@@ -1,0 +1,211 @@
+//
+//  sandbao-Prefix.pch
+//  sandbao
+//
+//  Created by tianNanYiHao on 2016/10/31.
+//  Copyright © 2016年 sand. All rights reserved.
+//
+
+#ifndef sandbao_Prefix_pch
+#define sandbao_Prefix_pch
+
+#define IS_IOS7 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <Availability.h>
+#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+#import "UIImage+image.h"
+#import "NSString+file.h"
+#import "NSDate+time.h"
+#import "NSString+string.h"
+#import "NSString+Money.h"
+#import "Masonry.h"
+#import "NSString+EncodingUTF8Additions.h"
+#import "NSRegularExpression+Verification.h"
+#import "NSString+Encryption.h"
+#import "UITextField+CheckLenght.h"
+#import "UIDevice+DeviceoInfo.h"
+#import "NavCoverView.h"
+#import "LoginViewController.h"
+#import "CommParameter.h"
+#import "SDMBProgressView.h"
+#import "MyViewController.h"
+#import "MqttClientManagerDelegate.h"
+#import "MqttClientManager.h"
+#import "WeiboSDK.h"
+#import "Tool.h"
+#import <POP/POP.h>
+#import "SDPopview.h"
+#import "SDLog.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "SDRequestHelp.h"
+#import "SDAlertControllerUtil.h"
+
+//添加混淆作用的头文件（这个文件名是脚本confuse.sh中定义的）
+//#import "codeObfuscation.h"
+#endif
+
+
+//通知
+//退出后切回首页通知
+#define LOGOUTNOTICEBARITEM @"logoutNoticeBarItem"
+//退出后 重置MQTT的clientID
+#define LOGOUTNOTICEMQTT @"logoutNoticeMQTT"
+//登录情况下,第三方应用调用杉德宝启动SPS支付
+#define OPENSPSPAYNOTICELOGIN @"openSPSPaynoticeLogin"
+//未登录情况下,第三方应用调用杉德宝启动SPS支付
+#define OPENSPSPAYNOTICELOGOUT @"openSPSPaynoticeLogout"
+
+
+//数据库表名配置
+#define MINLETS_ARR  (NSMutableArray*)@[@"id",@"orders",@"title",@"logo",@"url",@"type",@"isTest"]
+#define USERSCONFIG_ARR (NSMutableArray*)@[@"active",@"credit_fp",@"lets",@"sToken",@"uid",@"userName"]
+#define MQTTLIST_ARR (NSMutableArray*)@[@"uid",@"msg",@"isRead",@"indexCount"]
+
+//界面配置
+#define controllerTop 64.00
+#define RGBA(r,g,b,a) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:a]
+
+
+
+// 判断是否为ipad
+#define ipad ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(768, 1024), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为ipad2
+#define ipad2 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(768, 1024), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为ipad3
+#define ipad3 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为ipad4
+#define ipad4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为air
+#define air ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为mini
+#define mini ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(768, 1024), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为mini2
+#define mini2 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为mini3
+#define mini3 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为mini4
+#define mini4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1536, 2048), [[UIScreen mainScreen] currentMode].size) : NO)
+// 判断是否为pro
+#define pro ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(2048, 2732), [[UIScreen mainScreen] currentMode].size) : NO)
+
+
+// 判断是否为iPhone3g
+#define iPhone3g ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(320, 480), [[UIScreen mainScreen] currentMode].size) : NO)
+//// 判断是否为iPhone4
+//#define iPhone4 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+//// 判断是否为iPhone5
+//#define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+//// 判断是否为iPhone6
+//#define iPhone6 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size)) : NO)
+//// 判断是否为iPhone6 plus
+//#define iPhone6plus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? (CGSizeEqualToSize(CGSizeMake(1125, 2001), [[UIScreen mainScreen] currentMode].size) || CGSizeEqualToSize(CGSizeMake(1242, 2208), [[UIScreen mainScreen] currentMode].size)) : NO)
+
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+
+// 判断是否为iPhone4
+#define iPhone4 (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+// 判断是否为iPhone5
+#define iPhone5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+// 判断是否为iPhone6
+#define iPhone6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+// 判断是否为iPhone6 plus
+#define iPhone6plus (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
+
+
+//限制身份证键盘输入
+#define IDCardVerifi @"0987654321Xx"
+
+//限制输入数字小数点
+#define OnlyNumber_pointVerifi @"0987654321."
+
+//限制输入纯数字
+#define OnlyNumberVerifi @"0987654321"
+
+//限制输入纯数字纯字母
+#define OnlyNum_letterVerifi @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+
+//限制输入字母数字特殊字符
+#define OnlyChineseCharacterVerifi @"0123456789./*-+~!@#$%^&()_+-=,./;'[]{}:<>?`，。、？！‘“：；【】{}·~！……——“”<>《》%﹪。？！、；#＠～:,!?.*|……·＊－＝﹤︳`∕"
+
+
+
+//mqtt端口/地址
+#define kIP @"172.28.250.63"
+#define kPort 61613
+#define kMqttuserNmae @"testuser"
+#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+#define kMqttTopicUSERID(USERID) [NSString stringWithFormat:@"SANDBAO/0003/USER/%@",USERID]
+#define kMqttTopicBROADCAST @"SANDBAO/0003/BROADCAST"
+
+
+
+
+//调用微博微信登陆key
+//1.微博
+#define WB_App_Key @"1542798135"
+#define WB_App_Secret @"736b0c538d2c68ca277b3b7557fe9a1c"
+#define WB_App_Oauth2url @"https://api.weibo.com/oauth2/default.html"
+
+
+
+#pragma mark - 配置切换(生产/测试环境)
+#pragma mark - 1.生产环境地址
+//#define AddressHTTP @"https://sdb.sandpay.com.cn/"                          //生产
+
+#pragma mark - 2.测试环境地址
+#define AddressHTTP @"http://172.28.250.242:17892/"                           //测试
+
+//#define AddressHTTP @"http://172.28.250.242:9081/"                          //测试2
+
+//#define AddressHTTP @"http://192.168.22.58:8080/smp-uc-client/"             //肖云
+
+//#define AddressHTTP @"http://192.168.22.168:8080/"                          //大广
+
+//#define AddressHTTP @"http://192.168.22.122:8080/"                          //存叶
+
+//#define AddressHTTP @"http://192.168.22.156:8080/"                          //伟丽
+
+//#define AddressHTTP @"http://192.168.22.204:8090/smp-uc-client/"            //大龙
+
+#define jnl_order_list_mobile @"ot/jnl-order-list-mobile.html?" //账户变动  03000201
+#define jnl_trans_flow_mobile @"ot/jnl-trans-flow-mobile.html?" //订单流水  03000101
+#define ot_help_normal_FAQ    @"ot/help-normal-FAQ.html"        //帮助中心
+#define ot_index              @"ot/index.html"                  //服务协议
+
+
+
+//AccType
+#define CONSUME_CODE @"03" //消费账户
+#define CASH_CODE @"04" //现金账户
+#define SD_CRAD_CODE @"05" //杉德记名卡
+#define COMMON_CODE  @"06" //久彰宝通用
+#define MARKET_CODE @"07" //久彰宝商超
+
+//用哪个开哪个
+//显示给开发人员 (显示输入数据)
+//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
+//显示给测试人员 (隐藏输入数据)
+#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
+
+
+
+
+
+#endif/* sandbao_Prefix_pch */
