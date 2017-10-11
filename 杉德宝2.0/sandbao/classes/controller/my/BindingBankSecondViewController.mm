@@ -1359,6 +1359,7 @@
         [accountDic setValue:[passAccountDic objectForKey:@"walletBalance"] forKey:@"walletBalance"];
         //        [accountDic setValue:cvn forKey:@"cvn"];
         [accountDic setValue:expiry forKey:@"expiry"];
+        
         [accountDic setValue:[passAccountDic objectForKey:@"freezedBalance"] forKey:@"freezedBalance"];
         [accountDic setValue:[passAccountDic objectForKey:@"kind"] forKey:@"kind"];
         [accountDic setValue:[passAccountDic objectForKey:@"useableBalance"] forKey:@"useableBalance"];
