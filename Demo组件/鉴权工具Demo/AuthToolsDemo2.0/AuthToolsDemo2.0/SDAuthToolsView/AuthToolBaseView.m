@@ -44,6 +44,7 @@
     textfiled = [[UITextField alloc] init];
     textfiled.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:17];
     textfiled.placeholder = @"这里是副标题";
+    textfiled.clearButtonMode = UITextFieldViewModeWhileEditing;
     textfiled.textColor =  [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/0.4];
     [self addSubview:textfiled];
     

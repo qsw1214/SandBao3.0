@@ -30,6 +30,9 @@
 		28E1C0E91F8F6AFD00527048 /* login_icon_eye_lighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0DD1F8F6AFD00527048 /* login_icon_eye_lighted@3x.png */; };
 		28E1C0EA1F8F6AFD00527048 /* login_list_icon_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0DE1F8F6AFD00527048 /* login_list_icon_closed@2x.png */; };
 		28E1C0EB1F8F6AFD00527048 /* login_list_icon_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0DF1F8F6AFD00527048 /* login_list_icon_closed@3x.png */; };
+		28E1C0EE1F8F730100527048 /* NameAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0ED1F8F730100527048 /* NameAuthToolView.m */; };
+		28E1C0F11F8F740E00527048 /* IdentityAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0F01F8F740E00527048 /* IdentityAuthToolView.m */; };
+		28E1C0F41F8F746D00527048 /* CardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0F31F8F746D00527048 /* CardNoAuthToolView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +87,12 @@
 		28E1C0DD1F8F6AFD00527048 /* login_icon_eye_lighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_lighted@3x.png"; sourceTree = "<group>"; };
 		28E1C0DE1F8F6AFD00527048 /* login_list_icon_closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@2x.png"; sourceTree = "<group>"; };
 		28E1C0DF1F8F6AFD00527048 /* login_list_icon_closed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@3x.png"; sourceTree = "<group>"; };
+		28E1C0EC1F8F730100527048 /* NameAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameAuthToolView.h; sourceTree = "<group>"; };
+		28E1C0ED1F8F730100527048 /* NameAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameAuthToolView.m; sourceTree = "<group>"; };
+		28E1C0EF1F8F740E00527048 /* IdentityAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityAuthToolView.h; sourceTree = "<group>"; };
+		28E1C0F01F8F740E00527048 /* IdentityAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityAuthToolView.m; sourceTree = "<group>"; };
+		28E1C0F21F8F746D00527048 /* CardNoAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardNoAuthToolView.h; sourceTree = "<group>"; };
+		28E1C0F31F8F746D00527048 /* CardNoAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardNoAuthToolView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +193,12 @@
 				28E1C0CE1F8F673800527048 /* PhoneAuthToolView.m */,
 				28E1C0D01F8F6A3B00527048 /* PwdAuthToolView.h */,
 				28E1C0D11F8F6A3B00527048 /* PwdAuthToolView.m */,
+				28E1C0EC1F8F730100527048 /* NameAuthToolView.h */,
+				28E1C0ED1F8F730100527048 /* NameAuthToolView.m */,
+				28E1C0EF1F8F740E00527048 /* IdentityAuthToolView.h */,
+				28E1C0F01F8F740E00527048 /* IdentityAuthToolView.m */,
+				28E1C0F21F8F746D00527048 /* CardNoAuthToolView.h */,
+				28E1C0F31F8F746D00527048 /* CardNoAuthToolView.m */,
 			);
 			path = SDAuthToolsView;
 			sourceTree = "<group>";
@@ -356,10 +371,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				28E1C0CF1F8F673800527048 /* PhoneAuthToolView.m in Sources */,
+				28E1C0EE1F8F730100527048 /* NameAuthToolView.m in Sources */,
+				28E1C0F41F8F746D00527048 /* CardNoAuthToolView.m in Sources */,
 				28E1C09E1F8F51FD00527048 /* ViewController.m in Sources */,
 				28E1C0D21F8F6A3B00527048 /* PwdAuthToolView.m in Sources */,
 				28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */,
 				28E1C0981F8F51FD00527048 /* main.m in Sources */,
+				28E1C0F11F8F740E00527048 /* IdentityAuthToolView.m in Sources */,
 				28E1C0CC1F8F55E700527048 /* AuthToolBaseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,6 +622,7 @@
 				28E1C0C21F8F51FD00527048 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28E1C0C31F8F51FD00527048 /* Build configuration list for PBXNativeTarget "AuthToolsDemo2.0Tests" */ = {
 			isa = XCConfigurationList;
@@ -612,6 +631,7 @@
 				28E1C0C51F8F51FD00527048 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		28E1C0C61F8F51FD00527048 /* Build configuration list for PBXNativeTarget "AuthToolsDemo2.0UITests" */ = {
 			isa = XCConfigurationList;
@@ -620,6 +640,7 @@
 				28E1C0C81F8F51FD00527048 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
