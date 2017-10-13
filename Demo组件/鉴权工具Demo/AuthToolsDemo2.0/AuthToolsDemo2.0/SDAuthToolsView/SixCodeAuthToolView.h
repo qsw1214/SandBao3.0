@@ -8,6 +8,8 @@
 
 #import "AuthToolBaseView.h"
 
+typedef void(^CodeStrBlock)(NSString * codeStr);
+
 typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
     SmsCodeAuthTool = 0,
     PayCodeAuthTool,
@@ -21,5 +23,8 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
  */
 @property (nonatomic, assign) CodeAuthToolStyle style;
 
+
+
+@property (nonatomic, copy) CodeStrBlock codeStrBlock;
 
 @end

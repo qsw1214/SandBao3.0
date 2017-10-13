@@ -35,6 +35,9 @@
     
     SixCodeAuthToolView *d = [[SixCodeAuthToolView alloc] initWithFrame:CGRectMake(0, p.frame.size.height*2+100+30*2, 0, 0)];
     d.style = PayCodeAuthTool;
+    d.codeStrBlock = ^(NSString *codeStr) {
+        NSLog(@"%@",codeStr);
+    };
     [self.view addSubview:d];
     
 }

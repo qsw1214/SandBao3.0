@@ -52,12 +52,10 @@
         [self addUI];
     }
     if (_style == PayCodeAuthTool) {
-        self.titleLab.text = @"输入密码";
+        self.titleLab.text = @"";
         [self addUI];
     }
-    
-    
-    
+
 }
 
 - (void)addUI{
@@ -99,7 +97,7 @@
 }
 
 - (void)textFieldDidChange:(UITextField*)textfiled{
-    NSLog(@"??? %@",textfiled.text);
+    
     NSInteger length = textfiled.text.length;
     
     if (length == 0) {
@@ -111,12 +109,19 @@
             currentCodelab.text = [NSString stringWithFormat:@"%C", [textfiled.text characterAtIndex:length-1]];
         }
         if (_style == PayCodeAuthTool) {
-            currentCodelab.text = @"*";
+            currentCodelab.font = [UIFont systemFontOfSize:30];
+            currentCodelab.text = @"•";
         }
         if (length < codeLabCount) {
             UILabel *currentCodelab = (UILabel*)self.codeLabArr[length];
             currentCodelab.text = @"";
         }
+        
+        //保存codeStr
+        if (textfiled.text.length == 6) {
+            _codeStrBlock(textfiled.text);
+        }
+        
     }
     
 }
