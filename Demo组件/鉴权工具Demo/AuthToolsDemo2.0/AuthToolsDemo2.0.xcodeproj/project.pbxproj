@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281AEA881F9056A30000D1F5 /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */; };
 		28E1C0981F8F51FD00527048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0971F8F51FD00527048 /* main.m */; };
 		28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C09A1F8F51FD00527048 /* AppDelegate.m */; };
 		28E1C09E1F8F51FD00527048 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C09D1F8F51FD00527048 /* ViewController.m */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		281AEA861F9056A30000D1F5 /* SixCodeAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SixCodeAuthToolView.h; sourceTree = "<group>"; };
+		281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SixCodeAuthToolView.m; sourceTree = "<group>"; };
 		28E1C0931F8F51FD00527048 /* AuthToolsDemo2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthToolsDemo2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E1C0971F8F51FD00527048 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28E1C0991F8F51FD00527048 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -199,6 +202,8 @@
 				28E1C0F01F8F740E00527048 /* IdentityAuthToolView.m */,
 				28E1C0F21F8F746D00527048 /* CardNoAuthToolView.h */,
 				28E1C0F31F8F746D00527048 /* CardNoAuthToolView.m */,
+				281AEA861F9056A30000D1F5 /* SixCodeAuthToolView.h */,
+				281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */,
 			);
 			path = SDAuthToolsView;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */,
 				28E1C0981F8F51FD00527048 /* main.m in Sources */,
 				28E1C0F11F8F740E00527048 /* IdentityAuthToolView.m in Sources */,
+				281AEA881F9056A30000D1F5 /* SixCodeAuthToolView.m in Sources */,
 				28E1C0CC1F8F55E700527048 /* AuthToolBaseView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

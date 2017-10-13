@@ -13,6 +13,7 @@
 #import "NameAuthToolView.h"
 #import "IdentityAuthToolView.h"
 #import "CardNoAuthToolView.h"
+#import "SixCodeAuthToolView.h"
 @interface ViewController ()
 
 @end
@@ -32,7 +33,8 @@
     [self.view addSubview:p];
     
     
-    PhoneAuthToolView *d = [[PhoneAuthToolView alloc] initWithFrame:CGRectMake(0, p.frame.size.height*2+100+30*2, 0, 0)];
+    SixCodeAuthToolView *d = [[SixCodeAuthToolView alloc] initWithFrame:CGRectMake(0, p.frame.size.height*2+100+30*2, 0, 0)];
+    d.style = PayCodeAuthTool;
     [self.view addSubview:d];
     
 }

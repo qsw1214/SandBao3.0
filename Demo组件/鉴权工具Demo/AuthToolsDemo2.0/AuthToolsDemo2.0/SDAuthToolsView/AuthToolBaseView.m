@@ -17,6 +17,7 @@
 @implementation AuthToolBaseView
 @synthesize titleLab;
 @synthesize textfiled;
+@synthesize lineV;
 @synthesize leftRightSpace;
 @synthesize space;
 
@@ -36,13 +37,13 @@
     //title
     titleLab = [[UILabel alloc] init];
     titleLab.text = @"这里是标题";
-    titleLab.font =  [UIFont fontWithName:@"PingFang-SC-Medium" size:17];
+    titleLab.font =  [UIFont fontWithName:@"PingFang-SC-Medium" size:14];
     titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [self addSubview:titleLab];
     
     //textFiled
     textfiled = [[UITextField alloc] init];
-    textfiled.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:17];
+    textfiled.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:14];
     textfiled.placeholder = @"这里是副标题";
     textfiled.clearButtonMode = UITextFieldViewModeWhileEditing;
     textfiled.textColor =  [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/0.4];
@@ -50,7 +51,7 @@
     
     
     //line
-    UIView *lineV = [[UIView alloc] init];
+    lineV = [[UIView alloc] init];
     lineV.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1/1.0];
     [self addSubview:lineV];
     
@@ -63,11 +64,13 @@
     CGSize titleLabSize = [titleLab sizeThatFits:CGSizeZero];
     CGSize textfileSize = [textfiled sizeThatFits:CGSizeZero];
     
-    CGFloat textfiledOY = titleLabSize.height + space;
-    CGFloat lineVOY = textfiledOY + textfileSize.height + space;
+    
+    CGFloat textfiledOY = titleLabSize.height;
+    CGFloat textfiledOH = textfileSize.height + 2*space;
+    CGFloat lineVOY = textfiledOY + textfiledOH;
     
     titleLab.frame = CGRectMake(leftRightSpace, 0, titleLabSize.width, titleLabSize.height);
-    textfiled.frame = CGRectMake(leftRightSpace, textfiledOY,  [UIScreen mainScreen].bounds.size.width-leftRightSpace*2, textfileSize.height);
+    textfiled.frame = CGRectMake(leftRightSpace, textfiledOY,  [UIScreen mainScreen].bounds.size.width-leftRightSpace*2, textfiledOH);
     lineV.frame = CGRectMake(leftRightSpace, lineVOY,  [UIScreen mainScreen].bounds.size.width-leftRightSpace*2, lineH);
     CGFloat selfViewH = lineVOY + lineH;
     self.frame = CGRectMake(frameRect.origin.x, frameRect.origin.y, [UIScreen mainScreen].bounds.size.width, selfViewH);
