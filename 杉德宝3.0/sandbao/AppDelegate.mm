@@ -13,7 +13,6 @@
 #import "UIDevice+DeviceoInfo.h"
 #import "Majlet_Func.h"
 #import "SDNetwork.h"
-#import "OrderInfoNatiVeViewController.h"
 #import "SDSqlite.h"
 #import "SqliteHelper.h"
 #import "Loading.h"
@@ -35,8 +34,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // 2.loading
-    NSInteger LoadingResult = [Loading startLoading];
-    switch (LoadingResult) {
+    NSInteger loadingResult = [Loading startLoading];
+    loadingResult = 1;
+    switch (loadingResult) {
             //load失败
             case 0:
             {
@@ -73,8 +73,8 @@
     
     // 3.显示窗口
     [self.window makeKeyAndVisible];
-    // 4.接受本地消息通知
-    [self noticeLoacalGet];
+    
+    
     return YES;
 }
 - (void)loadingError:(NSString*)errorStr {
@@ -86,11 +86,6 @@
 
 
 
-- (void)noticeLoacalGet{
-    
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-}
 
 #pragma mark - 处理后台和前台通知点击
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
@@ -146,152 +141,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
-/**
- 收到一个来自微博客户端程序的响应
- 
- 收到微博的响应后，第三方应用可以通过响应类型、响应的数据和 WBBaseResponse.userInfo 中的数据完成自己的功能
- @param response 具体的响应对象
- */
-- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
-{
-    
-    if ([response isKindOfClass:WBSendMessageToWeiboResponse.class])
-    {
-//        NSString *title = NSLocalizedString(@"发送结果", nil);
-//        NSString *message = [NSString stringWithFormat:@"%@: %d\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode, NSLocalizedString(@"响应UserInfo数据", nil), response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil),response.requestUserInfo];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-//                                                        message:message
-//                                                       delegate:nil
-//                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-//                                              otherButtonTitles:nil];
-//        WBSendMessageToWeiboResponse* sendMessageToWeiboResponse = (WBSendMessageToWeiboResponse*)response;
-//        NSString* accessToken = [sendMessageToWeiboResponse.authResponse accessToken];
-//        if (accessToken)
-//        {
-//        }
-//        NSString* userID = [sendMessageToWeiboResponse.authResponse userID];
-//        if (userID) {
-//        }
-//        [alert show];
-    }
-    else if ([response isKindOfClass:WBAuthorizeResponse.class])
-    {
-        
-        if ([_delegate respondsToSelector:@selector(weiboLoginByResponse:)]) {
-            [_delegate weiboLoginByResponse:response];
-        }
-        
-//        NSString *title = NSLocalizedString(@"认证结果", nil);
-//        NSString *message = [NSString stringWithFormat:@"%@: %d\nresponse.userId: %@\nresponse.accessToken: %@\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode,[(WBAuthorizeResponse *)response userID], [(WBAuthorizeResponse *)response accessToken],  NSLocalizedString(@"响应UserInfo数据", nil), response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil), response.requestUserInfo];
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-//                                                        message:message
-//                                                       delegate:nil
-//                                              cancelButtonTitle:NSLocalizedString(@"确定", nil)
-//                                              otherButtonTitles:nil];
-//        [alert show];
-    }
-}
-
-
-/**
- 收到一个来自微博客户端程序的请求
- 
- 收到微博的请求后，第三方应用应该按照请求类型进行处理，处理完后必须通过 [WeiboSDK sendResponse:] 将结果回传给微博
- @param request 具体的请求对象
- */
-- (void)didReceiveWeiboRequest:(WBBaseRequest *)request{ //向微博发送请求
-    
-    NSLog(@" %@",request.class);
-}
-
-
-//接受微博或微信等各类App的起调
-#pragma mark 9.0之后
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
-    
-    //微博启动回调
-    if ([WeiboSDK handleOpenURL:url delegate:self]) {
-        return [WeiboSDK handleOpenURL:url delegate:self];
-    }
-    //sps启动回调
-    if ([url.absoluteString containsString:@"com.sand.sandbao"]) {
-        NSString *urlStr = [NSString stringWithFormat:@"%@",url];
-        //查询活跃状态用户数量(1个且只能为1)
-        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-        //无活跃用户,通知发送到 AddauthToolViewController(propety:isOtherAPPSPS=YES)
-        if (count <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPENSPSPAYNOTICELOGOUT object:urlStr];
-        }
-        //有活跃用户,发通知到 MainViewController (propety:isOtherAPPSPS=YES)
-        else{
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPENSPSPAYNOTICELOGIN object:urlStr];
-        }
-        return YES;
-    }
-    
-    
-    return NO;
-   
-}
-
-#pragma mark 9.0之前
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-   
-    //微博启动回调
-    if ([WeiboSDK handleOpenURL:url delegate:self]) {
-        return [WeiboSDK handleOpenURL:url delegate:self];
-    }
-    //sps启动回调
-    if ([url.absoluteString containsString:@"com.sand.sandbao"]) {
-        NSString *urlStr = [NSString stringWithFormat:@"%@",url];
-        //查询活跃状态用户数量(1且只能为1)
-        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-        //无活跃用户,通知发送到 AddauthToolViewController(propety:isOtherAPPSPS=YES)
-        if (count <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPENSPSPAYNOTICELOGOUT object:urlStr];
-        }
-        //有活跃用户,发通知到 MainViewController (propety:isOtherAPPSPS=YES)
-        else{
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPENSPSPAYNOTICELOGIN object:urlStr];
-        }
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation{
-
-    //微博启动回调
-    if ([WeiboSDK handleOpenURL:url delegate:self]) {
-        return [WeiboSDK handleOpenURL:url delegate:self];
-    }
-    //sps启动回调
-    if ([url.absoluteString containsString:@"com.sand.sandbao"]) {
-        NSString *urlStr = [NSString stringWithFormat:@"%@",url];
-        //查询活跃状态用户数量(1且只能为1)
-        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-        //(SPS场景3) 无活跃用户,通知发送到 AddauthToolViewController(propety:isOtherAPPSPS=YES)
-        if (count <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPENSPSPAYNOTICELOGOUT object:urlStr];
-        }
-        //(SPS场景4) 有活跃用户,发通知到 MainViewController (propety:isOtherAPPSPS=YES)
-        else{
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPENSPSPAYNOTICELOGIN object:urlStr];
-        }
-        return YES;
-    }
-    
-    
-    return NO;
-}
-
-
-
-
-
-
 
 
 

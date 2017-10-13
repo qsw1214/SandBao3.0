@@ -32,10 +32,10 @@
 #import "UITextField+CheckLenght.h"
 #import "UIDevice+DeviceoInfo.h"
 #import "NavCoverView.h"
-#import "LoginViewController.h"
+
 #import "CommParameter.h"
 #import "SDMBProgressView.h"
-#import "MyViewController.h"
+
 #import "MqttClientManagerDelegate.h"
 #import "MqttClientManager.h"
 #import "WeiboSDK.h"

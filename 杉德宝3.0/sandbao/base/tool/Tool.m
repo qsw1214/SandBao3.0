@@ -13,7 +13,7 @@
 #import "SqliteHelper.h"
 #import "Base64Util.h"
 #import "GzipUtility.h"
-
+#import "LoginViewController.h"
 
 @interface Tool(){
     
@@ -118,7 +118,6 @@
         
         //3.跳转登陆页面
         LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
-        mLoginViewController.isStokenOver = YES;
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         [viewController presentViewController:navLogin animated:YES completion:nil];
         //4.原界面返回控制器主vc
