@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AuthToolBaseView : UIView
+@interface AuthToolBaseView : UIView<UITextFieldDelegate>
 
 
 /**
@@ -26,6 +26,11 @@
  */
 @property (nonatomic, strong) UIView *lineV;
 
+/**
+ 红色Tip
+ */
+@property (nonatomic, strong) UILabel *tip;
+
 
 /**
  左右间距
@@ -36,6 +41,12 @@
  常用间距(上下)
  */
 @property (nonatomic, assign) CGFloat space;
+
+
+/**
+ 红色提示动画
+ */
+- (void)showTip;
 
 
 

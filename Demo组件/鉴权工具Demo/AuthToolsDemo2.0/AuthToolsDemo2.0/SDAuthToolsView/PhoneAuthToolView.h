@@ -8,6 +8,10 @@
 
 #import "AuthToolBaseView.h"
 
-@interface PhoneAuthToolView : AuthToolBaseView<UITextFieldDelegate>
+typedef void(^TextFiledErrorBlock)();
+
+@interface PhoneAuthToolView : AuthToolBaseView
+
+@property (nonatomic, copy) TextFiledErrorBlock errorBlock;
 
 @end

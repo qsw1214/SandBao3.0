@@ -8,6 +8,10 @@
 
 #import "AuthToolBaseView.h"
 
+typedef void(^TextFiledErrorBlock)();
+
 @interface IdentityAuthToolView : AuthToolBaseView
+
+@property (nonatomic, copy) TextFiledErrorBlock errorBlock;
 
 @end

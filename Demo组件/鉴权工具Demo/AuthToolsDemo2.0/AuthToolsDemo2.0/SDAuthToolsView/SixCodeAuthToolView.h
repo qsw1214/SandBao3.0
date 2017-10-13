@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
     PayCodeAuthTool,
 };
 
-@interface SixCodeAuthToolView : AuthToolBaseView<UITextFieldDelegate>
+@interface SixCodeAuthToolView : AuthToolBaseView
 
 
 /**

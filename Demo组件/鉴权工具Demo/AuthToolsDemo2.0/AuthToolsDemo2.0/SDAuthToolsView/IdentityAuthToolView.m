@@ -20,7 +20,22 @@
     
 }
 
-
+#pragma - mark textfiledDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    if (textField.text.length<18) {
+        
+        return YES;
+    }else{
+        _errorBlock();
+        return NO;
+    }
+    
+    return YES;
+}
 
 
 @end

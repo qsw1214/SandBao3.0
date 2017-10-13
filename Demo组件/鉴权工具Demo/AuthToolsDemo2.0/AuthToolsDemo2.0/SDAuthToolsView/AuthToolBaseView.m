@@ -18,6 +18,7 @@
 @synthesize titleLab;
 @synthesize textfiled;
 @synthesize lineV;
+@synthesize tip;
 @synthesize leftRightSpace;
 @synthesize space;
 
@@ -45,6 +46,7 @@
     textfiled = [[UITextField alloc] init];
     textfiled.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:14];
     textfiled.placeholder = @"这里是副标题";
+    textfiled.delegate = self;
     textfiled.clearButtonMode = UITextFieldViewModeWhileEditing;
     textfiled.textColor =  [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/0.4];
     [self addSubview:textfiled];
@@ -76,10 +78,45 @@
     self.frame = CGRectMake(frameRect.origin.x, frameRect.origin.y, [UIScreen mainScreen].bounds.size.width, selfViewH);
     
     
+    //内置红色tip
+    [self addTip];
     
+}
+
+- (void)addTip{
+    
+    tip = [[UILabel alloc] init];
+    tip.text = @"这里是红色提示!";
+    tip.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:12];
+    tip.textColor = [UIColor colorWithRed:242/255.0 green:9/255.0 blue:9/255.0 alpha:1/1.0];
+    [self addSubview:tip];
+    
+    //frame
+    CGFloat tipH = [tip sizeThatFits:CGSizeZero].height;
+    CGFloat tipOY = CGRectGetMaxY(lineV.frame);
+    tip.frame = CGRectMake(leftRightSpace, tipOY, [UIScreen mainScreen].bounds.size.width-leftRightSpace*2, tipH);
+    
+    tip.alpha = 0.f;
     
     
 }
 
+- (void)showTip{
+    
+    //tip出现
+    [UIView animateWithDuration:0.7f animations:^{
+        tip.alpha = 1.f;
+    } completion:^(BOOL finished) {
+
+        //tip隐藏
+        [UIView animateWithDuration:1.f delay:3.f options:UIViewAnimationOptionLayoutSubviews animations:^{
+            tip.alpha = 0.f;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }];
+    
+    
+}
 
 @end
