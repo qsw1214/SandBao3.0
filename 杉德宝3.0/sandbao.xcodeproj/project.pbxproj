@@ -36,6 +36,8 @@
 		2821B7831E778B2200F093D7 /* loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77E1E778B2200F093D7 /* loading@2x.png */; };
 		2821B7871E77B27100F093D7 /* HeadImageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 2821B7861E77B27100F093D7 /* HeadImageBtn.m */; };
 		2821B7D01E77E22700F093D7 /* GradualView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2821B7CF1E77E22700F093D7 /* GradualView.m */; };
+		2829EF0F1F91B76A00CC78EE /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2829EF0E1F91B76A00CC78EE /* BaseViewController.m */; };
+		2829EF121F91B7D100CC78EE /* AuthLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2829EF111F91B7D100CC78EE /* AuthLoginViewController.m */; };
 		282A48CE1F27337D00821A15 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A48CD1F27337D00821A15 /* libSDWebImage.a */; };
 		282D90321EF769B000CF8C28 /* SDActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282D902B1EF769B000CF8C28 /* SDActivityView.m */; };
 		282D90331EF769B000CF8C28 /* SDMBPerror.png in Resources */ = {isa = PBXBuildFile; fileRef = 282D902D1EF769B000CF8C28 /* SDMBPerror.png */; };
@@ -134,7 +136,6 @@
 		28574C5B1F4E72BF0003090D /* libpaynuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28574C5A1F4E72BF0003090D /* libpaynuc.a */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
-		2871052E1E67E04E00596FE3 /* GroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2871052D1E67E04E00596FE3 /* GroupView.m */; };
 		287105771E68278000596FE3 /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287105761E68278000596FE3 /* DropDownListView.m */; };
 		287C3BDF1EEF861B007DE3F4 /* Dock.m in Sources */ = {isa = PBXBuildFile; fileRef = 287C3BDC1EEF861B007DE3F4 /* Dock.m */; };
 		287C3BE01EEF861B007DE3F4 /* DockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 287C3BDE1EEF861B007DE3F4 /* DockItem.m */; };
@@ -331,6 +332,10 @@
 		2821B7861E77B27100F093D7 /* HeadImageBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeadImageBtn.m; sourceTree = "<group>"; };
 		2821B7CE1E77E22700F093D7 /* GradualView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradualView.h; sourceTree = "<group>"; };
 		2821B7CF1E77E22700F093D7 /* GradualView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradualView.m; sourceTree = "<group>"; };
+		2829EF0D1F91B76A00CC78EE /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		2829EF0E1F91B76A00CC78EE /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		2829EF101F91B7D100CC78EE /* AuthLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthLoginViewController.h; sourceTree = "<group>"; };
+		2829EF111F91B7D100CC78EE /* AuthLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthLoginViewController.m; sourceTree = "<group>"; };
 		282A48CD1F27337D00821A15 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../../../Library/Developer/Xcode/DerivedData/sandbao-ayiadrxmozfpmiadtzajtbozkvgl/Build/Products/Debug-iphoneos/SDWebImage/libSDWebImage.a"; sourceTree = "<group>"; };
 		282D902A1EF769B000CF8C28 /* SDActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDActivityView.h; sourceTree = "<group>"; };
 		282D902B1EF769B000CF8C28 /* SDActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDActivityView.m; sourceTree = "<group>"; };
@@ -456,8 +461,6 @@
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
 		286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
-		2871052C1E67E04E00596FE3 /* GroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupView.h; sourceTree = "<group>"; };
-		2871052D1E67E04E00596FE3 /* GroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupView.m; sourceTree = "<group>"; };
 		287105751E68278000596FE3 /* DropDownListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownListView.h; sourceTree = "<group>"; };
 		287105761E68278000596FE3 /* DropDownListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownListView.m; sourceTree = "<group>"; };
 		287C3BDB1EEF861B007DE3F4 /* Dock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dock.h; sourceTree = "<group>"; };
@@ -507,7 +510,6 @@
 		288421BA1F8E0A2100082E7C /* GzipUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipUtility.m; sourceTree = "<group>"; };
 		288421BE1F8E0A7800082E7C /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
 		288421BF1F8E0A7800082E7C /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
-		288421C21F8E0B9000082E7C /* AppUIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppUIConfig.h; sourceTree = "<group>"; };
 		2885F4F71E97587E0064411B /* VerticalLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalLineView.h; sourceTree = "<group>"; };
 		2885F4F81E97587E0064411B /* VerticalLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalLineView.m; sourceTree = "<group>"; };
 		289C0D501F203FBC00360147 /* Easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Easing.c; sourceTree = "<group>"; };
@@ -748,6 +750,8 @@
 			children = (
 				281AEBA81F90C3420000D1F5 /* LoginViewController.h */,
 				281AEBA91F90C3420000D1F5 /* LoginViewController.m */,
+				2829EF101F91B7D100CC78EE /* AuthLoginViewController.h */,
+				2829EF111F91B7D100CC78EE /* AuthLoginViewController.m */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -759,6 +763,8 @@
 				281AEBAE1F90C3420000D1F5 /* MainViewController.mm */,
 				281AEBAB1F90C3420000D1F5 /* ErrorMainViewController.h */,
 				281AEBAC1F90C3420000D1F5 /* ErrorMainViewController.m */,
+				2829EF0D1F91B76A00CC78EE /* BaseViewController.h */,
+				2829EF0E1F91B76A00CC78EE /* BaseViewController.m */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -1024,15 +1030,6 @@
 				286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */,
 			);
 			path = SDScanView;
-			sourceTree = "<group>";
-		};
-		2871052B1E67E04E00596FE3 /* groupView */ = {
-			isa = PBXGroup;
-			children = (
-				2871052C1E67E04E00596FE3 /* GroupView.h */,
-				2871052D1E67E04E00596FE3 /* GroupView.m */,
-			);
-			path = groupView;
 			sourceTree = "<group>";
 		};
 		287105741E68278000596FE3 /* DropDownListView */ = {
@@ -1575,7 +1572,6 @@
 				281D105E1E6FDADA0031806C /* NavCoverView */,
 				287105741E68278000596FE3 /* DropDownListView */,
 				A7E9C7811E2CAFE500080B87 /* customAlertView */,
-				2871052B1E67E04E00596FE3 /* groupView */,
 				A7FF2FD41E160A800068A2F7 /* collectionview */,
 				A7FF2F951E1601CB0068A2F7 /* check */,
 			);
@@ -1598,7 +1594,6 @@
 		A7FF2FC61E1602D80068A2F7 /* comm */ = {
 			isa = PBXGroup;
 			children = (
-				288421C21F8E0B9000082E7C /* AppUIConfig.h */,
 				A7FF2FC71E1602D80068A2F7 /* CommParameter.h */,
 				A7FF2FC81E1602D80068A2F7 /* CommParameter.m */,
 			);
@@ -1934,7 +1929,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2841F6201F53C52E00BD23C8 /* SDWaveViwe.m in Sources */,
-				2871052E1E67E04E00596FE3 /* GroupView.m in Sources */,
 				288421B41F8E095E00082E7C /* SDRequestHelp.mm in Sources */,
 				A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */,
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
@@ -1942,6 +1936,7 @@
 				283E16DA1F70B45300ECC00A /* SDPayToolPwdView.m in Sources */,
 				A7EFB1591EB9A8DD009AA369 /* MQTTInMemoryPersistence.m in Sources */,
 				281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */,
+				2829EF0F1F91B76A00CC78EE /* BaseViewController.m in Sources */,
 				288421BB1F8E0A2100082E7C /* Base64Util.m in Sources */,
 				A7EFB15F1EB9A8DD009AA369 /* MQTTSessionSynchron.m in Sources */,
 				288421911F8E091200082E7C /* NSDate+time.m in Sources */,
@@ -2021,6 +2016,7 @@
 				A7E9C7841E2CAFE500080B87 /* CustomAlertView.m in Sources */,
 				281AEBB01F90C3420000D1F5 /* ErrorMainViewController.m in Sources */,
 				A7EFB15C1EB9A8DD009AA369 /* MQTTSession.m in Sources */,
+				2829EF121F91B7D100CC78EE /* AuthLoginViewController.m in Sources */,
 				A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */,
 				283E16D71F70B45300ECC00A /* SDPayToolBaseView.m in Sources */,
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,

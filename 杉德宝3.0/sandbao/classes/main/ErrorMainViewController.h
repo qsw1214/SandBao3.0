@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ErrorMainViewController : UIViewController
+#import "BaseViewController.h"
+@interface ErrorMainViewController : BaseViewController
 
 @property (nonatomic, strong) NSString *errorInfo;
 

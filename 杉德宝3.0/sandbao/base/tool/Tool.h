@@ -163,4 +163,21 @@ typedef void(^DefulBtnBlock)();
  */
 + (NSString *)getIconImageName:(NSString*)type title:(NSString*)title imaUrl:(NSString*)imaUrl;
 
+
+
+#pragma mark -  Label工厂方法
+/**
+ Label工厂方法
+
+ @param str 文字
+ @param attributeStr attribute文字
+ @param font 字体大小
+ @param textColor 颜色
+ @param alignment 位置
+ @return 实例
+ */
++ (UILabel*)createLable:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor alignment:(NSTextAlignment)alignment;
+
+
+
 @end

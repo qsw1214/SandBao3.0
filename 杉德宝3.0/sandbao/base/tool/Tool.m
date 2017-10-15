@@ -15,6 +15,8 @@
 #import "GzipUtility.h"
 #import "LoginViewController.h"
 
+#define Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
+
 @interface Tool(){
     
 }
@@ -351,103 +353,103 @@
             
             if (i == 0) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 1) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
             if (i == 2) {
                 //草绿
-                backgroundColor = RGBA(154, 205, 50, 1.0);backgroundColor2 = RGBA(85, 171, 5, 1.0);
+                backgroundColor = Rgba(154, 205, 50, 1.0);backgroundColor2 = Rgba(85, 171, 5, 1.0);
             }
             if (i == 3) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 4) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
             if (i == 5) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 6) {
                 //橘黄
-                backgroundColor = RGBA(255, 127, 36, 1.0);backgroundColor2 = RGBA(255, 201, 38, 1.0);
+                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
             }
             if (i == 7) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
             if (i == 8) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 9) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 10) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
             if (i == 11) {
                 //橘黄
-                backgroundColor = RGBA(255, 127, 36, 1.0);backgroundColor2 = RGBA(255, 201, 38, 1.0);
+                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
             }
             if (i == 12) {
                 //橘黄
-                backgroundColor = RGBA(255, 127, 36, 1.0);backgroundColor2 = RGBA(255, 201, 38, 1.0);
+                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
             }
             if (i == 13) {
                 //橘黄
-                backgroundColor = RGBA(255, 127, 36, 1.0);backgroundColor2 = RGBA(255, 201, 38, 1.0);
+                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
             }
             if (i == 14) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 15) {
                 //橘黄
-                backgroundColor = RGBA(255, 127, 36, 1.0);backgroundColor2 = RGBA(255, 201, 38, 1.0);
+                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
             }
             if (i == 16) {
                 //草绿
-                backgroundColor = RGBA(154, 205, 50, 1.0);backgroundColor2 = RGBA(85, 171, 5, 1.0);
+                backgroundColor = Rgba(154, 205, 50, 1.0);backgroundColor2 = Rgba(85, 171, 5, 1.0);
             }
             if (i == 17) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 18) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
             if (i == 19) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
             if (i == 20) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
             if (i == 21) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 22) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 23) {
                 //红色
-                backgroundColor = RGBA(234, 85, 115, 1.0);backgroundColor2 = RGBA(158, 14, 14, 1.0);
+                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
             }
             if (i == 24) {
                 //天空蓝
-                backgroundColor = RGBA(0, 191, 255, 1.0);backgroundColor2 = RGBA(7, 78, 218, 1.0);
+                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
             }
         }
     }
@@ -557,6 +559,35 @@
     return @"qvip_pay_imageholder";
 }
 
+
++ (UILabel*)createLable:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor alignment:(NSTextAlignment)alignment {
+    
+    UILabel *label = [[UILabel alloc] init];
+    label.textColor = textColor;
+    label.textAlignment = (!alignment) ? NSTextAlignmentLeft : alignment;
+    label.font = font;
+    label.lineBreakMode = NSLineBreakByTruncatingMiddle; //中间省略,保留头尾
+    
+    if (str.length>0) {
+        label.text = str;
+    }
+    if (attributeStr.length>0) {
+        label.attributedText = attributeStr;
+    }
+    
+    return label;
+}
+
++ (UIButton*)createButton:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor{
+    
+    UIButton *btn = [[UIButton alloc] init];
+    
+    
+    
+    return btn;
+    
+    
+}
 
 
 @end

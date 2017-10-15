@@ -32,10 +32,8 @@
 #import "UITextField+CheckLenght.h"
 #import "UIDevice+DeviceoInfo.h"
 #import "NavCoverView.h"
-
 #import "CommParameter.h"
 #import "SDMBProgressView.h"
-
 #import "MqttClientManagerDelegate.h"
 #import "MqttClientManager.h"
 #import "WeiboSDK.h"
@@ -46,7 +44,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SDRequestHelp.h"
 #import "SDAlertControllerUtil.h"
-#import "AppUIConfig.h"
+
 
 //添加混淆作用的头文件（这个文件名是脚本confuse.sh中定义的）
 //#import "codeObfuscation.h"
@@ -71,7 +69,6 @@
 
 //界面配置
 #define controllerTop 64.00
-#define RGBA(r,g,b,a) [UIColor colorWithRed:(r/255.0) green:(g/255.0) blue:(b/255.0) alpha:a]
 
 
 

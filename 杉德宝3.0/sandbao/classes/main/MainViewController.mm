@@ -48,7 +48,8 @@
     }
     //暗登陆
     else{
-        [self noPwdLogin];
+//        [self noPwdLogin];
+        NSLog(@"==================================");
     }
 }
 #pragma mark - 明登陆
@@ -209,7 +210,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     
     
 

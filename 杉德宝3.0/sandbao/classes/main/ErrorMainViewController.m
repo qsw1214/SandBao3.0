@@ -16,7 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+    
     
     //修改状态栏白色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
@@ -26,7 +29,7 @@
     UIImageView *headImageView = [[UIImageView alloc] init];
     headImageView.contentMode = UIViewContentModeScaleAspectFit;
     headImageView.image = headImage;
-    [self.view addSubview:headImageView];
+    [self.baseScrollView addSubview:headImageView];
     [headImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self.view);
     }];
@@ -38,7 +41,7 @@
     versionLab.textAlignment = NSTextAlignmentCenter;
     CGSize versionLabsize = CGSizeMake(SCREEN_SIZE.width - 2*15, 15);
     versionLab.textColor = [UIColor whiteColor];
-    [self.view addSubview:versionLab];
+    [self.baseScrollView addSubview:versionLab];
     [versionLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(headImageView.mas_bottom).offset(-20);
         make.centerX.equalTo(headImageView.mas_centerX).offset(0);
@@ -55,7 +58,7 @@
     versionLab1.font = [UIFont systemFontOfSize:11];
     CGSize versionLabsize1 = CGSizeMake(SCREEN_SIZE.width - 2*15, 15);
     versionLab1.textColor = [UIColor lightGrayColor];
-    [self.view addSubview:versionLab1];
+    [self.baseScrollView addSubview:versionLab1];
     [versionLab1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(headImageView.mas_bottom).offset(-40);
         make.centerX.equalTo(headImageView.mas_centerX).offset(0);
