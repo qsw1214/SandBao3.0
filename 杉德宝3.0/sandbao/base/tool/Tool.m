@@ -559,17 +559,17 @@
     return @"qvip_pay_imageholder";
 }
 
-
+#pragma mark -  Label工厂方法
 + (UILabel*)createLable:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor alignment:(NSTextAlignment)alignment {
     
     UILabel *label = [[UILabel alloc] init];
-    label.textColor = textColor;
     label.textAlignment = (!alignment) ? NSTextAlignmentLeft : alignment;
-    label.font = font;
-    label.lineBreakMode = NSLineBreakByTruncatingMiddle; //中间省略,保留头尾
-    
     if (str.length>0) {
         label.text = str;
+        label.textColor = textColor;
+        
+        label.font = font;
+        label.lineBreakMode = NSLineBreakByTruncatingMiddle; //中间省略,保留头尾
     }
     if (attributeStr.length>0) {
         label.attributedText = attributeStr;
@@ -578,11 +578,20 @@
     return label;
 }
 
+#pragma mark -  Btn工厂方法
 + (UIButton*)createButton:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor{
     
     UIButton *btn = [[UIButton alloc] init];
     
+    if (str.length>0) {
+        [btn setTitle:str forState:UIControlStateNormal];
+        [btn setTitleColor:textColor forState:UIControlStateNormal];
+        btn.titleLabel.font = font;
+    }
     
+    if (attributeStr.length>0) {
+        [btn setAttributedTitle:attributeStr forState:UIControlStateNormal];
+    }
     
     return btn;
     

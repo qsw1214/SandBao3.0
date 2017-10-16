@@ -178,6 +178,16 @@ typedef void(^DefulBtnBlock)();
  */
 + (UILabel*)createLable:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor alignment:(NSTextAlignment)alignment;
 
+#pragma mark -  Btn工厂方法
+/**
+ Btn工厂方法
 
+ @param str 文字
+ @param attributeStr attribute文字
+ @param font 字体大小
+ @param textColor 颜色
+ @return
+ */
++ (UIButton*)createButton:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor;
 
 @end
