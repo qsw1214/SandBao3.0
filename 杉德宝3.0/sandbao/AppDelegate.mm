@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <IQKeyboardManager.h>
 #import "MainViewController.h"
 #import "ErrorMainViewController.h"
 #import "PayNucHelper.h"
@@ -29,6 +30,10 @@
     // 0.注册微博微信SDK
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:WB_App_Key];
+    
+    
+    //IQkeyBoard配置
+    [self IQKeyBoardSet];
     
     // 1.创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -77,6 +82,29 @@
     
     return YES;
 }
+
+- (void)IQKeyBoardSet{
+    
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
+    
+    keyboardManager.enable = YES; // 控制整个功能是否启用
+    
+    keyboardManager.shouldResignOnTouchOutside = YES; // 控制点击背景是否收起键盘
+    
+    keyboardManager.shouldToolbarUsesTextFieldTintColor = YES; // 控制键盘上的工具条文字颜色是否用户自定义
+    
+    keyboardManager.toolbarManageBehaviour = IQAutoToolbarByTag; // 有多个输入框时，可以通过点击Toolbar 上的“前一个”“后一个”按钮来实现移动到不同的输入框
+    
+    keyboardManager.enableAutoToolbar = YES; // 控制是否显示键盘上的工具条
+    
+    keyboardManager.shouldShowTextFieldPlaceholder = NO; // 是否显示占位文字
+    
+    keyboardManager.placeholderFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:14]; // 设置占位文字的字体
+    
+    keyboardManager.keyboardDistanceFromTextField = 20.f; // 输入框距离键盘的距离
+
+}
+
 - (void)loadingError:(NSString*)errorStr {
     ErrorMainViewController *mErrorMainViewController = [[ErrorMainViewController alloc] init];
     mErrorMainViewController.errorInfo = errorStr;

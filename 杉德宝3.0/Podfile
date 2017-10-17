@@ -5,4 +5,6 @@ target 'sandbao' do
   pod 'SDWebImage', '~> 4.0'
   pod "pop"
   pod 'Masonry'
+  pod 'IQKeyboardManager'
+
 end

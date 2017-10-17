@@ -42,7 +42,7 @@
 #define UPDOWNSPACE_25 25.f
 #define UPDOWNSPACE_15 15.f
 #define UPDOWNSPACE_10 10.f
-
+#define UPDOWNSPACE_0 0.f
 
 
 #pragma -mark font

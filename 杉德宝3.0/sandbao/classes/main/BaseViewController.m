@@ -29,13 +29,7 @@
     self.baseScrollView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:self.baseScrollView];
     
-    
-    //配置点击手势
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchScreen)];
-    //取消点击手势传递到baseScrollview的所有子类
-    tapGesture.cancelsTouchesInView = NO;
-    [self.baseScrollView addGestureRecognizer:tapGesture];
-    
+    //约束
     [self.baseScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(0);
         make.top.equalTo (self.view.mas_top).offset(UPDOWNSPACE_64);
@@ -71,15 +65,6 @@
     }else{
         self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, allHeight);
     }
-}
-
-
-/**
- baseScrollview的点击手势
- */
-- (void)touchScreen{
-    
-    [self.view endEditing:YES];
 }
 
 

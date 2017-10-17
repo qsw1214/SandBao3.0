@@ -15,7 +15,6 @@
 		280621E71EF8F04100346D1A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E61EF8F04100346D1A /* AudioToolbox.framework */; };
 		280621E91EF8F05100346D1A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E81EF8F05100346D1A /* AVFoundation.framework */; };
 		280621F31EF8F89600346D1A /* loading-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280621F21EF8F89600346D1A /* loading-667h@2x.png */; };
-		2811C9F61F949B1E003C4468 /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811C9DC1F949B1E003C4468 /* AuthToolBaseView.m */; };
 		2811C9F71F949B1E003C4468 /* CardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811C9DE1F949B1E003C4468 /* CardNoAuthToolView.m */; };
 		2811C9F81F949B1E003C4468 /* IdentityAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811C9E01F949B1E003C4468 /* IdentityAuthToolView.m */; };
 		2811C9F91F949B1E003C4468 /* general_icon_detail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2811C9E21F949B1E003C4468 /* general_icon_detail@2x.png */; };
@@ -35,6 +34,8 @@
 		2811CA071F949B1E003C4468 /* PwdAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811C9F31F949B1E003C4468 /* PwdAuthToolView.m */; };
 		2811CA081F949B1E003C4468 /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811C9F51F949B1E003C4468 /* SixCodeAuthToolView.m */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
+		2817474F1F964A9D007D4D3A /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2817474E1F964A9D007D4D3A /* RegistViewController.m */; };
+		281747551F96536F007D4D3A /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747541F96536F007D4D3A /* AuthToolBaseView.m */; };
 		281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA8B1F90BC6A0000D1F5 /* Loading.mm */; };
 		281AEBAF1F90C3420000D1F5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AEBA91F90C3420000D1F5 /* LoginViewController.m */; };
 		281AEBB01F90C3420000D1F5 /* ErrorMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AEBAC1F90C3420000D1F5 /* ErrorMainViewController.m */; };
@@ -313,8 +314,6 @@
 		280621E61EF8F04100346D1A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		280621E81EF8F05100346D1A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		280621F21EF8F89600346D1A /* loading-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-667h@2x.png"; sourceTree = "<group>"; };
-		2811C9DB1F949B1E003C4468 /* AuthToolBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthToolBaseView.h; sourceTree = "<group>"; };
-		2811C9DC1F949B1E003C4468 /* AuthToolBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthToolBaseView.m; sourceTree = "<group>"; };
 		2811C9DD1F949B1E003C4468 /* CardNoAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardNoAuthToolView.h; sourceTree = "<group>"; };
 		2811C9DE1F949B1E003C4468 /* CardNoAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardNoAuthToolView.m; sourceTree = "<group>"; };
 		2811C9DF1F949B1E003C4468 /* IdentityAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityAuthToolView.h; sourceTree = "<group>"; };
@@ -341,6 +340,10 @@
 		2811C9F51F949B1E003C4468 /* SixCodeAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SixCodeAuthToolView.m; sourceTree = "<group>"; };
 		2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+easyFrame.h"; sourceTree = "<group>"; };
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
+		2817474D1F964A9D007D4D3A /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
+		2817474E1F964A9D007D4D3A /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
+		281747531F96536F007D4D3A /* AuthToolBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthToolBaseView.h; sourceTree = "<group>"; };
+		281747541F96536F007D4D3A /* AuthToolBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthToolBaseView.m; sourceTree = "<group>"; };
 		281AEA8A1F90BC6A0000D1F5 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
 		281AEA8B1F90BC6A0000D1F5 /* Loading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Loading.mm; sourceTree = "<group>"; };
 		281AEBA81F90C3420000D1F5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -785,8 +788,8 @@
 			isa = PBXGroup;
 			children = (
 				2811C9E11F949B1E003C4468 /* image */,
-				2811C9DB1F949B1E003C4468 /* AuthToolBaseView.h */,
-				2811C9DC1F949B1E003C4468 /* AuthToolBaseView.m */,
+				281747531F96536F007D4D3A /* AuthToolBaseView.h */,
+				281747541F96536F007D4D3A /* AuthToolBaseView.m */,
 				2811C9DD1F949B1E003C4468 /* CardNoAuthToolView.h */,
 				2811C9DE1F949B1E003C4468 /* CardNoAuthToolView.m */,
 				2811C9DF1F949B1E003C4468 /* IdentityAuthToolView.h */,
@@ -822,6 +825,15 @@
 			path = image;
 			sourceTree = "<group>";
 		};
+		2817474C1F964A7E007D4D3A /* regist */ = {
+			isa = PBXGroup;
+			children = (
+				2817474D1F964A9D007D4D3A /* RegistViewController.h */,
+				2817474E1F964A9D007D4D3A /* RegistViewController.m */,
+			);
+			path = regist;
+			sourceTree = "<group>";
+		};
 		281AEA891F90BC4D0000D1F5 /* loadhelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -845,12 +857,12 @@
 		281AEBAA1F90C3420000D1F5 /* main */ = {
 			isa = PBXGroup;
 			children = (
+				2829EF0D1F91B76A00CC78EE /* BaseViewController.h */,
+				2829EF0E1F91B76A00CC78EE /* BaseViewController.m */,
 				281AEBAD1F90C3420000D1F5 /* MainViewController.h */,
 				281AEBAE1F90C3420000D1F5 /* MainViewController.mm */,
 				281AEBAB1F90C3420000D1F5 /* ErrorMainViewController.h */,
 				281AEBAC1F90C3420000D1F5 /* ErrorMainViewController.m */,
-				2829EF0D1F91B76A00CC78EE /* BaseViewController.h */,
-				2829EF0E1F91B76A00CC78EE /* BaseViewController.m */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -1532,6 +1544,7 @@
 			isa = PBXGroup;
 			children = (
 				A7FF2FC61E1602D80068A2F7 /* comm */,
+				2817474C1F964A7E007D4D3A /* regist */,
 				281AEBA71F90C3420000D1F5 /* login */,
 				281AEBAA1F90C3420000D1F5 /* main */,
 				A7FF2F941E1601CB0068A2F7 /* customView */,
@@ -2046,6 +2059,7 @@
 				289C0D541F203FBC00360147 /* Easing.c in Sources */,
 				281AEBAF1F90C3420000D1F5 /* LoginViewController.m in Sources */,
 				283E16D41F70B45300ECC00A /* SDPayAnimtion.m in Sources */,
+				281747551F96536F007D4D3A /* AuthToolBaseView.m in Sources */,
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
 				2811CA061F949B1E003C4468 /* PhoneAuthToolView.m in Sources */,
@@ -2105,6 +2119,7 @@
 				288421951F8E091200082E7C /* NSString+Encryption.m in Sources */,
 				288421991F8E091200082E7C /* UIDevice+DeviceoInfo.m in Sources */,
 				A7EFB1551EB9A8DD009AA369 /* MQTTCFSocketEncoder.m in Sources */,
+				2817474F1F964A9D007D4D3A /* RegistViewController.m in Sources */,
 				289EA96B1F59577500254EA6 /* SDAlertControllerUtil.m in Sources */,
 				2811C9F71F949B1E003C4468 /* CardNoAuthToolView.m in Sources */,
 				A7EFB1581EB9A8DD009AA369 /* MQTTDecoder.m in Sources */,
@@ -2135,7 +2150,6 @@
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,
 				28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */,
 				A7FF2FB91E1601CB0068A2F7 /* JYCheckBox.m in Sources */,
-				2811C9F61F949B1E003C4468 /* AuthToolBaseView.m in Sources */,
 				2811C9F81F949B1E003C4468 /* IdentityAuthToolView.m in Sources */,
 				A7EFB1611EB9A8DD009AA369 /* MQTTSSLSecurityPolicyDecoder.m in Sources */,
 			);

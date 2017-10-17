@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-
+#import "RegistViewController.h"
 
 @interface LoginViewController ()
 
@@ -39,7 +39,6 @@
     //PhoneAuthToolView
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     __block PhoneAuthToolView *phoneATV = phoneAuthToolView;
-    phoneAuthToolView.textfiled.keyboardType = UIKeyboardTypeDefault;
     phoneAuthToolView.errorBlock = ^{
         [phoneATV showTip];
     };
@@ -87,14 +86,14 @@
     }];
     
     [phoneAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.baseScrollView);
         make.top.equalTo(titleDesLab.mas_bottom).offset(UPDOWNSPACE_58);
+        make.left.equalTo(self.baseScrollView);
         make.size.mas_equalTo(phoneAuthToolView.size);
     }];
     
     [pwdAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.baseScrollView);
-        make.top.equalTo(phoneAuthToolView.mas_bottom).offset(UPDOWNSPACE_30);
+        make.top.equalTo(phoneAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
         make.size.mas_equalTo(pwdAuthToolView.size);
     }];
     
@@ -130,6 +129,8 @@
     }
     if (btn.tag == 103) {
         NSLog(@"点击了注册");
+        RegistViewController *regVc = [[RegistViewController alloc] init];
+        [self.navigationController pushViewController:regVc animated:YES];
     }
     
 }

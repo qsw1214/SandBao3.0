@@ -18,6 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
+    //http://www.jianshu.com/p/0939a30f5951
+    
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
     
     keyboardManager.enable = YES; // 控制整个功能是否启用
@@ -34,7 +37,8 @@
     
     keyboardManager.placeholderFont = [UIFont boldSystemFontOfSize:17]; // 设置占位文字的字体
     
-    keyboardManager.keyboardDistanceFromTextField = 10.0f; // 输入框距离键盘的距离
+    keyboardManager.keyboardDistanceFromTextField = 20.0f; // 输入框距离键盘的距离
+    
     
     
     return YES;
