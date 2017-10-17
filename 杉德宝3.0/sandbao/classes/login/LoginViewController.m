@@ -39,6 +39,7 @@
     //PhoneAuthToolView
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     __block PhoneAuthToolView *phoneATV = phoneAuthToolView;
+    phoneAuthToolView.textfiled.keyboardType = UIKeyboardTypeDefault;
     phoneAuthToolView.errorBlock = ^{
         [phoneATV showTip];
     };

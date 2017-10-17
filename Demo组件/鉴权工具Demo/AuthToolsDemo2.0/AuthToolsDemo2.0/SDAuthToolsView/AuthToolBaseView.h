@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface AuthToolBaseView : UIView<UITextFieldDelegate>
 
 
@@ -42,8 +41,6 @@
  常用间距(上下)
  */
 @property (nonatomic, assign) CGFloat space;
-
-
 
 
 /**

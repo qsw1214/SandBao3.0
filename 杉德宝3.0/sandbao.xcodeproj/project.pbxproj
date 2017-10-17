@@ -169,7 +169,6 @@
 		288421981F8E091200082E7C /* NSString+string.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421881F8E091200082E7C /* NSString+string.m */; };
 		288421991F8E091200082E7C /* UIDevice+DeviceoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884218A1F8E091200082E7C /* UIDevice+DeviceoInfo.m */; };
 		2884219A1F8E091200082E7C /* UIImage+image.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884218C1F8E091200082E7C /* UIImage+image.m */; };
-		2884219B1F8E091200082E7C /* UIScrollView+UITouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884218E1F8E091200082E7C /* UIScrollView+UITouch.m */; };
 		2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421901F8E091200082E7C /* UITextField+CheckLenght.m */; };
 		288421B01F8E095E00082E7C /* Majlet_Func.mm in Sources */ = {isa = PBXBuildFile; fileRef = 288421A01F8E095E00082E7C /* Majlet_Func.mm */; };
 		288421B11F8E095E00082E7C /* MqttClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421A31F8E095E00082E7C /* MqttClientManager.m */; };
@@ -535,8 +534,6 @@
 		2884218A1F8E091200082E7C /* UIDevice+DeviceoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+DeviceoInfo.m"; sourceTree = "<group>"; };
 		2884218B1F8E091200082E7C /* UIImage+image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+image.h"; sourceTree = "<group>"; };
 		2884218C1F8E091200082E7C /* UIImage+image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+image.m"; sourceTree = "<group>"; };
-		2884218D1F8E091200082E7C /* UIScrollView+UITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+UITouch.h"; sourceTree = "<group>"; };
-		2884218E1F8E091200082E7C /* UIScrollView+UITouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+UITouch.m"; sourceTree = "<group>"; };
 		2884218F1F8E091200082E7C /* UITextField+CheckLenght.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CheckLenght.h"; sourceTree = "<group>"; };
 		288421901F8E091200082E7C /* UITextField+CheckLenght.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CheckLenght.m"; sourceTree = "<group>"; };
 		2884219F1F8E095E00082E7C /* Majlet_Func.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Majlet_Func.h; sourceTree = "<group>"; };
@@ -1175,8 +1172,6 @@
 				2884218A1F8E091200082E7C /* UIDevice+DeviceoInfo.m */,
 				2884218B1F8E091200082E7C /* UIImage+image.h */,
 				2884218C1F8E091200082E7C /* UIImage+image.m */,
-				2884218D1F8E091200082E7C /* UIScrollView+UITouch.h */,
-				2884218E1F8E091200082E7C /* UIScrollView+UITouch.m */,
 				2884218F1F8E091200082E7C /* UITextField+CheckLenght.h */,
 				288421901F8E091200082E7C /* UITextField+CheckLenght.m */,
 				2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */,
@@ -2096,7 +2091,6 @@
 				289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */,
 				281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */,
 				A7FF2FE31E160A800068A2F7 /* DataModel.m in Sources */,
-				2884219B1F8E091200082E7C /* UIScrollView+UITouch.m in Sources */,
 				281F64481E792A970005AE86 /* SDCycleScrollView.m in Sources */,
 				288421941F8E091200082E7C /* NSString+EncodingUTF8Additions.m in Sources */,
 				288421961F8E091200082E7C /* NSString+file.m in Sources */,
