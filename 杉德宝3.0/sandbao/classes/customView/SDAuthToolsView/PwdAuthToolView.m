@@ -29,6 +29,7 @@
         self.titleLab.text = @"密码";
         self.textfiled.placeholder = @"输入登陆密码";
         self.textfiled.clearButtonMode = UITextFieldViewModeNever;
+        
         [self addUI];
     }return self;
     

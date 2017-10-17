@@ -1,5 +1,5 @@
 //
-//  PhoneAuthToolView.h
+//  IdentityAuthToolView.h
 //  AuthToolsDemo2.0
 //
 //  Created by tianNanYiHao on 2017/10/12.
@@ -10,12 +10,8 @@
 
 typedef void(^TextFiledErrorBlock)();
 
-@interface PhoneAuthToolView : AuthToolBaseView
+@interface IdentityAuthToolView : AuthToolBaseView
 
 @property (nonatomic, copy) TextFiledErrorBlock errorBlock;
-
-
-
-
 
 @end
