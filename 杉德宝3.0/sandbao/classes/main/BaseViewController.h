@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Masonry.h"
 #import "UIView+easyFrame.h"
-#import "SDBarBtnView.h"
+
 
 #import "CardNoAuthToolView.h"
 #import "IdentityAuthToolView.h"
@@ -25,7 +25,8 @@
 #pragma -mark frame
 #define SCREEN_RECT [UIScreen mainScreen].bounds
 #define SCREEN_SIZE [UIScreen mainScreen].bounds.size
-
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 
 #define LEFTRIGHTSPACE_40 40.f
 #define LEFTRIGHTSPACE_35 35.f
@@ -35,7 +36,9 @@
 
 #define UPDOWNSPACE_64 64.f
 #define UPDOWNSPACE_58 58.f
+#define UPDOWNSPACE_47 47.f
 #define UPDOWNSPACE_30 30.f
+#define UPDOWNSPACE_28 28.f
 #define UPDOWNSPACE_25 25.f
 #define UPDOWNSPACE_15 15.f
 #define UPDOWNSPACE_10 10.f
@@ -43,11 +46,12 @@
 
 
 #pragma -mark font
-#define FONT_28  [UIFont fontWithName:@"PingFang-SC-Medium" size:28]
-#define FONT_16  [UIFont fontWithName:@"PingFang-SC-Regular" size:16]
-#define FONT_15  [UIFont fontWithName:@"SFUIText-Medium" size:15]
-#define FONT_14  [UIFont fontWithName:@"SFUIText-Medium" size:14]
-#define FONT_12  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
+#define FONT_28_Medium   [UIFont fontWithName:@"PingFang-SC-Medium" size:28]
+#define FONT_20_Medium   [UIFont fontWithName:@"SFUIText-Medium" size:20]
+#define FONT_16_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:16]
+#define FONT_15_Regular  [UIFont fontWithName:@"PingFang-SC-Medium" size:15]
+#define FONT_14_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:14]
+#define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
 
 
 #pragma -mark color
@@ -92,6 +96,16 @@
  type:滚动视图
  */
 @property (nonatomic, strong) UIScrollView *baseScrollView;
+
+
+
+/**
+ 按钮触发汇总
+ -- 提供可重写父类的方法 --
+
+ @param btn 按钮
+ */
+- (void)buttonClick:(UIButton*)btn;
 
 
 

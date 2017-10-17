@@ -20,8 +20,13 @@
     //配置所有控制器背景色为白色
     self.view.backgroundColor = [UIColor whiteColor];
     
+    //配置所有ScrollviewView子类不被navgationController下压64
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
+    //配置baseScrollview 且隐藏自带两个imageView(VerticalScrollIndicator/HorizontalScrollIndicator)
     self.baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+    self.baseScrollView.showsVerticalScrollIndicator = NO;
+    self.baseScrollView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:self.baseScrollView];
     
     
@@ -32,6 +37,42 @@
     }];
     
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    
+    [super viewDidAppear:animated];
+    
+     [self setBaseScrollViewContentSize];
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self.view endEditing:YES];
+}
+
+/**
+ 设置baseScrollview的滚动区间
+ */
+- (void)setBaseScrollViewContentSize{
+    
+    CGFloat allHeight = 0.f;
+    
+    UIView *lasetObjectView = self.baseScrollView.subviews.lastObject;
+    
+    CGFloat lasetObjectViewOY = CGRectGetMaxY(lasetObjectView.frame);
+    
+    allHeight = lasetObjectViewOY;
+    
+    if (allHeight < SCREEN_HEIGHT - UPDOWNSPACE_64) {
+        self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - UPDOWNSPACE_64);
+    }else{
+        self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, allHeight);
+    }
+}
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

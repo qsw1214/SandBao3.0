@@ -44,7 +44,7 @@
     
     //textFiled
     textfiled = [[UITextField alloc] init];
-    textfiled.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:14];
+    textfiled.font = [UIFont fontWithName:@"SFUIText-Medium" size:14];
     textfiled.placeholder = @"这里是副标题";
     textfiled.delegate = self;
     textfiled.clearButtonMode = UITextFieldViewModeWhileEditing;

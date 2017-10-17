@@ -564,16 +564,17 @@
     
     UILabel *label = [[UILabel alloc] init];
     label.textAlignment = (!alignment) ? NSTextAlignmentLeft : alignment;
-    if (str.length>0) {
-        label.text = str;
-        label.textColor = textColor;
-        
-        label.font = font;
-        label.lineBreakMode = NSLineBreakByTruncatingMiddle; //中间省略,保留头尾
-    }
+    label.text = str;
+    label.textColor = textColor;
+    label.font = font;
+    label.lineBreakMode = NSLineBreakByTruncatingMiddle; //中间省略,保留头尾
+    
     if (attributeStr.length>0) {
         label.attributedText = attributeStr;
     }
+    
+    CGSize lableSize = [label sizeThatFits:CGSizeZero];
+    label.frame = CGRectMake(0, 0, lableSize.width, lableSize.height);
     
     return label;
 }
@@ -582,20 +583,45 @@
 + (UIButton*)createButton:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor{
     
     UIButton *btn = [[UIButton alloc] init];
-    
-    if (str.length>0) {
-        [btn setTitle:str forState:UIControlStateNormal];
-        [btn setTitleColor:textColor forState:UIControlStateNormal];
-        btn.titleLabel.font = font;
-    }
-    
+    [btn setTitle:str forState:UIControlStateNormal];
+    [btn setTitleColor:textColor forState:UIControlStateNormal];
+    btn.titleLabel.font = font;
     if (attributeStr.length>0) {
         [btn setAttributedTitle:attributeStr forState:UIControlStateNormal];
     }
-    
+    CGSize btnSize = [btn sizeThatFits:CGSizeZero];
+    btn.frame = CGRectMake(0, 0, btnSize.width, btnSize.height);
     return btn;
     
+}
+
+#pragma mark -  BarBtn工厂方法
++ (UIButton*)createBarButton:(NSString*)str font:(UIFont*)font titleColor:(UIColor*)titleColor backGroundColor:(UIColor*)groundColor leftSpace:(CGFloat)space{
     
+    UIButton *btn = [[UIButton alloc] init];
+    btn.backgroundColor = groundColor;
+    btn.layer.cornerRadius = 5.f;
+    btn.layer.masksToBounds = YES;
+    
+    UILabel *midLab = [[UILabel alloc] init];
+    midLab.textAlignment = NSTextAlignmentCenter;
+    midLab.textColor = titleColor;
+    midLab.font = font;
+    midLab.text = str;
+    [btn addSubview:midLab];
+    
+    //frame
+    CGFloat upSpace = 20;
+    CGSize midLabSize = [midLab sizeThatFits:CGSizeZero];
+    
+    CGFloat selfWidth = [UIScreen mainScreen].bounds.size.width - 2*space;
+    CGFloat selfHeight = upSpace*2 + midLabSize.height;
+    btn.frame = CGRectMake(0, 0, selfWidth, selfHeight);
+    
+    midLab.frame = CGRectMake(0, 0, midLabSize.width, midLabSize.height);
+    midLab.center = btn.center;
+    
+    return btn;
 }
 
 

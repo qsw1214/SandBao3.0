@@ -42,7 +42,7 @@
     //title
     // 1.标题
     UILabel *labTitle = [[UILabel alloc] init];
-    labTitle.frame = CGRectMake(15, 20, v.frame.size.width-2*15, controllerTop-20);
+    labTitle.frame = CGRectMake(15, 20, v.frame.size.width-2*15, 64-20);
     labTitle.text = title;
     labTitle.font = [UIFont systemFontOfSize:titleFontSzie];
     labTitle.textAlignment = NSTextAlignmentCenter;

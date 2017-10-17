@@ -68,8 +68,7 @@
 #define USERSCONFIG_ARR (NSMutableArray*)@[@"active",@"credit_fp",@"lets",@"sToken",@"uid",@"userName"]
 #define MQTTLIST_ARR (NSMutableArray*)@[@"uid",@"msg",@"isRead",@"indexCount"]
 
-//界面配置
-#define controllerTop 64.00
+
 
 
 
