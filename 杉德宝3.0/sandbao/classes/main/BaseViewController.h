@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Masonry.h"
 #import "UIView+easyFrame.h"
+#import "SDBarBtnView.h"
 
 #import "CardNoAuthToolView.h"
 #import "IdentityAuthToolView.h"
@@ -24,12 +26,14 @@
 #define SCREEN_RECT [UIScreen mainScreen].bounds
 #define SCREEN_SIZE [UIScreen mainScreen].bounds.size
 
+
 #define LEFTRIGHTSPACE_40 40.f
 #define LEFTRIGHTSPACE_35 35.f
 #define LEFTRIGHTSPACE_20 20.f
 #define LEFTRIGHTSPACE_15 15.f
 #define LEFTRIGHTSPACE_12 12.f
 
+#define UPDOWNSPACE_64 64.f
 #define UPDOWNSPACE_58 58.f
 #define UPDOWNSPACE_30 30.f
 #define UPDOWNSPACE_25 25.f

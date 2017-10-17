@@ -19,7 +19,6 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBar.hidden = YES;
-    
     [self createUI];
     
     
@@ -48,23 +47,63 @@
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
     [self.baseScrollView addSubview:pwdAuthToolView];
     
+    //forgetPwd
+    UIButton *forgetBtn = [Tool createButton:@"忘记密码?" attributeStr:nil font:FONT_14 textColor:COLOR_343339];
+    [self.baseScrollView addSubview:forgetBtn];
+    
+    //logintBtn
+    SDBarBtnView *loginBarbtn = [[SDBarBtnView alloc] init];
+    loginBarbtn.title = @"登录";
+    loginBarbtn.titleColor = COLOR_FFFFFF;
+    loginBarbtn.btnColor = COLOR_58A5F6;
+    [self.baseScrollView addSubview:loginBarbtn];
+    
+    
+    
+    
+    
     //frame
     
     CGFloat sizeToNav = 68.f;
     CGSize titleLabSize = [titleLab sizeThatFits:CGSizeZero];
     CGSize titleDesLabSize = [titleDesLab sizeThatFits:CGSizeZero];
+    CGSize forgetBtnSize = [forgetBtn systemLayoutSizeFittingSize:CGSizeZero];
+    CGFloat loginBarbtnW = SCREEN_SIZE.width - LEFTRIGHTSPACE_40*2;
 
-    CGFloat titleDesLabOY = sizeToNav + titleLabSize.height + UPDOWNSPACE_15;
-    CGFloat phoneAuthToolViewOY = titleDesLabOY + titleDesLabSize.height + UPDOWNSPACE_58;
-    CGFloat pwdAuthToolViewOY = phoneAuthToolViewOY + phoneAuthToolView.height +  UPDOWNSPACE_30;
     
-    titleLab.frame = CGRectMake(LEFTRIGHTSPACE_35, sizeToNav, titleLabSize.width, titleLabSize.height);
-    titleDesLab.frame = CGRectMake(LEFTRIGHTSPACE_35, titleDesLabOY, titleDesLabSize.width, titleDesLabSize.height);
-    phoneAuthToolView.y = phoneAuthToolViewOY;
-    pwdAuthToolView.y = pwdAuthToolViewOY;
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_35);
+        make.top.equalTo(self.baseScrollView.mas_top).offset(0);
+        make.size.mas_equalTo(titleLabSize);
+    }];
     
+    [titleDesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLab.mas_bottom).offset(UPDOWNSPACE_15);
+        make.left.equalTo(titleLab);
+        make.size.mas_equalTo(titleDesLabSize);
+    }];
     
+    [phoneAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.baseScrollView);
+        make.top.equalTo(titleDesLab.mas_bottom).offset(UPDOWNSPACE_58);
+        make.size.mas_equalTo(phoneAuthToolView.size);
+    }];
     
+    [pwdAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.baseScrollView);
+        make.top.equalTo(phoneAuthToolView.mas_bottom).offset(UPDOWNSPACE_30);
+        make.size.mas_equalTo(pwdAuthToolView.size);
+    }];
+    
+    [forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(pwdAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
+        make.right.equalTo(pwdAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
+        make.size.mas_equalTo(forgetBtnSize);
+    }];
+    
+    [loginBarbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+    }];
     
     
 }

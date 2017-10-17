@@ -35,6 +35,7 @@
 		2811CA071F949B1E003C4468 /* PwdAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811C9F31F949B1E003C4468 /* PwdAuthToolView.m */; };
 		2811CA081F949B1E003C4468 /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811C9F51F949B1E003C4468 /* SixCodeAuthToolView.m */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
+		281747461F94DDF8007D4D3A /* SDBarBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747451F94DDF8007D4D3A /* SDBarBtnView.m */; };
 		281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA8B1F90BC6A0000D1F5 /* Loading.mm */; };
 		281AEBAF1F90C3420000D1F5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AEBA91F90C3420000D1F5 /* LoginViewController.m */; };
 		281AEBB01F90C3420000D1F5 /* ErrorMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AEBAC1F90C3420000D1F5 /* ErrorMainViewController.m */; };
@@ -342,6 +343,8 @@
 		2811C9F51F949B1E003C4468 /* SixCodeAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SixCodeAuthToolView.m; sourceTree = "<group>"; };
 		2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+easyFrame.h"; sourceTree = "<group>"; };
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
+		281747441F94DDF8007D4D3A /* SDBarBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBarBtnView.h; sourceTree = "<group>"; };
+		281747451F94DDF8007D4D3A /* SDBarBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBarBtnView.m; sourceTree = "<group>"; };
 		281AEA8A1F90BC6A0000D1F5 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
 		281AEA8B1F90BC6A0000D1F5 /* Loading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Loading.mm; sourceTree = "<group>"; };
 		281AEBA81F90C3420000D1F5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -823,6 +826,15 @@
 				2811C9ED1F949B1E003C4468 /* login_list_icon_closed@3x.png */,
 			);
 			path = image;
+			sourceTree = "<group>";
+		};
+		281747431F94DDE0007D4D3A /* SDBarBtnView */ = {
+			isa = PBXGroup;
+			children = (
+				281747441F94DDF8007D4D3A /* SDBarBtnView.h */,
+				281747451F94DDF8007D4D3A /* SDBarBtnView.m */,
+			);
+			path = SDBarBtnView;
 			sourceTree = "<group>";
 		};
 		281AEA891F90BC4D0000D1F5 /* loadhelper */ = {
@@ -1666,6 +1678,7 @@
 				A7E9C7811E2CAFE500080B87 /* customAlertView */,
 				A7FF2FD41E160A800068A2F7 /* collectionview */,
 				A7FF2F951E1601CB0068A2F7 /* check */,
+				281747431F94DDE0007D4D3A /* SDBarBtnView */,
 			);
 			path = customView;
 			sourceTree = "<group>";
@@ -2038,6 +2051,7 @@
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
 				289C0D551F203FBC00360147 /* YXEasing.m in Sources */,
 				2811CA051F949B1E003C4468 /* NameAuthToolView.m in Sources */,
+				281747461F94DDF8007D4D3A /* SDBarBtnView.m in Sources */,
 				283E16DA1F70B45300ECC00A /* SDPayToolPwdView.m in Sources */,
 				A7EFB1591EB9A8DD009AA369 /* MQTTInMemoryPersistence.m in Sources */,
 				281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */,

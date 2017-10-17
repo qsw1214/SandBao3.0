@@ -25,7 +25,6 @@
 #import "NSDate+time.h"
 #import "NSString+string.h"
 #import "NSString+Money.h"
-#import "Masonry.h"
 #import "NSString+EncodingUTF8Additions.h"
 #import "NSRegularExpression+Verification.h"
 #import "NSString+Encryption.h"

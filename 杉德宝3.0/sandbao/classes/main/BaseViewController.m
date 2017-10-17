@@ -21,9 +21,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     
-    self.baseScrollView = [[UIScrollView alloc] initWithFrame:SCREEN_RECT];
+    self.baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.baseScrollView];
     
+    
+    [self.baseScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(0);
+        make.top.equalTo (self.view.mas_top).offset(UPDOWNSPACE_64);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_SIZE.width, SCREEN_SIZE.height -  UPDOWNSPACE_64));
+    }];
     
 }
 
