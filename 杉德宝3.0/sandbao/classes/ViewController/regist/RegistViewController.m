@@ -34,6 +34,9 @@
     self.navCoverView.leftBlock = ^{
         [weakself.navigationController popViewControllerAnimated:YES];
     };
+    self.navCoverView.rightImgStr = @"";
+    self.navCoverView.midTitleStr = @"lalalalal";
+    
     
 }
 

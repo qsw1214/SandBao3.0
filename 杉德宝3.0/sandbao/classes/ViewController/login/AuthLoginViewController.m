@@ -21,7 +21,7 @@
 #pragma - mark 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
-    self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, SCREEN_WIDTH, SCREEN_HEIGHT-UPDOWNSPACE_20);
+    
 }
 #pragma - mark 重写父类-导航设置方法
 - (void)setNavCoverView{

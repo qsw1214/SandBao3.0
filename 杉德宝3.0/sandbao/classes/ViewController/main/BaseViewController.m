@@ -36,8 +36,8 @@
     self.baseScrollView.showsVerticalScrollIndicator = NO;
     self.baseScrollView.showsHorizontalScrollIndicator = NO;
     
-    //配置所有baseScrollview子类 默认不能滚动
-    self.baseScrollView.scrollEnabled = NO;
+    //配置所有baseScrollview子类 默认能滚动
+    self.baseScrollView.scrollEnabled = YES;
     
     //配置所有baseScrollview子类 代理-提供禁止向下滚动方法
     self.baseScrollView.delegate = self;
