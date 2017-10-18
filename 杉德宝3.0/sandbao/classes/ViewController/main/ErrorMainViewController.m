@@ -70,6 +70,16 @@
     
 
 }
+#pragma - mark 重写父类-baseScrollView设置
+- (void)setBaseScrollview{
+    [super setBaseScrollview];
+}
+#pragma - mark 重写父类-导航设置方法
+- (void)setNavCoverView{
+    [super setNavCoverView];
+    self.navCoverView.hidden = YES;
+}
+
 - (void)showError{
     
     dispatch_async(dispatch_get_main_queue(), ^{

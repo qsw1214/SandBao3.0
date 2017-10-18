@@ -92,16 +92,17 @@
     keyboardManager.shouldResignOnTouchOutside = YES; // 控制点击背景是否收起键盘
     
     keyboardManager.shouldToolbarUsesTextFieldTintColor = YES; // 控制键盘上的工具条文字颜色是否用户自定义
+    keyboardManager.toolbarTintColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1/1.0];
     
     keyboardManager.toolbarManageBehaviour = IQAutoToolbarByTag; // 有多个输入框时，可以通过点击Toolbar 上的“前一个”“后一个”按钮来实现移动到不同的输入框
     
     keyboardManager.enableAutoToolbar = YES; // 控制是否显示键盘上的工具条
     
-    keyboardManager.shouldShowTextFieldPlaceholder = NO; // 是否显示占位文字
+    keyboardManager.shouldShowTextFieldPlaceholder = NO; // 是否显示占位文字placehordel
     
     keyboardManager.placeholderFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:14]; // 设置占位文字的字体
     
-    keyboardManager.keyboardDistanceFromTextField = 20.f; // 输入框距离键盘的距离
+    keyboardManager.keyboardDistanceFromTextField = 30.f; // 输入框距离键盘的距离
 
 }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281747AF1F978DC8007D4D3A /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747AE1F978DC8007D4D3A /* NoCopyTextField.m */; };
 		281AEA881F9056A30000D1F5 /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */; };
 		28E1C0981F8F51FD00527048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0971F8F51FD00527048 /* main.m */; };
 		28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C09A1F8F51FD00527048 /* AppDelegate.m */; };
@@ -56,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		192CFADC6A6BAE2496FDEBF0 /* Pods-AuthToolsDemo2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthToolsDemo2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-AuthToolsDemo2.0/Pods-AuthToolsDemo2.0.release.xcconfig"; sourceTree = "<group>"; };
+		281747AD1F978DC8007D4D3A /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
+		281747AE1F978DC8007D4D3A /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
 		281AEA861F9056A30000D1F5 /* SixCodeAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SixCodeAuthToolView.h; sourceTree = "<group>"; };
 		281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SixCodeAuthToolView.m; sourceTree = "<group>"; };
 		28E1C0931F8F51FD00527048 /* AuthToolsDemo2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthToolsDemo2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +214,8 @@
 				28E1C0F31F8F746D00527048 /* CardNoAuthToolView.m */,
 				281AEA861F9056A30000D1F5 /* SixCodeAuthToolView.h */,
 				281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */,
+				281747AD1F978DC8007D4D3A /* NoCopyTextField.h */,
+				281747AE1F978DC8007D4D3A /* NoCopyTextField.m */,
 			);
 			path = SDAuthToolsView;
 			sourceTree = "<group>";
@@ -456,6 +461,7 @@
 				28E1C09E1F8F51FD00527048 /* ViewController.m in Sources */,
 				28E1C0D21F8F6A3B00527048 /* PwdAuthToolView.m in Sources */,
 				28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */,
+				281747AF1F978DC8007D4D3A /* NoCopyTextField.m in Sources */,
 				28E1C0981F8F51FD00527048 /* main.m in Sources */,
 				28E1C0F11F8F740E00527048 /* IdentityAuthToolView.m in Sources */,
 				281AEA881F9056A30000D1F5 /* SixCodeAuthToolView.m in Sources */,

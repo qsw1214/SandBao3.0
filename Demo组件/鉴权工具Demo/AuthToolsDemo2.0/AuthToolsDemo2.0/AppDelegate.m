@@ -33,11 +33,11 @@
     
     keyboardManager.enableAutoToolbar = YES; // 控制是否显示键盘上的工具条
     
-    keyboardManager.shouldShowTextFieldPlaceholder = YES; // 是否显示占位文字
+    keyboardManager.shouldShowTextFieldPlaceholder = NO; // 是否显示占位文字
     
     keyboardManager.placeholderFont = [UIFont boldSystemFontOfSize:17]; // 设置占位文字的字体
     
-    keyboardManager.keyboardDistanceFromTextField = 20.0f; // 输入框距离键盘的距离
+    keyboardManager.keyboardDistanceFromTextField = 30.0f; // 输入框距离键盘的距离
     
     
     

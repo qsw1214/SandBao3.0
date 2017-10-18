@@ -17,7 +17,6 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
-
 @end
 
 @implementation ViewController
@@ -29,9 +28,11 @@
     
     
     
-    [self testOne];
+//    [self testOne];
     
-//    [self testTwo];
+    
+    //短信码框/密码框测试
+    [self testTwo];
   
 }
 
@@ -43,17 +44,25 @@
     self.scrollview.scrollEnabled = YES;
     self.scrollview.userInteractionEnabled = YES;
     
-    PhoneAuthToolView *p = [PhoneAuthToolView createAuthToolViewOY:300];
-    p.titleLab.text = @"预留手机号";
-    p.textfiled.placeholder = @"输入银行预留手机号";
-    p.tip.text = @"请输入正确的银行预留手机号";
-    __block PhoneAuthToolView *selfBlockp = p;
-    p.errorBlock = ^{
-        [selfBlockp showTip];
+    //短信m
+    SixCodeAuthToolView *d = [SixCodeAuthToolView createAuthToolViewOY:(100+30)*1+0];
+    d.style = SmsCodeAuthTool;
+    d.smsCodeStrBlock = ^(NSString *codeStr) {
+        NSLog(@"接受到的短信码为: %@",codeStr);
     };
+    d.smsRequestBlock = ^{
+        NSLog(@"点击了发送短信码的按钮");
+    };
+    [self.scrollview addSubview:d];
+    
+    SixCodeAuthToolView *n = [SixCodeAuthToolView createAuthToolViewOY:d.frame.size.height + 130];
+    n.style = PayCodeAuthTool;
+    n.smsCodeStrBlock = ^(NSString *codeStr) {
+        NSLog(@"接受到的密码为: %@",codeStr);
+    };
+    [self.scrollview addSubview:n];
     
     
-    [self.scrollview addSubview:p];
     
 }
 
@@ -88,19 +97,6 @@
     [self.scrollview addSubview:s];
     
     
-    SixCodeAuthToolView *d = [SixCodeAuthToolView createAuthToolViewOY:(b.frame.size.height+30)*3+0];
-    d.style = PayCodeAuthTool;
-    d.codeStrBlock = ^(NSString *codeStr) {
-        NSLog(@"%@",codeStr);
-    };
-    [self.scrollview addSubview:d];
-    
-    SixCodeAuthToolView *n = [SixCodeAuthToolView createAuthToolViewOY:(b.frame.size.height+30)*4+0];
-    n.codeStrBlock = ^(NSString *codeStr) {
-        NSLog(@"%@",codeStr);
-    };
-    [self.scrollview addSubview:n];
-    
     
     NameAuthToolView *m = [NameAuthToolView createAuthToolViewOY:(b.frame.size.height+30)*5+0];
     [self.scrollview addSubview:m];
@@ -121,7 +117,7 @@
     [self.scrollview addSubview:j];
     
     
-    self.scrollview.contentSize = CGSizeMake(self.view.frame.size.width,3000 + b.frame.size.height + p.frame.size.height + s.frame.size.height + d.frame.size.height+n.frame.size.height+m.frame.size.height+i.frame.size.height+t.frame.size.height+j.frame.size.height);
+    self.scrollview.contentSize = CGSizeMake(self.view.frame.size.width,3000 + b.frame.size.height + p.frame.size.height + s.frame.size.height + m.frame.size.height+i.frame.size.height+t.frame.size.height+j.frame.size.height);
     
 }
 @end

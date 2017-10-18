@@ -1,41 +1,58 @@
 //
-//  RegistViewController.m
+//  LoginViewController.m
 //  sandbao
 //
-//  Created by tianNanYiHao on 2017/10/17.
+//  Created by tianNanYiHao on 2017/10/13.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
+#import "LoginViewController.h"
 #import "RegistViewController.h"
 
-@interface RegistViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation RegistViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
+    
+    //隐藏系统导航栏的navigationBar
+    self.navigationController.navigationBar.hidden = YES;
     
     [self createUI];
     
+    
+}
+#pragma - mark 重写父类-baseScrollView设置
+- (void)setBaseScrollview{
+    [super setBaseScrollview];
+    self.baseScrollView.scrollEnabled = YES;
+    self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, SCREEN_WIDTH, SCREEN_HEIGHT-UPDOWNSPACE_20);
+}
+
+#pragma - mark 重写父类-导航设置方法
+- (void)setNavCoverView{
+    [super setNavCoverView];
+    self.navCoverView.hidden = YES;
 }
 
 #pragma - mark  UI绘制
 - (void)createUI{
     
     //titleLab1
-    UILabel *titleLab = [Tool createLable:@"输入你的手机号" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    UILabel *titleLab = [Tool createLable:@"欢迎回来" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [self.baseScrollView addSubview:titleLab];
     
     
+    //titleLab2
+    UILabel *titleDesLab = [Tool createLable:@"继续登录" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    [self.baseScrollView addSubview:titleDesLab];
     
     //PhoneAuthToolView
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
-    phoneAuthToolView.titleLab.text = @"你的手机号";
-    phoneAuthToolView.textfiled.placeholder = @"输入手机号";
+    phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
     __block PhoneAuthToolView *phoneATV = phoneAuthToolView;
     phoneAuthToolView.errorBlock = ^{
         [phoneATV showTip];
@@ -63,7 +80,7 @@
     [registAttributeStr addAttributes:@{
                                         NSFontAttributeName:FONT_14_Regular,
                                         NSForegroundColorAttributeName:COLOR_358BEF
-                                        } range:NSMakeRange(5, 2)];
+                                       } range:NSMakeRange(5, 2)];
     UIButton *registbtn = [Tool createButton:@"" attributeStr:registAttributeStr font:FONT_14_Regular textColor:COLOR_343339_7];
     [registbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     registbtn.tag = 103;
@@ -72,21 +89,26 @@
     
     //frame
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_112);
         make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_35);
-        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_64);
         make.size.mas_equalTo(titleLab.size);
     }];
     
+    [titleDesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLab.mas_bottom).offset(UPDOWNSPACE_15);
+        make.left.equalTo(titleLab);
+        make.size.mas_equalTo(titleDesLab.size);
+    }];
     
     [phoneAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.baseScrollView);
-        make.top.equalTo(titleLab.mas_bottom).offset(UPDOWNSPACE_58);
+        make.top.equalTo(titleDesLab.mas_bottom).offset(UPDOWNSPACE_58);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(phoneAuthToolView.size);
     }];
     
     [pwdAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(phoneAuthToolView.mas_bottom).offset(UPDOWNSPACE_30);
-        make.left.equalTo(self.baseScrollView);
+        make.top.equalTo(phoneAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(pwdAuthToolView.size);
     }];
     
@@ -98,7 +120,7 @@
     
     [loginBarbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(forgetBtn.mas_bottom).offset(UPDOWNSPACE_28);
-        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_40);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(loginBarbtn.size);
     }];
     
@@ -110,10 +132,38 @@
     
 }
 
+
+#pragma - mark 点击方法集合
+- (void)buttonClick:(UIButton *)btn{
+    
+    if (btn.tag == 101) {
+        NSLog(@"点击了忘记密码");
+    }
+    if (btn.tag == 102) {
+        NSLog(@"点击了登陆");
+    }
+    if (btn.tag == 103) {
+        NSLog(@"点击了注册");
+        RegistViewController *regVc = [[RegistViewController alloc] init];
+        [self.navigationController pushViewController:regVc animated:YES];
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 @end

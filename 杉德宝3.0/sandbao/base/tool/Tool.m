@@ -583,6 +583,7 @@
 + (UIButton*)createButton:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor{
     
     UIButton *btn = [[UIButton alloc] init];
+    btn.titleLabel.textAlignment = NSTextAlignmentCenter;
     [btn setTitle:str forState:UIControlStateNormal];
     [btn setTitleColor:textColor forState:UIControlStateNormal];
     btn.titleLabel.font = font;

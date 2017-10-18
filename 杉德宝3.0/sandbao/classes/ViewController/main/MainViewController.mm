@@ -211,8 +211,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.baseScrollView.backgroundColor = [UIColor redColor];
 
+}
+#pragma - mark 重写父类-baseScrollView设置
+- (void)setBaseScrollview{
+    [super setBaseScrollview];
+    
+}
+#pragma - mark 重写父类-导航设置方法
+- (void)setNavCoverView{
+    [super setNavCoverView];
+    
 }
 - (void)exitApplication {
     //来 加个动画，给用户一个友好的退出界面

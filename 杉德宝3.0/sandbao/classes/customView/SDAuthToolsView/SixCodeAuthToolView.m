@@ -7,10 +7,16 @@
 //
 
 #import "SixCodeAuthToolView.h"
+#import "NoCopyTextField.h"
 
 @interface SixCodeAuthToolView ()<UITextFieldDelegate>{
     
     NSInteger codeLabCount;
+    NSTimer *timer;
+    NSTimeInterval timeOut;
+    NSInteger timeCount;
+    UIButton *requestSmsBtn;
+    NoCopyTextField *noCopyTextfield;
     
 }
 @property (nonatomic, strong) NSMutableArray *codeLabArr; //保存codeLab的数组
@@ -34,18 +40,24 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if ([super initWithFrame:frame]) {
+        //sixCode不需要tip,因此在此子类中删除
+        [self.tip removeFromSuperview];
         
-        self.style = SmsCodeAuthTool;
+        //sixCode中需禁止父类的textfied的黏贴复制功能,因此使用 noCopyTextfield 来替换 self.textfied,从而禁止用户粘贴复制
+        noCopyTextfield = [[NoCopyTextField alloc] init];
+        noCopyTextfield.frame = self.textfiled.frame;
+        [self addSubview:noCopyTextfield];
+        [self.textfiled removeFromSuperview];
         
-        self.textfiled.placeholder = @"";
-        self.textfiled.clearButtonMode = UITextFieldViewModeNever;
-        self.textfiled.delegate = self;
-        self.textfiled.backgroundColor = [UIColor clearColor];
-        self.textfiled.textColor = [UIColor clearColor];
-        self.textfiled.tintColor = [UIColor clearColor];
-        self.textfiled.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
-        [self.textfiled addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+        noCopyTextfield.placeholder = @"";
+        noCopyTextfield.clearButtonMode = UITextFieldViewModeNever;
+        noCopyTextfield.delegate = self;
+        noCopyTextfield.backgroundColor = [UIColor clearColor];
+        noCopyTextfield.textColor = [UIColor clearColor];
+        noCopyTextfield.tintColor = [UIColor clearColor];
+        noCopyTextfield.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        noCopyTextfield.keyboardType = UIKeyboardTypeNumberPad;
+        [noCopyTextfield addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         
         self.lineV.hidden = YES;
         
@@ -60,13 +72,13 @@
     
     if (_style == SmsCodeAuthTool) {
         self.titleLab.text = @"验证码";
-        [self addUI];
+        
     }
     if (_style == PayCodeAuthTool) {
-        self.titleLab.text = @"";
-        [self addUI];
+        self.titleLab.text = @"支付密码";
+        
     }
-
+    [self addUI];
 }
 
 - (void)addUI{
@@ -77,8 +89,8 @@
     CGFloat space = 10;
     CGFloat spaceAll = (codeLabCount-1) * space;
     
-    CGFloat sixCodeLabAllWidth = self.textfiled.frame.size.width - spaceAll;
-    CGFloat sixCodeLabHeight   = self.textfiled.frame.size.height;
+    CGFloat sixCodeLabAllWidth = noCopyTextfield.frame.size.width - spaceAll;
+    CGFloat sixCodeLabHeight   = noCopyTextfield.frame.size.height;
     
     CGFloat codeLabWidth = sixCodeLabAllWidth/6.f;
     CGFloat codeLabHeight = sixCodeLabHeight;
@@ -105,6 +117,37 @@
         [self addSubview:bottomLineV];
     }
     
+#pragma - mark ====================== 根据style类型是否追加底部短信发送按钮 ===========================
+    //根据style类型是否追加底部短信发送按钮
+    if (_style == SmsCodeAuthTool) {
+        requestSmsBtn = [[UIButton alloc] init];
+        requestSmsBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+        requestSmsBtn.titleLabel.font =  [UIFont fontWithName:@"PingFang-SC-Regular" size:12];
+        requestSmsBtn.titleLabel.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1/1.0];
+        [requestSmsBtn addTarget:self action:@selector(changeBtnSate:) forControlEvents:UIControlEventTouchUpInside];
+        NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我获取短信"];
+        [atr addAttributes:@{
+                             NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
+                             NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                             } range:NSMakeRange(2, 2)];
+        [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
+        requestSmsBtn.selected = NO;
+        [self addSubview:requestSmsBtn];
+        
+        CGFloat requestBtnOX = self.leftRightSpace;
+        CGFloat requestBtnOY = codeLabHeight + codeLabOY;
+        CGSize requestBtnSize = [requestSmsBtn sizeThatFits:CGSizeZero];
+        requestSmsBtn.frame = CGRectMake(requestBtnOX, requestBtnOY, noCopyTextfield.frame.size.width, requestBtnSize.height + 4*self.space);
+        
+        //重置frame
+        CGRect rectFrame = self.frame;
+        rectFrame.size.height = requestSmsBtn.frame.size.height + requestBtnOY;
+        self.frame = rectFrame;
+        
+        
+    }
+    
+    
 }
 
 - (void)textFieldDidChange:(UITextField*)textfiled{
@@ -128,13 +171,66 @@
             currentCodelab.text = @"";
         }
         
-        //保存codeStr
+        //短信码字符串回调
         if (textfiled.text.length == 6) {
-            _codeStrBlock(textfiled.text);
+            self.smsCodeStrBlock(textfiled.text);
         }
         
     }
     
+}
+
+- (void)changeBtnSate:(UIButton*)btn{
+    
+    if (btn.selected == NO) {
+        btn.selected =  YES;
+        timeCount = 60;
+        [self shortMsgCodeCountDown];
+        //短信码请求事件回调
+        self.smsRequestBlock();
+    }
+    
+    
+}
+
+/**
+ *@brief 短信码倒计时
+ */
+- (void)shortMsgCodeCountDown
+{
+    timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(refreshTime) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+}
+/**
+ *@brief 短信码倒计时
+ */
+- (void)refreshTime
+{
+    timeCount--;
+    if (timeCount < 0) {
+        [timer invalidate];
+        timer = nil;
+        [requestSmsBtn setUserInteractionEnabled:YES];
+        requestSmsBtn.selected = NO;
+        NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我重新发送一次短信"];
+        [atr addAttributes:@{
+                             NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
+                             NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                             } range:NSMakeRange(2, 4)];
+        [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
+        
+        
+    } else {
+        [requestSmsBtn setUserInteractionEnabled:NO];
+        
+        NSString *time = [NSString stringWithFormat:@"(%ld秒)后可重新发送短信", (long)timeCount];
+        NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:time];
+        [atr addAttributes:@{
+                             NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
+                             NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                             } range:NSMakeRange(1, 2)];
+        [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
+    }
 }
 
 #pragma - mark textfiledDelegate
@@ -163,6 +259,4 @@
     
     
 }
-
-
 @end

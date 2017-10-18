@@ -8,8 +8,16 @@
 
 #import "AuthToolBaseView.h"
 
-typedef void(^CodeStrBlock)(NSString * codeStr);
+typedef void(^SmsCodeStrBlock)(NSString * codeStr);
+typedef void(^SmsRequestBlock)();
 
+
+/**
+ 六位字符码鉴权视图样式
+ 
+ - SmsCodeAuthTool: 短信模式
+ - PayCodeAuthTool: 密码模式
+ */
 typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
     SmsCodeAuthTool = 0,
     PayCodeAuthTool,
@@ -19,12 +27,21 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
 
 
 /**
- 类型
+ 控件类型:sms短信模式/pay密码模式
  */
 @property (nonatomic, assign) CodeAuthToolStyle style;
 
 
+/**
+ block-返回输入的六位字符码
+ */
+@property (nonatomic, copy) SmsCodeStrBlock smsCodeStrBlock;
 
-@property (nonatomic, copy) CodeStrBlock codeStrBlock;
+
+/**
+ block-回调在此发送短信码的请求标识
+ */
+@property (nonatomic, copy) SmsRequestBlock smsRequestBlock;
+
 
 @end
