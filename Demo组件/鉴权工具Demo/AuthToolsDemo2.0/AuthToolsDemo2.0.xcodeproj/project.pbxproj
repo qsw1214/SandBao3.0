@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		281747AF1F978DC8007D4D3A /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747AE1F978DC8007D4D3A /* NoCopyTextField.m */; };
 		281AEA881F9056A30000D1F5 /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */; };
+		2857CE2A1F98757F00874A7C /* BankAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE291F98757F00874A7C /* BankAuthToolView.m */; };
+		2857CE2E1F987C6C00874A7C /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE2D1F987C6C00874A7C /* NoCopyTextField.m */; };
+		2857CE311F98823A00874A7C /* BankPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE301F98823A00874A7C /* BankPickerView.m */; };
+		2857CE341F9889E600874A7C /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE331F9889E600874A7C /* NextViewController.m */; };
 		28E1C0981F8F51FD00527048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0971F8F51FD00527048 /* main.m */; };
 		28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C09A1F8F51FD00527048 /* AppDelegate.m */; };
 		28E1C09E1F8F51FD00527048 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C09D1F8F51FD00527048 /* ViewController.m */; };
@@ -20,12 +23,8 @@
 		28E1C0CC1F8F55E700527048 /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0CB1F8F55E700527048 /* AuthToolBaseView.m */; };
 		28E1C0CF1F8F673800527048 /* PhoneAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0CE1F8F673800527048 /* PhoneAuthToolView.m */; };
 		28E1C0D21F8F6A3B00527048 /* PwdAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0D11F8F6A3B00527048 /* PwdAuthToolView.m */; };
-		28E1C0E01F8F6AFD00527048 /* general_icon_detail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0D41F8F6AFD00527048 /* general_icon_detail@2x.png */; };
-		28E1C0E11F8F6AFD00527048 /* general_icon_detail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0D51F8F6AFD00527048 /* general_icon_detail@3x.png */; };
 		28E1C0E21F8F6AFD00527048 /* list_icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0D61F8F6AFD00527048 /* list_icon_more@2x.png */; };
 		28E1C0E31F8F6AFD00527048 /* list_icon_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0D71F8F6AFD00527048 /* list_icon_more@3x.png */; };
-		28E1C0E41F8F6AFD00527048 /* login_icon_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0D81F8F6AFD00527048 /* login_icon_back@2x.png */; };
-		28E1C0E51F8F6AFD00527048 /* login_icon_back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0D91F8F6AFD00527048 /* login_icon_back@3x.png */; };
 		28E1C0E61F8F6AFD00527048 /* login_icon_eye_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0DA1F8F6AFD00527048 /* login_icon_eye_default@2x.png */; };
 		28E1C0E71F8F6AFD00527048 /* login_icon_eye_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0DB1F8F6AFD00527048 /* login_icon_eye_default@3x.png */; };
 		28E1C0E81F8F6AFD00527048 /* login_icon_eye_lighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E1C0DC1F8F6AFD00527048 /* login_icon_eye_lighted@2x.png */; };
@@ -57,10 +56,16 @@
 
 /* Begin PBXFileReference section */
 		192CFADC6A6BAE2496FDEBF0 /* Pods-AuthToolsDemo2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthToolsDemo2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-AuthToolsDemo2.0/Pods-AuthToolsDemo2.0.release.xcconfig"; sourceTree = "<group>"; };
-		281747AD1F978DC8007D4D3A /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
-		281747AE1F978DC8007D4D3A /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
 		281AEA861F9056A30000D1F5 /* SixCodeAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SixCodeAuthToolView.h; sourceTree = "<group>"; };
 		281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SixCodeAuthToolView.m; sourceTree = "<group>"; };
+		2857CE281F98757F00874A7C /* BankAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAuthToolView.h; sourceTree = "<group>"; };
+		2857CE291F98757F00874A7C /* BankAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAuthToolView.m; sourceTree = "<group>"; };
+		2857CE2C1F987C6C00874A7C /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
+		2857CE2D1F987C6C00874A7C /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
+		2857CE2F1F98823A00874A7C /* BankPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankPickerView.h; sourceTree = "<group>"; };
+		2857CE301F98823A00874A7C /* BankPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankPickerView.m; sourceTree = "<group>"; };
+		2857CE321F9889E600874A7C /* NextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewController.h; sourceTree = "<group>"; };
+		2857CE331F9889E600874A7C /* NextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
 		28E1C0931F8F51FD00527048 /* AuthToolsDemo2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthToolsDemo2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28E1C0971F8F51FD00527048 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		28E1C0991F8F51FD00527048 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -83,12 +88,8 @@
 		28E1C0CE1F8F673800527048 /* PhoneAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneAuthToolView.m; sourceTree = "<group>"; };
 		28E1C0D01F8F6A3B00527048 /* PwdAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PwdAuthToolView.h; sourceTree = "<group>"; };
 		28E1C0D11F8F6A3B00527048 /* PwdAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdAuthToolView.m; sourceTree = "<group>"; };
-		28E1C0D41F8F6AFD00527048 /* general_icon_detail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "general_icon_detail@2x.png"; sourceTree = "<group>"; };
-		28E1C0D51F8F6AFD00527048 /* general_icon_detail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "general_icon_detail@3x.png"; sourceTree = "<group>"; };
 		28E1C0D61F8F6AFD00527048 /* list_icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@2x.png"; sourceTree = "<group>"; };
 		28E1C0D71F8F6AFD00527048 /* list_icon_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@3x.png"; sourceTree = "<group>"; };
-		28E1C0D81F8F6AFD00527048 /* login_icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_back@2x.png"; sourceTree = "<group>"; };
-		28E1C0D91F8F6AFD00527048 /* login_icon_back@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_back@3x.png"; sourceTree = "<group>"; };
 		28E1C0DA1F8F6AFD00527048 /* login_icon_eye_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_default@2x.png"; sourceTree = "<group>"; };
 		28E1C0DB1F8F6AFD00527048 /* login_icon_eye_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_default@3x.png"; sourceTree = "<group>"; };
 		28E1C0DC1F8F6AFD00527048 /* login_icon_eye_lighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_lighted@2x.png"; sourceTree = "<group>"; };
@@ -131,6 +132,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2857CE2B1F987C6C00874A7C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2857CE2C1F987C6C00874A7C /* NoCopyTextField.h */,
+				2857CE2D1F987C6C00874A7C /* NoCopyTextField.m */,
+				2857CE2F1F98823A00874A7C /* BankPickerView.h */,
+				2857CE301F98823A00874A7C /* BankPickerView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		28E1C08A1F8F51FD00527048 = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +173,8 @@
 				28E1C09A1F8F51FD00527048 /* AppDelegate.m */,
 				28E1C09C1F8F51FD00527048 /* ViewController.h */,
 				28E1C09D1F8F51FD00527048 /* ViewController.m */,
+				2857CE321F9889E600874A7C /* NextViewController.h */,
+				2857CE331F9889E600874A7C /* NextViewController.m */,
 				28E1C09F1F8F51FD00527048 /* Main.storyboard */,
 				28E1C0A21F8F51FD00527048 /* Assets.xcassets */,
 				28E1C0A41F8F51FD00527048 /* LaunchScreen.storyboard */,
@@ -199,6 +213,7 @@
 		28E1C0C91F8F55B300527048 /* SDAuthToolsView */ = {
 			isa = PBXGroup;
 			children = (
+				2857CE2B1F987C6C00874A7C /* View */,
 				28E1C0D31F8F6AD000527048 /* image */,
 				28E1C0CA1F8F55E700527048 /* AuthToolBaseView.h */,
 				28E1C0CB1F8F55E700527048 /* AuthToolBaseView.m */,
@@ -214,8 +229,8 @@
 				28E1C0F31F8F746D00527048 /* CardNoAuthToolView.m */,
 				281AEA861F9056A30000D1F5 /* SixCodeAuthToolView.h */,
 				281AEA871F9056A30000D1F5 /* SixCodeAuthToolView.m */,
-				281747AD1F978DC8007D4D3A /* NoCopyTextField.h */,
-				281747AE1F978DC8007D4D3A /* NoCopyTextField.m */,
+				2857CE281F98757F00874A7C /* BankAuthToolView.h */,
+				2857CE291F98757F00874A7C /* BankAuthToolView.m */,
 			);
 			path = SDAuthToolsView;
 			sourceTree = "<group>";
@@ -223,12 +238,8 @@
 		28E1C0D31F8F6AD000527048 /* image */ = {
 			isa = PBXGroup;
 			children = (
-				28E1C0D41F8F6AFD00527048 /* general_icon_detail@2x.png */,
-				28E1C0D51F8F6AFD00527048 /* general_icon_detail@3x.png */,
 				28E1C0D61F8F6AFD00527048 /* list_icon_more@2x.png */,
 				28E1C0D71F8F6AFD00527048 /* list_icon_more@3x.png */,
-				28E1C0D81F8F6AFD00527048 /* login_icon_back@2x.png */,
-				28E1C0D91F8F6AFD00527048 /* login_icon_back@3x.png */,
 				28E1C0DA1F8F6AFD00527048 /* login_icon_eye_default@2x.png */,
 				28E1C0DB1F8F6AFD00527048 /* login_icon_eye_default@3x.png */,
 				28E1C0DC1F8F6AFD00527048 /* login_icon_eye_lighted@2x.png */,
@@ -370,18 +381,14 @@
 			files = (
 				28E1C0E21F8F6AFD00527048 /* list_icon_more@2x.png in Resources */,
 				28E1C0E81F8F6AFD00527048 /* login_icon_eye_lighted@2x.png in Resources */,
-				28E1C0E51F8F6AFD00527048 /* login_icon_back@3x.png in Resources */,
 				28E1C0E31F8F6AFD00527048 /* list_icon_more@3x.png in Resources */,
 				28E1C0A61F8F51FD00527048 /* LaunchScreen.storyboard in Resources */,
 				28E1C0A31F8F51FD00527048 /* Assets.xcassets in Resources */,
 				28E1C0EB1F8F6AFD00527048 /* login_list_icon_closed@3x.png in Resources */,
-				28E1C0E41F8F6AFD00527048 /* login_icon_back@2x.png in Resources */,
-				28E1C0E11F8F6AFD00527048 /* general_icon_detail@3x.png in Resources */,
 				28E1C0E71F8F6AFD00527048 /* login_icon_eye_default@3x.png in Resources */,
 				28E1C0E61F8F6AFD00527048 /* login_icon_eye_default@2x.png in Resources */,
 				28E1C0A11F8F51FD00527048 /* Main.storyboard in Resources */,
 				28E1C0E91F8F6AFD00527048 /* login_icon_eye_lighted@3x.png in Resources */,
-				28E1C0E01F8F6AFD00527048 /* general_icon_detail@2x.png in Resources */,
 				28E1C0EA1F8F6AFD00527048 /* login_list_icon_closed@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,15 +462,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2857CE2A1F98757F00874A7C /* BankAuthToolView.m in Sources */,
 				28E1C0CF1F8F673800527048 /* PhoneAuthToolView.m in Sources */,
 				28E1C0EE1F8F730100527048 /* NameAuthToolView.m in Sources */,
 				28E1C0F41F8F746D00527048 /* CardNoAuthToolView.m in Sources */,
 				28E1C09E1F8F51FD00527048 /* ViewController.m in Sources */,
 				28E1C0D21F8F6A3B00527048 /* PwdAuthToolView.m in Sources */,
 				28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */,
-				281747AF1F978DC8007D4D3A /* NoCopyTextField.m in Sources */,
+				2857CE311F98823A00874A7C /* BankPickerView.m in Sources */,
 				28E1C0981F8F51FD00527048 /* main.m in Sources */,
 				28E1C0F11F8F740E00527048 /* IdentityAuthToolView.m in Sources */,
+				2857CE2E1F987C6C00874A7C /* NoCopyTextField.m in Sources */,
+				2857CE341F9889E600874A7C /* NextViewController.m in Sources */,
 				281AEA881F9056A30000D1F5 /* SixCodeAuthToolView.m in Sources */,
 				28E1C0CC1F8F55E700527048 /* AuthToolBaseView.m in Sources */,
 			);

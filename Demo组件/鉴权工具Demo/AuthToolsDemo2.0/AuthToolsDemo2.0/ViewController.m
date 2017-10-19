@@ -14,6 +14,10 @@
 #import "IdentityAuthToolView.h"
 #import "CardNoAuthToolView.h"
 #import "SixCodeAuthToolView.h"
+#import "BankAuthToolView.h"
+#import "BankPickerView.h"
+
+#import "NextViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 
@@ -21,21 +25,40 @@
 
 @implementation ViewController
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
     
-    
+    //啥都塞进去的测试
 //    [self testOne];
     
     
     //短信码框/密码框测试
-    [self testTwo];
+//    [self testTwo];
+    
+    //银行选择测试
+    [self testThree];
+    
   
 }
 
+
+- (void)testThree{
+    self.scrollview.scrollEnabled = YES;
+    self.scrollview.userInteractionEnabled = YES;
+    
+    BankAuthToolView *b = [BankAuthToolView createAuthToolViewOY:100];
+    [self.view addSubview:b];
+
+    [BankPickerView  showBankPickView:@[@[@"测试数据---1", @"测试数据---2", @"测试数据---3", @"测试数据---4", @"测试数据---5", @"测试数据---6"], @[@"123", @"456", @"789"]] blockBankInfo:^(NSArray *bankInfo) {
+        NSLog(@"%@ = %@",bankInfo[0],bankInfo[1]);
+    }];
+    
+}
 
 
 #pragma  - mark testTwo

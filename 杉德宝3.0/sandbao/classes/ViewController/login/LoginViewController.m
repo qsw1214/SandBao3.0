@@ -37,6 +37,22 @@
     [super setNavCoverView];
     self.navCoverView.hidden = YES;
 }
+#pragma - mark 重写父类-点击方法集合
+- (void)buttonClick:(UIButton *)btn{
+    
+    if (btn.tag == BTN_TAG_FORGETPWD) {
+        NSLog(@"点击了忘记密码");
+    }
+    if (btn.tag == BTN_TAG_LOGIN) {
+        NSLog(@"点击了登陆");
+    }
+    if (btn.tag == BTN_TAG_REGIST) {
+        NSLog(@"点击了注册");
+        RegistViewController *regVc = [[RegistViewController alloc] init];
+        [self.navigationController pushViewController:regVc animated:YES];
+    }
+    
+}
 
 #pragma - mark  UI绘制
 - (void)createUI{
@@ -65,13 +81,13 @@
     
     //forgetPwd
     UIButton *forgetBtn = [Tool createButton:@"忘记密码?" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7];
-    forgetBtn.tag = 101;
+    forgetBtn.tag = BTN_TAG_FORGETPWD;
     [forgetBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:forgetBtn];
     
     //logintBtn
     UIButton *loginBarbtn = [Tool createBarButton:@"登录" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    loginBarbtn.tag = 102;
+    loginBarbtn.tag = BTN_TAG_LOGIN;
     [loginBarbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:loginBarbtn];
     
@@ -83,7 +99,7 @@
                                        } range:NSMakeRange(5, 2)];
     UIButton *registbtn = [Tool createButton:@"" attributeStr:registAttributeStr font:FONT_14_Regular textColor:COLOR_343339_7];
     [registbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    registbtn.tag = 103;
+    registbtn.tag = BTN_TAG_REGIST;
     [self.baseScrollView addSubview:registbtn];
     
     
@@ -125,7 +141,7 @@
     }];
     
     [registbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(loginBarbtn.mas_bottom).offset(UPDOWNSPACE_47);
+        make.top.equalTo(loginBarbtn.mas_bottom).offset(UPDOWNSPACE_28);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(registbtn.size);
     }];
@@ -133,22 +149,7 @@
 }
 
 
-#pragma - mark 点击方法集合
-- (void)buttonClick:(UIButton *)btn{
-    
-    if (btn.tag == 101) {
-        NSLog(@"点击了忘记密码");
-    }
-    if (btn.tag == 102) {
-        NSLog(@"点击了登陆");
-    }
-    if (btn.tag == 103) {
-        NSLog(@"点击了注册");
-        RegistViewController *regVc = [[RegistViewController alloc] init];
-        [self.navigationController pushViewController:regVc animated:YES];
-    }
-    
-}
+
 
 
 

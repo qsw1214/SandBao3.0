@@ -88,7 +88,7 @@
     
     CGFloat lasetObjectViewOY = CGRectGetMaxY(lasetObjectView.frame);
     
-    allHeight = lasetObjectViewOY;
+    allHeight = lasetObjectViewOY + UPDOWNSPACE_20;
     
     if (allHeight < SCREEN_HEIGHT - UPDOWNSPACE_64) {
         self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - UPDOWNSPACE_64);

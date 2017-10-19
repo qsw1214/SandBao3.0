@@ -7,7 +7,7 @@
 //
 
 #import "RegistViewController.h"
-#import "SmsCodeViewController.h"
+#import "SmsCheckViewController.h"
 @interface RegistViewController ()
 
 @end
@@ -30,13 +30,27 @@
 #pragma - mark 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
+    self.navCoverView.rightImgStr = nil;
+    self.navCoverView.midTitleStr = nil;
     __block UIViewController *weakself = self;
     self.navCoverView.leftBlock = ^{
         [weakself.navigationController popViewControllerAnimated:YES];
     };
-    self.navCoverView.rightImgStr = @"";
-    self.navCoverView.midTitleStr = @"lalalalal";
+}
+#pragma - mark 重写父类-点击方法集合
+- (void)buttonClick:(UIButton *)btn{
     
+    if (btn.tag == BTN_TAG_NEXT) {
+        NSLog(@"点击了 继续");
+        SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
+        smsVC.phoneNoStr = @"15151474388";
+        smsVC.smsCheckType = SMS_CHECKTYPE_REGIST;
+        [self.navigationController pushViewController:smsVC animated:YES];
+    }
+    if (btn.tag == BTN_TAG_LOGIN) {
+        NSLog(@"点击了 返回继续登陆");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
 }
 
@@ -62,7 +76,7 @@
     
     //nextBtn
     UIButton *nextBarbtn = [Tool createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    nextBarbtn.tag = 101;
+    nextBarbtn.tag = BTN_TAG_NEXT;
     [nextBarbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:nextBarbtn];
     
@@ -74,7 +88,7 @@
                                         } range:NSMakeRange(6, 4)];
     UIButton *comeBackLogBtn = [Tool createButton:@"" attributeStr:registAttributeStr font:FONT_14_Regular textColor:COLOR_343339_7];
     [comeBackLogBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    comeBackLogBtn.tag = 102;
+    comeBackLogBtn.tag = BTN_TAG_LOGIN;
     [self.baseScrollView addSubview:comeBackLogBtn];
     
     
@@ -108,21 +122,7 @@
 }
 
 
-- (void)buttonClick:(UIButton *)btn{
-    
-    if (btn.tag == 101) {
-        NSLog(@"点击了 继续");
-        SmsCodeViewController *smsVC = [[SmsCodeViewController alloc] init];
-        smsVC.phoneNoStr = @"15151474388";
-        smsVC.smsCodeType = SMS_CODETYPE_REGIST;
-        [self.navigationController pushViewController:smsVC animated:YES];
-    }
-    if (btn.tag == 102) {
-        NSLog(@"点击了 返回继续登陆");
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    
-}
+
 
 
 - (void)didReceiveMemoryWarning {

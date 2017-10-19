@@ -19,10 +19,13 @@
     NoCopyTextField *noCopyTextfield;
     
 }
+
 @property (nonatomic, strong) NSMutableArray *codeLabArr; //保存codeLab的数组
 @end
 
 @implementation SixCodeAuthToolView
+
+
 
 /**
  创建对象
@@ -105,6 +108,7 @@
     for (int i = 0; i < codeLabCount; i++) {
         //lab
         UILabel *codeLab = [[UILabel alloc] init];
+        codeLab.tag = 10000 + i;
         codeLab.textAlignment = NSTextAlignmentCenter;
         codeLab.frame = CGRectMake(i*codeLabWidth+self.leftRightSpace+i*space, codeLabOY, codeLabWidth, codeLabHeight);
         [self.codeLabArr addObject:codeLab];
@@ -155,8 +159,10 @@
     NSInteger length = textfiled.text.length;
     
     if (length == 0) {
-        UILabel *currentCodelab = (UILabel*)self.codeLabArr[length];
-        currentCodelab.text = @"";
+        for (int i  = 0; i<self.codeLabArr.count; i++) {
+            UILabel *currentCodelab = (UILabel*)self.codeLabArr[i];
+            currentCodelab.text = @"";
+        }
     }else{
         UILabel *currentCodelab = (UILabel*)self.codeLabArr[length-1];
         if (_style == SmsCodeAuthTool) {
@@ -171,9 +177,16 @@
             currentCodelab.text = @"";
         }
         
-        //短信码字符串回调
+        //字符串回调
         if (textfiled.text.length == 6) {
-            self.smsCodeStrBlock(textfiled.text);
+            //回调短信码
+            if (_style == SmsCodeAuthTool) {
+                self.smsCodeStrBlock(textfiled.text);
+            }
+            //回调支付密码
+            if (_style == PayCodeAuthTool) {
+                self.payCodeStrBlock(textfiled.text);
+            }
         }
         
     }

@@ -38,7 +38,8 @@
     
     //pwd
     self.textfiled.secureTextEntry = YES;
-    self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
+    self.textfiled.delegate = self;
+    self.textfiled.keyboardType = UIKeyboardTypeDefault;
     
     
     //btnEye
@@ -76,5 +77,33 @@
     
 }
 
+#pragma - mark textfiledDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    
+    if ([string isEqualToString:@""]) {
+        return YES;
+    }
+    
+    if (textField.text.length >20) {
+        _errorBlock();
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    if (textField.text.length<8 && textField.text.length>0) {
+        _errorBlock();
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    if (textField.text.length>0) {
+        //清空
+        self.textfiled.text = @"";
+    }
+}
 
 @end

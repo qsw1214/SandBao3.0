@@ -1,18 +1,19 @@
 //
-//  SmsCodeViewController.m
+//  SmsCheckViewController.m
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/18.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "SmsCodeViewController.h"
-
-@interface SmsCodeViewController ()
+#import "SmsCheckViewController.h"
+#import "LogpwdViewController.h"
+#import "PayPwdViewController.h"
+@interface SmsCheckViewController ()
 
 @end
 
-@implementation SmsCodeViewController
+@implementation SmsCheckViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,15 +28,18 @@
 #pragma - mark 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
+    
+    self.navCoverView.rightImgStr = nil;
+    self.navCoverView.midTitleStr = nil;
     __block UIViewController *weakself = self;
     self.navCoverView.leftBlock = ^{
         [weakself.navigationController popViewControllerAnimated:YES];
     };
-    self.navCoverView.leftBlock = ^{
-        [weakself.navigationController popViewControllerAnimated:YES];
-    };
-    self.navCoverView.rightImgStr = @"";
-    self.navCoverView.midTitleStr = @"";
+}
+#pragma - mark 重写父类-点击方法集合
+- (void)buttonClick:(UIButton *)btn{
+    
+    
     
 }
 
@@ -60,14 +64,25 @@
     smsCodeAuthToolView.style = SmsCodeAuthTool;
     smsCodeAuthToolView.smsCodeStrBlock = ^(NSString *codeStr) {
         NSLog(@"接收到的短信码为: %@",codeStr);
+        
+        if (self.smsCheckType == SMS_CHECKTYPE_REGIST) {
+            //模拟输入短信成功后,跳转设置 登陆密码 页面
+            LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
+            [self.navigationController pushViewController:setLogpwdVC animated:YES];
+        }
+        if (self.smsCheckType == SMS_CHECKTYPE_REALNAME) {
+            //模拟输入短信成功后,跳转设置 支付密码 页面
+            PayPwdViewController *setPayPwdVC = [[PayPwdViewController alloc] init];
+            [self.navigationController pushViewController:setPayPwdVC animated:YES];
+        }
+        
     };
     smsCodeAuthToolView.smsRequestBlock = ^{
         NSLog(@"点击了发送短信码的按钮,触发了请求事件,请求事件待攻城狮处理");
+        
     };
     [self.baseScrollView addSubview:smsCodeAuthToolView];
     
-    
-
     
     
     //frame
@@ -99,11 +114,7 @@
 }
 
 
-- (void)buttonClick:(UIButton *)btn{
-    
 
-    
-}
 
 
 

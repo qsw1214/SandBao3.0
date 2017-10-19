@@ -224,6 +224,11 @@
     [super setNavCoverView];
     
 }
+#pragma - mark 重写父类-点击方法集合
+- (void)buttonClick:(UIButton *)btn{
+    
+    
+}
 - (void)exitApplication {
     //来 加个动画，给用户一个友好的退出界面
     

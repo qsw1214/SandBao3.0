@@ -19,9 +19,9 @@
 }
 
 /**
-*  创建UITextField 的catgory ，将此方法粘贴到.m文件。
+*  创建UITextField 的子类 ，将此方法粘贴到.m文件。
 *  也就是重写长按方法 ,将长按的菜单关闭掉.
-*  @return 在需要使用的类直接引入.h文件即可 无需调用
+*  @return 使用方法:使用该类的实例对象替换UITextfiledView
 */
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender {
 //    if (action == @selector(paste:))//禁止粘贴

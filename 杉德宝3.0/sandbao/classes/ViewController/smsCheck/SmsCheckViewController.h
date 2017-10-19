@@ -1,5 +1,5 @@
 //
-//  SmsCodeViewController.h
+//  SmsCheckViewController.h
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/18.
@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface SmsCodeViewController : BaseViewController
+@interface SmsCheckViewController : BaseViewController
 
 
 /**
@@ -16,6 +16,10 @@
  */
 @property (nonatomic, strong) NSString *phoneNoStr;
 
-@property (nonatomic, assign) NSInteger smsCodeType;
+
+/**
+ 接受: 调用发送短信的用途类型
+ */
+@property (nonatomic, assign) NSInteger smsCheckType;
 
 @end

@@ -8,6 +8,17 @@
 
 #import "AuthToolBaseView.h"
 
+/**
+ 输入框内容校验不通过回调
+ */
+typedef void(^TextErrorBlock)();
+
 @interface PwdAuthToolView : AuthToolBaseView
+
+/**
+ 输入框内容校验不通过回调
+ */
+@property (nonatomic, copy) TextErrorBlock errorBlock;
+
 
 @end

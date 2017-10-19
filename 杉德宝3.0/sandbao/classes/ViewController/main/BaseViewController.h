@@ -17,6 +17,7 @@
 #import "PhoneAuthToolView.h"
 #import "PwdAuthToolView.h"
 #import "SixCodeAuthToolView.h"
+#import "BankAuthToolView.h"
 
 
 
@@ -36,6 +37,7 @@
 
 #define UPDOWNSPACE_112 112.f
 #define UPDOWNSPACE_89 89.f
+#define UPDOWNSPACE_69 69.f
 #define UPDOWNSPACE_64 64.f
 #define UPDOWNSPACE_58 58.f
 #define UPDOWNSPACE_47 47.f
@@ -46,8 +48,9 @@
 #define UPDOWNSPACE_28 28.f
 #define UPDOWNSPACE_25 25.f
 #define UPDOWNSPACE_20 20.f
-#define UPDOWNSPACE_16 15.f
+#define UPDOWNSPACE_16 16.f
 #define UPDOWNSPACE_15 15.f
+#define UPDOWNSPACE_14 14.f
 #define UPDOWNSPACE_11 11.f
 #define UPDOWNSPACE_10 10.f
 #define UPDOWNSPACE_0 0.f
@@ -90,8 +93,18 @@
 #define COLOR_6CB9F9 HexRGBA(0x6CB9F9,1.f)
 
 
-#pragma - makr 短信类型:smsCodeType
-#define SMS_CODETYPE_REGIST 10001
+#pragma - mark 短信类型:smsCodeType
+#define SMS_CHECKTYPE_REGIST 10001
+#define SMS_CHECKTYPE_REALNAME 10002
+
+
+
+#pragma - mark 按钮Tag:tag
+#define BTN_TAG_FORGETPWD 100000
+#define BTN_TAG_LOGIN 100001
+#define BTN_TAG_REGIST 100002
+#define BTN_TAG_NEXT 100004
+#define BTN_TAG_SHOWBANKLIST 100005
 
 
 
@@ -130,7 +143,7 @@
 
 /**
  按钮触发汇总 - 供子类重写实现方法
- -- 本类无具体实现方法 --
+ -- 本类无具体实现方法 , 由子类复制具体实现--
 
  @param btn 按钮
  */

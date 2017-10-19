@@ -8,11 +8,18 @@
 
 #import "AuthToolBaseView.h"
 
-typedef void(^TextFiledErrorBlock)();
+/**
+ 输入框内容校验不通过回调
+ */
+typedef void(^TextErrorBlock)();
 
 @interface PhoneAuthToolView : AuthToolBaseView
 
-@property (nonatomic, copy) TextFiledErrorBlock errorBlock;
+
+/**
+ 输入框内容校验不通过回调
+ */
+@property (nonatomic, copy) TextErrorBlock errorBlock;
 
 
 
