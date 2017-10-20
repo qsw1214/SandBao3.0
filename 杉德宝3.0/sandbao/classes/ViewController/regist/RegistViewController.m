@@ -67,9 +67,12 @@
     phoneAuthToolView.titleLab.text = @"你的手机号";
     phoneAuthToolView.textfiled.placeholder = @"输入手机号";
     phoneAuthToolView.tip.text = @"请输入正确手机号";
-    __block PhoneAuthToolView *phoneATV = phoneAuthToolView;
+    __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
+    phoneAuthToolView.successBlock = ^{
+        NSLog(@"成功获取的手机号码为 : %@",selfPhoneAuthToolView.textfiled.text);
+    };
     phoneAuthToolView.errorBlock = ^{
-        [phoneATV showTip];
+        [selfPhoneAuthToolView showTip];
     };
     [self.baseScrollView addSubview:phoneAuthToolView];
     

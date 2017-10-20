@@ -33,19 +33,109 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     
-    //啥都塞进去的测试
+//    //啥都塞进去的测试
 //    [self testOne];
-    
-    
-    //短信码框/密码框测试
+//    
+//    //短信码框/密码框测试
 //    [self testTwo];
+//
+//    //银行选择测试
+//    [self testThree];
+//    
+//    //手机号的测试
+//    [self testFour];
+//
+//    //密码框的测试
+//    [self testFiv];
+//    
+//    //姓名框的测试
+//     [self testSix];
+//    
+//    //证件号的测试
+//    [self testSev];
     
-    //银行选择测试
-    [self testThree];
+    //银行卡号测试
+    [self testeight];
     
   
 }
 
+- (void)testeight{
+    
+    CardNoAuthToolView *card = [CardNoAuthToolView createAuthToolViewOY:100];
+    
+    card.tip.text = @"请输入正确的银行卡号";
+    __block CardNoAuthToolView *selfCard = card;
+    card.successBlock = ^{
+        NSLog(@"正确的卡号为 : %@",selfCard.textfiled.text);
+    };
+    card.errorBlock = ^{
+        [selfCard showTip];
+    };
+    [self.scrollview addSubview:card];
+    
+}
+
+- (void)testSev{
+    IdentityAuthToolView *idv = [IdentityAuthToolView createAuthToolViewOY:0];
+    
+    idv.tip.text = @"请输入正确身份证号码";
+    __block IdentityAuthToolView *selfIdv = idv;
+    idv.successBlock = ^{
+        NSLog(@"身份证号 : %@",selfIdv.textfiled.text);
+    };
+    idv.errorBlock = ^{
+        [selfIdv showTip];
+    };
+    
+    [self.scrollview addSubview:idv];
+    
+}
+
+- (void)testSix{
+    
+    NameAuthToolView * name = [NameAuthToolView createAuthToolViewOY:0];
+    name.tip.text = @"请输入真实姓名";
+    __block NameAuthToolView *selfName = name;
+    name.successBlock = ^{
+        NSLog(@"真实姓名 : %@",selfName.textfiled.text);
+    };
+    name.errorBlock = ^{
+        [selfName showTip];
+    };
+    
+    [self.scrollview addSubview:name];
+}
+
+- (void)testFiv{
+    
+    
+    PwdAuthToolView *pwd = [PwdAuthToolView createAuthToolViewOY:100];
+    pwd.tip.text = @"请输入8-20位数字字母组合密码";
+    __block PwdAuthToolView *selfPwd = pwd;
+    pwd.successBlock = ^{
+        NSLog(@"密码 : %@",selfPwd.textfiled.text);
+    };
+    pwd.errorBlock = ^{
+        [selfPwd showTip];
+    };
+    [self.scrollview addSubview:pwd];
+    
+}
+
+- (void)testFour{
+    
+    PhoneAuthToolView *p = [PhoneAuthToolView createAuthToolViewOY:100];
+    p.tip.text = @"请输入正确的手机号";
+    __block PhoneAuthToolView *selfP = p;
+    p.successBlock = ^{
+        NSLog(@"获取到的可用手机号码为 : %@",selfP.textfiled.text);
+    };
+    p.errorBlock = ^{
+        [selfP showTip];
+    };
+    [self.scrollview addSubview:p];
+}
 
 - (void)testThree{
     self.scrollview.scrollEnabled = YES;
@@ -70,22 +160,20 @@
     //短信m
     SixCodeAuthToolView *d = [SixCodeAuthToolView createAuthToolViewOY:(100+30)*1+0];
     d.style = SmsCodeAuthTool;
-    d.smsCodeStrBlock = ^(NSString *codeStr) {
+    d.successBlock = ^(NSString *codeStr) {
         NSLog(@"接受到的短信码为: %@",codeStr);
     };
-    d.smsRequestBlock = ^{
+    d.successRequestBlock = ^{
         NSLog(@"点击了发送短信码的按钮");
     };
     [self.scrollview addSubview:d];
     
     SixCodeAuthToolView *n = [SixCodeAuthToolView createAuthToolViewOY:d.frame.size.height + 130];
     n.style = PayCodeAuthTool;
-    n.smsCodeStrBlock = ^(NSString *codeStr) {
+    n.successBlock = ^(NSString *codeStr) {
         NSLog(@"接受到的密码为: %@",codeStr);
     };
     [self.scrollview addSubview:n];
-    
-    
     
 }
 
@@ -137,6 +225,11 @@
     
     
     PwdAuthToolView *j = [PwdAuthToolView createAuthToolViewOY:(b.frame.size.height+30)*8+0];
+    j.tip.text = @"请输入8-20位的数字字母组合密码";
+    __block id selfj = j;
+    j.errorBlock = ^{
+        [selfj showTip];
+    };
     [self.scrollview addSubview:j];
     
     

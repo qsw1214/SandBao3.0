@@ -8,26 +8,11 @@
 
 #import "AuthToolBaseView.h"
 
-
 /**
- 短信码回调
-
- @param codeStr 6位短信码字符串
+ 输入框内容通过回调
  */
-typedef void(^SmsCodeStrBlock)(NSString * codeStr);
+typedef void(^TextSuccessBlock)();
 
-/**
- 重复短信事件回调  
- */
-typedef void(^SmsRequestBlock)();
-
-
-/**
- 支付密码回调
-
- @param codeStr 6位支付密码字符串
- */
-typedef void(^PayCodeStrBlock)(NSString *codeStr);
 
 /**
  六位字符码鉴权视图样式
@@ -50,21 +35,16 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
 
 
 /**
- block-返回输入的六位短信字符码
+ block-返回sixCodeAuthTool的文本信息
  */
-@property (nonatomic, copy) SmsCodeStrBlock smsCodeStrBlock;
+@property (nonatomic, copy) TextSuccessBlock successBlock;
 
 
 /**
- block-回调在此发送短信码的请求标识
+ block-返回短信码重发请求的回调
  */
-@property (nonatomic, copy) SmsRequestBlock smsRequestBlock;
+@property (nonatomic, copy) TextSuccessBlock successRequestBlock;
 
-
-/**
- block-返回输入的六位支付密码
- */
-@property (nonatomic, copy) PayCodeStrBlock payCodeStrBlock;
 
 
 @end

@@ -186,11 +186,11 @@
         if (textfiled.text.length == 6) {
             //回调短信码
             if (_style == SmsCodeAuthTool) {
-                self.smsCodeStrBlock(textfiled.text);
+                self.successBlock(textfiled.text);
             }
             //回调支付密码
             if (_style == PayCodeAuthTool) {
-                self.payCodeStrBlock(textfiled.text);
+                self.successBlock(textfiled.text);
             }
         }
         
@@ -213,7 +213,7 @@
         [self shortMsgCodeCountDown];
         
         //短信码请求事件回调
-        self.smsRequestBlock();
+        self.successRequestBlock();
     }
     
     

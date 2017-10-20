@@ -66,14 +66,38 @@
     
     //nameAuthToolView
     NameAuthToolView *nameAuthToolView = [NameAuthToolView createAuthToolViewOY:0];
+    nameAuthToolView.tip.text = @"请输入真实有效姓名";
+    __block NameAuthToolView *selfnameAuthToolView = nameAuthToolView;
+    nameAuthToolView.successBlock = ^{
+        NSLog(@"%@",selfnameAuthToolView.textfiled.text);
+    };
+    nameAuthToolView.errorBlock = ^{
+        [selfnameAuthToolView showTip];
+    };
     [self.baseScrollView addSubview:nameAuthToolView];
     
     //identityAuthToolView
     IdentityAuthToolView *identityAuthToolView = [IdentityAuthToolView createAuthToolViewOY:0];
+    identityAuthToolView.tip.text = @"请输入有效身份证件号";
+    __block IdentityAuthToolView *selfIdentityAuthToolView = identityAuthToolView;
+    identityAuthToolView.successBlock = ^{
+        NSLog(@"%@",selfIdentityAuthToolView.textfiled.text);
+    };
+    identityAuthToolView.errorBlock = ^{
+        [selfIdentityAuthToolView showTip];
+    };
     [self.baseScrollView addSubview:identityAuthToolView];
     
     //cardNoAuthToolView
     CardNoAuthToolView *cardNoAuthToolView = [CardNoAuthToolView createAuthToolViewOY:0];
+    cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
+    __block CardNoAuthToolView *selfcardNoAuthToolView = cardNoAuthToolView;
+    cardNoAuthToolView.successBlock = ^{
+        NSLog(@"%@",selfcardNoAuthToolView.textfiled.text);
+    };
+    cardNoAuthToolView.errorBlock = ^{
+        [selfcardNoAuthToolView showTip];
+    };
     [self.baseScrollView addSubview:cardNoAuthToolView];
     
     //bankAuthToolView

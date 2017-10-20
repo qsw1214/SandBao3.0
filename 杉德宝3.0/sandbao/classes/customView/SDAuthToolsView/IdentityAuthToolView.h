@@ -9,12 +9,22 @@
 #import "AuthToolBaseView.h"
 
 /**
+ 输入框内容通过回调
+ */
+typedef void(^TextSuccessBlock)();
+
+/**
  输入框内容校验不通过回调
  */
 typedef void(^TextErrorBlock)();
 
 @interface IdentityAuthToolView : AuthToolBaseView
 
+
+/**
+ 输入框内容通过回调
+ */
+@property (nonatomic, copy) TextSuccessBlock successBlock;
 
 /**
  输入框内容校验不通过回调

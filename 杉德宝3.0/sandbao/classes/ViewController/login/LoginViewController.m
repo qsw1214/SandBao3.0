@@ -77,6 +77,9 @@
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
     __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
+    phoneAuthToolView.successBlock = ^{
+        NSLog(@"成功获取的手机号码为 : %@",selfPhoneAuthToolView.textfiled.text);
+    };
     phoneAuthToolView.errorBlock = ^{
         [selfPhoneAuthToolView showTip];
     };

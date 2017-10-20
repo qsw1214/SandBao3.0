@@ -77,33 +77,89 @@
     
 }
 
+
+#define OnlyNum_letterVerifi @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
 #pragma - mark textfiledDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    
-    if ([string isEqualToString:@""]) {
-        return YES;
+    //禁止输入空格且警告
+    if ([string isEqualToString:@" "]) {
+        _errorBlock();
+        return NO;
     }
-    
-    if (textField.text.length >20) {
+    //超过20长度不能再输入且警告提示
+    if (textField.text.length >20 && ![string isEqualToString:@""]) {
+        _errorBlock();
+        return NO;
+    }
+    //限制输入纯数字纯字母
+    if (![self restrictionwithTypeStr:OnlyNum_letterVerifi string:string]) {
         _errorBlock();
         return NO;
     }
     
     return YES;
 }
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if (textField.text.length<8 && textField.text.length>0) {
-        _errorBlock();
+-(BOOL)restrictionwithTypeStr:(NSString*)typeStr string:(NSString*)string{
+    NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:typeStr] invertedSet];
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    if ([string isEqualToString:@""]) { //不过滤回退键
+        return YES;
+    }
+    if ([string isEqualToString:filtered]) {
+        return YES;
+    }else{
+        return NO;  //过滤
     }
 }
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    if (((![self validatePasswordNumAndLetter:textField.text]) || !(textField.text.length>=8 && textField.text.length<=20)) && (textField.text.length>0)) {
+        [self deleteErrorTextAnimation:textField];
+        _errorBlock();
+    }else if([self validatePasswordNumAndLetter:textField.text] && textField.text>0){
+        _successBlock();
+    }
+}
+
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (textField.text.length>0) {
         //清空
         self.textfiled.text = @"";
     }
+    
+    
+}
+
+
+/**
+ 动画 - textfiled错误删除动画
+ 
+ @param textField textfiled
+ */
+- (void)deleteErrorTextAnimation:(UITextField*)textField{
+    
+    [UIView animateWithDuration:1.5f delay:0.5f options:UIViewAnimationOptionCurveEaseInOut|UIViewKeyframeAnimationOptionAllowUserInteraction animations:^{
+        textField.alpha = 0.f;
+    } completion:^(BOOL finished) {
+        textField.alpha = 1.f;
+        textField.text = @"";
+    }];
+}
+
+/**
+ *@brief 数字和字母组合密码
+ *@param passWord 字符串 参数：密码
+ *@return 返回BOOL
+ */
+- (BOOL)validatePasswordNumAndLetter:(NSString *)passWord
+{
+    NSString *passWordRegex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]+$";
+    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
+    return [passWordPredicate evaluateWithObject:passWord];
 }
 
 @end

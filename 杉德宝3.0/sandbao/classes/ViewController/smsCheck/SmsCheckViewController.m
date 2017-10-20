@@ -62,7 +62,7 @@
     //smsCodeAuth:sixCodeAuth
     SixCodeAuthToolView *smsCodeAuthToolView = [SixCodeAuthToolView createAuthToolViewOY:0];
     smsCodeAuthToolView.style = SmsCodeAuthTool;
-    smsCodeAuthToolView.smsCodeStrBlock = ^(NSString *codeStr) {
+    smsCodeAuthToolView.successBlock = ^(NSString *codeStr) {
         NSLog(@"接收到的短信码为: %@",codeStr);
         
         if (self.smsCheckType == SMS_CHECKTYPE_REGIST) {
@@ -77,7 +77,7 @@
         }
         
     };
-    smsCodeAuthToolView.smsRequestBlock = ^{
+    smsCodeAuthToolView.successRequestBlock = ^{
         NSLog(@"点击了发送短信码的按钮,触发了请求事件,请求事件待攻城狮处理");
         
     };

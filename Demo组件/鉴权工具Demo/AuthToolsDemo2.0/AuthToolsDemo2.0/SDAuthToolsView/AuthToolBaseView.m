@@ -96,19 +96,21 @@
 
 - (void)showTip{
     
-    //tip出现
-    [UIView animateWithDuration:0.7f animations:^{
-        tip.alpha = 1.f;
-    } completion:^(BOOL finished) {
-
-        //tip隐藏
-        [UIView animateWithDuration:1.f delay:3.f options:UIViewAnimationOptionLayoutSubviews animations:^{
-            tip.alpha = 0.f;
-        } completion:^(BOOL finished) {
-            
-        }];
-    }];
+    tip.alpha = 1.f;
+    CABasicAnimation *shakeAnimation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x"];
+    shakeAnimation.fromValue = @(-5);
+    shakeAnimation.toValue = @(5);
+    shakeAnimation.duration = 0.1f;
+    shakeAnimation.autoreverses = YES;
+    shakeAnimation.repeatCount = 3;
+    [tip.layer addAnimation:shakeAnimation forKey:@"shakeAnimation"];
     
+    
+    [UIView animateWithDuration:2.0f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        tip.alpha = 0.f;
+    } completion:^(BOOL finished) {
+        
+    }];
     
 }
 
