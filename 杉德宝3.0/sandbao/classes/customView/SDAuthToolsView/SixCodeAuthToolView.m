@@ -158,6 +158,11 @@
     
     NSInteger length = textfiled.text.length;
     
+    if (length == 6) {
+        //隐藏键盘
+        [textfiled resignFirstResponder];
+    }
+    
     if (length == 0) {
         for (int i  = 0; i<self.codeLabArr.count; i++) {
             UILabel *currentCodelab = (UILabel*)self.codeLabArr[i];
@@ -196,9 +201,17 @@
 - (void)changeBtnSate:(UIButton*)btn{
     
     if (btn.selected == NO) {
+        
         btn.selected =  YES;
+        
+        //点击发送短信按钮后, 键盘自动弹出
+        [noCopyTextfield becomeFirstResponder];
+        
         timeCount = 60;
+        
+        //短信码倒计时
         [self shortMsgCodeCountDown];
+        
         //短信码请求事件回调
         self.smsRequestBlock();
     }
@@ -231,8 +244,6 @@
                              NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
                              } range:NSMakeRange(2, 4)];
         [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
-        
-        
     } else {
         [requestSmsBtn setUserInteractionEnabled:NO];
         

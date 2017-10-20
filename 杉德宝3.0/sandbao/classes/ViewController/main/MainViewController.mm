@@ -16,8 +16,6 @@
 #import "LoginViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-
-
 #define kContentFrame CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kDockHeight)
 
 #define KDockFrame CGRectMake(0, self.view.frame.size.height - kDockHeight, self.view.frame.size.width, kDockHeight)
@@ -42,15 +40,21 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    //明登陆
-    if (_pwdLoginFlag) {
-        [self pwdLogin];
+    
+    if ([CommParameter sharedInstance].userId == nil) {
+        
+        //明登陆
+        if (_pwdLoginFlag) {
+            [self pwdLogin];
+        }
+        //暗登陆
+        else{
+            [self noPwdLogin];
+            
+        }
     }
-    //暗登陆
-    else{
-//        [self noPwdLogin];
-        NSLog(@"==================================");
-    }
+    
+
 }
 #pragma mark - 明登陆
 
@@ -61,10 +65,14 @@
     
     if (result) {
         LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
+                [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         [self presentViewController:navLogin animated:YES completion:nil];
     }
     
+//    PayPwdViewController *mLoginViewController = [[PayPwdViewController alloc] init];
+//    UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
+//    [self presentViewController:navLogin animated:YES completion:nil];
 }
 #pragma mark - 暗登陆
 - (void)noPwdLogin{
@@ -210,8 +218,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.baseScrollView.backgroundColor = [UIColor redColor];
 
 }
 #pragma - mark 重写父类-baseScrollView设置
@@ -222,6 +228,23 @@
 #pragma - mark 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
+    self.navCoverView.style = NavCoverStyleGradient;
+    self.navCoverView.midTitleStr = @"";
+    self.navCoverView.letfImgStr = @"index_avatar";
+    self.navCoverView.rightImgStr = @"index_msg";
+    self.navCoverView.leftBlock = ^{
+        
+    };
+    __block id selfBlock = self;
+    self.navCoverView.rightBlock = ^{
+        LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
+        [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
+        [selfBlock presentViewController:navLogin animated:YES completion:nil];
+    };
+    
+    
+    
     
 }
 #pragma - mark 重写父类-点击方法集合

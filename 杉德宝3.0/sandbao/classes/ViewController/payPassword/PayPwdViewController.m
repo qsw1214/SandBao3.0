@@ -8,21 +8,41 @@
 
 #import "PayPwdViewController.h"
 
+
+/**
+ 记录六位密码的输入状态
+
+ - sixCodeStateNomal: 正常输入(第一次输入)
+ - sixCodeStateAgain: 再次输入(第二次输入)
+ - SixCodeStateSuccess: 校验成功
+ */
+typedef NS_ENUM(NSInteger,SixCodeState){
+    
+    sixCodeStateNomal = 0,
+    sixCodeStateAgain ,
+    SixCodeStateSuccess
+};
+
 @interface PayPwdViewController ()
 {
     // 6位密码
     NSString *sixCodeStr;
-    BOOL isPayPwdAgain;  //第二次输入的密码是否和第一次一致
     
 }
+@property (nonatomic, assign) SixCodeState sixCodeState;
+
 @end
 
 @implementation PayPwdViewController
+@synthesize sixCodeState;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    isPayPwdAgain = NO;
+
+    
+    sixCodeState = sixCodeStateNomal;
     [self createUI];
 }
 
@@ -49,10 +69,12 @@
     
     if (btn.tag == BTN_TAG_NEXT) {
         
-        if (isPayPwdAgain) {
-            NSLog(@"-=-=-=-=-=-=-=-=-=-=-=-=-=-==-");
+        if (sixCodeState == SixCodeStateSuccess) {
+            //验证支付密码成功, dismiss方式返回MainViewController
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [CommParameter sharedInstance].userId = @"======";
         }
-        if (!isPayPwdAgain) {
+        if (sixCodeState == sixCodeStateAgain || sixCodeState == sixCodeStateNomal) {
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self createUI];
         }
@@ -73,7 +95,13 @@
     [self.baseScrollView addSubview:titleLab];
     
     //titleLab2
-    UILabel *titleDesLab = [Tool createLable:@"输入6位数字支付密码" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+    UILabel *titleDesLab;
+    if (sixCodeState == sixCodeStateNomal) {
+        titleDesLab = [Tool createLable:@"输入6位数字支付密码" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+    }
+    if (sixCodeState == sixCodeStateAgain) {
+        titleDesLab = [Tool createLable:@"再次输入6位数字支付密码" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+    }
     [self.baseScrollView addSubview:titleDesLab];
     
     //payCodeAuthTool:sixCodeAuthToolView
@@ -83,12 +111,14 @@
         NSLog(@"返回的支付密码为 : %@",codeStr);
         if (sixCodeStr.length == 0) {
             sixCodeStr = codeStr;
+            sixCodeState = sixCodeStateAgain;
         }
         else if (sixCodeStr.length > 0) {
             if ([sixCodeStr isEqualToString:codeStr]) {
-                isPayPwdAgain = YES;
+                sixCodeState = SixCodeStateSuccess;
             }else{
-                isPayPwdAgain = NO;
+                sixCodeState = sixCodeStateNomal;
+                sixCodeStr = nil;
             }
         }
         

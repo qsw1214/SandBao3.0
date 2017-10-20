@@ -20,7 +20,7 @@
     
     //隐藏系统导航栏的navigationBar
     self.navigationController.navigationBar.hidden = YES;
-    
+    [self clearUserInfo];
     [self createUI];
     
     
@@ -45,6 +45,8 @@
     }
     if (btn.tag == BTN_TAG_LOGIN) {
         NSLog(@"点击了登陆");
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [CommParameter sharedInstance].userId = @"======";
     }
     if (btn.tag == BTN_TAG_REGIST) {
         NSLog(@"点击了注册");
@@ -52,6 +54,11 @@
         [self.navigationController pushViewController:regVc animated:YES];
     }
     
+}
+
+#pragma - mark 登陆注册前,清除缓存中的用户信息
+- (void)clearUserInfo{
+    [CommParameter sharedInstance].userId = nil;
 }
 
 #pragma - mark  UI绘制
@@ -69,14 +76,19 @@
     //PhoneAuthToolView
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
-    __block PhoneAuthToolView *phoneATV = phoneAuthToolView;
+    __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
     phoneAuthToolView.errorBlock = ^{
-        [phoneATV showTip];
+        [selfPhoneAuthToolView showTip];
     };
     [self.baseScrollView addSubview:phoneAuthToolView];
     
     //PwdAuthToolView
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
+    pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
+    __block id selfpwdAuthToolView = pwdAuthToolView;
+    pwdAuthToolView.errorBlock = ^{
+        [selfpwdAuthToolView showTip];
+    };
     [self.baseScrollView addSubview:pwdAuthToolView];
     
     //forgetPwd
