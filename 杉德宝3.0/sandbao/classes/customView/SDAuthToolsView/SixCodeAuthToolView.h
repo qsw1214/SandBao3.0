@@ -7,7 +7,7 @@
 //
 
 #import "AuthToolBaseView.h"
-
+#import "NoCopyTextField.h"
 /**
  输入框内容通过回调
  */
@@ -27,6 +27,11 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
 
 @interface SixCodeAuthToolView : AuthToolBaseView
 
+
+/**
+ 代替父类的textfiled的 textfiled
+ */
+@property (nonatomic, strong) NoCopyTextField *noCopyTextfield;
 
 /**
  控件类型:sms短信模式/pay密码模式

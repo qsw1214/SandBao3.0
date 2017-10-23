@@ -96,20 +96,22 @@
     //payCodeAuthTool:sixCodeAuthToolView
     SixCodeAuthToolView *payCodeAuthTool = [SixCodeAuthToolView createAuthToolViewOY:0];
     payCodeAuthTool.style = PayCodeAuthTool;
-    payCodeAuthTool.successBlock = ^(NSString *codeStr) {
-        NSLog(@"返回的支付密码为 : %@",codeStr);
+    __block SixCodeAuthToolView *selfPayCodeAuthTool = payCodeAuthTool;
+    payCodeAuthTool.successBlock = ^{
+ 
         if (sixCodeStr.length == 0) {
-            sixCodeStr = codeStr;
+            sixCodeStr = selfPayCodeAuthTool.noCopyTextfield.text;
             SIX_CODE_STATE = SIX_CODE_STATE_INPUT_AGAIN;
         }
         else if (sixCodeStr.length > 0) {
-            if ([sixCodeStr isEqualToString:codeStr]) {
+            if ([sixCodeStr isEqualToString:selfPayCodeAuthTool.noCopyTextfield.text]) {
                 SIX_CODE_STATE = SIX_CODE_STATE_CHECK_OK;
             }else{
                 SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
                 sixCodeStr = nil;
             }
         }
+
     };
     [self.baseScrollView addSubview:payCodeAuthTool];
     

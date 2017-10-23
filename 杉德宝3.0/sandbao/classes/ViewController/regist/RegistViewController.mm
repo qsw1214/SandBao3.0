@@ -7,19 +7,30 @@
 //
 
 #import "RegistViewController.h"
+#import "PayNucHelper.h"
+
 #import "SmsCheckViewController.h"
 @interface RegistViewController ()
-
+{
+    
+}
+@property (nonatomic, strong) NSString *phoneNoStr; //手机号
+@property (nonatomic, strong) NSArray *authToolsArray;  //鉴权工具组
+@property (nonatomic, strong) NSArray *regAuthToolsArray; //待更新鉴权工具组
 @end
 
 @implementation RegistViewController
+@synthesize phoneNoStr;
+@synthesize authToolsArray;
+@synthesize regAuthToolsArray;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    
     [self createUI];
+    
+    [self load];
     
 }
 #pragma - mark 重写父类-baseScrollView设置
@@ -41,14 +52,18 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_NEXT) {
-        NSLog(@"点击了 继续");
-        SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
-        smsVC.phoneNoStr = @"15151474388";
-        smsVC.smsCheckType = SMS_CHECKTYPE_REGIST;
-        [self.navigationController pushViewController:smsVC animated:YES];
+        //下一步
+        if (phoneNoStr.length > 0) {
+            SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
+            smsVC.phoneNoStr = phoneNoStr;
+            smsVC.smsCheckType = SMS_CHECKTYPE_REGIST;
+            [self.navigationController pushViewController:smsVC animated:YES];
+        }else{
+            [Tool showDialog:@"请输入正确的登陆账号及密码"];
+        }
     }
     if (btn.tag == BTN_TAG_LOGIN) {
-        NSLog(@"点击了 返回继续登陆");
+        //返回- 登录页
         [self.navigationController popViewControllerAnimated:YES];
     }
     
@@ -69,7 +84,7 @@
     phoneAuthToolView.tip.text = @"请输入正确手机号";
     __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
     phoneAuthToolView.successBlock = ^{
-        NSLog(@"成功获取的手机号码为 : %@",selfPhoneAuthToolView.textfiled.text);
+        phoneNoStr = selfPhoneAuthToolView.textfiled.text;
     };
     phoneAuthToolView.errorBlock = ^{
         [selfPhoneAuthToolView showTip];
@@ -124,6 +139,63 @@
     
 }
 
+
+#pragma mark 业务逻辑
+#pragma mark - 获取鉴权工具(authTools)/待注册鉴权工具(regAuthTools)
+- (void)load
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getStoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        
+        paynuc.set("tTokenType", "01000101");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            NSString *authTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+            //获取鉴权工具集组
+            authToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:authTools];
+        }];
+        if (error) return ;
+        
+        
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSString *regAuthTools = [NSString stringWithUTF8String:paynuc.get("regAuthTools").c_str()];
+                //获取待更新鉴权工具集组
+                regAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
+                
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+    
+}
 
 
 

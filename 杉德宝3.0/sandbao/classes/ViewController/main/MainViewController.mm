@@ -7,13 +7,15 @@
 //
 
 #import "MainViewController.h"
+#import "PayNucHelper.h"
 #import "Dock.h"
 #import "NSObject+NSLocalNotification.h"
 #import "SqliteHelper.h"
 #import "SDSqlite.h"
 #import "SDDrowNoticeView.h"
 #import "LoginViewController.h"
-#import <AVFoundation/AVFoundation.h>
+#import "RealNameViewController.h"
+#import "RealNameViewController.h"
 
 #define kContentFrame CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kDockHeight)
 
@@ -36,6 +38,51 @@
 @synthesize kDockHeight;
 @synthesize selectedViewController;
 @synthesize mDock;
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+}
+#pragma - mark 重写父类-baseScrollView设置
+- (void)setBaseScrollview{
+    [super setBaseScrollview];
+    
+}
+#pragma - mark 重写父类-导航设置方法
+- (void)setNavCoverView{
+    [super setNavCoverView];
+    self.navCoverView.style = NavCoverStyleGradient;
+    self.navCoverView.midTitleStr = @"";
+    self.navCoverView.letfImgStr = @"index_avatar";
+    self.navCoverView.rightImgStr = @"index_msg";
+    self.navCoverView.leftBlock = ^{
+        
+    };
+    __block UIViewController *selfBlock = self;
+    self.navCoverView.rightBlock = ^{
+        
+        //实名认证检测
+        if ([CommParameter sharedInstance].realNameFlag == NO) {
+            [Tool showDialog:@"您还未实名认证,请先实名!" defulBlock:^{
+                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:realNameVC];
+                [selfBlock presentViewController:nav animated:YES completion:nil];
+            }];
+        }
+            
+    };
+    
+    
+    
+    
+}
+#pragma - mark 重写父类-点击方法集合
+- (void)buttonClick:(UIButton *)btn{
+    
+    
+}
+
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -62,16 +109,18 @@
     //跟新数据库,走明登陆则数据库活跃用户全部置为不活跃,
     BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
     
-    if (result) {
-        LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
-                [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-        [self presentViewController:navLogin animated:YES completion:nil];
-    }
-    
-//    PayPwdViewController *mLoginViewController = [[PayPwdViewController alloc] init];
-//    UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-//    [self presentViewController:navLogin animated:YES completion:nil];
+//    if (result) {
+//        LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
+//                [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+//        UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
+//        [self presentViewController:navLogin animated:YES completion:nil];
+//    }
+//    
+    RealNameViewController *mLoginViewController = [[RealNameViewController
+                                                     alloc] init];
+    [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
+    [self presentViewController:navLogin animated:YES completion:nil];
 }
 #pragma mark - 暗登陆
 - (void)noPwdLogin{
@@ -213,44 +262,6 @@
 
 
 
-#pragma - mark =====ViewDidLoad=====
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-}
-#pragma - mark 重写父类-baseScrollView设置
-- (void)setBaseScrollview{
-    [super setBaseScrollview];
-    
-}
-#pragma - mark 重写父类-导航设置方法
-- (void)setNavCoverView{
-    [super setNavCoverView];
-    self.navCoverView.style = NavCoverStyleGradient;
-    self.navCoverView.midTitleStr = @"";
-    self.navCoverView.letfImgStr = @"index_avatar";
-    self.navCoverView.rightImgStr = @"index_msg";
-    self.navCoverView.leftBlock = ^{
-        
-    };
-    __block id selfBlock = self;
-    self.navCoverView.rightBlock = ^{
-        LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
-        [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-        [selfBlock presentViewController:navLogin animated:YES completion:nil];
-    };
-    
-    
-    
-    
-}
-#pragma - mark 重写父类-点击方法集合
-- (void)buttonClick:(UIButton *)btn{
-    
-    
-}
 - (void)exitApplication {
     //来 加个动画，给用户一个友好的退出界面
     

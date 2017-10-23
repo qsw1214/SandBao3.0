@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "PayNucHelper.h"
 
 #import "Masonry.h"
 #import "UIView+easyFrame.h"
 #import "NavCoverView.h"
 #import "SDMBProgressView.h"
 
+#import "SDSqlite.h"
+#import "SqliteHelper.h"
 
 #import "CardNoAuthToolView.h"
 #import "IdentityAuthToolView.h"
@@ -98,9 +99,11 @@
 #define COLOR_6CB9F9 HexRGBA(0x6CB9F9,1.f)
 
 
+//短信类型
 #pragma - mark 短信类型:smsCodeType
-#define SMS_CHECKTYPE_REGIST 10001
-#define SMS_CHECKTYPE_REALNAME 10002
+#define SMS_CHECKTYPE_REGIST 10001  //用于注册
+#define SMS_CHECKTYPE_REALNAME 10002 //用于实名
+#define SMS_CHECKTYPE_LOGINT 10003  //用于登陆加强鉴权
 
 
 

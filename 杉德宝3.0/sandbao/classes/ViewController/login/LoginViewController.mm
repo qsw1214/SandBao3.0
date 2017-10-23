@@ -7,30 +7,45 @@
 //
 
 #import "LoginViewController.h"
+#import "PayNucHelper.h"
+
 #import "RegistViewController.h"
+#import "SmsCheckViewController.h"
 
 
 @interface LoginViewController ()
 {
     
 }
+@property (nonatomic, strong) NSString * phoneNum;
+@property (nonatomic, strong) NSString * loginPwd;
 @property (nonatomic, strong) NSMutableArray *authToolsArray;
 @end
 
 
 @implementation LoginViewController
+@synthesize phoneNum;
+@synthesize loginPwd;
 @synthesize authToolsArray;
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self load];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //隐藏系统导航栏的navigationBar
     self.navigationController.navigationBar.hidden = YES;
+    
     [self clearUserInfo];
+    
     [self createUI];
-    [self load];
     
 }
+
 #pragma - mark 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -47,15 +62,19 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_FORGETPWD) {
+        //忘记密码
         NSLog(@"点击了忘记密码");
     }
     if (btn.tag == BTN_TAG_LOGIN) {
-        NSLog(@"点击了登陆");
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [CommParameter sharedInstance].userId = @"======";
+        //登录
+        if (phoneNum.length>0 && loginPwd.length>0) {
+            [self loginUser];
+        }else{
+            [Tool showDialog:@"请输入正确的登陆账号及密码"];
+        }
     }
     if (btn.tag == BTN_TAG_REGIST) {
-        NSLog(@"点击了注册");
+        //注册
         RegistViewController *regVc = [[RegistViewController alloc] init];
         [self.navigationController pushViewController:regVc animated:YES];
     }
@@ -84,7 +103,7 @@
     phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
     __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
     phoneAuthToolView.successBlock = ^{
-        NSLog(@"成功获取的手机号码为 : %@",selfPhoneAuthToolView.textfiled.text);
+        phoneNum = selfPhoneAuthToolView.textfiled.text;
     };
     phoneAuthToolView.errorBlock = ^{
         [selfPhoneAuthToolView showTip];
@@ -96,7 +115,7 @@
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
     __block PwdAuthToolView *selfpwdAuthToolView = pwdAuthToolView;
     pwdAuthToolView.successBlock = ^{
-        NSLog(@"%@",selfpwdAuthToolView.textfiled.text);
+        loginPwd = selfpwdAuthToolView.textfiled.text;
     };
     pwdAuthToolView.errorBlock = ^{
         [selfpwdAuthToolView showTip];
@@ -172,7 +191,8 @@
     
 }
 
-#pragma mark - 业务逻辑
+#pragma mark 业务逻辑
+#pragma mark - 获取登陆鉴权工具
 
 /**
  *@brief 获取鉴权工具
@@ -274,6 +294,68 @@
         
     }];
 }
+
+
+#pragma mark - 用户登陆
+/**
+ *@brief 用户登录
+ */
+- (void)loginUser
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        //校验手机验证码
+        NSMutableArray * authToolSArr = [[NSMutableArray alloc] init];
+        NSMutableDictionary *authToolsDic1 = [[NSMutableDictionary alloc] init];
+        [authToolsDic1 setValue:@"loginpass" forKey:@"type"];
+        NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
+        [passDic setValue:@"sand" forKey:@"encryptType"];
+        [passDic setValue:[NSString stringWithUTF8String:paynuc.lgnenc([loginPwd UTF8String]).c_str()] forKey:@"password"];
+        [authToolsDic1 setObject:passDic forKey:@"pass"];
+        [authToolSArr addObject:authToolsDic1];
+        NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolSArr];
+        
+        NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
+        [userInfoDic setValue:phoneNum forKey:@"userName"];
+        NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
+
+        paynuc.set("authTools", [authTools UTF8String]);
+        paynuc.set("userInfo", [userInfo UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/login/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            if (type == respCodeErrorType) {
+                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                    NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
+                    if ([@"030005" isEqualToString:respCode]){
+                        NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+                        NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                        NSMutableArray *addauthTools = [NSMutableArray arrayWithCapacity:0];
+                        for (int i = 0; i < tempAuthToolsArray.count; i++) {
+                            [addauthTools addObject:tempAuthToolsArray[i]];
+                        }
+                        //跳转去加强鉴权页面验证
+                        SmsCheckViewController *smsCheckVC = [[SmsCheckViewController alloc] init];
+                        smsCheckVC.phoneNoStr = phoneNum;
+                        smsCheckVC.smsCheckType = SMS_CHECKTYPE_LOGINT;
+                        smsCheckVC.userInfo = userInfo;
+                        smsCheckVC.authToolArray = authToolSArr;
+                        [self.navigationController pushViewController:smsCheckVC animated:YES];
+                    }
+                }];
+            }
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                //do nothing
+            }];
+        }];
+        if (error) return;
+    }];
+}
+
 
 
 

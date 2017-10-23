@@ -7,7 +7,6 @@
 //
 
 #import "SixCodeAuthToolView.h"
-#import "NoCopyTextField.h"
 
 @interface SixCodeAuthToolView ()<UITextFieldDelegate>{
     
@@ -16,15 +15,12 @@
     NSTimeInterval timeOut;
     NSInteger timeCount;
     UIButton *requestSmsBtn;
-    NoCopyTextField *noCopyTextfield;
-    
 }
-
 @property (nonatomic, strong) NSMutableArray *codeLabArr; //保存codeLab的数组
 @end
 
 @implementation SixCodeAuthToolView
-
+@synthesize noCopyTextfield;
 
 
 /**
@@ -48,6 +44,7 @@
         
         //sixCode中需禁止父类的textfied的黏贴复制功能,因此使用 noCopyTextfield 来替换 self.textfied,从而禁止用户粘贴复制
         noCopyTextfield = [[NoCopyTextField alloc] init];
+        noCopyTextfield.userInteractionEnabled = NO;
         noCopyTextfield.frame = self.textfiled.frame;
         [self addSubview:noCopyTextfield];
         [self.textfiled removeFromSuperview];
@@ -203,6 +200,9 @@
     if (btn.selected == NO) {
         
         btn.selected =  YES;
+        
+        //恢复交互
+        noCopyTextfield.userInteractionEnabled = YES;
         
         //点击发送短信按钮后, 键盘自动弹出
         [noCopyTextfield becomeFirstResponder];

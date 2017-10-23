@@ -97,7 +97,6 @@
         _errorBlock();
         return NO;
     }
-    
     return YES;
 }
 -(BOOL)restrictionwithTypeStr:(NSString*)typeStr string:(NSString*)string{

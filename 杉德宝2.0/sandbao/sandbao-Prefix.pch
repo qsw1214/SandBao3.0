@@ -170,9 +170,9 @@
 //#define AddressHTTP @"https://sdb.sandpay.com.cn/"                          //生产
 
 #pragma mark - 2.测试环境地址
-#define AddressHTTP @"http://172.28.250.242:17892/"                           //测试
+//#define AddressHTTP @"http://172.28.250.242:17892/"                           //测试
 
-//#define AddressHTTP @"http://172.28.250.242:9081/"                          //测试2
+#define AddressHTTP @"http://192.168.22.156:9081/"                          //测试2
 
 //#define AddressHTTP @"http://192.168.22.58:8080/smp-uc-client/"             //肖云
 

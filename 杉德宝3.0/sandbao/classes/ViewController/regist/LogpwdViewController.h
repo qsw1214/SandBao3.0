@@ -10,4 +10,14 @@
 
 @interface LogpwdViewController : BaseViewController
 
+/**
+ 手机号
+ */
+@property (nonatomic, strong) NSString *phoneNoStr;
+
+
+/**
+ 短信码
+ */
+@property (nonatomic, strong) NSString *smsCodeString;
 @end

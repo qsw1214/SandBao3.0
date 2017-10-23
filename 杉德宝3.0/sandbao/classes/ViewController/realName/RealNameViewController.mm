@@ -7,14 +7,47 @@
 //
 
 #import "RealNameViewController.h"
+#import "PayNucHelper.h"
+
+
 #import "SmsCheckViewController.h"
 
 @interface RealNameViewController ()
+{
+    
+}
+@property (nonatomic, strong) NSString *realNameStr;  //真实姓名
+@property (nonatomic, strong) NSString *bankCardNoStr;  //银行卡号
+@property (nonatomic, strong) NSString *identityNoStr;  //真实姓名
+@property (nonatomic, strong) NSString *bankPhoneNoStr; //银行预留手机号
+@property (nonatomic, strong) NSMutableArray *authToolsArray; //鉴权工具集组
 
 @end
 
 @implementation RealNameViewController
+@synthesize realNameStr;
+@synthesize bankCardNoStr;
+@synthesize identityNoStr;
+@synthesize authToolsArray;
+@synthesize bankPhoneNoStr;
 
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // 禁用返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // 开启返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,11 +74,16 @@
         NSLog(@"点击了 支持银行 按钮");
     }
     if (btn.tag == BTN_TAG_NEXT) {
-        NSLog(@"点击了 继续 按钮");
-        SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
-        smsVC.phoneNoStr = @"15151474388";
-        smsVC.smsCheckType = SMS_CHECKTYPE_REALNAME;
-        [self.navigationController pushViewController:smsVC animated:YES];
+        //下一步 - 实名验证手机号
+        if (realNameStr.length>0 && identityNoStr.length>0 && bankCardNoStr.length>0 && bankPhoneNoStr.length>0) {
+            SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
+            smsVC.phoneNoStr = [CommParameter sharedInstance].userName;
+            smsVC.smsCheckType = SMS_CHECKTYPE_REALNAME;
+            [self.navigationController pushViewController:smsVC animated:YES];
+        }else{
+            [Tool showDialog:@"请输入完整验证信息"];
+        }
+        
     }
     
 }
@@ -67,7 +105,7 @@
     nameAuthToolView.tip.text = @"请输入真实有效姓名";
     __block NameAuthToolView *selfnameAuthToolView = nameAuthToolView;
     nameAuthToolView.successBlock = ^{
-        NSLog(@"%@",selfnameAuthToolView.textfiled.text);
+        realNameStr = selfnameAuthToolView.textfiled.text;
     };
     nameAuthToolView.errorBlock = ^{
         [selfnameAuthToolView showTip];
@@ -79,7 +117,7 @@
     identityAuthToolView.tip.text = @"请输入有效身份证件号";
     __block IdentityAuthToolView *selfIdentityAuthToolView = identityAuthToolView;
     identityAuthToolView.successBlock = ^{
-        NSLog(@"%@",selfIdentityAuthToolView.textfiled.text);
+        identityNoStr = selfIdentityAuthToolView.textfiled.text;
     };
     identityAuthToolView.errorBlock = ^{
         [selfIdentityAuthToolView showTip];
@@ -91,7 +129,7 @@
     cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
     __block CardNoAuthToolView *selfcardNoAuthToolView = cardNoAuthToolView;
     cardNoAuthToolView.successBlock = ^{
-        NSLog(@"%@",selfcardNoAuthToolView.textfiled.text);
+        bankCardNoStr = selfcardNoAuthToolView.textfiled.text;
     };
     cardNoAuthToolView.errorBlock = ^{
         [selfcardNoAuthToolView showTip];
@@ -101,6 +139,19 @@
     //bankAuthToolView
     BankAuthToolView *bankAuthToolView = [BankAuthToolView createAuthToolViewOY:0];
     [self.baseScrollView addSubview:bankAuthToolView];
+    
+    //bankPhoneNoAuthToolView
+    PhoneAuthToolView *bankPhoneNoAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
+    bankPhoneNoAuthToolView.titleLab.text = @"银行预留手机号";
+    bankPhoneNoAuthToolView.tip.text = @"请输入正确的银行预留手机号";
+    __block PhoneAuthToolView *selfPhoneAuthToolView = bankPhoneNoAuthToolView;
+    bankPhoneNoAuthToolView.successBlock = ^{
+        bankPhoneNoStr = selfPhoneAuthToolView.textfiled.text;
+    };
+    bankPhoneNoAuthToolView.errorBlock = ^{
+        [selfPhoneAuthToolView showTip];
+    };
+    [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
     
     //moreBankListBtn
     UIButton *moreBankListBtn = [Tool createButton:@"支持银行" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7];
@@ -154,15 +205,21 @@
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(bankAuthToolView.size);
     }];
+    
+    [bankPhoneNoAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bankAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(bankAuthToolView.size);
+    }];
 
     [moreBankListBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bankAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
-        make.right.equalTo(bankAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
+        make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
+        make.right.equalTo(bankPhoneNoAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
         make.size.mas_equalTo(moreBankListBtnSize);
     }];
     
     [nextBarbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bankAuthToolView.mas_bottom).offset(UPDOWNSPACE_69);
+        make.top.equalTo(moreBankListBtn.mas_bottom).offset(UPDOWNSPACE_25);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];
@@ -170,31 +227,115 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-- (void)viewDidAppear:(BOOL)animated
+#pragma mark 业务逻辑
+#pragma mark 查询银行信息
+- (void)queryCardDetail
 {
-    [super viewDidAppear:animated];
-    // 禁用返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01001101");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
+        [accountDic setValue:@"03" forKey:@"kind"];
+        [accountDic setValue:[NSString stringWithFormat:@"%@", bankCardNoStr] forKey:@"accNo"];
+        NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountDic];
+        [SDLog logTest:account];
+        paynuc.set("account", [account UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/queryCardDetail/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSString *payTool = [NSString stringWithUTF8String:paynuc.get("payTool").c_str()];
+                NSDictionary *payToolDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:payTool];
+                BOOL fastPayFlag = [[payToolDic objectForKey:@"fastPayFlag"] boolValue];
+                
+                NSString *userInfo = [NSString stringWithUTF8String:paynuc.get("userInfo").c_str()];
+                NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:userInfo];
+                
+                NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
+                [passDic setObject:userInfoDic forKey:@"userInfo"];
+                [passDic setValue:payToolDic forKey:@"payTool"];
+                
+                [self getAuthTools];
+
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+    
 }
-- (void)viewWillDisappear:(BOOL)animated
+
+
+#pragma mark - 获取鉴权工具
+
+/**
+ *@brief 获取鉴权工具
+ */
+- (void)getAuthTools
 {
-    [super viewWillDisappear:animated];
-    // 开启返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = YES;
-    }
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+                NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                
+                //1.取有效的鉴权工具 (贷记卡时,下发的payTools自带一个空鉴权,导致循环添加鉴权工具时,下移个groupViewHight)
+                authToolsArray = [NSMutableArray arrayWithCapacity:0];
+                for (int i = 0; i<authToolsArray.count; i++) {
+                    if (!([[authToolsArray[i] objectForKey:@"type"] length]>0)) {
+                        [authToolsArray removeObjectAtIndex:i];
+                    }
+                }
+                for (int i = 0; i < tempAuthToolsArray.count; i++) {
+                    [authToolsArray addObject:tempAuthToolsArray[i]];
+                }
+                
+                if ([authToolsArray count] <= 0) {
+                    [Tool showDialog:@"获取失败"];
+                } else {
+                   
+                }
+                
+            }];
+        }];
+        if (error) return ;
+        
+    }];
+    
 }
+
+
+
+
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
