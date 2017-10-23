@@ -16,14 +16,14 @@
 		280621E91EF8F05100346D1A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E81EF8F05100346D1A /* AVFoundation.framework */; };
 		280621F31EF8F89600346D1A /* loading-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280621F21EF8F89600346D1A /* loading-667h@2x.png */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
-		281747661F96E25B007D4D3A /* AuthLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747591F96E25B007D4D3A /* AuthLoginViewController.m */; };
-		281747671F96E25B007D4D3A /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2817475B1F96E25B007D4D3A /* LoginViewController.m */; };
-		281747681F96E25B007D4D3A /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2817475E1F96E25B007D4D3A /* BaseViewController.m */; };
-		281747691F96E25B007D4D3A /* ErrorMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747601F96E25B007D4D3A /* ErrorMainViewController.m */; };
+		281747661F96E25B007D4D3A /* AuthLoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747591F96E25B007D4D3A /* AuthLoginViewController.mm */; };
+		281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475B1F96E25B007D4D3A /* LoginViewController.mm */; };
+		281747681F96E25B007D4D3A /* BaseViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475E1F96E25B007D4D3A /* BaseViewController.mm */; };
+		281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747601F96E25B007D4D3A /* ErrorMainViewController.mm */; };
 		2817476A1F96E25B007D4D3A /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747621F96E25B007D4D3A /* MainViewController.mm */; };
-		2817476B1F96E25B007D4D3A /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747651F96E25B007D4D3A /* RegistViewController.m */; };
-		281747B21F983A4B007D4D3A /* LogpwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747B11F983A4B007D4D3A /* LogpwdViewController.m */; };
-		281747B61F9847DB007D4D3A /* RealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281747B51F9847DB007D4D3A /* RealNameViewController.m */; };
+		2817476B1F96E25B007D4D3A /* RegistViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747651F96E25B007D4D3A /* RegistViewController.mm */; };
+		281747B21F983A4B007D4D3A /* LogpwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747B11F983A4B007D4D3A /* LogpwdViewController.mm */; };
+		281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747B51F9847DB007D4D3A /* RealNameViewController.mm */; };
 		281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA8B1F90BC6A0000D1F5 /* Loading.mm */; };
 		281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281D10601E6FDAEF0031806C /* NavCoverView.m */; };
 		281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F64321E792A970005AE86 /* NSData+SDDataCache.m */; };
@@ -156,8 +156,8 @@
 		2857CE631F98960200874A7C /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE4E1F98960200874A7C /* SixCodeAuthToolView.m */; };
 		2857CE641F98960200874A7C /* BankPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE511F98960200874A7C /* BankPickerView.m */; };
 		2857CE651F98960200874A7C /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE531F98960200874A7C /* NoCopyTextField.m */; };
-		286922F81F98ADAF007C46B0 /* PayPwdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286922F71F98ADAF007C46B0 /* PayPwdViewController.m */; };
-		286922FC1F98AEDE007C46B0 /* SmsCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 286922FB1F98AEDE007C46B0 /* SmsCheckViewController.m */; };
+		286922F81F98ADAF007C46B0 /* PayPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286922F71F98ADAF007C46B0 /* PayPwdViewController.mm */; };
+		286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
 		287105771E68278000596FE3 /* DropDownListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287105761E68278000596FE3 /* DropDownListView.m */; };
@@ -320,21 +320,21 @@
 		2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+easyFrame.h"; sourceTree = "<group>"; };
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
 		281747581F96E25B007D4D3A /* AuthLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthLoginViewController.h; sourceTree = "<group>"; };
-		281747591F96E25B007D4D3A /* AuthLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthLoginViewController.m; sourceTree = "<group>"; };
+		281747591F96E25B007D4D3A /* AuthLoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AuthLoginViewController.mm; sourceTree = "<group>"; };
 		2817475A1F96E25B007D4D3A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		2817475B1F96E25B007D4D3A /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		2817475B1F96E25B007D4D3A /* LoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginViewController.mm; sourceTree = "<group>"; };
 		2817475D1F96E25B007D4D3A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		2817475E1F96E25B007D4D3A /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		2817475E1F96E25B007D4D3A /* BaseViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseViewController.mm; sourceTree = "<group>"; };
 		2817475F1F96E25B007D4D3A /* ErrorMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorMainViewController.h; sourceTree = "<group>"; };
-		281747601F96E25B007D4D3A /* ErrorMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorMainViewController.m; sourceTree = "<group>"; };
+		281747601F96E25B007D4D3A /* ErrorMainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ErrorMainViewController.mm; sourceTree = "<group>"; };
 		281747611F96E25B007D4D3A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		281747621F96E25B007D4D3A /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		281747641F96E25B007D4D3A /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
-		281747651F96E25B007D4D3A /* RegistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
+		281747651F96E25B007D4D3A /* RegistViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RegistViewController.mm; sourceTree = "<group>"; };
 		281747B01F983A4B007D4D3A /* LogpwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogpwdViewController.h; sourceTree = "<group>"; };
-		281747B11F983A4B007D4D3A /* LogpwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogpwdViewController.m; sourceTree = "<group>"; };
+		281747B11F983A4B007D4D3A /* LogpwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LogpwdViewController.mm; sourceTree = "<group>"; };
 		281747B41F9847DB007D4D3A /* RealNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameViewController.h; sourceTree = "<group>"; };
-		281747B51F9847DB007D4D3A /* RealNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RealNameViewController.m; sourceTree = "<group>"; };
+		281747B51F9847DB007D4D3A /* RealNameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RealNameViewController.mm; sourceTree = "<group>"; };
 		281AEA8A1F90BC6A0000D1F5 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
 		281AEA8B1F90BC6A0000D1F5 /* Loading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Loading.mm; sourceTree = "<group>"; };
 		281D105F1E6FDAEF0031806C /* NavCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavCoverView.h; sourceTree = "<group>"; };
@@ -518,9 +518,9 @@
 		2857CE521F98960200874A7C /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
 		2857CE531F98960200874A7C /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
 		286922F61F98ADAF007C46B0 /* PayPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPwdViewController.h; sourceTree = "<group>"; };
-		286922F71F98ADAF007C46B0 /* PayPwdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayPwdViewController.m; sourceTree = "<group>"; };
+		286922F71F98ADAF007C46B0 /* PayPwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PayPwdViewController.mm; sourceTree = "<group>"; };
 		286922FA1F98AEDE007C46B0 /* SmsCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsCheckViewController.h; sourceTree = "<group>"; };
-		286922FB1F98AEDE007C46B0 /* SmsCheckViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SmsCheckViewController.m; sourceTree = "<group>"; };
+		286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SmsCheckViewController.mm; sourceTree = "<group>"; };
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
 		286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -814,9 +814,9 @@
 			isa = PBXGroup;
 			children = (
 				2817475A1F96E25B007D4D3A /* LoginViewController.h */,
-				2817475B1F96E25B007D4D3A /* LoginViewController.m */,
+				2817475B1F96E25B007D4D3A /* LoginViewController.mm */,
 				281747581F96E25B007D4D3A /* AuthLoginViewController.h */,
-				281747591F96E25B007D4D3A /* AuthLoginViewController.m */,
+				281747591F96E25B007D4D3A /* AuthLoginViewController.mm */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -825,11 +825,11 @@
 			isa = PBXGroup;
 			children = (
 				2817475D1F96E25B007D4D3A /* BaseViewController.h */,
-				2817475E1F96E25B007D4D3A /* BaseViewController.m */,
+				2817475E1F96E25B007D4D3A /* BaseViewController.mm */,
 				281747611F96E25B007D4D3A /* MainViewController.h */,
 				281747621F96E25B007D4D3A /* MainViewController.mm */,
 				2817475F1F96E25B007D4D3A /* ErrorMainViewController.h */,
-				281747601F96E25B007D4D3A /* ErrorMainViewController.m */,
+				281747601F96E25B007D4D3A /* ErrorMainViewController.mm */,
 			);
 			path = main;
 			sourceTree = "<group>";
@@ -838,9 +838,9 @@
 			isa = PBXGroup;
 			children = (
 				281747641F96E25B007D4D3A /* RegistViewController.h */,
-				281747651F96E25B007D4D3A /* RegistViewController.m */,
+				281747651F96E25B007D4D3A /* RegistViewController.mm */,
 				281747B01F983A4B007D4D3A /* LogpwdViewController.h */,
-				281747B11F983A4B007D4D3A /* LogpwdViewController.m */,
+				281747B11F983A4B007D4D3A /* LogpwdViewController.mm */,
 			);
 			path = regist;
 			sourceTree = "<group>";
@@ -849,7 +849,7 @@
 			isa = PBXGroup;
 			children = (
 				281747B41F9847DB007D4D3A /* RealNameViewController.h */,
-				281747B51F9847DB007D4D3A /* RealNameViewController.m */,
+				281747B51F9847DB007D4D3A /* RealNameViewController.mm */,
 			);
 			path = realName;
 			sourceTree = "<group>";
@@ -1171,7 +1171,7 @@
 			isa = PBXGroup;
 			children = (
 				286922F61F98ADAF007C46B0 /* PayPwdViewController.h */,
-				286922F71F98ADAF007C46B0 /* PayPwdViewController.m */,
+				286922F71F98ADAF007C46B0 /* PayPwdViewController.mm */,
 			);
 			path = payPassword;
 			sourceTree = "<group>";
@@ -1180,7 +1180,7 @@
 			isa = PBXGroup;
 			children = (
 				286922FA1F98AEDE007C46B0 /* SmsCheckViewController.h */,
-				286922FB1F98AEDE007C46B0 /* SmsCheckViewController.m */,
+				286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */,
 			);
 			path = smsCheck;
 			sourceTree = "<group>";
@@ -2119,19 +2119,19 @@
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
 				A7EFB1571EB9A8DD009AA369 /* MQTTCoreDataPersistence.m in Sources */,
-				281747B21F983A4B007D4D3A /* LogpwdViewController.m in Sources */,
+				281747B21F983A4B007D4D3A /* LogpwdViewController.mm in Sources */,
 				A7FF2FB81E1601CB0068A2F7 /* CustomCheckBox.m in Sources */,
 				A7FF2FE51E160A800068A2F7 /* ExternStringDefine.m in Sources */,
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
 				288421971F8E091200082E7C /* NSString+Money.m in Sources */,
-				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.m in Sources */,
+				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */,
 				2857CE651F98960200874A7C /* NoCopyTextField.m in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
 				283E16D61F70B45300ECC00A /* SDPaySuccessAnimationView.m in Sources */,
 				A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */,
 				2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */,
 				A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */,
-				281747671F96E25B007D4D3A /* LoginViewController.m in Sources */,
+				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
 				28E82FC81ED6B5F6007FCA2B /* SDPopViewConfig.m in Sources */,
 				A7EFB1631EB9A8DD009AA369 /* MQTTSSLSecurityPolicyTransport.m in Sources */,
@@ -2147,10 +2147,10 @@
 				A7FF2FE81E160A800068A2F7 /* ItemCollectionViewCell.m in Sources */,
 				28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */,
 				A7EFB15E1EB9A8DD009AA369 /* MQTTSessionManager.m in Sources */,
-				286922F81F98ADAF007C46B0 /* PayPwdViewController.m in Sources */,
+				286922F81F98ADAF007C46B0 /* PayPwdViewController.mm in Sources */,
 				A7F2F2641E1E2AE000F6CDA3 /* HttpComm.mm in Sources */,
 				288421B01F8E095E00082E7C /* Majlet_Func.mm in Sources */,
-				281747691F96E25B007D4D3A /* ErrorMainViewController.m in Sources */,
+				281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */,
 				281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */,
 				28E82FC61ED6B5F6007FCA2B /* SDPopContainerViwe.m in Sources */,
 				A7FF2FE91E160A800068A2F7 /* MinletsData.m in Sources */,
@@ -2181,8 +2181,8 @@
 				2821B7871E77B27100F093D7 /* HeadImageBtn.m in Sources */,
 				2804B0A11EDEA3B10031CD10 /* SDMajletView.m in Sources */,
 				288421951F8E091200082E7C /* NSString+Encryption.m in Sources */,
-				2817476B1F96E25B007D4D3A /* RegistViewController.m in Sources */,
-				281747B61F9847DB007D4D3A /* RealNameViewController.m in Sources */,
+				2817476B1F96E25B007D4D3A /* RegistViewController.mm in Sources */,
+				281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */,
 				288421991F8E091200082E7C /* UIDevice+DeviceoInfo.m in Sources */,
 				A7EFB1551EB9A8DD009AA369 /* MQTTCFSocketEncoder.m in Sources */,
 				289EA96B1F59577500254EA6 /* SDAlertControllerUtil.m in Sources */,
@@ -2202,7 +2202,7 @@
 				2857CE641F98960200874A7C /* BankPickerView.m in Sources */,
 				A7EFB15C1EB9A8DD009AA369 /* MQTTSession.m in Sources */,
 				A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */,
-				281747661F96E25B007D4D3A /* AuthLoginViewController.m in Sources */,
+				281747661F96E25B007D4D3A /* AuthLoginViewController.mm in Sources */,
 				2857CE541F98960200874A7C /* AuthToolBaseView.m in Sources */,
 				283E16D71F70B45300ECC00A /* SDPayToolBaseView.m in Sources */,
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,
@@ -2214,7 +2214,7 @@
 				283E16D91F70B45300ECC00A /* SDPayToolOrderView.m in Sources */,
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,
-				281747681F96E25B007D4D3A /* BaseViewController.m in Sources */,
+				281747681F96E25B007D4D3A /* BaseViewController.mm in Sources */,
 				28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */,
 				A7FF2FB91E1601CB0068A2F7 /* JYCheckBox.m in Sources */,
 				A7EFB1611EB9A8DD009AA369 /* MQTTSSLSecurityPolicyDecoder.m in Sources */,

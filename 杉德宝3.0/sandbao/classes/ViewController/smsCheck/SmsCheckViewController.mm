@@ -62,21 +62,25 @@
     //smsCodeAuth:sixCodeAuth
     SixCodeAuthToolView *smsCodeAuthToolView = [SixCodeAuthToolView createAuthToolViewOY:0];
     smsCodeAuthToolView.style = SmsCodeAuthTool;
-    smsCodeAuthToolView.successBlock = ^(NSString *codeStr) {
-        NSLog(@"接收到的短信码为: %@",codeStr);
-        
-        if (self.smsCheckType == SMS_CHECKTYPE_REGIST) {
-            //模拟输入短信成功后,跳转设置 登陆密码 页面
-            LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
-            [self.navigationController pushViewController:setLogpwdVC animated:YES];
-        }
-        if (self.smsCheckType == SMS_CHECKTYPE_REALNAME) {
-            //模拟输入短信成功后,跳转设置 支付密码 页面
-            PayPwdViewController *setPayPwdVC = [[PayPwdViewController alloc] init];
-            [self.navigationController pushViewController:setPayPwdVC animated:YES];
-        }
+    smsCodeAuthToolView.successBlock = ^{
         
     };
+    
+//    smsCodeAuthToolView.successBlock = ^(NSString *codeStr) {
+//        NSLog(@"接收到的短信码为: %@",codeStr);
+//        
+//        if (self.smsCheckType == SMS_CHECKTYPE_REGIST) {
+//            //模拟输入短信成功后,跳转设置 登陆密码 页面
+//            LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
+//            [self.navigationController pushViewController:setLogpwdVC animated:YES];
+//        }
+//        if (self.smsCheckType == SMS_CHECKTYPE_REALNAME) {
+//            //模拟输入短信成功后,跳转设置 支付密码 页面
+//            PayPwdViewController *setPayPwdVC = [[PayPwdViewController alloc] init];
+//            [self.navigationController pushViewController:setPayPwdVC animated:YES];
+//        }
+//        
+//    };
     smsCodeAuthToolView.successRequestBlock = ^{
         NSLog(@"点击了发送短信码的按钮,触发了请求事件,请求事件待攻城狮处理");
         

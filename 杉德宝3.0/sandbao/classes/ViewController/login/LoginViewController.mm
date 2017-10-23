@@ -9,11 +9,17 @@
 #import "LoginViewController.h"
 #import "RegistViewController.h"
 
-@interface LoginViewController ()
 
+@interface LoginViewController ()
+{
+    
+}
+@property (nonatomic, strong) NSMutableArray *authToolsArray;
 @end
 
+
 @implementation LoginViewController
+@synthesize authToolsArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,7 +28,7 @@
     self.navigationController.navigationBar.hidden = YES;
     [self clearUserInfo];
     [self createUI];
-    
+    [self load];
     
 }
 #pragma - mark 重写父类-baseScrollView设置
@@ -88,7 +94,10 @@
     //PwdAuthToolView
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
-    __block id selfpwdAuthToolView = pwdAuthToolView;
+    __block PwdAuthToolView *selfpwdAuthToolView = pwdAuthToolView;
+    pwdAuthToolView.successBlock = ^{
+        NSLog(@"%@",selfpwdAuthToolView.textfiled.text);
+    };
     pwdAuthToolView.errorBlock = ^{
         [selfpwdAuthToolView showTip];
     };
@@ -163,12 +172,123 @@
     
 }
 
+#pragma mark - 业务逻辑
+
+/**
+ *@brief 获取鉴权工具
+ *@return NSArray
+ */
+- (void)load
+{
+    authToolsArray = [[NSMutableArray alloc] init];
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        //获取未登录钱sToken(虚拟)
+        paynuc.set("creditFp", "684599B093B8F673A9BE6A7F2AC4E45E");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getStoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    [Tool showDialog:respMsg defulBlock:^{
+                        //退出处理
+                        [self exitApplication];
+                    }];
+                }
+                else{
+                    [Tool showDialog:@"网络请求失败,请退出重试" defulBlock:^{
+                        //退出处理
+                        [self exitApplication];
+                    }];
+                }
+            }];
+        } successBlock:^{
+            
+        }];
+        if (error) return;
+        
+        paynuc.set("tTokenType", "01000201");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@("token/getTtoken/v1") errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    [Tool showDialog:respMsg defulBlock:^{
+                        [self exitApplication];
+                    }];
+                }
+                else{
+                    [Tool showDialog:@"网络请求失败,请退出重试" defulBlock:^{
+                        [self exitApplication];
+                    }];
+                }
+            }];
+        } successBlock:^{
+            
+        }];
+        if (error) return;
+        
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    [Tool showDialog:respMsg defulBlock:^{
+                        [self exitApplication];
+                    }];
+                }
+                else{
+                    [Tool showDialog:@"网络请求失败,请退出重试" defulBlock:^{
+                        [self exitApplication];
+                    }];
+                }
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+                NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                
+                //清空
+                if (authToolsArray.count>0) {
+                    [authToolsArray removeAllObjects];
+                }
+                for (int i = 0; i < tempAuthToolsArray.count; i++) {
+                    [authToolsArray addObject:tempAuthToolsArray[i]];
+                }
+                
+                if ([authToolsArray count] <= 0) {
+                    [Tool showDialog:@"获取失败"];
+                } else {
+                    
+                }
+            }];
+        }];
+        if (error) return;
+        
+    }];
+}
 
 
 
 
 
-
+- (void)exitApplication {
+    //来 加个动画，给用户一个友好的退出界面
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.view.window.alpha = 0;
+    } completion:^(BOOL finished) {
+        exit(0);
+    }];
+    
+}
 
 
 

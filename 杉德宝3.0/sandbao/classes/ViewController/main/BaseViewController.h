@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import "PayNucHelper.h"
+
 #import "Masonry.h"
 #import "UIView+easyFrame.h"
 #import "NavCoverView.h"
+#import "SDMBProgressView.h"
+
 
 #import "CardNoAuthToolView.h"
 #import "IdentityAuthToolView.h"
@@ -127,6 +132,14 @@
  所有子控件的父控件 - 类型:导航视图
  */
 @property (nonatomic, strong) NavCoverView *navCoverView;
+
+
+/**
+ HUD
+ */
+@property (nonatomic, strong) SDMBProgressView *HUD;
+
+
 
 #pragma - mark overried - 供子类重写的公共方法
 
