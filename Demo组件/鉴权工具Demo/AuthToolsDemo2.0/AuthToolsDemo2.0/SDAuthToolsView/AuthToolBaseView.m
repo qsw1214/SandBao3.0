@@ -37,7 +37,7 @@
     
     //title
     titleLab = [[UILabel alloc] init];
-    titleLab.text = @"这里是标题";
+    titleLab.text = @"这里是标题-这里是标题";
     titleLab.font =  [UIFont fontWithName:@"PingFang-SC-Medium" size:14];
     titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [self addSubview:titleLab];
@@ -45,7 +45,7 @@
     //textFiled
     textfiled = [[UITextField alloc] init];
     textfiled.font = [UIFont fontWithName:@"SFUIText-Medium" size:14];
-    textfiled.placeholder = @"这里是副标题";
+    textfiled.placeholder = @"这里是副标题 - 这里是副标题";
     textfiled.delegate = self;
     textfiled.clearButtonMode = UITextFieldViewModeWhileEditing;
     textfiled.textColor =  [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/0.4];
@@ -91,7 +91,15 @@
     CGFloat selfViewH = tipOY + tipH + space/2;
     self.frame = CGRectMake(frameRect.origin.x, frameRect.origin.y, [UIScreen mainScreen].bounds.size.width, selfViewH);
     
+    
+    
+    //kvo
+    [textfiled addObserver:self forKeyPath:@"text.length" options:NSKeyValueObservingOptionNew context:nil];
+    
 }
+
+
+
 
 
 - (void)showTip{

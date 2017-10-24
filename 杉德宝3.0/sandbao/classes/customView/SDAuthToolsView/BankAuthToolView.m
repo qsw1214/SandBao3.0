@@ -11,14 +11,13 @@
 @interface BankAuthToolView (){
     
     UIButton *chooseBankBtn;
-    UILabel  *chooseBankTitleLab;
     UIImageView *rightMoreImgV;
 }
 
 @end
 
 @implementation BankAuthToolView
-
+@synthesize chooseBankTitleLab;
 /**
  创建对象
  

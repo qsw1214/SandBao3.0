@@ -10,4 +10,10 @@
 #import "BankPickerView.h"
 @interface BankAuthToolView : AuthToolBaseView
 
+
+/**
+ 外部修改银行类型描述
+ */
+@property (nonatomic, strong) UILabel  *chooseBankTitleLab;
+
 @end

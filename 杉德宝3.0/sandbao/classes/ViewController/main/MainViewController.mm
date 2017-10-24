@@ -62,15 +62,6 @@
     __block UIViewController *selfBlock = self;
     self.navCoverView.rightBlock = ^{
         
-        //实名认证检测
-        if ([CommParameter sharedInstance].realNameFlag == NO) {
-            [Tool showDialog:@"您还未实名认证,请先实名!" defulBlock:^{
-                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:realNameVC];
-                [selfBlock presentViewController:nav animated:YES completion:nil];
-            }];
-        }
-            
     };
     
     
@@ -109,18 +100,18 @@
     //跟新数据库,走明登陆则数据库活跃用户全部置为不活跃,
     BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
     
-//    if (result) {
-//        LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
-//                [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-//        UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-//        [self presentViewController:navLogin animated:YES completion:nil];
-//    }
-//    
-    RealNameViewController *mLoginViewController = [[RealNameViewController
-                                                     alloc] init];
-    [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-    [self presentViewController:navLogin animated:YES completion:nil];
+    if (result) {
+        LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
+                [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
+        [self presentViewController:navLogin animated:YES completion:nil];
+    }
+    
+//    RealNameViewController *mLoginViewController = [[RealNameViewController
+//                                                     alloc] init];
+//    [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+//    UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
+//    [self presentViewController:navLogin animated:YES completion:nil];
 }
 #pragma mark - 暗登陆
 - (void)noPwdLogin{
@@ -252,6 +243,9 @@
                 //根据order 字段排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
+                [self.navigationController pushViewController:realNameVC animated:YES];
                 
             }];
         }];

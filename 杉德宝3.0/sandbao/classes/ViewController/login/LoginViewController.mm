@@ -101,6 +101,7 @@
     //PhoneAuthToolView
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
+    phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474688");
     __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
     phoneAuthToolView.successBlock = ^{
         phoneNum = selfPhoneAuthToolView.textfiled.text;
@@ -113,6 +114,7 @@
     //PwdAuthToolView
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
+    pwdAuthToolView.textfiled.text = SHOWTOTEST(@"qqqqqq111");
     __block PwdAuthToolView *selfpwdAuthToolView = pwdAuthToolView;
     pwdAuthToolView.successBlock = ^{
         loginPwd = selfpwdAuthToolView.textfiled.text;

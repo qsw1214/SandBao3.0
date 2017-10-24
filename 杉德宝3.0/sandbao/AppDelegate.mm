@@ -40,7 +40,7 @@
     
     // 2.loading
     NSInteger loadingResult = [Loading startLoading];
-    loadingResult = 1;
+//    loadingResult = 1;
     switch (loadingResult) {
             //load失败
             case 0:
@@ -67,8 +67,9 @@
             case 2:
             {
                 MainViewController *mMainViewController = [[MainViewController alloc] init];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mMainViewController];
                 mMainViewController.pwdLoginFlag = NO;
-                self.window.rootViewController = mMainViewController;
+                self.window.rootViewController = nav;
             }
                 
                 break;

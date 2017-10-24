@@ -13,7 +13,7 @@
 #import "PayPwdViewController.h"
 @interface SmsCheckViewController ()
 {
-    
+    SixCodeAuthToolView *smsCodeAuthToolView;
 }
 
 @end
@@ -67,36 +67,37 @@
     
     
     //smsCodeAuth:sixCodeAuth
-    SixCodeAuthToolView *smsCodeAuthToolView = [SixCodeAuthToolView createAuthToolViewOY:0];
+    smsCodeAuthToolView = [SixCodeAuthToolView createAuthToolViewOY:0];
     smsCodeAuthToolView.style = SmsCodeAuthTool;
     __block SixCodeAuthToolView *selfSmsCodeauthToolView = smsCodeAuthToolView;
+    __block SmsCheckViewController *selfBlock = self;
     smsCodeAuthToolView.successBlock = ^{
         
         if (self.smsCheckType == SMS_CHECKTYPE_REGIST) {
             //输入短信成功后, 进入 设置登录密码
-            self.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
+            selfBlock.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
             LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
-            setLogpwdVC.phoneNoStr = self.phoneNoStr;
-            setLogpwdVC.smsCodeString = self.smsCodeString;
-            [self.navigationController pushViewController:setLogpwdVC animated:YES];
+            setLogpwdVC.phoneNoStr = selfBlock.phoneNoStr;
+            setLogpwdVC.smsCodeString = selfBlock.smsCodeString;
+            [selfBlock.navigationController pushViewController:setLogpwdVC animated:YES];
             
         }
         if (self.smsCheckType == SMS_CHECKTYPE_REALNAME) {
-            //模拟输入短信成功后,跳转设置 支付密码 页面
-            PayPwdViewController *setPayPwdVC = [[PayPwdViewController alloc] init];
-            [self.navigationController pushViewController:setPayPwdVC animated:YES];
+            //输入短信成功后,进行实名认证
+            selfBlock.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
+            [selfBlock authentication];
         }
         if (self.smsCheckType == SMS_CHECKTYPE_LOGINT) {
             //输入短信成功后,进入 登录 流程
-            self.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
-            [self loginUser];
+            selfBlock.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
+            [selfBlock loginUser];
             
         }
 
     };
     smsCodeAuthToolView.successRequestBlock = ^{
         //触发 - 获取短信码请求
-        [self shortMsg];
+        [selfBlock shortMsg];
     };
     [self.baseScrollView addSubview:smsCodeAuthToolView];
     
@@ -132,7 +133,7 @@
 
 
 
-#pragma mark 公共业务逻辑
+#pragma mark -=-=-=-=-=-=  公共业务逻辑   -=-=-=-=-=-=-
 #pragma mark  获取短信验证码
 
 - (void)shortMsg
@@ -161,6 +162,11 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                
+                //短信发送成功,允许控件进行输入及编辑
+                smsCodeAuthToolView.noCopyTextfield.userInteractionEnabled = YES;
+                //短息发送成功,自动弹出键盘
+                [smsCodeAuthToolView.noCopyTextfield becomeFirstResponder];
                 
             }];
         }];
@@ -336,7 +342,7 @@
 
 
 
-#pragma mark - -=-=-=-=-=-=  用户实名模式  -=-=-=-=-=-=-=-=
+#pragma mark -=-=-=-=-=-=  用户实名模式   -=-=-=-=-=-=-
 #pragma mark - 用户实名
 /**
  *@brief 实名
@@ -360,44 +366,41 @@
         [authToolsArray1 addObject:authToolDic1];
         NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
         
-
-//        //账户
-//        NSDictionary *passAccountDic = [passPayToolDic objectForKey:@"account"];
-//        NSMutableDictionary *payToolDic = [[NSMutableDictionary alloc] init];
-//        NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
-//        NSMutableArray *authToolsArray2 = [[NSMutableArray alloc] init];
-//        NSMutableDictionary *authToolDic2 = [[NSMutableDictionary alloc] init];
-//        [authToolDic2 setValue:@"creditCard" forKey:@"type"];
-//        NSMutableDictionary *creditCardDic = [[NSMutableDictionary alloc] init];
-//        [authToolDic2 setObject:creditCardDic forKey:@"creditCard"];
-//        [authToolsArray2 addObject:authToolDic2];
-//        [payToolDic setObject:authToolsArray2 forKey:@"authTools"];
-//        [payToolDic setObject:accountDic forKey:@"account"];
-//        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:payToolDic];
-//        
-//
-//        
-//         //用户
-//        NSDictionary *passUserKeyDic = [passUserInfoDic objectForKey:@"userKey"];
-//        NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
-//        NSMutableDictionary *identityDic = [[NSMutableDictionary alloc] init];
-//        [identityDic setValue:IDNumTextField.text forKey:@"identityNo"];
-//        [identityDic setValue:@"01" forKey:@"type"];
-//        NSMutableDictionary *lastLoginDic = [[NSMutableDictionary alloc] init];
-//        [lastLoginDic setValue:[NSDate currentTime] forKey:@"time"];
-//        [lastLoginDic setValue:@"登录地点" forKey:@"location"];
-//        NSMutableDictionary *userKeyDic = [[NSMutableDictionary alloc] init];
-//        [userInfoDic setValue:phoneNoStr forKey:@"userRealName"];
-//        [userInfoDic setObject:lastLoginDic forKey:@"lastLogin"];
-//        [userInfoDic setObject:userKeyDic forKey:@"userKey"];
-//        [userInfoDic setObject:identityDic forKey:@"identity"];
-//        NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
-
         
+        //payTool
+        NSMutableDictionary *payToolDic = [NSMutableDictionary dictionaryWithDictionary:self.payToolDic];
+        NSMutableDictionary *payToolDic_accountDic = [NSMutableDictionary dictionaryWithDictionary:[self.payToolDic objectForKey:@"account"]];
+        NSMutableDictionary *payToolDic_authToolDic = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *payToolDic_authToolDic_creditCardDic = [[NSMutableDictionary alloc] init];
+        
+        [payToolDic_accountDic setValue:self.bankCardNoStr forKey:@"accNo"];
+        
+        [payToolDic_authToolDic setValue:@"creditCard" forKey:@"type"];
+        [payToolDic_authToolDic_creditCardDic setValue:self.cvnStr forKey:@"cvn"];
+        [payToolDic_authToolDic_creditCardDic setValue:self.expiryStr forKey:@"expiry"];
+        [payToolDic_authToolDic setObject:payToolDic_authToolDic_creditCardDic forKey:@"creditCard"];
+        
+        [payToolDic setObject:payToolDic_accountDic forKey:@"account"];
+        [payToolDic setObject:@[payToolDic_authToolDic] forKey:@"authTools"];
+        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:payToolDic];
+        
+
+        //userinfo
+        NSMutableDictionary *userinfoDic = [NSMutableDictionary dictionaryWithDictionary:self.userInfoDic];
+        NSMutableDictionary *userinfoDic_userinfoDic = [[NSMutableDictionary alloc] init];
+        
+        [userinfoDic_userinfoDic setValue:self.identityNoStr forKey:@"identityNo"];
+        [userinfoDic_userinfoDic setValue:@"01" forKey:@"type"]; //01 身份证 02 军官证 03护照
+        
+        [userinfoDic setValue:userinfoDic_userinfoDic forKey:@"identity"];
+        [userinfoDic setValue:self.realNameStr forKey:@"userRealName"];
+        [userinfoDic setValue:self.phoneNoStr forKey:@"phoneNo"];
+        NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userinfoDic];
+
         
         paynuc.set("authTools", [authTools UTF8String]);
-//        paynuc.set("payTool", [payTool UTF8String]);
-//        paynuc.set("userInfo", [userInfo UTF8String]);
+        paynuc.set("payTool", [payTool UTF8String]);
+        paynuc.set("userInfo", [userInfo UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/setRealName/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
@@ -417,7 +420,8 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                
+                PayPwdViewController *payPwdVC = [[PayPwdViewController alloc] init];
+                [self.navigationController pushViewController:payPwdVC animated:YES];
             }];
         }];
         if (error) return ;

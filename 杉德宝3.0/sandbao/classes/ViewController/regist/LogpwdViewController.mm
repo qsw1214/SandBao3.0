@@ -70,6 +70,7 @@
     //pwdAuthToolView
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
     pwdAuthToolView.titleLab.text = @"登陆密码";
+    pwdAuthToolView.textfiled.text = SHOWTOTEST(@"qqqqqq111");
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
     __block PwdAuthToolView *selfPwdauthTooView = pwdAuthToolView;
     pwdAuthToolView.successBlock = ^{

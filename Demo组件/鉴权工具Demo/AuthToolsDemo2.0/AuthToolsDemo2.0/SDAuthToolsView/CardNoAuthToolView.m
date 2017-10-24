@@ -34,7 +34,10 @@
     }return self;
     
 }
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    
+     NSLog(@"keyPath=%@,object=%@,change=%@,context=%@",keyPath,object,change,context);
+}
 
 #define OnlyNumberVerifi @"0987654321"
 #pragma - mark textfiledDelegate
@@ -46,7 +49,7 @@
         return NO;
     }
     //超过19长度不能再输入且警告提示
-    if (textField.text.length >19 && ![string isEqualToString:@""]) {
+    if (textField.text.length >=19 && ![string isEqualToString:@""]) {
         _errorBlock();
         return NO;
     }
@@ -73,12 +76,13 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-    if (((![self validateBankCard:textField.text]) || !(textField.text.length>=16 && textField.text.length<=19)) && (textField.text.length>0)) {
-        [self deleteErrorTextAnimation:textField];
-        _errorBlock();
-    }else if([self validateBankCard:textField.text] && textField.text>0){
-        _successBlock();
-    }
+//    if (((![self validateBankCard:textField.text]) || !(textField.text.length>=16 && textField.text.length<=19)) && (textField.text.length>0)) {
+//        [self deleteErrorTextAnimation:textField];
+//        _errorBlock();
+//    }else if([self validateBankCard:textField.text] && textField.text>0){
+//        _successBlock();
+//    }
+    _successBlock();
 }
 
 

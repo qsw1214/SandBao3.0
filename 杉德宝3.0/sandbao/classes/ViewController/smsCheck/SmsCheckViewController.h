@@ -40,11 +40,45 @@
 /**
  加强鉴权:发送短信成功后执行登陆所需的 用户信息
  */
-@property (nonatomic,strong) NSString *userInfo;
+@property (nonatomic, strong) NSString *userInfo;
 
 
 #pragma mark - 实名模式下属性
 
+/**
+ 实名认证:工具字典
+ */
+@property (nonatomic, strong) NSDictionary *payToolDic;
 
+/**
+ 实名认证:用户信息字典
+ */
+@property (nonatomic, strong) NSDictionary *userInfoDic;
+
+
+/**
+ 实名认证:四要素:信用卡校验码
+ */
+@property (nonatomic, strong) NSString *cvnStr;
+
+/**
+ 实名认证:四要素:信用卡有效期
+ */
+@property (nonatomic, strong) NSString *expiryStr;
+
+/**
+ 实名认证:四要素:身份证号
+ */
+@property (nonatomic, strong) NSString *identityNoStr;
+
+/**
+ 实名认证:四幺四:姓名
+ */
+@property (nonatomic, strong) NSString *realNameStr;
+
+/**
+ 实名认证:四要素:卡号
+ */
+@property (nonatomic, strong) NSString *bankCardNoStr;
 
 @end

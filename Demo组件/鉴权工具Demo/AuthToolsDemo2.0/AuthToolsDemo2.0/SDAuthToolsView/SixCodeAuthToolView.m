@@ -44,7 +44,6 @@
         
         //sixCode中需禁止父类的textfied的黏贴复制功能,因此使用 noCopyTextfield 来替换 self.textfied,从而禁止用户粘贴复制
         noCopyTextfield = [[NoCopyTextField alloc] init];
-        noCopyTextfield.userInteractionEnabled = NO;
         noCopyTextfield.frame = self.textfiled.frame;
         [self addSubview:noCopyTextfield];
         [self.textfiled removeFromSuperview];
@@ -71,6 +70,7 @@
     _style = style;
     
     if (_style == SmsCodeAuthTool) {
+        noCopyTextfield.userInteractionEnabled = NO;
         self.titleLab.text = @"验证码";
         
     }
@@ -201,11 +201,11 @@
         
         btn.selected =  YES;
         
-        //恢复交互
-        noCopyTextfield.userInteractionEnabled = YES;
+//        //恢复交互
+//        noCopyTextfield.userInteractionEnabled = YES;
         
-        //点击发送短信按钮后, 键盘自动弹出
-        [noCopyTextfield becomeFirstResponder];
+//        //点击发送短信按钮后, 键盘自动弹出
+//        [noCopyTextfield becomeFirstResponder];
         
         timeCount = 60;
         

@@ -1391,10 +1391,7 @@
         //账户
         NSMutableDictionary *payToolDic = [[NSMutableDictionary alloc] init];
         NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
-        [accountDic setValue:[passAccountDic objectForKey:@"accAlias"] forKey:@"accAlias"];
-        [accountDic setValue:[passAccountDic objectForKey:@"accNo"] forKey:@"accNo"];
-        [accountDic setValue:[passAccountDic objectForKey:@"balance"] forKey:@"balance"];
-        [accountDic setValue:[passAccountDic objectForKey:@"walletBalance"] forKey:@"walletBalance"];
+        
         //        [accountDic setValue:cvn forKey:@"cvn"];
         [accountDic setValue:expiry forKey:@"expiry"];
         [accountDic setValue:[passAccountDic objectForKey:@"freezedBalance"] forKey:@"freezedBalance"];

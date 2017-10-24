@@ -7,6 +7,8 @@
 //
 
 #import "PayPwdViewController.h"
+#import "PayNucHelper.h"
+
 
 #define SIX_CODE_STATE_INPUT_FIRST 80001
 #define SIX_CODE_STATE_INPUT_AGAIN 80002
@@ -16,6 +18,10 @@
 {
     // 6位密码
     NSString *sixCodeStr;
+    
+    // reg鉴权工具集组
+    NSArray *regAuthToolsArr;
+    
     
 }
 @property (nonatomic, assign) NSInteger SIX_CODE_STATE;
@@ -32,7 +38,11 @@
 
     
     SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
+    
+    
     [self createUI];
+    
+    [self getRegAuthTools];
 }
 
 
@@ -60,8 +70,8 @@
         
         if (SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
             //验证支付密码成功, dismiss方式返回MainViewController
-            [self dismissViewControllerAnimated:YES completion:nil];
-            [CommParameter sharedInstance].userId = @"======";
+            [self setRegAuthTools];
+            
         }
         if (SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN || SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -148,6 +158,84 @@
 }
 
 
+#pragma mark 业务逻辑
+#pragma mark 查询设置支付密码-鉴权工具
+- (void)getRegAuthTools{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSString *regAuthTools = [NSString stringWithUTF8String:paynuc.get("regAuthTools").c_str()];
+                regAuthToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
+                if (![[[regAuthToolsArr firstObject] objectForKey:@"type"] isEqualToString:@"paypass"]) {
+                    [Tool showDialog:@"下发鉴权工具有误"];
+                }
+                
+                
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+
+}
+
+
+#pragma 提交设置支付密码-鉴权工具
+- (void)setRegAuthTools{
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+        NSInteger index = 0;
+        for (int i = 0; i<regAuthToolsArr.count; i++) {
+            NSString *type = @"paypass";
+            NSString *typeGet = [regAuthToolsArr[i] objectForKey:@"type"];
+            if ([type isEqualToString:typeGet]) {
+                index = i;
+            }
+        }
+        
+        NSMutableDictionary *authToolDict = regAuthToolsArr[index];
+        NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:authToolDict];
+        //[authToolsDic removeObjectForKey:@"pass"];
+        NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
+        [passDic setValue:[[PayNucHelper sharedInstance] pinenc:sixCodeStr type:@"paypass"] forKey:@"password"];
+        [passDic setValue:@"sand" forKey:@"encryptType"];
+        [authToolsDic setObject:passDic forKey:@"pass"];
+        [tempArray addObject:authToolsDic];
+        NSString *regAuthTools = [[PayNucHelper sharedInstance] arrayToJSON:tempArray];
+        
+        paynuc.set("regAuthTools", [regAuthTools UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                [Tool showDialog:@"支付密码设置成功" defulBlock:^{
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+                
+            }];
+        }];
+        if (error) return ;
+    
+    }];
+    
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -44,8 +44,8 @@
         _errorBlock();
         return NO;
     }
-    //超过20长度不能再输入且警告提示
-    if (textField.text.length >18 && ![string isEqualToString:@""]) {
+    //超过18长度不能再输入且警告提示
+    if (textField.text.length >=18 && ![string isEqualToString:@""]) {
         _errorBlock();
         return NO;
     }
