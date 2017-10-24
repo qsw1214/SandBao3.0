@@ -43,17 +43,17 @@
     
     //禁止输入空格且警告
     if ([string isEqualToString:@" "]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //超过6长度不能再输入且警告提示
     if (textField.text.length >=6 && ![string isEqualToString:@""]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     ////限制输入字母数字特殊字符
     if (![self restrictionwithChineseCharTypeStr:OnlyChineseCharacterVerifi string:string]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     
@@ -82,7 +82,7 @@
     
     if (!(textField.text.length>=2 && textField.text.length<=6) && (textField.text.length>0)) {
         [self deleteErrorTextAnimation:textField];
-        _errorBlock();
+        [self showTip];
     }else if(textField.text>0){
         _successBlock(textField.text);
     }

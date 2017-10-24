@@ -43,17 +43,17 @@
     
     //禁止输入空格且警告
     if ([string isEqualToString:@" "]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //超过11长度不能再输入且警告提示
     if (textField.text.length >=11 && ![string isEqualToString:@""]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //限制输入纯数字
     if (![self restrictionwithTypeStr:OnlyNumberVerifi string:string]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     
@@ -85,7 +85,7 @@
     //手机号正则校验
     if ((![self validateMobile:textField.text]) && (textField.text.length > 0)) {
         [self deleteErrorTextAnimation:textField];
-        _errorBlock();
+        [self showTip];
     }
     if ([self validateMobile:textField.text] && textField.text.length > 0) {
         _successBlock(textField.text);

@@ -8,16 +8,11 @@
 
 #import "AuthToolBaseView.h"
 
-
 /**
  输入框内容通过回调
  */
 typedef void(^TextSuccessBlock_PhoneAuthTool)(NSString *textfieldText);
 
-/**
- 输入框内容校验不通过回调
- */
-typedef void(^TextErrorBlock_PhoneAuthTool)();
 
 @interface PhoneAuthToolView : AuthToolBaseView
 
@@ -27,10 +22,6 @@ typedef void(^TextErrorBlock_PhoneAuthTool)();
 @property (nonatomic, copy) TextSuccessBlock_PhoneAuthTool successBlock;
 
 
-/**
- 输入框内容校验不通过回调
- */
-@property (nonatomic, copy) TextErrorBlock_PhoneAuthTool errorBlock;
 
 
 

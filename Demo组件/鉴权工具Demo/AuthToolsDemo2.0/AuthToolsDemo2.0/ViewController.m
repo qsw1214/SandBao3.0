@@ -42,8 +42,8 @@
 //    //银行选择测试
 //    [self testThree];
 //
-//    //手机号的测试
-//    [self testFour];
+    //手机号的测试
+    [self testFour];
 //
 //    //密码框的测试
 //    [self testFiv];
@@ -54,8 +54,8 @@
 //    //证件号的测试
 //    [self testSev];
 //
-    //银行卡号测试
-    [self testeight];
+//    //银行卡号测试
+//    [self testeight];
     
   
 }
@@ -65,12 +65,8 @@
     CardNoAuthToolView *card = [CardNoAuthToolView createAuthToolViewOY:100];
     
     card.tip.text = @"请输入正确的银行卡号";
-    __block CardNoAuthToolView *selfCard = card;
     card.successBlock = ^(NSString *textfieldText){
         NSLog(@"正确的卡号为 : %@",textfieldText);
-    };
-    card.errorBlock = ^{
-        [selfCard showTip];
     };
     [self.scrollview addSubview:card];
     
@@ -80,13 +76,10 @@
     IdentityAuthToolView *idv = [IdentityAuthToolView createAuthToolViewOY:0];
     
     idv.tip.text = @"请输入正确身份证号码";
-    __block IdentityAuthToolView *selfIdv = idv;
     idv.successBlock = ^(NSString *textfieldText){
         NSLog(@"身份证号 : %@",textfieldText);
     };
-    idv.errorBlock = ^{
-        [selfIdv showTip];
-    };
+
     
     [self.scrollview addSubview:idv];
     
@@ -96,12 +89,8 @@
     
     NameAuthToolView * name = [NameAuthToolView createAuthToolViewOY:0];
     name.tip.text = @"请输入真实姓名";
-    __block NameAuthToolView *selfName = name;
     name.successBlock = ^(NSString *textfieldText){
         NSLog(@"真实姓名 : %@",textfieldText);
-    };
-    name.errorBlock = ^{
-        [selfName showTip];
     };
     
     [self.scrollview addSubview:name];
@@ -112,12 +101,8 @@
     
     PwdAuthToolView *pwd = [PwdAuthToolView createAuthToolViewOY:100];
     pwd.tip.text = @"请输入8-20位数字字母组合密码";
-    __block PwdAuthToolView *selfPwd = pwd;
     pwd.successBlock = ^(NSString *textfieldText){
         NSLog(@"密码 : %@",textfieldText);
-    };
-    pwd.errorBlock = ^{
-        [selfPwd showTip];
     };
     [self.scrollview addSubview:pwd];
     
@@ -127,12 +112,8 @@
     
     PhoneAuthToolView *p = [PhoneAuthToolView createAuthToolViewOY:100];
     p.tip.text = @"请输入正确的手机号";
-    __block PhoneAuthToolView *selfP = p;
     p.successBlock = ^(NSString *textfieldText){
         NSLog(@"获取到的可用手机号码为 : %@",textfieldText);
-    };
-    p.errorBlock = ^{
-        [selfP showTip];
     };
     [self.scrollview addSubview:p];
 }
@@ -198,10 +179,6 @@
     p.titleLab.text = @"预留手机号";
     p.textfiled.placeholder = @"输入银行预留手机号";
     p.tip.text = @"请输入正确的银行预留手机号";
-    __block PhoneAuthToolView *selfBlockp = p;
-    p.errorBlock = ^{
-        [selfBlockp showTip];
-    };
     [self.scrollview addSubview:p];
     
     
@@ -215,10 +192,6 @@
     
     IdentityAuthToolView *i = [IdentityAuthToolView createAuthToolViewOY:(b.frame.size.height+30)*6+0];
     i.tip.text = @"请输入正确的证件号码";
-    __block IdentityAuthToolView *selfBlocki = i;
-    i.errorBlock = ^{
-        [selfBlocki showTip];
-    };
     [self.scrollview addSubview:i];
     
     CardNoAuthToolView *t = [CardNoAuthToolView createAuthToolViewOY:(b.frame.size.height+30)*7+0];
@@ -227,10 +200,6 @@
     
     PwdAuthToolView *j = [PwdAuthToolView createAuthToolViewOY:(b.frame.size.height+30)*8+0];
     j.tip.text = @"请输入8-20位的数字字母组合密码";
-    __block id selfj = j;
-    j.errorBlock = ^{
-        [selfj showTip];
-    };
     [self.scrollview addSubview:j];
     
     

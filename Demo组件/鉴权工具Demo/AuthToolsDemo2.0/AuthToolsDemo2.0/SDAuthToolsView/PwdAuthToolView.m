@@ -84,17 +84,17 @@
     
     //禁止输入空格且警告
     if ([string isEqualToString:@" "]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //超过20长度不能再输入且警告提示
     if (textField.text.length >=20 && ![string isEqualToString:@""]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //限制输入纯数字纯字母
     if (![self restrictionwithTypeStr:OnlyNum_letterVerifi string:string]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     
@@ -126,7 +126,7 @@
     
     if (((![self validatePasswordNumAndLetter:textField.text]) || !(textField.text.length>=8 && textField.text.length<=20)) && (textField.text.length>0)) {
         [self deleteErrorTextAnimation:textField];
-        _errorBlock();
+        [self showTip];
     }else if([self validatePasswordNumAndLetter:textField.text] && textField.text>0){
         _successBlock(textField.text);
     }

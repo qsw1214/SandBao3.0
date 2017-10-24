@@ -13,10 +13,6 @@
  */
 typedef void(^TextSuccessBlock_CardNoAuthTool)(NSString *textfieldText);
 
-/**
- 输入框内容校验不通过回调
- */
-typedef void(^TextErrorBlock_CardNoAuthTool)();
 
 @interface CardNoAuthToolView : AuthToolBaseView
 
@@ -25,10 +21,7 @@ typedef void(^TextErrorBlock_CardNoAuthTool)();
  */
 @property (nonatomic, copy) TextSuccessBlock_CardNoAuthTool successBlock;
 
-/**
- 输入框内容校验不通过回调
- */
-@property (nonatomic, copy) TextErrorBlock_CardNoAuthTool errorBlock;
+
 
 
 @end

@@ -13,10 +13,6 @@
  */
 typedef void(^TextSuccessBlock_NameAuthTool)(NSString *textfieldText);
 
-/**
- 输入框内容校验不通过回调
- */
-typedef void(^TextErrorBlock_NameAuthTool)();
 
 @interface NameAuthToolView : AuthToolBaseView
 
@@ -25,10 +21,7 @@ typedef void(^TextErrorBlock_NameAuthTool)();
  */
 @property (nonatomic, copy) TextSuccessBlock_NameAuthTool successBlock;
 
-/**
- 输入框内容校验不通过回调
- */
-@property (nonatomic, copy) TextErrorBlock_NameAuthTool errorBlock;
+
 
 
 @end
