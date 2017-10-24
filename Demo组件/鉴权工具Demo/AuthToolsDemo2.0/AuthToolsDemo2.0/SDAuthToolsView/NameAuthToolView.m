@@ -57,6 +57,12 @@
         return NO;
     }
     
+    //实时获取输入的框内的text,校验后返回
+    NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (currentText.length >= 2 && currentText.length <= 6) {
+        _successBlock(currentText);
+    }
+    
     return YES;
 }
 -(BOOL)restrictionwithChineseCharTypeStr:(NSString*)typeStr string:(NSString*)string{
@@ -78,7 +84,7 @@
         [self deleteErrorTextAnimation:textField];
         _errorBlock();
     }else if(textField.text>0){
-        _successBlock();
+        _successBlock(textField.text);
     }
 }
 
@@ -97,19 +103,5 @@
         textField.text = @"";
     }];
 }
-
-/**
- *@brief 数字和字母组合密码
- *@param passWord 字符串 参数：密码
- *@return 返回BOOL
- */
-- (BOOL)validatePasswordNumAndLetter:(NSString *)passWord
-{
-    NSString *passWordRegex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]+$";
-    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
-    return [passWordPredicate evaluateWithObject:passWord];
-}
-
-
 
 @end

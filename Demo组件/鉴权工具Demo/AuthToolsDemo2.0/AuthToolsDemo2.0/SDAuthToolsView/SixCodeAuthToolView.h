@@ -11,7 +11,7 @@
 /**
  输入框内容通过回调
  */
-typedef void(^TextSuccessBlock)();
+typedef void(^TextSuccessBlock_SixCodeAuthTool)(NSString *textfieldText);
 
 
 /**
@@ -42,13 +42,13 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
 /**
  block-返回sixCodeAuthTool的文本信息
  */
-@property (nonatomic, copy) TextSuccessBlock successBlock;
+@property (nonatomic, copy) TextSuccessBlock_SixCodeAuthTool successBlock;
 
 
 /**
  block-返回短信码重发请求的回调
  */
-@property (nonatomic, copy) TextSuccessBlock successRequestBlock;
+@property (nonatomic, copy) TextSuccessBlock_SixCodeAuthTool successRequestBlock;
 
 
 

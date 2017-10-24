@@ -57,6 +57,14 @@
         return NO;
     }
     
+    //实时获取输入的框内的text,校验后返回
+    NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (currentText.length <= 11) {
+        if ([self validateMobile:currentText] && currentText.length > 0) {
+            _successBlock(currentText);
+        }
+    }
+    
     return YES;
 }
 -(BOOL)restrictionwithTypeStr:(NSString*)typeStr string:(NSString*)string{
@@ -80,7 +88,7 @@
         _errorBlock();
     }
     if ([self validateMobile:textField.text] && textField.text.length > 0) {
-        _successBlock();
+        _successBlock(textField.text);
     }
 }
 

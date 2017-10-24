@@ -55,6 +55,14 @@
         return NO;
     }
     
+    //实时获取输入的框内的text,校验后返回
+    NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (currentText.length >= 15 && currentText.length <= 18) {
+        if ([self validateIdentityCard:currentText] && currentText.length > 0) {
+            _successBlock(currentText);
+        }
+    }
+    
     return YES;
 }
 -(BOOL)restrictionwithTypeStr:(NSString*)typeStr string:(NSString*)string{
@@ -76,7 +84,7 @@
         [self deleteErrorTextAnimation:textField];
         _errorBlock();
     }else if([self validateIdentityCard:textField.text] && textField.text>0){
-        _successBlock();
+        _successBlock(textField.text);
     }
 }
 

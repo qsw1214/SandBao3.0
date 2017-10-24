@@ -91,11 +91,6 @@
     CGFloat selfViewH = tipOY + tipH + space/2;
     self.frame = CGRectMake(frameRect.origin.x, frameRect.origin.y, [UIScreen mainScreen].bounds.size.width, selfViewH);
     
-    
-    
-    //kvo
-    [textfiled addObserver:self forKeyPath:@"text.length" options:NSKeyValueObservingOptionNew context:nil];
-    
 }
 
 

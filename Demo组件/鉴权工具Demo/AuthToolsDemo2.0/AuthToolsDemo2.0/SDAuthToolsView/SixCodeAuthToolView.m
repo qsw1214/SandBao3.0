@@ -213,7 +213,7 @@
         [self shortMsgCodeCountDown];
         
         //短信码请求事件回调
-        self.successRequestBlock();
+        self.successRequestBlock(@"");
     }
     
     

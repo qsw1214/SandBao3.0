@@ -41,19 +41,19 @@
 //
 //    //银行选择测试
 //    [self testThree];
-//    
+//
 //    //手机号的测试
 //    [self testFour];
 //
 //    //密码框的测试
 //    [self testFiv];
-//    
+//
 //    //姓名框的测试
 //     [self testSix];
-//    
+//
 //    //证件号的测试
 //    [self testSev];
-    
+//
     //银行卡号测试
     [self testeight];
     
@@ -66,8 +66,8 @@
     
     card.tip.text = @"请输入正确的银行卡号";
     __block CardNoAuthToolView *selfCard = card;
-    card.successBlock = ^{
-        NSLog(@"正确的卡号为 : %@",selfCard.textfiled.text);
+    card.successBlock = ^(NSString *textfieldText){
+        NSLog(@"正确的卡号为 : %@",textfieldText);
     };
     card.errorBlock = ^{
         [selfCard showTip];
@@ -81,8 +81,8 @@
     
     idv.tip.text = @"请输入正确身份证号码";
     __block IdentityAuthToolView *selfIdv = idv;
-    idv.successBlock = ^{
-        NSLog(@"身份证号 : %@",selfIdv.textfiled.text);
+    idv.successBlock = ^(NSString *textfieldText){
+        NSLog(@"身份证号 : %@",textfieldText);
     };
     idv.errorBlock = ^{
         [selfIdv showTip];
@@ -97,8 +97,8 @@
     NameAuthToolView * name = [NameAuthToolView createAuthToolViewOY:0];
     name.tip.text = @"请输入真实姓名";
     __block NameAuthToolView *selfName = name;
-    name.successBlock = ^{
-        NSLog(@"真实姓名 : %@",selfName.textfiled.text);
+    name.successBlock = ^(NSString *textfieldText){
+        NSLog(@"真实姓名 : %@",textfieldText);
     };
     name.errorBlock = ^{
         [selfName showTip];
@@ -113,8 +113,8 @@
     PwdAuthToolView *pwd = [PwdAuthToolView createAuthToolViewOY:100];
     pwd.tip.text = @"请输入8-20位数字字母组合密码";
     __block PwdAuthToolView *selfPwd = pwd;
-    pwd.successBlock = ^{
-        NSLog(@"密码 : %@",selfPwd.textfiled.text);
+    pwd.successBlock = ^(NSString *textfieldText){
+        NSLog(@"密码 : %@",textfieldText);
     };
     pwd.errorBlock = ^{
         [selfPwd showTip];
@@ -128,8 +128,8 @@
     PhoneAuthToolView *p = [PhoneAuthToolView createAuthToolViewOY:100];
     p.tip.text = @"请输入正确的手机号";
     __block PhoneAuthToolView *selfP = p;
-    p.successBlock = ^{
-        NSLog(@"获取到的可用手机号码为 : %@",selfP.textfiled.text);
+    p.successBlock = ^(NSString *textfieldText){
+        NSLog(@"获取到的可用手机号码为 : %@",textfieldText);
     };
     p.errorBlock = ^{
         [selfP showTip];
@@ -160,18 +160,19 @@
     //短信m
     SixCodeAuthToolView *d = [SixCodeAuthToolView createAuthToolViewOY:(100+30)*1+0];
     d.style = SmsCodeAuthTool;
-    d.successBlock = ^(NSString *codeStr) {
-        NSLog(@"接受到的短信码为: %@",codeStr);
+    d.successBlock = ^(NSString *textfieldText){
+        NSLog(@"%@",textfieldText);
     };
-    d.successRequestBlock = ^{
+
+    d.successRequestBlock = ^(NSString *textfieldText){
         NSLog(@"点击了发送短信码的按钮");
     };
     [self.scrollview addSubview:d];
     
     SixCodeAuthToolView *n = [SixCodeAuthToolView createAuthToolViewOY:d.frame.size.height + 130];
     n.style = PayCodeAuthTool;
-    n.successBlock = ^(NSString *codeStr) {
-        NSLog(@"接受到的密码为: %@",codeStr);
+    n.successBlock = ^(NSString *textfieldText) {
+        NSLog(@"接受到的密码为: %@",textfieldText);
     };
     [self.scrollview addSubview:n];
     

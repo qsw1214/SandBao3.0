@@ -12,25 +12,25 @@
 /**
  输入框内容通过回调
  */
-typedef void(^TextSuccessBlock)();
+typedef void(^TextSuccessBlock_PhoneAuthTool)(NSString *textfieldText);
 
 /**
  输入框内容校验不通过回调
  */
-typedef void(^TextErrorBlock)();
+typedef void(^TextErrorBlock_PhoneAuthTool)();
 
 @interface PhoneAuthToolView : AuthToolBaseView
 
 /**
  输入框内容通过回调
  */
-@property (nonatomic, copy) TextSuccessBlock successBlock;
+@property (nonatomic, copy) TextSuccessBlock_PhoneAuthTool successBlock;
 
 
 /**
  输入框内容校验不通过回调
  */
-@property (nonatomic, copy) TextErrorBlock errorBlock;
+@property (nonatomic, copy) TextErrorBlock_PhoneAuthTool errorBlock;
 
 
 
