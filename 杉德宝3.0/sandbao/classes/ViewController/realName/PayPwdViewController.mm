@@ -223,6 +223,7 @@
                 [self.HUD hidden];
                 
                 [Tool showDialog:@"支付密码设置成功" defulBlock:^{
+                    
                     //dismiss回主页
                     [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
                     [self dismissViewControllerAnimated:YES completion:nil];

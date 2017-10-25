@@ -239,13 +239,6 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
-                //实名
-                RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-                [realNameVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:realNameVC];
-                [self presentViewController:nav animated:YES completion:nil];
-                
-                
             }];
         }];
         if (error) return;

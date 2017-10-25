@@ -135,7 +135,7 @@
         NSMutableDictionary *loginpassDic = [[NSMutableDictionary alloc] init];
         [loginpassDic setValue:@"loginpass" forKey:@"type"];
         NSMutableDictionary *passDic1 = [[NSMutableDictionary alloc] init];
-        [passDic1 setValue:@"sanddddddddddddd" forKey:@"encryptType"];
+        [passDic1 setValue:@"sand" forKey:@"encryptType"];
         [passDic1 setValue:[NSString stringWithUTF8String:paynuc.lgnenc([loginPwdStr UTF8String]).c_str()] forKey:@"password"];
         [loginpassDic setObject:passDic1 forKey:@"pass"];
         [regAuthToolsArray addObject:loginpassDic];
@@ -220,9 +220,7 @@
     if (result == YES) {
         //实名
         RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-        [realNameVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:realNameVC];
-        [self presentViewController:nav animated:YES completion:nil];
+        [self.navigationController pushViewController:realNameVC animated:YES];
         
     } else {
         //数据写入失败->返回直接登陆
