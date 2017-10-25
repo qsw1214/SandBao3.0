@@ -27,12 +27,12 @@
     
     [self createUI];
 }
-#pragma - mark 重写父类-baseScrollView设置
+#pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     
 }
-#pragma - mark 重写父类-导航设置方法
+#pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
     
@@ -43,14 +43,14 @@
         [weakself.navigationController popViewControllerAnimated:YES];
     };
 }
-#pragma - mark 重写父类-点击方法集合
+#pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
     
     
 }
 
-#pragma - mark  UI绘制
+#pragma mark  - UI绘制
 - (void)createUI{
     
     //titleLab1
@@ -69,33 +69,39 @@
     //smsCodeAuth:sixCodeAuth
     smsCodeAuthToolView = [SixCodeAuthToolView createAuthToolViewOY:0];
     smsCodeAuthToolView.style = SmsCodeAuthTool;
-    __block SixCodeAuthToolView *selfSmsCodeauthToolView = smsCodeAuthToolView;
     __block SmsCheckViewController *selfBlock = self;
-    smsCodeAuthToolView.successBlock = ^{
+    smsCodeAuthToolView.successBlock = ^(NSString *textfieldText) {
         
-        if (self.smsCheckType == SMS_CHECKTYPE_REGIST) {
-            //输入短信成功后, 进入 设置登录密码
-            selfBlock.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
-            LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
-            setLogpwdVC.phoneNoStr = selfBlock.phoneNoStr;
-            setLogpwdVC.smsCodeString = selfBlock.smsCodeString;
-            [selfBlock.navigationController pushViewController:setLogpwdVC animated:YES];
-            
+        switch (selfBlock.smsCheckType) {
+            case SMS_CHECKTYPE_LOGINT:
+            {
+                //输入短信成功后,进入 登录 流程
+                selfBlock.smsCodeString = textfieldText;
+                [selfBlock loginUser];
+                
+            }
+                break;
+            case SMS_CHECKTYPE_REGIST:
+            {
+                //输入短信成功后, setAuthTools 提交鉴权
+                selfBlock.smsCodeString = textfieldText;
+                [selfBlock setAuthTools];
+            }
+                break;
+            case SMS_CHECKTYPE_REALNAME:
+            {
+                //输入短信成功后,进行实名认证
+                selfBlock.smsCodeString = textfieldText;
+                [selfBlock realUserName];
+            }
+                break;
+                
+            default:
+                break;
         }
-        if (self.smsCheckType == SMS_CHECKTYPE_REALNAME) {
-            //输入短信成功后,进行实名认证
-            selfBlock.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
-            [selfBlock authentication];
-        }
-        if (self.smsCheckType == SMS_CHECKTYPE_LOGINT) {
-            //输入短信成功后,进入 登录 流程
-            selfBlock.smsCodeString = selfSmsCodeauthToolView.noCopyTextfield.text;
-            [selfBlock loginUser];
-            
-        }
-
+        
     };
-    smsCodeAuthToolView.successRequestBlock = ^{
+    smsCodeAuthToolView.successRequestBlock = ^(NSString *textfieldText) {
         //触发 - 获取短信码请求
         [selfBlock shortMsg];
     };
@@ -133,7 +139,7 @@
 
 
 
-#pragma mark -=-=-=-=-=-=  公共业务逻辑   -=-=-=-=-=-=-
+#pragma mark - =-=-=-=-=-=  公共业务逻辑   =-=-=-=-=-=
 #pragma mark  获取短信验证码
 
 - (void)shortMsg
@@ -152,8 +158,6 @@
         [authToolDic setObject:smsDic forKey:@"sms"];
         
         NSString *authTool = [[PayNucHelper sharedInstance] dictionaryToJson:authToolDic];
-        
-        [SDLog logTest:authTool];
         
         paynuc.set("authTool", [authTool UTF8String]);
         
@@ -175,9 +179,9 @@
 }
 
 
-#pragma mark -  -=-=-=-=-=-=  用户登录模式  -=-=-=-=-=-=-
+#pragma mark - =-=-=-=-=-=  用户登录模式  =-=-=-=-=-=
 
-#pragma mark - 用户登录
+#pragma mark 用户登录
 - (void)loginUser
 {
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
@@ -186,16 +190,17 @@
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         //校验手机验证码
+        NSMutableArray *authToolArr = [NSMutableArray arrayWithArray:self.authToolArray];
         NSMutableDictionary *authToolsDic2 = [[NSMutableDictionary alloc] init];
         [authToolsDic2 setValue:@"sms" forKey:@"type"];
         NSMutableDictionary *smsDic = [[NSMutableDictionary alloc] init];
         [smsDic setValue:self.phoneNoStr forKey:@"phoneNo"];
         [smsDic setValue:self.smsCodeString forKey:@"code"];
         [authToolsDic2 setObject:smsDic forKey:@"sms"];
-        [self.authToolArray addObject:authToolsDic2];
+        [authToolArr addObject:authToolsDic2];
         
         
-        NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:self.authToolArray];
+        NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolArr];
         NSString *userinfo = self.userInfo;
         paynuc.set("authTools", [authTools UTF8String]);
         paynuc.set("userInfo", [userinfo UTF8String]);
@@ -208,13 +213,15 @@
                 [CommParameter sharedInstance].userInfo = [NSString stringWithUTF8String:paynuc.get("userInfo").c_str()];
                 NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
                 [CommParameter sharedInstance].avatar = [userInfoDic objectForKey:@"avatar"];
-                [CommParameter sharedInstance].realNameFlag = [[userInfoDic objectForKey:@"realNameFlag"] boolValue];
                 [CommParameter sharedInstance].userRealName = [userInfoDic objectForKey:@"userRealName"];
                 [CommParameter sharedInstance].userName = [userInfoDic objectForKey:@"userName"];
                 [CommParameter sharedInstance].phoneNo = [userInfoDic objectForKey:@"phoneNo"];
                 [CommParameter sharedInstance].userId = [userInfoDic objectForKey:@"userId"];
+                [CommParameter sharedInstance].payPassFlag = [[userInfoDic objectForKey:@"payPassFlag"] boolValue];
+                [CommParameter sharedInstance].realNameFlag = [[userInfoDic objectForKey:@"realNameFlag"] boolValue];
                 [CommParameter sharedInstance].safeQuestionFlag = [[userInfoDic objectForKey:@"safeQuestionFlag"] boolValue];
                 [CommParameter sharedInstance].nick = [userInfoDic objectForKey:@"nick"];
+                
                 [self updateUserData];
                 
             }];
@@ -331,6 +338,7 @@
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
                 //登陆成功:
+                [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
                 [self dismissViewControllerAnimated:YES completion:nil];
                 
             }];
@@ -340,14 +348,90 @@
     }];
 }
 
+#pragma mark - =-=-=-=-=-=  用户注册模式   =-=-=-=-=-=
+#pragma mark 提交注册鉴权
+- (void)setAuthTools{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        //校验手机验证码
+        NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
+        NSMutableDictionary *authToolsDic = [[NSMutableDictionary alloc] init];
+        [authToolsDic setValue:@"sms" forKey:@"type"];
+        NSMutableDictionary *smsDic = [[NSMutableDictionary alloc] init];
+        [smsDic setValue:self.phoneNoStr forKey:@"phoneNo"];
+        [smsDic setValue:self.smsCodeString forKey:@"code"];
+        [authToolsDic setObject:smsDic forKey:@"sms"];
+        [authToolsArray1 addObject:authToolsDic];
+        NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
+        
+        paynuc.set("authTools", [authTools UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                //校验用户
+                [self checkUser];
+            }];
+           
+        }];
+        if (error) return ;
+        
+    }];
+    
+}
+
+#pragma mark 校验用户
+- (void)checkUser{
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        //验证用户数否存在
+        NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
+        [userInfoDic setValue:self.phoneNoStr forKey:@"userName"];
+        NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
+        
+        paynuc.set("userInfo", [userInfo UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/checkUser/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                //跳转设置登陆密码
+                LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
+                setLogpwdVC.phoneNoStr = self.phoneNoStr;
+                setLogpwdVC.smsCodeString = self.smsCodeString;
+                [self.navigationController pushViewController:setLogpwdVC animated:YES];
+                
+            }];
+        }];
+        if (error) return ;
+
+        
+    }];
+
+}
 
 
-#pragma mark -=-=-=-=-=-=  用户实名模式   -=-=-=-=-=-=-
-#pragma mark - 用户实名
+#pragma mark - =-=-=-=-=-=  用户实名模式   =-=-=-=-=-=-
+#pragma mark 用户实名
 /**
  *@brief 实名
  */
-- (void)authentication
+- (void)realUserName
 {
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;

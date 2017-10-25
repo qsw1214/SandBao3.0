@@ -41,18 +41,26 @@
     
     //禁止输入空格且警告
     if ([string isEqualToString:@" "]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //超过18长度不能再输入且警告提示
     if (textField.text.length >=18 && ![string isEqualToString:@""]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     ////限制身份证键盘输入
     if (![self restrictionwithTypeStr:IDCardVerifi string:string]) {
-        _errorBlock();
+        [self showTip];
         return NO;
+    }
+    
+    //实时获取输入的框内的text,校验后返回
+    NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (currentText.length >= 15 && currentText.length <= 18) {
+        if ([self validateIdentityCard:currentText] && currentText.length > 0) {
+            _successBlock(currentText);
+        }
     }
     
     return YES;
@@ -74,9 +82,9 @@
     
     if (((![self validateIdentityCard:textField.text]) || !(textField.text.length>=15 && textField.text.length<=18)) && (textField.text.length>0)) {
         [self deleteErrorTextAnimation:textField];
-        _errorBlock();
+        [self showTip];
     }else if([self validateIdentityCard:textField.text] && textField.text>0){
-        _successBlock();
+        _successBlock(textField.text);
     }
 }
 

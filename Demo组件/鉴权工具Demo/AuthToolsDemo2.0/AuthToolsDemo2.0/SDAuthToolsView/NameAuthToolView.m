@@ -34,9 +34,6 @@
     }return self;
     
 }
-
-
-
 #define OnlyChineseCharacterVerifi @"0123456789./*-+~!@#$%^&()_+-=,./;'[]{}:<>?`，。、？！‘“：；【】{}·~！……——“”<>《》%﹪。？！、；#＠～:,!?.*|……·＊－＝﹤︳`∕"
 #pragma - mark textfiledDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -83,7 +80,7 @@
     if (!(textField.text.length>=2 && textField.text.length<=6) && (textField.text.length>0)) {
         [self deleteErrorTextAnimation:textField];
         [self showTip];
-    }else if(textField.text>0){
+    }else if(textField.text.length>0){
         _successBlock(textField.text);
     }
 }

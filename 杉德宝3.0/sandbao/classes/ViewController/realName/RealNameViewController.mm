@@ -73,19 +73,19 @@
      [self createUI];
 }
 
-#pragma - mark 重写父类-baseScrollView设置
+#pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, SCREEN_WIDTH, SCREEN_HEIGHT-UPDOWNSPACE_20);
     
 }
-#pragma - mark 重写父类-导航设置方法
+#pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.hidden = YES;
     
 }
-#pragma - mark 重写父类-点击方法集合
+#pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     if (btn.tag == BTN_TAG_SHOWBANKLIST) {
         NSLog(@"点击了 支持银行 按钮");
@@ -109,7 +109,7 @@
     }
 }
 
-#pragma - mark  UI绘制
+#pragma mark  - UI绘制
 - (void)createUI{
     
     //titleLab1
@@ -125,13 +125,9 @@
     NameAuthToolView *nameAuthToolView = [NameAuthToolView createAuthToolViewOY:0];
     nameAuthToolView.tip.text = @"请输入真实有效姓名";
     nameAuthToolView.textfiled.text = SHOWTOTEST(@"刘斐斐");
-    __block NameAuthToolView *selfnameAuthToolView = nameAuthToolView;
-    nameAuthToolView.successBlock = ^{
-        realNameStr = selfnameAuthToolView.textfiled.text;
-        
-    };
-    nameAuthToolView.errorBlock = ^{
-        [selfnameAuthToolView showTip];
+    realNameStr = SHOWTOTEST(@"刘斐斐");
+    nameAuthToolView.successBlock = ^(NSString *textfieldText) {
+        realNameStr = textfieldText;
     };
     [self.baseScrollView addSubview:nameAuthToolView];
     
@@ -139,13 +135,9 @@
     IdentityAuthToolView *identityAuthToolView = [IdentityAuthToolView createAuthToolViewOY:0];
     identityAuthToolView.tip.text = @"请输入有效身份证件号";
     identityAuthToolView.textfiled.text = SHOWTOTEST(@"320981199001053212");
-    __block IdentityAuthToolView *selfIdentityAuthToolView = identityAuthToolView;
-    identityAuthToolView.successBlock = ^{
-        identityNoStr = selfIdentityAuthToolView.textfiled.text;
-        
-    };
-    identityAuthToolView.errorBlock = ^{
-        [selfIdentityAuthToolView showTip];
+    identityNoStr = SHOWTOTEST(@"320981199001053212");
+    identityAuthToolView.successBlock = ^(NSString *textfieldText) {
+        identityNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:identityAuthToolView];
     
@@ -153,13 +145,9 @@
     cardNoAuthToolView = [CardNoAuthToolView createAuthToolViewOY:0];
     cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
     cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6217001210062891245");
-    __block CardNoAuthToolView *selfcardNoAuthToolView = cardNoAuthToolView;
-    cardNoAuthToolView.successBlock = ^{
-        bankCardNoStr = selfcardNoAuthToolView.textfiled.text;
-        
-    };
-    cardNoAuthToolView.errorBlock = ^{
-        [selfcardNoAuthToolView showTip];
+    bankCardNoStr = SHOWTOTEST(@"6217001210062891245");
+    cardNoAuthToolView.successBlock = ^(NSString *textfieldText) {
+        bankCardNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:cardNoAuthToolView];
     
@@ -225,13 +213,8 @@
     PhoneAuthToolView *bankPhoneNoAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     bankPhoneNoAuthToolView.titleLab.text = @"银行预留手机号";
     bankPhoneNoAuthToolView.tip.text = @"请输入正确的银行预留手机号";
-    __block PhoneAuthToolView *selfPhoneAuthToolView = bankPhoneNoAuthToolView;
-    bankPhoneNoAuthToolView.successBlock = ^{
-        bankPhoneNoStr = selfPhoneAuthToolView.textfiled.text;
-        
-    };
-    bankPhoneNoAuthToolView.errorBlock = ^{
-        [selfPhoneAuthToolView showTip];
+    bankPhoneNoAuthToolView.successBlock = ^(NSString *textfieldText) {
+        bankPhoneNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
 
@@ -241,11 +224,6 @@
     [moreBankListBtn setImage:[UIImage imageNamed:@"general_icon_detail"] forState:UIControlStateNormal];
     CGSize moreBankListBtnSize = [moreBankListBtn sizeThatFits:CGSizeZero];
     [self.baseScrollView addSubview:moreBankListBtn];
-    
-    //保存追加的UI子View
-    appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,moreBankListBtn];
-    
-    
     
     [bankAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
@@ -277,6 +255,9 @@
     CGFloat appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + moreBankListBtn.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
     self.baseScrollView.contentSize = CGSizeMake(self.baseScrollView.contentSize.width, self.baseScrollView.contentSize.height + appendViewHeight);
     
+    //保存追加的UI子View
+    appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,moreBankListBtn];
+    
 }
 
 //删除追加的UI及清空数据
@@ -302,7 +283,7 @@
 }
 
 
-#pragma mark 业务逻辑
+#pragma mark - 业务逻辑
 #pragma mark 查询银行信息
 - (void)queryCardDetail
 {
@@ -338,8 +319,7 @@
                 
                 NSString *payTool = [NSString stringWithUTF8String:paynuc.get("payTool").c_str()];
                 payToolDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:payTool];
-                BOOL fastPayFlag = [[payToolDic objectForKey:@"fastPayFlag"] boolValue];
-                
+
                 NSString *userInfo = [NSString stringWithUTF8String:paynuc.get("userInfo").c_str()];
                 userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:userInfo];
                 
@@ -347,6 +327,7 @@
                 //信用卡
                 if (payTool_authToolsArr.count > 0) {
                     //暂不处理
+                    [Tool showDialog:@"暂不支持信用卡绑定"];
                 }
                 //借记卡
                 else{
@@ -362,7 +343,7 @@
 }
 
 
-#pragma mark - 获取鉴权工具
+#pragma mark 获取鉴权工具
 
 /**
  *@brief 获取鉴权工具

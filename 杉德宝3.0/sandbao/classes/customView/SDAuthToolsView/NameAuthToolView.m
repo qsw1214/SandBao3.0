@@ -34,27 +34,30 @@
     }return self;
     
 }
-
-
-
 #define OnlyChineseCharacterVerifi @"0123456789./*-+~!@#$%^&()_+-=,./;'[]{}:<>?`，。、？！‘“：；【】{}·~！……——“”<>《》%﹪。？！、；#＠～:,!?.*|……·＊－＝﹤︳`∕"
 #pragma - mark textfiledDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     //禁止输入空格且警告
     if ([string isEqualToString:@" "]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //超过6长度不能再输入且警告提示
     if (textField.text.length >=6 && ![string isEqualToString:@""]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     ////限制输入字母数字特殊字符
     if (![self restrictionwithChineseCharTypeStr:OnlyChineseCharacterVerifi string:string]) {
-        _errorBlock();
+        [self showTip];
         return NO;
+    }
+    
+    //实时获取输入的框内的text,校验后返回
+    NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (currentText.length >= 2 && currentText.length <= 6) {
+        _successBlock(currentText);
     }
     
     return YES;
@@ -76,9 +79,9 @@
     
     if (!(textField.text.length>=2 && textField.text.length<=6) && (textField.text.length>0)) {
         [self deleteErrorTextAnimation:textField];
-        _errorBlock();
-    }else if(textField.text>0){
-        _successBlock();
+        [self showTip];
+    }else if(textField.text.length>0){
+        _successBlock(textField.text);
     }
 }
 
@@ -97,19 +100,5 @@
         textField.text = @"";
     }];
 }
-
-/**
- *@brief 数字和字母组合密码
- *@param passWord 字符串 参数：密码
- *@return 返回BOOL
- */
-- (BOOL)validatePasswordNumAndLetter:(NSString *)passWord
-{
-    NSString *passWordRegex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]+$";
-    NSPredicate *passWordPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",passWordRegex];
-    return [passWordPredicate evaluateWithObject:passWord];
-}
-
-
 
 @end

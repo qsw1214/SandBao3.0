@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *phoneNo; //手机号
 @property (nonatomic, strong) NSString *userId;  //用户id
 @property (nonatomic, assign) BOOL realNameFlag; //实名认证flag
+@property (nonatomic, assign) BOOL payPassFlag;  //是否设置支付密码flag
 @property (nonatomic, strong) NSArray *ownPayToolsArray; //我方支付工具组
 @property (nonatomic, strong) NSString *userInfo; //用户信息
 @property (nonatomic, assign) BOOL safeQuestionFlag; //开通快捷flag

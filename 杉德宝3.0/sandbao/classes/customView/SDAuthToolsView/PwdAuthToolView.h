@@ -11,24 +11,17 @@
 /**
  输入框内容通过回调
  */
-typedef void(^TextSuccessBlock)();
+typedef void(^TextSuccessBlock_PwdAuthTool)(NSString *textfieldText);
 
-/**
- 输入框内容校验不通过回调
- */
-typedef void(^TextErrorBlock)();
 
 @interface PwdAuthToolView : AuthToolBaseView
 
 /**
  输入框内容通过回调
  */
-@property (nonatomic, copy) TextSuccessBlock successBlock;
+@property (nonatomic, copy) TextSuccessBlock_PwdAuthTool successBlock;
 
-/**
- 输入框内容校验不通过回调
- */
-@property (nonatomic, copy) TextErrorBlock errorBlock;
+
 
 
 @end

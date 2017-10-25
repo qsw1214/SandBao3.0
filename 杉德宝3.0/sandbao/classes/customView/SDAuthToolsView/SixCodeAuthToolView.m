@@ -70,6 +70,7 @@
     _style = style;
     
     if (_style == SmsCodeAuthTool) {
+        //短信模式禁止交互
         noCopyTextfield.userInteractionEnabled = NO;
         self.titleLab.text = @"验证码";
         
@@ -184,6 +185,8 @@
             //回调短信码
             if (_style == SmsCodeAuthTool) {
                 self.successBlock(textfiled.text);
+                //回调以后,禁止用户交互
+                noCopyTextfield.userInteractionEnabled = NO;
             }
             //回调支付密码
             if (_style == PayCodeAuthTool) {
@@ -213,7 +216,15 @@
         [self shortMsgCodeCountDown];
         
         //短信码请求事件回调
-        self.successRequestBlock();
+        self.successRequestBlock(@"");
+        
+        //清空六个lab
+        for (UILabel *subLab in self.codeLabArr) {
+            subLab.text = @"";
+        }
+        //清空 noCopyTextfield
+        noCopyTextfield.text = nil;
+        
     }
     
     

@@ -11,25 +11,17 @@
 /**
  输入框内容通过回调
  */
-typedef void(^TextSuccessBlock)();
+typedef void(^TextSuccessBlock_IdentityAuthTool)(NSString *textfieldText);
 
-/**
- 输入框内容校验不通过回调
- */
-typedef void(^TextErrorBlock)();
 
 @interface IdentityAuthToolView : AuthToolBaseView
-
 
 /**
  输入框内容通过回调
  */
-@property (nonatomic, copy) TextSuccessBlock successBlock;
+@property (nonatomic, copy) TextSuccessBlock_IdentityAuthTool successBlock;
 
-/**
- 输入框内容校验不通过回调
- */
-@property (nonatomic, copy) TextErrorBlock errorBlock;
+
 
 
 @end

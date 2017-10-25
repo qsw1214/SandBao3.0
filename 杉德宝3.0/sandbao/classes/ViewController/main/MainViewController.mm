@@ -44,12 +44,12 @@
     [super viewDidLoad];
     
 }
-#pragma - mark 重写父类-baseScrollView设置
+#pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     
 }
-#pragma - mark 重写父类-导航设置方法
+#pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
@@ -68,7 +68,7 @@
     
     
 }
-#pragma - mark 重写父类-点击方法集合
+#pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
     
@@ -93,7 +93,8 @@
     
 
 }
-#pragma mark - 明登陆
+#pragma mark - 业务逻辑
+#pragma mark 明登陆
 
 - (void)pwdLogin{
     //如果走明登陆,则数据库状态则全部要为无激活用户状态 (1为不活跃,0位活跃且只有一个活跃用户)
@@ -106,14 +107,8 @@
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         [self presentViewController:navLogin animated:YES completion:nil];
     }
-    
-//    RealNameViewController *mLoginViewController = [[RealNameViewController
-//                                                     alloc] init];
-//    [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-//    UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-//    [self presentViewController:navLogin animated:YES completion:nil];
 }
-#pragma mark - 暗登陆
+#pragma mark 暗登陆
 - (void)noPwdLogin{
     
     NSMutableDictionary *userInfoDic = [SDSqlite selectOneData:[SqliteHelper shareSqliteHelper].sandBaoDB tableName:@"usersconfig" columnArray:USERSCONFIG_ARR whereColumnString:@"active" whereParamString:@"0"];
@@ -244,8 +239,12 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
+                //实名
                 RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-                [self.navigationController pushViewController:realNameVC animated:YES];
+                [realNameVC setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:realNameVC];
+                [self presentViewController:nav animated:YES completion:nil];
+                
                 
             }];
         }];

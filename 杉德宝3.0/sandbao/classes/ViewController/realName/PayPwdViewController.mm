@@ -46,12 +46,12 @@
 }
 
 
-#pragma - mark 重写父类-baseScrollView设置
+#pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     
 }
-#pragma - mark 重写父类-导航设置方法
+#pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
     
@@ -63,7 +63,7 @@
     };
     
 }
-#pragma - mark 重写父类-点击方法集合
+#pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_NEXT) {
@@ -85,7 +85,7 @@
 }
 
 
-#pragma - mark  UI绘制
+#pragma mark  - UI绘制
 - (void)createUI{
     
     
@@ -106,22 +106,20 @@
     //payCodeAuthTool:sixCodeAuthToolView
     SixCodeAuthToolView *payCodeAuthTool = [SixCodeAuthToolView createAuthToolViewOY:0];
     payCodeAuthTool.style = PayCodeAuthTool;
-    __block SixCodeAuthToolView *selfPayCodeAuthTool = payCodeAuthTool;
-    payCodeAuthTool.successBlock = ^{
- 
+    payCodeAuthTool.successBlock = ^(NSString *textfieldText) {
+        
         if (sixCodeStr.length == 0) {
-            sixCodeStr = selfPayCodeAuthTool.noCopyTextfield.text;
+            sixCodeStr = textfieldText;
             SIX_CODE_STATE = SIX_CODE_STATE_INPUT_AGAIN;
         }
         else if (sixCodeStr.length > 0) {
-            if ([sixCodeStr isEqualToString:selfPayCodeAuthTool.noCopyTextfield.text]) {
+            if ([sixCodeStr isEqualToString:textfieldText]) {
                 SIX_CODE_STATE = SIX_CODE_STATE_CHECK_OK;
             }else{
                 SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
                 sixCodeStr = nil;
             }
         }
-
     };
     [self.baseScrollView addSubview:payCodeAuthTool];
     
@@ -158,7 +156,7 @@
 }
 
 
-#pragma mark 业务逻辑
+#pragma mark - 业务逻辑
 #pragma mark 查询设置支付密码-鉴权工具
 - (void)getRegAuthTools{
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
@@ -225,6 +223,8 @@
                 [self.HUD hidden];
                 
                 [Tool showDialog:@"支付密码设置成功" defulBlock:^{
+                    //dismiss回主页
+                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }];
                 

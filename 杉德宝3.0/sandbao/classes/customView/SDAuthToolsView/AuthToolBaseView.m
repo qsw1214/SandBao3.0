@@ -94,6 +94,9 @@
 }
 
 
+
+
+
 - (void)showTip{
     
     tip.alpha = 1.f;

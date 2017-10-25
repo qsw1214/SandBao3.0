@@ -46,19 +46,19 @@
     
 }
 
-#pragma - mark 重写父类-baseScrollView设置
+#pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     self.baseScrollView.scrollEnabled = YES;
     self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, SCREEN_WIDTH, SCREEN_HEIGHT-UPDOWNSPACE_20);
 }
 
-#pragma - mark 重写父类-导航设置方法
+#pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.hidden = YES;
 }
-#pragma - mark 重写父类-点击方法集合
+#pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_FORGETPWD) {
@@ -86,7 +86,7 @@
     [CommParameter sharedInstance].userId = nil;
 }
 
-#pragma - mark  UI绘制
+#pragma mark  - UI绘制
 - (void)createUI{
     
     //titleLab1
@@ -102,12 +102,8 @@
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
     phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474688");
-    __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
-    phoneAuthToolView.successBlock = ^{
-        phoneNum = selfPhoneAuthToolView.textfiled.text;
-    };
-    phoneAuthToolView.errorBlock = ^{
-        [selfPhoneAuthToolView showTip];
+    phoneAuthToolView.successBlock = ^(NSString *textfieldText) {
+        phoneNum = textfieldText;
     };
     [self.baseScrollView addSubview:phoneAuthToolView];
     
@@ -115,12 +111,8 @@
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
     pwdAuthToolView.textfiled.text = SHOWTOTEST(@"qqqqqq111");
-    __block PwdAuthToolView *selfpwdAuthToolView = pwdAuthToolView;
-    pwdAuthToolView.successBlock = ^{
-        loginPwd = selfpwdAuthToolView.textfiled.text;
-    };
-    pwdAuthToolView.errorBlock = ^{
-        [selfpwdAuthToolView showTip];
+    pwdAuthToolView.successBlock = ^(NSString *textfieldText) {
+        loginPwd = textfieldText;
     };
     [self.baseScrollView addSubview:pwdAuthToolView];
     
@@ -193,8 +185,8 @@
     
 }
 
-#pragma mark 业务逻辑
-#pragma mark - 获取登陆鉴权工具
+#pragma mark - 业务逻辑
+#pragma mark 获取登陆鉴权工具
 
 /**
  *@brief 获取鉴权工具
@@ -298,7 +290,7 @@
 }
 
 
-#pragma mark - 用户登陆
+#pragma mark 用户登陆
 /**
  *@brief 用户登录
  */

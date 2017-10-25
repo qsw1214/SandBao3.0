@@ -36,24 +36,33 @@
 }
 
 
+
 #define OnlyNumberVerifi @"0987654321"
 #pragma - mark textfiledDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
     //禁止输入空格且警告
     if ([string isEqualToString:@" "]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //超过19长度不能再输入且警告提示
     if (textField.text.length >=19 && ![string isEqualToString:@""]) {
-        _errorBlock();
+        [self showTip];
         return NO;
     }
     //限制输入纯数字
     if (![self restrictionwithTypeStr:OnlyNumberVerifi string:string]) {
-        _errorBlock();
+        [self showTip];
         return NO;
+    }
+    
+    //实时获取输入的框内的text,校验后返回
+    NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (currentText.length >= 16 && currentText.length <= 19) {
+        if ([self validateBankCard:currentText] && currentText.length > 0) {
+            _successBlock(currentText);
+        }
     }
     
     return YES;
@@ -73,13 +82,12 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-//    if (((![self validateBankCard:textField.text]) || !(textField.text.length>=16 && textField.text.length<=19)) && (textField.text.length>0)) {
-//        [self deleteErrorTextAnimation:textField];
-//        _errorBlock();
-//    }else if([self validateBankCard:textField.text] && textField.text>0){
-//        _successBlock();
-//    }
-    _successBlock();
+    if (((![self validateBankCard:textField.text]) || !(textField.text.length>=16 && textField.text.length<=19)) && (textField.text.length>0)) {
+        [self deleteErrorTextAnimation:textField];
+        [self showTip];
+    }else if([self validateBankCard:textField.text] && textField.text>0){
+        _successBlock(textField.text);
+    }
 }
 
 

@@ -127,22 +127,6 @@
 
 
 
-//限制身份证键盘输入
-#define IDCardVerifi @"0987654321Xx"
-
-//限制输入数字小数点
-#define OnlyNumber_pointVerifi @"0987654321."
-
-//限制输入纯数字
-#define OnlyNumberVerifi @"0987654321"
-
-//限制输入纯数字纯字母
-#define OnlyNum_letterVerifi @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-
-//限制输入字母数字特殊字符
-#define OnlyChineseCharacterVerifi @"0123456789./*-+~!@#$%^&()_+-=,./;'[]{}:<>?`，。、？！‘“：；【】{}·~！……——“”<>《》%﹪。？！、；#＠～:,!?.*|……·＊－＝﹤︳`∕"
-
-
 
 //mqtt端口/地址
 #define kIP @"172.28.250.63"
@@ -198,9 +182,9 @@
 
 //用哪个开哪个
 //显示给开发人员 (显示输入数据)
-#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
+//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
 //显示给测试人员 (隐藏输入数据)
-//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
+#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
 
 
 

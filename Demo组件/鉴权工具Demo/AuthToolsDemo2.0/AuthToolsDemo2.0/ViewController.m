@@ -42,14 +42,14 @@
 //    //银行选择测试
 //    [self testThree];
 //
-    //手机号的测试
-    [self testFour];
+//    //手机号的测试
+//    [self testFour];
 //
 //    //密码框的测试
 //    [self testFiv];
 //
-//    //姓名框的测试
-//     [self testSix];
+    //姓名框的测试
+     [self testSix];
 //
 //    //证件号的测试
 //    [self testSev];

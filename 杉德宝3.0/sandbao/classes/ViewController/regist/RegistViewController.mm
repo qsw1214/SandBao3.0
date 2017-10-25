@@ -25,20 +25,28 @@
 @synthesize regAuthToolsArray;
 
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //流程每次进入均刷新
+    //注册流程开始
+    [self getAuthToolsRegAuthTools];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self createUI];
     
-    [self load];
+    
     
 }
-#pragma - mark 重写父类-baseScrollView设置
+#pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     
 }
-#pragma - mark 重写父类-导航设置方法
+#pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.rightImgStr = nil;
@@ -48,7 +56,7 @@
         [weakself.navigationController popViewControllerAnimated:YES];
     };
 }
-#pragma - mark 重写父类-点击方法集合
+#pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_NEXT) {
@@ -69,7 +77,7 @@
     
 }
 
-#pragma - mark  UI绘制
+#pragma mark  - UI绘制
 - (void)createUI{
     
     //titleLab1
@@ -83,12 +91,8 @@
     phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474688");
     phoneAuthToolView.textfiled.placeholder = @"输入手机号";
     phoneAuthToolView.tip.text = @"请输入正确手机号";
-    __block PhoneAuthToolView *selfPhoneAuthToolView = phoneAuthToolView;
-    phoneAuthToolView.successBlock = ^{
-        phoneNoStr = selfPhoneAuthToolView.textfiled.text;
-    };
-    phoneAuthToolView.errorBlock = ^{
-        [selfPhoneAuthToolView showTip];
+    phoneAuthToolView.successBlock = ^(NSString *textfieldText) {
+        phoneNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:phoneAuthToolView];
     
@@ -141,9 +145,9 @@
 }
 
 
-#pragma mark 业务逻辑
-#pragma mark - 获取鉴权工具(authTools)/待注册鉴权工具(regAuthTools)
-- (void)load
+#pragma mark - 业务逻辑
+#pragma mark 获取鉴权工具(authTools)/待注册鉴权工具(regAuthTools)
+- (void)getAuthToolsRegAuthTools
 {
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;

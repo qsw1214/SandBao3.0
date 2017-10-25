@@ -16,11 +16,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    [self setBaseInfo];
+    [self showError];
     
     
-    
-    
-    
+
+}
+#pragma mark - 重写父类-baseScrollView设置
+- (void)setBaseScrollview{
+    [super setBaseScrollview];
+    self.baseScrollView.frame = [UIScreen mainScreen].bounds;
+}
+#pragma mark - 重写父类-导航设置方法
+- (void)setNavCoverView{
+    [super setNavCoverView];
+    self.navCoverView.hidden = YES;
+}
+
+- (void)setBaseInfo{
     //修改状态栏白色
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
@@ -65,21 +79,8 @@
         make.size.mas_equalTo(versionLabsize1);
     }];
     
-    [self showError];
     
-    
-
 }
-#pragma - mark 重写父类-baseScrollView设置
-- (void)setBaseScrollview{
-    [super setBaseScrollview];
-}
-#pragma - mark 重写父类-导航设置方法
-- (void)setNavCoverView{
-    [super setNavCoverView];
-    self.navCoverView.hidden = YES;
-}
-
 - (void)showError{
     
     dispatch_async(dispatch_get_main_queue(), ^{

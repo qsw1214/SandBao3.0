@@ -16,7 +16,6 @@
 		280621E91EF8F05100346D1A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E81EF8F05100346D1A /* AVFoundation.framework */; };
 		280621F31EF8F89600346D1A /* loading-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280621F21EF8F89600346D1A /* loading-667h@2x.png */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
-		281747661F96E25B007D4D3A /* AuthLoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747591F96E25B007D4D3A /* AuthLoginViewController.mm */; };
 		281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475B1F96E25B007D4D3A /* LoginViewController.mm */; };
 		281747681F96E25B007D4D3A /* BaseViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475E1F96E25B007D4D3A /* BaseViewController.mm */; };
 		281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747601F96E25B007D4D3A /* ErrorMainViewController.mm */; };
@@ -138,25 +137,6 @@
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
 		28574C5B1F4E72BF0003090D /* libpaynuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28574C5A1F4E72BF0003090D /* libpaynuc.a */; };
-		2857CE541F98960200874A7C /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE371F98960200874A7C /* AuthToolBaseView.m */; };
-		2857CE551F98960200874A7C /* BankAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE391F98960200874A7C /* BankAuthToolView.m */; };
-		2857CE561F98960200874A7C /* CardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE3B1F98960200874A7C /* CardNoAuthToolView.m */; };
-		2857CE571F98960200874A7C /* IdentityAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE3D1F98960200874A7C /* IdentityAuthToolView.m */; };
-		2857CE581F98960200874A7C /* list_icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE3F1F98960200874A7C /* list_icon_more@2x.png */; };
-		2857CE591F98960200874A7C /* list_icon_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE401F98960200874A7C /* list_icon_more@3x.png */; };
-		2857CE5A1F98960200874A7C /* login_icon_eye_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE411F98960200874A7C /* login_icon_eye_default@2x.png */; };
-		2857CE5B1F98960200874A7C /* login_icon_eye_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE421F98960200874A7C /* login_icon_eye_default@3x.png */; };
-		2857CE5C1F98960200874A7C /* login_icon_eye_lighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE431F98960200874A7C /* login_icon_eye_lighted@2x.png */; };
-		2857CE5D1F98960200874A7C /* login_icon_eye_lighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE441F98960200874A7C /* login_icon_eye_lighted@3x.png */; };
-		2857CE5E1F98960200874A7C /* login_list_icon_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE451F98960200874A7C /* login_list_icon_closed@2x.png */; };
-		2857CE5F1F98960200874A7C /* login_list_icon_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2857CE461F98960200874A7C /* login_list_icon_closed@3x.png */; };
-		2857CE601F98960200874A7C /* NameAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE481F98960200874A7C /* NameAuthToolView.m */; };
-		2857CE611F98960200874A7C /* PhoneAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE4A1F98960200874A7C /* PhoneAuthToolView.m */; };
-		2857CE621F98960200874A7C /* PwdAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE4C1F98960200874A7C /* PwdAuthToolView.m */; };
-		2857CE631F98960200874A7C /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE4E1F98960200874A7C /* SixCodeAuthToolView.m */; };
-		2857CE641F98960200874A7C /* BankPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE511F98960200874A7C /* BankPickerView.m */; };
-		2857CE651F98960200874A7C /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE531F98960200874A7C /* NoCopyTextField.m */; };
-		286922F81F98ADAF007C46B0 /* PayPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286922F71F98ADAF007C46B0 /* PayPwdViewController.mm */; };
 		286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
@@ -184,6 +164,25 @@
 		288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421BA1F8E0A2100082E7C /* GzipUtility.m */; };
 		288421C01F8E0A7800082E7C /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421BF1F8E0A7800082E7C /* Tool.m */; };
 		2885F4F91E97587E0064411B /* VerticalLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2885F4F81E97587E0064411B /* VerticalLineView.m */; };
+		28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B5E1FA01FA8004CFC95 /* AuthToolBaseView.m */; };
+		28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B601FA01FA8004CFC95 /* BankAuthToolView.m */; };
+		28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B621FA01FA8004CFC95 /* CardNoAuthToolView.m */; };
+		28981B7E1FA01FA8004CFC95 /* IdentityAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B641FA01FA8004CFC95 /* IdentityAuthToolView.m */; };
+		28981B7F1FA01FA8004CFC95 /* list_icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B661FA01FA8004CFC95 /* list_icon_more@2x.png */; };
+		28981B801FA01FA8004CFC95 /* list_icon_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B671FA01FA8004CFC95 /* list_icon_more@3x.png */; };
+		28981B811FA01FA8004CFC95 /* login_icon_eye_default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B681FA01FA8004CFC95 /* login_icon_eye_default@2x.png */; };
+		28981B821FA01FA8004CFC95 /* login_icon_eye_default@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B691FA01FA8004CFC95 /* login_icon_eye_default@3x.png */; };
+		28981B831FA01FA8004CFC95 /* login_icon_eye_lighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B6A1FA01FA8004CFC95 /* login_icon_eye_lighted@2x.png */; };
+		28981B841FA01FA8004CFC95 /* login_icon_eye_lighted@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B6B1FA01FA8004CFC95 /* login_icon_eye_lighted@3x.png */; };
+		28981B851FA01FA8004CFC95 /* login_list_icon_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B6C1FA01FA8004CFC95 /* login_list_icon_closed@2x.png */; };
+		28981B861FA01FA8004CFC95 /* login_list_icon_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28981B6D1FA01FA8004CFC95 /* login_list_icon_closed@3x.png */; };
+		28981B871FA01FA8004CFC95 /* NameAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B6F1FA01FA8004CFC95 /* NameAuthToolView.m */; };
+		28981B881FA01FA8004CFC95 /* PhoneAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B711FA01FA8004CFC95 /* PhoneAuthToolView.m */; };
+		28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B731FA01FA8004CFC95 /* PwdAuthToolView.m */; };
+		28981B8A1FA01FA8004CFC95 /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B751FA01FA8004CFC95 /* SixCodeAuthToolView.m */; };
+		28981B8B1FA01FA8004CFC95 /* BankPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B781FA01FA8004CFC95 /* BankPickerView.m */; };
+		28981B8C1FA01FA8004CFC95 /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B7A1FA01FA8004CFC95 /* NoCopyTextField.m */; };
+		28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28981BD51FA05EC1004CFC95 /* PayPwdViewController.mm */; };
 		289C0D541F203FBC00360147 /* Easing.c in Sources */ = {isa = PBXBuildFile; fileRef = 289C0D501F203FBC00360147 /* Easing.c */; };
 		289C0D551F203FBC00360147 /* YXEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 289C0D531F203FBC00360147 /* YXEasing.m */; };
 		289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289C0D581F203FE100360147 /* SDSuccessAnimationView.m */; };
@@ -319,8 +318,6 @@
 		280621F21EF8F89600346D1A /* loading-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-667h@2x.png"; sourceTree = "<group>"; };
 		2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+easyFrame.h"; sourceTree = "<group>"; };
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
-		281747581F96E25B007D4D3A /* AuthLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthLoginViewController.h; sourceTree = "<group>"; };
-		281747591F96E25B007D4D3A /* AuthLoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AuthLoginViewController.mm; sourceTree = "<group>"; };
 		2817475A1F96E25B007D4D3A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2817475B1F96E25B007D4D3A /* LoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginViewController.mm; sourceTree = "<group>"; };
 		2817475D1F96E25B007D4D3A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -489,36 +486,6 @@
 		28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentAnimatedTransitioning.m; sourceTree = "<group>"; };
 		2853C5771EE134C100DFF407 /* h5test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = h5test.html; sourceTree = "<group>"; };
 		28574C5A1F4E72BF0003090D /* libpaynuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpaynuc.a; sourceTree = "<group>"; };
-		2857CE361F98960200874A7C /* AuthToolBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthToolBaseView.h; sourceTree = "<group>"; };
-		2857CE371F98960200874A7C /* AuthToolBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthToolBaseView.m; sourceTree = "<group>"; };
-		2857CE381F98960200874A7C /* BankAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAuthToolView.h; sourceTree = "<group>"; };
-		2857CE391F98960200874A7C /* BankAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAuthToolView.m; sourceTree = "<group>"; };
-		2857CE3A1F98960200874A7C /* CardNoAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardNoAuthToolView.h; sourceTree = "<group>"; };
-		2857CE3B1F98960200874A7C /* CardNoAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardNoAuthToolView.m; sourceTree = "<group>"; };
-		2857CE3C1F98960200874A7C /* IdentityAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityAuthToolView.h; sourceTree = "<group>"; };
-		2857CE3D1F98960200874A7C /* IdentityAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityAuthToolView.m; sourceTree = "<group>"; };
-		2857CE3F1F98960200874A7C /* list_icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@2x.png"; sourceTree = "<group>"; };
-		2857CE401F98960200874A7C /* list_icon_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@3x.png"; sourceTree = "<group>"; };
-		2857CE411F98960200874A7C /* login_icon_eye_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_default@2x.png"; sourceTree = "<group>"; };
-		2857CE421F98960200874A7C /* login_icon_eye_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_default@3x.png"; sourceTree = "<group>"; };
-		2857CE431F98960200874A7C /* login_icon_eye_lighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_lighted@2x.png"; sourceTree = "<group>"; };
-		2857CE441F98960200874A7C /* login_icon_eye_lighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_lighted@3x.png"; sourceTree = "<group>"; };
-		2857CE451F98960200874A7C /* login_list_icon_closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@2x.png"; sourceTree = "<group>"; };
-		2857CE461F98960200874A7C /* login_list_icon_closed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@3x.png"; sourceTree = "<group>"; };
-		2857CE471F98960200874A7C /* NameAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameAuthToolView.h; sourceTree = "<group>"; };
-		2857CE481F98960200874A7C /* NameAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameAuthToolView.m; sourceTree = "<group>"; };
-		2857CE491F98960200874A7C /* PhoneAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneAuthToolView.h; sourceTree = "<group>"; };
-		2857CE4A1F98960200874A7C /* PhoneAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneAuthToolView.m; sourceTree = "<group>"; };
-		2857CE4B1F98960200874A7C /* PwdAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PwdAuthToolView.h; sourceTree = "<group>"; };
-		2857CE4C1F98960200874A7C /* PwdAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdAuthToolView.m; sourceTree = "<group>"; };
-		2857CE4D1F98960200874A7C /* SixCodeAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SixCodeAuthToolView.h; sourceTree = "<group>"; };
-		2857CE4E1F98960200874A7C /* SixCodeAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SixCodeAuthToolView.m; sourceTree = "<group>"; };
-		2857CE501F98960200874A7C /* BankPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankPickerView.h; sourceTree = "<group>"; };
-		2857CE511F98960200874A7C /* BankPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankPickerView.m; sourceTree = "<group>"; };
-		2857CE521F98960200874A7C /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
-		2857CE531F98960200874A7C /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
-		286922F61F98ADAF007C46B0 /* PayPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPwdViewController.h; sourceTree = "<group>"; };
-		286922F71F98ADAF007C46B0 /* PayPwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PayPwdViewController.mm; sourceTree = "<group>"; };
 		286922FA1F98AEDE007C46B0 /* SmsCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsCheckViewController.h; sourceTree = "<group>"; };
 		286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SmsCheckViewController.mm; sourceTree = "<group>"; };
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
@@ -573,6 +540,36 @@
 		288421BF1F8E0A7800082E7C /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
 		2885F4F71E97587E0064411B /* VerticalLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticalLineView.h; sourceTree = "<group>"; };
 		2885F4F81E97587E0064411B /* VerticalLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerticalLineView.m; sourceTree = "<group>"; };
+		28981B5D1FA01FA8004CFC95 /* AuthToolBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthToolBaseView.h; sourceTree = "<group>"; };
+		28981B5E1FA01FA8004CFC95 /* AuthToolBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthToolBaseView.m; sourceTree = "<group>"; };
+		28981B5F1FA01FA8004CFC95 /* BankAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAuthToolView.h; sourceTree = "<group>"; };
+		28981B601FA01FA8004CFC95 /* BankAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankAuthToolView.m; sourceTree = "<group>"; };
+		28981B611FA01FA8004CFC95 /* CardNoAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardNoAuthToolView.h; sourceTree = "<group>"; };
+		28981B621FA01FA8004CFC95 /* CardNoAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardNoAuthToolView.m; sourceTree = "<group>"; };
+		28981B631FA01FA8004CFC95 /* IdentityAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityAuthToolView.h; sourceTree = "<group>"; };
+		28981B641FA01FA8004CFC95 /* IdentityAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityAuthToolView.m; sourceTree = "<group>"; };
+		28981B661FA01FA8004CFC95 /* list_icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@2x.png"; sourceTree = "<group>"; };
+		28981B671FA01FA8004CFC95 /* list_icon_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@3x.png"; sourceTree = "<group>"; };
+		28981B681FA01FA8004CFC95 /* login_icon_eye_default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_default@2x.png"; sourceTree = "<group>"; };
+		28981B691FA01FA8004CFC95 /* login_icon_eye_default@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_default@3x.png"; sourceTree = "<group>"; };
+		28981B6A1FA01FA8004CFC95 /* login_icon_eye_lighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_lighted@2x.png"; sourceTree = "<group>"; };
+		28981B6B1FA01FA8004CFC95 /* login_icon_eye_lighted@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_icon_eye_lighted@3x.png"; sourceTree = "<group>"; };
+		28981B6C1FA01FA8004CFC95 /* login_list_icon_closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@2x.png"; sourceTree = "<group>"; };
+		28981B6D1FA01FA8004CFC95 /* login_list_icon_closed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@3x.png"; sourceTree = "<group>"; };
+		28981B6E1FA01FA8004CFC95 /* NameAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameAuthToolView.h; sourceTree = "<group>"; };
+		28981B6F1FA01FA8004CFC95 /* NameAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameAuthToolView.m; sourceTree = "<group>"; };
+		28981B701FA01FA8004CFC95 /* PhoneAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneAuthToolView.h; sourceTree = "<group>"; };
+		28981B711FA01FA8004CFC95 /* PhoneAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneAuthToolView.m; sourceTree = "<group>"; };
+		28981B721FA01FA8004CFC95 /* PwdAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PwdAuthToolView.h; sourceTree = "<group>"; };
+		28981B731FA01FA8004CFC95 /* PwdAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PwdAuthToolView.m; sourceTree = "<group>"; };
+		28981B741FA01FA8004CFC95 /* SixCodeAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SixCodeAuthToolView.h; sourceTree = "<group>"; };
+		28981B751FA01FA8004CFC95 /* SixCodeAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SixCodeAuthToolView.m; sourceTree = "<group>"; };
+		28981B771FA01FA8004CFC95 /* BankPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankPickerView.h; sourceTree = "<group>"; };
+		28981B781FA01FA8004CFC95 /* BankPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankPickerView.m; sourceTree = "<group>"; };
+		28981B791FA01FA8004CFC95 /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
+		28981B7A1FA01FA8004CFC95 /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
+		28981BD51FA05EC1004CFC95 /* PayPwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PayPwdViewController.mm; sourceTree = "<group>"; };
+		28981BD61FA05EC1004CFC95 /* PayPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayPwdViewController.h; sourceTree = "<group>"; };
 		289C0D501F203FBC00360147 /* Easing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Easing.c; sourceTree = "<group>"; };
 		289C0D511F203FBC00360147 /* Easing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Easing.h; sourceTree = "<group>"; };
 		289C0D521F203FBC00360147 /* YXEasing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YXEasing.h; sourceTree = "<group>"; };
@@ -801,7 +798,6 @@
 			isa = PBXGroup;
 			children = (
 				286922F91F98AEBA007C46B0 /* smsCheck */,
-				286922F51F98AD80007C46B0 /* payPassword */,
 				281747B31F9847AF007D4D3A /* realName */,
 				281747631F96E25B007D4D3A /* regist */,
 				281747571F96E25B007D4D3A /* login */,
@@ -815,8 +811,6 @@
 			children = (
 				2817475A1F96E25B007D4D3A /* LoginViewController.h */,
 				2817475B1F96E25B007D4D3A /* LoginViewController.mm */,
-				281747581F96E25B007D4D3A /* AuthLoginViewController.h */,
-				281747591F96E25B007D4D3A /* AuthLoginViewController.mm */,
 			);
 			path = login;
 			sourceTree = "<group>";
@@ -850,6 +844,8 @@
 			children = (
 				281747B41F9847DB007D4D3A /* RealNameViewController.h */,
 				281747B51F9847DB007D4D3A /* RealNameViewController.mm */,
+				28981BD61FA05EC1004CFC95 /* PayPwdViewController.h */,
+				28981BD51FA05EC1004CFC95 /* PayPwdViewController.mm */,
 			);
 			path = realName;
 			sourceTree = "<group>";
@@ -1116,66 +1112,6 @@
 			path = SDViewControllerAnimatedTransitioning;
 			sourceTree = "<group>";
 		};
-		2857CE351F98960200874A7C /* SDAuthToolsView */ = {
-			isa = PBXGroup;
-			children = (
-				2857CE3E1F98960200874A7C /* image */,
-				2857CE361F98960200874A7C /* AuthToolBaseView.h */,
-				2857CE371F98960200874A7C /* AuthToolBaseView.m */,
-				2857CE381F98960200874A7C /* BankAuthToolView.h */,
-				2857CE391F98960200874A7C /* BankAuthToolView.m */,
-				2857CE3A1F98960200874A7C /* CardNoAuthToolView.h */,
-				2857CE3B1F98960200874A7C /* CardNoAuthToolView.m */,
-				2857CE3C1F98960200874A7C /* IdentityAuthToolView.h */,
-				2857CE3D1F98960200874A7C /* IdentityAuthToolView.m */,
-				2857CE471F98960200874A7C /* NameAuthToolView.h */,
-				2857CE481F98960200874A7C /* NameAuthToolView.m */,
-				2857CE491F98960200874A7C /* PhoneAuthToolView.h */,
-				2857CE4A1F98960200874A7C /* PhoneAuthToolView.m */,
-				2857CE4B1F98960200874A7C /* PwdAuthToolView.h */,
-				2857CE4C1F98960200874A7C /* PwdAuthToolView.m */,
-				2857CE4D1F98960200874A7C /* SixCodeAuthToolView.h */,
-				2857CE4E1F98960200874A7C /* SixCodeAuthToolView.m */,
-				2857CE4F1F98960200874A7C /* View */,
-			);
-			path = SDAuthToolsView;
-			sourceTree = "<group>";
-		};
-		2857CE3E1F98960200874A7C /* image */ = {
-			isa = PBXGroup;
-			children = (
-				2857CE3F1F98960200874A7C /* list_icon_more@2x.png */,
-				2857CE401F98960200874A7C /* list_icon_more@3x.png */,
-				2857CE411F98960200874A7C /* login_icon_eye_default@2x.png */,
-				2857CE421F98960200874A7C /* login_icon_eye_default@3x.png */,
-				2857CE431F98960200874A7C /* login_icon_eye_lighted@2x.png */,
-				2857CE441F98960200874A7C /* login_icon_eye_lighted@3x.png */,
-				2857CE451F98960200874A7C /* login_list_icon_closed@2x.png */,
-				2857CE461F98960200874A7C /* login_list_icon_closed@3x.png */,
-			);
-			path = image;
-			sourceTree = "<group>";
-		};
-		2857CE4F1F98960200874A7C /* View */ = {
-			isa = PBXGroup;
-			children = (
-				2857CE501F98960200874A7C /* BankPickerView.h */,
-				2857CE511F98960200874A7C /* BankPickerView.m */,
-				2857CE521F98960200874A7C /* NoCopyTextField.h */,
-				2857CE531F98960200874A7C /* NoCopyTextField.m */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		286922F51F98AD80007C46B0 /* payPassword */ = {
-			isa = PBXGroup;
-			children = (
-				286922F61F98ADAF007C46B0 /* PayPwdViewController.h */,
-				286922F71F98ADAF007C46B0 /* PayPwdViewController.mm */,
-			);
-			path = payPassword;
-			sourceTree = "<group>";
-		};
 		286922F91F98AEBA007C46B0 /* smsCheck */ = {
 			isa = PBXGroup;
 			children = (
@@ -1345,6 +1281,57 @@
 				2885F4F81E97587E0064411B /* VerticalLineView.m */,
 			);
 			path = verticalineView;
+			sourceTree = "<group>";
+		};
+		28981B5C1FA01FA8004CFC95 /* SDAuthToolsView */ = {
+			isa = PBXGroup;
+			children = (
+				28981B5D1FA01FA8004CFC95 /* AuthToolBaseView.h */,
+				28981B5E1FA01FA8004CFC95 /* AuthToolBaseView.m */,
+				28981B5F1FA01FA8004CFC95 /* BankAuthToolView.h */,
+				28981B601FA01FA8004CFC95 /* BankAuthToolView.m */,
+				28981B611FA01FA8004CFC95 /* CardNoAuthToolView.h */,
+				28981B621FA01FA8004CFC95 /* CardNoAuthToolView.m */,
+				28981B631FA01FA8004CFC95 /* IdentityAuthToolView.h */,
+				28981B641FA01FA8004CFC95 /* IdentityAuthToolView.m */,
+				28981B651FA01FA8004CFC95 /* image */,
+				28981B6E1FA01FA8004CFC95 /* NameAuthToolView.h */,
+				28981B6F1FA01FA8004CFC95 /* NameAuthToolView.m */,
+				28981B701FA01FA8004CFC95 /* PhoneAuthToolView.h */,
+				28981B711FA01FA8004CFC95 /* PhoneAuthToolView.m */,
+				28981B721FA01FA8004CFC95 /* PwdAuthToolView.h */,
+				28981B731FA01FA8004CFC95 /* PwdAuthToolView.m */,
+				28981B741FA01FA8004CFC95 /* SixCodeAuthToolView.h */,
+				28981B751FA01FA8004CFC95 /* SixCodeAuthToolView.m */,
+				28981B761FA01FA8004CFC95 /* View */,
+			);
+			path = SDAuthToolsView;
+			sourceTree = "<group>";
+		};
+		28981B651FA01FA8004CFC95 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				28981B661FA01FA8004CFC95 /* list_icon_more@2x.png */,
+				28981B671FA01FA8004CFC95 /* list_icon_more@3x.png */,
+				28981B681FA01FA8004CFC95 /* login_icon_eye_default@2x.png */,
+				28981B691FA01FA8004CFC95 /* login_icon_eye_default@3x.png */,
+				28981B6A1FA01FA8004CFC95 /* login_icon_eye_lighted@2x.png */,
+				28981B6B1FA01FA8004CFC95 /* login_icon_eye_lighted@3x.png */,
+				28981B6C1FA01FA8004CFC95 /* login_list_icon_closed@2x.png */,
+				28981B6D1FA01FA8004CFC95 /* login_list_icon_closed@3x.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		28981B761FA01FA8004CFC95 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				28981B771FA01FA8004CFC95 /* BankPickerView.h */,
+				28981B781FA01FA8004CFC95 /* BankPickerView.m */,
+				28981B791FA01FA8004CFC95 /* NoCopyTextField.h */,
+				28981B7A1FA01FA8004CFC95 /* NoCopyTextField.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		289C0D4F1F203FBC00360147 /* YXEasings */ = {
@@ -1716,7 +1703,7 @@
 		A7FF2F941E1601CB0068A2F7 /* customView */ = {
 			isa = PBXGroup;
 			children = (
-				2857CE351F98960200874A7C /* SDAuthToolsView */,
+				28981B5C1FA01FA8004CFC95 /* SDAuthToolsView */,
 				283E16771F70B45300ECC00A /* SDPayToolView */,
 				2841F61D1F53C52100BD23C8 /* SDWaveAnimationView */,
 				28491BC11F386FD100E2B30C /* SDViewControllerAnimatedTransitioning */,
@@ -1881,7 +1868,7 @@
 			files = (
 				283E171C1F70B45400ECC00A /* payGoBack@2x.png in Resources */,
 				A7DF3C671DC7152A00243EF6 /* Assets.xcassets in Resources */,
-				2857CE5F1F98960200874A7C /* login_list_icon_closed@3x.png in Resources */,
+				28981B861FA01FA8004CFC95 /* login_list_icon_closed@3x.png in Resources */,
 				A7DF3DE51DC7202B00243EF6 /* indicator4@3x.png in Resources */,
 				283E16DE1F70B45300ECC00A /* banklist_bj@2x.png in Resources */,
 				283E17061F70B45400ECC00A /* banklist_xy@2x.png in Resources */,
@@ -1910,12 +1897,12 @@
 				283E16F91F70B45400ECC00A /* banklist_nh@3x.png in Resources */,
 				28DA888D1EEA7FCD00754259 /* tab_button_plan_sel.png in Resources */,
 				A7DF3DDF1DC7202B00243EF6 /* indicator2@3x.png in Resources */,
-				2857CE5B1F98960200874A7C /* login_icon_eye_default@3x.png in Resources */,
+				28981B821FA01FA8004CFC95 /* login_icon_eye_default@3x.png in Resources */,
 				A7DF3DEF1DC7202B00243EF6 /* indicator8.png in Resources */,
 				28DA88841EEA7FCD00754259 /* tab_button_mine_normal.png in Resources */,
 				283E16F31F70B45400ECC00A /* banklist_jt@3x.png in Resources */,
-				2857CE5D1F98960200874A7C /* login_icon_eye_lighted@3x.png in Resources */,
-				2857CE581F98960200874A7C /* list_icon_more@2x.png in Resources */,
+				28981B841FA01FA8004CFC95 /* login_icon_eye_lighted@3x.png in Resources */,
+				28981B7F1FA01FA8004CFC95 /* list_icon_more@2x.png in Resources */,
 				A7DF3DE61DC7202B00243EF6 /* indicator5.png in Resources */,
 				283E171D1F70B45400ECC00A /* payGoBack@3x.png in Resources */,
 				283E17211F70B45400ECC00A /* payListSelectedState@3x.png in Resources */,
@@ -1947,7 +1934,7 @@
 				283E170A1F70B45400ECC00A /* banklist_zs@2x.png in Resources */,
 				283E17171F70B45400ECC00A /* list_yinlian_AddCard@3x.png in Resources */,
 				28DA88811EEA7FCD00754259 /* tab_button_home_sel.png in Resources */,
-				2857CE591F98960200874A7C /* list_icon_more@3x.png in Resources */,
+				28981B801FA01FA8004CFC95 /* list_icon_more@3x.png in Resources */,
 				28DA88881EEA7FCD00754259 /* tab_button_mine_sel@2x.png in Resources */,
 				283E16F51F70B45400ECC00A /* banklist_ms@3x.png in Resources */,
 				283E17161F70B45400ECC00A /* list_yinlian_AddCard@2x.png in Resources */,
@@ -1990,11 +1977,11 @@
 				282D90341EF769B000CF8C28 /* SDMBPLoad.png in Resources */,
 				283E171F1F70B45400ECC00A /* payHelp@3x.png in Resources */,
 				280621F31EF8F89600346D1A /* loading-667h@2x.png in Resources */,
-				2857CE5C1F98960200874A7C /* login_icon_eye_lighted@2x.png in Resources */,
+				28981B831FA01FA8004CFC95 /* login_icon_eye_lighted@2x.png in Resources */,
 				283E16F41F70B45400ECC00A /* banklist_ms@2x.png in Resources */,
 				283E17201F70B45400ECC00A /* payListSelectedState@2x.png in Resources */,
 				283E17021F70B45400ECC00A /* banklist_shns@2x.png in Resources */,
-				2857CE5E1F98960200874A7C /* login_list_icon_closed@2x.png in Resources */,
+				28981B851FA01FA8004CFC95 /* login_list_icon_closed@2x.png in Resources */,
 				283DBD341ECAA1A400B84E3E /* WeiboSDK.bundle in Resources */,
 				283E17181F70B45400ECC00A /* payChooseBtn@2x.png in Resources */,
 				283E17121F70B45400ECC00A /* list_sand_logo@2x.png in Resources */,
@@ -2017,7 +2004,7 @@
 				2821B77F1E778B2200F093D7 /* loading-568h@2x.png in Resources */,
 				283E17231F70B45400ECC00A /* qvip_pay_imageholder@3x.png in Resources */,
 				28DA88891EEA7FCD00754259 /* tab_button_mine_sel@3x.png in Resources */,
-				2857CE5A1F98960200874A7C /* login_icon_eye_default@2x.png in Resources */,
+				28981B811FA01FA8004CFC95 /* login_icon_eye_default@2x.png in Resources */,
 				28DA887B1EEA7FCD00754259 /* tab_bg.png in Resources */,
 				283E16FB1F70B45400ECC00A /* banklist_nj@3x.png in Resources */,
 				A7DF3DE41DC7202B00243EF6 /* indicator4@2x.png in Resources */,
@@ -2111,12 +2098,14 @@
 				A7EFB15F1EB9A8DD009AA369 /* MQTTSessionSynchron.m in Sources */,
 				288421911F8E091200082E7C /* NSDate+time.m in Sources */,
 				A7FF2FE41E160A800068A2F7 /* DragCellCollectionView.m in Sources */,
+				28981B8B1FA01FA8004CFC95 /* BankPickerView.m in Sources */,
 				281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */,
-				2857CE611F98960200874A7C /* PhoneAuthToolView.m in Sources */,
 				A7EFB1601EB9A8DD009AA369 /* MQTTSSLSecurityPolicy.m in Sources */,
 				289C0D541F203FBC00360147 /* Easing.c in Sources */,
 				283E16D41F70B45300ECC00A /* SDPayAnimtion.m in Sources */,
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
+				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
+				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
 				A7EFB1571EB9A8DD009AA369 /* MQTTCoreDataPersistence.m in Sources */,
 				281747B21F983A4B007D4D3A /* LogpwdViewController.mm in Sources */,
@@ -2125,12 +2114,12 @@
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
 				288421971F8E091200082E7C /* NSString+Money.m in Sources */,
 				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */,
-				2857CE651F98960200874A7C /* NoCopyTextField.m in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
 				283E16D61F70B45300ECC00A /* SDPaySuccessAnimationView.m in Sources */,
 				A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */,
 				2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */,
 				A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */,
+				28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */,
 				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
 				28E82FC81ED6B5F6007FCA2B /* SDPopViewConfig.m in Sources */,
@@ -2144,37 +2133,38 @@
 				287C3BE01EEF861B007DE3F4 /* DockItem.m in Sources */,
 				A7FF2FE71E160A800068A2F7 /* HeaderCollectionReusableView.m in Sources */,
 				2820D1AF1E7BE8120012C067 /* SDCircleView.m in Sources */,
+				28981B881FA01FA8004CFC95 /* PhoneAuthToolView.m in Sources */,
 				A7FF2FE81E160A800068A2F7 /* ItemCollectionViewCell.m in Sources */,
 				28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */,
 				A7EFB15E1EB9A8DD009AA369 /* MQTTSessionManager.m in Sources */,
-				286922F81F98ADAF007C46B0 /* PayPwdViewController.mm in Sources */,
 				A7F2F2641E1E2AE000F6CDA3 /* HttpComm.mm in Sources */,
 				288421B01F8E095E00082E7C /* Majlet_Func.mm in Sources */,
 				281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */,
 				281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */,
+				28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */,
 				28E82FC61ED6B5F6007FCA2B /* SDPopContainerViwe.m in Sources */,
 				A7FF2FE91E160A800068A2F7 /* MinletsData.m in Sources */,
 				282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */,
 				288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */,
 				281F64471E792A970005AE86 /* SDCollectionViewCell.m in Sources */,
 				281F64451E792A970005AE86 /* TADotView.m in Sources */,
+				28981B871FA01FA8004CFC95 /* NameAuthToolView.m in Sources */,
 				288421C01F8E0A7800082E7C /* Tool.m in Sources */,
 				A7EFB1621EB9A8DD009AA369 /* MQTTSSLSecurityPolicyEncoder.m in Sources */,
+				28981B8A1FA01FA8004CFC95 /* SixCodeAuthToolView.m in Sources */,
 				A7EFB15B1EB9A8DD009AA369 /* MqttProperties.m in Sources */,
 				A7EFB1561EB9A8DD009AA369 /* MQTTCFSocketTransport.m in Sources */,
 				289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */,
 				281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */,
-				2857CE551F98960200874A7C /* BankAuthToolView.m in Sources */,
 				A7FF2FE31E160A800068A2F7 /* DataModel.m in Sources */,
+				28981B8C1FA01FA8004CFC95 /* NoCopyTextField.m in Sources */,
 				281F64481E792A970005AE86 /* SDCycleScrollView.m in Sources */,
 				288421941F8E091200082E7C /* NSString+EncodingUTF8Additions.m in Sources */,
 				2817476A1F96E25B007D4D3A /* MainViewController.mm in Sources */,
 				288421961F8E091200082E7C /* NSString+file.m in Sources */,
+				28981B7E1FA01FA8004CFC95 /* IdentityAuthToolView.m in Sources */,
 				28E82FC71ED6B5F6007FCA2B /* SDPopview.m in Sources */,
-				2857CE621F98960200874A7C /* PwdAuthToolView.m in Sources */,
 				288421B11F8E095E00082E7C /* MqttClientManager.m in Sources */,
-				2857CE601F98960200874A7C /* NameAuthToolView.m in Sources */,
-				2857CE571F98960200874A7C /* IdentityAuthToolView.m in Sources */,
 				A7EFB15A1EB9A8DD009AA369 /* MQTTMessage.m in Sources */,
 				283E16D81F70B45300ECC00A /* SDPayToolListView.m in Sources */,
 				289EA96A1F59577500254EA6 /* PSTAlertController.m in Sources */,
@@ -2191,19 +2181,14 @@
 				288421B31F8E095E00082E7C /* PayNucHelper.mm in Sources */,
 				281F64431E792A970005AE86 /* TAAbstractDotView.m in Sources */,
 				2885F4F91E97587E0064411B /* VerticalLineView.m in Sources */,
-				2857CE631F98960200874A7C /* SixCodeAuthToolView.m in Sources */,
 				2804B0A01EDEA3B10031CD10 /* SDMajletCellHead.m in Sources */,
 				A7FF2FBA1E1601CB0068A2F7 /* JYRadioButton.m in Sources */,
 				282D90321EF769B000CF8C28 /* SDActivityView.m in Sources */,
 				2804B09F1EDEA3B10031CD10 /* SDMajletCell.m in Sources */,
 				288421B51F8E095E00082E7C /* SqliteHelper.m in Sources */,
 				A7E9C7841E2CAFE500080B87 /* CustomAlertView.m in Sources */,
-				2857CE561F98960200874A7C /* CardNoAuthToolView.m in Sources */,
-				2857CE641F98960200874A7C /* BankPickerView.m in Sources */,
 				A7EFB15C1EB9A8DD009AA369 /* MQTTSession.m in Sources */,
 				A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */,
-				281747661F96E25B007D4D3A /* AuthLoginViewController.mm in Sources */,
-				2857CE541F98960200874A7C /* AuthToolBaseView.m in Sources */,
 				283E16D71F70B45300ECC00A /* SDPayToolBaseView.m in Sources */,
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,
 				287C3BDF1EEF861B007DE3F4 /* Dock.m in Sources */,
@@ -2212,6 +2197,7 @@
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,
 				283E16DB1F70B45300ECC00A /* SDPayView.m in Sources */,
 				283E16D91F70B45300ECC00A /* SDPayToolOrderView.m in Sources */,
+				28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */,
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,
 				281747681F96E25B007D4D3A /* BaseViewController.mm in Sources */,
