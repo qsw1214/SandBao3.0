@@ -32,6 +32,7 @@
     return self;
 }
 
+
 - (void)createBaseUI{
     
     //title
@@ -91,6 +92,10 @@
     self.frame = CGRectMake(frameRect.origin.x, frameRect.origin.y, [UIScreen mainScreen].bounds.size.width, selfViewH);
     
 }
+
+
+
+
 
 - (void)showTip{
     
