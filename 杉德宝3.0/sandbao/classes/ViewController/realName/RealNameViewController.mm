@@ -308,11 +308,7 @@
         paynuc.set("account", [account UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/queryCardDetail/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                if (type == respCodeErrorType) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            }];
+             
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
