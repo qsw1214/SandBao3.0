@@ -266,22 +266,17 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
-                NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                NSString *AuthToolstr = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+                NSArray *authToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:AuthToolstr];
                 
-                //清空
-                if (authToolsArray.count>0) {
-                    [authToolsArray removeAllObjects];
-                }
-                for (int i = 0; i < tempAuthToolsArray.count; i++) {
-                    [authToolsArray addObject:tempAuthToolsArray[i]];
+                if (authToolsArr.count>0) {
+                    for (int i = 0; i < authToolsArr.count; i++) {
+                        [authToolsArray addObject:authToolsArr[i]];
+                    }
+                }else{
+                     [Tool showDialog:@"无鉴权工具下发"];
                 }
                 
-                if ([authToolsArray count] <= 0) {
-                    [Tool showDialog:@"获取失败"];
-                } else {
-                    
-                }
             }];
         }];
         if (error) return;
@@ -325,18 +320,27 @@
                     NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
                     if ([@"030005" isEqualToString:respCode]){
                         NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
-                        NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
-                        NSMutableArray *addauthTools = [NSMutableArray arrayWithCapacity:0];
-                        for (int i = 0; i < tempAuthToolsArray.count; i++) {
-                            [addauthTools addObject:tempAuthToolsArray[i]];
+                        NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];                        
+                        if (tempAuthToolsArray.count>0) {
+                            for (int i = 0; i<tempAuthToolsArray.count; i++) {
+                                NSDictionary *authToolDic = tempAuthToolsArray[i];
+                                if ([[authToolDic objectForKey:@"type"] isEqualToString:@"sms"]) {
+                                    //跳转去加强鉴权页面验证
+                                    SmsCheckViewController *smsCheckVC = [[SmsCheckViewController alloc] init];
+                                    smsCheckVC.phoneNoStr = phoneNum;
+                                    smsCheckVC.smsCheckType = SMS_CHECKTYPE_LOGINT;
+                                    smsCheckVC.userInfo = userInfo;
+                                    smsCheckVC.authToolArray = authToolSArr;
+                                    [self.navigationController pushViewController:smsCheckVC animated:YES];
+                                }else{
+                                    [Tool showDialog:@"下发鉴权工具有误"];
+                                }
+                            }
+                        }else{
+                            [Tool showDialog:@"下发鉴权工具为空"];
                         }
-                        //跳转去加强鉴权页面验证
-                        SmsCheckViewController *smsCheckVC = [[SmsCheckViewController alloc] init];
-                        smsCheckVC.phoneNoStr = phoneNum;
-                        smsCheckVC.smsCheckType = SMS_CHECKTYPE_LOGINT;
-                        smsCheckVC.userInfo = userInfo;
-                        smsCheckVC.authToolArray = authToolSArr;
-                        [self.navigationController pushViewController:smsCheckVC animated:YES];
+                        
+                       
                     }
                 }];
             }

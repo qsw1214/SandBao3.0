@@ -30,6 +30,8 @@
     
     //流程每次进入均刷新
     //注册流程开始
+    authToolsArray = nil;
+    regAuthToolsArray = nil;
     [self getAuthToolsRegAuthTools];
 }
 
@@ -62,10 +64,21 @@
     if (btn.tag == BTN_TAG_NEXT) {
         //下一步
         if (phoneNoStr.length > 0) {
-            SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
-            smsVC.phoneNoStr = phoneNoStr;
-            smsVC.smsCheckType = SMS_CHECKTYPE_REGIST;
-            [self.navigationController pushViewController:smsVC animated:YES];
+            if (authToolsArray.count>0) {
+                for (int i = 0; i<authToolsArray.count; i++) {
+                    NSDictionary *authToolDic = authToolsArray[i];
+                    if ([[authToolDic objectForKey:@"type"] isEqualToString:@"sms"]) {
+                        SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
+                        smsVC.phoneNoStr = phoneNoStr;
+                        smsVC.smsCheckType = SMS_CHECKTYPE_REGIST;
+                        [self.navigationController pushViewController:smsVC animated:YES];
+                    }else{
+                        [Tool showDialog:@"下发鉴权工具有误"];
+                    }
+                }
+            }else{
+                [Tool showDialog:@"下发鉴权工具为空"];
+            }
         }else{
             [Tool showDialog:@"请输入正确的登陆账号及密码"];
         }

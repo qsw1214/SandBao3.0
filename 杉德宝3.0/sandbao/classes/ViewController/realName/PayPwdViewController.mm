@@ -166,6 +166,13 @@
         __block BOOL error = NO;
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [Tool showDialog:@"支付密码设置失败" defulBlock:^{
+                    //dismiss回主页
+                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
@@ -218,6 +225,13 @@
         paynuc.set("regAuthTools", [regAuthTools UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [Tool showDialog:@"支付密码设置失败" defulBlock:^{
+                    //dismiss回主页
+                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];

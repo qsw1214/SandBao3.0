@@ -124,6 +124,7 @@
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
+        
         //注册 - userInfo
         NSMutableDictionary *userInfoDic1 = [[NSMutableDictionary alloc] init];
         [userInfoDic1 setValue:self.phoneNoStr forKey:@"userName"];
@@ -142,7 +143,7 @@
         NSString *regAuthTools = [[PayNucHelper sharedInstance] arrayToJSON:regAuthToolsArray];
         
         
-        
+        //register
         paynuc.set("userInfo", [userInfo1 UTF8String]);
         paynuc.set("regAuthTools", [regAuthTools UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/register/v1" errorBlock:^(SDRequestErrorType type) {
@@ -221,12 +222,6 @@
         //实名
         RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
         [self.navigationController pushViewController:realNameVC animated:YES];
-        
-    } else {
-        //数据写入失败->返回直接登陆
-        [Tool showDialog:@"用户数据存储失败,请返回直接登陆" defulBlock:^{
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }];
     }
 }
 

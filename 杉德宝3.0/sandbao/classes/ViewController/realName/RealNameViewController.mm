@@ -356,10 +356,8 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                
                 NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
                 NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
-                
                 if (tempAuthToolsArray.count>0) {
                     for (int i = 0; i<tempAuthToolsArray.count; i++) {
                         NSDictionary *authToolDic = tempAuthToolsArray[i];
@@ -373,6 +371,8 @@
                             smsVC.bankCardNoStr = bankCardNoStr;
                             smsVC.smsCheckType = SMS_CHECKTYPE_REALNAME;
                             [self.navigationController pushViewController:smsVC animated:YES];
+                        }else{
+                            [Tool showDialog:@"下发鉴权工具有误"];
                         }
                     }
                 }else{

@@ -83,9 +83,9 @@
                 break;
             case SMS_CHECKTYPE_REGIST:
             {
-                //输入短信成功后, setAuthTools 提交鉴权
+                //输入短信成功后, checkUser检测用户
                 selfBlock.smsCodeString = textfieldText;
-                [selfBlock setAuthTools];
+                [selfBlock checkUser];
             }
                 break;
             case SMS_CHECKTYPE_REALNAME:
@@ -349,15 +349,16 @@
 }
 
 #pragma mark - =-=-=-=-=-=  用户注册模式   =-=-=-=-=-=
-#pragma mark 提交注册鉴权
-- (void)setAuthTools{
+#pragma mark 校验用户
+- (void)checkUser{
+    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
-        //校验手机验证码
+        //setAuthTools
         NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
         NSMutableDictionary *authToolsDic = [[NSMutableDictionary alloc] init];
         [authToolsDic setValue:@"sms" forKey:@"type"];
@@ -371,34 +372,14 @@
         paynuc.set("authTools", [authTools UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                if (type == respCodeErrorType) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self.HUD hidden];
-                //校验用户
-                [self checkUser];
-            }];
-           
+            
         }];
         if (error) return ;
         
-    }];
-    
-}
-
-#pragma mark 校验用户
-- (void)checkUser{
-    
-    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
-    [SDRequestHelp shareSDRequest].HUD = self.HUD;
-    [SDRequestHelp shareSDRequest].controller = self;
-    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
-        __block BOOL error = NO;
-        //验证用户数否存在
+        
+        
+        //checkUser
         NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
         [userInfoDic setValue:self.phoneNoStr forKey:@"userName"];
         NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
@@ -496,8 +477,6 @@
                         [Tool showDialog:respMsg defulBlock:^{
                             
                         }];
-                    }else{
-                        [self.navigationController popViewControllerAnimated:YES];
                     }
                 }
             }];

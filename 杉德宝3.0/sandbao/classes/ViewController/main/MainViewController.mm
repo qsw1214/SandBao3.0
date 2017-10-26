@@ -43,6 +43,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //隐藏系统导航条
+    self.navigationController.navigationBar.hidden = YES;
+    
 }
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{

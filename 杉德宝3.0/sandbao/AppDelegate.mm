@@ -47,7 +47,6 @@
                 SDNetwork *sdnet = [[SDNetwork alloc] init];
                 if ([@"" isEqualToString:[sdnet stringWithNetworkType]]) {
                     [self loadingError:@"无网络连接"];
-                    
                 }else{
                     [self loadingError:@"网络异常"];
                 }
@@ -58,7 +57,8 @@
             {
                 MainViewController *mMainViewController = [[MainViewController alloc] init];
                 mMainViewController.pwdLoginFlag = YES;
-                self.window.rootViewController = mMainViewController;
+                UINavigationController *navMainViewController = [[UINavigationController alloc] initWithRootViewController:mMainViewController];
+                self.window.rootViewController = navMainViewController;
             }
 
                 break;
@@ -67,7 +67,8 @@
             {
                 MainViewController *mMainViewController = [[MainViewController alloc] init];
                 mMainViewController.pwdLoginFlag = NO;
-                self.window.rootViewController = mMainViewController;
+                UINavigationController *navMainViewController = [[UINavigationController alloc] initWithRootViewController:mMainViewController];
+                self.window.rootViewController = navMainViewController;
             }
                 
                 break;
@@ -82,6 +83,7 @@
     return YES;
 }
 
+#pragma  mark IQKeyBoard键盘库设置
 - (void)IQKeyBoardSet{
     
     IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager]; // 获取类库的单例变量
@@ -105,6 +107,7 @@
 
 }
 
+#pragma mark Loading失败 - 进入失败页
 - (void)loadingError:(NSString*)errorStr {
     ErrorMainViewController *mErrorMainViewController = [[ErrorMainViewController alloc] init];
     mErrorMainViewController.errorInfo = errorStr;

@@ -89,9 +89,9 @@
   
     _menuViewControllerTransformation = CGAffineTransformMakeScale(1.5f, 1.5f);
     
-    _scaleContentView = NO;
+    _scaleContentView = YES;
     _scaleBackgroundImageView = YES;
-    _scaleMenuView = NO;
+    _scaleMenuView = YES;
     _fadeMenuView = YES;
     
     _parallaxEnabled = YES;
@@ -112,8 +112,10 @@
     _contentViewShadowOpacity = 0.4f;
     _contentViewShadowRadius = 8.0f;
     _contentViewFadeOutAlpha = 1.0f;
-    _contentViewInLandscapeOffsetCenterX = 30.f;
-    _contentViewInPortraitOffsetCenterX  = 30.f;
+    
+    //内容控制器的缩放及偏移
+    _contentViewInLandscapeOffsetCenterX = 1.f;
+    _contentViewInPortraitOffsetCenterX  = 1.f;
     _contentViewScaleValue = 0.7f;
 }
 
