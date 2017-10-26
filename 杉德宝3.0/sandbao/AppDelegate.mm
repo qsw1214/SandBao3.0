@@ -17,13 +17,25 @@
 #import "SDSqlite.h"
 #import "SqliteHelper.h"
 #import "Loading.h"
-
+#import "LeftSideMenuViewController.h"
 
 @interface AppDelegate ()<WeiboSDKDelegate>
 
 @end
 
 @implementation AppDelegate
+
+- (BOOL)testView{
+    // 1.创建窗口
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    // 2.
+    LeftSideMenuViewController *fs = [[LeftSideMenuViewController alloc] init];
+    self.window.rootViewController = fs;
+    // 3.显示窗口
+    [self.window makeKeyAndVisible];
+    
+    return YES;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
@@ -37,6 +49,8 @@
     
     // 1.创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    return [self testView];
     
     // 2.loading
     NSInteger loadingResult = [Loading startLoading];

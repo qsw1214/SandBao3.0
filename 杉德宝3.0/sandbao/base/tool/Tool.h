@@ -164,6 +164,16 @@ typedef void(^DefulBtnBlock)();
 + (NSString *)getIconImageName:(NSString*)type title:(NSString*)title imaUrl:(NSString*)imaUrl;
 
 
+#pragma mark - ImageView工厂方法
+
+/**
+ ImageView工厂方法
+
+ @param image 图片
+ @return 实例
+ */
++ (UIImageView*)createImagView:(UIImage*)image;
+
 
 #pragma mark -  Label工厂方法
 /**

@@ -17,27 +17,16 @@
 #import "RealNameViewController.h"
 #import "RealNameViewController.h"
 
-#define kContentFrame CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kDockHeight)
-
-#define KDockFrame CGRectMake(0, self.view.frame.size.height - kDockHeight, self.view.frame.size.width, kDockHeight)
-
 @interface MainViewController ()<MqttClientManagerDelegate>
 {
-    Dock *dock;
+    
     NSInteger currentVCindex;
     
 }
-// 选中的控制器
-@property (nonatomic, strong) UIViewController *selectedViewController;
-@property (nonatomic, strong) Dock *mDock;
-@property (nonatomic, assign) CGFloat kDockHeight;
 @end
 
 @implementation MainViewController
 
-@synthesize kDockHeight;
-@synthesize selectedViewController;
-@synthesize mDock;
 
 
 - (void)viewDidLoad {

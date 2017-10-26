@@ -69,8 +69,9 @@
 #define FONT_16_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:16]
 #define FONT_15_Regular  [UIFont fontWithName:@"PingFang-SC-Medium" size:15]
 #define FONT_14_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:14]
+#define FONT_13_OpenSan  [UIFont fontWithName:@"OpenSans" size:13]
 #define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
-
+#define FONT_08_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:8]
 
 #pragma -mark 颜色:color
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]

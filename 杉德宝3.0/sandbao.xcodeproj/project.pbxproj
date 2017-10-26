@@ -213,6 +213,7 @@
 		28E82FC61ED6B5F6007FCA2B /* SDPopContainerViwe.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E82FC11ED6B5F6007FCA2B /* SDPopContainerViwe.m */; };
 		28E82FC71ED6B5F6007FCA2B /* SDPopview.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E82FC31ED6B5F6007FCA2B /* SDPopview.m */; };
 		28E82FC81ED6B5F6007FCA2B /* SDPopViewConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E82FC51ED6B5F6007FCA2B /* SDPopViewConfig.m */; };
+		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.m */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
 		4DD1A90DEFCB099DED2ED74F /* libPods-sandbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */; };
 		A7694D081EA0C2A500BB6369 /* persenCenterList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7694C521EA0C2A500BB6369 /* persenCenterList.plist */; };
@@ -608,6 +609,8 @@
 		28E82FC31ED6B5F6007FCA2B /* SDPopview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPopview.m; sourceTree = "<group>"; };
 		28E82FC41ED6B5F6007FCA2B /* SDPopViewConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPopViewConfig.h; sourceTree = "<group>"; };
 		28E82FC51ED6B5F6007FCA2B /* SDPopViewConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPopViewConfig.m; sourceTree = "<group>"; };
+		28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideMenuViewController.h; sourceTree = "<group>"; };
+		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSideMenuViewController.m; sourceTree = "<group>"; };
 		28EBA18C1F2F1B0B003EEA61 /* SDDrowNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDrowNoticeView.h; sourceTree = "<group>"; };
 		28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDrowNoticeView.m; sourceTree = "<group>"; };
 		2EC4B09642F881744F76DBA7 /* Pods-sandbao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sandbao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sandbao/Pods-sandbao.debug.xcconfig"; sourceTree = "<group>"; };
@@ -801,6 +804,7 @@
 				281747B31F9847AF007D4D3A /* realName */,
 				281747631F96E25B007D4D3A /* regist */,
 				281747571F96E25B007D4D3A /* login */,
+				28EB6CEC1FA182FB003949AF /* leftSide */,
 				2817475C1F96E25B007D4D3A /* main */,
 			);
 			path = ViewController;
@@ -1404,6 +1408,15 @@
 				28E82FC51ED6B5F6007FCA2B /* SDPopViewConfig.m */,
 			);
 			path = SDPopView;
+			sourceTree = "<group>";
+		};
+		28EB6CEC1FA182FB003949AF /* leftSide */ = {
+			isa = PBXGroup;
+			children = (
+				28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */,
+				28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.m */,
+			);
+			path = leftSide;
 			sourceTree = "<group>";
 		};
 		28EBA18B1F2F1B0B003EEA61 /* SDDrowNoticeView */ = {
@@ -2147,6 +2160,7 @@
 				282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */,
 				288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */,
 				281F64471E792A970005AE86 /* SDCollectionViewCell.m in Sources */,
+				28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.m in Sources */,
 				281F64451E792A970005AE86 /* TADotView.m in Sources */,
 				28981B871FA01FA8004CFC95 /* NameAuthToolView.m in Sources */,
 				288421C01F8E0A7800082E7C /* Tool.m in Sources */,

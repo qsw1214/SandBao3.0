@@ -559,6 +559,17 @@
     return @"qvip_pay_imageholder";
 }
 
+
+#pragma mark - ImageView工厂方法
++ (UIImageView*)createImagView:(UIImage*)image{
+    
+    UIImageView *imgv = [[UIImageView alloc] init];
+    imgv.image = image;
+    imgv.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    return imgv;
+}
+
+
 #pragma mark -  Label工厂方法
 + (UILabel*)createLable:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor alignment:(NSTextAlignment)alignment {
     
