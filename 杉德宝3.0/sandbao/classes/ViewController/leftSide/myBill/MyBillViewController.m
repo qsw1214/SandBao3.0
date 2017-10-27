@@ -8,6 +8,8 @@
 
 #import "MyBillViewController.h"
 
+#import "SDRechargePopView.h"
+
 @interface MyBillViewController ()
 
 @end
@@ -32,10 +34,11 @@
     self.navCoverView.rightImgStr = @"";
 
     
-    
+    [SDRechargePopView showRechargePopView:@"" chooseList:nil];
     
     
 }
+
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     

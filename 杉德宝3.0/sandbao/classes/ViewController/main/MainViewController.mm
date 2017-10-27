@@ -8,7 +8,6 @@
 
 #import "MainViewController.h"
 #import "PayNucHelper.h"
-#import "Dock.h"
 #import "NSObject+NSLocalNotification.h"
 #import "SqliteHelper.h"
 #import "SDSqlite.h"
