@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //基础配置 - self.navgationController.navgationBar -> hidden
+    self.navigationController.navigationBar.hidden = YES;
+    
     //基础配置 - self.baseScrollView
     [self setBaseScrollview];
     

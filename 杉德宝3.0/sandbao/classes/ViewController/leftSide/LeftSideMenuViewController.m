@@ -8,21 +8,66 @@
 
 #import "LeftSideMenuViewController.h"
 
-@interface LeftSideMenuViewController ()
+#import "MainViewController.h"
+#import "MyBillViewController.h"
+#import "WalletAccountViewController.h"
+#import "SandPointsViewController.h"
+#import "FinancicleCenterViewController.h"
+#import "BankCardViewController.h"
+#import "SandCardViewController.h"
+#import "SetViewController.h"
+#import "LoginViewController.h"
+
+
+
+/**
+ 左边栏控制器:由于使用RESideMenu之后的present以及dismiss均交由RESideMenu控制,因此本控制器仅加载一次.
+ */
+@interface LeftSideMenuViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     
+    //HeadView
+    UIView *headView;
     
+    //tableView
+    UITableView *tableview;
+    
+    //logOutbtn
+    UIButton *logOutbtn;
+    
+    //数据源
+    NSArray *dataArray;
 }
 @end
 
 @implementation LeftSideMenuViewController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //滚动到顶部
+    self.baseScrollView.scrollsToTop = YES;
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+   
+    
+    //重置baseScrollview的Contentsize
+    [self setBaseScrollViewContentSize];
+}
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self createUI];
+
+    //加载UI
+    [self createUI_headView];
+    [self createUI_tableView];
+    [self createUI_LogOutView];
 }
 
 
@@ -32,7 +77,7 @@
     
     //重置frame.width
     CGFloat leftSideWidth = SCREEN_WIDTH * (1-0.258);
-    self.baseScrollView.frame = CGRectMake(0, 0, leftSideWidth, SCREEN_HEIGHT);
+    self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, leftSideWidth, SCREEN_HEIGHT-UPDOWNSPACE_20);
     
     
 }
@@ -44,15 +89,23 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    if (btn.tag == BTN_TAG_LOGOUT) {
+
+        
+        [self.sideMenuViewController hideMenuViewController];
+        
+        [Tool presetnLoginVC:self.sideMenuViewController];
+        
+        
+    }
     
 }
 
 #pragma mark  - UI绘制
-- (void)createUI{
+- (void)createUI_headView{
 
     //HeadView
-    UIView *headView = [[UIView alloc] init];
-    headView.backgroundColor = COLOR_358BEF;
+    headView = [[UIView alloc] init];
     [self.baseScrollView addSubview:headView];
     
     
@@ -68,17 +121,31 @@
     UIImageView *realNameImgView = [Tool createImagView:realNameImg];
     [headView addSubview:realNameImgView];
     
-    UILabel *realNameLab = [Tool createLable:@"" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentCenter];
+    UILabel *realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentCenter];
     [headView addSubview:realNameLab];
     
-    UIButton *couponBtn = [Tool createButton:@"" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FFFFFF];
+    UIButton *couponBtn = [Tool createButton:@"小白积分2000 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FFFFFF];
+    couponBtn.layer.masksToBounds = YES;
+    couponBtn.backgroundColor = COLOR_58A5F6;
+    couponBtn.width += LEFTRIGHTSPACE_04;
+    couponBtn.height -= UPDOWNSPACE_10;
+    couponBtn.layer.cornerRadius = couponBtn.height/2;
     [headView addSubview:couponBtn];
     
-    UIButton *accountBtn = [Tool createButton:@"" attributeStr:nil font:FONT_08_Regular textColor:COLOR_58A5F6];
+    UIButton *accountBtn = [Tool createButton:@"开通辅助账户 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_58A5F6];
+    accountBtn.layer.masksToBounds = YES;
+    accountBtn.layer.borderColor = COLOR_58A5F6.CGColor;
+    accountBtn.layer.borderWidth = 1.f;
+    accountBtn.width += LEFTRIGHTSPACE_04;
+    accountBtn.height -= UPDOWNSPACE_10;
+    accountBtn.layer.cornerRadius = accountBtn.height/2;
     [headView addSubview:accountBtn];
     
-    UIButton *rightArrowBtn = [Tool createButton:@"" attributeStr:nil font:nil textColor:nil];
-    [rightArrowBtn setBackgroundImage:[UIImage imageNamed:@"center_profile_arror_right"] forState:UIControlStateNormal];
+    
+    UIButton *rightArrowBtn = [[UIButton alloc] init];
+    UIImage *rightArrowImg = [UIImage imageNamed:@"center_profile_arror_right"];
+    rightArrowBtn.size = rightArrowImg.size;
+    [rightArrowBtn setBackgroundImage:rightArrowImg forState:UIControlStateNormal];
     [headView addSubview:rightArrowBtn];
     
     
@@ -96,39 +163,200 @@
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_0);
-        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_20);
-        make.size.mas_equalTo(headImgView.size);
+        make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
+        make.size.mas_equalTo(titleLab.size);
     }];
     
+    [realNameImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
+        make.size.mas_equalTo(realNameImgView.size);
+    }];
     
+    [realNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.left.equalTo(realNameImgView.mas_right).offset(LEFTRIGHTSPACE_09);
+        make.size.mas_equalTo(realNameLab.size);
+    }];
     
+    [couponBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(realNameLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
+        make.size.mas_equalTo(couponBtn.size);
+    }];
     
+    [accountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(realNameLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.left.equalTo(couponBtn.mas_right).offset(LEFTRIGHTSPACE_09);
+        make.size.mas_equalTo(accountBtn.size);
+    }];
     
-    
-    
-    
-    
-    
-    
-    
+    if (SCREEN_WIDTH == SCREEN_WIDTH_320) {
+        [rightArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(headView.mas_centerY);
+            make.right.equalTo(headView.mas_right).offset(LEFTRIGHTSPACE_00);
+            make.size.mas_equalTo(rightArrowBtn.size);
+        }];
+    }else{
+        [rightArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(headView.mas_centerY);
+            make.right.equalTo(headView.mas_right).offset(-LEFTRIGHTSPACE_20);
+            make.size.mas_equalTo(rightArrowBtn.size);
+        }];
+    }
+}
+
+- (void)createUI_tableView{
     //tableView
-    UITableView *tableView = [[UITableView alloc] init];
-    [self.baseScrollView addSubview:tableView];
+    tableview = [[UITableView alloc] init];
+    
+    tableview.delegate = self;
+    tableview.dataSource = self;
+    tableview.scrollEnabled = NO;
+    tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.baseScrollView addSubview:tableview];
     
     
-    //logOutView
-    UIView *logOutView = [[UIView alloc] init];
-    [self.baseScrollView addSubview:logOutView];
+    NSURL *setPlistDataPath = [[NSBundle mainBundle] URLForResource:@"set" withExtension:@"plist"];
+    NSArray *arrar = [NSArray arrayWithContentsOfURL:setPlistDataPath];
+    dataArray = arrar;
+    CGFloat tableViewH = UPDOWNSPACE_64 * dataArray.count;
     
+    [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headView.mas_bottom).offset(UPDOWNSPACE_25);
+        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_00);
+        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width, tableViewH));
+    }];
     
+}
+
+- (void)createUI_LogOutView{
+
+    logOutbtn = [[UIButton alloc] init];
+    logOutbtn.tag = BTN_TAG_LOGOUT;
+    [logOutbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.baseScrollView addSubview:logOutbtn];
     
+    UIImage *logOutImg = [UIImage imageNamed:@"center_menu_08"];
+    UIImageView *logOutImgView = [[UIImageView alloc] initWithImage:logOutImg];
+    [logOutbtn addSubview:logOutImgView];
     
+    UILabel *titleLab = [Tool createLable:@"退出" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    [logOutbtn addSubview:titleLab];
     
+    [logOutbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.baseScrollView.mas_left);
+        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width, logOutImg.size.height*2));
+        make.bottom.equalTo(tableview.mas_bottom).offset(UPDOWNSPACE_89);
+    }];
     
+    [logOutImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(logOutbtn.mas_centerY);
+        make.left.equalTo(logOutbtn.mas_left).offset(LEFTRIGHTSPACE_20);
+        make.size.mas_equalTo(logOutImg.size);
+    }];
     
-    
+    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(logOutbtn.mas_centerY);
+        make.left.equalTo(logOutImgView.mas_right).offset(LEFTRIGHTSPACE_04);
+        make.size.mas_equalTo(titleLab.size);
+    }];
     
 
+}
+
+/**
+ 设置baseScrollview的滚动区间
+ */
+- (void)setBaseScrollViewContentSize{
+    
+    CGFloat allHeight = 0.f;
+    
+    UIView *lasetObjectView = self.baseScrollView.subviews.lastObject;
+    
+    CGFloat lasetObjectViewOY = CGRectGetMaxY(lasetObjectView.frame);
+    
+    allHeight = lasetObjectViewOY + UPDOWNSPACE_20;
+    
+    if (allHeight < SCREEN_HEIGHT - UPDOWNSPACE_64) {
+        self.baseScrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT - UPDOWNSPACE_64);
+    }else{
+        self.baseScrollView.contentSize = CGSizeMake(0, allHeight);
+    }
+}
+
+#pragma mark tableViewDelegate&&dataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return dataArray.count;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return UPDOWNSPACE_64;
+}
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    static NSString *cells = @"cells";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cells];
+    
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cells];
+    }
+    NSDictionary *dict = dataArray[indexPath.row];
+    cell.imageView.image = [UIImage imageNamed:[dict objectForKey:@"imgName"]];
+    cell.textLabel.text = [dict objectForKey:@"title"];
+    cell.textLabel.textColor = COLOR_343339_7;
+    cell.textLabel.font = FONT_15_Regular;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSDictionary *dict = dataArray[indexPath.row];
+    NSString *titleName = [dict objectForKey:@"title"];
+    
+    UINavigationController *nav;
+    if ([titleName isEqualToString:@"返回首页"]) {
+        MainViewController *mainVC = [[MainViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    }
+    if ([titleName isEqualToString:@"我的账单"]) {
+        MyBillViewController *myAccVC = [[MyBillViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:myAccVC];
+    }
+    if ([titleName isEqualToString:@"钱包账户"]) {
+        WalletAccountViewController *walletAccVC = [[WalletAccountViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:walletAccVC];
+    }
+    if ([titleName isEqualToString:@"杉德积分"]) {
+        SandPointsViewController *sandPtVC = [[SandPointsViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:sandPtVC];
+    }
+    if ([titleName isEqualToString:@"理财中心"]) {
+        FinancicleCenterViewController *financicleVC = [[FinancicleCenterViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:financicleVC];
+    }
+    if ([titleName isEqualToString:@"银行卡"]) {
+        BankCardViewController *bankCardVC = [[BankCardViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:bankCardVC];
+    }
+    if ([titleName isEqualToString:@"杉德卡"]) {
+        SandCardViewController *sandCardVC = [[SandCardViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:sandCardVC];
+    }
+    if ([titleName isEqualToString:@"设置"]) {
+        SetViewController *setVC = [[SetViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:setVC];
+    }
+    
+    //重置RESdieMeun的主控制器
+    [self.sideMenuViewController setContentViewController:nav];
+    //隐藏Menu控制器
+    [self.sideMenuViewController hideMenuViewController];
+    
 }
 
 

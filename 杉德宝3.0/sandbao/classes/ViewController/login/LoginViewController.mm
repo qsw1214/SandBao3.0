@@ -36,9 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //隐藏系统导航栏的navigationBar
-    self.navigationController.navigationBar.hidden = YES;
+
     
     [self clearUserInfo];
     

@@ -434,18 +434,14 @@
         
         //payTool
         NSMutableDictionary *payToolDic = [NSMutableDictionary dictionaryWithDictionary:self.payToolDic];
-        NSMutableDictionary *payToolDic_accountDic = [NSMutableDictionary dictionaryWithDictionary:[self.payToolDic objectForKey:@"account"]];
         NSMutableDictionary *payToolDic_authToolDic = [[NSMutableDictionary alloc] init];
         NSMutableDictionary *payToolDic_authToolDic_creditCardDic = [[NSMutableDictionary alloc] init];
-        
-        [payToolDic_accountDic setValue:self.bankCardNoStr forKey:@"accNo"];
-        
+    
         [payToolDic_authToolDic setValue:@"creditCard" forKey:@"type"];
         [payToolDic_authToolDic_creditCardDic setValue:self.cvnStr forKey:@"cvn"];
         [payToolDic_authToolDic_creditCardDic setValue:self.expiryStr forKey:@"expiry"];
         [payToolDic_authToolDic setObject:payToolDic_authToolDic_creditCardDic forKey:@"creditCard"];
         
-        [payToolDic setObject:payToolDic_accountDic forKey:@"account"];
         [payToolDic setObject:@[payToolDic_authToolDic] forKey:@"authTools"];
         NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:payToolDic];
         

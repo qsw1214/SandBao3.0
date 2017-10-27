@@ -32,8 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //隐藏系统导航条
-    self.navigationController.navigationBar.hidden = YES;
+    
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -45,13 +44,14 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
-    self.navCoverView.midTitleStr = @"";
+    self.navCoverView.midTitleStr = @"首页";
     self.navCoverView.letfImgStr = @"index_avatar";
     self.navCoverView.rightImgStr = @"index_msg";
+    __block MainViewController *selfBlock = self;
     self.navCoverView.leftBlock = ^{
         
+        [selfBlock presentLeftMenuViewController:selfBlock.sideMenuViewController];
     };
-    __block UIViewController *selfBlock = self;
     self.navCoverView.rightBlock = ^{
         
     };
@@ -72,15 +72,15 @@
     
     if ([CommParameter sharedInstance].userId == nil) {
         
-        //明登陆
-        if (_pwdLoginFlag) {
-            [self pwdLogin];
-        }
-        //暗登陆
-        else{
-            [self noPwdLogin];
-            
-        }
+//        //明登陆
+//        if (_pwdLoginFlag) {
+//            [self pwdLogin];
+//        }
+//        //暗登陆
+//        else{
+//            [self noPwdLogin];
+//            
+//        }
     }
     
 

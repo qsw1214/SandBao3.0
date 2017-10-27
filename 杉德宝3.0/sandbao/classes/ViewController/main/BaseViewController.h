@@ -6,17 +6,22 @@
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
+//系统框架
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 
+//三方库头文件
 #import "Masonry.h"
-#import "UIView+easyFrame.h"
-#import "NavCoverView.h"
-#import "SDMBProgressView.h"
+#import "RESideMenu.h"
 
+//类扩展头文件
+#import "UIView+easyFrame.h"
+
+//自定义头文件
 #import "SDSqlite.h"
 #import "SqliteHelper.h"
-
+#import "NavCoverView.h"
+#import "SDMBProgressView.h"
 #import "CardNoAuthToolView.h"
 #import "IdentityAuthToolView.h"
 #import "NameAuthToolView.h"
@@ -35,11 +40,19 @@
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 
+#define SCREEN_WIDTH_320 320.f
+#define SCREEN_WIDTH_375 375.f
+#define SCREEN_WIDTH_414 414.f
+
 #define LEFTRIGHTSPACE_40 40.f
 #define LEFTRIGHTSPACE_35 35.f
 #define LEFTRIGHTSPACE_20 20.f
 #define LEFTRIGHTSPACE_15 15.f
 #define LEFTRIGHTSPACE_12 12.f
+#define LEFTRIGHTSPACE_09 09.f
+#define LEFTRIGHTSPACE_04 04.f
+#define LEFTRIGHTSPACE_00 00.f
+
 
 #define UPDOWNSPACE_112 112.f
 #define UPDOWNSPACE_89 89.f
@@ -59,6 +72,7 @@
 #define UPDOWNSPACE_14 14.f
 #define UPDOWNSPACE_11 11.f
 #define UPDOWNSPACE_10 10.f
+#define UPDOWNSPACE_09 9.f
 #define UPDOWNSPACE_0 0.f
 
 
@@ -70,6 +84,7 @@
 #define FONT_15_Regular  [UIFont fontWithName:@"PingFang-SC-Medium" size:15]
 #define FONT_14_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:14]
 #define FONT_13_OpenSan  [UIFont fontWithName:@"OpenSans" size:13]
+#define FONT_13_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:13]
 #define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
 #define FONT_08_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:8]
 
@@ -115,6 +130,7 @@
 #define BTN_TAG_NEXT 100004
 #define BTN_TAG_SHOWBANKLIST 100005
 #define BTN_TAG_REALNAME  100006
+#define BTN_TAG_LOGOUT  100007
 
 
 
@@ -146,23 +162,22 @@
 
 
 
-#pragma - mark overried - 供子类重写的公共方法
+#pragma mark - overried - 供子类重写的公共方法
 
 
 /**
- 设置baseScrollview样式 - 供子类重写实现方法
+ 设置baseScrollview样式 - 供子类重写实现方法 :必须重写
  */
 - (void)setBaseScrollview;
 
 /**
- 设置导航样式 - 供子类重写实现方法
+ 设置导航样式 - 供子类重写实现方法 : 必须重写
  */
 - (void)setNavCoverView;
 
 /**
- 按钮触发汇总 - 供子类重写实现方法
+ 按钮触发汇总 - 供子类重写实现方法 : 可选重写
  -- 本类无具体实现方法 , 由子类复制具体实现--
-
  @param btn 按钮
  */
 - (void)buttonClick:(UIButton*)btn;

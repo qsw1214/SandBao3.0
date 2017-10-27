@@ -122,8 +122,7 @@
         LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         [viewController presentViewController:navLogin animated:YES completion:nil];
-        //4.原界面返回控制器主vc
-        [viewController.navigationController popToRootViewControllerAnimated:NO];
+        
     }else{
         return;
     }

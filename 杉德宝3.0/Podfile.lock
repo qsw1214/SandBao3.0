@@ -2,6 +2,7 @@ PODS:
   - IQKeyboardManager (3.3.7)
   - Masonry (1.0.2)
   - pop (1.0.10)
+  - RESideMenu (4.0.7)
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
@@ -10,14 +11,16 @@ DEPENDENCIES:
   - IQKeyboardManager
   - Masonry
   - pop
+  - RESideMenu (~> 4.0.7)
   - SDWebImage (~> 4.0)
 
 SPEC CHECKSUMS:
   IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
+  RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
 
-PODFILE CHECKSUM: ec45920eeaf92b7a23f2e9db75fbb7999c1e280f
+PODFILE CHECKSUM: 1add3fdf408d3fe287fa34c7865cd7be3c872552
 
 COCOAPODS: 1.2.1

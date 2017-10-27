@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <IQKeyboardManager.h>
+#import <UIKit/UIKit.h>
 #import "MainViewController.h"
 #import "ErrorMainViewController.h"
 #import "PayNucHelper.h"
@@ -17,6 +18,7 @@
 #import "SDSqlite.h"
 #import "SqliteHelper.h"
 #import "Loading.h"
+#import "RESideMenu.h"
 #import "LeftSideMenuViewController.h"
 
 @interface AppDelegate ()<WeiboSDKDelegate>
@@ -50,10 +52,11 @@
     // 1.创建窗口
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    return [self testView];
+//    return [self testView];
     
     // 2.loading
     NSInteger loadingResult = [Loading startLoading];
+    loadingResult = 1;
     switch (loadingResult) {
             //load失败
             case 0:
@@ -69,20 +72,36 @@
             //明登陆引导
             case 1:
             {
+                //主vc
                 MainViewController *mMainViewController = [[MainViewController alloc] init];
                 mMainViewController.pwdLoginFlag = YES;
                 UINavigationController *navMainViewController = [[UINavigationController alloc] initWithRootViewController:mMainViewController];
-                self.window.rootViewController = navMainViewController;
+                //侧滑vc
+                LeftSideMenuViewController *leftSideMenuVC = [[LeftSideMenuViewController alloc] init];
+                
+                //RESidenMenu控制器
+                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:navMainViewController leftMenuViewController:leftSideMenuVC rightMenuViewController:nil];
+                
+                self.window.backgroundColor = [UIColor whiteColor];
+                self.window.rootViewController = sideMenuVC;
             }
 
                 break;
             //暗登陆引导
             case 2:
             {
+                //主vc
                 MainViewController *mMainViewController = [[MainViewController alloc] init];
                 mMainViewController.pwdLoginFlag = NO;
                 UINavigationController *navMainViewController = [[UINavigationController alloc] initWithRootViewController:mMainViewController];
-                self.window.rootViewController = navMainViewController;
+                //侧滑vc
+                LeftSideMenuViewController *leftSideMenuVC = [[LeftSideMenuViewController alloc] init];
+                
+                //RESidenMenu控制器
+                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:navMainViewController leftMenuViewController:leftSideMenuVC rightMenuViewController:nil];
+                
+                self.window.backgroundColor = [UIColor whiteColor];
+                self.window.rootViewController = sideMenuVC;
             }
                 
                 break;

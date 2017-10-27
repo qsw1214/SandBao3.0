@@ -189,6 +189,13 @@
 		289D15D81EE505BD00B34EAC /* sandbaolibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289D15D71EE505BD00B34EAC /* sandbaolibrary.a */; };
 		289EA96A1F59577500254EA6 /* PSTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EA9671F59577500254EA6 /* PSTAlertController.m */; };
 		289EA96B1F59577500254EA6 /* SDAlertControllerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EA9691F59577500254EA6 /* SDAlertControllerUtil.m */; };
+		28D289A41FA2CA3700C3787E /* WalletAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A31FA2CA3700C3787E /* WalletAccountViewController.m */; };
+		28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A61FA2CA4900C3787E /* SandPointsViewController.m */; };
+		28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */; };
+		28D289AD1FA2CA7000C3787E /* BankCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289AC1FA2CA7000C3787E /* BankCardViewController.m */; };
+		28D289B01FA2CA8000C3787E /* SandCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289AF1FA2CA8000C3787E /* SandCardViewController.m */; };
+		28D289B31FA2CA8C00C3787E /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B21FA2CA8C00C3787E /* SetViewController.m */; };
+		28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B51FA2D2D600C3787E /* MyBillViewController.m */; };
 		28DA887B1EEA7FCD00754259 /* tab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88661EEA7FCD00754259 /* tab_bg.png */; };
 		28DA887C1EEA7FCD00754259 /* tab_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88671EEA7FCD00754259 /* tab_bg@2x.png */; };
 		28DA887D1EEA7FCD00754259 /* tab_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88681EEA7FCD00754259 /* tab_bg@3x.png */; };
@@ -582,6 +589,20 @@
 		289EA9671F59577500254EA6 /* PSTAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTAlertController.m; sourceTree = "<group>"; };
 		289EA9681F59577500254EA6 /* SDAlertControllerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAlertControllerUtil.h; sourceTree = "<group>"; };
 		289EA9691F59577500254EA6 /* SDAlertControllerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAlertControllerUtil.m; sourceTree = "<group>"; };
+		28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountViewController.h; sourceTree = "<group>"; };
+		28D289A31FA2CA3700C3787E /* WalletAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAccountViewController.m; sourceTree = "<group>"; };
+		28D289A51FA2CA4900C3787E /* SandPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandPointsViewController.h; sourceTree = "<group>"; };
+		28D289A61FA2CA4900C3787E /* SandPointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandPointsViewController.m; sourceTree = "<group>"; };
+		28D289A81FA2CA6300C3787E /* FinancicleCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancicleCenterViewController.h; sourceTree = "<group>"; };
+		28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancicleCenterViewController.m; sourceTree = "<group>"; };
+		28D289AB1FA2CA7000C3787E /* BankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardViewController.h; sourceTree = "<group>"; };
+		28D289AC1FA2CA7000C3787E /* BankCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardViewController.m; sourceTree = "<group>"; };
+		28D289AE1FA2CA8000C3787E /* SandCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandCardViewController.h; sourceTree = "<group>"; };
+		28D289AF1FA2CA8000C3787E /* SandCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandCardViewController.m; sourceTree = "<group>"; };
+		28D289B11FA2CA8C00C3787E /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
+		28D289B21FA2CA8C00C3787E /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
+		28D289B51FA2D2D600C3787E /* MyBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBillViewController.m; sourceTree = "<group>"; };
+		28D289B61FA2D2D600C3787E /* MyBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBillViewController.h; sourceTree = "<group>"; };
 		28DA88661EEA7FCD00754259 /* tab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bg.png; sourceTree = "<group>"; };
 		28DA88671EEA7FCD00754259 /* tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@2x.png"; sourceTree = "<group>"; };
 		28DA88681EEA7FCD00754259 /* tab_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@3x.png"; sourceTree = "<group>"; };
@@ -1287,6 +1308,60 @@
 			path = verticalineView;
 			sourceTree = "<group>";
 		};
+		288D7FB21FA2C8C4001CCAC1 /* walletAccount */ = {
+			isa = PBXGroup;
+			children = (
+				28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */,
+				28D289A31FA2CA3700C3787E /* WalletAccountViewController.m */,
+			);
+			path = walletAccount;
+			sourceTree = "<group>";
+		};
+		288D7FB31FA2C8CB001CCAC1 /* sandPoints */ = {
+			isa = PBXGroup;
+			children = (
+				28D289A51FA2CA4900C3787E /* SandPointsViewController.h */,
+				28D289A61FA2CA4900C3787E /* SandPointsViewController.m */,
+			);
+			path = sandPoints;
+			sourceTree = "<group>";
+		};
+		288D7FB41FA2C8D3001CCAC1 /* financileCenter */ = {
+			isa = PBXGroup;
+			children = (
+				28D289A81FA2CA6300C3787E /* FinancicleCenterViewController.h */,
+				28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */,
+			);
+			path = financileCenter;
+			sourceTree = "<group>";
+		};
+		288D7FB51FA2C8DB001CCAC1 /* bankCard */ = {
+			isa = PBXGroup;
+			children = (
+				28D289AB1FA2CA7000C3787E /* BankCardViewController.h */,
+				28D289AC1FA2CA7000C3787E /* BankCardViewController.m */,
+			);
+			path = bankCard;
+			sourceTree = "<group>";
+		};
+		288D7FB61FA2C8E4001CCAC1 /* sandCard */ = {
+			isa = PBXGroup;
+			children = (
+				28D289AE1FA2CA8000C3787E /* SandCardViewController.h */,
+				28D289AF1FA2CA8000C3787E /* SandCardViewController.m */,
+			);
+			path = sandCard;
+			sourceTree = "<group>";
+		};
+		288D7FB71FA2C8EE001CCAC1 /* set */ = {
+			isa = PBXGroup;
+			children = (
+				28D289B11FA2CA8C00C3787E /* SetViewController.h */,
+				28D289B21FA2CA8C00C3787E /* SetViewController.m */,
+			);
+			path = set;
+			sourceTree = "<group>";
+		};
 		28981B5C1FA01FA8004CFC95 /* SDAuthToolsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1369,6 +1444,15 @@
 			path = PSTAlertController;
 			sourceTree = "<group>";
 		};
+		28D289B41FA2D29900C3787E /* myBill */ = {
+			isa = PBXGroup;
+			children = (
+				28D289B51FA2D2D600C3787E /* MyBillViewController.m */,
+				28D289B61FA2D2D600C3787E /* MyBillViewController.h */,
+			);
+			path = myBill;
+			sourceTree = "<group>";
+		};
 		28DA88651EEA7FCD00754259 /* tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1415,6 +1499,13 @@
 			children = (
 				28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */,
 				28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.m */,
+				28D289B41FA2D29900C3787E /* myBill */,
+				288D7FB21FA2C8C4001CCAC1 /* walletAccount */,
+				288D7FB31FA2C8CB001CCAC1 /* sandPoints */,
+				288D7FB41FA2C8D3001CCAC1 /* financileCenter */,
+				288D7FB51FA2C8DB001CCAC1 /* bankCard */,
+				288D7FB61FA2C8E4001CCAC1 /* sandCard */,
+				288D7FB71FA2C8EE001CCAC1 /* set */,
 			);
 			path = leftSide;
 			sourceTree = "<group>";
@@ -1608,8 +1699,8 @@
 		A7DF3E0A1DC7223900243EF6 /* classes */ = {
 			isa = PBXGroup;
 			children = (
-				281747561F96E23F007D4D3A /* ViewController */,
 				A7FF2FC61E1602D80068A2F7 /* comm */,
+				281747561F96E23F007D4D3A /* ViewController */,
 				A7FF2F941E1601CB0068A2F7 /* customView */,
 			);
 			path = classes;
@@ -2101,6 +2192,8 @@
 			files = (
 				2841F6201F53C52E00BD23C8 /* SDWaveViwe.m in Sources */,
 				288421B41F8E095E00082E7C /* SDRequestHelp.mm in Sources */,
+				28D289A41FA2CA3700C3787E /* WalletAccountViewController.m in Sources */,
+				28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */,
 				A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */,
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
 				289C0D551F203FBC00360147 /* YXEasing.m in Sources */,
@@ -2117,6 +2210,7 @@
 				289C0D541F203FBC00360147 /* Easing.c in Sources */,
 				283E16D41F70B45300ECC00A /* SDPayAnimtion.m in Sources */,
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
+				28D289AD1FA2CA7000C3787E /* BankCardViewController.m in Sources */,
 				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
@@ -2134,6 +2228,7 @@
 				A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */,
 				28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */,
 				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
+				28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
 				28E82FC81ED6B5F6007FCA2B /* SDPopViewConfig.m in Sources */,
 				A7EFB1631EB9A8DD009AA369 /* MQTTSSLSecurityPolicyTransport.m in Sources */,
@@ -2163,6 +2258,7 @@
 				28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.m in Sources */,
 				281F64451E792A970005AE86 /* TADotView.m in Sources */,
 				28981B871FA01FA8004CFC95 /* NameAuthToolView.m in Sources */,
+				28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */,
 				288421C01F8E0A7800082E7C /* Tool.m in Sources */,
 				A7EFB1621EB9A8DD009AA369 /* MQTTSSLSecurityPolicyEncoder.m in Sources */,
 				28981B8A1FA01FA8004CFC95 /* SixCodeAuthToolView.m in Sources */,
@@ -2171,6 +2267,7 @@
 				289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */,
 				281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */,
 				A7FF2FE31E160A800068A2F7 /* DataModel.m in Sources */,
+				28D289B01FA2CA8000C3787E /* SandCardViewController.m in Sources */,
 				28981B8C1FA01FA8004CFC95 /* NoCopyTextField.m in Sources */,
 				281F64481E792A970005AE86 /* SDCycleScrollView.m in Sources */,
 				288421941F8E091200082E7C /* NSString+EncodingUTF8Additions.m in Sources */,
@@ -2194,6 +2291,7 @@
 				282D90391EF769D000CF8C28 /* MBProgressHUD.m in Sources */,
 				288421B31F8E095E00082E7C /* PayNucHelper.mm in Sources */,
 				281F64431E792A970005AE86 /* TAAbstractDotView.m in Sources */,
+				28D289B31FA2CA8C00C3787E /* SetViewController.m in Sources */,
 				2885F4F91E97587E0064411B /* VerticalLineView.m in Sources */,
 				2804B0A01EDEA3B10031CD10 /* SDMajletCellHead.m in Sources */,
 				A7FF2FBA1E1601CB0068A2F7 /* JYRadioButton.m in Sources */,
