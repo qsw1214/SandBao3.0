@@ -7,6 +7,9 @@
 //
 
 #import "LeftSideMenuViewController.h"
+#import "PayNucHelper.h"
+
+
 
 #import "MainViewController.h"
 #import "MyBillViewController.h"
@@ -51,8 +54,6 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-   
-    
     //重置baseScrollview的Contentsize
     [self setBaseScrollViewContentSize];
 }
@@ -79,7 +80,6 @@
     CGFloat leftSideWidth = SCREEN_WIDTH * (1-0.258);
     self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, leftSideWidth, SCREEN_HEIGHT-UPDOWNSPACE_20);
     
-    
 }
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
@@ -90,13 +90,7 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_LOGOUT) {
-
-        
-        [self.sideMenuViewController hideMenuViewController];
-        
-        [Tool presetnLoginVC:self.sideMenuViewController];
-        
-        
+        [self loginOut];
     }
     
 }
@@ -358,6 +352,51 @@
     [self.sideMenuViewController hideMenuViewController];
     
 }
+
+#pragma mark - 业务逻辑
+#pragma mark 登出
+/**
+ *@brief 登出
+ */
+- (void)loginOut
+{
+    //退出前,回到MainVC
+    MainViewController *mainVC = [[MainViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+    [self.sideMenuViewController setContentViewController:nav];
+    //隐藏Menu控制器
+    [self.sideMenuViewController hideMenuViewController];
+    
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01000301");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/logout/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                //退出到登录界面
+                [Tool presetnLoginVC:self.sideMenuViewController];
+            }];
+        }];
+        if (error) return ;
+        
+    }];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {

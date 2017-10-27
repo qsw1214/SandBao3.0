@@ -83,5 +83,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-UI-Text-Regular.otf</string>
+		<string>opensans.ttf</string>
+	</array>
 </dict>
 </plist>

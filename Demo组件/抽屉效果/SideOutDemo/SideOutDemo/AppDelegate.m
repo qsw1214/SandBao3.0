@@ -29,6 +29,7 @@
                                                                     leftMenuViewController:leftVC
                                                                    rightMenuViewController:nil];
     
+    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"Stars"];
     
      self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
      self.window.rootViewController = sideMenuViewController;

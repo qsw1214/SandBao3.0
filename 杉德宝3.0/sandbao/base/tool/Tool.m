@@ -120,6 +120,7 @@
         
         //3.跳转登陆页面
         LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
+        [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         [viewController presentViewController:navLogin animated:YES completion:nil];
         

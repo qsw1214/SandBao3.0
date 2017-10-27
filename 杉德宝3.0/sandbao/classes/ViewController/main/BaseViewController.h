@@ -44,6 +44,7 @@
 #define SCREEN_WIDTH_375 375.f
 #define SCREEN_WIDTH_414 414.f
 
+#define LEFTRIGHTSPACE_50 50.f
 #define LEFTRIGHTSPACE_40 40.f
 #define LEFTRIGHTSPACE_35 35.f
 #define LEFTRIGHTSPACE_20 20.f
@@ -54,6 +55,7 @@
 #define LEFTRIGHTSPACE_00 00.f
 
 
+#define UPDOWNSPACE_122 122.f
 #define UPDOWNSPACE_112 112.f
 #define UPDOWNSPACE_89 89.f
 #define UPDOWNSPACE_69 69.f
@@ -73,10 +75,13 @@
 #define UPDOWNSPACE_11 11.f
 #define UPDOWNSPACE_10 10.f
 #define UPDOWNSPACE_09 9.f
+#define UPDOWNSPACE_05 05.f
 #define UPDOWNSPACE_0 0.f
 
 
 #pragma -mark 字体:font
+#define FONT_36_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:36]
+#define FONT_35_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:35]
 #define FONT_28_Medium   [UIFont fontWithName:@"PingFang-SC-Medium" size:28]
 #define FONT_20_Medium   [UIFont fontWithName:@"SFUIText-Medium" size:20]
 #define FONT_20_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:20]
@@ -86,7 +91,9 @@
 #define FONT_13_OpenSan  [UIFont fontWithName:@"OpenSans" size:13]
 #define FONT_13_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:13]
 #define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
+#define FONT_10_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:10]
 #define FONT_08_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:8]
+
 
 #pragma -mark 颜色:color
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
@@ -97,6 +104,8 @@
 #define COLOR_343339_7 HexRGBA(0x343339,0.7f)
 //灰色
 #define COLOR_666666 HexRGBA(0x666666,1.f)
+//背景灰
+#define COLOR_D8D8D8_7 HexRGBA(0xD8D8D8,0.7f)
 //白色
 #define COLOR_FFFFFF HexRGBA(0xFFFFFF,1.f)
 //深蓝
@@ -124,13 +133,21 @@
 
 
 #pragma - mark 按钮Tag:tag
-#define BTN_TAG_FORGETPWD 100000
-#define BTN_TAG_LOGIN 100001
-#define BTN_TAG_REGIST 100002
-#define BTN_TAG_NEXT 100004
-#define BTN_TAG_SHOWBANKLIST 100005
-#define BTN_TAG_REALNAME  100006
-#define BTN_TAG_LOGOUT  100007
+#define BTN_TAG_FORGETPWD 100000 //忘记密码
+#define BTN_TAG_LOGIN 100001 //登录
+#define BTN_TAG_REGIST 100002 //注册
+#define BTN_TAG_NEXT 100004 //继续
+#define BTN_TAG_SHOWBANKLIST 100005 //支持银行
+#define BTN_TAG_REALNAME  100006 //实名
+#define BTN_TAG_LOGOUT  100007  //登出
+#define BTN_TAG_INOUTPAY  100008 //收付款
+#define BTN_TAG_BLANCE  100009 //余额展示
+#define BTN_TAG_CARDBAG  100010 //卡券包
+#define BTN_TAG_RECHARGE  100011 //充值
+#define BTN_TAG_TRANSFER  100012 //转账
+
+
+
 
 
 

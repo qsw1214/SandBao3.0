@@ -37,12 +37,14 @@ static CommParameter *commParameterSharedInstance = nil;
     _phoneNo = nil;
     _userId = nil;
     _realNameFlag = nil;
+    _payPassFlag = nil;
     _ownPayToolsArray = nil;
     _userInfo = nil;
     _safeQuestionFlag = nil;
     _sToken = nil;
     _nick = nil;
     _avatar = nil;
+    
 }
 
 @end

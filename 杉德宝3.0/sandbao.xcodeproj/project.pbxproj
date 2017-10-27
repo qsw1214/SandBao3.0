@@ -196,6 +196,8 @@
 		28D289B01FA2CA8000C3787E /* SandCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289AF1FA2CA8000C3787E /* SandCardViewController.m */; };
 		28D289B31FA2CA8C00C3787E /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B21FA2CA8C00C3787E /* SetViewController.m */; };
 		28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B51FA2D2D600C3787E /* MyBillViewController.m */; };
+		28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */; };
+		28D289FB1FA330D400C3787E /* opensans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289FA1FA330D400C3787E /* opensans.ttf */; };
 		28DA887B1EEA7FCD00754259 /* tab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88661EEA7FCD00754259 /* tab_bg.png */; };
 		28DA887C1EEA7FCD00754259 /* tab_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88671EEA7FCD00754259 /* tab_bg@2x.png */; };
 		28DA887D1EEA7FCD00754259 /* tab_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88681EEA7FCD00754259 /* tab_bg@3x.png */; };
@@ -220,7 +222,7 @@
 		28E82FC61ED6B5F6007FCA2B /* SDPopContainerViwe.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E82FC11ED6B5F6007FCA2B /* SDPopContainerViwe.m */; };
 		28E82FC71ED6B5F6007FCA2B /* SDPopview.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E82FC31ED6B5F6007FCA2B /* SDPopview.m */; };
 		28E82FC81ED6B5F6007FCA2B /* SDPopViewConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E82FC51ED6B5F6007FCA2B /* SDPopViewConfig.m */; };
-		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.m */; };
+		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
 		4DD1A90DEFCB099DED2ED74F /* libPods-sandbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */; };
 		A7694D081EA0C2A500BB6369 /* persenCenterList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7694C521EA0C2A500BB6369 /* persenCenterList.plist */; };
@@ -603,6 +605,8 @@
 		28D289B21FA2CA8C00C3787E /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
 		28D289B51FA2D2D600C3787E /* MyBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBillViewController.m; sourceTree = "<group>"; };
 		28D289B61FA2D2D600C3787E /* MyBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBillViewController.h; sourceTree = "<group>"; };
+		28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
+		28D289FA1FA330D400C3787E /* opensans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = opensans.ttf; sourceTree = "<group>"; };
 		28DA88661EEA7FCD00754259 /* tab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bg.png; sourceTree = "<group>"; };
 		28DA88671EEA7FCD00754259 /* tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@2x.png"; sourceTree = "<group>"; };
 		28DA88681EEA7FCD00754259 /* tab_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@3x.png"; sourceTree = "<group>"; };
@@ -631,7 +635,7 @@
 		28E82FC41ED6B5F6007FCA2B /* SDPopViewConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPopViewConfig.h; sourceTree = "<group>"; };
 		28E82FC51ED6B5F6007FCA2B /* SDPopViewConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPopViewConfig.m; sourceTree = "<group>"; };
 		28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideMenuViewController.h; sourceTree = "<group>"; };
-		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSideMenuViewController.m; sourceTree = "<group>"; };
+		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeftSideMenuViewController.mm; sourceTree = "<group>"; };
 		28EBA18C1F2F1B0B003EEA61 /* SDDrowNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDrowNoticeView.h; sourceTree = "<group>"; };
 		28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDrowNoticeView.m; sourceTree = "<group>"; };
 		2EC4B09642F881744F76DBA7 /* Pods-sandbao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sandbao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sandbao/Pods-sandbao.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1453,6 +1457,15 @@
 			path = myBill;
 			sourceTree = "<group>";
 		};
+		28D289F71FA32E1800C3787E /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				28D289FA1FA330D400C3787E /* opensans.ttf */,
+				28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		28DA88651EEA7FCD00754259 /* tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1498,7 +1511,7 @@
 			isa = PBXGroup;
 			children = (
 				28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */,
-				28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.m */,
+				28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */,
 				28D289B41FA2D29900C3787E /* myBill */,
 				288D7FB21FA2C8C4001CCAC1 /* walletAccount */,
 				288D7FB31FA2C8CB001CCAC1 /* sandPoints */,
@@ -1522,6 +1535,7 @@
 		A7694B901EA0C2A500BB6369 /* resource */ = {
 			isa = PBXGroup;
 			children = (
+				28D289F71FA32E1800C3787E /* Font */,
 				A7DF3D531DC7202B00243EF6 /* image */,
 				A7694B911EA0C2A500BB6369 /* database */,
 				A7694C501EA0C2A500BB6369 /* plist */,
@@ -2001,6 +2015,7 @@
 				283E16F91F70B45400ECC00A /* banklist_nh@3x.png in Resources */,
 				28DA888D1EEA7FCD00754259 /* tab_button_plan_sel.png in Resources */,
 				A7DF3DDF1DC7202B00243EF6 /* indicator2@3x.png in Resources */,
+				28D289FB1FA330D400C3787E /* opensans.ttf in Resources */,
 				28981B821FA01FA8004CFC95 /* login_icon_eye_default@3x.png in Resources */,
 				A7DF3DEF1DC7202B00243EF6 /* indicator8.png in Resources */,
 				28DA88841EEA7FCD00754259 /* tab_button_mine_normal.png in Resources */,
@@ -2072,6 +2087,7 @@
 				A7DF3DE71DC7202B00243EF6 /* indicator5@2x.png in Resources */,
 				A7DF3DE11DC7202B00243EF6 /* indicator3@2x.png in Resources */,
 				A7DF3DE21DC7202B00243EF6 /* indicator3@3x.png in Resources */,
+				28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */,
 				28DA888A1EEA7FCD00754259 /* tab_button_plan_normal.png in Resources */,
 				283E16FD1F70B45400ECC00A /* banklist_pa@3x.png in Resources */,
 				28DA888E1EEA7FCD00754259 /* tab_button_plan_sel@2x.png in Resources */,
@@ -2255,7 +2271,7 @@
 				282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */,
 				288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */,
 				281F64471E792A970005AE86 /* SDCollectionViewCell.m in Sources */,
-				28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.m in Sources */,
+				28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */,
 				281F64451E792A970005AE86 /* TADotView.m in Sources */,
 				28981B871FA01FA8004CFC95 /* NameAuthToolView.m in Sources */,
 				28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */,

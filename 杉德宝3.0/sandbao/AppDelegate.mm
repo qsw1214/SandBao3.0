@@ -46,15 +46,15 @@
     [WeiboSDK registerApp:WB_App_Key];
     
     
-    //IQkeyBoard配置
+    // 1.IQkeyBoard配置
     [self IQKeyBoardSet];
     
-    // 1.创建窗口
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
+    // 2.window设置
+    [self setWindows];
+
 //    return [self testView];
     
-    // 2.loading
+    // 3.loading
     NSInteger loadingResult = [Loading startLoading];
     loadingResult = 1;
     switch (loadingResult) {
@@ -81,8 +81,6 @@
                 
                 //RESidenMenu控制器
                 RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:navMainViewController leftMenuViewController:leftSideMenuVC rightMenuViewController:nil];
-                
-                self.window.backgroundColor = [UIColor whiteColor];
                 self.window.rootViewController = sideMenuVC;
             }
 
@@ -99,8 +97,6 @@
                 
                 //RESidenMenu控制器
                 RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:navMainViewController leftMenuViewController:leftSideMenuVC rightMenuViewController:nil];
-                
-                self.window.backgroundColor = [UIColor whiteColor];
                 self.window.rootViewController = sideMenuVC;
             }
                 
@@ -139,8 +135,18 @@
     keyboardManager.keyboardDistanceFromTextField = 30.f; // 输入框距离键盘的距离
 
 }
+#pragma mark - 设置window属性
+- (void)setWindows{
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIImageView * imgv =  [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    imgv.image = [UIImage imageNamed:@"Stars"];
+    [self.window addSubview:imgv];
+    
+}
 
-#pragma mark Loading失败 - 进入失败页
+
+#pragma mark - Loading失败 - 进入失败页
 - (void)loadingError:(NSString*)errorStr {
     ErrorMainViewController *mErrorMainViewController = [[ErrorMainViewController alloc] init];
     mErrorMainViewController.errorInfo = errorStr;

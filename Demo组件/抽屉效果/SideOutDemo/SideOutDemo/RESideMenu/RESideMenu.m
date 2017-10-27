@@ -83,39 +83,52 @@
 {
     _menuViewContainer = [[UIView alloc] init];
     _contentViewContainer = [[UIView alloc] init];
-    
+    //动画时间
     _animationDuration = 0.35f;
     _interactivePopGestureRecognizerEnabled = YES;
-  
-    _menuViewControllerTransformation = CGAffineTransformMakeScale(1.5f, 1.5f);
     
-    _scaleContentView = NO;
-    _scaleBackgroundImageView = YES;
+    //菜单Menu控制器的缩放
+    _menuViewControllerTransformation = CGAffineTransformMakeScale(1.1f, 1.1f);
+    
+    //内容控制器的缩放
+    _scaleContentView = YES;
+    //背景图片的缩放
+    _scaleBackgroundImageView = NO;
+    //菜单的缩放
     _scaleMenuView = NO;
+    //菜单的淡出
     _fadeMenuView = YES;
     
-    _parallaxEnabled = YES;
+    
+    //屏幕晃动效果
+    _parallaxEnabled = NO;
     _parallaxMenuMinimumRelativeValue = -15;
     _parallaxMenuMaximumRelativeValue = 15;
-    _parallaxContentMinimumRelativeValue = -25;
-    _parallaxContentMaximumRelativeValue = 25;
+    _parallaxContentMinimumRelativeValue = -15;
+    _parallaxContentMaximumRelativeValue = 15;
     
-    _bouncesHorizontally = YES;
+    _bouncesHorizontally = NO;
+    
     
     _panGestureEnabled = YES;
     _panFromEdge = YES;
     _panMinimumOpenThreshold = 60.0;
     
-    _contentViewShadowEnabled = NO;
+    //阴影效果
+    _contentViewShadowEnabled = YES;
     _contentViewShadowColor = [UIColor blackColor];
     _contentViewShadowOffset = CGSizeZero;
     _contentViewShadowOpacity = 0.4f;
     _contentViewShadowRadius = 8.0f;
-    _contentViewFadeOutAlpha = 1.0f;
-    _contentViewInLandscapeOffsetCenterX = 30.f;
-    _contentViewInPortraitOffsetCenterX  = 30.f;
-    _contentViewScaleValue = 0.7f;
-}
+    
+    //控制器的透明效果
+    _contentViewFadeOutAlpha = 0.9f;
+    //内容控制器的缩放及偏移(屏幕中点为原点)
+    _contentViewInLandscapeOffsetCenterX = 0;
+    //控制肖像视图(前景视图)的偏移量(0为偏移半个UIScreen)
+    _contentViewInPortraitOffsetCenterX  = [UIScreen mainScreen].bounds.size.width/4;
+    //控制器的缩放效果
+    _contentViewScaleValue = 0.96f;}
 
 #pragma mark -
 #pragma mark Public methods
