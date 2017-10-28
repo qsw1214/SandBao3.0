@@ -35,6 +35,13 @@
 		281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F64411E792A970005AE86 /* UIView+SDExtension.m */; };
 		281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F644C1E7934B40005AE86 /* SDBannerView.m */; };
 		2820D1AF1E7BE8120012C067 /* SDCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2820D1AE1E7BE8120012C067 /* SDCircleView.m */; };
+		282143D71FA4124200E6D489 /* SDRechargePop_nol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143D51FA4124200E6D489 /* SDRechargePop_nol@2x.png */; };
+		282143D81FA4124200E6D489 /* SDRechargePop_nol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143D61FA4124200E6D489 /* SDRechargePop_nol@3x.png */; };
+		282143DB1FA4124A00E6D489 /* SDRechargePop_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143D91FA4124A00E6D489 /* SDRechargePop_sel@2x.png */; };
+		282143DC1FA4124A00E6D489 /* SDRechargePop_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DA1FA4124A00E6D489 /* SDRechargePop_sel@3x.png */; };
+		282143DF1FA4147C00E6D489 /* login_list_icon_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */; };
+		282143E01FA4147C00E6D489 /* login_list_icon_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */; };
+		282143E81FA457B100E6D489 /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282143E71FA457B100E6D489 /* RechargeViewController.m */; };
 		2821B77F1E778B2200F093D7 /* loading-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77A1E778B2200F093D7 /* loading-568h@2x.png */; };
 		2821B7811E778B2200F093D7 /* loading-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77C1E778B2200F093D7 /* loading-736h@3x.png */; };
 		2821B7821E778B2200F093D7 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77D1E778B2200F093D7 /* loading.png */; };
@@ -356,6 +363,14 @@
 		281F644C1E7934B40005AE86 /* SDBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBannerView.m; sourceTree = "<group>"; };
 		2820D1AD1E7BE8120012C067 /* SDCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCircleView.h; sourceTree = "<group>"; };
 		2820D1AE1E7BE8120012C067 /* SDCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCircleView.m; sourceTree = "<group>"; };
+		282143D51FA4124200E6D489 /* SDRechargePop_nol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_nol@2x.png"; sourceTree = "<group>"; };
+		282143D61FA4124200E6D489 /* SDRechargePop_nol@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_nol@3x.png"; sourceTree = "<group>"; };
+		282143D91FA4124A00E6D489 /* SDRechargePop_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_sel@2x.png"; sourceTree = "<group>"; };
+		282143DA1FA4124A00E6D489 /* SDRechargePop_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_sel@3x.png"; sourceTree = "<group>"; };
+		282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@3x.png"; sourceTree = "<group>"; };
+		282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@2x.png"; sourceTree = "<group>"; };
+		282143E61FA457B100E6D489 /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
+		282143E71FA457B100E6D489 /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
 		2821B77A1E778B2200F093D7 /* loading-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-568h@2x.png"; sourceTree = "<group>"; };
 		2821B77C1E778B2200F093D7 /* loading-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-736h@3x.png"; sourceTree = "<group>"; };
 		2821B77D1E778B2200F093D7 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
@@ -916,6 +931,35 @@
 			path = SDCircleView;
 			sourceTree = "<group>";
 		};
+		282143D41FA4122700E6D489 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */,
+				282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */,
+				282143D91FA4124A00E6D489 /* SDRechargePop_sel@2x.png */,
+				282143DA1FA4124A00E6D489 /* SDRechargePop_sel@3x.png */,
+				282143D51FA4124200E6D489 /* SDRechargePop_nol@2x.png */,
+				282143D61FA4124200E6D489 /* SDRechargePop_nol@3x.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		282143E41FA4579200E6D489 /* transfer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = transfer;
+			sourceTree = "<group>";
+		};
+		282143E51FA4579200E6D489 /* recharge */ = {
+			isa = PBXGroup;
+			children = (
+				282143E61FA457B100E6D489 /* RechargeViewController.h */,
+				282143E71FA457B100E6D489 /* RechargeViewController.m */,
+			);
+			path = recharge;
+			sourceTree = "<group>";
+		};
 		2821B7841E77B25A00F093D7 /* HeadImageBtnView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1256,6 +1300,8 @@
 			children = (
 				28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */,
 				28D289A31FA2CA3700C3787E /* WalletAccountViewController.m */,
+				282143E51FA4579200E6D489 /* recharge */,
+				282143E41FA4579200E6D489 /* transfer */,
 			);
 			path = walletAccount;
 			sourceTree = "<group>";
@@ -1408,6 +1454,7 @@
 		28D28A461FA351BD00C3787E /* SDRechargePop */ = {
 			isa = PBXGroup;
 			children = (
+				282143D41FA4122700E6D489 /* image */,
 				28D28A471FA351EC00C3787E /* SDRechargePopView.h */,
 				28D28A481FA351EC00C3787E /* SDRechargePopView.m */,
 			);
@@ -1764,6 +1811,7 @@
 		A7FF2F941E1601CB0068A2F7 /* customView */ = {
 			isa = PBXGroup;
 			children = (
+				28E82FBF1ED6B5F6007FCA2B /* SDPopView */,
 				28981B5C1FA01FA8004CFC95 /* SDAuthToolsView */,
 				283E16771F70B45300ECC00A /* SDPayToolView */,
 				2841F61D1F53C52100BD23C8 /* SDWaveAnimationView */,
@@ -1774,7 +1822,6 @@
 				2820D1AC1E7BE8120012C067 /* SDCircleView */,
 				286BFCA91EE92A3100FD9731 /* SDScanView */,
 				2804B0981EDEA3B10031CD10 /* SDMajletManager */,
-				28E82FBF1ED6B5F6007FCA2B /* SDPopView */,
 				A7D24CD81E973D9E00688506 /* webViewProgress */,
 				281F644A1E7934590005AE86 /* BannerView */,
 				2821B7841E77B25A00F093D7 /* HeadImageBtnView */,
@@ -1930,6 +1977,7 @@
 				283E16ED1F70B45300ECC00A /* banklist_hs@3x.png in Resources */,
 				283E171A1F70B45400ECC00A /* payClosed@2x.png in Resources */,
 				283E16E21F70B45300ECC00A /* banklist_dy@2x.png in Resources */,
+				282143DC1FA4124A00E6D489 /* SDRechargePop_sel@3x.png in Resources */,
 				A7DF3DEA1DC7202B00243EF6 /* indicator6@2x.png in Resources */,
 				28DA888F1EEA7FCD00754259 /* tab_button_plan_sel@3x.png in Resources */,
 				283E16E31F70B45300ECC00A /* banklist_dy@3x.png in Resources */,
@@ -2010,6 +2058,7 @@
 				A7DF3DDC1DC7202B00243EF6 /* indicator1@3x.png in Resources */,
 				283E16EC1F70B45300ECC00A /* banklist_hs@2x.png in Resources */,
 				A7DF3DED1DC7202B00243EF6 /* indicator7@2x.png in Resources */,
+				282143DF1FA4147C00E6D489 /* login_list_icon_closed@3x.png in Resources */,
 				A7DF3DE71DC7202B00243EF6 /* indicator5@2x.png in Resources */,
 				A7DF3DE11DC7202B00243EF6 /* indicator3@2x.png in Resources */,
 				A7DF3DE21DC7202B00243EF6 /* indicator3@3x.png in Resources */,
@@ -2019,6 +2068,7 @@
 				28DA888E1EEA7FCD00754259 /* tab_button_plan_sel@2x.png in Resources */,
 				283E17141F70B45400ECC00A /* list_xiaofei@2x.png in Resources */,
 				283E16DC1F70B45300ECC00A /* banklist_bh@2x.png in Resources */,
+				282143E01FA4147C00E6D489 /* login_list_icon_closed@2x.png in Resources */,
 				283E17091F70B45400ECC00A /* banklist_yz@3x.png in Resources */,
 				282D90341EF769B000CF8C28 /* SDMBPLoad.png in Resources */,
 				283E171F1F70B45400ECC00A /* payHelp@3x.png in Resources */,
@@ -2029,10 +2079,12 @@
 				283E17021F70B45400ECC00A /* banklist_shns@2x.png in Resources */,
 				28981B851FA01FA8004CFC95 /* login_list_icon_closed@2x.png in Resources */,
 				283DBD341ECAA1A400B84E3E /* WeiboSDK.bundle in Resources */,
+				282143DB1FA4124A00E6D489 /* SDRechargePop_sel@2x.png in Resources */,
 				283E17181F70B45400ECC00A /* payChooseBtn@2x.png in Resources */,
 				283E17121F70B45400ECC00A /* list_sand_logo@2x.png in Resources */,
 				283E16E91F70B45300ECC00A /* banklist_gh@3x.png in Resources */,
 				283E16E71F70B45300ECC00A /* banklist_gf@3x.png in Resources */,
+				282143D81FA4124200E6D489 /* SDRechargePop_nol@3x.png in Resources */,
 				28DA888B1EEA7FCD00754259 /* tab_button_plan_normal@2x.png in Resources */,
 				283E16DF1F70B45300ECC00A /* banklist_bj@3x.png in Resources */,
 				283E16F01F70B45400ECC00A /* banklist_js@2x.png in Resources */,
@@ -2040,6 +2092,7 @@
 				283E170C1F70B45400ECC00A /* banklist_zx@2x.png in Resources */,
 				283E17081F70B45400ECC00A /* banklist_yz@2x.png in Resources */,
 				283E16F61F70B45400ECC00A /* banklist_nb@2x.png in Resources */,
+				282143D71FA4124200E6D489 /* SDRechargePop_nol@2x.png in Resources */,
 				283E16F11F70B45400ECC00A /* banklist_js@3x.png in Resources */,
 				A7694D0A1EA0C2A500BB6369 /* set.plist in Resources */,
 				A7DF3DF21DC7202B00243EF6 /* indicator9.png in Resources */,
@@ -2238,6 +2291,7 @@
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,
 				288421931F8E091200082E7C /* NSRegularExpression+Verification.m in Sources */,
 				28D28A491FA351EC00C3787E /* SDRechargePopView.m in Sources */,
+				282143E81FA457B100E6D489 /* RechargeViewController.m in Sources */,
 				288421B21F8E095E00082E7C /* MqttStatus.m in Sources */,
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,
 				283E16DB1F70B45300ECC00A /* SDPayView.m in Sources */,

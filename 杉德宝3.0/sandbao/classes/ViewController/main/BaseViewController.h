@@ -81,8 +81,10 @@
 
 #pragma -mark 字体:font
 #define FONT_36_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:36]
+#define FONT_36_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:36]
 #define FONT_35_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:35]
 #define FONT_28_Medium   [UIFont fontWithName:@"PingFang-SC-Medium" size:28]
+#define FONT_24_Medium   [UIFont fontWithName:@"PingFang-SC-Medium" size:24]
 #define FONT_20_Medium   [UIFont fontWithName:@"SFUIText-Medium" size:20]
 #define FONT_20_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:20]
 #define FONT_16_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:16]
@@ -91,6 +93,7 @@
 #define FONT_13_OpenSan  [UIFont fontWithName:@"OpenSans" size:13]
 #define FONT_13_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:13]
 #define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
+#define FONT_11_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:11]
 #define FONT_10_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:10]
 #define FONT_08_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:8]
 
@@ -102,6 +105,8 @@
 #define COLOR_343339 HexRGBA(0x343339,1.f)
 //黑色(0.7透明度)
 #define COLOR_343339_7 HexRGBA(0x343339,0.7f)
+//黑色(0.5透明度)
+#define COLOR_343339_5 HexRGBA(0x343339,0.5f)
 //灰色
 #define COLOR_666666 HexRGBA(0x666666,1.f)
 //背景灰

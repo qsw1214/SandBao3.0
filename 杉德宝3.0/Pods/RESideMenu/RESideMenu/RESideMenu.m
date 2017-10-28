@@ -118,7 +118,7 @@
     _contentViewShadowEnabled = YES;
     _contentViewShadowColor = [UIColor blackColor];
     _contentViewShadowOffset = CGSizeZero;
-    _contentViewShadowOpacity = 0.9f;
+    _contentViewShadowOpacity = 1.f;
     _contentViewShadowRadius = 8.0f;
     
     //内容控制器的缩放及偏移(屏幕中点为原点)

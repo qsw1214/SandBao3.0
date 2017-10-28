@@ -8,9 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
+
+/**
+ 选择框点击回调
+
+ @param cellName 选择框名
+ */
+typedef void(^SDRechargePopChooseBlock)(NSString *cellName);
+
 @interface SDRechargePopView : UIView
 
-+ (void)showRechargePopView:(NSString*)title chooseList:(NSArray*)listArray;
+@property (nonatomic, copy) SDRechargePopChooseBlock chooseBlock;
+/**
+ 显示控件
+
+ @param title 名字
+ @param listArray 列表名
+ */
++ (void)showRechargePopView:(NSString*)title chooseList:(NSArray*)listArray rechargeChooseBlock:(SDRechargePopChooseBlock)block;
 
 
 @end

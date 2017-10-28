@@ -8,7 +8,7 @@
 
 #import "MyBillViewController.h"
 
-#import "SDRechargePopView.h"
+
 
 @interface MyBillViewController ()
 
@@ -34,9 +34,7 @@
     self.navCoverView.rightImgStr = @"";
 
     
-    [SDRechargePopView showRechargePopView:@"" chooseList:nil];
-    
-    
+ 
 }
 
 #pragma mark - 重写父类-点击方法集合

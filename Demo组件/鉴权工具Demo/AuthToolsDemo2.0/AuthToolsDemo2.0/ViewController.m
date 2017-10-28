@@ -17,6 +17,7 @@
 #import "BankAuthToolView.h"
 #import "BankPickerView.h"
 
+
 #import "NextViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -48,16 +49,18 @@
 //    //密码框的测试
 //    [self testFiv];
 //
-    //姓名框的测试
-     [self testSix];
+//    //姓名框的测试
+//     [self testSix];
 //
 //    //证件号的测试
 //    [self testSev];
 //
-//    //银行卡号测试
-//    [self testeight];
+    //银行卡号测试
+    [self testeight];
     
-  
+
+ 
+    
 }
 
 - (void)testeight{

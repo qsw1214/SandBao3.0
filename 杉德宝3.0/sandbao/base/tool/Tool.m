@@ -569,6 +569,18 @@
     return imgv;
 }
 
+#pragma mark -  textfield工厂方法
++ (UITextField*)createTextField:(NSString*)placehold font:(UIFont*)font textColor:(UIColor*)textColor{
+    
+    UITextField *textf = [[UITextField alloc] init];
+    textf.font = font;
+    textf.textColor = textColor;
+    
+    CGSize textfSize  = [textf sizeThatFits:CGSizeZero];
+    textf.frame = CGRectMake(0, 0, textfSize.width, textfSize.height);
+    
+    return textf;
+}
 
 #pragma mark -  Label工厂方法
 + (UILabel*)createLable:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor alignment:(NSTextAlignment)alignment {

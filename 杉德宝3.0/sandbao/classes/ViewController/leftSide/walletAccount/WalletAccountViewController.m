@@ -9,11 +9,17 @@
 #import "WalletAccountViewController.h"
 
 #import "GradualView.h"
+#import "SDRechargePopView.h"
+
+#import "RechargeViewController.h"
 
 @interface WalletAccountViewController ()
 {
     //headView
     GradualView *headView;
+    
+    //存放弹出view的描述信息的数组
+    NSArray *choosePopInfoArray;
 }
 @end
 
@@ -49,9 +55,34 @@
     
     if (btn.tag == BTN_TAG_RECHARGE) {
         NSLog(@"充值");
+        choosePopInfoArray = @[@"银行卡充值",@"代付凭证充值"];
+        [SDRechargePopView showRechargePopView:@"选择充值账户" chooseList:choosePopInfoArray rechargeChooseBlock:^(NSString *cellName) {
+            
+            //充值
+            if ([cellName isEqualToString:@"银行卡充值"]) {
+                RechargeViewController *rechargeVC = [[RechargeViewController alloc] init];
+                [self.navigationController pushViewController:rechargeVC animated:YES];
+            }
+            if ([cellName isEqualToString:@"代付凭证充值"]) {
+                
+            }
+        }];
+        
     }
     if (btn.tag == BTN_TAG_TRANSFER) {
         NSLog(@"转账");
+        choosePopInfoArray = @[@"个人银行卡",@"杉德宝用户"];
+        [SDRechargePopView showRechargePopView:@"选择充值账户" chooseList:choosePopInfoArray  rechargeChooseBlock:^(NSString *cellName) {
+            
+            //转账
+            if ([cellName isEqualToString:@"个人银行卡"]) {
+                
+            }
+            if ([cellName isEqualToString:@"杉德宝用户"]) {
+                
+            }
+        }];
+
     }
 }
 
@@ -110,7 +141,7 @@
     UILabel *rechargeLab = [Tool createLable:@"充值" attributeStr:nil font:FONT_15_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     [rechargeAccBtn addSubview:rechargeLab];
     rechargeAccBtn.width = rechargeImg.size.width + LEFTRIGHTSPACE_50 *2;
-    rechargeAccBtn.height = rechargeImg.size.height + UPDOWNSPACE_30 + UPDOWNSPACE_20 + UPDOWNSPACE_58;
+    rechargeAccBtn.height = rechargeImg.size.height + UPDOWNSPACE_30 + UPDOWNSPACE_20 + rechargeLab.height + UPDOWNSPACE_58;
     
     CGFloat leftAndRightMargin = (SCREEN_WIDTH - LEFTRIGHTSPACE_12 - rechargeAccBtn.width*2)/2;
     
@@ -169,8 +200,6 @@
     
     
 }
-
-
 
 
 - (void)didReceiveMemoryWarning {

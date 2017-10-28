@@ -174,6 +174,18 @@ typedef void(^DefulBtnBlock)();
  */
 + (UIImageView*)createImagView:(UIImage*)image;
 
+#pragma mark -  textfield工厂方法
+
+/**
+ textfield工厂方法
+
+ @param placehold 预留字
+ @param font font
+ @param textColor 颜色
+ @return 实例
+ */
++ (UITextField*)createTextField:(NSString*)placehold font:(UIFont*)font textColor:(UIColor*)textColor;
+
 
 #pragma mark -  Label工厂方法
 /**
