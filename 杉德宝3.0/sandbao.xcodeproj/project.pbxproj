@@ -42,6 +42,7 @@
 		282143DF1FA4147C00E6D489 /* login_list_icon_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */; };
 		282143E01FA4147C00E6D489 /* login_list_icon_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */; };
 		282143E81FA457B100E6D489 /* RechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282143E71FA457B100E6D489 /* RechargeViewController.m */; };
+		2821445A1FA4B34A00E6D489 /* RechargeFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 282144591FA4B34A00E6D489 /* RechargeFinishViewController.m */; };
 		2821B77F1E778B2200F093D7 /* loading-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77A1E778B2200F093D7 /* loading-568h@2x.png */; };
 		2821B7811E778B2200F093D7 /* loading-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77C1E778B2200F093D7 /* loading-736h@3x.png */; };
 		2821B7821E778B2200F093D7 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77D1E778B2200F093D7 /* loading.png */; };
@@ -371,6 +372,8 @@
 		282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@2x.png"; sourceTree = "<group>"; };
 		282143E61FA457B100E6D489 /* RechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeViewController.h; sourceTree = "<group>"; };
 		282143E71FA457B100E6D489 /* RechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeViewController.m; sourceTree = "<group>"; };
+		282144581FA4B34A00E6D489 /* RechargeFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFinishViewController.h; sourceTree = "<group>"; };
+		282144591FA4B34A00E6D489 /* RechargeFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeFinishViewController.m; sourceTree = "<group>"; };
 		2821B77A1E778B2200F093D7 /* loading-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-568h@2x.png"; sourceTree = "<group>"; };
 		2821B77C1E778B2200F093D7 /* loading-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-736h@3x.png"; sourceTree = "<group>"; };
 		2821B77D1E778B2200F093D7 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
@@ -956,6 +959,8 @@
 			children = (
 				282143E61FA457B100E6D489 /* RechargeViewController.h */,
 				282143E71FA457B100E6D489 /* RechargeViewController.m */,
+				282144581FA4B34A00E6D489 /* RechargeFinishViewController.h */,
+				282144591FA4B34A00E6D489 /* RechargeFinishViewController.m */,
 			);
 			path = recharge;
 			sourceTree = "<group>";
@@ -2217,6 +2222,7 @@
 				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
 				283E16D61F70B45300ECC00A /* SDPaySuccessAnimationView.m in Sources */,
+				2821445A1FA4B34A00E6D489 /* RechargeFinishViewController.m in Sources */,
 				A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */,
 				2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */,
 				A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */,

@@ -8,6 +8,8 @@
 
 #import "RechargeViewController.h"
 
+#import "RechargeFinishViewController.h"
+
 @interface RechargeViewController ()
 {
     
@@ -27,6 +29,7 @@
     [self create_HeadView];
     [self create_TipView];
     [self create_BodyView];
+    [self create_NextBarBtn];
 }
 
 
@@ -34,7 +37,7 @@
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
-    self.baseScrollView.backgroundColor = COLOR_D8D8D8_7;
+    self.baseScrollView.backgroundColor = COLOR_F5F5F5;
     
 }
 #pragma mark - 重写父类-导航设置方法
@@ -55,6 +58,10 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    if (btn.tag == BTN_TAG_RECHARGE) {
+        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
+    }
     
 }
 
@@ -114,12 +121,12 @@
 - (void)create_TipView{
     
     tipView = [[UIView alloc] init];
-    tipView.backgroundColor = COLOR_D8D8D8_7;
+    tipView.backgroundColor = COLOR_F5F5F5;
     [self.baseScrollView addSubview:tipView];
     
     //tipLab
     UILabel *tipLab = [Tool createLable:@"该卡最多可免费充值1000.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
-    [headView addSubview:tipLab];
+    [tipView addSubview:tipLab];
     
     tipView.height = tipLab.height + UPDOWNSPACE_15*2;
     CGFloat tipLabW = SCREEN_WIDTH - LEFTRIGHTSPACE_35;
@@ -156,10 +163,16 @@
     
     //moneyTextfield
     UITextField *moneyTextfield = [Tool createTextField:@"0.00" font:FONT_36_SFUIT_Rrgular textColor:COLOR_343339_5];
+    moneyTextfield.keyboardType = UIKeyboardTypeNumberPad;
+    moneyTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
+    moneyTextfield.height += UPDOWNSPACE_30*2;
+    moneyTextfield.width = SCREEN_WIDTH - LEFTRIGHTSPACE_55;
     [bodyView addSubview:moneyTextfield];
     
     //line
     UIView *line = [[UIView alloc] init];
+    line.backgroundColor = COLOR_A1A2A5_3;
+    line.size = CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_20, 1);
     [bodyView addSubview:line];
     
     //bottomTipLab
@@ -167,17 +180,74 @@
     [bodyView addSubview:bottomTipLab];
     
     //bottomBtn
-    UIButton *bottomBtn = [Tool createButton:@"" attributeStr:nil font:FONT_13_Regular textColor:COLOR_FF5D31];
+    UIButton *bottomBtn = [Tool createButton:@"全部充值" attributeStr:nil font:FONT_13_Regular textColor:COLOR_FF5D31];
+    bottomBtn.size = CGSizeMake(bottomBtn.width, bottomBtn.height + UPDOWNSPACE_25);
     [bodyView addSubview:bottomBtn];
     
     
+    CGFloat bodyViewH = UPDOWNSPACE_20 + rechargeMoneyLab.height + moneyTextfield.height + UPDOWNSPACE_25 + bottomTipLab.height + UPDOWNSPACE_25;
     
+    [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tipView.mas_bottom);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, bodyViewH));
+    }];
     
+    [rechargeMoneyLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bodyView.mas_top).offset(UPDOWNSPACE_20);
+        make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_35);
+        make.size.mas_equalTo(rechargeMoneyLab.size);
+    }];
     
+    [moneyTextfield mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(rechargeMoneyLab.mas_bottom).offset(UPDOWNSPACE_0);
+        make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_55);
+        make.size.mas_equalTo(CGSizeMake(moneyTextfield.width, moneyTextfield.height));
+    }];
+    
+    [rmbLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(moneyTextfield.mas_centerY);
+        make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_35);
+        make.size.mas_equalTo(rmbLab.size);
+    }];
+    
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(moneyTextfield.mas_bottom);
+        make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_20);
+        make.size.mas_equalTo(line.size);
+    }];
+    
+    [bottomTipLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(line.mas_bottom).offset(UPDOWNSPACE_25);
+        make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_35);
+        make.size.mas_equalTo(bottomTipLab.size);
+    }];
+    
+    [bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(bottomTipLab.mas_centerY);
+        make.right.equalTo(bodyView.mas_right).offset(-LEFTRIGHTSPACE_20);
+        make.size.mas_equalTo(bottomBtn.size);
+    }];
+    
+
+
     
 }
 
-
+- (void)create_NextBarBtn{
+    //rechargeBtn
+    UIButton *rechargeBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    rechargeBtn.tag = BTN_TAG_RECHARGE;
+    [rechargeBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.baseScrollView addSubview:rechargeBtn];
+    
+    [rechargeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bodyView.mas_bottom).offset(UPDOWNSPACE_69);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.size.mas_equalTo(rechargeBtn.size);
+    }];
+    
+}
 
 
 

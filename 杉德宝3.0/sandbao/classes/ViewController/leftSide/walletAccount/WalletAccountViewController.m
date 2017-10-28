@@ -38,7 +38,7 @@
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     
-    self.baseScrollView.backgroundColor = COLOR_D8D8D8_7;
+    self.baseScrollView.backgroundColor = COLOR_F5F5F5;
     
 }
 #pragma mark - 重写父类-导航设置方法
