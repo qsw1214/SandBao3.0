@@ -1,5 +1,5 @@
 //
-//  RechargeViewController.h
+//  BankCardRechargeViewController.h
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/28.
@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface RechargeViewController : BaseViewController
+@interface BankCardRechargeViewController : BaseViewController
 
 @end

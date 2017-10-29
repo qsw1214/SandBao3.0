@@ -11,7 +11,9 @@
 #import "GradualView.h"
 #import "SDRechargePopView.h"
 
-#import "RechargeViewController.h"
+#import "BankCardRechargeViewController.h"
+#import "PaymentRechargeViewController.h"
+
 
 @interface WalletAccountViewController ()
 {
@@ -58,11 +60,12 @@
             
             //充值
             if ([cellName isEqualToString:@"银行卡充值"]) {
-                RechargeViewController *rechargeVC = [[RechargeViewController alloc] init];
+                BankCardRechargeViewController *rechargeVC = [[BankCardRechargeViewController alloc] init];
                 [self.navigationController pushViewController:rechargeVC animated:YES];
             }
             if ([cellName isEqualToString:@"代付凭证充值"]) {
-                
+                PaymentRechargeViewController *paymentVC = [[PaymentRechargeViewController alloc] init];
+                [self.navigationController pushViewController:paymentVC animated:YES];
             }
         }];
         

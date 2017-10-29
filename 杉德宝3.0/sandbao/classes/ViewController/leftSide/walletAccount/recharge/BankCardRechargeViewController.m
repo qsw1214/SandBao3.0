@@ -1,16 +1,19 @@
 //
-//  RechargeViewController.m
+//  BankCardRechargeViewController.m
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/28.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "RechargeViewController.h"
+#import "BankCardRechargeViewController.h"
 
 #import "RechargeFinishViewController.h"
 
-@interface RechargeViewController ()
+/**
+ 银行卡充值
+ */
+@interface BankCardRechargeViewController ()
 {
     
     UIView *headView;
@@ -20,7 +23,7 @@
 }
 @end
 
-@implementation RechargeViewController
+@implementation BankCardRechargeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,11 +47,11 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
-    self.navCoverView.midTitleStr = @"充值";
+    self.navCoverView.midTitleStr = @"银行卡充值";
     self.navCoverView.letfImgStr = @"general_icon_back";
 
     
-    __block RechargeViewController *selfBlock = self;
+    __block BankCardRechargeViewController *selfBlock = self;
     self.navCoverView.leftBlock = ^{
         [selfBlock.navigationController popViewControllerAnimated:YES];
     };

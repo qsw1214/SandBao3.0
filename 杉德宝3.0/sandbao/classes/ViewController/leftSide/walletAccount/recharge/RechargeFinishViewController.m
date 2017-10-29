@@ -45,7 +45,7 @@
  
     
     __block RechargeFinishViewController *selfBlock = self;
-    self.navCoverView.leftBlock = ^{
+    self.navCoverView.rightBlock = ^{
         [selfBlock.navigationController popToRootViewControllerAnimated:YES];
     };
 
