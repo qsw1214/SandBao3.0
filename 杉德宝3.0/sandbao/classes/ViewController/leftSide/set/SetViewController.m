@@ -30,13 +30,7 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
     self.navCoverView.midTitleStr = @"设置";
-    self.navCoverView.letfImgStr = @"";
-    self.navCoverView.rightImgStr = @"";
-    
-    
-    
-    
-    
+  
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{

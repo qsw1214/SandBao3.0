@@ -51,8 +51,8 @@
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
-    self.navCoverView.rightImgStr = nil;
-    self.navCoverView.midTitleStr = nil;
+    self.navCoverView.letfImgStr = @"login_icon_back";
+
     __block UIViewController *weakself = self;
     self.navCoverView.leftBlock = ^{
         [weakself.navigationController popViewControllerAnimated:YES];

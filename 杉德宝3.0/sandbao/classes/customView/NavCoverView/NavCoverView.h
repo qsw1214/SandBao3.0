@@ -50,9 +50,20 @@ typedef NS_ENUM(NSInteger,NavCoverViewStyle){
 
 
 /**
+ 左边标题名
+ */
+@property (nonatomic, strong) NSString *leftTitleStr;
+
+
+/**
  右边图片名
  */
 @property (nonatomic, strong) NSString *rightImgStr;
+
+/**
+ 右边标题名
+ */
+@property (nonatomic, strong) NSString *rightTitleStr;
 
 
 /**

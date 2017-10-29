@@ -32,12 +32,6 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
     self.navCoverView.midTitleStr = @"银行卡";
-    self.navCoverView.letfImgStr = @"";
-    self.navCoverView.rightImgStr = @"";
-    
-    
-    
-    
     
 }
 #pragma mark - 重写父类-点击方法集合

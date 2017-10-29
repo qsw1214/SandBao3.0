@@ -58,8 +58,10 @@
     self.navCoverView = [NavCoverView createNavCorverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.midTitleStr = @"可爱的测试标题";
-    self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.rightImgStr = @"login_icon_back";
+    self.navCoverView.letfImgStr = nil;
+    self.navCoverView.leftTitleStr = nil;
+    self.navCoverView.rightImgStr = nil;
+    self.navCoverView.rightTitleStr = nil;
     
     self.navCoverView.leftBlock = ^{
         NSLog(@"BaseViewController -- navCoverView -- leftBlock");

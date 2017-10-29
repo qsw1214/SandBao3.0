@@ -16,6 +16,8 @@
     UIButton *rightBtn;
     UIImageView *imgLeftV;
     UIImageView *imgRightV;
+    UILabel *labLeft;
+    UILabel *labRight;
     CGFloat leftSpace;
     //渐变色
     CAGradientLayer *layerRGB;
@@ -67,21 +69,37 @@
     [baseView addSubview:labTitle];
     
     //左边按钮
-    leftBtn = [[UIButton alloc] init];
+    leftBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [leftBtn addTarget:self action:@selector(clickLeft:) forControlEvents:UIControlEventTouchUpInside];
     UIImage *imgleft = [UIImage imageNamed:@""];
     imgLeftV = [[UIImageView alloc] initWithImage:imgleft];
-    [baseView addSubview:leftBtn];
     [leftBtn addSubview:imgLeftV];
+    
+    labLeft = [[UILabel alloc] initWithFrame:CGRectZero];
+    labLeft.textAlignment = NSTextAlignmentLeft;
+    labLeft.font =[UIFont fontWithName:@"PingFang-SC-Regular" size:15];
+    labLeft.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+    [leftBtn addSubview:labLeft];
+    
+    [baseView addSubview:leftBtn];
+    
     
     
     //右边的按钮
-    rightBtn = [[UIButton alloc] init];
+    rightBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [rightBtn addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
     UIImage *imgRight = [UIImage imageNamed:@""];
     imgRightV = [[UIImageView alloc] initWithImage:imgRight];
-    [baseView addSubview:rightBtn];
     [rightBtn addSubview:imgRightV];
+    
+    labRight = [[UILabel alloc] initWithFrame:CGRectZero];
+    labRight.textAlignment = NSTextAlignmentRight;
+    labRight.font =[UIFont fontWithName:@"PingFang-SC-Regular" size:15];
+    labRight.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+    [rightBtn addSubview:labRight];
+    
+    [baseView addSubview:rightBtn];
+    
     
    
 }
@@ -135,6 +153,20 @@
 
 }
 
+- (void)setLeftTitleStr:(NSString *)leftTitleStr{
+    
+    _leftTitleStr = leftTitleStr;
+    
+    labLeft.text = leftTitleStr;
+    
+    CGSize labSize = [labLeft sizeThatFits:CGSizeZero];
+    CGFloat labLeftOY = (baseView.frame.size.height - labSize.height)/2;
+    labLeft.frame = CGRectMake(leftSpace, labLeftOY, labSize.width, labSize.height);
+    leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
+
+}
+
+
 - (void)setRightImgStr:(NSString *)rightImgStr{
     
     _rightImgStr = rightImgStr;
@@ -149,6 +181,22 @@
     rightBtn.frame = CGRectMake(rightBtnOX, 0, self.frame.size.width/4, baseView.frame.size.height);
 
 }
+
+- (void)setRightTitleStr:(NSString *)rightTitleStr{
+    _rightTitleStr = rightTitleStr;
+    
+    labRight.text = rightTitleStr;
+    
+    CGSize labSize = [labRight sizeThatFits:CGSizeZero];
+    CGFloat labLeftOY = (baseView.frame.size.height - labSize.height)/2;
+    CGFloat labLeftOX = (baseView.frame.size.width/4 - leftSpace - labSize.width);
+    labRight.frame = CGRectMake(labLeftOX, labLeftOY, labSize.width, labSize.height);
+
+    CGFloat rightBtnOX = baseView.frame.size.width*3/4;
+    rightBtn.frame = CGRectMake(rightBtnOX, 0, self.frame.size.width/4, baseView.frame.size.height);
+    
+}
+
 
 - (void)clickLeft:(UIButton*)btn{
     _leftBlock();

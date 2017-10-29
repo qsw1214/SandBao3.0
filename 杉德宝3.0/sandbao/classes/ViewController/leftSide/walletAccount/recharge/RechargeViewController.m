@@ -46,7 +46,7 @@
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.midTitleStr = @"充值";
     self.navCoverView.letfImgStr = @"general_icon_back";
-    self.navCoverView.rightImgStr = @"";
+
     
     __block RechargeViewController *selfBlock = self;
     self.navCoverView.leftBlock = ^{

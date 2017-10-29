@@ -30,8 +30,6 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
     self.navCoverView.midTitleStr = @"我的账单";
-    self.navCoverView.letfImgStr = @"";
-    self.navCoverView.rightImgStr = @"";
 
     
  
