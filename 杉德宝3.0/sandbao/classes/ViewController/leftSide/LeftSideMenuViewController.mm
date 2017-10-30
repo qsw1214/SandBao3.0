@@ -50,6 +50,8 @@
     [super viewWillAppear:animated];
     //滚动到顶部
     self.baseScrollView.scrollsToTop = YES;
+    
+    
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];

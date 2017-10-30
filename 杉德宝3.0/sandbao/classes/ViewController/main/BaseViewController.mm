@@ -16,7 +16,12 @@
 
 @implementation BaseViewController
 
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //基础配置 - 禁用RESideMenu的侧滑手势(子类控制器需要开启时,子类自己去修改为YES开启)
+    self.sideMenuViewController.panGestureEnabled = NO;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     

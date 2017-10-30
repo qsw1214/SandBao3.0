@@ -17,15 +17,23 @@
 
 @implementation RechargeFinishViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.sideMenuViewController.panGestureEnabled = NO;
+    self.baseScrollView.pagingEnabled = NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
     
     [self create_HeadView];
     [self create_BodyView];
     
 }
-
 
 
 
@@ -48,7 +56,6 @@
     self.navCoverView.rightBlock = ^{
         [selfBlock.navigationController popToRootViewControllerAnimated:YES];
     };
-
     
 }
 #pragma mark - 重写父类-点击方法集合

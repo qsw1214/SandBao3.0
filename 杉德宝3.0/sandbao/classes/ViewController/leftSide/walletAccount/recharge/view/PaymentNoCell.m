@@ -24,7 +24,7 @@
     
     if ([super initWithFrame:frame]) {
         
-        self.titleLab.text = @"代付凭证号";
+        self.titleStr = @"代付凭证号";
         self.textfield.placeholder = @"请输入代付凭证号";
         
     }return self;

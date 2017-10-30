@@ -14,7 +14,10 @@
 #import "BankCardRechargeViewController.h"
 #import "PaymentRechargeViewController.h"
 
+#import "BankCardTransferViewController.h"
+#import "SandUserTransferViewController.h"
 
+#import "MainViewController.h"
 @interface WalletAccountViewController ()
 {
     //headView
@@ -26,6 +29,16 @@
 @end
 
 @implementation WalletAccountViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    // 禁用返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    //允许RESideMenu的返回手势
+    self.sideMenuViewController.panGestureEnabled = YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,7 +61,7 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
     self.navCoverView.midTitleStr = @"钱包账户";
-
+    
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
@@ -60,12 +73,12 @@
             
             //充值
             if ([cellName isEqualToString:@"银行卡充值"]) {
-                BankCardRechargeViewController *rechargeVC = [[BankCardRechargeViewController alloc] init];
-                [self.navigationController pushViewController:rechargeVC animated:YES];
+                BankCardRechargeViewController *bankCardRechargeVC = [[BankCardRechargeViewController alloc] init];
+                [self.navigationController pushViewController:bankCardRechargeVC animated:YES];
             }
             if ([cellName isEqualToString:@"代付凭证充值"]) {
-                PaymentRechargeViewController *paymentVC = [[PaymentRechargeViewController alloc] init];
-                [self.navigationController pushViewController:paymentVC animated:YES];
+                PaymentRechargeViewController *paymentRechargeVC = [[PaymentRechargeViewController alloc] init];
+                [self.navigationController pushViewController:paymentRechargeVC animated:YES];
             }
         }];
         
@@ -77,10 +90,12 @@
             
             //转账
             if ([cellName isEqualToString:@"个人银行卡"]) {
-                
+                BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];
+                [self.navigationController pushViewController:bankCardTransferVC animated:YES];
             }
             if ([cellName isEqualToString:@"杉德宝用户"]) {
-                
+                SandUserTransferViewController *sandUserTransferVC = [[SandUserTransferViewController alloc] init];
+                [self.navigationController pushViewController:sandUserTransferVC animated:YES];
             }
         }];
 

@@ -109,7 +109,7 @@
     
     _bouncesHorizontally = NO;
     
-    
+    //侧滑手势:默认开启
     _panGestureEnabled = YES;
     _panFromEdge = YES;
     _panMinimumOpenThreshold = 60.0;
@@ -126,7 +126,7 @@
     //控制肖像视图(前景视图)的偏移量(0为偏移半个UIScreen)
     _contentViewInPortraitOffsetCenterX  = [UIScreen mainScreen].bounds.size.width/4;
     //控制器的缩放效果
-    _contentViewScaleValue = 0.88f;
+    _contentViewScaleValue = 1.f;
 }
 
 #pragma mark -
@@ -260,7 +260,6 @@
 
 #pragma mark -
 #pragma mark Private methods
-
 - (void)presentMenuViewContainerWithMenuViewController:(UIViewController *)menuViewController
 {
     self.menuViewContainer.transform = CGAffineTransformIdentity;

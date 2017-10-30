@@ -22,7 +22,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if ([super initWithFrame:frame]) {
-        self.titleLab.text = @"充值金额";
+        self.titleStr = @"充值金额";
         self.textfield.placeholder = @"输入充值金额";
         
         self.line.hidden = YES;

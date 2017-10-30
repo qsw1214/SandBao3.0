@@ -22,8 +22,10 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if ([super initWithFrame:frame]) {
-        self.titleLab.text = @"代付凭证校验码";
+        self.titleStr = @"代付凭证校验码";
         self.textfield.placeholder = @"输入代付凭证校验码";
+        
+        
     }return self;
 }
 

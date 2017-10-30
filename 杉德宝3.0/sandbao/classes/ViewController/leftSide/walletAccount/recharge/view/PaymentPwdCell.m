@@ -22,7 +22,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if ([super initWithFrame:frame]) {
-        self.titleLab.text = @"代付凭证密码";
+        self.titleStr = @"代付凭证密码";
         self.textfield.placeholder = @"输入代付凭证密码";
     }return self;
 }

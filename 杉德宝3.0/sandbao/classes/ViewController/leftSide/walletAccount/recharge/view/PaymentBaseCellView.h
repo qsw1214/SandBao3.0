@@ -12,6 +12,13 @@
 
 
 
+
+/**
+ 标题名:动态计算宽度
+ */
+@property (nonatomic, strong) NSString *titleStr;
+
+
 /**
  标题Lab
  */

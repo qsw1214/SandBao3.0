@@ -1,19 +1,14 @@
 //
-//  BankCardRechargeViewController.m
+//  BankCardTransferViewController.m
 //  sandbao
 //
-//  Created by tianNanYiHao on 2017/10/28.
+//  Created by tianNanYiHao on 2017/10/30.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "BankCardRechargeViewController.h"
+#import "BankCardTransferViewController.h"
 
-#import "RechargeFinishViewController.h"
-
-/**
- 银行卡充值
- */
-@interface BankCardRechargeViewController ()
+@interface BankCardTransferViewController ()
 {
     
     UIView *headView;
@@ -23,8 +18,7 @@
 }
 @end
 
-@implementation BankCardRechargeViewController
-
+@implementation BankCardTransferViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -47,11 +41,10 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
-    self.navCoverView.midTitleStr = @"银行卡充值";
+    self.navCoverView.midTitleStr = @"转账到个人银行卡";
     self.navCoverView.letfImgStr = @"general_icon_back";
-
     
-    __block BankCardRechargeViewController *selfBlock = self;
+    __block BankCardTransferViewController *selfBlock = self;
     self.navCoverView.leftBlock = ^{
         [selfBlock.navigationController popViewControllerAnimated:YES];
     };
@@ -60,15 +53,7 @@
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
-    
-    if (btn.tag == BTN_TAG_RECHARGE) {
-        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
-        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
-    }
-    
-    if (btn.tag == BTN_TAG_SHOWALLMONEY) {
-         
-    }
+
     
 }
 
@@ -82,16 +67,16 @@
     [self.baseScrollView addSubview:headView];
     
     //bankIcon
-    UIImage *bankIconImag = [UIImage imageNamed:@"banklist_gh"];
+    UIImage *bankIconImag = [UIImage imageNamed:@"banklist_js"];
     UIImageView *bankIconImgView = [Tool createImagView:bankIconImag];
     [headView addSubview:bankIconImgView];
     
     //bankName
-    UILabel *bankNameLab = [Tool createLable:@"中国工商银行储蓄卡" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    UILabel *bankNameLab = [Tool createLable:@"中国建设银行储蓄卡" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNameLab];
     
     //bankNum
-    UILabel *bankNumLab = [Tool createLable:@"尾号0008" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    UILabel *bankNumLab = [Tool createLable:@"尾号6666" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNumLab];
     
     headView.height = bankIconImag.size.height + UPDOWNSPACE_16*2;
@@ -132,7 +117,7 @@
     [self.baseScrollView addSubview:tipView];
     
     //tipLab
-    UILabel *tipLab = [Tool createLable:@"该卡最多可免费充值1000.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    UILabel *tipLab = [Tool createLable:@"该卡最多可转账9,999,999,00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [tipView addSubview:tipLab];
     
     tipView.height = tipLab.height + UPDOWNSPACE_15*2;
@@ -161,7 +146,7 @@
     
     
     //rechargeMoneyLab
-    UILabel *rechargeMoneyLab = [Tool createLable:@"充值金额" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    UILabel *rechargeMoneyLab = [Tool createLable:@"转账金额(手续费率0.1%)" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:rechargeMoneyLab];
     
     //rmbLab
@@ -183,11 +168,11 @@
     [bodyView addSubview:line];
     
     //bottomTipLab
-    UILabel *bottomTipLab = [Tool createLable:@"超出最多可免费充值的金额将收取手续费" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    UILabel *bottomTipLab = [Tool createLable:@"该卡最低转账金额100.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:bottomTipLab];
     
     //bottomBtn
-    UIButton *bottomBtn = [Tool createButton:@"全部充值" attributeStr:nil font:FONT_13_Regular textColor:COLOR_FF5D31];
+    UIButton *bottomBtn = [Tool createButton:@"全部转账" attributeStr:nil font:FONT_13_Regular textColor:COLOR_FF5D31];
     bottomBtn.tag = BTN_TAG_SHOWALLMONEY;
     [bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     bottomBtn.size = CGSizeMake(bottomBtn.width, bottomBtn.height + UPDOWNSPACE_25);
@@ -238,14 +223,14 @@
         make.size.mas_equalTo(bottomBtn.size);
     }];
     
-
-
+    
+    
     
 }
 
 - (void)create_NextBarBtn{
     //rechargeBtn
-    UIButton *rechargeBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    UIButton *rechargeBtn = [Tool createBarButton:@"两个工作日到账,确认转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
     rechargeBtn.tag = BTN_TAG_RECHARGE;
     [rechargeBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBtn];
@@ -257,13 +242,6 @@
     }];
     
 }
-
-
-
-
-
-
-
 
 
 

@@ -8,6 +8,7 @@
 
 
 #import "PaymentRechargeViewController.h"
+#import "RechargeFinishViewController.h"
 
 #import "PaymentNoCell.h"
 #import "PaymentCodeCell.h"
@@ -56,7 +57,10 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
-
+    if (btn.tag == BTN_TAG_RECHARGE) {
+        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
+    }
     
 }
 
@@ -76,6 +80,12 @@
     
     PaymentMoneyCell *paymentMoneyCell = [PaymentMoneyCell createPaymentCellViewOY:0];
     [self.baseScrollView addSubview:paymentMoneyCell];
+    
+    //rechargeBarBtn
+    UIButton *rechargeBarBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    rechargeBarBtn.tag = BTN_TAG_RECHARGE;
+    [rechargeBarBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.baseScrollView addSubview:rechargeBarBtn];
     
     [paymentNoCell mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_20);
@@ -99,6 +109,12 @@
         make.top.equalTo(paymentPwdCell.mas_bottom);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(paymentMoneyCell.size);
+    }];
+    
+    [rechargeBarBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(paymentMoneyCell.mas_bottom).offset(UPDOWNSPACE_69);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.size.mas_equalTo(rechargeBarBtn.size);
     }];
     
 }
