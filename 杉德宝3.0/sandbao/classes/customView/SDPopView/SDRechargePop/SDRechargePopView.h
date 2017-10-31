@@ -19,13 +19,20 @@ typedef void(^SDRechargePopChooseBlock)(NSString *cellName);
 @interface SDRechargePopView : UIView
 
 @property (nonatomic, copy) SDRechargePopChooseBlock chooseBlock;
+
+
+/**
+ 按钮标题文字
+ */
+@property (nonatomic, strong) NSArray *chooseBtnTitleArr;
+
+
 /**
  显示控件
 
  @param title 名字
- @param listArray 列表名
  */
-+ (void)showRechargePopView:(NSString*)title chooseList:(NSArray*)listArray rechargeChooseBlock:(SDRechargePopChooseBlock)block;
++ (instancetype)showRechargePopView:(NSString*)title rechargeChooseBlock:(SDRechargePopChooseBlock)block;
 
 
 @end

@@ -41,7 +41,6 @@
     self.textfield = [[UITextField alloc] init];
     self.textfield.placeholder = @"这里是输入框预设文字";
     self.textfield.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
-    self.textfield.textAlignment = NSTextAlignmentRight;
     self.textfield.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
 
     
@@ -65,19 +64,20 @@
     self.titleLab.text = _titleStr;
     
     self.leftRightSpace = 35;
-    self.space = 25;
+    self.space = 30;
     
     CGSize titleLabSize = [self.titleLab sizeThatFits:CGSizeZero];
     CGSize textfieldSize = [self.textfield sizeThatFits:CGSizeZero];
-    CGFloat textfieldOX = self.leftRightSpace + titleLabSize.width;
     
-    CGFloat allHeight = self.space*2 + titleLabSize.height;
-    
+    CGFloat textfieldOY = titleLabSize.height + self.space;
+    CGFloat textfieldOX = self.leftRightSpace;
+    CGFloat textfieldHeight = textfieldSize.height + self.space ;
     textfieldSize.width = [UIScreen mainScreen].bounds.size.width - textfieldOX - self.leftRightSpace;
     
+    CGFloat allHeight = self.space + titleLabSize.height + textfieldHeight;
     
     self.titleLab.frame = CGRectMake(self.leftRightSpace, self.space, titleLabSize.width, titleLabSize.height);
-    self.textfield.frame = CGRectMake(textfieldOX, 0, textfieldSize.width, allHeight);
+    self.textfield.frame = CGRectMake(textfieldOX, textfieldOY, textfieldSize.width, textfieldHeight);
     self.line.frame = CGRectMake(self.space, allHeight - 1, [UIScreen mainScreen].bounds.size.width - 2*self.space, 1);
     
     self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, allHeight);

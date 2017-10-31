@@ -67,7 +67,8 @@
 
 -(void) setFont:(CGFloat)font{
     _font = font;
-    titleLab.font = [UIFont systemFontOfSize:_font];
+    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:_font];
+    
 }
 -(void)setTitle:(NSString *)title{
     _title = title;

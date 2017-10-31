@@ -22,9 +22,6 @@
 {
     //headView
     GradualView *headView;
-    
-    //存放弹出view的描述信息的数组
-    NSArray *choosePopInfoArray;
 }
 @end
 
@@ -73,25 +70,41 @@
     
     if (btn.tag == BTN_TAG_RECHARGE) {
         NSLog(@"充值");
-        choosePopInfoArray = @[@"银行卡充值",@"代付凭证充值"];
-        [SDRechargePopView showRechargePopView:@"选择充值账户" chooseList:choosePopInfoArray rechargeChooseBlock:^(NSString *cellName) {
+        
+        BOOL paymentActivite = 1;
+        
+        if (paymentActivite) {
             
-            //充值
-            if ([cellName isEqualToString:@"银行卡充值"]) {
-                BankCardRechargeViewController *bankCardRechargeVC = [[BankCardRechargeViewController alloc] init];
-                [self.navigationController pushViewController:bankCardRechargeVC animated:YES];
-            }
-            if ([cellName isEqualToString:@"代付凭证充值"]) {
+            SDRechargePopView *popview =  [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
+                
+                //充值
+                if ([cellName isEqualToString:@"银行卡充值"]) {
+                    BankCardRechargeViewController *bankCardRechargeVC = [[BankCardRechargeViewController alloc] init];
+                    [self.navigationController pushViewController:bankCardRechargeVC animated:YES];
+                }
+                if ([cellName isEqualToString:@"代付凭证充值"]) {
+                    PaymentRechargeViewController *paymentRechargeVC = [[PaymentRechargeViewController alloc] init];
+                    [self.navigationController pushViewController:paymentRechargeVC animated:YES];
+                }
+            }];
+            
+            popview.chooseBtnTitleArr = @[@"银行卡充值",@"代付凭证充值"];
+        }
+        else{
+            SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
+                //跳转去代付凭证激活页
                 PaymentRechargeViewController *paymentRechargeVC = [[PaymentRechargeViewController alloc] init];
                 [self.navigationController pushViewController:paymentRechargeVC animated:YES];
-            }
-        }];
-        
+                
+            }];
+            popview.chooseBtnTitleArr = @[@"银行卡充值"];
+            
+        }
     }
     if (btn.tag == BTN_TAG_TRANSFER) {
         NSLog(@"转账");
-        choosePopInfoArray = @[@"个人银行卡",@"杉德宝用户"];
-        [SDRechargePopView showRechargePopView:@"选择充值账户" chooseList:choosePopInfoArray  rechargeChooseBlock:^(NSString *cellName) {
+        
+        SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
             
             //转账
             if ([cellName isEqualToString:@"个人银行卡"]) {
@@ -103,6 +116,7 @@
                 [self.navigationController pushViewController:sandUserTransferVC animated:YES];
             }
         }];
+        popview.chooseBtnTitleArr = @[@"个人银行卡",@"杉德宝用户"];
 
     }
 }

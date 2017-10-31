@@ -17,15 +17,17 @@
 #import "RealNameViewController.h"
 
 #import "GradualView.h"
-#import "SDMajletCell.h"
+#import "SDMajletView.h"
 @interface MainViewController ()<MqttClientManagerDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     //headView
     GradualView *headView;
     UIView      *bodyViewOne;
+    UIView      *bodyViewTwo;
     
 }
-@property (nonatomic, strong) NSMutableArray *minletsArr;
+@property (nonatomic, strong) NSMutableArray *sandServerArr; //杉德服务子件数组
+@property (nonatomic, strong) NSMutableArray *limitServerArr; //限时服务子件数组
 @end
 
 @implementation MainViewController
@@ -60,9 +62,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //子件数据读取
-    NSURL *majletURL = [[NSBundle mainBundle] URLForResource:@"majlet" withExtension:@"plist"];
-    self.minletsArr = [NSMutableArray arrayWithContentsOfURL:majletURL];
+    //杉德服务子件数据读取
+    NSURL *sandServerURL = [[NSBundle mainBundle] URLForResource:@"sandServer" withExtension:@"plist"];
+    self.sandServerArr = [NSMutableArray arrayWithContentsOfURL:sandServerURL];
+    
+    //限时服务子件数据读取
+    NSURL *limitServerURL = [[NSBundle mainBundle] URLForResource:@"limitServer" withExtension:@"plist"];
+    self.limitServerArr = [NSMutableArray arrayWithContentsOfURL:limitServerURL];
     
     [self create_HeadView];
     [self create_bodyView];
@@ -71,6 +77,8 @@
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
+    
+    self.baseScrollView.backgroundColor = COLOR_F5F5F5;
     
 }
 #pragma mark - 重写父类-导航设置方法
@@ -126,6 +134,7 @@
     
     //payBtn
     UIButton *payBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
+    [payBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     payBtn.tag = BTN_TAG_INOUTPAY;
     [self.baseScrollView addSubview:payBtn];
     
@@ -160,6 +169,7 @@
     
     //moneyBtn
     UIButton *moneyBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
+    [moneyBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     moneyBtn.tag = BTN_TAG_BLANCE;
     [self.baseScrollView addSubview:moneyBtn];
     
@@ -213,6 +223,7 @@
     
     //cardBag
     UIButton *cardBagBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
+    [cardBagBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     cardBagBtn.tag = BTN_TAG_CARDBAG;
     [self.baseScrollView addSubview:cardBagBtn];
     
@@ -250,73 +261,84 @@
 
 - (void)create_bodyView{
     
+    //杉德服务
+    UILabel *sandServerLab = [Tool createLable:@"杉德服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    [self.baseScrollView addSubview:sandServerLab];
+    
+    
     //bodyViewOne
     bodyViewOne = [[UIView alloc] init];
     bodyViewOne.backgroundColor = COLOR_FFFFFF;
     [self.baseScrollView addSubview:bodyViewOne];
     
+   
+    //majletView
+    SDMajletView *sandServerView = [SDMajletView createMajletViewOY:0];
+    sandServerView.cellSpace = LEFTRIGHTSPACE_25;
+    sandServerView.columnNumber = 4;
+    sandServerView.majletArr = self.sandServerArr;
+    sandServerView.titleNameBlock = ^(NSString *titleName) {
+        [SDLog logTest:[NSString stringWithFormat:@"  titleName == %@",titleName]];
+    };
+    [bodyViewOne addSubview:sandServerView];
+    
+    [sandServerLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headView.mas_bottom).offset(UPDOWNSPACE_10);
+        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_15);
+        make.size.mas_equalTo(sandServerLab.size);
+    }];
+    
     [bodyViewOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headView.mas_bottom);
+        make.top.equalTo(sandServerLab.mas_bottom).offset(UPDOWNSPACE_10);
         make.centerX.equalTo(headView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 200));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, sandServerView.height));
+    }];
+    
+    [sandServerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bodyViewOne.mas_top).offset(UPDOWNSPACE_0);
+        make.centerX.equalTo(headView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, sandServerView.height));
     }];
     
     
-    NSInteger columnNumber = 4;
-    //flowLayout布局
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    CGFloat spaceCount = columnNumber + 1 ; //(间隙count永远比列数多1)
-    CGFloat cellWith = (SCREEN_WIDTH- spaceCount*LEFTRIGHTSPACE_35)/columnNumber;
-    //cell size
-    UIImage *iconImag = [UIImage imageNamed:@"index_service_01"];
-    CGFloat cellHeight = iconImag.size.height*2;
-    //布局item大小
-    flowLayout.itemSize = CGSizeMake(cellWith, cellHeight);
-    //布局边距
-    flowLayout.sectionInset = UIEdgeInsetsMake(LEFTRIGHTSPACE_35-5, LEFTRIGHTSPACE_35, LEFTRIGHTSPACE_35-5, LEFTRIGHTSPACE_35);
-    //布局最小行间距
-    flowLayout.minimumLineSpacing = LEFTRIGHTSPACE_35-5;
-    //布局最小列间距
-    flowLayout.minimumInteritemSpacing = LEFTRIGHTSPACE_35;
-
     
+    //杉德服务
+    UILabel *limitServerLab = [Tool createLable:@"限时服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    [self.baseScrollView addSubview:limitServerLab];
     
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0) collectionViewLayout:flowLayout];
-    collectionView.scrollEnabled = NO;
-    collectionView.backgroundColor = [UIColor whiteColor];
-    //复用ID必须和代理中的ID一致
-    [collectionView registerClass:[SDMajletCell class] forCellWithReuseIdentifier:@"SDMajletCell"];
-    collectionView.delegate = self;
-    collectionView.dataSource = self;
-    [bodyViewOne addSubview:collectionView];
+    //bodyViewTwo
+    bodyViewTwo = [[UIView alloc] init];
+    bodyViewTwo.backgroundColor = COLOR_FFFFFF;
+    [self.baseScrollView addSubview:bodyViewTwo];
     
-     collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
+    //majletView
+    SDMajletView *limitServerView = [SDMajletView createMajletViewOY:0];
+    limitServerView.cellSpace = LEFTRIGHTSPACE_12;
+    limitServerView.columnNumber = 3;
+    limitServerView.majletArr = self.limitServerArr;
+    limitServerView.titleNameBlock = ^(NSString *titleName) {
+        [SDLog logTest:[NSString stringWithFormat:@"  titleName == %@",titleName]];
+    };
+    [bodyViewTwo addSubview:limitServerView];
     
+    [limitServerLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(sandServerView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_15);
+        make.size.mas_equalTo(limitServerLab.size);
+    }];
     
+    [bodyViewTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(limitServerLab.mas_bottom).offset(UPDOWNSPACE_10);
+        make.centerX.equalTo(headView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, limitServerView.height));
+    }];
     
+    [limitServerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bodyViewTwo.mas_top).offset(UPDOWNSPACE_0);
+        make.centerX.equalTo(headView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, limitServerView.height));
+    }];
     
-    
-}
-#pragma mark  子件collection代理方法区
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.minletsArr.count;
-}
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    static NSString *cellID = @"SDMajletCell";
-    SDMajletCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    cell.font = 13;
-    cell.iconName = [self.minletsArr[indexPath.row] objectForKey:@"iconKey"];
-    cell.title = [self.minletsArr[indexPath.row] objectForKey:@"titleKey"];
-    return cell;
-    
-}
-
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-
-    NSString *titleName = [self.minletsArr[indexPath.row] objectForKey:@"titleKey"];
-    [SDLog logTest:[NSString stringWithFormat:@"  titleName == %@",titleName]];
     
     
 }

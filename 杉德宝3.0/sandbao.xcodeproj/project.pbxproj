@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2804B09F1EDEA3B10031CD10 /* SDMajletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804B09A1EDEA3B10031CD10 /* SDMajletCell.m */; };
-		2804B0A01EDEA3B10031CD10 /* SDMajletCellHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804B09C1EDEA3B10031CD10 /* SDMajletCellHead.m */; };
-		2804B0A11EDEA3B10031CD10 /* SDMajletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804B09E1EDEA3B10031CD10 /* SDMajletView.m */; };
 		280621E31EF8F02F00346D1A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E21EF8F02F00346D1A /* OpenGLES.framework */; };
 		280621E51EF8F03800346D1A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E41EF8F03800346D1A /* CoreMotion.framework */; };
 		280621E71EF8F04100346D1A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E61EF8F04100346D1A /* AudioToolbox.framework */; };
@@ -143,10 +140,11 @@
 		28466F471FA8160500FA64FF /* AboutUSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F461FA8160500FA64FF /* AboutUSViewController.m */; };
 		28466F561FA816CD00FA64FF /* PaymentBaseCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F4D1FA816CD00FA64FF /* PaymentBaseCellView.m */; };
 		28466F571FA816CD00FA64FF /* PaymentCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F4F1FA816CD00FA64FF /* PaymentCodeCell.m */; };
-		28466F581FA816CD00FA64FF /* PaymentMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F511FA816CD00FA64FF /* PaymentMoneyCell.m */; };
 		28466F591FA816CD00FA64FF /* PaymentNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F531FA816CD00FA64FF /* PaymentNoCell.m */; };
 		28466F5A1FA816CD00FA64FF /* PaymentPwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F551FA816CD00FA64FF /* PaymentPwdCell.m */; };
-		28466F5C1FA846CE00FA64FF /* majlet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28466F5B1FA846CE00FA64FF /* majlet.plist */; };
+		28466F5C1FA846CE00FA64FF /* sandServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28466F5B1FA846CE00FA64FF /* sandServer.plist */; };
+		28466F631FA864D200FA64FF /* SDMajletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F621FA864D200FA64FF /* SDMajletCell.m */; };
+		28466F691FA8654000FA64FF /* SDMajletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F681FA8654000FA64FF /* SDMajletView.m */; };
 		28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */; };
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
@@ -211,6 +209,10 @@
 		28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */; };
 		28D289FB1FA330D400C3787E /* opensans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289FA1FA330D400C3787E /* opensans.ttf */; };
 		28D28A491FA351EC00C3787E /* SDRechargePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D28A481FA351EC00C3787E /* SDRechargePopView.m */; };
+		28D7E5701FA879AC00518042 /* limitServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28D7E56F1FA879AC00518042 /* limitServer.plist */; };
+		28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */; };
+		28D7E57A1FA8AD0100518042 /* recharge_chooseBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D7E5781FA8AD0100518042 /* recharge_chooseBtn@3x.png */; };
+		28D7E57B1FA8AD0100518042 /* recharge_chooseBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D7E5791FA8AD0100518042 /* recharge_chooseBtn@2x.png */; };
 		28DA887B1EEA7FCD00754259 /* tab_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88661EEA7FCD00754259 /* tab_bg.png */; };
 		28DA887C1EEA7FCD00754259 /* tab_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88671EEA7FCD00754259 /* tab_bg@2x.png */; };
 		28DA887D1EEA7FCD00754259 /* tab_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88681EEA7FCD00754259 /* tab_bg@3x.png */; };
@@ -326,12 +328,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2804B0991EDEA3B10031CD10 /* SDMajletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletCell.h; sourceTree = "<group>"; };
-		2804B09A1EDEA3B10031CD10 /* SDMajletCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletCell.m; sourceTree = "<group>"; };
-		2804B09B1EDEA3B10031CD10 /* SDMajletCellHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletCellHead.h; sourceTree = "<group>"; };
-		2804B09C1EDEA3B10031CD10 /* SDMajletCellHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletCellHead.m; sourceTree = "<group>"; };
-		2804B09D1EDEA3B10031CD10 /* SDMajletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletView.h; sourceTree = "<group>"; };
-		2804B09E1EDEA3B10031CD10 /* SDMajletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletView.m; sourceTree = "<group>"; };
 		280621E21EF8F02F00346D1A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		280621E41EF8F03800346D1A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		280621E61EF8F04100346D1A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -515,13 +511,15 @@
 		28466F4D1FA816CD00FA64FF /* PaymentBaseCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentBaseCellView.m; sourceTree = "<group>"; };
 		28466F4E1FA816CD00FA64FF /* PaymentCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCodeCell.h; sourceTree = "<group>"; };
 		28466F4F1FA816CD00FA64FF /* PaymentCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCodeCell.m; sourceTree = "<group>"; };
-		28466F501FA816CD00FA64FF /* PaymentMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentMoneyCell.h; sourceTree = "<group>"; };
-		28466F511FA816CD00FA64FF /* PaymentMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentMoneyCell.m; sourceTree = "<group>"; };
 		28466F521FA816CD00FA64FF /* PaymentNoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentNoCell.h; sourceTree = "<group>"; };
 		28466F531FA816CD00FA64FF /* PaymentNoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentNoCell.m; sourceTree = "<group>"; };
 		28466F541FA816CD00FA64FF /* PaymentPwdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentPwdCell.h; sourceTree = "<group>"; };
 		28466F551FA816CD00FA64FF /* PaymentPwdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPwdCell.m; sourceTree = "<group>"; };
-		28466F5B1FA846CE00FA64FF /* majlet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = majlet.plist; sourceTree = "<group>"; };
+		28466F5B1FA846CE00FA64FF /* sandServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sandServer.plist; sourceTree = "<group>"; };
+		28466F611FA864D200FA64FF /* SDMajletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletCell.h; sourceTree = "<group>"; };
+		28466F621FA864D200FA64FF /* SDMajletCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletCell.m; sourceTree = "<group>"; };
+		28466F671FA8654000FA64FF /* SDMajletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletView.h; sourceTree = "<group>"; };
+		28466F681FA8654000FA64FF /* SDMajletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletView.m; sourceTree = "<group>"; };
 		28491BCE1F38719F00E2B30C /* DismissAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissAnimatedTransitioning.h; sourceTree = "<group>"; };
 		28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissAnimatedTransitioning.m; sourceTree = "<group>"; };
 		28491BD01F38719F00E2B30C /* PresentAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentAnimatedTransitioning.h; sourceTree = "<group>"; };
@@ -637,6 +635,11 @@
 		28D289FA1FA330D400C3787E /* opensans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = opensans.ttf; sourceTree = "<group>"; };
 		28D28A471FA351EC00C3787E /* SDRechargePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRechargePopView.h; sourceTree = "<group>"; };
 		28D28A481FA351EC00C3787E /* SDRechargePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRechargePopView.m; sourceTree = "<group>"; };
+		28D7E56F1FA879AC00518042 /* limitServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = limitServer.plist; sourceTree = "<group>"; };
+		28D7E5751FA885CE00518042 /* BankItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankItemTableViewCell.h; sourceTree = "<group>"; };
+		28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankItemTableViewCell.m; sourceTree = "<group>"; };
+		28D7E5781FA8AD0100518042 /* recharge_chooseBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recharge_chooseBtn@3x.png"; sourceTree = "<group>"; };
+		28D7E5791FA8AD0100518042 /* recharge_chooseBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recharge_chooseBtn@2x.png"; sourceTree = "<group>"; };
 		28DA88661EEA7FCD00754259 /* tab_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bg.png; sourceTree = "<group>"; };
 		28DA88671EEA7FCD00754259 /* tab_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@2x.png"; sourceTree = "<group>"; };
 		28DA88681EEA7FCD00754259 /* tab_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_bg@3x.png"; sourceTree = "<group>"; };
@@ -834,19 +837,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2804B0981EDEA3B10031CD10 /* SDMajletManager */ = {
-			isa = PBXGroup;
-			children = (
-				2804B0991EDEA3B10031CD10 /* SDMajletCell.h */,
-				2804B09A1EDEA3B10031CD10 /* SDMajletCell.m */,
-				2804B09B1EDEA3B10031CD10 /* SDMajletCellHead.h */,
-				2804B09C1EDEA3B10031CD10 /* SDMajletCellHead.m */,
-				2804B09D1EDEA3B10031CD10 /* SDMajletView.h */,
-				2804B09E1EDEA3B10031CD10 /* SDMajletView.m */,
-			);
-			path = SDMajletManager;
-			sourceTree = "<group>";
-		};
 		281747561F96E23F007D4D3A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,6 +862,7 @@
 		2817475C1F96E25B007D4D3A /* main */ = {
 			isa = PBXGroup;
 			children = (
+				28466F5D1FA8646600FA64FF /* view */,
 				2817475D1F96E25B007D4D3A /* BaseViewController.h */,
 				2817475E1F96E25B007D4D3A /* BaseViewController.mm */,
 				281747611F96E25B007D4D3A /* MainViewController.h */,
@@ -974,6 +965,8 @@
 		282143D41FA4122700E6D489 /* image */ = {
 			isa = PBXGroup;
 			children = (
+				28D7E5781FA8AD0100518042 /* recharge_chooseBtn@3x.png */,
+				28D7E5791FA8AD0100518042 /* recharge_chooseBtn@2x.png */,
 				282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */,
 				282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */,
 				282143D91FA4124A00E6D489 /* SDRechargePop_sel@2x.png */,
@@ -1229,12 +1222,21 @@
 				28466F4D1FA816CD00FA64FF /* PaymentBaseCellView.m */,
 				28466F4E1FA816CD00FA64FF /* PaymentCodeCell.h */,
 				28466F4F1FA816CD00FA64FF /* PaymentCodeCell.m */,
-				28466F501FA816CD00FA64FF /* PaymentMoneyCell.h */,
-				28466F511FA816CD00FA64FF /* PaymentMoneyCell.m */,
 				28466F521FA816CD00FA64FF /* PaymentNoCell.h */,
 				28466F531FA816CD00FA64FF /* PaymentNoCell.m */,
 				28466F541FA816CD00FA64FF /* PaymentPwdCell.h */,
 				28466F551FA816CD00FA64FF /* PaymentPwdCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		28466F5D1FA8646600FA64FF /* view */ = {
+			isa = PBXGroup;
+			children = (
+				28466F611FA864D200FA64FF /* SDMajletCell.h */,
+				28466F621FA864D200FA64FF /* SDMajletCell.m */,
+				28466F671FA8654000FA64FF /* SDMajletView.h */,
+				28466F681FA8654000FA64FF /* SDMajletView.m */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -1436,6 +1438,7 @@
 		288D7FB51FA2C8DB001CCAC1 /* bankCard */ = {
 			isa = PBXGroup;
 			children = (
+				28D7E5741FA885BC00518042 /* view */,
 				28D289AB1FA2CA7000C3787E /* BankCardViewController.h */,
 				28D289AC1FA2CA7000C3787E /* BankCardViewController.m */,
 			);
@@ -1575,6 +1578,15 @@
 			path = SDRechargePop;
 			sourceTree = "<group>";
 		};
+		28D7E5741FA885BC00518042 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				28D7E5751FA885CE00518042 /* BankItemTableViewCell.h */,
+				28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		28DA88651EEA7FCD00754259 /* tabbar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1668,7 +1680,8 @@
 			isa = PBXGroup;
 			children = (
 				A7694C541EA0C2A500BB6369 /* leftMenu.plist */,
-				28466F5B1FA846CE00FA64FF /* majlet.plist */,
+				28466F5B1FA846CE00FA64FF /* sandServer.plist */,
+				28D7E56F1FA879AC00518042 /* limitServer.plist */,
 			);
 			path = plist;
 			sourceTree = "<group>";
@@ -1943,7 +1956,6 @@
 				282D90291EF769B000CF8C28 /* SDMBProgress */,
 				2820D1AC1E7BE8120012C067 /* SDCircleView */,
 				286BFCA91EE92A3100FD9731 /* SDScanView */,
-				2804B0981EDEA3B10031CD10 /* SDMajletManager */,
 				A7D24CD81E973D9E00688506 /* webViewProgress */,
 				281F644A1E7934590005AE86 /* BannerView */,
 				2821B7841E77B25A00F093D7 /* HeadImageBtnView */,
@@ -2142,9 +2154,10 @@
 				282D90351EF769B000CF8C28 /* SDMBPRotaion.png in Resources */,
 				283E17041F70B45400ECC00A /* banklist_tj@2x.png in Resources */,
 				283E171E1F70B45400ECC00A /* payHelp@2x.png in Resources */,
+				28D7E57B1FA8AD0100518042 /* recharge_chooseBtn@2x.png in Resources */,
 				283E170E1F70B45400ECC00A /* list_cash@2x.png in Resources */,
 				283E170B1F70B45400ECC00A /* banklist_zs@3x.png in Resources */,
-				28466F5C1FA846CE00FA64FF /* majlet.plist in Resources */,
+				28466F5C1FA846CE00FA64FF /* sandServer.plist in Resources */,
 				283E17001F70B45400ECC00A /* banklist_sh@2x.png in Resources */,
 				283E170A1F70B45400ECC00A /* banklist_zs@2x.png in Resources */,
 				283E17171F70B45400ECC00A /* list_yinlian_AddCard@3x.png in Resources */,
@@ -2187,8 +2200,10 @@
 				28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */,
 				28DA888A1EEA7FCD00754259 /* tab_button_plan_normal.png in Resources */,
 				283E16FD1F70B45400ECC00A /* banklist_pa@3x.png in Resources */,
+				28D7E57A1FA8AD0100518042 /* recharge_chooseBtn@3x.png in Resources */,
 				28DA888E1EEA7FCD00754259 /* tab_button_plan_sel@2x.png in Resources */,
 				283E17141F70B45400ECC00A /* list_xiaofei@2x.png in Resources */,
+				28D7E5701FA879AC00518042 /* limitServer.plist in Resources */,
 				283E16DC1F70B45300ECC00A /* banklist_bh@2x.png in Resources */,
 				282143E01FA4147C00E6D489 /* login_list_icon_closed@2x.png in Resources */,
 				283E17091F70B45400ECC00A /* banklist_yz@3x.png in Resources */,
@@ -2335,11 +2350,13 @@
 				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
+				28466F691FA8654000FA64FF /* SDMajletView.m in Sources */,
 				A7EFB1571EB9A8DD009AA369 /* MQTTCoreDataPersistence.m in Sources */,
 				281747B21F983A4B007D4D3A /* LogpwdViewController.mm in Sources */,
 				A7FF2FE51E160A800068A2F7 /* ExternStringDefine.m in Sources */,
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
 				288421971F8E091200082E7C /* NSString+Money.m in Sources */,
+				28466F631FA864D200FA64FF /* SDMajletCell.m in Sources */,
 				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
 				283E16D61F70B45300ECC00A /* SDPaySuccessAnimationView.m in Sources */,
@@ -2371,6 +2388,7 @@
 				281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */,
 				281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */,
 				28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */,
+				28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */,
 				28E634B11FA6C00F00DFF58B /* SandUserTransferViewController.m in Sources */,
 				A7FF2FE91E160A800068A2F7 /* MinletsData.m in Sources */,
 				282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */,
@@ -2401,7 +2419,6 @@
 				A7EFB15A1EB9A8DD009AA369 /* MQTTMessage.m in Sources */,
 				283E16D81F70B45300ECC00A /* SDPayToolListView.m in Sources */,
 				289EA96A1F59577500254EA6 /* PSTAlertController.m in Sources */,
-				2804B0A11EDEA3B10031CD10 /* SDMajletView.m in Sources */,
 				288421951F8E091200082E7C /* NSString+Encryption.m in Sources */,
 				2817476B1F96E25B007D4D3A /* RegistViewController.mm in Sources */,
 				281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */,
@@ -2414,9 +2431,7 @@
 				28466F591FA816CD00FA64FF /* PaymentNoCell.m in Sources */,
 				281F64431E792A970005AE86 /* TAAbstractDotView.m in Sources */,
 				28D289B31FA2CA8C00C3787E /* SetViewController.m in Sources */,
-				2804B0A01EDEA3B10031CD10 /* SDMajletCellHead.m in Sources */,
 				282D90321EF769B000CF8C28 /* SDActivityView.m in Sources */,
-				2804B09F1EDEA3B10031CD10 /* SDMajletCell.m in Sources */,
 				288421B51F8E095E00082E7C /* SqliteHelper.m in Sources */,
 				A7E9C7841E2CAFE500080B87 /* CustomAlertView.m in Sources */,
 				A7EFB15C1EB9A8DD009AA369 /* MQTTSession.m in Sources */,
@@ -2431,7 +2446,6 @@
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,
 				283E16DB1F70B45300ECC00A /* SDPayView.m in Sources */,
 				283E16D91F70B45300ECC00A /* SDPayToolOrderView.m in Sources */,
-				28466F581FA816CD00FA64FF /* PaymentMoneyCell.m in Sources */,
 				28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */,
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,

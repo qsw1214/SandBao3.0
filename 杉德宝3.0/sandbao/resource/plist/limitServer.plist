@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+    <dict>
+        <key>iconKey</key>
+        <string>index_limitservice_01</string>
+        <key>titleKey</key>
+        <string>年化10%</string>
+    </dict>
+    <dict>
+        <key>iconKey</key>
+        <string>index_limitservice_02</string>
+        <key>titleKey</key>
+        <string>杉德新卡推荐</string>
+    </dict>
+    <dict>
+        <key>iconKey</key>
+        <string>index_limitservice_03</string>
+        <key>titleKey</key>
+        <string>iPhone X超值兑换</string>
+    </dict>
+    <dict>
+        <key>iconKey</key>
+        <string>index_limitservice_04</string>
+        <key>titleKey</key>
+        <string>商户推荐</string>
+    </dict>
+</array>
+</plist>

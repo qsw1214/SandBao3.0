@@ -13,7 +13,6 @@
 #import "PaymentNoCell.h"
 #import "PaymentCodeCell.h"
 #import "PaymentPwdCell.h"
-#import "PaymentMoneyCell.h"
 
 
 /**
@@ -78,9 +77,6 @@
     PaymentPwdCell *paymentPwdCell = [PaymentPwdCell createPaymentCellViewOY:0];
     [self.baseScrollView addSubview:paymentPwdCell];
     
-    PaymentMoneyCell *paymentMoneyCell = [PaymentMoneyCell createPaymentCellViewOY:0];
-    [self.baseScrollView addSubview:paymentMoneyCell];
-    
     //rechargeBarBtn
     UIButton *rechargeBarBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
     rechargeBarBtn.tag = BTN_TAG_RECHARGE;
@@ -105,14 +101,8 @@
         make.size.mas_equalTo(paymentPwdCell.size);
     }];
     
-    [paymentMoneyCell mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(paymentPwdCell.mas_bottom);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(paymentMoneyCell.size);
-    }];
-    
     [rechargeBarBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(paymentMoneyCell.mas_bottom).offset(UPDOWNSPACE_69);
+        make.top.equalTo(paymentPwdCell.mas_bottom).offset(UPDOWNSPACE_69);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(rechargeBarBtn.size);
     }];
