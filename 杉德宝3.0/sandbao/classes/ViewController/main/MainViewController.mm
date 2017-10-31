@@ -17,13 +17,15 @@
 #import "RealNameViewController.h"
 
 #import "GradualView.h"
-
-@interface MainViewController ()<MqttClientManagerDelegate>
+#import "SDMajletCell.h"
+@interface MainViewController ()<MqttClientManagerDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     //headView
     GradualView *headView;
+    UIView      *bodyViewOne;
     
 }
+@property (nonatomic, strong) NSMutableArray *minletsArr;
 @end
 
 @implementation MainViewController
@@ -58,8 +60,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self create_HeadView];
+    //子件数据读取
+    NSURL *majletURL = [[NSBundle mainBundle] URLForResource:@"majlet" withExtension:@"plist"];
+    self.minletsArr = [NSMutableArray arrayWithContentsOfURL:majletURL];
     
+    [self create_HeadView];
+    [self create_bodyView];
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -74,10 +80,10 @@
     self.navCoverView.midTitleStr = @"首页";
     self.navCoverView.letfImgStr = @"index_avatar";
     self.navCoverView.rightImgStr = @"index_msg";
-    __block MainViewController *selfBlock = self;
+    __block MainViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         
-        [selfBlock presentLeftMenuViewController:selfBlock.sideMenuViewController];
+        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
     self.navCoverView.rightBlock = ^{
         
@@ -241,6 +247,79 @@
     
 }
 
+
+- (void)create_bodyView{
+    
+    //bodyViewOne
+    bodyViewOne = [[UIView alloc] init];
+    bodyViewOne.backgroundColor = COLOR_FFFFFF;
+    [self.baseScrollView addSubview:bodyViewOne];
+    
+    [bodyViewOne mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headView.mas_bottom);
+        make.centerX.equalTo(headView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 200));
+    }];
+    
+    
+    NSInteger columnNumber = 4;
+    //flowLayout布局
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    CGFloat spaceCount = columnNumber + 1 ; //(间隙count永远比列数多1)
+    CGFloat cellWith = (SCREEN_WIDTH- spaceCount*LEFTRIGHTSPACE_35)/columnNumber;
+    //cell size
+    UIImage *iconImag = [UIImage imageNamed:@"index_service_01"];
+    CGFloat cellHeight = iconImag.size.height*2;
+    //布局item大小
+    flowLayout.itemSize = CGSizeMake(cellWith, cellHeight);
+    //布局边距
+    flowLayout.sectionInset = UIEdgeInsetsMake(LEFTRIGHTSPACE_35-5, LEFTRIGHTSPACE_35, LEFTRIGHTSPACE_35-5, LEFTRIGHTSPACE_35);
+    //布局最小行间距
+    flowLayout.minimumLineSpacing = LEFTRIGHTSPACE_35-5;
+    //布局最小列间距
+    flowLayout.minimumInteritemSpacing = LEFTRIGHTSPACE_35;
+
+    
+    
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0) collectionViewLayout:flowLayout];
+    collectionView.scrollEnabled = NO;
+    collectionView.backgroundColor = [UIColor whiteColor];
+    //复用ID必须和代理中的ID一致
+    [collectionView registerClass:[SDMajletCell class] forCellWithReuseIdentifier:@"SDMajletCell"];
+    collectionView.delegate = self;
+    collectionView.dataSource = self;
+    [bodyViewOne addSubview:collectionView];
+    
+     collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 200);
+    
+    
+    
+    
+    
+}
+#pragma mark  子件collection代理方法区
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return self.minletsArr.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *cellID = @"SDMajletCell";
+    SDMajletCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    cell.font = 13;
+    cell.iconName = [self.minletsArr[indexPath.row] objectForKey:@"iconKey"];
+    cell.title = [self.minletsArr[indexPath.row] objectForKey:@"titleKey"];
+    return cell;
+    
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+
+    NSString *titleName = [self.minletsArr[indexPath.row] objectForKey:@"titleKey"];
+    [SDLog logTest:[NSString stringWithFormat:@"  titleName == %@",titleName]];
+    
+    
+}
 
 
 #pragma mark - 业务逻辑

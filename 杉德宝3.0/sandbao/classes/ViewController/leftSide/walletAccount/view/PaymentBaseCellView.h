@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ 代付凭证cell父类
+ */
 @interface PaymentBaseCellView : UIView<UITextFieldDelegate>
 
 

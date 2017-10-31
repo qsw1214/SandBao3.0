@@ -37,9 +37,9 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
 
-    __block UIViewController *weakself = self;
+    __block SmsCheckViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakself.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
 }
 #pragma mark - 重写父类-点击方法集合

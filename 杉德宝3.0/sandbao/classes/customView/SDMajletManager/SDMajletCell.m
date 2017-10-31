@@ -76,9 +76,10 @@
 -(void)setIconName:(NSString *)iconName{
     _iconName = iconName;
     
-    UIImage *image = [UIImage imageNamed:@"more"];
-    [iconImageView sd_setImageWithURL:[NSURL URLWithString:_iconName] placeholderImage:[UIImage imageNamed:@"more"]];
+    UIImage *image = [UIImage imageNamed:_iconName];
+//    [iconImageView sd_setImageWithURL:[NSURL URLWithString:_iconName] placeholderImage:[UIImage imageNamed:@"more"]];
     
+    iconImageView.image = image;
     CGSize size = self.bounds.size;
     iconImageView.frame = CGRectMake(0, 0, image.size.width,image.size.height);
     iconImageView.center = CGPointMake(self.bounds.size.width/2, image.size.height/2);

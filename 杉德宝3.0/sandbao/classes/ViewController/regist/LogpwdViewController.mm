@@ -38,10 +38,10 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
-    __block UIViewController *weakself = self;
+    __block LogpwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         // 返回 RegistViewController
-        [weakself.navigationController popToViewController:[weakself.navigationController.viewControllers objectAtIndex:1] animated:YES];
+        [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
     };
 }
 #pragma mark - 重写父类-点击方法集合

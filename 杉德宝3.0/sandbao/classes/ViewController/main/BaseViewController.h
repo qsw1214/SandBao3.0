@@ -91,6 +91,7 @@
 #define FONT_24_Medium   [UIFont fontWithName:@"PingFang-SC-Medium" size:24]
 #define FONT_20_Medium   [UIFont fontWithName:@"SFUIText-Medium" size:20]
 #define FONT_20_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:20]
+#define FONT_18_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:18]
 #define FONT_16_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:16]
 #define FONT_15_Regular [UIFont fontWithName:@"PingFang-SC-Regular" size:15]
 #define FONT_15_Medium  [UIFont fontWithName:@"PingFang-SC-Medium" size:15]
@@ -99,6 +100,7 @@
 #define FONT_13_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:13]
 #define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
 #define FONT_11_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:11]
+#define FONT_10_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:10]
 #define FONT_10_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:10]
 #define FONT_08_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:8]
 
@@ -162,8 +164,13 @@
 #define BTN_TAG_SHOWALLMONEY  100013 //show全部金额
 #define BTN_TAG_SEARCH  100014 //搜索
 #define BTN_TAG_HONGBAO 100015 //红包
-
-
+#define BTN_TAG_CHANGPAYPWD 100016 //修改支付密码
+#define BTN_TAG_CHANGLOGPWD 100017 //修改登陆密码
+#define BTN_TAG_FEEDBACK 100018 //意见反馈
+#define BTN_TAG_ABOUTUS 100019 //关于我们
+#define BTN_TAG_VERSION 100020 //版本说明
+#define BTN_TAG_TOSTAR 100021 //去评分
+#define BTN_TAG_ABOUTSAND 100022 //杉德宝隐私政策
 
 
 

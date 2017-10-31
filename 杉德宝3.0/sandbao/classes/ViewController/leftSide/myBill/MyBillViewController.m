@@ -39,8 +39,13 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
+    self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"我的账单";
 
+    __block MyBillViewController *weakSelf = self;
+    self.navCoverView.leftBlock = ^{
+        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+    };
     
  
 }

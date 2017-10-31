@@ -41,8 +41,13 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
+    self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"银行卡";
     
+    __block BankCardViewController *weakSelf = self;
+    self.navCoverView.leftBlock = ^{
+        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+    };
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{

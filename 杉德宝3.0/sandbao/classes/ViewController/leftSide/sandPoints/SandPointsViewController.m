@@ -40,8 +40,13 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
+    self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"杉德积分";
  
+    __block SandPointsViewController *weakSelf = self;
+    self.navCoverView.leftBlock = ^{
+        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+    };
     
 }
 #pragma mark - 重写父类-点击方法集合

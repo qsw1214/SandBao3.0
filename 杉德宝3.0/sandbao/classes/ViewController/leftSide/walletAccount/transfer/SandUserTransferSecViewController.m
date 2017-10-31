@@ -41,9 +41,9 @@
     self.navCoverView.midTitleStr = @"个人主页";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
-    __block SandUserTransferSecViewController *selfBlock = self;
+    __block SandUserTransferSecViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [selfBlock.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
     

@@ -56,9 +56,9 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
 
-    __block UIViewController *weakself = self;
+    __block PayPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakself.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
 }

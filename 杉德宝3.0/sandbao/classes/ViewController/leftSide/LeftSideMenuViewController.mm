@@ -213,7 +213,7 @@
     [self.baseScrollView addSubview:tableview];
     
     
-    NSURL *setPlistDataPath = [[NSBundle mainBundle] URLForResource:@"set" withExtension:@"plist"];
+    NSURL *setPlistDataPath = [[NSBundle mainBundle] URLForResource:@"leftMenu" withExtension:@"plist"];
     NSArray *arrar = [NSArray arrayWithContentsOfURL:setPlistDataPath];
     dataArray = arrar;
     CGFloat tableViewH = UPDOWNSPACE_64 * dataArray.count;

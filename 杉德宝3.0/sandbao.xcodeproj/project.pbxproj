@@ -140,6 +140,13 @@
 		283E17221F70B45400ECC00A /* qvip_pay_imageholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283E16D21F70B45300ECC00A /* qvip_pay_imageholder@2x.png */; };
 		283E17231F70B45400ECC00A /* qvip_pay_imageholder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 283E16D31F70B45300ECC00A /* qvip_pay_imageholder@3x.png */; };
 		2841F6201F53C52E00BD23C8 /* SDWaveViwe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2841F61F1F53C52E00BD23C8 /* SDWaveViwe.m */; };
+		28466F471FA8160500FA64FF /* AboutUSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F461FA8160500FA64FF /* AboutUSViewController.m */; };
+		28466F561FA816CD00FA64FF /* PaymentBaseCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F4D1FA816CD00FA64FF /* PaymentBaseCellView.m */; };
+		28466F571FA816CD00FA64FF /* PaymentCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F4F1FA816CD00FA64FF /* PaymentCodeCell.m */; };
+		28466F581FA816CD00FA64FF /* PaymentMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F511FA816CD00FA64FF /* PaymentMoneyCell.m */; };
+		28466F591FA816CD00FA64FF /* PaymentNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F531FA816CD00FA64FF /* PaymentNoCell.m */; };
+		28466F5A1FA816CD00FA64FF /* PaymentPwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F551FA816CD00FA64FF /* PaymentPwdCell.m */; };
+		28466F5C1FA846CE00FA64FF /* majlet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28466F5B1FA846CE00FA64FF /* majlet.plist */; };
 		28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */; };
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
@@ -147,6 +154,8 @@
 		286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
+		28765CB11FA75D98006F2A06 /* SetCellBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28765CB01FA75D98006F2A06 /* SetCellBaseView.m */; };
+		28765CB41FA77036006F2A06 /* SetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28765CB31FA77036006F2A06 /* SetCellView.m */; };
 		288421911F8E091200082E7C /* NSDate+time.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884217A1F8E091200082E7C /* NSDate+time.m */; };
 		288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884217C1F8E091200082E7C /* NSObject+NSLocalNotification.m */; };
 		288421931F8E091200082E7C /* NSRegularExpression+Verification.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884217E1F8E091200082E7C /* NSRegularExpression+Verification.m */; };
@@ -230,14 +239,8 @@
 		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
 		28F1BCDD1FA5C65A000872CA /* PaymentRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F1BCDC1FA5C65A000872CA /* PaymentRechargeViewController.m */; };
-		28F1BCE11FA5CD79000872CA /* PaymentBaseCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F1BCE01FA5CD79000872CA /* PaymentBaseCellView.m */; };
-		28F1BCE41FA5EAEC000872CA /* PaymentNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F1BCE31FA5EAEC000872CA /* PaymentNoCell.m */; };
-		28F1BCE71FA5EBC7000872CA /* PaymentCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F1BCE61FA5EBC7000872CA /* PaymentCodeCell.m */; };
-		28F1BCEA1FA5EBE8000872CA /* PaymentPwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F1BCE91FA5EBE8000872CA /* PaymentPwdCell.m */; };
-		28F1BCED1FA5EC06000872CA /* PaymentMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F1BCEC1FA5EC06000872CA /* PaymentMoneyCell.m */; };
 		4DD1A90DEFCB099DED2ED74F /* libPods-sandbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */; };
-		A7694D081EA0C2A500BB6369 /* persenCenterList.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7694C521EA0C2A500BB6369 /* persenCenterList.plist */; };
-		A7694D0A1EA0C2A500BB6369 /* set.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7694C541EA0C2A500BB6369 /* set.plist */; };
+		A7694D0A1EA0C2A500BB6369 /* leftMenu.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7694C541EA0C2A500BB6369 /* leftMenu.plist */; };
 		A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D24CDA1E973D9E00688506 /* WebViewProgressView.m */; };
 		A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DF3C5B1DC7152A00243EF6 /* main.m */; };
 		A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A7DF3C5E1DC7152A00243EF6 /* AppDelegate.mm */; };
@@ -506,6 +509,19 @@
 		283E16D31F70B45300ECC00A /* qvip_pay_imageholder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qvip_pay_imageholder@3x.png"; sourceTree = "<group>"; };
 		2841F61E1F53C52E00BD23C8 /* SDWaveViwe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWaveViwe.h; sourceTree = "<group>"; };
 		2841F61F1F53C52E00BD23C8 /* SDWaveViwe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaveViwe.m; sourceTree = "<group>"; };
+		28466F451FA8160500FA64FF /* AboutUSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUSViewController.h; sourceTree = "<group>"; };
+		28466F461FA8160500FA64FF /* AboutUSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUSViewController.m; sourceTree = "<group>"; };
+		28466F4C1FA816CD00FA64FF /* PaymentBaseCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentBaseCellView.h; sourceTree = "<group>"; };
+		28466F4D1FA816CD00FA64FF /* PaymentBaseCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentBaseCellView.m; sourceTree = "<group>"; };
+		28466F4E1FA816CD00FA64FF /* PaymentCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCodeCell.h; sourceTree = "<group>"; };
+		28466F4F1FA816CD00FA64FF /* PaymentCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCodeCell.m; sourceTree = "<group>"; };
+		28466F501FA816CD00FA64FF /* PaymentMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentMoneyCell.h; sourceTree = "<group>"; };
+		28466F511FA816CD00FA64FF /* PaymentMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentMoneyCell.m; sourceTree = "<group>"; };
+		28466F521FA816CD00FA64FF /* PaymentNoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentNoCell.h; sourceTree = "<group>"; };
+		28466F531FA816CD00FA64FF /* PaymentNoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentNoCell.m; sourceTree = "<group>"; };
+		28466F541FA816CD00FA64FF /* PaymentPwdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentPwdCell.h; sourceTree = "<group>"; };
+		28466F551FA816CD00FA64FF /* PaymentPwdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPwdCell.m; sourceTree = "<group>"; };
+		28466F5B1FA846CE00FA64FF /* majlet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = majlet.plist; sourceTree = "<group>"; };
 		28491BCE1F38719F00E2B30C /* DismissAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissAnimatedTransitioning.h; sourceTree = "<group>"; };
 		28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissAnimatedTransitioning.m; sourceTree = "<group>"; };
 		28491BD01F38719F00E2B30C /* PresentAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentAnimatedTransitioning.h; sourceTree = "<group>"; };
@@ -517,6 +533,10 @@
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
 		286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
+		28765CAF1FA75D98006F2A06 /* SetCellBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCellBaseView.h; sourceTree = "<group>"; };
+		28765CB01FA75D98006F2A06 /* SetCellBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCellBaseView.m; sourceTree = "<group>"; };
+		28765CB21FA77036006F2A06 /* SetCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCellView.h; sourceTree = "<group>"; };
+		28765CB31FA77036006F2A06 /* SetCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCellView.m; sourceTree = "<group>"; };
 		288421791F8E091200082E7C /* NSDate+time.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+time.h"; sourceTree = "<group>"; };
 		2884217A1F8E091200082E7C /* NSDate+time.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+time.m"; sourceTree = "<group>"; };
 		2884217B1F8E091200082E7C /* NSObject+NSLocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+NSLocalNotification.h"; sourceTree = "<group>"; };
@@ -652,23 +672,10 @@
 		28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDrowNoticeView.m; sourceTree = "<group>"; };
 		28F1BCDB1FA5C65A000872CA /* PaymentRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentRechargeViewController.h; sourceTree = "<group>"; };
 		28F1BCDC1FA5C65A000872CA /* PaymentRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentRechargeViewController.m; sourceTree = "<group>"; };
-		28F1BCDF1FA5CD79000872CA /* PaymentBaseCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentBaseCellView.h; sourceTree = "<group>"; };
-		28F1BCE01FA5CD79000872CA /* PaymentBaseCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentBaseCellView.m; sourceTree = "<group>"; };
-		28F1BCE21FA5EAEC000872CA /* PaymentNoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentNoCell.h; sourceTree = "<group>"; };
-		28F1BCE31FA5EAEC000872CA /* PaymentNoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentNoCell.m; sourceTree = "<group>"; };
-		28F1BCE51FA5EBC7000872CA /* PaymentCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCodeCell.h; sourceTree = "<group>"; };
-		28F1BCE61FA5EBC7000872CA /* PaymentCodeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentCodeCell.m; sourceTree = "<group>"; };
-		28F1BCE81FA5EBE8000872CA /* PaymentPwdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentPwdCell.h; sourceTree = "<group>"; };
-		28F1BCE91FA5EBE8000872CA /* PaymentPwdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPwdCell.m; sourceTree = "<group>"; };
-		28F1BCEB1FA5EC06000872CA /* PaymentMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentMoneyCell.h; sourceTree = "<group>"; };
-		28F1BCEC1FA5EC06000872CA /* PaymentMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentMoneyCell.m; sourceTree = "<group>"; };
 		2EC4B09642F881744F76DBA7 /* Pods-sandbao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sandbao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sandbao/Pods-sandbao.debug.xcconfig"; sourceTree = "<group>"; };
 		3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sandbao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B255CB4F8665BF156812A3 /* Pods-sandbao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sandbao.release.xcconfig"; path = "Pods/Target Support Files/Pods-sandbao/Pods-sandbao.release.xcconfig"; sourceTree = "<group>"; };
-		A7694C511EA0C2A500BB6369 /* payList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = payList.plist; sourceTree = "<group>"; };
-		A7694C521EA0C2A500BB6369 /* persenCenterList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = persenCenterList.plist; sourceTree = "<group>"; };
-		A7694C531EA0C2A500BB6369 /* pwd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pwd.plist; sourceTree = "<group>"; };
-		A7694C541EA0C2A500BB6369 /* set.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = set.plist; sourceTree = "<group>"; };
+		A7694C541EA0C2A500BB6369 /* leftMenu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = leftMenu.plist; sourceTree = "<group>"; };
 		A7D24CD91E973D9E00688506 /* WebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewProgressView.h; sourceTree = "<group>"; };
 		A7D24CDA1E973D9E00688506 /* WebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewProgressView.m; sourceTree = "<group>"; };
 		A7DF3C571DC7152A00243EF6 /* sandbao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sandbao.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -999,7 +1006,6 @@
 				28F1BCDC1FA5C65A000872CA /* PaymentRechargeViewController.m */,
 				282144581FA4B34A00E6D489 /* RechargeFinishViewController.h */,
 				282144591FA4B34A00E6D489 /* RechargeFinishViewController.m */,
-				28F1BCDE1FA5CD3B000872CA /* view */,
 			);
 			path = recharge;
 			sourceTree = "<group>";
@@ -1186,6 +1192,53 @@
 			path = SDWaveAnimationView;
 			sourceTree = "<group>";
 		};
+		28466F441FA815EA00FA64FF /* aboutUs */ = {
+			isa = PBXGroup;
+			children = (
+				28466F451FA8160500FA64FF /* AboutUSViewController.h */,
+				28466F461FA8160500FA64FF /* AboutUSViewController.m */,
+			);
+			path = aboutUs;
+			sourceTree = "<group>";
+		};
+		28466F481FA8163F00FA64FF /* changePayPwd */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = changePayPwd;
+			sourceTree = "<group>";
+		};
+		28466F491FA8164600FA64FF /* changeLogPwd */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = changeLogPwd;
+			sourceTree = "<group>";
+		};
+		28466F4A1FA8164E00FA64FF /* feedBack */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = feedBack;
+			sourceTree = "<group>";
+		};
+		28466F4B1FA816CD00FA64FF /* view */ = {
+			isa = PBXGroup;
+			children = (
+				28466F4C1FA816CD00FA64FF /* PaymentBaseCellView.h */,
+				28466F4D1FA816CD00FA64FF /* PaymentBaseCellView.m */,
+				28466F4E1FA816CD00FA64FF /* PaymentCodeCell.h */,
+				28466F4F1FA816CD00FA64FF /* PaymentCodeCell.m */,
+				28466F501FA816CD00FA64FF /* PaymentMoneyCell.h */,
+				28466F511FA816CD00FA64FF /* PaymentMoneyCell.m */,
+				28466F521FA816CD00FA64FF /* PaymentNoCell.h */,
+				28466F531FA816CD00FA64FF /* PaymentNoCell.m */,
+				28466F541FA816CD00FA64FF /* PaymentPwdCell.h */,
+				28466F551FA816CD00FA64FF /* PaymentPwdCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		28491BC11F386FD100E2B30C /* SDViewControllerAnimatedTransitioning */ = {
 			isa = PBXGroup;
 			children = (
@@ -1214,6 +1267,17 @@
 				286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */,
 			);
 			path = SDScanView;
+			sourceTree = "<group>";
+		};
+		28765CAE1FA75D41006F2A06 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				28765CAF1FA75D98006F2A06 /* SetCellBaseView.h */,
+				28765CB01FA75D98006F2A06 /* SetCellBaseView.m */,
+				28765CB21FA77036006F2A06 /* SetCellView.h */,
+				28765CB31FA77036006F2A06 /* SetCellView.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		288421771F8E08DF00082E7C /* base */ = {
@@ -1342,6 +1406,7 @@
 		288D7FB21FA2C8C4001CCAC1 /* walletAccount */ = {
 			isa = PBXGroup;
 			children = (
+				28466F4B1FA816CD00FA64FF /* view */,
 				28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */,
 				28D289A31FA2CA3700C3787E /* WalletAccountViewController.m */,
 				282143E51FA4579200E6D489 /* recharge */,
@@ -1389,8 +1454,13 @@
 		288D7FB71FA2C8EE001CCAC1 /* set */ = {
 			isa = PBXGroup;
 			children = (
+				28765CAE1FA75D41006F2A06 /* view */,
 				28D289B11FA2CA8C00C3787E /* SetViewController.h */,
 				28D289B21FA2CA8C00C3787E /* SetViewController.m */,
+				28466F481FA8163F00FA64FF /* changePayPwd */,
+				28466F491FA8164600FA64FF /* changeLogPwd */,
+				28466F4A1FA8164E00FA64FF /* feedBack */,
+				28466F441FA815EA00FA64FF /* aboutUs */,
 			);
 			path = set;
 			sourceTree = "<group>";
@@ -1576,23 +1646,6 @@
 			path = SDDrowNoticeView;
 			sourceTree = "<group>";
 		};
-		28F1BCDE1FA5CD3B000872CA /* view */ = {
-			isa = PBXGroup;
-			children = (
-				28F1BCDF1FA5CD79000872CA /* PaymentBaseCellView.h */,
-				28F1BCE01FA5CD79000872CA /* PaymentBaseCellView.m */,
-				28F1BCE21FA5EAEC000872CA /* PaymentNoCell.h */,
-				28F1BCE31FA5EAEC000872CA /* PaymentNoCell.m */,
-				28F1BCE51FA5EBC7000872CA /* PaymentCodeCell.h */,
-				28F1BCE61FA5EBC7000872CA /* PaymentCodeCell.m */,
-				28F1BCE81FA5EBE8000872CA /* PaymentPwdCell.h */,
-				28F1BCE91FA5EBE8000872CA /* PaymentPwdCell.m */,
-				28F1BCEB1FA5EC06000872CA /* PaymentMoneyCell.h */,
-				28F1BCEC1FA5EC06000872CA /* PaymentMoneyCell.m */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
 		A7694B901EA0C2A500BB6369 /* resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -1614,10 +1667,8 @@
 		A7694C501EA0C2A500BB6369 /* plist */ = {
 			isa = PBXGroup;
 			children = (
-				A7694C511EA0C2A500BB6369 /* payList.plist */,
-				A7694C521EA0C2A500BB6369 /* persenCenterList.plist */,
-				A7694C531EA0C2A500BB6369 /* pwd.plist */,
-				A7694C541EA0C2A500BB6369 /* set.plist */,
+				A7694C541EA0C2A500BB6369 /* leftMenu.plist */,
+				28466F5B1FA846CE00FA64FF /* majlet.plist */,
 			);
 			path = plist;
 			sourceTree = "<group>";
@@ -2042,7 +2093,6 @@
 				283E16E11F70B45300ECC00A /* banklist_cd@3x.png in Resources */,
 				283E17111F70B45400ECC00A /* list_sand_AddCard@3x.png in Resources */,
 				283E16E01F70B45300ECC00A /* banklist_cd@2x.png in Resources */,
-				A7694D081EA0C2A500BB6369 /* persenCenterList.plist in Resources */,
 				A7DF3DF11DC7202B00243EF6 /* indicator8@3x.png in Resources */,
 				283E17031F70B45400ECC00A /* banklist_shns@3x.png in Resources */,
 				283E16ED1F70B45300ECC00A /* banklist_hs@3x.png in Resources */,
@@ -2094,6 +2144,7 @@
 				283E171E1F70B45400ECC00A /* payHelp@2x.png in Resources */,
 				283E170E1F70B45400ECC00A /* list_cash@2x.png in Resources */,
 				283E170B1F70B45400ECC00A /* banklist_zs@3x.png in Resources */,
+				28466F5C1FA846CE00FA64FF /* majlet.plist in Resources */,
 				283E17001F70B45400ECC00A /* banklist_sh@2x.png in Resources */,
 				283E170A1F70B45400ECC00A /* banklist_zs@2x.png in Resources */,
 				283E17171F70B45400ECC00A /* list_yinlian_AddCard@3x.png in Resources */,
@@ -2165,7 +2216,7 @@
 				283E16F61F70B45400ECC00A /* banklist_nb@2x.png in Resources */,
 				282143D71FA4124200E6D489 /* SDRechargePop_nol@2x.png in Resources */,
 				283E16F11F70B45400ECC00A /* banklist_js@3x.png in Resources */,
-				A7694D0A1EA0C2A500BB6369 /* set.plist in Resources */,
+				A7694D0A1EA0C2A500BB6369 /* leftMenu.plist in Resources */,
 				A7DF3DF21DC7202B00243EF6 /* indicator9.png in Resources */,
 				283E16FE1F70B45400ECC00A /* banklist_pf@2x.png in Resources */,
 				283E17131F70B45400ECC00A /* list_sand_logo@3x.png in Resources */,
@@ -2261,15 +2312,16 @@
 				28D289A41FA2CA3700C3787E /* WalletAccountViewController.m in Sources */,
 				28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */,
 				A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */,
+				28466F571FA816CD00FA64FF /* PaymentCodeCell.m in Sources */,
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
 				289C0D551F203FBC00360147 /* YXEasing.m in Sources */,
 				283E16DA1F70B45300ECC00A /* SDPayToolPwdView.m in Sources */,
 				A7EFB1591EB9A8DD009AA369 /* MQTTInMemoryPersistence.m in Sources */,
+				28466F561FA816CD00FA64FF /* PaymentBaseCellView.m in Sources */,
 				281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */,
 				288421BB1F8E0A2100082E7C /* Base64Util.m in Sources */,
 				A7EFB15F1EB9A8DD009AA369 /* MQTTSessionSynchron.m in Sources */,
 				28F1BCDD1FA5C65A000872CA /* PaymentRechargeViewController.m in Sources */,
-				28F1BCE71FA5EBC7000872CA /* PaymentCodeCell.m in Sources */,
 				288421911F8E091200082E7C /* NSDate+time.m in Sources */,
 				A7FF2FE41E160A800068A2F7 /* DragCellCollectionView.m in Sources */,
 				28981B8B1FA01FA8004CFC95 /* BankPickerView.m in Sources */,
@@ -2289,25 +2341,26 @@
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
 				288421971F8E091200082E7C /* NSString+Money.m in Sources */,
 				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */,
-				28F1BCE41FA5EAEC000872CA /* PaymentNoCell.m in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
 				283E16D61F70B45300ECC00A /* SDPaySuccessAnimationView.m in Sources */,
 				2821445A1FA4B34A00E6D489 /* RechargeFinishViewController.m in Sources */,
 				A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */,
 				2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */,
+				28765CB41FA77036006F2A06 /* SetCellView.m in Sources */,
 				A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */,
 				28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */,
 				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
 				28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
 				A7EFB1631EB9A8DD009AA369 /* MQTTSSLSecurityPolicyTransport.m in Sources */,
+				28466F5A1FA816CD00FA64FF /* PaymentPwdCell.m in Sources */,
 				A7EFB15D1EB9A8DD009AA369 /* MQTTSessionLegacy.m in Sources */,
 				28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */,
-				28F1BCE11FA5CD79000872CA /* PaymentBaseCellView.m in Sources */,
 				288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */,
 				A7FF2FC91E1602D80068A2F7 /* CommParameter.m in Sources */,
 				283E16D51F70B45300ECC00A /* SDPayKeyBoardView.m in Sources */,
 				A7FF2FE71E160A800068A2F7 /* HeaderCollectionReusableView.m in Sources */,
+				28466F471FA8160500FA64FF /* AboutUSViewController.m in Sources */,
 				2820D1AF1E7BE8120012C067 /* SDCircleView.m in Sources */,
 				28981B881FA01FA8004CFC95 /* PhoneAuthToolView.m in Sources */,
 				A7FF2FE81E160A800068A2F7 /* ItemCollectionViewCell.m in Sources */,
@@ -2316,7 +2369,6 @@
 				A7F2F2641E1E2AE000F6CDA3 /* HttpComm.mm in Sources */,
 				288421B01F8E095E00082E7C /* Majlet_Func.mm in Sources */,
 				281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */,
-				28F1BCED1FA5EC06000872CA /* PaymentMoneyCell.m in Sources */,
 				281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */,
 				28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */,
 				28E634B11FA6C00F00DFF58B /* SandUserTransferViewController.m in Sources */,
@@ -2341,6 +2393,7 @@
 				28981B8C1FA01FA8004CFC95 /* NoCopyTextField.m in Sources */,
 				281F64481E792A970005AE86 /* SDCycleScrollView.m in Sources */,
 				288421941F8E091200082E7C /* NSString+EncodingUTF8Additions.m in Sources */,
+				28765CB11FA75D98006F2A06 /* SetCellBaseView.m in Sources */,
 				2817476A1F96E25B007D4D3A /* MainViewController.mm in Sources */,
 				288421961F8E091200082E7C /* NSString+file.m in Sources */,
 				28981B7E1FA01FA8004CFC95 /* IdentityAuthToolView.m in Sources */,
@@ -2358,13 +2411,13 @@
 				A7EFB1581EB9A8DD009AA369 /* MQTTDecoder.m in Sources */,
 				282D90391EF769D000CF8C28 /* MBProgressHUD.m in Sources */,
 				288421B31F8E095E00082E7C /* PayNucHelper.mm in Sources */,
+				28466F591FA816CD00FA64FF /* PaymentNoCell.m in Sources */,
 				281F64431E792A970005AE86 /* TAAbstractDotView.m in Sources */,
 				28D289B31FA2CA8C00C3787E /* SetViewController.m in Sources */,
 				2804B0A01EDEA3B10031CD10 /* SDMajletCellHead.m in Sources */,
 				282D90321EF769B000CF8C28 /* SDActivityView.m in Sources */,
 				2804B09F1EDEA3B10031CD10 /* SDMajletCell.m in Sources */,
 				288421B51F8E095E00082E7C /* SqliteHelper.m in Sources */,
-				28F1BCEA1FA5EBE8000872CA /* PaymentPwdCell.m in Sources */,
 				A7E9C7841E2CAFE500080B87 /* CustomAlertView.m in Sources */,
 				A7EFB15C1EB9A8DD009AA369 /* MQTTSession.m in Sources */,
 				A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */,
@@ -2378,6 +2431,7 @@
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,
 				283E16DB1F70B45300ECC00A /* SDPayView.m in Sources */,
 				283E16D91F70B45300ECC00A /* SDPayToolOrderView.m in Sources */,
+				28466F581FA816CD00FA64FF /* PaymentMoneyCell.m in Sources */,
 				28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */,
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,

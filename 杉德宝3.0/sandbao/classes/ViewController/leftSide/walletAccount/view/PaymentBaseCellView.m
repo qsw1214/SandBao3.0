@@ -9,6 +9,9 @@
 #import "PaymentBaseCellView.h"
 
 
+/**
+ 代付凭证cell : 基础view
+ */
 @implementation PaymentBaseCellView
 
 

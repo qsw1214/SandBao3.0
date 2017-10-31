@@ -44,9 +44,9 @@
     self.navCoverView.midTitleStr = @"转账到个人银行卡";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
-    __block BankCardTransferViewController *selfBlock = self;
+    __block BankCardTransferViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [selfBlock.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
     

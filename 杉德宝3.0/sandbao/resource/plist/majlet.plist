@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>iconKey</key>
+		<string>index_service_01</string>
+		<key>titleKey</key>
+		<string>转账</string>
+	</dict>
+    <dict>
+        <key>iconKey</key>
+        <string>index_service_02</string>
+        <key>titleKey</key>
+        <string>理财</string>
+    </dict>
+    <dict>
+        <key>iconKey</key>
+        <string>index_service_03</string>
+        <key>titleKey</key>
+        <string>积分商城</string>
+    </dict>
+    <dict>
+        <key>iconKey</key>
+        <string>index_service_05</string>
+        <key>titleKey</key>
+        <string>手机充值</string>
+    </dict>
+    <dict>
+        <key>iconKey</key>
+        <string>index_service_05</string>
+        <key>titleKey</key>
+        <string>生活缴费</string>
+    </dict>
+</array>
+</plist>

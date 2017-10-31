@@ -51,9 +51,9 @@
     self.navCoverView.letfImgStr = @"general_icon_back";
 
     
-    __block BankCardRechargeViewController *selfBlock = self;
+    __block BankCardRechargeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [selfBlock.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
     

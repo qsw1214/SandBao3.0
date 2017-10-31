@@ -47,9 +47,9 @@
     self.navCoverView.letfImgStr = @"general_icon_back";
     
     
-    __block PaymentRechargeViewController *selfBlock = self;
+    __block PaymentRechargeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [selfBlock.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
     
