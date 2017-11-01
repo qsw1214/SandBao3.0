@@ -64,6 +64,7 @@
 #define UPDOWNSPACE_69 69.f
 #define UPDOWNSPACE_64 64.f
 #define UPDOWNSPACE_58 58.f
+#define UPDOWNSPACE_50 50.f
 #define UPDOWNSPACE_47 47.f
 #define UPDOWNSPACE_43 43.f
 #define UPDOWNSPACE_40 40.f
@@ -79,6 +80,7 @@
 #define UPDOWNSPACE_10 10.f
 #define UPDOWNSPACE_09 9.f
 #define UPDOWNSPACE_05 05.f
+#define UPDOWNSPACE_01 01.f
 #define UPDOWNSPACE_0 0.f
 
 
@@ -96,6 +98,7 @@
 #define FONT_15_Regular [UIFont fontWithName:@"PingFang-SC-Regular" size:15]
 #define FONT_15_Medium  [UIFont fontWithName:@"PingFang-SC-Medium" size:15]
 #define FONT_14_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:14]
+#define FONT_14_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:14]
 #define FONT_13_OpenSan  [UIFont fontWithName:@"OpenSans" size:13]
 #define FONT_13_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:13]
 #define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:12]
@@ -171,6 +174,8 @@
 #define BTN_TAG_VERSION 100020 //版本说明
 #define BTN_TAG_TOSTAR 100021 //去评分
 #define BTN_TAG_ABOUTSAND 100022 //杉德宝隐私政策
+#define BTN_TAG_PAYMENTACTIVE 100023 //代付凭证激活
+
 
 
 

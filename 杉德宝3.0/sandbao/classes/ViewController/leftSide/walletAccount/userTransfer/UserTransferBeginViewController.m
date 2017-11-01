@@ -1,21 +1,21 @@
 //
-//  SandUserTransferViewController.m
+//  UserTransferBeginViewController.m
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/30.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "SandUserTransferViewController.h"
+#import "UserTransferBeginViewController.h"
 
-#import "SandUserTransferSecViewController.h"
+#import "UserTransferPageViewController.h"
 #import "SDSearchPop.h"
 
-@interface SandUserTransferViewController ()
+@interface UserTransferBeginViewController ()
 
 @end
 
-@implementation SandUserTransferViewController
+@implementation UserTransferBeginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,7 +39,7 @@
     self.navCoverView.letfImgStr = @"general_icon_back";
     self.navCoverView.rightImgStr = @"searchpage_saoyisao";
     
-    __block SandUserTransferViewController *weakSelf = self;
+    __block UserTransferBeginViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -59,7 +59,7 @@
         
         [SDSearchPop showSearchPopViewPlaceholder:@"杉德宝账户" textBlock:^(NSString *text) {
             //转账第二步
-            SandUserTransferSecViewController *transferSecVC = [[SandUserTransferSecViewController alloc] init];
+            UserTransferPageViewController *transferSecVC = [[UserTransferPageViewController alloc] init];
             [self.navigationController pushViewController:transferSecVC animated:YES];
             
             

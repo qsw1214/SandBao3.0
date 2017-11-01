@@ -27,7 +27,15 @@
         self.titleStr = @"代付凭证号";
         self.textfield.placeholder = @"请输入代付凭证号";
         
+        self.textfield.delegate = self;
+        
     }return self;
+}
+#pragma mark textfileDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    [self showTip];
+    
 }
 
 

@@ -13,9 +13,10 @@
 
 #import "BankCardRechargeViewController.h"
 #import "PaymentRechargeViewController.h"
+#import "PaymentActiveViewController.h"
 
 #import "BankCardTransferViewController.h"
-#import "SandUserTransferViewController.h"
+#import "UserTransferBeginViewController.h"
 
 #import "MainViewController.h"
 @interface WalletAccountViewController ()
@@ -93,8 +94,8 @@
         else{
             SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
                 //跳转去代付凭证激活页
-                PaymentRechargeViewController *paymentRechargeVC = [[PaymentRechargeViewController alloc] init];
-                [self.navigationController pushViewController:paymentRechargeVC animated:YES];
+                PaymentActiveViewController *paymentActiveVC = [[PaymentActiveViewController alloc] init];
+                [self.navigationController pushViewController:paymentActiveVC animated:YES];
                 
             }];
             popview.chooseBtnTitleArr = @[@"银行卡充值"];
@@ -112,7 +113,7 @@
                 [self.navigationController pushViewController:bankCardTransferVC animated:YES];
             }
             if ([cellName isEqualToString:@"杉德宝用户"]) {
-                SandUserTransferViewController *sandUserTransferVC = [[SandUserTransferViewController alloc] init];
+                UserTransferBeginViewController *sandUserTransferVC = [[UserTransferBeginViewController alloc] init];
                 [self.navigationController pushViewController:sandUserTransferVC animated:YES];
             }
         }];

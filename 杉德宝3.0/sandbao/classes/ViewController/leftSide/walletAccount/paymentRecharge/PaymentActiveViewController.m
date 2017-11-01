@@ -1,5 +1,5 @@
 //
-//  PaymentRechargeViewController.m
+//  PaymentActiveViewController.m
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/29.
@@ -7,7 +7,7 @@
 //
 
 
-#import "PaymentRechargeViewController.h"
+#import "PaymentActiveViewController.h"
 #import "RechargeFinishViewController.h"
 
 #import "PaymentNoCell.h"
@@ -18,11 +18,11 @@
 /**
  代付凭证充值
  */
-@interface PaymentRechargeViewController ()
+@interface PaymentActiveViewController ()
 
 @end
 
-@implementation PaymentRechargeViewController
+@implementation PaymentActiveViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,11 +42,11 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
-    self.navCoverView.midTitleStr = @"代付凭证充值";
+    self.navCoverView.midTitleStr = @"代付凭证激活";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
     
-    __block PaymentRechargeViewController *weakSelf = self;
+    __block PaymentActiveViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -56,7 +56,7 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
-    if (btn.tag == BTN_TAG_RECHARGE) {
+    if (btn.tag == BTN_TAG_PAYMENTACTIVE) {
         RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
         [self.navigationController pushViewController:rechargeFinishVC animated:YES];
     }
@@ -75,11 +75,12 @@
     [self.baseScrollView addSubview:paymenCodeCell];
     
     PaymentPwdCell *paymentPwdCell = [PaymentPwdCell createPaymentCellViewOY:0];
+    paymentPwdCell.line.hidden = YES;
     [self.baseScrollView addSubview:paymentPwdCell];
     
     //rechargeBarBtn
-    UIButton *rechargeBarBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    rechargeBarBtn.tag = BTN_TAG_RECHARGE;
+    UIButton *rechargeBarBtn = [Tool createBarButton:@"激活" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    rechargeBarBtn.tag = BTN_TAG_PAYMENTACTIVE;
     [rechargeBarBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBarBtn];
     

@@ -7,6 +7,7 @@
 //
 
 #import "BankCardTransferViewController.h"
+#import "BankCardTransferFinishViewController.h"
 
 @interface BankCardTransferViewController ()
 {
@@ -53,7 +54,11 @@
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
-
+    
+    if (btn.tag == BTN_TAG_TRANSFER) {
+        BankCardTransferFinishViewController *bankTransferFinish = [[BankCardTransferFinishViewController alloc] init];
+        [self.navigationController pushViewController:bankTransferFinish animated:YES];
+    }
     
 }
 
@@ -231,7 +236,7 @@
 - (void)create_NextBarBtn{
     //rechargeBtn
     UIButton *rechargeBtn = [Tool createBarButton:@"两个工作日到账,确认转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
-    rechargeBtn.tag = BTN_TAG_RECHARGE;
+    rechargeBtn.tag = BTN_TAG_TRANSFER;
     [rechargeBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBtn];
     

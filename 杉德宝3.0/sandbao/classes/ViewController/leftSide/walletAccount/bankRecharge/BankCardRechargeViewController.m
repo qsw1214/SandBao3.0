@@ -66,10 +66,6 @@
         [self.navigationController pushViewController:rechargeFinishVC animated:YES];
     }
     
-    if (btn.tag == BTN_TAG_SHOWALLMONEY) {
-         
-    }
-    
 }
 
 

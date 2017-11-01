@@ -1,14 +1,15 @@
 //
-//  SandUserTransferSecViewController.m
+//  UserTransferPageViewController.m
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/30.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "SandUserTransferSecViewController.h"
-
-@interface SandUserTransferSecViewController ()
+#import "UserTransferPageViewController.h"
+#import "UserTransferViewController.h"
+#import "UserHongbaoViewController.h"
+@interface UserTransferPageViewController ()
 {
     UIView *headView;
     UIButton *transferBtn;
@@ -16,7 +17,7 @@
 }
 @end
 
-@implementation SandUserTransferSecViewController
+@implementation UserTransferPageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,7 +42,7 @@
     self.navCoverView.midTitleStr = @"个人主页";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
-    __block SandUserTransferSecViewController *weakSelf = self;
+    __block UserTransferPageViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -57,7 +58,11 @@
         //红包反选
         hongbaoBtn.selected = NO;
         hongbaoBtn.backgroundColor = COLOR_FFFFFF;
-  
+        
+        //跳转去转账
+        UserTransferViewController *userTransferVC = [[UserTransferViewController alloc] init];
+        [self.navigationController pushViewController:userTransferVC animated:YES];
+        
     }
     
     if (btn.tag == BTN_TAG_HONGBAO) {
@@ -67,6 +72,11 @@
         //转账反宣
         transferBtn.selected = NO;
         transferBtn.backgroundColor = COLOR_FFFFFF;
+        
+        //跳转去红包
+        UserHongbaoViewController *userHongbaoVC = [[UserHongbaoViewController alloc] init];
+        [self.navigationController pushViewController:userHongbaoVC animated:YES];
+        
     }
     
     

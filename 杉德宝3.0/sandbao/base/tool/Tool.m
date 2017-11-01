@@ -574,6 +574,7 @@
     
     UITextField *textf = [[UITextField alloc] init];
     textf.font = font;
+    textf.placeholder = placehold;
     textf.textColor = textColor;
     
     CGSize textfSize  = [textf sizeThatFits:CGSizeZero];

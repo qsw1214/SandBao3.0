@@ -1,5 +1,5 @@
 //
-//  SandUserTransferViewController.h
+//  UserTransferPageViewController.h
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/30.
@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface SandUserTransferViewController : BaseViewController
+@interface UserTransferPageViewController : BaseViewController
 
 @end

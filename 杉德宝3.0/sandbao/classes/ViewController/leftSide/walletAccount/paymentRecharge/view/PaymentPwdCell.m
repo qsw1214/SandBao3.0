@@ -24,6 +24,15 @@
     if ([super initWithFrame:frame]) {
         self.titleStr = @"代付凭证密码";
         self.textfield.placeholder = @"输入代付凭证密码";
+        self.textfield.delegate = self;
     }return self;
 }
+#pragma mark textfileDelegate
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
+    [self showTip];
+    
+}
+
+
 @end

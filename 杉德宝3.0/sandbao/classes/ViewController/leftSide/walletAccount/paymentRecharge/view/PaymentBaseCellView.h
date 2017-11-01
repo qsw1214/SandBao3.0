@@ -52,12 +52,25 @@
 
 
 /**
+ 红色Tip
+ */
+@property (nonatomic, strong) UILabel *tip;
+
+/**
  代付凭证cell类-工程方法
 
  @param OY OY点
  @return 实例
  */
 + (instancetype)createPaymentCellViewOY:(CGFloat)OY;
+
+
+
+
+/**
+ 红色提示动画
+ */
+- (void)showTip;
 
 
 

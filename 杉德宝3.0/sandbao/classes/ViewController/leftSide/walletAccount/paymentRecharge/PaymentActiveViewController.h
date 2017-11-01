@@ -1,5 +1,5 @@
 //
-//  PaymentRechargeViewController.h
+//  PaymentActiveViewController.h
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/29.
@@ -10,6 +10,6 @@
 
 #import "BaseViewController.h"
 
-@interface PaymentRechargeViewController : BaseViewController
+@interface PaymentActiveViewController : BaseViewController
 
 @end
