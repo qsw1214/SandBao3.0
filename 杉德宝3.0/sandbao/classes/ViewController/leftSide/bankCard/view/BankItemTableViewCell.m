@@ -157,21 +157,21 @@
     //设置水印图标fram
     CGFloat iconOffset = 0;
     CGSize iconWatermarkImageViewSize = CGSizeMake(self.iconWatermarkImageView.image.size.width, self.iconWatermarkImageView.image.size.height);
-    CGFloat iconWatermarkImageViewY = cellHeight - iconWatermarkImageViewSize.height;
-    CGFloat iconWatermarkImageViewX = backgroundImageViewW - iconWatermarkImageViewSize.width;
+    CGFloat iconWatermarkImageViewY = cellHeight - iconWatermarkImageViewSize.height - space;
+    CGFloat iconWatermarkImageViewX = commLabelW - iconWatermarkImageViewSize.width;
     self.iconWatermarkImageView.frame = CGRectMake(iconWatermarkImageViewX+iconOffset, iconWatermarkImageViewY, iconWatermarkImageViewSize.width, iconWatermarkImageViewSize.height);
     
     //设置银行名字的frame
     CGFloat bankNameLabelX= iconImageViewX + iconImageViewW + space;
     CGFloat bankNameLabelY= upDownSpace;
-    CGFloat bankNameLabelW= commLabelW - iconImage.size.width - 10 *2;
+    CGFloat bankNameLabelW= commLabelW - iconImage.size.width - space *6;
     CGFloat bankNameLabelH= bankNameLabelSize.height;
     
     self.bankNameLabel.frame = CGRectMake(bankNameLabelX, leftRightSpace, bankNameLabelW, bankNameLabelH);
     
     //设置银行类型的frame
     CGFloat bankTypeLabelX= bankNameLabelX;
-    CGFloat bankTypeLabelY= bankNameLabelY + bankNameLabelH + space;
+    CGFloat bankTypeLabelY= bankNameLabelY + bankNameLabelH + space*2;
     CGFloat bankTypeLabelW= bankNameLabelW;
     CGFloat bankTypeLabelH= bankTypeLabelSize.height;
     
@@ -180,7 +180,7 @@
     
     //设置银行卡号的frame
     CGFloat bankNumLabelX= bankNameLabelX;
-    CGFloat bankNumLabelY= bankTypeLabelY + bankTypeLabelH + bankNumLabelTop;
+    CGFloat bankNumLabelY= bankTypeLabelY + bankTypeLabelH;
     CGFloat bankNumLabelW= bankNameLabelW;
     CGFloat bankNumLabelH= bankNumLabelSize.height;
     
@@ -193,8 +193,6 @@
  */
 - (void)settingData
 {
-
-    
     UIFont *bankNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:15];
     UIFont *bankTypeTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:13];
     UIFont *bankNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:26];

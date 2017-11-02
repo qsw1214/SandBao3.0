@@ -10,7 +10,7 @@
 #import "PayNucHelper.h"
 
 
-
+#import "MyCenterViewController.h"
 #import "MainViewController.h"
 #import "MyBillViewController.h"
 #import "WalletAccountViewController.h"
@@ -41,7 +41,7 @@
     //数据源
     NSArray *dataArray;
 }
-
+@property (nonatomic, strong) MyCenterViewController         *myCenterVC;
 @property (nonatomic, strong) MainViewController             *mainVC;
 @property (nonatomic, strong) MyBillViewController           *myBillVC;
 @property (nonatomic, strong) WalletAccountViewController    *walletAccVC;
@@ -51,6 +51,7 @@
 @property (nonatomic, strong) SandCardViewController         *sandCardVC;
 @property (nonatomic, strong) SetViewController              *setVC;
 
+@property (nonatomic, strong) UINavigationController *myCenterNav;
 @property (nonatomic, strong) UINavigationController *mainNav;
 @property (nonatomic, strong) UINavigationController *myBillNav;
 @property (nonatomic, strong) UINavigationController *walletAccNav;
@@ -70,8 +71,6 @@
     [super viewWillAppear:animated];
     
     //用户退出后再登陆需刷新数据
-    
-    
     
 }
 - (void)viewDidAppear:(BOOL)animated{
@@ -115,14 +114,23 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    //退出
     if (btn.tag == BTN_TAG_LOGOUT) {
 
         [self loginOut];
+    }
+    //个人信息
+    if (btn.tag == BTN_TAG_JUSTCLICK) {
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.myCenterNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
     }
     
 }
 
 - (void)addSubViewController{
+    self.myCenterVC = [[MyCenterViewController alloc] init];
     self.mainVC = [[MainViewController alloc] init];
     self.myBillVC = [[MyBillViewController alloc] init];
     self.walletAccVC = [[WalletAccountViewController alloc] init];
@@ -132,6 +140,7 @@
     self.sandCardVC = [[SandCardViewController alloc] init];
     self.setVC = [[SetViewController alloc] init];
     
+    self.myCenterNav = [[UINavigationController alloc] initWithRootViewController:self.myCenterVC];
     self.mainNav = [[UINavigationController alloc] initWithRootViewController:self.mainVC];
     self.myBillNav = [[UINavigationController alloc] initWithRootViewController:self.myBillVC];
     self.walletAccNav = [[UINavigationController alloc] initWithRootViewController:self.walletAccVC];
@@ -151,22 +160,35 @@
     headView = [[UIView alloc] init];
     [self.baseScrollView addSubview:headView];
     
-    
+    //headImgView
     UIImage *headImg = [UIImage imageNamed:@"center_profile_avatar"];
-    
     UIImageView *headImgView = [Tool createImagView:headImg];
+    headImgView.userInteractionEnabled = YES;
     [headView addSubview:headImgView];
     
+    //headCoverBtn:头像按钮上的透明按钮
+    UIButton *headCoverBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
+    headCoverBtn.backgroundColor = [UIColor clearColor];
+    headCoverBtn.tag = BTN_TAG_JUSTCLICK;
+    headCoverBtn.frame = CGRectMake(0, 0, headImg.size.width, headImg.size.height);
+    [headCoverBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headImgView addSubview:headCoverBtn];
+    
+    
+    //titleLab
     UILabel *titleLab = [Tool createLable:@"1515****388" attributeStr:nil font:FONT_13_OpenSan textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [headView addSubview:titleLab];
     
+    //realNameImgView
     UIImage *realNameImg = [UIImage imageNamed:@"center_profile_card"];
     UIImageView *realNameImgView = [Tool createImagView:realNameImg];
     [headView addSubview:realNameImgView];
     
+    //realNameLab
     UILabel *realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentCenter];
     [headView addSubview:realNameLab];
     
+    //couponBtn
     UIButton *couponBtn = [Tool createButton:@"小白积分2000 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FFFFFF];
     couponBtn.layer.masksToBounds = YES;
     couponBtn.backgroundColor = COLOR_58A5F6;
@@ -175,6 +197,7 @@
     couponBtn.layer.cornerRadius = couponBtn.height/2;
     [headView addSubview:couponBtn];
     
+    //accountBtn
     UIButton *accountBtn = [Tool createButton:@"开通辅助账户 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_58A5F6];
     accountBtn.layer.masksToBounds = YES;
     accountBtn.layer.borderColor = COLOR_58A5F6.CGColor;
@@ -185,6 +208,7 @@
     [headView addSubview:accountBtn];
     
     
+    //rightArrowBtn
     UIButton *rightArrowBtn = [[UIButton alloc] init];
     UIImage *rightArrowImg = [UIImage imageNamed:@"center_profile_arror_right"];
     rightArrowBtn.size = rightArrowImg.size;
@@ -430,9 +454,9 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
-                //1.退出成功,回到MainVC
+                //重置RESdieMeun的主控制器
                 [self.sideMenuViewController setContentViewController:self.mainNav];
-                //2.隐藏Menu控制器
+                //隐藏Menu控制器
                 [self.sideMenuViewController hideMenuViewController];
                 //3.退出到登录界面
                 [Tool presetnLoginVC:self.sideMenuViewController];

@@ -28,7 +28,7 @@ typedef void(^SDRechargePopChooseBlock)(NSString *cellName);
 
 
 /**
- 显示控件
+ 显示充值pop控件
 
  @param title 名字
  */

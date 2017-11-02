@@ -152,7 +152,7 @@
         }
         if (type == SDMBProgressViewOnlyLoadingIMG) {
             lableText = @"正在加载中...";
-            SDActivityView *activityV = [[SDActivityView alloc]initWithImage:@"SDMBPLoad" view:self rectWH:bezlViewWH];
+            SDActivityView *activityV = [[SDActivityView alloc]initWithImage:@"SDMBPRotaion" view:self rectWH:bezlViewWH];
             [self addMBProgressHUD:MBProgressHUDModeCustomView animationType:MBProgressHUDAnimationZoomOut customView:(UIImageView*)activityV lableText:lableText detailsLabelText:nil hid:NO delayTime:0];
         }
         if (type == SDMBProgressViewLoadError) {
@@ -204,7 +204,7 @@
     HUD.backgroundView.alpha = 0.1f;
     
     //5.设置 bezelView(中间方块)
-    HUD.bezelView.backgroundColor = [UIColor colorWithRed:65/255.0 green:131/255.0 blue:215/255.0 alpha:1.0f];
+    HUD.bezelView.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.7f];
     
     //6.设置边距
     HUD.margin = 15.0f;

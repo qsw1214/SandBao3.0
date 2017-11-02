@@ -11,7 +11,7 @@
 #import "PayNucHelper.h"
 
 #import "BankItemTableViewCell.h"
-
+#import "SDBottomPop.h"
 
 @interface BankCardViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -80,7 +80,23 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    //绑卡
+    if (btn.tag == BTN_TAG_BINDBANKCARD) {
+        
+        [SDBottomPop showBottomPopView:@"解除绑定后银行服务将不可用" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
+            if ([cellName isEqualToString:@"确认解除绑定"]) {
+                
+            }
+        } cancleBlock:^{
+            
+        }];
+    }
+    //解绑
+    if (btn.tag == BTN_TAG_UNBINDCARD) {
+        
 
+        
+    }
     
     
     
@@ -98,6 +114,8 @@
     //bottomBtn
     self.bottomBtn = [Tool createButton:@"添加银行卡" attributeStr:nil font:FONT_14_Regular textColor:COLOR_FFFFFF];
     self.bottomBtn.backgroundColor = COLOR_58A5F6;
+    self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
+    [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:self.bottomBtn];
     self.bottomBtn.height += UPDOWNSPACE_23;
     
@@ -189,6 +207,9 @@
  */
 - (void)ownPayTools
 {
+    //不允许RESideMenu的返回手势
+    self.sideMenuViewController.panGestureEnabled = NO;
+    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
@@ -197,6 +218,8 @@
         paynuc.set("tTokenType", "01001501");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            //允许RESideMenu的返回手势
+            self.sideMenuViewController.panGestureEnabled = YES;
         } successBlock:^{
             
         }];
@@ -206,17 +229,19 @@
         paynuc.set("payToolKinds", "[]");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            //允许RESideMenu的返回手势
+            self.sideMenuViewController.panGestureEnabled = YES;
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                
+                //允许RESideMenu的返回手势
+                self.sideMenuViewController.panGestureEnabled = YES;
                 
                 NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
                 //支付工具排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
-                
-                //设置各payTool数据
-                [self settingData];
                 
             }];
         }];
@@ -224,6 +249,8 @@
     }];
     
 }
+
+
 /**
  *@brief  设置支付工具
  *@return
@@ -259,8 +286,7 @@
         }
         //杉德卡现金账户
         else if ([@"1005" isEqualToString:type]) {
-//            cashPayToolDic = payToolsArray[i];
-//            NSDictionary *accountDic = [cashPayToolDic objectForKey:@"account"];
+            
         }
         //杉德卡消费账户
         else if ([@"1006" isEqualToString:type]) {
@@ -295,7 +321,9 @@
     
     if (bankArray.count>0) {
         self.noCardLab.hidden = YES;
-        [self.bottomBtn setTitle:@"添加银行卡" forState:UIControlStateNormal];
+        [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
+        self.bottomBtn.tag = BTN_TAG_UNBINDCARD;
+        
         //银行卡列表刷新数据
         [self.bankTableView reloadData];
         
@@ -307,7 +335,8 @@
         }];
     }else{
         self.noCardLab.hidden = NO;
-        [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
+        [self.bottomBtn setTitle:@"添加银行卡" forState:UIControlStateNormal];
+        self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
     }
     
 

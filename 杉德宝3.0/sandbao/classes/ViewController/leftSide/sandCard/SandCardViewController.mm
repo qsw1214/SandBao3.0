@@ -75,6 +75,14 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    //绑定杉德卡
+    if (btn.tag == BTN_TAG_BINDSANDCARD) {
+        
+    }
+    //解绑
+    if (btn.tag == BTN_TAG_UNBINDCARD) {
+        
+    }
     
 }
 
@@ -88,6 +96,8 @@
     //bottomBtn
     self.bottomBtn = [Tool createButton:@"添加杉德卡" attributeStr:nil font:FONT_14_Regular textColor:COLOR_FFFFFF];
     self.bottomBtn.backgroundColor = COLOR_58A5F6;
+    [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
     [self.baseScrollView addSubview:self.bottomBtn];
     self.bottomBtn.height += UPDOWNSPACE_23;
     
@@ -162,6 +172,9 @@
  */
 - (void)ownPayTools
 {
+    //不允许RESideMenu的返回手势
+    self.sideMenuViewController.panGestureEnabled = NO;
+    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
@@ -170,6 +183,8 @@
         paynuc.set("tTokenType", "01001501");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            //允许RESideMenu的返回手势
+            self.sideMenuViewController.panGestureEnabled = YES;
         } successBlock:^{
             
         }];
@@ -179,17 +194,19 @@
         paynuc.set("payToolKinds", "[]");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            //允许RESideMenu的返回手势
+            self.sideMenuViewController.panGestureEnabled = YES;
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                
+                //允许RESideMenu的返回手势
+                self.sideMenuViewController.panGestureEnabled = YES;
                 
                 NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
                 //支付工具排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
-                
-                //设置各payTool数据
-                [self settingData];
                 
             }];
         }];
@@ -197,6 +214,8 @@
     }];
     
 }
+
+
 /**
  *@brief  设置支付工具
  *@return
@@ -269,7 +288,8 @@
     
     if (sandArray.count>0) {
         self.noCardLab.hidden = YES;
-        [self.bottomBtn setTitle:@"添加杉德卡" forState:UIControlStateNormal];
+        [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
+        self.bottomBtn.tag = BTN_TAG_UNBINDCARD;
         //杉德卡列表刷新数据
         [self.sandTableView reloadData];
         
@@ -282,7 +302,8 @@
         
     }else{
         self.noCardLab.hidden = NO;
-        [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
+        [self.bottomBtn setTitle:@"添加杉德卡" forState:UIControlStateNormal];
+        self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
     }
     
   

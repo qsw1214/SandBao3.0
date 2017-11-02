@@ -44,7 +44,6 @@
 @property (nonatomic, strong) UIButton *closeBtn;
 
 
-
 /**
  标题文字
  */
@@ -119,8 +118,6 @@
             
         }];
     }
-    
-    
 }
 
 #pragma mark - lazyLoad

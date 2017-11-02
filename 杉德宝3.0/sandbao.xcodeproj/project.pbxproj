@@ -32,12 +32,6 @@
 		281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F64411E792A970005AE86 /* UIView+SDExtension.m */; };
 		281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F644C1E7934B40005AE86 /* SDBannerView.m */; };
 		2820D1AF1E7BE8120012C067 /* SDCircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2820D1AE1E7BE8120012C067 /* SDCircleView.m */; };
-		282143D71FA4124200E6D489 /* SDRechargePop_nol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143D51FA4124200E6D489 /* SDRechargePop_nol@2x.png */; };
-		282143D81FA4124200E6D489 /* SDRechargePop_nol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143D61FA4124200E6D489 /* SDRechargePop_nol@3x.png */; };
-		282143DB1FA4124A00E6D489 /* SDRechargePop_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143D91FA4124A00E6D489 /* SDRechargePop_sel@2x.png */; };
-		282143DC1FA4124A00E6D489 /* SDRechargePop_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DA1FA4124A00E6D489 /* SDRechargePop_sel@3x.png */; };
-		282143DF1FA4147C00E6D489 /* login_list_icon_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */; };
-		282143E01FA4147C00E6D489 /* login_list_icon_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */; };
 		2821B77F1E778B2200F093D7 /* loading-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77A1E778B2200F093D7 /* loading-568h@2x.png */; };
 		2821B7811E778B2200F093D7 /* loading-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77C1E778B2200F093D7 /* loading-736h@3x.png */; };
 		2821B7821E778B2200F093D7 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77D1E778B2200F093D7 /* loading.png */; };
@@ -194,6 +188,19 @@
 		289D15D81EE505BD00B34EAC /* sandbaolibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289D15D71EE505BD00B34EAC /* sandbaolibrary.a */; };
 		289EA96A1F59577500254EA6 /* PSTAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EA9671F59577500254EA6 /* PSTAlertController.m */; };
 		289EA96B1F59577500254EA6 /* SDAlertControllerUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 289EA9691F59577500254EA6 /* SDAlertControllerUtil.m */; };
+		28A8AEAF1FAB25E500FA1EC1 /* SDBottomPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AE9F1FAB25E500FA1EC1 /* SDBottomPop.m */; };
+		28A8AEB01FAB25E500FA1EC1 /* login_list_icon_closed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA21FAB25E500FA1EC1 /* login_list_icon_closed@2x.png */; };
+		28A8AEB11FAB25E500FA1EC1 /* login_list_icon_closed@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA31FAB25E500FA1EC1 /* login_list_icon_closed@3x.png */; };
+		28A8AEB21FAB25E500FA1EC1 /* recharge_chooseBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA41FAB25E500FA1EC1 /* recharge_chooseBtn@2x.png */; };
+		28A8AEB31FAB25E500FA1EC1 /* recharge_chooseBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA51FAB25E500FA1EC1 /* recharge_chooseBtn@3x.png */; };
+		28A8AEB41FAB25E500FA1EC1 /* SDRechargePop_nol@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA61FAB25E500FA1EC1 /* SDRechargePop_nol@2x.png */; };
+		28A8AEB51FAB25E500FA1EC1 /* SDRechargePop_nol@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA71FAB25E500FA1EC1 /* SDRechargePop_nol@3x.png */; };
+		28A8AEB61FAB25E500FA1EC1 /* SDRechargePop_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA81FAB25E500FA1EC1 /* SDRechargePop_sel@2x.png */; };
+		28A8AEB71FAB25E500FA1EC1 /* SDRechargePop_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA91FAB25E500FA1EC1 /* SDRechargePop_sel@3x.png */; };
+		28A8AEB81FAB25E500FA1EC1 /* SDRechargePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEAB1FAB25E500FA1EC1 /* SDRechargePopView.m */; };
+		28A8AEB91FAB25E500FA1EC1 /* SDSearchPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEAE1FAB25E500FA1EC1 /* SDSearchPop.m */; };
+		28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */; };
+		28A8AEC11FAB635900FA1EC1 /* MyCenterCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEC01FAB635900FA1EC1 /* MyCenterCellView.m */; };
 		28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */; };
 		28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A61FA2CA4900C3787E /* SandPointsViewController.m */; };
 		28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */; };
@@ -203,11 +210,8 @@
 		28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B51FA2D2D600C3787E /* MyBillViewController.m */; };
 		28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */; };
 		28D289FB1FA330D400C3787E /* opensans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289FA1FA330D400C3787E /* opensans.ttf */; };
-		28D28A491FA351EC00C3787E /* SDRechargePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D28A481FA351EC00C3787E /* SDRechargePopView.m */; };
 		28D7E5701FA879AC00518042 /* limitServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28D7E56F1FA879AC00518042 /* limitServer.plist */; };
 		28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */; };
-		28D7E57A1FA8AD0100518042 /* recharge_chooseBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D7E5781FA8AD0100518042 /* recharge_chooseBtn@3x.png */; };
-		28D7E57B1FA8AD0100518042 /* recharge_chooseBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D7E5791FA8AD0100518042 /* recharge_chooseBtn@2x.png */; };
 		28D7E5851FA9A50C00518042 /* BankCardRechargeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5841FA9A50C00518042 /* BankCardRechargeViewController.m */; };
 		28D7E58A1FA9A51600518042 /* PaymentActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5871FA9A51600518042 /* PaymentActiveViewController.m */; };
 		28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.m */; };
@@ -243,7 +247,6 @@
 		28DA888D1EEA7FCD00754259 /* tab_button_plan_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88781EEA7FCD00754259 /* tab_button_plan_sel.png */; };
 		28DA888E1EEA7FCD00754259 /* tab_button_plan_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA88791EEA7FCD00754259 /* tab_button_plan_sel@2x.png */; };
 		28DA888F1EEA7FCD00754259 /* tab_button_plan_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA887A1EEA7FCD00754259 /* tab_button_plan_sel@3x.png */; };
-		28E634B61FA7036800DFF58B /* SDSearchPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E634B51FA7036800DFF58B /* SDSearchPop.m */; };
 		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
 		4DD1A90DEFCB099DED2ED74F /* libPods-sandbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */; };
@@ -378,12 +381,6 @@
 		281F644C1E7934B40005AE86 /* SDBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBannerView.m; sourceTree = "<group>"; };
 		2820D1AD1E7BE8120012C067 /* SDCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCircleView.h; sourceTree = "<group>"; };
 		2820D1AE1E7BE8120012C067 /* SDCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCircleView.m; sourceTree = "<group>"; };
-		282143D51FA4124200E6D489 /* SDRechargePop_nol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_nol@2x.png"; sourceTree = "<group>"; };
-		282143D61FA4124200E6D489 /* SDRechargePop_nol@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_nol@3x.png"; sourceTree = "<group>"; };
-		282143D91FA4124A00E6D489 /* SDRechargePop_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_sel@2x.png"; sourceTree = "<group>"; };
-		282143DA1FA4124A00E6D489 /* SDRechargePop_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_sel@3x.png"; sourceTree = "<group>"; };
-		282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@3x.png"; sourceTree = "<group>"; };
-		282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@2x.png"; sourceTree = "<group>"; };
 		2821B77A1E778B2200F093D7 /* loading-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-568h@2x.png"; sourceTree = "<group>"; };
 		2821B77C1E778B2200F093D7 /* loading-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-736h@3x.png"; sourceTree = "<group>"; };
 		2821B77D1E778B2200F093D7 /* loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading.png; sourceTree = "<group>"; };
@@ -612,6 +609,24 @@
 		289EA9671F59577500254EA6 /* PSTAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTAlertController.m; sourceTree = "<group>"; };
 		289EA9681F59577500254EA6 /* SDAlertControllerUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAlertControllerUtil.h; sourceTree = "<group>"; };
 		289EA9691F59577500254EA6 /* SDAlertControllerUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAlertControllerUtil.m; sourceTree = "<group>"; };
+		28A8AE9E1FAB25E500FA1EC1 /* SDBottomPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBottomPop.h; sourceTree = "<group>"; };
+		28A8AE9F1FAB25E500FA1EC1 /* SDBottomPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBottomPop.m; sourceTree = "<group>"; };
+		28A8AEA21FAB25E500FA1EC1 /* login_list_icon_closed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@2x.png"; sourceTree = "<group>"; };
+		28A8AEA31FAB25E500FA1EC1 /* login_list_icon_closed@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closed@3x.png"; sourceTree = "<group>"; };
+		28A8AEA41FAB25E500FA1EC1 /* recharge_chooseBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recharge_chooseBtn@2x.png"; sourceTree = "<group>"; };
+		28A8AEA51FAB25E500FA1EC1 /* recharge_chooseBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recharge_chooseBtn@3x.png"; sourceTree = "<group>"; };
+		28A8AEA61FAB25E500FA1EC1 /* SDRechargePop_nol@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_nol@2x.png"; sourceTree = "<group>"; };
+		28A8AEA71FAB25E500FA1EC1 /* SDRechargePop_nol@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_nol@3x.png"; sourceTree = "<group>"; };
+		28A8AEA81FAB25E500FA1EC1 /* SDRechargePop_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_sel@2x.png"; sourceTree = "<group>"; };
+		28A8AEA91FAB25E500FA1EC1 /* SDRechargePop_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDRechargePop_sel@3x.png"; sourceTree = "<group>"; };
+		28A8AEAA1FAB25E500FA1EC1 /* SDRechargePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRechargePopView.h; sourceTree = "<group>"; };
+		28A8AEAB1FAB25E500FA1EC1 /* SDRechargePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRechargePopView.m; sourceTree = "<group>"; };
+		28A8AEAD1FAB25E500FA1EC1 /* SDSearchPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSearchPop.h; sourceTree = "<group>"; };
+		28A8AEAE1FAB25E500FA1EC1 /* SDSearchPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSearchPop.m; sourceTree = "<group>"; };
+		28A8AEBB1FAB573400FA1EC1 /* MyCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterViewController.h; sourceTree = "<group>"; };
+		28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterViewController.m; sourceTree = "<group>"; };
+		28A8AEBF1FAB635900FA1EC1 /* MyCenterCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterCellView.h; sourceTree = "<group>"; };
+		28A8AEC01FAB635900FA1EC1 /* MyCenterCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterCellView.m; sourceTree = "<group>"; };
 		28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountViewController.h; sourceTree = "<group>"; };
 		28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WalletAccountViewController.mm; sourceTree = "<group>"; };
 		28D289A51FA2CA4900C3787E /* SandPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandPointsViewController.h; sourceTree = "<group>"; };
@@ -628,13 +643,9 @@
 		28D289B61FA2D2D600C3787E /* MyBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBillViewController.h; sourceTree = "<group>"; };
 		28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		28D289FA1FA330D400C3787E /* opensans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = opensans.ttf; sourceTree = "<group>"; };
-		28D28A471FA351EC00C3787E /* SDRechargePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDRechargePopView.h; sourceTree = "<group>"; };
-		28D28A481FA351EC00C3787E /* SDRechargePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDRechargePopView.m; sourceTree = "<group>"; };
 		28D7E56F1FA879AC00518042 /* limitServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = limitServer.plist; sourceTree = "<group>"; };
 		28D7E5751FA885CE00518042 /* BankItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankItemTableViewCell.h; sourceTree = "<group>"; };
 		28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankItemTableViewCell.m; sourceTree = "<group>"; };
-		28D7E5781FA8AD0100518042 /* recharge_chooseBtn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recharge_chooseBtn@3x.png"; sourceTree = "<group>"; };
-		28D7E5791FA8AD0100518042 /* recharge_chooseBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recharge_chooseBtn@2x.png"; sourceTree = "<group>"; };
 		28D7E5831FA9A50C00518042 /* BankCardRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardRechargeViewController.h; sourceTree = "<group>"; };
 		28D7E5841FA9A50C00518042 /* BankCardRechargeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardRechargeViewController.m; sourceTree = "<group>"; };
 		28D7E5861FA9A51600518042 /* PaymentActiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentActiveViewController.h; sourceTree = "<group>"; };
@@ -684,8 +695,6 @@
 		28DA88781EEA7FCD00754259 /* tab_button_plan_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_button_plan_sel.png; sourceTree = "<group>"; };
 		28DA88791EEA7FCD00754259 /* tab_button_plan_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_button_plan_sel@2x.png"; sourceTree = "<group>"; };
 		28DA887A1EEA7FCD00754259 /* tab_button_plan_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tab_button_plan_sel@3x.png"; sourceTree = "<group>"; };
-		28E634B41FA7036800DFF58B /* SDSearchPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSearchPop.h; sourceTree = "<group>"; };
-		28E634B51FA7036800DFF58B /* SDSearchPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSearchPop.m; sourceTree = "<group>"; };
 		28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideMenuViewController.h; sourceTree = "<group>"; };
 		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeftSideMenuViewController.mm; sourceTree = "<group>"; };
 		28EBA18C1F2F1B0B003EEA61 /* SDDrowNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDrowNoticeView.h; sourceTree = "<group>"; };
@@ -975,21 +984,6 @@
 				2820D1AE1E7BE8120012C067 /* SDCircleView.m */,
 			);
 			path = SDCircleView;
-			sourceTree = "<group>";
-		};
-		282143D41FA4122700E6D489 /* image */ = {
-			isa = PBXGroup;
-			children = (
-				28D7E5781FA8AD0100518042 /* recharge_chooseBtn@3x.png */,
-				28D7E5791FA8AD0100518042 /* recharge_chooseBtn@2x.png */,
-				282143DD1FA4147C00E6D489 /* login_list_icon_closed@3x.png */,
-				282143DE1FA4147C00E6D489 /* login_list_icon_closed@2x.png */,
-				282143D91FA4124A00E6D489 /* SDRechargePop_sel@2x.png */,
-				282143DA1FA4124A00E6D489 /* SDRechargePop_sel@3x.png */,
-				282143D51FA4124200E6D489 /* SDRechargePop_nol@2x.png */,
-				282143D61FA4124200E6D489 /* SDRechargePop_nol@3x.png */,
-			);
-			path = image;
 			sourceTree = "<group>";
 		};
 		2821B7841E77B25A00F093D7 /* HeadImageBtnView */ = {
@@ -1535,6 +1529,78 @@
 			path = PSTAlertController;
 			sourceTree = "<group>";
 		};
+		28A8AE9C1FAB25E500FA1EC1 /* SDPopView */ = {
+			isa = PBXGroup;
+			children = (
+				28A8AE9D1FAB25E500FA1EC1 /* SDBottomPop */,
+				28A8AEA01FAB25E500FA1EC1 /* SDRechargePop */,
+				28A8AEAC1FAB25E500FA1EC1 /* SDSearchPop */,
+			);
+			path = SDPopView;
+			sourceTree = "<group>";
+		};
+		28A8AE9D1FAB25E500FA1EC1 /* SDBottomPop */ = {
+			isa = PBXGroup;
+			children = (
+				28A8AE9E1FAB25E500FA1EC1 /* SDBottomPop.h */,
+				28A8AE9F1FAB25E500FA1EC1 /* SDBottomPop.m */,
+			);
+			path = SDBottomPop;
+			sourceTree = "<group>";
+		};
+		28A8AEA01FAB25E500FA1EC1 /* SDRechargePop */ = {
+			isa = PBXGroup;
+			children = (
+				28A8AEA11FAB25E500FA1EC1 /* image */,
+				28A8AEAA1FAB25E500FA1EC1 /* SDRechargePopView.h */,
+				28A8AEAB1FAB25E500FA1EC1 /* SDRechargePopView.m */,
+			);
+			path = SDRechargePop;
+			sourceTree = "<group>";
+		};
+		28A8AEA11FAB25E500FA1EC1 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				28A8AEA21FAB25E500FA1EC1 /* login_list_icon_closed@2x.png */,
+				28A8AEA31FAB25E500FA1EC1 /* login_list_icon_closed@3x.png */,
+				28A8AEA41FAB25E500FA1EC1 /* recharge_chooseBtn@2x.png */,
+				28A8AEA51FAB25E500FA1EC1 /* recharge_chooseBtn@3x.png */,
+				28A8AEA61FAB25E500FA1EC1 /* SDRechargePop_nol@2x.png */,
+				28A8AEA71FAB25E500FA1EC1 /* SDRechargePop_nol@3x.png */,
+				28A8AEA81FAB25E500FA1EC1 /* SDRechargePop_sel@2x.png */,
+				28A8AEA91FAB25E500FA1EC1 /* SDRechargePop_sel@3x.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		28A8AEAC1FAB25E500FA1EC1 /* SDSearchPop */ = {
+			isa = PBXGroup;
+			children = (
+				28A8AEAD1FAB25E500FA1EC1 /* SDSearchPop.h */,
+				28A8AEAE1FAB25E500FA1EC1 /* SDSearchPop.m */,
+			);
+			path = SDSearchPop;
+			sourceTree = "<group>";
+		};
+		28A8AEBA1FAB571000FA1EC1 /* myCenter */ = {
+			isa = PBXGroup;
+			children = (
+				28A8AEBE1FAB631D00FA1EC1 /* view */,
+				28A8AEBB1FAB573400FA1EC1 /* MyCenterViewController.h */,
+				28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */,
+			);
+			path = myCenter;
+			sourceTree = "<group>";
+		};
+		28A8AEBE1FAB631D00FA1EC1 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				28A8AEBF1FAB635900FA1EC1 /* MyCenterCellView.h */,
+				28A8AEC01FAB635900FA1EC1 /* MyCenterCellView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		28D289B41FA2D29900C3787E /* myBill */ = {
 			isa = PBXGroup;
 			children = (
@@ -1551,16 +1617,6 @@
 				28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */,
 			);
 			path = Font;
-			sourceTree = "<group>";
-		};
-		28D28A461FA351BD00C3787E /* SDRechargePop */ = {
-			isa = PBXGroup;
-			children = (
-				282143D41FA4122700E6D489 /* image */,
-				28D28A471FA351EC00C3787E /* SDRechargePopView.h */,
-				28D28A481FA351EC00C3787E /* SDRechargePopView.m */,
-			);
-			path = SDRechargePop;
 			sourceTree = "<group>";
 		};
 		28D7E5741FA885BC00518042 /* view */ = {
@@ -1664,29 +1720,12 @@
 			path = tabbar;
 			sourceTree = "<group>";
 		};
-		28E634B31FA7035000DFF58B /* SDSearchPop */ = {
-			isa = PBXGroup;
-			children = (
-				28E634B41FA7036800DFF58B /* SDSearchPop.h */,
-				28E634B51FA7036800DFF58B /* SDSearchPop.m */,
-			);
-			path = SDSearchPop;
-			sourceTree = "<group>";
-		};
-		28E82FBF1ED6B5F6007FCA2B /* SDPopView */ = {
-			isa = PBXGroup;
-			children = (
-				28E634B31FA7035000DFF58B /* SDSearchPop */,
-				28D28A461FA351BD00C3787E /* SDRechargePop */,
-			);
-			path = SDPopView;
-			sourceTree = "<group>";
-		};
 		28EB6CEC1FA182FB003949AF /* leftSide */ = {
 			isa = PBXGroup;
 			children = (
 				28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */,
 				28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */,
+				28A8AEBA1FAB571000FA1EC1 /* myCenter */,
 				28D289B41FA2D29900C3787E /* myBill */,
 				288D7FB21FA2C8C4001CCAC1 /* walletAccount */,
 				288D7FB31FA2C8CB001CCAC1 /* sandPoints */,
@@ -1995,7 +2034,7 @@
 		A7FF2F941E1601CB0068A2F7 /* customView */ = {
 			isa = PBXGroup;
 			children = (
-				28E82FBF1ED6B5F6007FCA2B /* SDPopView */,
+				28A8AE9C1FAB25E500FA1EC1 /* SDPopView */,
 				28981B5C1FA01FA8004CFC95 /* SDAuthToolsView */,
 				283E16771F70B45300ECC00A /* SDPayToolView */,
 				2841F61D1F53C52100BD23C8 /* SDWaveAnimationView */,
@@ -2152,6 +2191,7 @@
 				283E16E41F70B45300ECC00A /* banklist_gd@2x.png in Resources */,
 				A7DF3DE91DC7202B00243EF6 /* indicator6.png in Resources */,
 				283E16E11F70B45300ECC00A /* banklist_cd@3x.png in Resources */,
+				28A8AEB11FAB25E500FA1EC1 /* login_list_icon_closed@3x.png in Resources */,
 				283E17111F70B45400ECC00A /* list_sand_AddCard@3x.png in Resources */,
 				283E16E01F70B45300ECC00A /* banklist_cd@2x.png in Resources */,
 				A7DF3DF11DC7202B00243EF6 /* indicator8@3x.png in Resources */,
@@ -2159,7 +2199,7 @@
 				283E16ED1F70B45300ECC00A /* banklist_hs@3x.png in Resources */,
 				283E171A1F70B45400ECC00A /* payClosed@2x.png in Resources */,
 				283E16E21F70B45300ECC00A /* banklist_dy@2x.png in Resources */,
-				282143DC1FA4124A00E6D489 /* SDRechargePop_sel@3x.png in Resources */,
+				28A8AEB01FAB25E500FA1EC1 /* login_list_icon_closed@2x.png in Resources */,
 				A7DF3DEA1DC7202B00243EF6 /* indicator6@2x.png in Resources */,
 				28DA888F1EEA7FCD00754259 /* tab_button_plan_sel@3x.png in Resources */,
 				283E16E31F70B45300ECC00A /* banklist_dy@3x.png in Resources */,
@@ -2169,6 +2209,7 @@
 				28DA888C1EEA7FCD00754259 /* tab_button_plan_normal@3x.png in Resources */,
 				283E171B1F70B45400ECC00A /* payClosed@3x.png in Resources */,
 				283E16F91F70B45400ECC00A /* banklist_nh@3x.png in Resources */,
+				28A8AEB41FAB25E500FA1EC1 /* SDRechargePop_nol@2x.png in Resources */,
 				28DA888D1EEA7FCD00754259 /* tab_button_plan_sel.png in Resources */,
 				A7DF3DDF1DC7202B00243EF6 /* indicator2@3x.png in Resources */,
 				28D289FB1FA330D400C3787E /* opensans.ttf in Resources */,
@@ -2190,6 +2231,7 @@
 				28DA88821EEA7FCD00754259 /* tab_button_home_sel@2x.png in Resources */,
 				2853C5781EE134C100DFF407 /* h5test.html in Resources */,
 				283E17051F70B45400ECC00A /* banklist_tj@3x.png in Resources */,
+				28A8AEB31FAB25E500FA1EC1 /* recharge_chooseBtn@3x.png in Resources */,
 				A7DF3DDE1DC7202B00243EF6 /* indicator2@2x.png in Resources */,
 				A7DF3DE81DC7202B00243EF6 /* indicator5@3x.png in Resources */,
 				2821B7811E778B2200F093D7 /* loading-736h@3x.png in Resources */,
@@ -2203,7 +2245,6 @@
 				282D90351EF769B000CF8C28 /* SDMBPRotaion.png in Resources */,
 				283E17041F70B45400ECC00A /* banklist_tj@2x.png in Resources */,
 				283E171E1F70B45400ECC00A /* payHelp@2x.png in Resources */,
-				28D7E57B1FA8AD0100518042 /* recharge_chooseBtn@2x.png in Resources */,
 				283E170E1F70B45400ECC00A /* list_cash@2x.png in Resources */,
 				283E170B1F70B45400ECC00A /* banklist_zs@3x.png in Resources */,
 				28466F5C1FA846CE00FA64FF /* sandServer.plist in Resources */,
@@ -2241,20 +2282,18 @@
 				2821B7821E778B2200F093D7 /* loading.png in Resources */,
 				A7DF3DDC1DC7202B00243EF6 /* indicator1@3x.png in Resources */,
 				283E16EC1F70B45300ECC00A /* banklist_hs@2x.png in Resources */,
+				28A8AEB61FAB25E500FA1EC1 /* SDRechargePop_sel@2x.png in Resources */,
 				A7DF3DED1DC7202B00243EF6 /* indicator7@2x.png in Resources */,
-				282143DF1FA4147C00E6D489 /* login_list_icon_closed@3x.png in Resources */,
 				A7DF3DE71DC7202B00243EF6 /* indicator5@2x.png in Resources */,
 				A7DF3DE11DC7202B00243EF6 /* indicator3@2x.png in Resources */,
 				A7DF3DE21DC7202B00243EF6 /* indicator3@3x.png in Resources */,
 				28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */,
 				28DA888A1EEA7FCD00754259 /* tab_button_plan_normal.png in Resources */,
 				283E16FD1F70B45400ECC00A /* banklist_pa@3x.png in Resources */,
-				28D7E57A1FA8AD0100518042 /* recharge_chooseBtn@3x.png in Resources */,
 				28DA888E1EEA7FCD00754259 /* tab_button_plan_sel@2x.png in Resources */,
 				283E17141F70B45400ECC00A /* list_xiaofei@2x.png in Resources */,
 				28D7E5701FA879AC00518042 /* limitServer.plist in Resources */,
 				283E16DC1F70B45300ECC00A /* banklist_bh@2x.png in Resources */,
-				282143E01FA4147C00E6D489 /* login_list_icon_closed@2x.png in Resources */,
 				283E17091F70B45400ECC00A /* banklist_yz@3x.png in Resources */,
 				282D90341EF769B000CF8C28 /* SDMBPLoad.png in Resources */,
 				283E171F1F70B45400ECC00A /* payHelp@3x.png in Resources */,
@@ -2265,12 +2304,11 @@
 				283E17021F70B45400ECC00A /* banklist_shns@2x.png in Resources */,
 				28981B851FA01FA8004CFC95 /* login_list_icon_closed@2x.png in Resources */,
 				283DBD341ECAA1A400B84E3E /* WeiboSDK.bundle in Resources */,
-				282143DB1FA4124A00E6D489 /* SDRechargePop_sel@2x.png in Resources */,
 				283E17181F70B45400ECC00A /* payChooseBtn@2x.png in Resources */,
+				28A8AEB21FAB25E500FA1EC1 /* recharge_chooseBtn@2x.png in Resources */,
 				283E17121F70B45400ECC00A /* list_sand_logo@2x.png in Resources */,
 				283E16E91F70B45300ECC00A /* banklist_gh@3x.png in Resources */,
 				283E16E71F70B45300ECC00A /* banklist_gf@3x.png in Resources */,
-				282143D81FA4124200E6D489 /* SDRechargePop_nol@3x.png in Resources */,
 				28DA888B1EEA7FCD00754259 /* tab_button_plan_normal@2x.png in Resources */,
 				283E16DF1F70B45300ECC00A /* banklist_bj@3x.png in Resources */,
 				283E16F01F70B45400ECC00A /* banklist_js@2x.png in Resources */,
@@ -2278,7 +2316,6 @@
 				283E170C1F70B45400ECC00A /* banklist_zx@2x.png in Resources */,
 				283E17081F70B45400ECC00A /* banklist_yz@2x.png in Resources */,
 				283E16F61F70B45400ECC00A /* banklist_nb@2x.png in Resources */,
-				282143D71FA4124200E6D489 /* SDRechargePop_nol@2x.png in Resources */,
 				283E16F11F70B45400ECC00A /* banklist_js@3x.png in Resources */,
 				A7694D0A1EA0C2A500BB6369 /* leftMenu.plist in Resources */,
 				A7DF3DF21DC7202B00243EF6 /* indicator9.png in Resources */,
@@ -2292,7 +2329,9 @@
 				28981B811FA01FA8004CFC95 /* login_icon_eye_default@2x.png in Resources */,
 				28DA887B1EEA7FCD00754259 /* tab_bg.png in Resources */,
 				283E16FB1F70B45400ECC00A /* banklist_nj@3x.png in Resources */,
+				28A8AEB51FAB25E500FA1EC1 /* SDRechargePop_nol@3x.png in Resources */,
 				A7DF3DE41DC7202B00243EF6 /* indicator4@2x.png in Resources */,
+				28A8AEB71FAB25E500FA1EC1 /* SDRechargePop_sel@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2390,6 +2429,7 @@
 				28981B8B1FA01FA8004CFC95 /* BankPickerView.m in Sources */,
 				281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */,
 				A7EFB1601EB9A8DD009AA369 /* MQTTSSLSecurityPolicy.m in Sources */,
+				28A8AEC11FAB635900FA1EC1 /* MyCenterCellView.m in Sources */,
 				289C0D541F203FBC00360147 /* Easing.c in Sources */,
 				283E16D41F70B45300ECC00A /* SDPayAnimtion.m in Sources */,
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
@@ -2421,7 +2461,9 @@
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
 				A7EFB1631EB9A8DD009AA369 /* MQTTSSLSecurityPolicyTransport.m in Sources */,
 				283B0FD41FAAFBA00010ADAA /* SandItemTableViewCell.m in Sources */,
+				28A8AEB81FAB25E500FA1EC1 /* SDRechargePopView.m in Sources */,
 				A7EFB15D1EB9A8DD009AA369 /* MQTTSessionLegacy.m in Sources */,
+				28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.m in Sources */,
 				28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */,
 				288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */,
 				A7FF2FC91E1602D80068A2F7 /* CommParameter.m in Sources */,
@@ -2440,6 +2482,7 @@
 				281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */,
 				28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */,
 				28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */,
+				28A8AEAF1FAB25E500FA1EC1 /* SDBottomPop.m in Sources */,
 				A7FF2FE91E160A800068A2F7 /* MinletsData.m in Sources */,
 				282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */,
 				288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */,
@@ -2477,6 +2520,7 @@
 				288421951F8E091200082E7C /* NSString+Encryption.m in Sources */,
 				2817476B1F96E25B007D4D3A /* RegistViewController.mm in Sources */,
 				281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */,
+				28A8AEB91FAB25E500FA1EC1 /* SDSearchPop.m in Sources */,
 				288421991F8E091200082E7C /* UIDevice+DeviceoInfo.m in Sources */,
 				A7EFB1551EB9A8DD009AA369 /* MQTTCFSocketEncoder.m in Sources */,
 				289EA96B1F59577500254EA6 /* SDAlertControllerUtil.m in Sources */,
@@ -2492,9 +2536,7 @@
 				A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */,
 				283E16D71F70B45300ECC00A /* SDPayToolBaseView.m in Sources */,
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,
-				28E634B61FA7036800DFF58B /* SDSearchPop.m in Sources */,
 				288421931F8E091200082E7C /* NSRegularExpression+Verification.m in Sources */,
-				28D28A491FA351EC00C3787E /* SDRechargePopView.m in Sources */,
 				288421B21F8E095E00082E7C /* MqttStatus.m in Sources */,
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,
 				283E16DB1F70B45300ECC00A /* SDPayView.m in Sources */,

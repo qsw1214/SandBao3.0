@@ -154,6 +154,7 @@
 
 
 #pragma - mark 按钮Tag:tag
+#define BTN_TAG_JUSTCLICK  99999  //仅点击(标识)
 #define BTN_TAG_FORGETPWD 100000 //忘记密码
 #define BTN_TAG_LOGIN 100001 //登录
 #define BTN_TAG_REGIST 100002 //注册
@@ -177,7 +178,9 @@
 #define BTN_TAG_TOSTAR 100021 //去评分
 #define BTN_TAG_ABOUTSAND 100022 //杉德宝隐私政策
 #define BTN_TAG_PAYMENTACTIVE 100023 //代付凭证激活
-
+#define BTN_TAG_BINDBANKCARD 100024 //添加银行卡
+#define BTN_TAG_BINDSANDCARD 100025 //添加杉德卡
+#define BTN_TAG_UNBINDCARD   100026 //解绑卡
 
 
 

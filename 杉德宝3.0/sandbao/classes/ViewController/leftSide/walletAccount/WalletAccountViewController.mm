@@ -18,7 +18,6 @@
 #import "BankCardTransferViewController.h"
 #import "UserTransferBeginViewController.h"
 
-#import "MainViewController.h"
 @interface WalletAccountViewController ()
 {
     //headView
@@ -253,6 +252,9 @@
  */
 - (void)ownPayTools
 {
+    //不允许RESideMenu的返回手势
+    self.sideMenuViewController.panGestureEnabled = NO;
+    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
@@ -261,6 +263,8 @@
         paynuc.set("tTokenType", "01001501");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            //允许RESideMenu的返回手势
+            self.sideMenuViewController.panGestureEnabled = YES;
         } successBlock:^{
             
         }];
@@ -270,9 +274,14 @@
         paynuc.set("payToolKinds", "[]");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            //允许RESideMenu的返回手势
+            self.sideMenuViewController.panGestureEnabled = YES;
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                
+                //允许RESideMenu的返回手势
+                self.sideMenuViewController.panGestureEnabled = YES;
                 
                 NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
                 //支付工具排序
@@ -285,6 +294,10 @@
     }];
     
 }
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
