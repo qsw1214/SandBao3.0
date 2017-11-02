@@ -103,6 +103,17 @@ typedef void(^DefulBtnBlock)();
 + (UIImage *)twoDimensionCodeWithStr:(NSString *)str size:(CGFloat)size;
 
 
+#pragma mark - 金额格式化
+
+/**
+ 数字:金额格式化
+
+ @param number 数字
+ @return 数组化字符串
+ */
++ (NSString *)numberStyleWith:(NSNumber*)number;
+
+
 
 #pragma mark - 头像图片转换(avatar的两种形式_1.文件形式的base64_2.网络Url的Base64)
 

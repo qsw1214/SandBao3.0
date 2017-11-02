@@ -122,7 +122,6 @@
     CGFloat bankNumLabelTop = 2 * space;
     
     UIImage *iconImage = [UIImage imageNamed:@"banklist_abc"];
-    CGSize iconImageSize = CGSizeMake(iconImage.size.width+space/2, iconImage.size.height+space/2);
     CGFloat commLabelW = viewSize.width - 2 * 10 - 2 * 10 - iconImage.size.width - space;
     CGSize bankNameLabelSize = [self.bankNameLabel sizeThatFits:CGSizeMake(commLabelW, MAXFLOAT)];
     CGSize bankTypeLabelSize = [self.bankTypeLabel sizeThatFits:CGSizeMake(commLabelW, MAXFLOAT)];
@@ -148,7 +147,6 @@
     
     //设置图标的frame
     CGFloat iconImageViewX= leftRightSpace;
-    CGFloat iconImageViewY= upDownSpace;
     CGFloat iconImageViewW= self.iconImageView.image.size.width;
     CGFloat iconImageViewH= self.iconImageView.image.size.height;
     
@@ -157,7 +155,7 @@
     
     
     //设置水印图标fram
-    CGFloat iconOffset = 10;
+    CGFloat iconOffset = 0;
     CGSize iconWatermarkImageViewSize = CGSizeMake(self.iconWatermarkImageView.image.size.width, self.iconWatermarkImageView.image.size.height);
     CGFloat iconWatermarkImageViewY = cellHeight - iconWatermarkImageViewSize.height;
     CGFloat iconWatermarkImageViewX = backgroundImageViewW - iconWatermarkImageViewSize.width;
@@ -166,16 +164,16 @@
     //设置银行名字的frame
     CGFloat bankNameLabelX= iconImageViewX + iconImageViewW + space;
     CGFloat bankNameLabelY= upDownSpace;
-    CGFloat bankNameLabelW=commLabelW;
-    CGFloat bankNameLabelH=bankNameLabelSize.height;
+    CGFloat bankNameLabelW= commLabelW - iconImage.size.width - 10 *2;
+    CGFloat bankNameLabelH= bankNameLabelSize.height;
     
     self.bankNameLabel.frame = CGRectMake(bankNameLabelX, leftRightSpace, bankNameLabelW, bankNameLabelH);
     
     //设置银行类型的frame
     CGFloat bankTypeLabelX= bankNameLabelX;
     CGFloat bankTypeLabelY= bankNameLabelY + bankNameLabelH + space;
-    CGFloat bankTypeLabelW=commLabelW;
-    CGFloat bankTypeLabelH=bankTypeLabelSize.height;
+    CGFloat bankTypeLabelW= bankNameLabelW;
+    CGFloat bankTypeLabelH= bankTypeLabelSize.height;
     
     self.bankTypeLabel.frame = CGRectMake(bankTypeLabelX, bankTypeLabelY, bankTypeLabelW, bankTypeLabelH);
     
@@ -183,8 +181,8 @@
     //设置银行卡号的frame
     CGFloat bankNumLabelX= bankNameLabelX;
     CGFloat bankNumLabelY= bankTypeLabelY + bankTypeLabelH + bankNumLabelTop;
-    CGFloat bankNumLabelW=commLabelW;
-    CGFloat bankNumLabelH=bankNumLabelSize.height;
+    CGFloat bankNumLabelW= bankNameLabelW;
+    CGFloat bankNumLabelH= bankNumLabelSize.height;
     
     self.bankNumLabel.frame = CGRectMake(bankNumLabelX, bankNumLabelY, bankNumLabelW, bankNumLabelH);
 }
@@ -195,14 +193,12 @@
  */
 - (void)settingData
 {
-    CGFloat bankNameTextSize = 0;
-    CGFloat bankTypeTextSize = 0;
-    CGFloat bankNumTextSize = 0;
+
     
-  
-        bankNameTextSize = 14;
-        bankTypeTextSize = 14;
-        bankNumTextSize = 14;
+    UIFont *bankNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:15];
+    UIFont *bankTypeTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:13];
+    UIFont *bankNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:26];
+
 
     
     //背景和图标
@@ -225,8 +221,8 @@
                              (__bridge id)backgroundColor.CGColor,
                              (__bridge id)backgroundColor2.CGColor
                              ];
-    self.gradientLayer.startPoint = CGPointMake(0.5f, 1);
-    self.gradientLayer.endPoint = CGPointMake(0.5f, 0);
+    self.gradientLayer.startPoint = CGPointMake(1.f, 0.5f);
+    self.gradientLayer.endPoint = CGPointMake(0.f, 0.5f);
     
     self.iconImageView.image = iconImage;
     self.iconImageView.layer.cornerRadius = iconImage.size.width/2;
@@ -245,19 +241,19 @@
     
     //银行名字
     self.bankNameLabel.text = [_dicData objectForKey:@"title"];
-    self.bankNameLabel.textColor = [UIColor blueColor];
-    self.bankNameLabel.font = [UIFont systemFontOfSize:bankNameTextSize];
+    self.bankNameLabel.textColor = [UIColor whiteColor];
+    self.bankNameLabel.font = bankNameTextFont;
     
     //银行卡类型
     self.bankTypeLabel.text = [self getBankType];
-    self.bankTypeLabel.textColor = [UIColor blueColor];
-    self.bankTypeLabel.font = [UIFont systemFontOfSize:bankTypeTextSize];
+    self.bankTypeLabel.textColor = [UIColor whiteColor];
+    self.bankTypeLabel.font = bankTypeTextFont;
     
     //银行卡号
     NSDictionary *accountDic = [_dicData objectForKey:@"account"];
     self.bankNumLabel.text = [NSString stringWithFormat:@"**** **** **** %@", [accountDic objectForKey:@"accNo"]];
-    self.bankNumLabel.textColor = [UIColor blueColor];
-    self.bankNumLabel.font = [UIFont systemFontOfSize:bankNumTextSize];
+    self.bankNumLabel.textColor = [UIColor whiteColor];
+    self.bankNumLabel.font = bankNumTextFont;
 }
 
 /**
@@ -306,26 +302,7 @@
         bankType = @"网银贷记卡";
     }
     
-    
     return bankType;
-}
-
-/**
- *  计算文本的宽高
- *
- *  @param str     需要计算的文本
- *  @param font    文本显示的字体
- *  @param maxSize 文本显示的范围
- *
- *  @return 文本占用的真实宽高
- */
-- (CGSize)sizeWithString:(NSString *)str font:(UIFont *)font maxSize:(CGSize)maxSize
-{
-    NSDictionary *dict = @{NSFontAttributeName : font};
-    // 如果将来计算的文字的范围超出了指定的范围,返回的就是指定的范围
-    // 如果将来计算的文字的范围小于指定的范围, 返回的就是真实的范围
-    CGSize size =  [str boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil].size;
-    return size;
 }
 
 

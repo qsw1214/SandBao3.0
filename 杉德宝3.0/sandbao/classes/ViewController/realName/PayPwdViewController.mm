@@ -192,7 +192,7 @@
 }
 
 
-#pragma 提交设置支付密码-鉴权工具
+#pragma mark 提交设置支付密码-鉴权工具
 - (void)setRegAuthTools{
     
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];

@@ -41,6 +41,26 @@
     //数据源
     NSArray *dataArray;
 }
+
+@property (nonatomic, strong) MainViewController             *mainVC;
+@property (nonatomic, strong) MyBillViewController           *myBillVC;
+@property (nonatomic, strong) WalletAccountViewController    *walletAccVC;
+@property (nonatomic, strong) SandPointsViewController       *sandPointVC;
+@property (nonatomic, strong) FinancicleCenterViewController *financicleVC;
+@property (nonatomic, strong) BankCardViewController         *bankCardVC;
+@property (nonatomic, strong) SandCardViewController         *sandCardVC;
+@property (nonatomic, strong) SetViewController              *setVC;
+
+@property (nonatomic, strong) UINavigationController *mainNav;
+@property (nonatomic, strong) UINavigationController *myBillNav;
+@property (nonatomic, strong) UINavigationController *walletAccNav;
+@property (nonatomic, strong) UINavigationController *sandPointNav;
+@property (nonatomic, strong) UINavigationController *financicleNav;
+@property (nonatomic, strong) UINavigationController *bankCardNav;
+@property (nonatomic, strong) UINavigationController *sandCardNav;
+@property (nonatomic, strong) UINavigationController *setNav;
+
+
 @end
 
 @implementation LeftSideMenuViewController
@@ -48,8 +68,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //滚动到顶部
-    self.baseScrollView.scrollsToTop = YES;
+    
+    //用户退出后再登陆需刷新数据
+    
     
     
 }
@@ -66,7 +87,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-
+    
+    //加载子控制器
+    [self addSubViewController];
+    
     //加载UI
     [self createUI_headView];
     [self createUI_tableView];
@@ -92,8 +116,31 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_LOGOUT) {
+
         [self loginOut];
     }
+    
+}
+
+- (void)addSubViewController{
+    self.mainVC = [[MainViewController alloc] init];
+    self.myBillVC = [[MyBillViewController alloc] init];
+    self.walletAccVC = [[WalletAccountViewController alloc] init];
+    self.sandPointVC = [[SandPointsViewController alloc] init];
+    self.financicleVC = [[FinancicleCenterViewController alloc] init];
+    self.bankCardVC = [[BankCardViewController alloc] init];
+    self.sandCardVC = [[SandCardViewController alloc] init];
+    self.setVC = [[SetViewController alloc] init];
+    
+    self.mainNav = [[UINavigationController alloc] initWithRootViewController:self.mainVC];
+    self.myBillNav = [[UINavigationController alloc] initWithRootViewController:self.myBillVC];
+    self.walletAccNav = [[UINavigationController alloc] initWithRootViewController:self.walletAccVC];
+    self.sandPointNav = [[UINavigationController alloc] initWithRootViewController:self.sandPointVC];
+    self.financicleNav = [[UINavigationController alloc] initWithRootViewController:self.financicleVC];
+    self.bankCardNav = [[UINavigationController alloc] initWithRootViewController:self.bankCardVC];
+    self.sandCardNav = [[UINavigationController alloc] initWithRootViewController:self.sandCardVC];
+    self.setNav = [[UINavigationController alloc] initWithRootViewController:self.setVC];
+    
     
 }
 
@@ -313,47 +360,48 @@
     
     NSDictionary *dict = dataArray[indexPath.row];
     NSString *titleName = [dict objectForKey:@"title"];
+
     
-    UINavigationController *nav;
     if ([titleName isEqualToString:@"返回首页"]) {
-        MainViewController *mainVC = [[MainViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.mainNav];
     }
     if ([titleName isEqualToString:@"我的账单"]) {
-        MyBillViewController *myAccVC = [[MyBillViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:myAccVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.myBillNav];
     }
     if ([titleName isEqualToString:@"钱包账户"]) {
-        WalletAccountViewController *walletAccVC = [[WalletAccountViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:walletAccVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.walletAccNav];
     }
     if ([titleName isEqualToString:@"杉德积分"]) {
-        SandPointsViewController *sandPtVC = [[SandPointsViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:sandPtVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.sandPointNav];
     }
     if ([titleName isEqualToString:@"理财中心"]) {
-        FinancicleCenterViewController *financicleVC = [[FinancicleCenterViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:financicleVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.financicleNav];
     }
     if ([titleName isEqualToString:@"银行卡"]) {
-        BankCardViewController *bankCardVC = [[BankCardViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:bankCardVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.bankCardNav];
     }
     if ([titleName isEqualToString:@"杉德卡"]) {
-        SandCardViewController *sandCardVC = [[SandCardViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:sandCardVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.sandCardNav];
     }
     if ([titleName isEqualToString:@"设置"]) {
-        SetViewController *setVC = [[SetViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:setVC];
+        //重置RESdieMeun的主控制器
+        [self.sideMenuViewController setContentViewController:self.setNav];
     }
     
-    //重置RESdieMeun的主控制器
-    [self.sideMenuViewController setContentViewController:nav];
     //隐藏Menu控制器
     [self.sideMenuViewController hideMenuViewController];
     
 }
+
+
+
 
 #pragma mark - 业务逻辑
 #pragma mark 登出
@@ -362,14 +410,6 @@
  */
 - (void)loginOut
 {
-    //退出前,回到MainVC
-    MainViewController *mainVC = [[MainViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mainVC];
-    [self.sideMenuViewController setContentViewController:nav];
-    //隐藏Menu控制器
-    [self.sideMenuViewController hideMenuViewController];
-    
-    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
@@ -389,7 +429,12 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                //退出到登录界面
+                
+                //1.退出成功,回到MainVC
+                [self.sideMenuViewController setContentViewController:self.mainNav];
+                //2.隐藏Menu控制器
+                [self.sideMenuViewController hideMenuViewController];
+                //3.退出到登录界面
                 [Tool presetnLoginVC:self.sideMenuViewController];
             }];
         }];

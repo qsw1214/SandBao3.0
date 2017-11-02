@@ -7,7 +7,7 @@
 //
 
 #import "WalletAccountViewController.h"
-
+#import "PayNucHelper.h"
 #import "GradualView.h"
 #import "SDRechargePopView.h"
 
@@ -36,6 +36,14 @@
     }
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
+    
+}
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //1.刷新支付工具
+    [self ownPayTools];
+    
 }
 
 - (void)viewDidLoad {
@@ -144,6 +152,7 @@
     
     //balanceLab
     UILabel *balanceLab = [Tool createLable:@"9,999,999.00" attributeStr:nil font:FONT_35_SFUIT_Rrgular textColor:COLOR_FFFFFF alignment:NSTextAlignmentCenter];
+    balanceLab.text = [Tool numberStyleWith:[NSNumber numberWithDouble:100867.89]];
     [headView addSubview:balanceLab];
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -234,6 +243,46 @@
         make.size.mas_equalTo(transferLab.size);
     }];
     
+    
+}
+
+#pragma mark - 业务逻辑
+#pragma mark 查询我方支付工具鉴权工具
+/**
+ *@brief 查询我方支付工具
+ */
+- (void)ownPayTools
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01001501");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
+                //支付工具排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+            }];
+        }];
+        if (error) return ;
+    }];
     
 }
 

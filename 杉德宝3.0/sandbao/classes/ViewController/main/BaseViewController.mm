@@ -62,7 +62,7 @@
     
     self.navCoverView = [NavCoverView createNavCorverView];
     self.navCoverView.style = NavCoverStyleWhite;
-    self.navCoverView.midTitleStr = @"可爱的测试标题";
+    self.navCoverView.midTitleStr = @"";
     self.navCoverView.letfImgStr = nil;
     self.navCoverView.leftTitleStr = nil;
     self.navCoverView.rightImgStr = nil;

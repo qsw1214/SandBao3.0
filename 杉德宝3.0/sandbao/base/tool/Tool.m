@@ -274,6 +274,21 @@
     return [UIImage imageWithCGImage:scaledImage];
 }
 
+
+#pragma mark - 金额格式化
++ (NSString *)numberStyleWith:(NSNumber*)number{
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    
+    numberFormatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    
+    NSString * decimalNumberStr = [numberFormatter stringFromNumber:number];
+    
+    return decimalNumberStr;
+    
+}
+
+
 #pragma mark - 头像图片转换(avatar的两种形式_1.文件形式的base64_2.网络Url的Base64)
 /**
  头像图片转换
