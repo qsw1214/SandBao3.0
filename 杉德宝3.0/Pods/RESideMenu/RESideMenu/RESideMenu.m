@@ -116,10 +116,10 @@
     
     //阴影效果
     _contentViewShadowEnabled = YES;
-    _contentViewShadowColor = [UIColor blackColor];
+    _contentViewShadowColor = [UIColor lightGrayColor];
     _contentViewShadowOffset = CGSizeZero;
-    _contentViewShadowOpacity = 1.f;
-    _contentViewShadowRadius = 8.0f;
+    _contentViewShadowOpacity = 0.6f;
+    _contentViewShadowRadius = 4.0f;
     
     //内容控制器的缩放及偏移(屏幕中点为原点)
     _contentViewInLandscapeOffsetCenterX = 30;

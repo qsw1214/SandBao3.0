@@ -28,12 +28,23 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
+ 
+    NextViewController *next = [[NextViewController alloc] init];
+    [self.navigationController pushViewController:next animated:YES];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+  
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    
+
+ 
 //    //啥都塞进去的测试
 //    [self testOne];
 //    
@@ -55,8 +66,8 @@
 //    //证件号的测试
 //    [self testSev];
 //
-    //银行卡号测试
-    [self testeight];
+//    //银行卡号测试
+//    [self testeight];
     
 
  

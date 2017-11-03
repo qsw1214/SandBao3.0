@@ -76,14 +76,18 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    //明登陆
-    if (_pwdLoginFlag) {
-        [self pwdLogin];
-    }
-    //暗登陆
-    else{
-        [self noPwdLogin];
+    if ([CommParameter sharedInstance].userId == nil) {
         
+        //明登陆
+        if (_pwdLoginFlag) {
+            [self pwdLogin];
+            _pwdLoginFlag = NO;
+        }
+        //暗登陆
+        else{
+            [self noPwdLogin];
+            
+        }
     }
     
     //重置baseScrollview的Contentsize

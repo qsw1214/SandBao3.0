@@ -11,9 +11,6 @@
 @interface SixCodeAuthToolView ()<UITextFieldDelegate>{
     
     NSInteger codeLabCount;
-    NSTimer *timer;
-    NSTimeInterval timeOut;
-    NSInteger timeCount;
     UIButton *requestSmsBtn;
 }
 @property (nonatomic, strong) NSMutableArray *codeLabArr; //保存codeLab的数组
@@ -73,6 +70,12 @@
         //短信模式禁止交互
         noCopyTextfield.userInteractionEnabled = NO;
         self.titleLab.text = @"验证码";
+        //取缓存中的倒计时
+        NSInteger currentTimeOut = [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentTimeOut"] integerValue];
+        if (currentTimeOut>0) {
+            //以当前timeOut 开启GCD定时器
+            [self createTimer:currentTimeOut];
+        }
         
     }
     if (_style == PayCodeAuthTool) {
@@ -210,10 +213,10 @@
 //        //点击发送短信按钮后, 键盘自动弹出
 //        [noCopyTextfield becomeFirstResponder];
         
-        timeCount = 60;
         
-        //短信码倒计时
-        [self shortMsgCodeCountDown];
+        
+        //GCD创建计时器
+        [self createTimer:0];
         
         //短信码请求事件回调
         self.successRequestBlock(@"");
@@ -230,43 +233,87 @@
     
 }
 
-/**
- *@brief 短信码倒计时
- */
-- (void)shortMsgCodeCountDown
-{
-    timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(refreshTime) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-}
-/**
- *@brief 短信码倒计时
- */
-- (void)refreshTime
-{
-    timeCount--;
-    if (timeCount < 0) {
-        [timer invalidate];
-        timer = nil;
-        [requestSmsBtn setUserInteractionEnabled:YES];
-        requestSmsBtn.selected = NO;
-        NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我重新发送一次短信"];
-        [atr addAttributes:@{
-                             NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
-                             NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
-                             } range:NSMakeRange(2, 4)];
-        [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
-    } else {
-        [requestSmsBtn setUserInteractionEnabled:NO];
-        
-        NSString *time = [NSString stringWithFormat:@"(%ld秒)后可重新发送短信", (long)timeCount];
-        NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:time];
-        [atr addAttributes:@{
-                             NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
-                             NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
-                             } range:NSMakeRange(1, 2)];
-        [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
+#pragma mark - 定时器 (GCD)
+- (void)createTimer:(NSInteger)currentTimeOut {
+    
+    //设置倒计时时间
+    //通过检验发现，方法调用后，timeout会先自动-1，所以如果从15秒开始倒计时timeout应该写16
+    //__block 如果修饰指针时，指针相当于弱引用，指针对指向的对象不产生引用计数的影响
+    __block NSInteger timeout;
+    
+    if (currentTimeOut>0) {
+        timeout = currentTimeOut;
+    }else{
+        timeout = 61;
     }
+    
+    
+    //获取全局队列
+    dispatch_queue_t global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    
+    //创建一个定时器，并将定时器的任务交给全局队列执行(并行，不会造成主线程阻塞)
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, global);
+    
+    // 设置触发的间隔时间
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    //1.0 * NSEC_PER_SEC  代表设置定时器触发的时间间隔为1s
+    //0 * NSEC_PER_SEC    代表时间允许的误差是 0s
+    
+    //block内部 如果对当前对象的强引用属性修改 应该使用__weak typeof(self)weakSelf 修饰  避免循环调用
+    
+    //设置定时器的触发事件
+    dispatch_source_set_event_handler(timer, ^{
+        
+        //倒计时  刷新button上的title ，当倒计时时间为0时，结束倒计时
+        
+        //1. 每调用一次 时间-1s 存一次当前计时器
+        timeout --;
+        [[NSUserDefaults standardUserDefaults] setInteger:timeout forKey:@"currentTimeOut"];
+        //2.对timeout进行判断时间是停止倒计时，还是修改button的title
+        if (timeout <= 0) {
+            
+            //停止倒计时，button打开交互,状态修改
+            
+            //关闭定时器
+            dispatch_source_cancel(timer);
+            
+            
+            //button上的相关设置
+            //注意: button是属于UI，在iOS中多线程处理时，UI控件的操作必须是交给主线程(主队列)
+            //在主线程中对button进行修改操作
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [requestSmsBtn setUserInteractionEnabled:YES];
+                requestSmsBtn.selected = NO;
+                NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我重新发送一次短信"];
+                [atr addAttributes:@{
+                                     NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
+                                     NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                                     } range:NSMakeRange(2, 4)];
+                [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
+
+            });
+        }else {
+            
+            //处于正在倒计时，在主线程中刷新button上的title，时间-1秒
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [requestSmsBtn setUserInteractionEnabled:NO];
+                NSString *time = [NSString stringWithFormat:@"(%ld秒)后可重新发送短信", (long)timeout];
+                NSLog(@"-=-=-=-=-=-=-=-=-= -=-=-=  -=-=-= %@",time);
+                NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:time];
+                [atr addAttributes:@{
+                                     NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
+                                     NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                                     } range:NSMakeRange(1, 2)];
+                [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
+            });
+        }
+    });
+    
+    dispatch_resume(timer);
 }
+
 
 #pragma - mark textfiledDelegate
 
@@ -294,4 +341,11 @@
     
     
 }
+
+#pragma mark - 清除存储的currentTimeOut
+- (void)cleanCurrentTimeOut{
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"currentTimeOut"];
+}
+
 @end

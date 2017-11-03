@@ -29,6 +29,8 @@
 #import "PwdAuthToolView.h"
 #import "SixCodeAuthToolView.h"
 #import "BankAuthToolView.h"
+#import "SDPayConfig.h"
+
 
 
 

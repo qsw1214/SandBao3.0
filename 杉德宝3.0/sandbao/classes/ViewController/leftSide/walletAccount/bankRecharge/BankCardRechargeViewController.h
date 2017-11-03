@@ -10,4 +10,15 @@
 
 @interface BankCardRechargeViewController : BaseViewController
 
+
+/**
+ 被充值支付工具
+ */
+@property (nonatomic, strong)NSMutableDictionary *beRechargePayToolDic;
+
+/**
+ tTokenType
+ */
+@property (nonatomic, strong) NSString *tTokenType;
+
 @end

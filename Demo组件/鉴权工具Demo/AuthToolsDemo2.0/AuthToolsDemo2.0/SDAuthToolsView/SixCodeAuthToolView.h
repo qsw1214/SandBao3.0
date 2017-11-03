@@ -51,5 +51,9 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
 @property (nonatomic, copy) TextSuccessBlock_SixCodeAuthTool successRequestBlock;
 
 
+/**
+ 短信模式下调用:清空
+ */
+- (void)cleanCurrentTimeOut;
 
 @end

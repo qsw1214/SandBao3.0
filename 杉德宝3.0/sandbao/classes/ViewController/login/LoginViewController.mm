@@ -38,12 +38,15 @@
     [super viewDidLoad];
 
     
-    [self clearUserInfo];
+    [self clearSmsTimeOut];
     
     [self createUI];
     
 }
-
+- (void)clearSmsTimeOut{
+    //清空上一次用户误操作留下的timeOut
+    [SixCodeAuthToolView cleanCurrentTimeOut];
+}
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -77,11 +80,6 @@
         [self.navigationController pushViewController:regVc animated:YES];
     }
     
-}
-
-#pragma - mark 登陆注册前,清除缓存中的用户信息
-- (void)clearUserInfo{
-    [CommParameter sharedInstance].userId = nil;
 }
 
 #pragma mark  - UI绘制
@@ -339,8 +337,8 @@
                         }else{
                             [Tool showDialog:@"下发鉴权工具为空"];
                         }
-                        
-                       
+                    }else{
+                         [self load];
                     }
                 }];
             }
