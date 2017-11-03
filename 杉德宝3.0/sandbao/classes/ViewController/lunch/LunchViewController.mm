@@ -1,28 +1,44 @@
 //
-//  ErrorMainViewController.m
+//  LunchViewController.m
 //  sandbao
 //
-//  Created by tianNanYiHao on 2017/10/12.
+//  Created by tianNanYiHao on 2017/11/3.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "ErrorMainViewController.h"
+#import "LunchViewController.h"
 
-@interface ErrorMainViewController ()
+#import "PayNucHelper.h"
+#import "NSObject+NSLocalNotification.h"
+#import "SqliteHelper.h"
+#import "SDSqlite.h"
+#import "SDDrowNoticeView.h"
+#import "LoginViewController.h"
 
+@interface LunchViewController ()
+{
+    
+}
 @end
 
-@implementation ErrorMainViewController
+@implementation LunchViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    // 用户退出后再登陆需刷新数据
+    
+    //允许RESideMenu的返回手势
+    self.sideMenuViewController.panGestureEnabled = YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    // Do any additional setup after loading the view.
+    
     [self setBaseInfo];
-    [self showError];
-    
-    
-
 }
+
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -34,9 +50,16 @@
     self.navCoverView.hidden = YES;
 }
 
+#pragma mark - 重写父类-点击方法集合
+- (void)buttonClick:(UIButton *)btn{
+
+    
+}
+
+#pragma mark  - UI绘制
 - (void)setBaseInfo{
     //修改状态栏白色
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
     
     
     UIImage *headImage = [UIImage fullscreenAllIphoneImageWithName:@"loading.png"];
@@ -78,29 +101,28 @@
         make.centerX.equalTo(headImageView.mas_centerX).offset(0);
         make.size.mas_equalTo(versionLabsize1);
     }];
-    
-    
-}
-- (void)showError{
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [Tool showDialog:_errorInfo defulBlock:^{
-            [self exitApplication];
-        }];
-    });
-   
-
 }
 
-- (void)exitApplication {
-    //来 加个动画，给用户一个友好的退出界面
-    [UIView animateWithDuration:0.4 animations:^{
-        self.view.window.alpha = 0;
-    } completion:^(BOOL finished) {
-        exit(0);
-    }];
-    
+
+
+
+
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

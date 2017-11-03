@@ -68,7 +68,7 @@
     if (btn.tag == BTN_TAG_NEXT) {
         
         if (SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
-            //验证支付密码成功, dismiss方式返回MainViewController
+            //验证支付密码成功, dismiss方式返回HomeViewController
             [self setRegAuthTools];
             
         }

@@ -9,8 +9,8 @@
 #import "AppDelegate.h"
 #import <IQKeyboardManager.h>
 #import <UIKit/UIKit.h>
-#import "MainViewController.h"
-#import "ErrorMainViewController.h"
+#import "LunchViewController.h"
+#import "ErrorLunchViewController.h"
 #import "PayNucHelper.h"
 #import "UIDevice+DeviceoInfo.h"
 #import "Majlet_Func.h"
@@ -56,7 +56,7 @@
     
     // 3.loading
     NSInteger loadingResult = [Loading startLoading];
-    loadingResult = 1;
+//    loadingResult = 1;
     switch (loadingResult) {
             //load失败
             case 0:
@@ -72,15 +72,17 @@
             //明登陆引导
             case 1:
             {
-                //主vc
-                MainViewController *mMainViewController = [[MainViewController alloc] init];
-                mMainViewController.pwdLoginFlag = YES;
-                UINavigationController *navMainViewController = [[UINavigationController alloc] initWithRootViewController:mMainViewController];
-                //侧滑vc
-                LeftSideMenuViewController *leftSideMenuVC = [[LeftSideMenuViewController alloc] init];
+                //lunchVC
+                LunchViewController *lunchVC = [[LunchViewController alloc] init];
+                
+                UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
+                //leftVC
+                LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
+                leftVC.pwdLoginFlag = YES;
                 
                 //RESidenMenu控制器
-                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:navMainViewController leftMenuViewController:leftSideMenuVC rightMenuViewController:nil];
+                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
+                
                 self.window.rootViewController = sideMenuVC;
             }
 
@@ -88,15 +90,17 @@
             //暗登陆引导
             case 2:
             {
-                //主vc
-                MainViewController *mMainViewController = [[MainViewController alloc] init];
-                mMainViewController.pwdLoginFlag = NO;
-                UINavigationController *navMainViewController = [[UINavigationController alloc] initWithRootViewController:mMainViewController];
-                //侧滑vc
-                LeftSideMenuViewController *leftSideMenuVC = [[LeftSideMenuViewController alloc] init];
+                //lunchVC
+                LunchViewController *lunchVC = [[LunchViewController alloc] init];
+
+                UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
+                //leftVC
+                LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
+                leftVC.pwdLoginFlag = NO;
                 
                 //RESidenMenu控制器
-                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:navMainViewController leftMenuViewController:leftSideMenuVC rightMenuViewController:nil];
+                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
+                
                 self.window.rootViewController = sideMenuVC;
             }
                 
@@ -148,9 +152,9 @@
 
 #pragma mark - Loading失败 - 进入失败页
 - (void)loadingError:(NSString*)errorStr {
-    ErrorMainViewController *mErrorMainViewController = [[ErrorMainViewController alloc] init];
-    mErrorMainViewController.errorInfo = errorStr;
-    self.window.rootViewController = mErrorMainViewController;
+    ErrorLunchViewController *mErrorLunchViewController = [[ErrorLunchViewController alloc] init];
+    mErrorLunchViewController.errorInfo = errorStr;
+    self.window.rootViewController = mErrorLunchViewController;
     [self.window makeKeyAndVisible];
 }
 

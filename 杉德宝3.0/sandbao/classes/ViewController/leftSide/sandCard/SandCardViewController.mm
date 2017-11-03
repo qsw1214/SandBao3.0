@@ -8,6 +8,7 @@
 
 #import "SandCardViewController.h"
 #import "PayNucHelper.h"
+#import "SDBottomPop.h"
 
 #import "SandItemTableViewCell.h"
 
@@ -29,10 +30,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    // 禁用返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
+    
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
 }
@@ -81,7 +79,13 @@
     }
     //解绑
     if (btn.tag == BTN_TAG_UNBINDCARD) {
-        
+        [SDBottomPop showBottomPopView:@"解除此杉德卡绑定" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
+            if ([cellName isEqualToString:@"确认解除绑定"]) {
+                
+            }
+        } cancleBlock:^{
+            
+        }];
     }
     
 }
@@ -109,7 +113,7 @@
     self.sandTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.baseScrollView addSubview:self.sandTableView];
     
-    cellHeight = UPDOWNSPACE_112;
+    cellHeight = UPDOWNSPACE_122;
     
     [self.noCardLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_160);
@@ -141,6 +145,10 @@
     return sandArray.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return cellHeight;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //获得cell
@@ -164,6 +172,14 @@
     mSandItemTableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     return mSandItemTableViewCell;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+}
+
+
 
 #pragma mark - 业务逻辑
 #pragma mark 查询我方支付工具鉴权工具
@@ -207,6 +223,9 @@
                 //支付工具排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //设置支付工具
+                [self settingData];
                 
             }];
         }];
@@ -290,14 +309,14 @@
         self.noCardLab.hidden = YES;
         [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
         self.bottomBtn.tag = BTN_TAG_UNBINDCARD;
+        
         //杉德卡列表刷新数据
         [self.sandTableView reloadData];
-        
-        CGFloat sandTableViewHeight = cellHeight * sandArray.count;
+        [self.sandTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.sandTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.baseScrollView);
             make.centerX.equalTo(self.baseScrollView);
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, sandTableViewHeight));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.baseScrollView.height - self.bottomBtn.height));
         }];
         
     }else{

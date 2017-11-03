@@ -119,7 +119,6 @@
     if (isShow) {
         [UIView animateWithDuration:0.35 animations:^{
             self.maskBlackView.alpha = 0.4f;
-            self.alpha = 1.f;
             self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - self.allHeight, [UIScreen mainScreen].bounds.size.width, self.allHeight);
         } completion:^(BOOL finished) {
             
@@ -128,7 +127,6 @@
     if (!isShow) {
         [UIView animateWithDuration:0.35f animations:^{
             self.maskBlackView.alpha = 0.f;
-            self.alpha = 0.f;
             self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, self.allHeight);
         } completion:^(BOOL finished) {
             [self.backGroundView removeFromSuperview];

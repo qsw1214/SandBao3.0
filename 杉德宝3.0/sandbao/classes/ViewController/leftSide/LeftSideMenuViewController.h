@@ -9,5 +9,9 @@
 #import "BaseViewController.h"
 
 @interface LeftSideMenuViewController : BaseViewController
+/**
+ 明暗登录标识
+ */
+@property (nonatomic, assign) BOOL pwdLoginFlag;
 
 @end

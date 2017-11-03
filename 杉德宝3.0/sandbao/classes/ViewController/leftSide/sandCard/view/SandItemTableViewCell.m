@@ -41,6 +41,9 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    self.backgroundColor = [UIColor colorWithRed:245/255.f green:245/255.f blue:245/255.f alpha:1.f];
+    
     if (self) {
         
         //背景
@@ -102,10 +105,10 @@
 {
     CGFloat space = 10.0;
     CGFloat leftRightSpace = 15;
-    CGFloat sandNumLabelTop = 2 * leftRightSpace;
+    CGFloat sandNumLabelTop = 2 * space;
     
-    UIImage *iconImage = [UIImage imageNamed:@"banklist_abc"];
-    CGFloat commLabelW = viewSize.width - 2 * 10 - 2 * 10 - iconImage.size.width - space;
+    UIImage *iconImage = [UIImage imageNamed:@"sandcards_list_logo"];
+    CGFloat commLabelW = viewSize.width - 2*leftRightSpace - 2*leftRightSpace - iconImage.size.width - space;
     CGSize sandNameLabelSize = [self.sandNameLabel sizeThatFits:CGSizeMake(commLabelW, MAXFLOAT)];
     CGSize sandNumLabelSize = [self.sandNumLabel sizeThatFits:CGSizeMake(commLabelW, MAXFLOAT)];
     
@@ -124,24 +127,22 @@
     
     //设置图标的frame
     CGFloat iconImageViewX= leftRightSpace;
-    CGFloat iconImageViewY= upDownSpace;
     CGFloat iconImageViewW=iconImage.size.width;
     CGFloat iconImageViewH=iconImage.size.height;
     
     self.iconImageView.frame = CGRectMake(iconImageViewX, leftRightSpace, iconImageViewW, iconImageViewH);
     
     //设置水印图标fram
-    CGFloat iconOffset = 10;
     CGSize iconWatermarkImageViewSize = CGSizeMake(self.iconWatermarkImageView.image.size.width, self.iconWatermarkImageView.image.size.height);
-    CGFloat iconWatermarkImageViewY = cellHeight - iconWatermarkImageViewSize.height;
+    CGFloat iconWatermarkImageViewY = (cellHeight-space) - iconWatermarkImageViewSize.height;
     CGFloat iconWatermarkImageViewX = backgroundImageViewW - iconWatermarkImageViewSize.width;
-    self.iconWatermarkImageView.frame = CGRectMake(iconWatermarkImageViewX+iconOffset, iconWatermarkImageViewY, iconWatermarkImageViewSize.width, iconWatermarkImageViewSize.height);
+    self.iconWatermarkImageView.frame = CGRectMake(iconWatermarkImageViewX, iconWatermarkImageViewY, iconWatermarkImageViewSize.width, iconWatermarkImageViewSize.height);
 
     
     //设置杉德卡名字的frame
     CGFloat sandNameLabelX= iconImageViewX + iconImageViewW + space;
     CGFloat sandNameLabelY= upDownSpace;
-    CGFloat sandNameLabelW= commLabelW - iconImage.size.width - 10 *2;
+    CGFloat sandNameLabelW= commLabelW;
     CGFloat sandNameLabelH= sandNameLabelSize.height;
     
     self.sandNameLabel.frame = CGRectMake(sandNameLabelX, leftRightSpace, sandNameLabelW, sandNameLabelH);
@@ -162,8 +163,8 @@
  */
 - (void)settingData
 {
-    UIFont *sandNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:15];
-    UIFont *sandNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:26];
+    UIFont *sandNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:18];
+    UIFont *sandNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:28];
     
     //背景和图标
     UIColor *backgroundColor;

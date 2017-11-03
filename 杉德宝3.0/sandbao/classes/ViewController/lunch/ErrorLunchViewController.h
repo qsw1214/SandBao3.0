@@ -1,5 +1,5 @@
 //
-//  ErrorMainViewController.h
+//  ErrorLunchViewController.h
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/10/12.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
-@interface ErrorMainViewController : BaseViewController
+@interface ErrorLunchViewController : BaseViewController
 
 @property (nonatomic, strong) NSString *errorInfo;
 

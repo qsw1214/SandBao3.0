@@ -14,9 +14,6 @@
 		280621F31EF8F89600346D1A /* loading-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280621F21EF8F89600346D1A /* loading-667h@2x.png */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
 		281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475B1F96E25B007D4D3A /* LoginViewController.mm */; };
-		281747681F96E25B007D4D3A /* BaseViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475E1F96E25B007D4D3A /* BaseViewController.mm */; };
-		281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747601F96E25B007D4D3A /* ErrorMainViewController.mm */; };
-		2817476A1F96E25B007D4D3A /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747621F96E25B007D4D3A /* MainViewController.mm */; };
 		2817476B1F96E25B007D4D3A /* RegistViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747651F96E25B007D4D3A /* RegistViewController.mm */; };
 		281747B21F983A4B007D4D3A /* LogpwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747B11F983A4B007D4D3A /* LogpwdViewController.mm */; };
 		281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747B51F9847DB007D4D3A /* RealNameViewController.mm */; };
@@ -132,8 +129,6 @@
 		2841F6201F53C52E00BD23C8 /* SDWaveViwe.m in Sources */ = {isa = PBXBuildFile; fileRef = 2841F61F1F53C52E00BD23C8 /* SDWaveViwe.m */; };
 		28466F471FA8160500FA64FF /* AboutUSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F461FA8160500FA64FF /* AboutUSViewController.m */; };
 		28466F5C1FA846CE00FA64FF /* sandServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28466F5B1FA846CE00FA64FF /* sandServer.plist */; };
-		28466F631FA864D200FA64FF /* SDMajletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F621FA864D200FA64FF /* SDMajletCell.m */; };
-		28466F691FA8654000FA64FF /* SDMajletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28466F681FA8654000FA64FF /* SDMajletView.m */; };
 		28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */; };
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
@@ -201,6 +196,12 @@
 		28A8AEB91FAB25E500FA1EC1 /* SDSearchPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEAE1FAB25E500FA1EC1 /* SDSearchPop.m */; };
 		28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */; };
 		28A8AEC11FAB635900FA1EC1 /* MyCenterCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEC01FAB635900FA1EC1 /* MyCenterCellView.m */; };
+		28B6490D1FAC17A30074A390 /* HomeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28B6490B1FAC17A30074A390 /* HomeViewController.mm */; };
+		28B649141FAC45040074A390 /* BaseViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28B649131FAC45040074A390 /* BaseViewController.mm */; };
+		28B6491A1FAC451D0074A390 /* SDMajletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B649171FAC451D0074A390 /* SDMajletCell.m */; };
+		28B6491B1FAC451D0074A390 /* SDMajletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B649191FAC451D0074A390 /* SDMajletView.m */; };
+		28B649211FAC459B0074A390 /* ErrorLunchViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28B6491E1FAC459B0074A390 /* ErrorLunchViewController.mm */; };
+		28B649221FAC459B0074A390 /* LunchViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28B649201FAC459B0074A390 /* LunchViewController.mm */; };
 		28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */; };
 		28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A61FA2CA4900C3787E /* SandPointsViewController.m */; };
 		28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */; };
@@ -345,12 +346,6 @@
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
 		2817475A1F96E25B007D4D3A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2817475B1F96E25B007D4D3A /* LoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginViewController.mm; sourceTree = "<group>"; };
-		2817475D1F96E25B007D4D3A /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		2817475E1F96E25B007D4D3A /* BaseViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseViewController.mm; sourceTree = "<group>"; };
-		2817475F1F96E25B007D4D3A /* ErrorMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorMainViewController.h; sourceTree = "<group>"; };
-		281747601F96E25B007D4D3A /* ErrorMainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ErrorMainViewController.mm; sourceTree = "<group>"; };
-		281747611F96E25B007D4D3A /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		281747621F96E25B007D4D3A /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
 		281747641F96E25B007D4D3A /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		281747651F96E25B007D4D3A /* RegistViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RegistViewController.mm; sourceTree = "<group>"; };
 		281747B01F983A4B007D4D3A /* LogpwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogpwdViewController.h; sourceTree = "<group>"; };
@@ -508,10 +503,6 @@
 		28466F451FA8160500FA64FF /* AboutUSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUSViewController.h; sourceTree = "<group>"; };
 		28466F461FA8160500FA64FF /* AboutUSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUSViewController.m; sourceTree = "<group>"; };
 		28466F5B1FA846CE00FA64FF /* sandServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sandServer.plist; sourceTree = "<group>"; };
-		28466F611FA864D200FA64FF /* SDMajletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletCell.h; sourceTree = "<group>"; };
-		28466F621FA864D200FA64FF /* SDMajletCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletCell.m; sourceTree = "<group>"; };
-		28466F671FA8654000FA64FF /* SDMajletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletView.h; sourceTree = "<group>"; };
-		28466F681FA8654000FA64FF /* SDMajletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletView.m; sourceTree = "<group>"; };
 		28491BCE1F38719F00E2B30C /* DismissAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissAnimatedTransitioning.h; sourceTree = "<group>"; };
 		28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissAnimatedTransitioning.m; sourceTree = "<group>"; };
 		28491BD01F38719F00E2B30C /* PresentAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentAnimatedTransitioning.h; sourceTree = "<group>"; };
@@ -627,6 +618,18 @@
 		28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterViewController.m; sourceTree = "<group>"; };
 		28A8AEBF1FAB635900FA1EC1 /* MyCenterCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterCellView.h; sourceTree = "<group>"; };
 		28A8AEC01FAB635900FA1EC1 /* MyCenterCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterCellView.m; sourceTree = "<group>"; };
+		28B6490B1FAC17A30074A390 /* HomeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HomeViewController.mm; sourceTree = "<group>"; };
+		28B6490C1FAC17A30074A390 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		28B649121FAC45040074A390 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		28B649131FAC45040074A390 /* BaseViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaseViewController.mm; sourceTree = "<group>"; };
+		28B649161FAC451D0074A390 /* SDMajletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletCell.h; sourceTree = "<group>"; };
+		28B649171FAC451D0074A390 /* SDMajletCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletCell.m; sourceTree = "<group>"; };
+		28B649181FAC451D0074A390 /* SDMajletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMajletView.h; sourceTree = "<group>"; };
+		28B649191FAC451D0074A390 /* SDMajletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMajletView.m; sourceTree = "<group>"; };
+		28B6491D1FAC459B0074A390 /* ErrorLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorLunchViewController.h; sourceTree = "<group>"; };
+		28B6491E1FAC459B0074A390 /* ErrorLunchViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ErrorLunchViewController.mm; sourceTree = "<group>"; };
+		28B6491F1FAC459B0074A390 /* LunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchViewController.h; sourceTree = "<group>"; };
+		28B649201FAC459B0074A390 /* LunchViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LunchViewController.mm; sourceTree = "<group>"; };
 		28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountViewController.h; sourceTree = "<group>"; };
 		28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WalletAccountViewController.mm; sourceTree = "<group>"; };
 		28D289A51FA2CA4900C3787E /* SandPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandPointsViewController.h; sourceTree = "<group>"; };
@@ -864,12 +867,13 @@
 		281747561F96E23F007D4D3A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				28B649111FAC44D40074A390 /* base */,
+				28B6491C1FAC459B0074A390 /* lunch */,
 				286922F91F98AEBA007C46B0 /* smsCheck */,
 				281747B31F9847AF007D4D3A /* realName */,
 				281747631F96E25B007D4D3A /* regist */,
 				281747571F96E25B007D4D3A /* login */,
 				28EB6CEC1FA182FB003949AF /* leftSide */,
-				2817475C1F96E25B007D4D3A /* main */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -881,20 +885,6 @@
 				2817475B1F96E25B007D4D3A /* LoginViewController.mm */,
 			);
 			path = login;
-			sourceTree = "<group>";
-		};
-		2817475C1F96E25B007D4D3A /* main */ = {
-			isa = PBXGroup;
-			children = (
-				28466F5D1FA8646600FA64FF /* view */,
-				2817475D1F96E25B007D4D3A /* BaseViewController.h */,
-				2817475E1F96E25B007D4D3A /* BaseViewController.mm */,
-				281747611F96E25B007D4D3A /* MainViewController.h */,
-				281747621F96E25B007D4D3A /* MainViewController.mm */,
-				2817475F1F96E25B007D4D3A /* ErrorMainViewController.h */,
-				281747601F96E25B007D4D3A /* ErrorMainViewController.mm */,
-			);
-			path = main;
 			sourceTree = "<group>";
 		};
 		281747631F96E25B007D4D3A /* regist */ = {
@@ -1205,17 +1195,6 @@
 			children = (
 			);
 			path = feedBack;
-			sourceTree = "<group>";
-		};
-		28466F5D1FA8646600FA64FF /* view */ = {
-			isa = PBXGroup;
-			children = (
-				28466F611FA864D200FA64FF /* SDMajletCell.h */,
-				28466F621FA864D200FA64FF /* SDMajletCell.m */,
-				28466F671FA8654000FA64FF /* SDMajletView.h */,
-				28466F681FA8654000FA64FF /* SDMajletView.m */,
-			);
-			path = view;
 			sourceTree = "<group>";
 		};
 		28491BC11F386FD100E2B30C /* SDViewControllerAnimatedTransitioning */ = {
@@ -1601,6 +1580,47 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		28B6490A1FAC17770074A390 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				28B649151FAC451D0074A390 /* view */,
+				28B6490C1FAC17A30074A390 /* HomeViewController.h */,
+				28B6490B1FAC17A30074A390 /* HomeViewController.mm */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		28B649111FAC44D40074A390 /* base */ = {
+			isa = PBXGroup;
+			children = (
+				28B649121FAC45040074A390 /* BaseViewController.h */,
+				28B649131FAC45040074A390 /* BaseViewController.mm */,
+			);
+			path = base;
+			sourceTree = "<group>";
+		};
+		28B649151FAC451D0074A390 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				28B649161FAC451D0074A390 /* SDMajletCell.h */,
+				28B649171FAC451D0074A390 /* SDMajletCell.m */,
+				28B649181FAC451D0074A390 /* SDMajletView.h */,
+				28B649191FAC451D0074A390 /* SDMajletView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		28B6491C1FAC459B0074A390 /* lunch */ = {
+			isa = PBXGroup;
+			children = (
+				28B6491F1FAC459B0074A390 /* LunchViewController.h */,
+				28B649201FAC459B0074A390 /* LunchViewController.mm */,
+				28B6491D1FAC459B0074A390 /* ErrorLunchViewController.h */,
+				28B6491E1FAC459B0074A390 /* ErrorLunchViewController.mm */,
+			);
+			path = lunch;
+			sourceTree = "<group>";
+		};
 		28D289B41FA2D29900C3787E /* myBill */ = {
 			isa = PBXGroup;
 			children = (
@@ -1725,6 +1745,7 @@
 			children = (
 				28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */,
 				28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */,
+				28B6490A1FAC17770074A390 /* home */,
 				28A8AEBA1FAB571000FA1EC1 /* myCenter */,
 				28D289B41FA2D29900C3787E /* myBill */,
 				288D7FB21FA2C8C4001CCAC1 /* walletAccount */,
@@ -2438,14 +2459,13 @@
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
 				28D7E58A1FA9A51600518042 /* PaymentActiveViewController.m in Sources */,
-				28466F691FA8654000FA64FF /* SDMajletView.m in Sources */,
+				28B649141FAC45040074A390 /* BaseViewController.mm in Sources */,
 				28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */,
 				A7EFB1571EB9A8DD009AA369 /* MQTTCoreDataPersistence.m in Sources */,
 				281747B21F983A4B007D4D3A /* LogpwdViewController.mm in Sources */,
 				A7FF2FE51E160A800068A2F7 /* ExternStringDefine.m in Sources */,
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
 				288421971F8E091200082E7C /* NSString+Money.m in Sources */,
-				28466F631FA864D200FA64FF /* SDMajletCell.m in Sources */,
 				28D7E5A71FA9D15A00518042 /* PaymentBaseCellView.m in Sources */,
 				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
@@ -2458,6 +2478,7 @@
 				28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */,
 				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
 				28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */,
+				28B6491B1FAC451D0074A390 /* SDMajletView.m in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
 				A7EFB1631EB9A8DD009AA369 /* MQTTSSLSecurityPolicyTransport.m in Sources */,
 				283B0FD41FAAFBA00010ADAA /* SandItemTableViewCell.m in Sources */,
@@ -2467,6 +2488,7 @@
 				28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */,
 				288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */,
 				A7FF2FC91E1602D80068A2F7 /* CommParameter.m in Sources */,
+				28B649221FAC459B0074A390 /* LunchViewController.mm in Sources */,
 				283E16D51F70B45300ECC00A /* SDPayKeyBoardView.m in Sources */,
 				A7FF2FE71E160A800068A2F7 /* HeaderCollectionReusableView.m in Sources */,
 				28466F471FA8160500FA64FF /* AboutUSViewController.m in Sources */,
@@ -2478,7 +2500,6 @@
 				A7EFB15E1EB9A8DD009AA369 /* MQTTSessionManager.m in Sources */,
 				A7F2F2641E1E2AE000F6CDA3 /* HttpComm.mm in Sources */,
 				288421B01F8E095E00082E7C /* Majlet_Func.mm in Sources */,
-				281747691F96E25B007D4D3A /* ErrorMainViewController.mm in Sources */,
 				281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */,
 				28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */,
 				28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */,
@@ -2500,16 +2521,17 @@
 				A7EFB1561EB9A8DD009AA369 /* MQTTCFSocketTransport.m in Sources */,
 				289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */,
 				281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */,
+				28B6491A1FAC451D0074A390 /* SDMajletCell.m in Sources */,
 				A7FF2FE31E160A800068A2F7 /* DataModel.m in Sources */,
 				28D7E5971FA9A53F00518042 /* UserTransferBeginViewController.m in Sources */,
 				28D289B01FA2CA8000C3787E /* SandCardViewController.mm in Sources */,
 				28981B8C1FA01FA8004CFC95 /* NoCopyTextField.m in Sources */,
 				28D7E5A81FA9D15A00518042 /* PaymentCodeCell.m in Sources */,
 				281F64481E792A970005AE86 /* SDCycleScrollView.m in Sources */,
+				28B649211FAC459B0074A390 /* ErrorLunchViewController.mm in Sources */,
 				288421941F8E091200082E7C /* NSString+EncodingUTF8Additions.m in Sources */,
 				28D7E5AD1FA9D25000518042 /* PaymentRechargeViewController.m in Sources */,
 				28765CB11FA75D98006F2A06 /* SetCellBaseView.m in Sources */,
-				2817476A1F96E25B007D4D3A /* MainViewController.mm in Sources */,
 				288421961F8E091200082E7C /* NSString+file.m in Sources */,
 				28981B7E1FA01FA8004CFC95 /* IdentityAuthToolView.m in Sources */,
 				288421B11F8E095E00082E7C /* MqttClientManager.m in Sources */,
@@ -2518,6 +2540,7 @@
 				283E16D81F70B45300ECC00A /* SDPayToolListView.m in Sources */,
 				289EA96A1F59577500254EA6 /* PSTAlertController.m in Sources */,
 				288421951F8E091200082E7C /* NSString+Encryption.m in Sources */,
+				28B6490D1FAC17A30074A390 /* HomeViewController.mm in Sources */,
 				2817476B1F96E25B007D4D3A /* RegistViewController.mm in Sources */,
 				281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */,
 				28A8AEB91FAB25E500FA1EC1 /* SDSearchPop.m in Sources */,
@@ -2544,7 +2567,6 @@
 				28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */,
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,
-				281747681F96E25B007D4D3A /* BaseViewController.mm in Sources */,
 				28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */,
 				28D7E5961FA9A53F00518042 /* UserTransferPageViewController.m in Sources */,
 				A7EFB1611EB9A8DD009AA369 /* MQTTSSLSecurityPolicyDecoder.m in Sources */,

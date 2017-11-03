@@ -25,6 +25,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //基础配置 - 禁用系统侧滑返回
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    
     //基础配置 - self.navgationController.navgationBar -> hidden
     self.navigationController.navigationBar.hidden = YES;
     

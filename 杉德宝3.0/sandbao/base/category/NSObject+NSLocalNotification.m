@@ -13,7 +13,7 @@
 
 #import "NSObject+NSLocalNotification.h"
 #import "AppDelegate.h"
-#import "MainViewController.h"
+#import "HomeViewController.h"
 
 @implementation NSObject (NSLocalNotification)
 
