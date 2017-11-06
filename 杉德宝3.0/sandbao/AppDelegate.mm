@@ -56,7 +56,7 @@
     
     // 3.loading
     NSInteger loadingResult = [Loading startLoading];
-//    loadingResult = 1;
+//    loadingResult = 2;
     switch (loadingResult) {
             //load失败
             case 0:

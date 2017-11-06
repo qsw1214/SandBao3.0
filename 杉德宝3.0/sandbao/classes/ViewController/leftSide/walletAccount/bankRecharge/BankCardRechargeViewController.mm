@@ -64,7 +64,8 @@ typedef void(^CashRechargeStateBlock)(NSArray *paramArr);
     [self create_NextBarBtn];
     [self create_PayView];
     
-    [self getPayTools];
+    //获取充值支付工具
+//    [self getPayTools];
 }
 
 
@@ -95,8 +96,31 @@ typedef void(^CashRechargeStateBlock)(NSArray *paramArr);
     
     if (btn.tag == BTN_TAG_RECHARGE) {
         
+        
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"format2" ofType:@"json"];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        NSArray *arr = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
+        payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
+        for (int i = 0; i<arr.count; i++) {
+            if ([@"0" isEqualToString:[NSString stringWithFormat:@"%@",[[arr[i] objectForKey:@"account"] objectForKey:@"useableBalance"]]] || [[arr[i] objectForKey:@"available"] boolValue]== NO) {
+                //不可用支付工具集
+                [payToolsArrayUnusableM addObject:arr[i]];
+            }else{
+                //可用支付工具集
+                [payToolsArrayUsableM addObject:arr[i]];
+            }
+        }
+        //设置支付方式列表
+        [self initPayMode:arr];
+        [self resetBankNameLabelAndIconImageView];
         [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"现金账户充值"];
-        [self fee];
+        [self.payView showPayTool];
+        
+        
+        
+//        [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"现金账户充值"];
+//        [self fee];
 //        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
 //        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
     }
@@ -348,6 +372,7 @@ typedef void(^CashRechargeStateBlock)(NSArray *paramArr);
                     
                     //2.设置VC默认显示的支付
                     self.rechargePayToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
+                    //刷新页面信息
                     [self resetBankNameLabelAndIconImageView];
                     
                     //3.设置支付方式列表
@@ -364,10 +389,13 @@ typedef void(^CashRechargeStateBlock)(NSArray *paramArr);
  重置文字和icon图片
  */
 - (void)resetBankNameLabelAndIconImageView{
+    
     NSString *accNo  = [[payToolsArrayUsableM[0] objectForKey:@"account"] objectForKey:@"accNo"];
     NSString *title = [payToolsArrayUsableM[0] objectForKey:@"title"];
     NSString *lastfournumber = accNo.length>=4?lastfournumber = [accNo substringFromIndex:accNo.length-4]:lastfournumber = @"暂无显示";
-    bankNameLab.text = [NSString stringWithFormat:@"%@(%@)",title,lastfournumber];
+    
+    bankNameLab.text = [NSString stringWithFormat:@"%@",title];
+    bankNumLab.text = [NSString stringWithFormat:@"尾号%@",lastfournumber];
     NSString *imgName = [Tool getIconImageName:[payToolsArrayUsableM[0] objectForKey:@"type"] title:title imaUrl:nil];
     bankIconImgView.image = [UIImage imageNamed:imgName];
 }
@@ -531,12 +559,8 @@ typedef void(^CashRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewSelectPayToolDic:(NSMutableDictionary *)selectPayToolDict{
     self.rechargePayToolDic = selectPayToolDict;
     
-    NSString *accNo  = [[self.rechargePayToolDic objectForKey:@"account"] objectForKey:@"accNo"];
-    NSString *title = [self.rechargePayToolDic objectForKey:@"title"];
-    NSString *lastfournumber = accNo.length>=4?lastfournumber = [accNo substringFromIndex:accNo.length-4]:lastfournumber = @"暂无显示";
-//    bankNametLabel.text = [NSString stringWithFormat:@"%@(%@)",title,lastfournumber];
-//    NSString *imgName = [Tool getIconImageName:[selectPayToolDict objectForKey:@"type"]title:title imaUrl:@""];
-//    iconImageView.image = [UIImage imageNamed:imgName];
+    //刷新页面信息
+    [self resetBankNameLabelAndIconImageView];
     
 }
 

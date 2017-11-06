@@ -40,6 +40,14 @@
     [self.leftBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 }
 
+- (void)goBack{
+    
+    if ([_delegate respondsToSelector:@selector(payToolPwdViewjumpBackToPayToolOrderView)]) {
+        [_delegate payToolPwdViewjumpBackToPayToolOrderView];
+    }
+    
+}
+
 - (void)setIsOnlyPayToolPwdViewStyle:(BOOL)isOnlyPayToolPwdViewStyle{
     
     [self.leftBtn setImage:[UIImage imageNamed:@"payClosed"] forState:UIControlStateNormal];

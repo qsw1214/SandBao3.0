@@ -85,6 +85,7 @@
         }
         //暗登陆
         else{
+            //暗登陆成 - 切换到首页
             [self noPwdLogin];
             
         }

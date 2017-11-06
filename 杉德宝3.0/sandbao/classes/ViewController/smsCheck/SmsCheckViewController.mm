@@ -94,7 +94,13 @@
                 [selfBlock realUserName];
             }
                 break;
-                
+            case SMS_CHECKTYPE_ADDBANKCARD:
+            {
+                //输入短信成功后,addBankCard 绑卡流程
+                selfBlock.smsCodeString = textfieldText;
+                [selfBlock addBankCard];
+            }
+                break;
             default:
                 break;
         }
@@ -297,7 +303,7 @@
     
     
     if (result == YES) {
-        [self ownPayTools];
+        [self ownPayTools_login];
     } else {
         //数据写入失败->返回直接登陆
         [Tool showDialog:@"用户数据存储失败,请返回重新登陆" defulBlock:^{
@@ -307,9 +313,9 @@
 }
 
 /**
- *@brief 查询信息
+ 更新我方支付工具_登陆模式下
  */
-- (void)ownPayTools
+- (void)ownPayTools_login
 {
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].self.HUD = self.HUD;
@@ -348,6 +354,7 @@
         
     }];
 }
+
 
 #pragma mark - =-=-=-=-=-=  用户注册模式   =-=-=-=-=-=
 #pragma mark 校验用户
@@ -489,7 +496,129 @@
     
 }
 
+#pragma mark - =-=-=-=-=-=  用户绑银行卡  =-=-=-=-=-=-
+#pragma mark 用户绑银行卡
 
+- (void)addBankCard{
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        //authTools
+        NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
+        NSMutableDictionary *authToolDic1 = [[NSMutableDictionary alloc] init];
+        [authToolDic1 setValue:@"sms" forKey:@"type"];
+        NSMutableDictionary *smsDic = [[NSMutableDictionary alloc] init];
+        [smsDic setValue:self.phoneNoStr forKey:@"phoneNo"];
+        [smsDic setValue:self.smsCodeString forKey:@"code"];
+        [authToolDic1 setObject:smsDic forKey:@"sms"];
+        [authToolsArray1 addObject:authToolDic1];
+        NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
+        
+        
+        //payTool
+        NSMutableDictionary *payToolDic = [NSMutableDictionary dictionaryWithDictionary:self.payToolDic];
+        NSMutableDictionary *payToolDic_authToolDic = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *payToolDic_authToolDic_creditCardDic = [[NSMutableDictionary alloc] init];
+        
+        [payToolDic_authToolDic setValue:@"creditCard" forKey:@"type"];
+        [payToolDic_authToolDic_creditCardDic setValue:self.cvnStr forKey:@"cvn"];
+        [payToolDic_authToolDic_creditCardDic setValue:self.expiryStr forKey:@"expiry"];
+        [payToolDic_authToolDic setObject:payToolDic_authToolDic_creditCardDic forKey:@"creditCard"];
+        
+        [payToolDic setObject:@[payToolDic_authToolDic] forKey:@"authTools"];
+        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:payToolDic];
+        
+        
+        //userinfo
+        NSMutableDictionary *userinfoDic = [NSMutableDictionary dictionaryWithDictionary:self.userInfoDic];
+        NSMutableDictionary *userinfoDic_userinfoDic = [[NSMutableDictionary alloc] init];
+        
+        [userinfoDic_userinfoDic setValue:self.identityNoStr forKey:@"identityNo"];
+        [userinfoDic_userinfoDic setValue:@"01" forKey:@"type"]; //01 身份证 02 军官证 03护照
+        
+        [userinfoDic setValue:userinfoDic_userinfoDic forKey:@"identity"];
+        [userinfoDic setValue:self.realNameStr forKey:@"userRealName"];
+        [userinfoDic setValue:self.phoneNoStr forKey:@"phoneNo"];
+        NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userinfoDic];
+        
+        
+        paynuc.set("authTools", [authTools UTF8String]);
+        paynuc.set("payTool", [payTool UTF8String]);
+        paynuc.set("userInfo", [userInfo UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/bandCard/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
+                    NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
+                    //绑卡成功,开通快捷失败(后端默认绑卡成功)
+                    if ([@"050005" isEqualToString:respCode]) {
+                        NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                        [Tool showDialog:respMsg defulBlock:^{
+                            [self.navigationController popToRootViewControllerAnimated:YES];
+                        }];
+                    }
+                }
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                [Tool showDialog:@"绑卡成功" defulBlock:^{
+                    [self ownPayTools_addBakcCard];
+                }];
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+    
+}
+/**
+ 更新我方支付工具_绑卡
+ */
+- (void)ownPayTools_addBakcCard
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].self.HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        paynuc.set("tTokenType", "01001501");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
+                //根据order 字段排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //登陆成功:
+                [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+                [self dismissViewControllerAnimated:YES completion:nil];
+                
+            }];
+        }];
+        if (error) return ;
+        
+    }];
+}
 
 
 - (void)didReceiveMemoryWarning {

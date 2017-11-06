@@ -13,6 +13,9 @@
 #import "BankItemTableViewCell.h"
 #import "SDBottomPop.h"
 
+#import "AddBankCardViewController.h"
+
+
 @interface BankCardViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     //银行卡数组
@@ -66,11 +69,17 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
+    self.navCoverView.rightTitleStr = @"添加";
     self.navCoverView.midTitleStr = @"银行卡";
     
     __block BankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+    };
+    self.navCoverView.rightBlock = ^{
+        
+        [weakSelf performSelector:@selector(buttonClick:) withObject:@BTN_TAG_BINDBANKCARD];
+        
     };
 }
 #pragma mark - 重写父类-点击方法集合
@@ -78,7 +87,9 @@
     
     //绑卡
     if (btn.tag == BTN_TAG_BINDBANKCARD) {
-        
+        //添加银行卡
+        AddBankCardViewController *addVC = [[AddBankCardViewController alloc] init];
+        [self.navigationController pushViewController:addVC animated:YES];
     }
     //解绑
     if (btn.tag == BTN_TAG_UNBINDCARD) {
@@ -185,6 +196,15 @@
 {
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [SDBottomPop showBottomPopView:@"解除绑定后银行服务将不可用" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
+        if ([cellName isEqualToString:@"确认解除绑定"]) {
+            
+        }
+    } cancleBlock:^{
+        
+    }];
+    
     
 }
 

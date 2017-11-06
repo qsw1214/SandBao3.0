@@ -56,14 +56,14 @@
 - (void)setTitleStr:(NSString *)titleStr{
     _titleStr = titleStr;
     
-    self.leftRightSpace = 35;
+    self.leftRightSpace = 40;
     self.space = 25;
     
     self.titleLab.text = _titleStr;
     
     CGSize titleLabSize = [self.titleLab sizeThatFits:CGSizeZero];
     CGFloat allHeight = self.space*2 + titleLabSize.height;
-    self.titleLab.frame = CGRectMake(self.leftRightSpace, self.space, titleLabSize.width, titleLabSize.height);
+    self.titleLab.frame = CGRectMake(self.leftRightSpace, self.space, [UIScreen mainScreen].bounds.size.width-2*_leftRightSpace, titleLabSize.height);
     self.line.frame = CGRectMake(self.space, allHeight - 1, [UIScreen mainScreen].bounds.size.width - 2*self.space, 1);
     self.coverBtn.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, allHeight);
     self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, allHeight);

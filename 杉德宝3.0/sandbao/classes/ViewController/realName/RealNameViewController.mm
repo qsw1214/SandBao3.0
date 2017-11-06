@@ -18,9 +18,11 @@
 {
  
     CardNoAuthToolView *cardNoAuthToolView;
+    
     UIButton *nextBarbtn;
     
     NSDictionary *payToolDic;   //支付工具字典
+    
     NSDictionary *userInfoDic;  //用户信息字典
     
     NSArray *appendUIArr;        //保存追加UI的子view
