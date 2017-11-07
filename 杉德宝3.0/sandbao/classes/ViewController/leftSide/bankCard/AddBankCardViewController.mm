@@ -57,7 +57,7 @@
     self.navCoverView.midTitleStr = @"绑定银行卡";
     __block AddBankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     
 }

@@ -36,16 +36,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
-    [self clearSmsTimeOut];
     
     [self createUI];
     
-}
-- (void)clearSmsTimeOut{
-    //清空上一次用户误操作留下的timeOut
-    [SixCodeAuthToolView cleanCurrentTimeOut];
 }
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
@@ -328,7 +321,7 @@
                                     smsCheckVC.phoneNoStr = phoneNum;
                                     smsCheckVC.smsCheckType = SMS_CHECKTYPE_LOGINT;
                                     smsCheckVC.userInfo = userInfo;
-                                    smsCheckVC.authToolArray = authToolSArr;
+                                    smsCheckVC.loginAuthToolArray = authToolSArr;
                                     [self.navigationController pushViewController:smsCheckVC animated:YES];
                                 }else{
                                     [Tool showDialog:@"下发鉴权工具有误"];

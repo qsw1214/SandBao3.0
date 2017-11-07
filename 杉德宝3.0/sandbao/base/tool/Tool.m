@@ -123,6 +123,7 @@
         [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         [viewController presentViewController:navLogin animated:YES completion:nil];
+        [viewController.navigationController popToRootViewControllerAnimated:YES];
         
     }else{
         return;
@@ -606,6 +607,7 @@
     label.text = str;
     label.textColor = textColor;
     label.font = font;
+    label.numberOfLines = 0;
     label.lineBreakMode = NSLineBreakByTruncatingMiddle; //中间省略,保留头尾
     
     if (attributeStr.length>0) {

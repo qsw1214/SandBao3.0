@@ -34,7 +34,7 @@
 /**
  加强鉴权:发送短信成功后执行登陆所需的 鉴权工具
  */
-@property (nonatomic, strong) NSMutableArray *authToolArray;
+@property (nonatomic, strong) NSMutableArray *loginAuthToolArray;
 
 
 /**
@@ -80,5 +80,17 @@
  实名认证:四要素:卡号
  */
 @property (nonatomic, strong) NSString *bankCardNoStr;
+
+
+#pragma mark - 鉴权工具集组模式(修改:支付/登陆密码)
+/**
+ 鉴权工具组(sms + anything)
+ */
+@property (nonatomic, strong) NSArray *verifyAuthToolsArr;
+
+/**
+ 鉴权类型:(修改支付/登陆密码等)
+ */
+@property (nonatomic, assign) NSInteger verifyType;
 
 @end

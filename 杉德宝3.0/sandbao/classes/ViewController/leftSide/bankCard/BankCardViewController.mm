@@ -9,26 +9,33 @@
 #import "BankCardViewController.h"
 
 #import "PayNucHelper.h"
-
+#import "SDPayView.h"
 #import "BankItemTableViewCell.h"
 #import "SDBottomPop.h"
 
 #import "AddBankCardViewController.h"
 
+typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 
-@interface BankCardViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface BankCardViewController ()<UITableViewDelegate,UITableViewDataSource,SDPayViewDelegate>
 {
     //银行卡数组
     NSMutableArray *bankArray;
     //杉德卡数组
     NSMutableArray *sandArray;
+    //所选的支付工具(银行卡)
+    NSDictionary   *selectPayToolDic;
     
     CGFloat cellHeight;
+    
+    NSString *payPassPwdStr;
     
 }
 @property (nonatomic, strong) UILabel *noCardLab;
 @property (nonatomic, strong) UIButton *bottomBtn;
 @property (nonatomic, strong) UITableView *bankTableView;
+@property (nonatomic, strong) SDPayView *payView;
+@property (nonatomic, strong) NSArray *authTools;
 @end
 
 @implementation BankCardViewController
@@ -52,6 +59,9 @@
     // Do any additional setup after loading the view.
     
     [self createUI];
+    
+    [self createUI_PayToolView];
+    
 }
 
 
@@ -78,7 +88,9 @@
     };
     self.navCoverView.rightBlock = ^{
         
-        [weakSelf performSelector:@selector(buttonClick:) withObject:@BTN_TAG_BINDBANKCARD];
+        //添加银行卡
+        AddBankCardViewController *addVC = [[AddBankCardViewController alloc] init];
+        [weakSelf.navigationController pushViewController:addVC animated:YES];
         
     };
 }
@@ -158,6 +170,16 @@
 
 }
 
+- (void)createUI_PayToolView{
+    
+    self.payView = [SDPayView getPayView];
+    self.payView.style = SDPayViewOnlyPwd;
+    self.payView.delegate = self;
+    [self.view addSubview:self.payView];
+
+}
+
+
 #pragma mark tableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -197,9 +219,11 @@
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    selectPayToolDic = bankArray[indexPath.row];
+    
     [SDBottomPop showBottomPopView:@"解除绑定后银行服务将不可用" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
         if ([cellName isEqualToString:@"确认解除绑定"]) {
-            
+            [self getAuthTools];
         }
     } cancleBlock:^{
         
@@ -207,6 +231,47 @@
     
     
 }
+
+#pragma mark - SDPayViewDelegate
+- (void)payViewPwd:(NSString *)pwdStr paySuccessView:(SDPaySuccessAnimationView *)successView{
+    
+    //动画开始
+    [successView animationStart];
+    
+    payPassPwdStr = pwdStr;
+    
+    [self unbandCardbankCradDeleteSuccessed:^(NSArray *paramArr){
+        //解绑成功
+        [successView animationSuccess];
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            [Tool showDialog:@"解绑成功" defulBlock:^{
+                [self ownPayTools];
+            }];
+            
+            
+        });
+    } bankCardDelError:^(NSArray *paramArr){
+        //解绑失败
+        [successView animationStopClean];
+        [self.payView hidPayTool];
+    }];
+    
+}
+- (void)payViewForgetPwd:(NSString *)type{
+    
+    if ([type isEqualToString:PAYTOOL_PAYPASS]) {
+//        //修改支付密码
+//        VerificationModeViewController *mVerificationModeViewController = [[VerificationModeViewController alloc] init];
+//        mVerificationModeViewController.tokenType = @"01000601";
+//        [self.navigationController pushViewController:mVerificationModeViewController animated:YES];
+    }
+    if ([type isEqualToString:PAYTOOL_ACCPASS]) {
+        //修改杉德卡密码
+    }
+    
+}
+
 
 
 #pragma mark - 业务逻辑
@@ -349,9 +414,97 @@
         [self.bottomBtn setTitle:@"添加银行卡" forState:UIControlStateNormal];
         self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
     }
-    
+}
 
-    
+
+
+
+#pragma mark - 解绑银行卡_获取鉴权工具
+- (void)getAuthTools
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01000901");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                
+                [self.HUD hidden];
+                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+                NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                self.authTools = tempAuthToolsArray;
+                
+                //根据不同支付密码类型选择UI弹出框
+                NSMutableDictionary *dic = self.authTools[0];
+                [self.payView setPayInfo:@[dic] moneyStr:nil orderTypeStr:nil];
+                [self.payView showPayTool];
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+}
+#pragma mark 提交鉴权 + 解绑
+- (void)unbandCardbankCradDeleteSuccessed:(BankCardUnBindBlock)successBlock bankCardDelError:(BankCardUnBindBlock)errorBlock
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [self.HUD hidden];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        NSMutableArray *tempAuthToolsArray = [[NSMutableArray alloc] init];
+        
+        NSMutableDictionary *dic = self.authTools[0];
+        NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+        [authToolsDic removeObjectForKey:@"pass"];
+        NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
+        [passDic setValue:[[PayNucHelper sharedInstance] pinenc:payPassPwdStr type:@"paypass"] forKey:@"password"];
+        [passDic setValue:@"" forKey:@"description"];
+        [passDic setValue:@"" forKey:@"encryptType"];
+        [passDic setValue:@"" forKey:@"regular"];
+        [authToolsDic setObject:passDic forKey:@"pass"];
+        [tempAuthToolsArray addObject:authToolsDic];
+        NSString *authToolS = [[PayNucHelper sharedInstance] arrayToJSON:tempAuthToolsArray];
+        paynuc.set("authTools", [authToolS UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                errorBlock(nil);
+            }];
+        } successBlock:^{
+        }];
+        if (error) return ;
+        
+        
+        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)selectPayToolDic];
+        paynuc.set("payTool", [payTool UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/unbandCard/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                errorBlock(nil);
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                successBlock(nil);
+                
+            }];
+        }];
+        if (error) return ;
+    }];
     
 }
 

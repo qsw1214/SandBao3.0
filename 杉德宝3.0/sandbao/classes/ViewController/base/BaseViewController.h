@@ -36,7 +36,7 @@
 
 
 
-#pragma -mark 尺寸:frame
+#pragma mark - 尺寸:frame
 #define SCREEN_RECT [UIScreen mainScreen].bounds
 #define SCREEN_SIZE [UIScreen mainScreen].bounds.size
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -88,7 +88,7 @@
 #define UPDOWNSPACE_0 0.f
 
 
-#pragma -mark 字体:font
+#pragma mark - 字体:font
 #define FONT_36_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:36]
 #define FONT_36_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:36]
 #define FONT_35_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:35]
@@ -112,7 +112,7 @@
 #define FONT_08_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:8]
 
 
-#pragma -mark 颜色:color
+#pragma mark - 颜色:color
 #define RGBA(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define HexRGBA(rgbValue,a) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:a]
 //正黑
@@ -148,15 +148,19 @@
 
 
 //短信类型
-#pragma - mark 短信类型:smsCodeType
+#pragma mark - 短信类型:smsCodeType
 #define SMS_CHECKTYPE_REGIST 10001  //用于注册
 #define SMS_CHECKTYPE_REALNAME 10002 //用于实名
 #define SMS_CHECKTYPE_LOGINT 10003  //用于登陆加强鉴权
 #define SMS_CHECKTYPE_ADDBANKCARD 10004 //用于绑银行卡
+#define SMS_CHECKTYPE_VERIFYTYPE 10005 //用于修改支付/登陆密码
 
+//修改支付/登陆密码
+#pragma mark - 修改支付/登陆密码
+#define VERIFY_TYPE_CHANGEPATPWD 2001 //修改支付密码
+#define VERIFY_TYPE_CHANGELOGPWD 2002 //修改登录密码
 
-
-#pragma - mark 按钮Tag:tag
+#pragma mark - 按钮Tag:tag
 #define BTN_TAG_JUSTCLICK  99999  //仅点击(标识)
 #define BTN_TAG_FORGETPWD 100000 //忘记密码
 #define BTN_TAG_LOGIN 100001 //登录

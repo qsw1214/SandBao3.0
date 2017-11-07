@@ -11,6 +11,9 @@
 
 #import "LogpwdViewController.h"
 #import "PayPwdViewController.h"
+#import "VerifyViewController.h"
+
+
 @interface SmsCheckViewController ()
 {
     SixCodeAuthToolView *smsCodeAuthToolView;
@@ -74,7 +77,7 @@
         switch (selfBlock.smsCheckType) {
             case SMS_CHECKTYPE_LOGINT:
             {
-                //输入短信成功后,进入 登录 流程
+                //输入短信成功后,进入登录流程
                 selfBlock.smsCodeString = textfieldText;
                 [selfBlock loginUser];
                 
@@ -96,9 +99,17 @@
                 break;
             case SMS_CHECKTYPE_ADDBANKCARD:
             {
-                //输入短信成功后,addBankCard 绑卡流程
+                //输入短信成功后,addBankCard绑卡流程
                 selfBlock.smsCodeString = textfieldText;
                 [selfBlock addBankCard];
+            }
+                break;
+            case SMS_CHECKTYPE_VERIFYTYPE:
+            {
+                //输入短信成功后,跳转verifyVC进行进一步鉴权工具填写
+                selfBlock.smsCodeString = textfieldText;
+                [selfBlock pushToVerifyViewController];
+                
             }
                 break;
             default:
@@ -195,7 +206,7 @@
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         //校验手机验证码
-        NSMutableArray *authToolArr = [NSMutableArray arrayWithArray:self.authToolArray];
+        NSMutableArray *authToolArr = [NSMutableArray arrayWithArray:self.loginAuthToolArray];
         NSMutableDictionary *authToolsDic2 = [[NSMutableDictionary alloc] init];
         [authToolsDic2 setValue:@"sms" forKey:@"type"];
         NSMutableDictionary *smsDic = [[NSMutableDictionary alloc] init];
@@ -609,9 +620,7 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
-                //登陆成功:
-                [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self.navigationController popToRootViewControllerAnimated:YES];
                 
             }];
         }];
@@ -619,6 +628,35 @@
         
     }];
 }
+
+#pragma mark - =-=-=-=-=-=  修改支付/登陆密码  =-=-=-=-=-=-
+- (void)pushToVerifyViewController{
+    
+    //组装sms
+    NSMutableArray *authToolsArr;
+    for (int i = 0; i<self.verifyAuthToolsArr.count; i++) {
+        if ([@"sms" isEqualToString:[self.verifyAuthToolsArr[i] objectForKey:@"type"]]) {
+            
+            NSMutableDictionary *authToolDic = [NSMutableDictionary dictionaryWithDictionary: self.verifyAuthToolsArr[i]];
+            NSMutableDictionary *smsDic = [NSMutableDictionary dictionaryWithDictionary:[authToolDic objectForKey:@"sms"]];
+            [smsDic setValue:self.smsCodeString forKey:@"code"];
+            [authToolDic setValue:smsDic forKey:@"sms"];
+            
+            authToolsArr = [NSMutableArray arrayWithArray:self.verifyAuthToolsArr];
+            [authToolsArr removeObjectAtIndex:i];
+            [authToolsArr insertObject:authToolDic atIndex:i];
+        }
+    }
+    
+    VerifyViewController *verifyVC = [[VerifyViewController alloc] init];
+    verifyVC.authToolArr = authToolsArr;
+    verifyVC.verifyType = self.verifyType;
+    [self.navigationController pushViewController:verifyVC animated:YES];
+    
+}
+
+
+
 
 
 - (void)didReceiveMemoryWarning {

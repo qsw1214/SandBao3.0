@@ -70,6 +70,9 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //重置内容控制器为Home,(如明登陆/修改登录密码退出后重登录需要调用)
+    [self goHomeViewController];
+    
     //用户退出后再登陆需刷新数据
     
 }
@@ -647,8 +650,6 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
-                [self goHomeViewController];
-                
                 //3.退出到登录界面
                 [Tool presetnLoginVC:self.sideMenuViewController];
             }];
@@ -662,8 +663,16 @@
 #pragma mark - 本类公共方法调用
 #pragma mark 跳转首页
 - (void)goHomeViewController{
+    
+    //确保归位到首页时,所有的leftSide子控制器都可以侧滑
+    self.sideMenuViewController.panGestureEnabled = YES;
+    //当前控制器归位到Home页
     [self.sideMenuViewController setContentViewController:self.homeNav];
+    //隐藏侧边
     [self.sideMenuViewController hideMenuViewController];
+    //滚动到顶部
+    self.baseScrollView.scrollsToTop = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning {

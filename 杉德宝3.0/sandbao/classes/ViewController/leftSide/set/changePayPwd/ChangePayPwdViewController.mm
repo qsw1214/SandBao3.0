@@ -1,12 +1,12 @@
 //
-//  PayPwdViewController.m
+//  ChangePayPwdViewController.m
 //  sandbao
 //
-//  Created by tianNanYiHao on 2017/10/19.
+//  Created by tianNanYiHao on 2017/11/6.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "PayPwdViewController.h"
+#import "ChangePayPwdViewController.h"
 #import "PayNucHelper.h"
 
 
@@ -14,34 +14,32 @@
 #define SIX_CODE_STATE_INPUT_AGAIN 80002
 #define SIX_CODE_STATE_CHECK_OK    80003
 
-@interface PayPwdViewController ()
+@interface ChangePayPwdViewController ()
 {
     // 6位密码
     NSString *sixCodeStr;
     
-    //查询待注册鉴权工具
+    // reg鉴权工具集组
     NSArray *regAuthToolsArr;
-    
     
 }
 @property (nonatomic, assign) NSInteger SIX_CODE_STATE;
-
 @end
 
-@implementation PayPwdViewController
+@implementation ChangePayPwdViewController
 @synthesize SIX_CODE_STATE;
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
     
     SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
     
-    
     [self createUI];
     
+    //查询待注册鉴权工具
     [self getRegAuthTools];
 }
 
@@ -55,8 +53,8 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
-
-    __block PayPwdViewController *weakSelf = self;
+    
+    __block ChangePayPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -68,7 +66,7 @@
     if (btn.tag == BTN_TAG_NEXT) {
         
         if (SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
-            //验证支付密码成功, dismiss方式返回HomeViewController
+            //验证支付密码不重复,查询带注册鉴权
             [self setRegAuthTools];
             
         }
@@ -84,18 +82,20 @@
 }
 
 
+
 #pragma mark  - UI绘制
 - (void)createUI{
     
     
     //titleLab1
-    UILabel *titleLab = [Tool createLable:@"设置支付密码" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    UILabel *titleLab = [Tool createLable:@"修改支付密码" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
     
     //titleLab2
     UILabel *titleDesLab;
     if (SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
-        titleDesLab = [Tool createLable:@"输入6位数字支付密码" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+        NSString *titleDesStr = [NSString stringWithFormat:@"请为%@设置一个新的支付密码",[CommParameter sharedInstance].userName];
+        titleDesLab = [Tool createLable:titleDesStr attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     }
     if (SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN) {
         titleDesLab = [Tool createLable:@"再次输入6位数字支付密码" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
@@ -140,9 +140,9 @@
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(titleDesLab.size);
     }];
-
+    
     [payCodeAuthTool mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleDesLab.mas_bottom).offset(UPDOWNSPACE_25);
+        make.top.equalTo(titleDesLab.mas_bottom).offset(UPDOWNSPACE_58);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(payCodeAuthTool.size);
     }];
@@ -166,10 +166,9 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"支付密码设置失败" defulBlock:^{
+                [Tool showDialog:@"支付密码修改失败" defulBlock:^{
                     //dismiss回主页
-                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }];
             }];
         } successBlock:^{
@@ -188,7 +187,7 @@
         }];
         if (error) return ;
     }];
-
+    
 }
 
 
@@ -202,16 +201,8 @@
         __block BOOL error = NO;
         
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        NSInteger index = 0;
-        for (int i = 0; i<regAuthToolsArr.count; i++) {
-            NSString *type = @"paypass";
-            NSString *typeGet = [regAuthToolsArr[i] objectForKey:@"type"];
-            if ([type isEqualToString:typeGet]) {
-                index = i;
-            }
-        }
         
-        NSMutableDictionary *authToolDict = regAuthToolsArr[index];
+        NSMutableDictionary *authToolDict = regAuthToolsArr[0];
         NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:authToolDict];
         //[authToolsDic removeObjectForKey:@"pass"];
         NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
@@ -225,31 +216,29 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"支付密码设置失败" defulBlock:^{
+                [Tool showDialog:@"支付密码修改失败" defulBlock:^{
                     //dismiss回主页
-                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
                 }];
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                
-                [Tool showDialog:@"支付密码设置成功" defulBlock:^{
-                    
-                    //dismiss回主页
-                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                [Tool showDialog:@"支付密码修改成功" defulBlock:^{
+                    //pop返回主页
+                    [self.navigationController popToRootViewControllerAnimated:YES];
                 }];
                 
             }];
         }];
         if (error) return ;
-    
+        
     }];
     
-
+    
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -53,7 +53,6 @@
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
 		28574C5B1F4E72BF0003090D /* libpaynuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28574C5A1F4E72BF0003090D /* libpaynuc.a */; };
-		286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
 		28765CB11FA75D98006F2A06 /* SetCellBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28765CB01FA75D98006F2A06 /* SetCellBaseView.m */; };
@@ -206,6 +205,11 @@
 		28BCE8A71FB03E5900D62F94 /* AddBankCardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8A61FB03E5900D62F94 /* AddBankCardViewController.mm */; };
 		28BCE8AA1FB046CB00D62F94 /* AddBankCardSecViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8A91FB046CB00D62F94 /* AddBankCardSecViewController.mm */; };
 		28BCE8AD1FB04E8100D62F94 /* AddBankCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8AC1FB04E8100D62F94 /* AddBankCardCell.m */; };
+		28BCE8B01FB07BFB00D62F94 /* ChangePayPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8AF1FB07BFB00D62F94 /* ChangePayPwdViewController.mm */; };
+		28BCE8BD1FB18FBD00D62F94 /* SmsCheckViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8BC1FB18FBD00D62F94 /* SmsCheckViewController.mm */; };
+		28BCE8C21FB18FD500D62F94 /* VerifyTypeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8BF1FB18FD500D62F94 /* VerifyTypeViewController.mm */; };
+		28BCE8C31FB18FD500D62F94 /* VerifyViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8C11FB18FD500D62F94 /* VerifyViewController.mm */; };
+		28BCE8C61FB190B300D62F94 /* ChangeLogPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8C51FB190B300D62F94 /* ChangeLogPwdViewController.mm */; };
 		28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */; };
 		28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A61FA2CA4900C3787E /* SandPointsViewController.m */; };
 		28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */; };
@@ -424,8 +428,6 @@
 		28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentAnimatedTransitioning.m; sourceTree = "<group>"; };
 		2853C5771EE134C100DFF407 /* h5test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = h5test.html; sourceTree = "<group>"; };
 		28574C5A1F4E72BF0003090D /* libpaynuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpaynuc.a; sourceTree = "<group>"; };
-		286922FA1F98AEDE007C46B0 /* SmsCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsCheckViewController.h; sourceTree = "<group>"; };
-		286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SmsCheckViewController.mm; sourceTree = "<group>"; };
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
 		286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -641,6 +643,16 @@
 		28BCE8A91FB046CB00D62F94 /* AddBankCardSecViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddBankCardSecViewController.mm; sourceTree = "<group>"; };
 		28BCE8AB1FB04E8100D62F94 /* AddBankCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBankCardCell.h; sourceTree = "<group>"; };
 		28BCE8AC1FB04E8100D62F94 /* AddBankCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddBankCardCell.m; sourceTree = "<group>"; };
+		28BCE8AE1FB07BFB00D62F94 /* ChangePayPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPwdViewController.h; sourceTree = "<group>"; };
+		28BCE8AF1FB07BFB00D62F94 /* ChangePayPwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChangePayPwdViewController.mm; sourceTree = "<group>"; };
+		28BCE8BB1FB18FBD00D62F94 /* SmsCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmsCheckViewController.h; sourceTree = "<group>"; };
+		28BCE8BC1FB18FBD00D62F94 /* SmsCheckViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SmsCheckViewController.mm; sourceTree = "<group>"; };
+		28BCE8BE1FB18FD500D62F94 /* VerifyTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyTypeViewController.h; sourceTree = "<group>"; };
+		28BCE8BF1FB18FD500D62F94 /* VerifyTypeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VerifyTypeViewController.mm; sourceTree = "<group>"; };
+		28BCE8C01FB18FD500D62F94 /* VerifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyViewController.h; sourceTree = "<group>"; };
+		28BCE8C11FB18FD500D62F94 /* VerifyViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VerifyViewController.mm; sourceTree = "<group>"; };
+		28BCE8C41FB190B300D62F94 /* ChangeLogPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogPwdViewController.h; sourceTree = "<group>"; };
+		28BCE8C51FB190B300D62F94 /* ChangeLogPwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChangeLogPwdViewController.mm; sourceTree = "<group>"; };
 		28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountViewController.h; sourceTree = "<group>"; };
 		28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WalletAccountViewController.mm; sourceTree = "<group>"; };
 		28D289A51FA2CA4900C3787E /* SandPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandPointsViewController.h; sourceTree = "<group>"; };
@@ -880,7 +892,7 @@
 			children = (
 				28B649111FAC44D40074A390 /* base */,
 				28B6491C1FAC459B0074A390 /* lunch */,
-				286922F91F98AEBA007C46B0 /* smsCheck */,
+				28BCE8BA1FB18F9F00D62F94 /* common */,
 				281747B31F9847AF007D4D3A /* realName */,
 				281747631F96E25B007D4D3A /* regist */,
 				281747571F96E25B007D4D3A /* login */,
@@ -1070,6 +1082,8 @@
 		28466F481FA8163F00FA64FF /* changePayPwd */ = {
 			isa = PBXGroup;
 			children = (
+				28BCE8AE1FB07BFB00D62F94 /* ChangePayPwdViewController.h */,
+				28BCE8AF1FB07BFB00D62F94 /* ChangePayPwdViewController.mm */,
 			);
 			path = changePayPwd;
 			sourceTree = "<group>";
@@ -1077,6 +1091,8 @@
 		28466F491FA8164600FA64FF /* changeLogPwd */ = {
 			isa = PBXGroup;
 			children = (
+				28BCE8C41FB190B300D62F94 /* ChangeLogPwdViewController.h */,
+				28BCE8C51FB190B300D62F94 /* ChangeLogPwdViewController.mm */,
 			);
 			path = changeLogPwd;
 			sourceTree = "<group>";
@@ -1097,15 +1113,6 @@
 				28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */,
 			);
 			path = SDViewControllerAnimatedTransitioning;
-			sourceTree = "<group>";
-		};
-		286922F91F98AEBA007C46B0 /* smsCheck */ = {
-			isa = PBXGroup;
-			children = (
-				286922FA1F98AEDE007C46B0 /* SmsCheckViewController.h */,
-				286922FB1F98AEDE007C46B0 /* SmsCheckViewController.mm */,
-			);
-			path = smsCheck;
 			sourceTree = "<group>";
 		};
 		286BFCA91EE92A3100FD9731 /* SDScanView */ = {
@@ -1634,6 +1641,19 @@
 				28B6497F1FAC654A0074A390 /* qvip_pay_imageholder@3x.png */,
 			);
 			path = commImg;
+			sourceTree = "<group>";
+		};
+		28BCE8BA1FB18F9F00D62F94 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				28BCE8BB1FB18FBD00D62F94 /* SmsCheckViewController.h */,
+				28BCE8BC1FB18FBD00D62F94 /* SmsCheckViewController.mm */,
+				28BCE8BE1FB18FD500D62F94 /* VerifyTypeViewController.h */,
+				28BCE8BF1FB18FD500D62F94 /* VerifyTypeViewController.mm */,
+				28BCE8C01FB18FD500D62F94 /* VerifyViewController.h */,
+				28BCE8C11FB18FD500D62F94 /* VerifyViewController.mm */,
+			);
+			path = common;
 			sourceTree = "<group>";
 		};
 		28D289B41FA2D29900C3787E /* myBill */ = {
@@ -2452,6 +2472,7 @@
 			files = (
 				2841F6201F53C52E00BD23C8 /* SDWaveViwe.m in Sources */,
 				288421B41F8E095E00082E7C /* SDRequestHelp.mm in Sources */,
+				28BCE8B01FB07BFB00D62F94 /* ChangePayPwdViewController.mm in Sources */,
 				28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */,
 				28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */,
 				A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */,
@@ -2481,12 +2502,12 @@
 				28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */,
 				A7EFB1571EB9A8DD009AA369 /* MQTTCoreDataPersistence.m in Sources */,
 				281747B21F983A4B007D4D3A /* LogpwdViewController.mm in Sources */,
+				28BCE8C31FB18FD500D62F94 /* VerifyViewController.mm in Sources */,
 				A7FF2FE51E160A800068A2F7 /* ExternStringDefine.m in Sources */,
 				28B649851FAC654A0074A390 /* SDPayToolOrderView.m in Sources */,
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
 				288421971F8E091200082E7C /* NSString+Money.m in Sources */,
 				28D7E5A71FA9D15A00518042 /* PaymentBaseCellView.m in Sources */,
-				286922FC1F98AEDE007C46B0 /* SmsCheckViewController.mm in Sources */,
 				28BCE8AD1FB04E8100D62F94 /* AddBankCardCell.m in Sources */,
 				28B649831FAC654A0074A390 /* SDPayToolBaseView.m in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
@@ -2506,7 +2527,9 @@
 				28A8AEB81FAB25E500FA1EC1 /* SDRechargePopView.m in Sources */,
 				A7EFB15D1EB9A8DD009AA369 /* MQTTSessionLegacy.m in Sources */,
 				28BCE8AA1FB046CB00D62F94 /* AddBankCardSecViewController.mm in Sources */,
+				28BCE8C61FB190B300D62F94 /* ChangeLogPwdViewController.mm in Sources */,
 				28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.m in Sources */,
+				28BCE8C21FB18FD500D62F94 /* VerifyTypeViewController.mm in Sources */,
 				28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */,
 				288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */,
 				A7FF2FC91E1602D80068A2F7 /* CommParameter.m in Sources */,
@@ -2583,6 +2606,7 @@
 				A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */,
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,
 				288421931F8E091200082E7C /* NSRegularExpression+Verification.m in Sources */,
+				28BCE8BD1FB18FBD00D62F94 /* SmsCheckViewController.mm in Sources */,
 				288421B21F8E095E00082E7C /* MqttStatus.m in Sources */,
 				28BCE8A71FB03E5900D62F94 /* AddBankCardViewController.mm in Sources */,
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,

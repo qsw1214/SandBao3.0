@@ -10,6 +10,8 @@
 #import "SetCellView.h"
 
 #import "AboutUSViewController.h"
+#import "ChangePayPwdViewController.h"
+#import "VerifyTypeViewController.h"
 
 @interface SetViewController ()
 
@@ -23,6 +25,7 @@
     
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
+    
 }
 
 - (void)viewDidLoad {
@@ -30,9 +33,8 @@
     // Do any additional setup after loading the view.
     
     [self creaetUI];
+    
 }
-
-
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -55,10 +57,18 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_CHANGPAYPWD) {
-        NSLog(@"修改支付密码");
+        //@"修改支付密码"
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000601";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     if (btn.tag == BTN_TAG_CHANGLOGPWD) {
-        NSLog(@"修改登录密码");
+        //@"修改登录密码"
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000501";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGELOGPWD;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     if (btn.tag == BTN_TAG_FEEDBACK) {
         NSLog(@"意见反馈");
