@@ -311,66 +311,13 @@
     //被充值支付工具 - 初始化
     beRechargePayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
     
-    //2 整合数据
-    NSArray *payToolsArray = [CommParameter sharedInstance].ownPayToolsArray;
-    NSInteger payToolsArrayCount = [payToolsArray count];
+    NSDictionary *ownPayToolDic = [Tool getOwnPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    beRechargePayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
     
-    for (int i = 0; i < payToolsArrayCount; i++) {
-        NSDictionary *dic = payToolsArray[i];
-        NSString *type = [dic objectForKey:@"type"];
-        //快捷借记卡
-        if ([@"1001" isEqualToString:type]) {
-            
-        }
-        //快捷贷记卡
-        else if ([@"1002" isEqualToString:type]) {
-            
-        }
-        //记名卡主账户
-        else if ([@"1003" isEqualToString:type]) {
-           
-        }
-        //杉德卡钱包
-        else if ([@"1004" isEqualToString:type]) {
-            
-        }
-        //杉德卡现金账户
-        else if ([@"1005" isEqualToString:type]) {
-            beRechargePayToolDic = payToolsArray[i];
-            NSString *balacneStr = [[beRechargePayToolDic objectForKey:@"account"] objectForKey:@"balance"];
-            balanceLab.text = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]/100]];
-        }
-        //杉德卡消费账户
-        else if ([@"1006" isEqualToString:type]) {
-            
-        }
-        //久彰宝杉德币账户
-        else if ([@"1007" isEqualToString:type]) {
-            
-        }
-        //久彰宝专用账户
-        else if ([@"1008" isEqualToString:type]) {
-            
-        }
-        //久彰宝通用账户
-        else if ([@"1009" isEqualToString:type]) {
-            
-        }
-        //会员卡账户
-        else if ([@"1010" isEqualToString:type]) {
-            
-        }
-        //网银借记卡
-        else if ([@"1011" isEqualToString:type]) {
-            
-        }
-        //网银贷记卡
-        else if ([@"1012" isEqualToString:type]) {
-            
-        }
-    }
-
-
+    NSString *balacneStr = [[beRechargePayToolDic objectForKey:@"account"] objectForKey:@"balance"];
+    balanceLab.text = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]/100]];
+    
+    
 }
 
 

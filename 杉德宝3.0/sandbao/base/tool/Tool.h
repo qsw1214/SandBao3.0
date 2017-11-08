@@ -114,6 +114,24 @@ typedef void(^DefulBtnBlock)();
 + (NSString *)numberStyleWith:(NSNumber*)number;
 
 
+#pragma mark - 用户信息获取/刷新
+/**
+ 刷新当前用户信息
+ 
+ @param userInfoStr 用户信息json串
+ */
++ (void)refreshUserInfo:(NSString*)userInfoStr;
+
+
+#pragma mark - 装配我方支付工具
+/**
+ 装配我方支付工具
+
+ @param ownPayToolsArr 支付工具数组
+ @return 支付工具分类
+ */
++ (NSDictionary*)getOwnPayToolsInfo:(NSArray*)ownPayToolsArr;
+
 
 #pragma mark - 头像图片转换(avatar的两种形式_1.文件形式的base64_2.网络Url的Base64)
 
@@ -124,10 +142,6 @@ typedef void(^DefulBtnBlock)();
  @return 图片img
  */
 +(UIImage*)avatarImageWith:(NSString*)avatar;
-
-
-
-
 
 
 #pragma mark - 头像缓存获取

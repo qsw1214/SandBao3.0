@@ -10,8 +10,8 @@
 
 @interface LeftSideMenuViewController : BaseViewController
 /**
- 明暗登录标识
+ 登陆标识描述
  */
-@property (nonatomic, assign) BOOL pwdLoginFlag;
+@property (nonatomic, assign) NSString * loginTypeStr;
 
 @end

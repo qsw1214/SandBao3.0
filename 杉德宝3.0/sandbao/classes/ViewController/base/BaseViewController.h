@@ -145,6 +145,8 @@
 #define COLOR_4591F1 HexRGBA(0x4591F1,1.f)
 //渐变蓝2
 #define COLOR_6CB9F9 HexRGBA(0x6CB9F9,1.f)
+//绿色
+#define COLOR_74D478 HexRGBA(0x74D478,1.f)
 
 
 //短信类型

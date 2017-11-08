@@ -78,7 +78,7 @@
                 UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
                 //leftVC
                 LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
-                leftVC.pwdLoginFlag = YES;
+                leftVC.loginTypeStr = @"PWD_LOGIN";
                 
                 //RESidenMenu控制器
                 RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
@@ -96,7 +96,7 @@
                 UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
                 //leftVC
                 LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
-                leftVC.pwdLoginFlag = NO;
+                leftVC.loginTypeStr = @"NO_PWD_LOGIN";
                 
                 //RESidenMenu控制器
                 RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];

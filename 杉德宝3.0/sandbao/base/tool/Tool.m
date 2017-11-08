@@ -285,18 +285,114 @@
     
     NSString * decimalNumberStr = [numberFormatter stringFromNumber:number];
     
+    if ( number == 0) {
+        decimalNumberStr = @"0.00";
+    }
+    
     return decimalNumberStr;
     
 }
 
+#pragma mark - 用户信息获取/刷新
++ (void)refreshUserInfo:(NSString*)userInfoStr{
+    
+    NSData *userInfoData = [userInfoStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *userInfoDic = [NSJSONSerialization JSONObjectWithData:userInfoData options:NSJSONReadingMutableLeaves error:nil];
+    [CommParameter sharedInstance].userInfo = userInfoStr;
+    [CommParameter sharedInstance].avatar = [userInfoDic objectForKey:@"avatar"];
+    [CommParameter sharedInstance].userRealName = [userInfoDic objectForKey:@"userRealName"];
+    [CommParameter sharedInstance].userName = [userInfoDic objectForKey:@"userName"];
+    [CommParameter sharedInstance].phoneNo = [userInfoDic objectForKey:@"phoneNo"];
+    [CommParameter sharedInstance].userId = [userInfoDic objectForKey:@"userId"];
+    [CommParameter sharedInstance].payPassFlag = [[userInfoDic objectForKey:@"payPassFlag"] boolValue];
+    [CommParameter sharedInstance].PayForAnthoerFlag = [[userInfoDic objectForKey:@"PayForAnthoerFlag"] boolValue];
+    [CommParameter sharedInstance].realNameFlag = [[userInfoDic objectForKey:@"realNameFlag"] boolValue];
+    [CommParameter sharedInstance].safeQuestionFlag = [[userInfoDic objectForKey:@"safeQuestionFlag"] boolValue];
+    [CommParameter sharedInstance].nick = [userInfoDic objectForKey:@"nick"];
+    
+}
+
+#pragma mark - 装配我方支付工具
++ (NSDictionary*)getOwnPayToolsInfo:(NSArray*)ownPayToolsArr{
+    
+    NSMutableDictionary *infoDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    //银行卡 数组初始化
+    NSMutableArray *bankArray = [NSMutableArray arrayWithCapacity:0];
+    //杉德卡 数组初始化
+    NSMutableArray *sandArray = [NSMutableArray arrayWithCapacity:0];
+    //杉德宝钱包账户 初始化
+    NSMutableDictionary *sandWalletDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    //代付凭证 初始化
+    NSMutableDictionary *payForAnthoerDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    
+    for (int i = 0; i < ownPayToolsArr.count; i++) {
+        NSDictionary *dic = ownPayToolsArr[i];
+        NSString *type = [dic objectForKey:@"type"];
+        //快捷借记卡
+        if ([@"1001" isEqualToString:type]) {
+            [bankArray addObject:dic];
+        }
+        //快捷贷记卡
+        else if ([@"1002" isEqualToString:type]) {
+            [bankArray addObject:dic];
+        }
+        //记名卡主账户
+        else if ([@"1003" isEqualToString:type]) {
+            [sandArray addObject:dic];
+        }
+        //杉德卡钱包
+        else if ([@"1004" isEqualToString:type]) {
+            
+        }
+        //杉德卡钱包账户
+        else if ([@"1005" isEqualToString:type]) {
+            sandWalletDic = (NSMutableDictionary*)dic;
+        }
+        //电子记名卡账户
+        else if ([@"1006" isEqualToString:type]) {
+            
+        }
+        //久彰宝杉德币账户
+        else if ([@"1007" isEqualToString:type]) {
+            
+        }
+        //久彰宝专用账户
+        else if ([@"1008" isEqualToString:type]) {
+            
+        }
+        //久彰宝通用账户
+        else if ([@"1009" isEqualToString:type]) {
+            
+        }
+        //会员卡账户
+        else if ([@"1010" isEqualToString:type]) {
+            
+        }
+        //网银借记卡
+        else if ([@"1011" isEqualToString:type]) {
+            [bankArray addObject:dic];
+        }
+        //网银贷记卡
+        else if ([@"1012" isEqualToString:type]) {
+            [bankArray addObject:dic];
+        }
+        //代付凭证
+        else if ([@"1014" isEqualToString:type]) {
+            payForAnthoerDic = (NSMutableDictionary*)dic;
+        }
+    }
+    
+    [infoDic setObject:bankArray forKey:@"bankArray"];
+    [infoDic setObject:sandArray forKey:@"sandArray"];
+    [infoDic setObject:sandWalletDic forKey:@"sandWalletDic"];
+    [infoDic setObject:payForAnthoerDic forKey:@"payForAnthoerDic"];
+    
+    return infoDic;
+    
+}
 
 #pragma mark - 头像图片转换(avatar的两种形式_1.文件形式的base64_2.网络Url的Base64)
-/**
- 头像图片转换
- 
- @param avatar 头像base64字符串
- @return 图片img
- */
 +(UIImage*)avatarImageWith:(NSString*)avatar{
     
     UIImage *image ;
@@ -318,7 +414,7 @@
     
     //确保有返回
     if (image==nil) {
-        image = [UIImage imageNamed:@"banaba_cot"];
+        image = [UIImage imageNamed:@"center_profile_avatar"];
     }
     
     return image;

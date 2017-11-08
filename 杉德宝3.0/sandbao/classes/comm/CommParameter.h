@@ -11,7 +11,6 @@
 @interface CommParameter : NSObject
 
 #pragma mark - userInfo域
-@property (nonatomic, assign) BOOL loginFlag;
 @property (nonatomic, strong) NSString *sToken;   //用户活动状态标识
 @property (nonatomic, strong) NSString *userInfo; //用户信息
 
@@ -24,6 +23,7 @@
 
 @property (nonatomic, assign) BOOL realNameFlag; //实名认证flag
 @property (nonatomic, assign) BOOL payPassFlag;  //是否设置支付密码flag
+@property (nonatomic, assign) BOOL PayForAnthoerFlag; //代付凭证是否激活标志
 @property (nonatomic, assign) BOOL safeQuestionFlag; //开通快捷flag
 
 
@@ -45,7 +45,10 @@
 + (CommParameter *) sharedInstance;
 
 
-
+/**
+ 打印查看当前信息
+ */
+- (void)showCommParameter;
 
 /**
  清除数据

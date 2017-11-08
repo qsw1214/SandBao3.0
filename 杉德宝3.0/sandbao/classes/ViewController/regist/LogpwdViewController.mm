@@ -154,15 +154,9 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
-                NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[NSString stringWithUTF8String:paynuc.get("userInfo").c_str()]];
-                [CommParameter sharedInstance].avatar = [userInfoDic objectForKey:@"avatar"];
-                [CommParameter sharedInstance].realNameFlag = [[userInfoDic objectForKey:@"realNameFlag"] boolValue];
-                [CommParameter sharedInstance].userRealName = [userInfoDic objectForKey:@"userRealName"];
-                [CommParameter sharedInstance].userName = [userInfoDic objectForKey:@"userName"];
-                [CommParameter sharedInstance].phoneNo = [userInfoDic objectForKey:@"phoneNo"];
-                [CommParameter sharedInstance].userId = [userInfoDic objectForKey:@"userId"];
-                [CommParameter sharedInstance].safeQuestionFlag = [[userInfoDic objectForKey:@"safeQuestionFlag"] boolValue];
-                [CommParameter sharedInstance].nick = [userInfoDic objectForKey:@"nick"];
+                //更新用户数据信息
+                [Tool refreshUserInfo:[NSString stringWithUTF8String:paynuc.get("userInfo").c_str()]];
+                //更新用户数据库
                 [self updateUserData];
                 
             }];

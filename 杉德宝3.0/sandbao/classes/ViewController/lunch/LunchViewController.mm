@@ -23,15 +23,6 @@
 
 @implementation LunchViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    // 用户退出后再登陆需刷新数据
-    
-    //允许RESideMenu的返回手势
-    self.sideMenuViewController.panGestureEnabled = YES;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

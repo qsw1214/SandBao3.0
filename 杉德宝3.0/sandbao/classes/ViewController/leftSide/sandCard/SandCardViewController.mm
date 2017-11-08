@@ -14,8 +14,6 @@
 
 @interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
-    //银行卡数组
-    NSMutableArray *bankArray;
     //杉德卡数组
     NSMutableArray *sandArray;
     
@@ -241,68 +239,11 @@
  */
 - (void)settingData
 {
-    //银行卡/杉德卡 数组初始化
-    bankArray = [NSMutableArray arrayWithCapacity:0];
+    //杉德卡 数组初始化
     sandArray = [NSMutableArray arrayWithCapacity:0];
     
-    //2 整合数据
-    NSArray *payToolsArray = [CommParameter sharedInstance].ownPayToolsArray;
-    NSInteger payToolsArrayCount = [payToolsArray count];
-    
-    for (int i = 0; i < payToolsArrayCount; i++) {
-        NSDictionary *dic = payToolsArray[i];
-        NSString *type = [dic objectForKey:@"type"];
-        //快捷借记卡
-        if ([@"1001" isEqualToString:type]) {
-            [bankArray addObject:dic];
-        }
-        //快捷贷记卡
-        else if ([@"1002" isEqualToString:type]) {
-            [bankArray addObject:dic];
-        }
-        //记名卡主账户
-        else if ([@"1003" isEqualToString:type]) {
-            [sandArray addObject:dic];
-        }
-        //杉德卡钱包
-        else if ([@"1004" isEqualToString:type]) {
-            
-        }
-        //杉德卡现金账户
-        else if ([@"1005" isEqualToString:type]) {
-            //            cashPayToolDic = payToolsArray[i];
-            //            NSDictionary *accountDic = [cashPayToolDic objectForKey:@"account"];
-        }
-        //杉德卡消费账户
-        else if ([@"1006" isEqualToString:type]) {
-            
-        }
-        //久彰宝杉德币账户
-        else if ([@"1007" isEqualToString:type]) {
-            
-        }
-        //久彰宝专用账户
-        else if ([@"1008" isEqualToString:type]) {
-            
-        }
-        //久彰宝通用账户
-        else if ([@"1009" isEqualToString:type]) {
-            
-        }
-        //会员卡账户
-        else if ([@"1010" isEqualToString:type]) {
-            
-        }
-        //网银借记卡
-        else if ([@"1011" isEqualToString:type]) {
-            [bankArray addObject:dic];
-        }
-        //网银贷记卡
-        else if ([@"1012" isEqualToString:type]) {
-            [bankArray addObject:dic];
-        }
-    }
-    
+    NSDictionary *ownPayToolDic = [Tool getOwnPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    sandArray = [ownPayToolDic objectForKey:@"sandArray"];
     
     
     if (sandArray.count>0) {

@@ -40,6 +40,19 @@
     
     //数据源
     NSArray *dataArray;
+    
+    //头像
+    UIImageView *headImgView;
+    
+    //用户名lab
+    UILabel *nickNameLab;
+    
+    //实名认证图片标志
+    UIImageView *realNameImgView;
+    
+    //去实名提示
+    UILabel *realNameLab;
+    
 }
 @property (nonatomic, strong) MyCenterViewController         *myCenterVC;
 @property (nonatomic, strong) HomeViewController             *homeVC;
@@ -69,30 +82,40 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    //重置内容控制器为Home,(如明登陆/修改登录密码退出后重登录需要调用)
-    [self goHomeViewController];
-    
-    //用户退出后再登陆需刷新数据
-    
+
+    //登陆描述字符串为空时,允许以下操作
+    if (self.loginTypeStr.length == 0) {
+        
+        //重置内容控制器为Home,(如明登陆/修改登录密码退出后重登录需要调用)
+        [self goHomeViewController];
+        
+        //用户刷新数据信息
+        [self refreshUI];
+    }
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    if ([CommParameter sharedInstance].userId == nil) {
-        
-        //明登陆
-        if (_pwdLoginFlag) {
-            [self pwdLogin];
-            _pwdLoginFlag = NO;
+    
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        //查询活跃状态用户数量(1且只能为1)
+        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
+        //1.明登录
+        if (count <= 0 && [self.loginTypeStr isEqualToString:@"PWD_LOGIN"])
+        {
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self pwdLogin];
+            }];
         }
-        //暗登陆
-        else{
-            //暗登陆成 - 切换到首页
-            [self noPwdLogin];
-            
+        //2.暗登陆
+        else
+        {
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                //暗登陆成 - 切换到首页
+                [self noPwdLogin];
+            }];
         }
-    }
+    }];
     
     //重置baseScrollview的Contentsize
     [self setBaseScrollViewContentSize];
@@ -180,7 +203,9 @@
     
     //headImgView
     UIImage *headImg = [UIImage imageNamed:@"center_profile_avatar"];
-    UIImageView *headImgView = [Tool createImagView:headImg];
+    headImgView = [Tool createImagView:headImg];
+    headImgView.layer.cornerRadius = headImg.size.height/2;
+    headImgView.layer.masksToBounds = YES;
     headImgView.userInteractionEnabled = YES;
     [headView addSubview:headImgView];
     
@@ -194,16 +219,16 @@
     
     
     //titleLab
-    UILabel *titleLab = [Tool createLable:@"1515****388" attributeStr:nil font:FONT_13_OpenSan textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
-    [headView addSubview:titleLab];
+    nickNameLab = [Tool createLable:@"1515****388" attributeStr:nil font:FONT_13_OpenSan textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    [headView addSubview:nickNameLab];
     
     //realNameImgView
     UIImage *realNameImg = [UIImage imageNamed:@"center_profile_card"];
-    UIImageView *realNameImgView = [Tool createImagView:realNameImg];
+    realNameImgView = [Tool createImagView:realNameImg];
     [headView addSubview:realNameImgView];
     
     //realNameLab
-    UILabel *realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentCenter];
+    realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentCenter];
     [headView addSubview:realNameLab];
     
     //couponBtn
@@ -246,21 +271,21 @@
         make.size.mas_equalTo(headImgView.size);
     }];
     
-    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    [nickNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_0);
         make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
-        make.size.mas_equalTo(titleLab.size);
+        make.size.mas_equalTo(nickNameLab.size);
     }];
     
     [realNameImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.top.equalTo(nickNameLab.mas_bottom).offset(UPDOWNSPACE_09);
         make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
         make.size.mas_equalTo(realNameImgView.size);
     }];
     
     [realNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(titleLab.mas_bottom).offset(UPDOWNSPACE_09);
-        make.left.equalTo(realNameImgView.mas_right).offset(LEFTRIGHTSPACE_09);
+        make.top.equalTo(nickNameLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.left.equalTo(realNameImgView.mas_right).offset(LEFTRIGHTSPACE_04);
         make.size.mas_equalTo(realNameLab.size);
     }];
     
@@ -470,52 +495,46 @@
 #pragma mark 暗登陆
 - (void)noPwdLogin{
     
-    NSMutableDictionary *userInfoDic = [SDSqlite selectOneData:[SqliteHelper shareSqliteHelper].sandBaoDB tableName:@"usersconfig" columnArray:USERSCONFIG_ARR whereColumnString:@"active" whereParamString:@"0"];
-    
-    //2.1 暗登陆 -从数据库获取sTokey
-    [CommParameter sharedInstance].sToken = [userInfoDic objectForKey:@"sToken"];
-    NSString *creditFp = [userInfoDic objectForKey:@"credit_fp"];
-    
-    __block BOOL error = NO;
-    paynuc.set("sToken", [[CommParameter sharedInstance].sToken UTF8String]);
-    paynuc.set("creditFp", [creditFp UTF8String]);
-    paynuc.set("tTokenType", "01001401");
-    [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
-        error = YES;
-        [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-            //2.2 数据库中sToken失效/查询用户tToken获取失败 -> 明登陆
-            [self pwdLogin];
-        }];
-    } successBlock:^{
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
         
-    }];
-    if (error) return;
-    
-    [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/queryInfo/v1" errorBlock:^(SDRequestErrorType type) {
-        error = YES;
-        [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-            //2.3 查询用户信息失败/查询用户信息失败  - > 直接明登陆
-            [self pwdLogin];
-        }];
-    } successBlock:^{
-        [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+        NSMutableDictionary *userInfoDic = [SDSqlite selectOneData:[SqliteHelper shareSqliteHelper].sandBaoDB tableName:@"usersconfig" columnArray:USERSCONFIG_ARR whereColumnString:@"active" whereParamString:@"0"];
+        //2.1 暗登陆 -从数据库获取sTokey
+        [CommParameter sharedInstance].sToken = [userInfoDic objectForKey:@"sToken"];
+        NSString *creditFp = [userInfoDic objectForKey:@"credit_fp"];
+        
+        
+        paynuc.set("sToken", [[CommParameter sharedInstance].sToken UTF8String]);
+        paynuc.set("creditFp", [creditFp UTF8String]);
+        paynuc.set("tTokenType", "01001401");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                //2.2 数据库中sToken失效/查询用户tToken获取失败 -> 明登陆
+                [self pwdLogin];
+            }];
+        } successBlock:^{
             
-            //3. 暗登陆成功
-            [CommParameter sharedInstance].userInfo = [NSString stringWithUTF8String:paynuc.get("userInfo").c_str()];
-            NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
-            
-            [CommParameter sharedInstance].avatar = [userInfoDic objectForKey:@"avatar"];
-            [CommParameter sharedInstance].realNameFlag = [[userInfoDic objectForKey:@"realNameFlag"] boolValue];
-            [CommParameter sharedInstance].userRealName = [userInfoDic objectForKey:@"userRealName"];
-            [CommParameter sharedInstance].userName = [userInfoDic objectForKey:@"userName"];
-            [CommParameter sharedInstance].phoneNo = [userInfoDic objectForKey:@"phoneNo"];
-            [CommParameter sharedInstance].userId = [userInfoDic objectForKey:@"userId"];
-            [CommParameter sharedInstance].safeQuestionFlag = [[userInfoDic objectForKey:@"safeQuestionFlag"] boolValue];
-            [CommParameter sharedInstance].nick = [userInfoDic objectForKey:@"nick"];
-            [self updateUserData];
         }];
+        if (error) return;
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/queryInfo/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                //2.3 查询用户信息失败/查询用户信息失败  - > 直接明登陆
+                [self pwdLogin];
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                
+                //3. 暗登陆成功
+                //更新用户数据信息
+                [Tool refreshUserInfo:[NSString stringWithUTF8String:paynuc.get("userInfo").c_str()]];
+                //更新用户数据库
+                [self updateUserData];
+            }];
+        }];
+        if (error) return;
     }];
-    if (error) return;
 }
 
 /**
@@ -552,7 +571,6 @@
  */
 - (void)ownPayTools
 {
-    
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
@@ -592,6 +610,7 @@
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
                 
                 NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
                 //根据order 字段排序
@@ -600,6 +619,8 @@
                 
                 //暗登陆成 - 切换到首页
                 [self goHomeViewController];
+                //暗登陆成 - 刷新UI数据
+                [self refreshUI];
             }];
         }];
         if (error) return;
@@ -608,17 +629,6 @@
 }
 
 
-
-- (void)exitApplication {
-    //来 加个动画，给用户一个友好的退出界面
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.view.window.alpha = 0;
-    } completion:^(BOOL finished) {
-        exit(0);
-    }];
-    
-}
 
 
 
@@ -672,8 +682,63 @@
     [self.sideMenuViewController hideMenuViewController];
     //滚动到顶部
     self.baseScrollView.scrollsToTop = YES;
+    //置空登陆描述
+    self.loginTypeStr = nil;
     
 }
+#pragma mark 刷新用户信息
+
+- (void)refreshUI{
+    
+    [[CommParameter sharedInstance] showCommParameter];
+    
+    //刷新昵称
+    if ([CommParameter sharedInstance].nick.length>0) {
+        nickNameLab.text = [CommParameter sharedInstance].nick;
+    }else{
+        nickNameLab.text = [CommParameter sharedInstance].userName;
+    }
+
+    //刷新头像数据
+    NSString *str = [CommParameter sharedInstance].avatar;
+    if (str==nil) {
+        headImgView.image = [UIImage imageNamed:@"center_profile_avatar"];
+        return;
+    }else{
+        UIImage *headimg = [Tool avatarImageWith:str];
+        headImgView.image = headimg;
+    }
+    
+    //3.刷新实名认证FLag
+    if ([CommParameter sharedInstance].realNameFlag == NO) {
+        realNameImgView.image = [UIImage imageNamed:@"center_profile_card"];
+        realNameLab.text = @"未实名认证";
+        realNameLab.textColor = COLOR_FF5D31;
+        realNameLab.layer.cornerRadius = 0.f;
+        realNameLab.layer.borderColor = COLOR_000000.CGColor;
+        realNameLab.layer.borderWidth = 0.f;
+    }else{
+        realNameImgView.image = [UIImage imageNamed:@"center_profile_card_RealName"];
+        realNameLab.text = @"已实名认证";
+        realNameLab.textColor = COLOR_74D478;
+        realNameLab.layer.cornerRadius = 1.5f;
+        realNameLab.layer.borderColor = COLOR_74D478.CGColor;
+        realNameLab.layer.borderWidth = 0.5f;
+    }
+}
+
+
+- (void)exitApplication {
+    //来 加个动画，给用户一个友好的退出界面
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.view.window.alpha = 0;
+    } completion:^(BOOL finished) {
+        exit(0);
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

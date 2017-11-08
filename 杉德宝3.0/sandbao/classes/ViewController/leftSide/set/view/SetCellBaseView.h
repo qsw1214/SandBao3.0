@@ -19,7 +19,7 @@ typedef void(^SetCellClickBlock)();
 
 
 /**
- 按钮时间回调
+ 按钮事件回调
  */
 @property (nonatomic, copy) SetCellClickBlock clickBlock;
 

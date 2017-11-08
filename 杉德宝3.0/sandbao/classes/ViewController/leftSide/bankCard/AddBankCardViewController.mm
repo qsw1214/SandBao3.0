@@ -140,6 +140,7 @@
     
     //bankAuthToolView
     BankAuthToolView *bankAuthToolView = [BankAuthToolView createAuthToolViewOY:0];
+    bankAuthToolView.titleLab.text = @"该卡所属银行";
     bankAuthToolView.chooseBankTitleLab.text = [payToolDic objectForKey:@"title"];
     bankAuthToolView.userInteractionEnabled = NO;
     [self.baseScrollView addSubview:bankAuthToolView];

@@ -24,20 +24,40 @@ static CommParameter *commParameterSharedInstance = nil;
     return commParameterSharedInstance;
 }
 
-
+- (void)showCommParameter{
+    
+    NSLog(@"******************************");
+    
+    NSLog(@" _userName :%@",_userName);
+    NSLog(@" _userRealName :%@",_userRealName);
+    NSLog(@" _phoneNo :%@",_phoneNo);
+    NSLog(@" _userId :%@",_userId);
+    NSLog(@" _realNameFlag :%d",_realNameFlag);
+    NSLog(@" _payPassFlag :%d",_payPassFlag);
+    NSLog(@" _PayForAnthoerFlag :%d",_PayForAnthoerFlag);
+    
+    NSLog(@" _safeQuestionFlag :%d",_safeQuestionFlag);
+    NSLog(@" _nick :%@",_nick);
+    NSLog(@" _avatar :%@",_avatar);
+    NSLog(@" _ownPayToolsArray :%@",_ownPayToolsArray);
+    NSLog(@" _userInfo :%@",_userInfo);
+    
+    NSLog(@"******************************");
+    
+}
 
 /**
  清除数据
  */
 -(void)cleanCommParameter{
     
-    _loginFlag = nil;
     _userName = nil;
     _userRealName = nil;
     _phoneNo = nil;
     _userId = nil;
     _realNameFlag = nil;
     _payPassFlag = nil;
+    _PayForAnthoerFlag = nil;
     _ownPayToolsArray = nil;
     _userInfo = nil;
     _safeQuestionFlag = nil;

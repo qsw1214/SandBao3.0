@@ -80,8 +80,9 @@
         [self.backgroundImageView addSubview:bankNameLabel];
         self.bankNameLabel = bankNameLabel;
         
-        //银行名字
+        //卡类型
         UILabel *bankTypeLabel = [[UILabel alloc] init];
+        bankTypeLabel.textAlignment = NSTextAlignmentRight;
         [self.backgroundImageView addSubview:bankTypeLabel];
         self.bankTypeLabel = bankTypeLabel;
         
@@ -121,23 +122,23 @@
 - (void)settingFrame
 {
     CGFloat space = 10.0;
-    CGFloat leftRightSpace = 15;
-    CGFloat bankNumLabelTop = 2 * space;
+    CGFloat leftRightSpaceIn = 30;
+    CGFloat leftRightSpaceOut = 15;
+    CGFloat bankNameLabelTop = 27;
+    CGFloat bankNumLabelTop = 12;
     
     UIImage *iconImage = [UIImage imageNamed:@"banklist_gh"];
-    CGFloat commLabelW = viewSize.width - 2*leftRightSpace - 2*leftRightSpace - iconImage.size.width - space;
+    CGFloat commLabelW = viewSize.width - 2*leftRightSpaceOut - 2*leftRightSpaceIn - iconImage.size.width - space;
     
     CGSize bankNameLabelSize = [self.bankNameLabel sizeThatFits:CGSizeMake(commLabelW, MAXFLOAT)];
     CGSize bankTypeLabelSize = [self.bankTypeLabel sizeThatFits:CGSizeMake(commLabelW, MAXFLOAT)];
     CGSize bankNumLabelSize = [self.bankNumLabel sizeThatFits:CGSizeMake(commLabelW, MAXFLOAT)];
     
-    CGFloat upDownSpace = (cellHeight - space - bankNameLabelSize.height - space - bankTypeLabelSize.height - bankNumLabelTop - bankNumLabelSize.height) / 2;
-    
     //设置背景的frame
-    CGFloat backgroundImageViewX = leftRightSpace;
+    CGFloat backgroundImageViewX = leftRightSpaceOut;
     CGFloat backgroundImageViewY = space;
-    CGFloat backgroundImageViewW = viewSize.width - leftRightSpace * 2;
-    CGFloat backgroundImageViewH = cellHeight - 10;
+    CGFloat backgroundImageViewW = viewSize.width - leftRightSpaceOut * 2;
+    CGFloat backgroundImageViewH = cellHeight - space;
     
     self.backgroundImageView.frame = CGRectMake(backgroundImageViewX, backgroundImageViewY, backgroundImageViewW, backgroundImageViewH);
     
@@ -149,31 +150,31 @@
     
     
     //设置图标的frame
-    CGFloat iconImageViewX= leftRightSpace;
+    CGFloat iconImageViewX= leftRightSpaceIn;
     CGFloat iconImageViewW= self.iconImageView.image.size.width;
     CGFloat iconImageViewH= self.iconImageView.image.size.height;
     
-    self.iconImageBackView.frame = CGRectMake(iconImageViewX - radius, leftRightSpace - radius, iconImageViewW + radius, iconImageViewH + radius);
+    self.iconImageBackView.frame = CGRectMake(iconImageViewX - radius, leftRightSpaceIn - radius, iconImageViewW + radius, iconImageViewH + radius);
     self.iconImageView.frame = CGRectMake(radius/2, radius/2, iconImageViewW, iconImageViewH);
     
     
     //设置水印图标fram
-    CGSize iconWatermarkImageViewSize = CGSizeMake(self.iconWatermarkImageView.image.size.width, self.iconWatermarkImageView.image.size.height);
-    CGFloat iconWatermarkImageViewY = ((cellHeight- space) - iconWatermarkImageViewSize.height)/2;
-    CGFloat iconWatermarkImageViewX = (viewSize.width - 2*leftRightSpace) - iconWatermarkImageViewSize.width;
+    CGSize iconWatermarkImageViewSize = CGSizeMake(self.iconWatermarkImageView.image.size.width*2, self.iconWatermarkImageView.image.size.height*2);
+    CGFloat iconWatermarkImageViewY = -space;
+    CGFloat iconWatermarkImageViewX = (viewSize.width - leftRightSpaceIn) - iconWatermarkImageViewSize.width + space;
     self.iconWatermarkImageView.frame = CGRectMake(iconWatermarkImageViewX, iconWatermarkImageViewY, iconWatermarkImageViewSize.width, iconWatermarkImageViewSize.height);
     
     //设置银行名字的frame
     CGFloat bankNameLabelX= iconImageViewX + iconImageViewW + space;
-    CGFloat bankNameLabelY= upDownSpace;
+    CGFloat bankNameLabelY= bankNameLabelTop;
     CGFloat bankNameLabelW= commLabelW;
     CGFloat bankNameLabelH= bankNameLabelSize.height;
     
-    self.bankNameLabel.frame = CGRectMake(bankNameLabelX, leftRightSpace, bankNameLabelW, bankNameLabelH);
+    self.bankNameLabel.frame = CGRectMake(bankNameLabelX, bankNameLabelY, bankNameLabelW, bankNameLabelH);
     
     //设置银行类型的frame
     CGFloat bankTypeLabelX= bankNameLabelX;
-    CGFloat bankTypeLabelY= bankNameLabelY + bankNameLabelH;
+    CGFloat bankTypeLabelY= bankNameLabelY + 2;
     CGFloat bankTypeLabelW= bankNameLabelW;
     CGFloat bankTypeLabelH= bankTypeLabelSize.height;
     
@@ -181,9 +182,9 @@
     
     
     //设置银行卡号的frame
-    CGFloat bankNumLabelX= bankNameLabelX;
-    CGFloat bankNumLabelY= bankTypeLabelY + bankTypeLabelH + upDownSpace;
-    CGFloat bankNumLabelW= bankNameLabelW;
+    CGFloat bankNumLabelX= leftRightSpaceIn;
+    CGFloat bankNumLabelY= iconImageViewX + iconImage.size.height + bankNumLabelTop;
+    CGFloat bankNumLabelW= commLabelW + iconImage.size.width + space;
     CGFloat bankNumLabelH= bankNumLabelSize.height;
     
     self.bankNumLabel.frame = CGRectMake(bankNumLabelX, bankNumLabelY, bankNumLabelW, bankNumLabelH);

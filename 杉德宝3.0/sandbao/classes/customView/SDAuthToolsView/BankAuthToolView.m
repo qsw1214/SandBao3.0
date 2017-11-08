@@ -76,6 +76,7 @@
     UIImage *moreImg = [UIImage imageNamed:@"list_icon_more"];
     rightMoreImgV = [[UIImageView alloc] init];
     rightMoreImgV.image = moreImg;
+    rightMoreImgV.hidden = YES;
     [chooseBankBtn addSubview:rightMoreImgV];
     
     CGFloat rightMoreImgVOX = chooseBankBtn.frame.size.width - moreImg.size.width;
