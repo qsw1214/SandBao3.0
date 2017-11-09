@@ -10,7 +10,7 @@
 #import "PayNucHelper.h"
 
 #import "RealNameViewController.h"
-#import "RealNameViewController.h"
+#import "VerifyTypeViewController.h"
 
 #import "GradualView.h"
 #import "SDMajletView.h"
@@ -31,12 +31,20 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    // 用户退出后再登陆需刷新数据
-    
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //用户刷新数据信息
+    [self refreshUI];
+    
+    //检测是否实名/设置支付密码
+    [self checkRealNameOrSetPayPwd];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -320,6 +328,61 @@
     
     
     
+}
+
+#pragma mark - 业务逻辑
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - 本类公共方法调用
+#pragma mark 检测是否实名或设置支付密码
+- (void)checkRealNameOrSetPayPwd{
+    
+    //在已登陆情况下,检测用户是否实名/是否设置支付密码
+    if ([CommParameter sharedInstance].userInfo.length>0)
+    {
+        //若检测未实名,进行实名
+        if (![CommParameter sharedInstance].realNameFlag) {
+            [Tool showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"登出" leftBlock:^{
+                RealNameViewController *realName = [[RealNameViewController alloc] init];
+                UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
+                [self presentViewController:realNameNav animated:YES completion:nil];
+            } rightBlock:^{
+                [Tool presetnLoginVC:self];
+            }];
+            return;
+        }
+        //若检测未设置支付密码,则修改支付密码
+        if (![CommParameter sharedInstance].payPassFlag) {
+            [Tool showDialog:@"请进行设置" message:@"检测到您还未设置支付密码" leftBtnString:@"去设置" rightBtnString:@"登出" leftBlock:^{
+                //由于设置支付密码挂在实名流程之下(不能单独设置),因此单独设置支付密码必须走 修改支付密码流程
+                VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+                verifyTypeVC.tokenType = @"01000601";
+                verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+                [self.navigationController pushViewController:verifyTypeVC animated:YES];
+            } rightBlock:^{
+                [Tool presetnLoginVC:self];
+            }];
+        }
+    }
+}
+
+#pragma mark 刷新用户信息
+- (void)refreshUI{
+    
+    //刷新导航左边头像
+    self.navCoverView.leftImg = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
 }
 
 

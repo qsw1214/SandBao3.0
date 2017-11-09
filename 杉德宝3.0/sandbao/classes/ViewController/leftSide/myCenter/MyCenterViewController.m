@@ -10,6 +10,9 @@
 
 #import "MyCenterCellView.h"
 
+#import "SDBottomPop.h"
+
+
 @interface MyCenterViewController ()
 
 @end
@@ -54,34 +57,81 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    if (btn.tag == BTN_TAG_CHANGEHEADIMG) {
+        NSLog(@"头像");
+        
+        [SDBottomPop showBottomPopView:@"更换头像" cellNameList:@[@"拍照上传",@"从相册上传"] suerBlock:^(NSString *cellName) {
+            
+        }];
+        
+    }
+    if (btn.tag == BTN_TAG_CHECKIDENTITY) {
+        NSLog(@"身份认证");
+    }
+    if (btn.tag == BTN_TAG_CHECKACCOUNT) {
+        NSLog(@"杉德宝账号");
+    }
+    if (btn.tag == BTN_TAG_MYERCODE) {
+        NSLog(@"我的二维码");
+    }
+    if (btn.tag == BTN_TAG_MYHEADNAME) {
+        NSLog(@"我的发票抬头");
+    }
     
 }
 
 
 #pragma mark  - UI绘制
 - (void)createUI{
+    __block MyCenterViewController *weakSelf = self;
     
     MyCenterCellView *headCell = [MyCenterCellView createSetCellViewOY:0];
     headCell.cellType = myCenterCellType_Head;
+    headCell.clickBlock = ^{
+        UIButton *btn = [UIButton new];
+        btn.tag = BTN_TAG_CHANGEHEADIMG;
+        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+    };
     [self.baseScrollView addSubview:headCell];
     
     MyCenterCellView *identityCell = [MyCenterCellView createSetCellViewOY:0];
     identityCell.cellType = myCenterCellType_Identity;
+    identityCell.clickBlock = ^{
+        UIButton *btn = [UIButton new];
+        btn.tag = BTN_TAG_CHECKIDENTITY;
+        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+    };
     [self.baseScrollView addSubview:identityCell];
     
     MyCenterCellView *accountCell = [MyCenterCellView createSetCellViewOY:0];
     accountCell.cellType = myCenterCellType_Account;
+    accountCell.clickBlock = ^{
+        UIButton *btn = [UIButton new];
+        btn.tag = BTN_TAG_CHECKACCOUNT;
+        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+    };
     [self.baseScrollView addSubview:accountCell];
     
     
     MyCenterCellView *erCodeCell = [MyCenterCellView createSetCellViewOY:0];
     erCodeCell.cellType = myCenterCellType_ErCode;
+    erCodeCell.clickBlock = ^{
+        UIButton *btn = [UIButton new];
+        btn.tag = BTN_TAG_MYERCODE;
+        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+    };
     [self.baseScrollView addSubview:erCodeCell];
     
     MyCenterCellView *nameHeadCell = [MyCenterCellView createSetCellViewOY:0];
     nameHeadCell.cellType = myCenterCellType_NameHead;
+    nameHeadCell.clickBlock = ^{
+        UIButton *btn = [UIButton new];
+        btn.tag = BTN_TAG_MYHEADNAME;
+        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+    };
     nameHeadCell.line.hidden = YES;
     [self.baseScrollView addSubview:nameHeadCell];
+    
     
     
     [headCell mas_makeConstraints:^(MASConstraintMaker *make) {

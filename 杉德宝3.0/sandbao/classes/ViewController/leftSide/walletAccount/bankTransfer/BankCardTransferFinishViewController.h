@@ -10,4 +10,7 @@
 
 @interface BankCardTransferFinishViewController : BaseViewController
 
+
+
+
 @end

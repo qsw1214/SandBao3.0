@@ -108,8 +108,6 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
             if ([cellName isEqualToString:@"确认解除绑定"]) {
                 
             }
-        } cancleBlock:^{
-            
         }];
         
     }
@@ -223,8 +221,6 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         if ([cellName isEqualToString:@"确认解除绑定"]) {
             [self getAuthTools];
         }
-    } cancleBlock:^{
-        
     }];
     
     

@@ -490,6 +490,7 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                [CommParameter sharedInstance].realNameFlag = YES;
                 PayPwdViewController *payPwdVC = [[PayPwdViewController alloc] init];
                 [self.navigationController pushViewController:payPwdVC animated:YES];
             }];

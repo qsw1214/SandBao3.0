@@ -225,6 +225,7 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 [Tool showDialog:@"支付密码修改成功" defulBlock:^{
+                    [CommParameter sharedInstance].payPassFlag = YES;
                     //pop返回主页
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }];

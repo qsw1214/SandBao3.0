@@ -285,7 +285,7 @@
     
     NSString * decimalNumberStr = [numberFormatter stringFromNumber:number];
     
-    if ( number == 0) {
+    if ( [number floatValue] == 0) {
         decimalNumberStr = @"0.00";
     }
     
@@ -396,6 +396,10 @@
 +(UIImage*)avatarImageWith:(NSString*)avatar{
     
     UIImage *image ;
+    if (avatar.length == 0) {
+        return image = [UIImage imageNamed:@"center_profile_avatar"];
+    }
+    
     //不能判断avatar字符串原来的格式,所以做两次转换
     NSData *data = [Base64Util dataWithBase64EncodedString:avatar];
     data = [GzipUtility uncompressZippedData:data];
@@ -409,12 +413,6 @@
     }else{
         //后端返回)
         image = [UIImage imageWithData:data];
-    }
-    
-    
-    //确保有返回
-    if (image==nil) {
-        image = [UIImage imageNamed:@"center_profile_avatar"];
     }
     
     return image;

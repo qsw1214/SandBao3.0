@@ -54,7 +54,7 @@
     
     
     //创建并添加baseView
-    leftSpace = 25;
+    leftSpace = 15;
     baseView = [[UIView alloc] init];
     baseView.frame = CGRectMake(0, 20, self.frame.size.width, 44);
     [self addSubview:baseView];
@@ -71,7 +71,7 @@
     //左边按钮
     leftBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [leftBtn addTarget:self action:@selector(clickLeft:) forControlEvents:UIControlEventTouchUpInside];
-    UIImage *imgleft = [UIImage imageNamed:@""];
+    UIImage *imgleft = [UIImage imageNamed:@"index_avatar"];
     imgLeftV = [[UIImageView alloc] initWithImage:imgleft];
     [leftBtn addSubview:imgLeftV];
     
@@ -88,7 +88,7 @@
     //右边的按钮
     rightBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [rightBtn addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
-    UIImage *imgRight = [UIImage imageNamed:@""];
+    UIImage *imgRight = [UIImage imageNamed:@"index_avatar"];
     imgRightV = [[UIImageView alloc] initWithImage:imgRight];
     [rightBtn addSubview:imgRightV];
     
@@ -151,6 +151,20 @@
     imgLeftV.frame = CGRectMake(leftSpace, imgLeftVOY, imgLeftV.image.size.width, imgLeftV.image.size.height);
     leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
 
+}
+- (void)setLeftImg:(UIImage *)leftImg{
+    _leftImg = leftImg;
+    
+    CGSize defulImgSize = CGSizeMake(34, 34); //根据UI给出数据
+    
+    imgLeftV.image = _leftImg;
+    
+    imgLeftV.layer.cornerRadius = defulImgSize.height/2;
+    imgLeftV.layer.masksToBounds = YES;
+    
+    CGFloat imgLeftVOY = (baseView.frame.size.height - defulImgSize.height)/2;
+    imgLeftV.frame = CGRectMake(leftSpace, imgLeftVOY, defulImgSize.width, defulImgSize.height);
+    leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
 }
 
 - (void)setLeftTitleStr:(NSString *)leftTitleStr{

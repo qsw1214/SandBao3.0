@@ -48,6 +48,10 @@ typedef NS_ENUM(NSInteger,NavCoverViewStyle){
  */
 @property (nonatomic, strong) NSString *letfImgStr;
 
+/**
+ 左边图片
+ */
+@property (nonatomic, strong) UIImage *leftImg;
 
 /**
  左边标题名

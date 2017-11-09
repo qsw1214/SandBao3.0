@@ -224,7 +224,7 @@
 		28D7E5851FA9A50C00518042 /* BankCardRechargeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5841FA9A50C00518042 /* BankCardRechargeViewController.mm */; };
 		28D7E58A1FA9A51600518042 /* PaymentActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5871FA9A51600518042 /* PaymentActiveViewController.m */; };
 		28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.m */; };
-		28D7E5911FA9A52C00518042 /* BankCardTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.m */; };
+		28D7E5911FA9A52C00518042 /* BankCardTransferViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.mm */; };
 		28D7E5961FA9A53F00518042 /* UserTransferPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5931FA9A53F00518042 /* UserTransferPageViewController.m */; };
 		28D7E5971FA9A53F00518042 /* UserTransferBeginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5951FA9A53F00518042 /* UserTransferBeginViewController.m */; };
 		28D7E59A1FA9A80A00518042 /* UserTransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5991FA9A80A00518042 /* UserTransferViewController.m */; };
@@ -258,6 +258,8 @@
 		28DA888F1EEA7FCD00754259 /* tab_button_plan_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28DA887A1EEA7FCD00754259 /* tab_button_plan_sel@3x.png */; };
 		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
+		28F3770C1FB31C4500813512 /* CvnAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F377091FB31C4500813512 /* CvnAuthToolView.m */; };
+		28F3770D1FB31C4500813512 /* ValidAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F3770B1FB31C4500813512 /* ValidAuthToolView.m */; };
 		4DD1A90DEFCB099DED2ED74F /* libPods-sandbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */; };
 		A7694D0A1EA0C2A500BB6369 /* leftMenu.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7694C541EA0C2A500BB6369 /* leftMenu.plist */; };
 		A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D24CDA1E973D9E00688506 /* WebViewProgressView.m */; };
@@ -679,7 +681,7 @@
 		28D7E58C1FA9A52C00518042 /* BankCardTransferFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardTransferFinishViewController.h; sourceTree = "<group>"; };
 		28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardTransferFinishViewController.m; sourceTree = "<group>"; };
 		28D7E58E1FA9A52C00518042 /* BankCardTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardTransferViewController.h; sourceTree = "<group>"; };
-		28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardTransferViewController.m; sourceTree = "<group>"; };
+		28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BankCardTransferViewController.mm; sourceTree = "<group>"; };
 		28D7E5921FA9A53F00518042 /* UserTransferPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTransferPageViewController.h; sourceTree = "<group>"; };
 		28D7E5931FA9A53F00518042 /* UserTransferPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTransferPageViewController.m; sourceTree = "<group>"; };
 		28D7E5941FA9A53F00518042 /* UserTransferBeginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTransferBeginViewController.h; sourceTree = "<group>"; };
@@ -725,6 +727,10 @@
 		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeftSideMenuViewController.mm; sourceTree = "<group>"; };
 		28EBA18C1F2F1B0B003EEA61 /* SDDrowNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDrowNoticeView.h; sourceTree = "<group>"; };
 		28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDrowNoticeView.m; sourceTree = "<group>"; };
+		28F377081FB31C4500813512 /* CvnAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CvnAuthToolView.h; sourceTree = "<group>"; };
+		28F377091FB31C4500813512 /* CvnAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CvnAuthToolView.m; sourceTree = "<group>"; };
+		28F3770A1FB31C4500813512 /* ValidAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidAuthToolView.h; sourceTree = "<group>"; };
+		28F3770B1FB31C4500813512 /* ValidAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidAuthToolView.m; sourceTree = "<group>"; };
 		2EC4B09642F881744F76DBA7 /* Pods-sandbao.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sandbao.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sandbao/Pods-sandbao.debug.xcconfig"; sourceTree = "<group>"; };
 		3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sandbao.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		48B255CB4F8665BF156812A3 /* Pods-sandbao.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sandbao.release.xcconfig"; path = "Pods/Target Support Files/Pods-sandbao/Pods-sandbao.release.xcconfig"; sourceTree = "<group>"; };
@@ -1348,6 +1354,10 @@
 				28981B731FA01FA8004CFC95 /* PwdAuthToolView.m */,
 				28981B741FA01FA8004CFC95 /* SixCodeAuthToolView.h */,
 				28981B751FA01FA8004CFC95 /* SixCodeAuthToolView.m */,
+				28F377081FB31C4500813512 /* CvnAuthToolView.h */,
+				28F377091FB31C4500813512 /* CvnAuthToolView.m */,
+				28F3770A1FB31C4500813512 /* ValidAuthToolView.h */,
+				28F3770B1FB31C4500813512 /* ValidAuthToolView.m */,
 				28981B761FA01FA8004CFC95 /* View */,
 			);
 			path = SDAuthToolsView;
@@ -1703,10 +1713,10 @@
 		28D7E5801FA9A47F00518042 /* bankTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				28D7E58E1FA9A52C00518042 /* BankCardTransferViewController.h */,
+				28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.mm */,
 				28D7E58C1FA9A52C00518042 /* BankCardTransferFinishViewController.h */,
 				28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.m */,
-				28D7E58E1FA9A52C00518042 /* BankCardTransferViewController.h */,
-				28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.m */,
 			);
 			path = bankTransfer;
 			sourceTree = "<group>";
@@ -2475,6 +2485,7 @@
 				28BCE8B01FB07BFB00D62F94 /* ChangePayPwdViewController.mm in Sources */,
 				28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */,
 				28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */,
+				28F3770D1FB31C4500813512 /* ValidAuthToolView.m in Sources */,
 				A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */,
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
 				28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.m in Sources */,
@@ -2511,7 +2522,7 @@
 				28BCE8AD1FB04E8100D62F94 /* AddBankCardCell.m in Sources */,
 				28B649831FAC654A0074A390 /* SDPayToolBaseView.m in Sources */,
 				A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */,
-				28D7E5911FA9A52C00518042 /* BankCardTransferViewController.m in Sources */,
+				28D7E5911FA9A52C00518042 /* BankCardTransferViewController.mm in Sources */,
 				A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */,
 				2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */,
 				28765CB41FA77036006F2A06 /* SetCellView.m in Sources */,
@@ -2614,6 +2625,7 @@
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,
 				28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */,
+				28F3770C1FB31C4500813512 /* CvnAuthToolView.m in Sources */,
 				28D7E5961FA9A53F00518042 /* UserTransferPageViewController.m in Sources */,
 				A7EFB1611EB9A8DD009AA369 /* MQTTSSLSecurityPolicyDecoder.m in Sources */,
 			);

@@ -22,4 +22,21 @@ typedef NS_ENUM(NSInteger,MyCenterCellType){
 @property (nonatomic, assign) MyCenterCellType cellType;
 
 
+/**
+ 头像字符串
+ */
+@property (nonatomic, strong) NSString *headIconImgStr;
+
+
+/**
+ 昵称字符串
+ */
+@property (nonatomic, strong) NSString *nickNameStr;
+
+/**
+ 账户号字符串
+ */
+@property (nonatomic, strong) NSString *accountNo;
+
+
 @end

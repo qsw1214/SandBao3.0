@@ -38,13 +38,11 @@
 @implementation SDBottomPop
 
 
-+ (void)showBottomPopView:(NSString*)tipStr cellNameList:(NSArray*)cellNameArr suerBlock:(SDBottomPopSureBlock)sureBlock cancleBlock:(SDBottomPopCancleBlock)cancleBlock{
++ (void)showBottomPopView:(NSString*)tipStr cellNameList:(NSArray*)cellNameArr suerBlock:(SDBottomPopSureBlock)sureBlock{
     
     SDBottomPop *pop = [[SDBottomPop alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     pop.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1/1.0];
     pop.sureblock = sureBlock;
-    pop.cancleblock = cancleBlock;
-    
     
     //tipView
     UIView *tipView = [[UIView alloc] init];
@@ -53,7 +51,7 @@
     
     //tipLab
     UILabel *tipLab = [[UILabel alloc] init];
-    tipLab.text = @"解除绑定后银行服务将不可用";
+    tipLab.text = tipStr;
     tipLab.textAlignment = NSTextAlignmentCenter;
     tipLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
     tipLab.textColor = [UIColor colorWithRed:136/255.0 green:136/255.0 blue:136/255.0 alpha:1/1.0];

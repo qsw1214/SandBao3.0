@@ -84,7 +84,7 @@
     CGFloat tipH = [tip sizeThatFits:CGSizeZero].height;
     CGFloat tipOY = lineVOY + lineH + space/2;
     
-    titleLab.frame = CGRectMake(leftRightSpace, 0, titleLabSize.width, titleLabSize.height);
+    titleLab.frame = CGRectMake(leftRightSpace, 0, [UIScreen mainScreen].bounds.size.width - 2*leftRightSpace, titleLabSize.height);
     textfiled.frame = CGRectMake(leftRightSpace, textfiledOY,  [UIScreen mainScreen].bounds.size.width-leftRightSpace*2, textfiledOH);
     lineV.frame = CGRectMake(leftRightSpace, lineVOY,  [UIScreen mainScreen].bounds.size.width-leftRightSpace*2, lineH);
     tip.frame = CGRectMake(leftRightSpace, tipOY, [UIScreen mainScreen].bounds.size.width-leftRightSpace*2, tipH);

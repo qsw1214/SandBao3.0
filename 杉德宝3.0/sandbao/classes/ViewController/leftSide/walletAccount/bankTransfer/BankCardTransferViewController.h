@@ -10,4 +10,15 @@
 
 @interface BankCardTransferViewController : BaseViewController
 
+/**
+ 被转出支付工具
+ */
+@property (nonatomic, strong)NSMutableDictionary *transferOutPayToolDic;
+
+
+/**
+ tTokenType
+ */
+@property (nonatomic, strong) NSString *tTokenType;
+
 @end

@@ -16,8 +16,8 @@
 #import "SixCodeAuthToolView.h"
 #import "BankAuthToolView.h"
 #import "BankPickerView.h"
-
-
+#import "CvnAuthToolView.h"
+#import "ValidAuthToolView.h"
 #import "NextViewController.h"
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -28,9 +28,9 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
- 
-    NextViewController *next = [[NextViewController alloc] init];
-    [self.navigationController pushViewController:next animated:YES];
+// 
+//    NextViewController *next = [[NextViewController alloc] init];
+//    [self.navigationController pushViewController:next animated:YES];
 }
 
 
@@ -68,11 +68,36 @@
 //
 //    //银行卡号测试
 //    [self testeight];
-    
-
- 
+//
+//    //CVN测试
+//    [self testnine];
+    //有效期测试
+    [self testten];
     
 }
+
+- (void)testten{
+    
+    ValidAuthToolView *valid = [ValidAuthToolView createAuthToolViewOY:100];
+    valid.tip.text = @"请输入正确有效期";
+    valid.successBlock = ^(NSString *textfieldText) {
+        NSLog(@"%@",textfieldText);
+    };
+    [self.scrollview addSubview:valid];
+}
+
+- (void)testnine{
+    
+    CvnAuthToolView *cvn = [CvnAuthToolView createAuthToolViewOY:100];
+    cvn.tip.text = @"请输入正确有效CVN号";
+    cvn.successBlock = ^(NSString *textfieldText) {
+        NSLog(@"%@",textfieldText);
+    };
+    
+    [self.scrollview addSubview:cvn];
+    
+}
+
 
 - (void)testeight{
     

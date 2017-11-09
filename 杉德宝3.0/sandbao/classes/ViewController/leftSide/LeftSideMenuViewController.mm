@@ -96,27 +96,30 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    
-    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
-        //查询活跃状态用户数量(1且只能为1)
-        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-        //1.明登录
-        if (count <= 0 && [self.loginTypeStr isEqualToString:@"PWD_LOGIN"])
-        {
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self pwdLogin];
-            }];
-        }
-        //2.暗登陆
-        else
-        {
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                //暗登陆成 - 切换到首页
-                [self noPwdLogin];
-            }];
-        }
-    }];
-    
+    //如果未登录情况,进行明暗登录操作
+    if ([CommParameter sharedInstance].userInfo.length == 0) {
+        
+        [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+            //查询活跃状态用户数量(1且只能为1)
+            long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
+            //1.明登录
+            if (count <= 0 && [self.loginTypeStr isEqualToString:@"PWD_LOGIN"])
+            {
+                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                    [self pwdLogin];
+                }];
+            }
+            //2.暗登陆
+            else
+            {
+                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                    //暗登陆成 - 切换到首页
+                    [self noPwdLogin];
+                }];
+            }
+        }];
+    }
+
     //重置baseScrollview的Contentsize
     [self setBaseScrollViewContentSize];
 }
@@ -690,25 +693,16 @@
 
 - (void)refreshUI{
     
-    [[CommParameter sharedInstance] showCommParameter];
-    
-    //刷新昵称
+    //1.刷新昵称
     if ([CommParameter sharedInstance].nick.length>0) {
         nickNameLab.text = [CommParameter sharedInstance].nick;
     }else{
         nickNameLab.text = [CommParameter sharedInstance].userName;
     }
 
-    //刷新头像数据
-    NSString *str = [CommParameter sharedInstance].avatar;
-    if (str==nil) {
-        headImgView.image = [UIImage imageNamed:@"center_profile_avatar"];
-        return;
-    }else{
-        UIImage *headimg = [Tool avatarImageWith:str];
-        headImgView.image = headimg;
-    }
-    
+    //2.刷新头像数据
+    headImgView.image = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
+
     //3.刷新实名认证FLag
     if ([CommParameter sharedInstance].realNameFlag == NO) {
         realNameImgView.image = [UIImage imageNamed:@"center_profile_card"];

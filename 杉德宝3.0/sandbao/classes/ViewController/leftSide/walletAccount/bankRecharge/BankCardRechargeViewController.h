@@ -14,7 +14,8 @@
 /**
  被充值支付工具
  */
-@property (nonatomic, strong)NSMutableDictionary *beRechargePayToolDic;
+@property (nonatomic, strong)NSMutableDictionary *rechargeInPayToolDic;
+
 
 /**
  tTokenType

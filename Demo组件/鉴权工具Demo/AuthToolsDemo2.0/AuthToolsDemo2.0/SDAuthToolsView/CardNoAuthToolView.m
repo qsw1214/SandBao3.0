@@ -26,7 +26,7 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     
     if ([super initWithFrame:frame]) {
-        self.titleLab.text = @"银行卡号银行卡号银行卡号";
+        self.titleLab.text = @"银行卡号";
         self.textfiled.placeholder = @"输入银行卡卡号";
         self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
         self.textfiled.delegate = self;
@@ -114,6 +114,8 @@
  */
 - (BOOL)validateBankCard:(NSString*) bankNum
 {
+    return YES;
+    /*
     if (bankNum.length == 0 ) {
         return NO;
     }
@@ -155,6 +157,7 @@
         return YES;
     else
         return NO;
+     */
 }
 
 

@@ -51,20 +51,23 @@ static CommParameter *commParameterSharedInstance = nil;
  */
 -(void)cleanCommParameter{
     
-    _userName = nil;
-    _userRealName = nil;
-    _phoneNo = nil;
-    _userId = nil;
-    _realNameFlag = nil;
-    _payPassFlag = nil;
-    _PayForAnthoerFlag = nil;
-    _ownPayToolsArray = nil;
-    _userInfo = nil;
-    _safeQuestionFlag = nil;
-    _sToken = nil;
-    _nick = nil;
-    _avatar = nil;
+    _sToken = nil;   //用户活动状态标识
+    _userInfo = nil; //用户信息
     
+    _userName = nil; //用户名
+    _userRealName = nil; //用户实名
+    _phoneNo = nil; //手机号
+    _userId = nil;  //用户id
+    _nick = nil; //昵称
+    _avatar = nil; //头像
+    
+    _realNameFlag = nil; //实名认证flag
+    _payPassFlag = nil;  //是否设置支付密码flag
+    _PayForAnthoerFlag = nil; //代付凭证是否激活标志
+    _safeQuestionFlag = nil; //开通快捷flag
+    
+    _ownPayToolsArray = nil; //我方支付工具组
+
 }
 
 @end

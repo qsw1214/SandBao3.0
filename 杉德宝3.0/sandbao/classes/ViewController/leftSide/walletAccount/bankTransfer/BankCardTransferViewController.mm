@@ -1,42 +1,37 @@
 //
-//  BankCardRechargeViewController.m
+//  BankCardTransferViewController.m
 //  sandbao
 //
-//  Created by tianNanYiHao on 2017/10/28.
+//  Created by tianNanYiHao on 2017/10/30.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "BankCardRechargeViewController.h"
+#import "BankCardTransferViewController.h"
 #import "PayNucHelper.h"
-#import "RechargeFinishViewController.h"
+#import "BankCardTransferFinishViewController.h"
 
+typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 
-typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
-
-/**
- 银行卡充值
- */
-@interface BankCardRechargeViewController ()<SDPayViewDelegate>
+@interface BankCardTransferViewController ()<SDPayViewDelegate>
 {
     
     UIView *headView;
     UIView *tipView;
     UIView *bodyView;
     
+    
     UIImageView *bankIconImgView;
     UILabel *bankNameLab;
     UILabel *bankNumLab;
     UITextField *moneyTextfield;
     
-    
     NSMutableArray *payToolsArrayUsableM;  //可用支付工具
     NSMutableArray *payToolsArrayUnusableM; //不可用支付工具
-    
 }
 /**
- 充值支付工具
+ 转入支付工具(提现)
  */
-@property (nonatomic, strong) NSMutableDictionary *rechargeOutPayToolDic;
+@property (nonatomic, strong) NSMutableDictionary *transferInPayToolDic;
 
 /**
  work域
@@ -50,8 +45,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 
 @end
 
-@implementation BankCardRechargeViewController
-
+@implementation BankCardTransferViewController
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -60,6 +54,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self getPayTools];
     
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -70,8 +65,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self create_BodyView];
     [self create_NextBarBtn];
     [self create_PayView];
-    
 }
+
 
 
 
@@ -85,11 +80,10 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
-    self.navCoverView.midTitleStr = @"银行卡充值";
+    self.navCoverView.midTitleStr = @"转账到个人银行卡";
     self.navCoverView.letfImgStr = @"general_icon_back";
-
     
-    __block BankCardRechargeViewController *weakSelf = self;
+    __block BankCardTransferViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -99,15 +93,10 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
-    if (btn.tag == BTN_TAG_RECHARGE) {
-        
-        if (moneyTextfield.text.length>0) {
-            
-            [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"现金账户充值"];
-            [self fee];
-        }
+    if (btn.tag == BTN_TAG_TRANSFER) {
+        [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"提现到个人银行卡"];
+        [self fee];
     }
-    
 }
 
 
@@ -120,16 +109,16 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self.baseScrollView addSubview:headView];
     
     //bankIcon
-    UIImage *bankIconImag = [UIImage imageNamed:@"banklist_gh"];
+    UIImage *bankIconImag = [UIImage imageNamed:@"banklist_js"];
     bankIconImgView = [Tool createImagView:bankIconImag];
     [headView addSubview:bankIconImgView];
     
     //bankName
-    bankNameLab = [Tool createLable:@"中国工商银行储蓄卡" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    bankNameLab = [Tool createLable:@"中国建设银行储蓄卡" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNameLab];
     
     //bankNum
-    bankNumLab = [Tool createLable:@"尾号0008" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    bankNumLab = [Tool createLable:@"尾号6666" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNumLab];
     
     headView.height = bankIconImag.size.height + UPDOWNSPACE_16*2;
@@ -170,7 +159,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self.baseScrollView addSubview:tipView];
     
     //tipLab
-    UILabel *tipLab = [Tool createLable:@"该卡最多可免费充值1000.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    UILabel *tipLab = [Tool createLable:@"该卡最多可转账9,999,999,00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [tipView addSubview:tipLab];
     
     tipView.height = tipLab.height + UPDOWNSPACE_15*2;
@@ -199,7 +188,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
     
     //rechargeMoneyLab
-    UILabel *rechargeMoneyLab = [Tool createLable:@"充值金额" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    UILabel *rechargeMoneyLab = [Tool createLable:@"转账金额(手续费率0.1%)" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:rechargeMoneyLab];
     
     //rmbLab
@@ -221,11 +210,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [bodyView addSubview:line];
     
     //bottomTipLab
-    UILabel *bottomTipLab = [Tool createLable:@"超出最多可免费充值的金额将收取手续费" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    UILabel *bottomTipLab = [Tool createLable:@"该卡最低转账金额100.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:bottomTipLab];
     
     //bottomBtn
-    UIButton *bottomBtn = [Tool createButton:@"全部充值" attributeStr:nil font:FONT_13_Regular textColor:COLOR_FF5D31];
+    UIButton *bottomBtn = [Tool createButton:@"全部转账" attributeStr:nil font:FONT_13_Regular textColor:COLOR_FF5D31];
     bottomBtn.tag = BTN_TAG_SHOWALLMONEY;
     [bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     bottomBtn.size = CGSizeMake(bottomBtn.width, bottomBtn.height + UPDOWNSPACE_25);
@@ -276,15 +265,15 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         make.size.mas_equalTo(bottomBtn.size);
     }];
     
-
-
+    
+    
     
 }
 
 - (void)create_NextBarBtn{
     //rechargeBtn
-    UIButton *rechargeBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
-    rechargeBtn.tag = BTN_TAG_RECHARGE;
+    UIButton *rechargeBtn = [Tool createBarButton:@"两个工作日到账,确认转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    rechargeBtn.tag = BTN_TAG_TRANSFER;
     [rechargeBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBtn];
     
@@ -301,18 +290,16 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self.view addSubview:self.payView];
 }
 
-
-#pragma mark - SDPayViewDelegate
+#pragma mark  SDPayViewDelegate
 - (void)payViewSelectPayToolDic:(NSMutableDictionary *)selectPayToolDict{
-   
-    self.rechargeOutPayToolDic = selectPayToolDict;
-    
+    self.transferInPayToolDic = selectPayToolDict;
+
     //刷新页面信息
     [self resetBankNameLabelAndIconImageView];
-    
 }
 
 - (void)payViewPwd:(NSString *)pwdStr paySuccessView:(SDPaySuccessAnimationView *)successView{
+    
     //支付动画开始
     [successView animationStart];
     
@@ -321,7 +308,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         [successView animationSuccess];
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-            //充值成功
+
+            //提现成功
             
         });
     } rechagreErrorBlock:^(NSArray *paramArr){
@@ -329,16 +317,18 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         [successView animationStopClean];
         [self.payView hidPayTool];
         [self resetBankNameLabelAndIconImageView];
+        
     }];
+    
 }
 
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         //修改支付密码
-        //        VerificationModeViewController *mVerificationModeViewController = [[VerificationModeViewController alloc] init];
-        //        mVerificationModeViewController.tokenType = @"01000601";
-        //        [self.navigationController pushViewController:mVerificationModeViewController animated:YES];
+//        VerificationModeViewController *mVerificationModeViewController = [[VerificationModeViewController alloc] init];
+//        mVerificationModeViewController.tokenType = @"01000601";
+//        [self.navigationController pushViewController:mVerificationModeViewController animated:YES];
     }
     
 }
@@ -346,15 +336,14 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        //        BindingBankViewController *mBindingBankViewController = [[BindingBankViewController alloc] init];
-        //        [self.navigationController pushViewController:mBindingBankViewController animated:YES];
+//        BindingBankViewController *mBindingBankViewController = [[BindingBankViewController alloc] init];
+//        [self.navigationController pushViewController:mBindingBankViewController animated:YES];
         return;
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         
     }
 }
-
 
 
 #pragma mark - 业务逻辑
@@ -376,7 +365,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         if (error) return ;
         
         
-        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeInPayToolDic];
+        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferOutPayToolDic];
         paynuc.set("payTool", [payTool UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getPayTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
@@ -413,7 +402,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
                     }
                     
                     //2.设置VC默认显示的支付
-                    self.rechargeOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
+                    self.transferOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
                     //刷新页面信息
                     [self resetBankNameLabelAndIconImageView];
                     //3.设置支付方式列表
@@ -425,7 +414,6 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     }];
     
 }
-
 /**
  重置文字和icon图片
  */
@@ -440,15 +428,15 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     NSString *imgName = [Tool getIconImageName:[payToolsArrayUsableM[0] objectForKey:@"type"] title:title imaUrl:nil];
     bankIconImgView.image = [UIImage imageNamed:imgName];
 }
-
 /**
  *@brief 初始化支付方式
  */
 - (void)initPayMode:(NSArray *)paramArray
 {
+    
     NSMutableDictionary *bankDic = [[NSMutableDictionary alloc] init];
     [bankDic setValue:@"PAYLTOOL_LIST_PAYPASS" forKey:@"type"];
-    [bankDic setValue:@"添加银行卡充值" forKey:@"title"];
+    [bankDic setValue:@"添加银行卡提现" forKey:@"title"];
     [bankDic setValue:@"list_yinlian_AddCard" forKey:@"img"];
     [bankDic setValue:@"" forKey:@"limit"];
     [bankDic setValue:@"2" forKey:@"state"];
@@ -459,14 +447,10 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     for (int i = 0; i < unavailableArrayCount; i++) {
         [payToolsArrayUsableM addObject:payToolsArrayUnusableM[i]];
     }
-    
 }
 
+
 #pragma mark 计算手续费fee
-/**
- *@brief 手续费
- *@return
- */
 - (void)fee
 {
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
@@ -477,7 +461,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
         
         NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
-        [workDic setValue:@"recharge" forKey:@"type"];
+        [workDic setValue:@"withdraw" forKey:@"type"];
         [workDic setValue:@"" forKey:@"merOrderId"];
         [workDic setValue:@"" forKey:@"sandTN"];
         [workDic setValue:@"" forKey:@"thirdParty"];
@@ -488,11 +472,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         [workDic setValue:@"" forKey:@"feeRate"];
         
         NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
+        [SDLog logDebug:work];
         
-        NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeInPayToolDic];
-
-        NSString *outPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeOutPayToolDic];
-
+        NSString *outPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferOutPayToolDic];
+        NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferInPayToolDic];
+        
         paynuc.set("work", [work UTF8String]);
         paynuc.set("inPayTool", [inPayTool UTF8String]);
         paynuc.set("outPayTool", [outPayTool UTF8String]);
@@ -516,24 +500,21 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         }];
         if (error) return ;
     }];
+    
 }
 
-
-
-#pragma mark 确认充值
-- (void)recharge:(NSString *)param paramDic:(NSDictionary *)paramDic rechargeSuccessBlock:(WalletRechargeStateBlock)successBlock rechagreErrorBlock:(WalletRechargeStateBlock)errorBlock
+#pragma mark 确认转账
+- (void)recharge:(NSString *)param paramDic:(NSDictionary *)paramDic rechargeSuccessBlock:(WalletTransferStateBlock)successBlock rechagreErrorBlock:(WalletTransferStateBlock)errorBlock
 {
-    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
-    [self.HUD hidden];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
-        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [@"999" floatValue] * 100];
+        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
         
         NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
-        [workDic setValue:@"recharge" forKey:@"type"];
+        [workDic setValue:@"withdraw" forKey:@"type"];
         [workDic setValue:@"" forKey:@"merOrderId"];
         [workDic setValue:@"" forKey:@"sandTN"];
         [workDic setValue:@"" forKey:@"thirdParty"];
@@ -544,16 +525,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         [workDic setValue:[paramDic objectForKey:@"feeRate"] forKey:@"feeRate"];
         
         NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
-        [SDLog logDebug:work];
+        NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferInPayToolDic];
         
-        NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeInPayToolDic];
-        [SDLog logDebug:inPayTool];
-        
-        NSArray *authToolsArray = [self.rechargeOutPayToolDic objectForKey:@"authTools"];
-        
+        NSMutableDictionary *outPayToolDic = [NSMutableDictionary dictionaryWithDictionary:self.transferOutPayToolDic];
+        NSArray *authToolsArray = [outPayToolDic objectForKey:@"authTools"];
         NSMutableArray *tempAuthToolsArray = [[NSMutableArray alloc] init];
-        
-        
         NSMutableDictionary *dic = authToolsArray[0];
         NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:dic];
         [authToolsDic removeObjectForKey:@"pass"];
@@ -569,10 +545,9 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         [passDic setValue:@"" forKey:@"regular"];
         [authToolsDic setObject:passDic forKey:@"pass"];
         [tempAuthToolsArray addObject:authToolsDic];
-        [self.rechargeOutPayToolDic setObject:tempAuthToolsArray forKey:@"authTools"];
+        [outPayToolDic setObject:tempAuthToolsArray forKey:@"authTools"];
+        NSString *outPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:outPayToolDic];
         
-        NSString *outPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeOutPayToolDic];
-        [SDLog logDebug:outPayTool];
         
         paynuc.set("work", [work UTF8String]);
         paynuc.set("inPayTool", [inPayTool UTF8String]);
@@ -583,15 +558,23 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
                 errorBlock(nil);
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+            [[SDRequestHelp shareSDRequest]dispatchToMainQueue:^{
                 [self.HUD hidden];
-                successBlock(@[workDic,self.rechargeOutPayToolDic]);
+                NSString *work = [NSString stringWithUTF8String:paynuc.get("work").c_str()];
+                NSDictionary *workDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];
+                successBlock(@[workDic,outPayToolDic]);
             }];
         }];
         if (error) return ;
     }];
-    
 }
+
+
+
+
+
+
+
 
 
 

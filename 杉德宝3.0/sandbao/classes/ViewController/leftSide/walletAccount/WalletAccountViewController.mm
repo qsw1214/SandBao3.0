@@ -23,10 +23,15 @@
     //headView
     GradualView *headView;
     
-    //被充值支付工具
-    NSMutableDictionary *beRechargePayToolDic;
+    //钱包账户_被充值_支付工具
+    NSMutableDictionary *rechargeInPayToolDic;
+    //钱包账户_被转账_支付工具
+    NSMutableDictionary *transferOutPayToolDic;
+
     
     UILabel *balanceLab;
+    
+    BOOL payForAnthoerFlag; //代付凭证标识
 }
 @end
 
@@ -34,7 +39,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
     
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
@@ -45,6 +49,9 @@
     
     //1.刷新支付工具
     [self ownPayTools];
+    
+    //2.检查代付凭证标识
+    [self checkPayAnthoerFlag];
     
 }
 
@@ -80,18 +87,13 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_RECHARGE) {
-        NSLog(@"充值");
-        
-        BOOL paymentActivite = 1;
-        
-        if (paymentActivite) {
-            
+        //@"充值"
+        //1.代付凭证已激活
+        if (payForAnthoerFlag) {
             SDRechargePopView *popview =  [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
-                
-                //充值
                 if ([cellName isEqualToString:@"银行卡充值"]) {
                     BankCardRechargeViewController *bankCardRechargeVC = [[BankCardRechargeViewController alloc] init];
-                    bankCardRechargeVC.beRechargePayToolDic = beRechargePayToolDic;
+                    bankCardRechargeVC.rechargeInPayToolDic = rechargeInPayToolDic;
                     bankCardRechargeVC.tTokenType = @"02000101";
                     [self.navigationController pushViewController:bankCardRechargeVC animated:YES];
                 }
@@ -100,28 +102,36 @@
                     [self.navigationController pushViewController:paymentRechargeVC animated:YES];
                 }
             }];
-            
             popview.chooseBtnTitleArr = @[@"银行卡充值",@"代付凭证充值"];
         }
+        //2.代付凭证未激活
         else{
             SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
-                //跳转去代付凭证激活页
-                PaymentActiveViewController *paymentActiveVC = [[PaymentActiveViewController alloc] init];
-                [self.navigationController pushViewController:paymentActiveVC animated:YES];
-                
+                if ([cellName isEqualToString:@"银行卡充值"]) {
+                    BankCardRechargeViewController *bankCardRechargeVC = [[BankCardRechargeViewController alloc] init];
+                    bankCardRechargeVC.rechargeInPayToolDic = rechargeInPayToolDic;
+                    bankCardRechargeVC.tTokenType = @"02000101";
+                    [self.navigationController pushViewController:bankCardRechargeVC animated:YES];
+                }else{
+                    //跳转去代付凭证激活页
+                    PaymentActiveViewController *paymentActiveVC = [[PaymentActiveViewController alloc] init];
+                    [self.navigationController pushViewController:paymentActiveVC animated:YES];
+                }
             }];
             popview.chooseBtnTitleArr = @[@"银行卡充值"];
             
         }
     }
     if (btn.tag == BTN_TAG_TRANSFER) {
-        NSLog(@"转账");
-        
-        SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
-            
-            //转账
+        //@"转账"
+        if ([balanceLab.text floatValue] == 0) {
+            [Tool showDialog:@"您的余额不足,不能进行转账"];
+        }
+        SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"个人银行卡"]) {
                 BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];
+                bankCardTransferVC.transferOutPayToolDic = transferOutPayToolDic;
+                bankCardTransferVC.tTokenType = @"02000201";
                 [self.navigationController pushViewController:bankCardTransferVC animated:YES];
             }
             if ([cellName isEqualToString:@"杉德宝用户"]) {
@@ -130,7 +140,6 @@
             }
         }];
         popview.chooseBtnTitleArr = @[@"个人银行卡",@"杉德宝用户"];
-
     }
 }
 
@@ -308,17 +317,39 @@
  */
 - (void)settingData
 {
-    //被充值支付工具 - 初始化
-    beRechargePayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
-    
     NSDictionary *ownPayToolDic = [Tool getOwnPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
-    beRechargePayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
     
-    NSString *balacneStr = [[beRechargePayToolDic objectForKey:@"account"] objectForKey:@"balance"];
+    //钱包账户_被充值_支付工具 - 初始化
+    rechargeInPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    rechargeInPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
+    NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];
     balanceLab.text = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]/100]];
     
+    //钱包账户_被转账_支付工具
+    transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
+
     
 }
+
+
+
+#pragma mark - 本类公共方法调用
+
+#pragma mark 检查代付凭证标识
+- (void)checkPayAnthoerFlag{
+    
+    //取代付凭证标识
+    payForAnthoerFlag = [CommParameter sharedInstance].PayForAnthoerFlag;
+}
+
+
+
+
+
+
+
+
 
 
 

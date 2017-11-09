@@ -244,7 +244,7 @@
     if (currentTimeOut>0) {
         timeout = currentTimeOut;
     }else{
-        timeout = 61;
+        timeout = 11;
     }
     
     
@@ -285,11 +285,11 @@
                 
                 [requestSmsBtn setUserInteractionEnabled:YES];
                 requestSmsBtn.selected = NO;
-                NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我重新发送一次短信"];
+                NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我获取短信"];
                 [atr addAttributes:@{
                                      NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
                                      NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
-                                     } range:NSMakeRange(2, 4)];
+                                     } range:NSMakeRange(2, 2)];
                 [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
 
             });
@@ -343,9 +343,10 @@
 }
 
 #pragma mark - 清除存储的currentTimeOut
-- (void)cleanCurrentTimeOut{
++ (void)cleanCurrentTimeOut{
     
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"currentTimeOut"];
+    
 }
 
 @end

@@ -81,8 +81,6 @@
             if ([cellName isEqualToString:@"确认解除绑定"]) {
                 
             }
-        } cancleBlock:^{
-            
         }];
     }
     

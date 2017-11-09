@@ -29,6 +29,8 @@
 #import "PwdAuthToolView.h"
 #import "SixCodeAuthToolView.h"
 #import "BankAuthToolView.h"
+#import "ValidAuthToolView.h"
+#import "CvnAuthToolView.h"
 #import "SDPayConfig.h"
 
 
@@ -190,9 +192,11 @@
 #define BTN_TAG_BINDBANKCARD 100024 //添加银行卡
 #define BTN_TAG_BINDSANDCARD 100025 //添加杉德卡
 #define BTN_TAG_UNBINDCARD   100026 //解绑卡
-
-
-
+#define BTN_TAG_CHANGEHEADIMG  100027 //修改头像
+#define BTN_TAG_CHECKIDENTITY  100028 //身份认证
+#define BTN_TAG_CHECKACCOUNT  100029 //杉德宝账号
+#define BTN_TAG_MYERCODE  100030 //我的二维码
+#define BTN_TAG_MYHEADNAME  100031 //我的发票抬头
 
 
 /**

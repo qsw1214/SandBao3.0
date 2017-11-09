@@ -52,8 +52,8 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
 
 
 /**
- 短信模式下调用:清空
+ 短信模式下调用:清空存储的倒计时
  */
-- (void)cleanCurrentTimeOut;
++ (void)cleanCurrentTimeOut;
 
 @end

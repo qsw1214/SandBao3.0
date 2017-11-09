@@ -12,6 +12,12 @@
 
 #import "SmsCheckViewController.h"
 
+typedef NS_ENUM(NSInteger,BankCardType) {
+    
+    debitCard = 1, //借记卡
+    creditCard,    //贷记卡
+    
+};
 
 
 @interface RealNameViewController ()
@@ -27,13 +33,17 @@
     
     NSArray *appendUIArr;        //保存追加UI的子view
     
+    ValidAuthToolView *validAuthToolView;
+    
+    CvnAuthToolView *cvnAuthToolView;
     
 }
 @property (nonatomic, strong) NSString *realNameStr;  //真实姓名
 @property (nonatomic, strong) NSString *bankCardNoStr;  //银行卡号
 @property (nonatomic, strong) NSString *identityNoStr;  //真实姓名
 @property (nonatomic, strong) NSString *bankPhoneNoStr; //银行预留手机号
-
+@property (nonatomic, strong) NSString *validStr;       //卡有效期
+@property (nonatomic, strong) NSString *cvnStr;       //cvn
 
 @end
 
@@ -42,6 +52,8 @@
 @synthesize bankCardNoStr;
 @synthesize identityNoStr;
 @synthesize bankPhoneNoStr;
+@synthesize validStr;
+@synthesize cvnStr;
 
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -185,7 +197,7 @@
 }
 
 //查询银行卡后,追加UI
-- (void)appendUI{
+- (void)appendUI:(NSInteger)carType{
     
     
     //bankAuthToolView
@@ -203,7 +215,24 @@
         bankPhoneNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
-
+    
+    //如果是信用卡
+    if (carType == creditCard) {
+        validAuthToolView = [ValidAuthToolView createAuthToolViewOY:0];
+        validAuthToolView.tip.text = @"请输入正确有效期";
+        validAuthToolView.successBlock = ^(NSString *textfieldText) {
+            validStr = textfieldText;
+        };
+        [self.baseScrollView addSubview:validAuthToolView];
+        
+        cvnAuthToolView = [CvnAuthToolView createAuthToolViewOY:0];
+        cvnAuthToolView.tip.text = @"请输入正确CVN";
+        cvnAuthToolView.successBlock = ^(NSString *textfieldText) {
+            cvnStr = textfieldText;
+        };
+        [self.baseScrollView addSubview:cvnAuthToolView];
+    }
+    
     //moreBankListBtn
     UIButton *moreBankListBtn = [Tool createButton:@"支持银行" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7];
     moreBankListBtn.tag = BTN_TAG_SHOWBANKLIST;
@@ -222,9 +251,27 @@
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(bankPhoneNoAuthToolView.size);
     }];
+    
+    if (carType == creditCard) {
+        [validAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
+            make.centerX.equalTo(self.baseScrollView);
+            make.size.mas_equalTo(validAuthToolView.size);
+        }];
+        [cvnAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(validAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
+            make.centerX.equalTo(self.baseScrollView);
+            make.size.mas_equalTo(cvnAuthToolView.size);
+        }];
+    }
 
     [moreBankListBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
+        if (carType == creditCard) {
+            make.top.equalTo(cvnAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
+        }else{
+            make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
+        }
+        
         make.right.equalTo(bankPhoneNoAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
         make.size.mas_equalTo(moreBankListBtnSize);
     }];
@@ -237,12 +284,21 @@
     }];
     
     
-    //重置contentSize
-    CGFloat appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + moreBankListBtn.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
+    CGFloat appendViewHeight;
+    if (carType == creditCard) {
+        //重置contentSize
+        appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + moreBankListBtn.height + validAuthToolView.height + cvnAuthToolView.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
+        //保存追加的UI子View
+        appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,validAuthToolView,cvnAuthToolView,moreBankListBtn];
+    }else{
+        //重置contentSize
+        appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + moreBankListBtn.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
+        //保存追加的UI子View
+        appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,moreBankListBtn];
+    }
     self.baseScrollView.contentSize = CGSizeMake(self.baseScrollView.contentSize.width, self.baseScrollView.contentSize.height + appendViewHeight);
     
-    //保存追加的UI子View
-    appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,moreBankListBtn];
+ 
     
 }
 
@@ -308,13 +364,13 @@
                 NSMutableArray *payTool_authToolsArr = [payToolDic objectForKey:@"authTools"];
                 //信用卡
                 if (payTool_authToolsArr.count > 0) {
-                    //暂不处理
-                    [Tool showDialog:@"暂不支持信用卡绑定"];
+                    //追加UI
+                    [self appendUI:creditCard];
                 }
                 //借记卡
                 else{
                     //追加UI
-                    [self appendUI];
+                    [self appendUI:debitCard];
                 }
                 
             }];
