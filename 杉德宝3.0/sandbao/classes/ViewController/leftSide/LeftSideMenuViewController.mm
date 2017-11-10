@@ -222,7 +222,7 @@
     
     
     //titleLab
-    nickNameLab = [Tool createLable:@"1515****388" attributeStr:nil font:FONT_13_OpenSan textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    nickNameLab = [Tool createLable:@"1515****388" attributeStr:nil font:FONT_13_OpenSan textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headView addSubview:nickNameLab];
     
     //realNameImgView
@@ -231,7 +231,7 @@
     [headView addSubview:realNameImgView];
     
     //realNameLab
-    realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentCenter];
+    realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentLeft];
     [headView addSubview:realNameLab];
     
     //couponBtn
@@ -693,17 +693,13 @@
 
 - (void)refreshUI{
     
-    //1.刷新昵称
-    if ([CommParameter sharedInstance].nick.length>0) {
-        nickNameLab.text = [CommParameter sharedInstance].nick;
-    }else{
-        nickNameLab.text = [CommParameter sharedInstance].userName;
-    }
-
-    //2.刷新头像数据
+    //0.刷新用户名(用户手机号)
+    nickNameLab.text = [CommParameter sharedInstance].userName;
+    
+    //1.刷新头像数据
     headImgView.image = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
 
-    //3.刷新实名认证FLag
+    //2.刷新实名认证FLag
     if ([CommParameter sharedInstance].realNameFlag == NO) {
         realNameImgView.image = [UIImage imageNamed:@"center_profile_card"];
         realNameLab.text = @"未实名认证";
@@ -713,11 +709,17 @@
         realNameLab.layer.borderWidth = 0.f;
     }else{
         realNameImgView.image = [UIImage imageNamed:@"center_profile_card_RealName"];
-        realNameLab.text = @"已实名认证";
-        realNameLab.textColor = COLOR_74D478;
-        realNameLab.layer.cornerRadius = 1.5f;
-        realNameLab.layer.borderColor = COLOR_74D478.CGColor;
-        realNameLab.layer.borderWidth = 0.5f;
+        //3.昵称刷新
+        if ([CommParameter sharedInstance].nick.length>0) {
+            realNameLab.text = [CommParameter sharedInstance].nick;
+            realNameLab.textColor = COLOR_343339;
+        }else{
+            realNameLab.text = @"已实名认证";
+            realNameLab.textColor = COLOR_74D478;
+            realNameLab.layer.cornerRadius = 1.5f;
+            realNameLab.layer.borderColor = COLOR_74D478.CGColor;
+            realNameLab.layer.borderWidth = 0.5f;
+        }
     }
 }
 

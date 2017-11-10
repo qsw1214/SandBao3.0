@@ -411,7 +411,12 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
                             [payToolsArrayUsableM addObject:rechargePayToolsArray[i]];
                         }
                     }
-                    
+                    if (payToolsArrayUnusableM.count == rechargePayToolsArray.count) {
+                        [Tool showDialog:@"无可用支付工具" defulBlock:^{
+                            [self.navigationController popViewControllerAnimated:YES];
+                        }];
+                        return ;
+                    }
                     //2.设置VC默认显示的支付
                     self.rechargeOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
                     //刷新页面信息

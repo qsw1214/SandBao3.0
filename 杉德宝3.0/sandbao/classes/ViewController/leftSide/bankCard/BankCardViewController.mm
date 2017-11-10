@@ -40,6 +40,8 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
 }
@@ -333,14 +335,16 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     NSDictionary *ownPayToolDic = [Tool getOwnPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     bankArray = [ownPayToolDic objectForKey:@"bankArray"];
+   
+    //银行卡列表刷新数据
+    [self.bankTableView reloadData];
     
     if (bankArray.count>0) {
         self.noCardLab.hidden = YES;
         [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
         self.bottomBtn.tag = BTN_TAG_UNBINDCARD;
         
-        //银行卡列表刷新数据
-        [self.bankTableView reloadData];
+        
         [self.bankTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.bankTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.baseScrollView);

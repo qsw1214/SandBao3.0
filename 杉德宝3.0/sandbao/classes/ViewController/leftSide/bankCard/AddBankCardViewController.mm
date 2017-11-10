@@ -128,7 +128,7 @@
     }];
     
     [nextBarbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_15);
+        make.top.equalTo(cardNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_69);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];
@@ -239,17 +239,8 @@
                 userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:userInfo];
                 
                 NSMutableArray *payTool_authToolsArr = [payToolDic objectForKey:@"authTools"];
-                //信用卡
-                if (payTool_authToolsArr.count > 0) {
-                    //暂不处理
-                    [Tool showDialog:@"暂不支持信用卡绑定"];
-                }
-                //借记卡
-                else{
-                    //追加UI
-                    [self appendUI];
-                }
-                
+                //追加UI
+                [self appendUI];
             }];
         }];
         if (error) return ;

@@ -52,8 +52,21 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
 
 
 /**
- 短信模式下调用:清空存储的倒计时
+ 外部调用开启短信倒计时(非按钮事件调用)
  */
-+ (void)cleanCurrentTimeOut;
+- (void)startTimeOut;
+
+
+/**
+ 停止计时器(当短信输入且验证成功)
+ */
+-(void)stopTimer;
+
+/**
+ 获取当前倒计时时间
+
+ @return 当前存储的倒计时时间
+ */
++ (NSInteger)getCurrentTimeOut;
 
 @end

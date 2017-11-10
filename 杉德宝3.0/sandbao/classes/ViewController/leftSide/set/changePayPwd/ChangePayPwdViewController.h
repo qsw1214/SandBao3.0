@@ -10,4 +10,9 @@
 
 @interface ChangePayPwdViewController : BaseViewController
 
+/**
+ 使用鉴权类型(修改支付/登陆密码)
+ */
+@property (nonatomic, assign) NSInteger verifyType;
+
 @end

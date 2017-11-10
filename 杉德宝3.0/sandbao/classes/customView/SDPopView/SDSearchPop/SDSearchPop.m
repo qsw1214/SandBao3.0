@@ -110,7 +110,7 @@
     
     if (nowSearchText.length == 11) {
         
-        self.block(searchBar.text);
+        self.block(nowSearchText);
         [searchBar resignFirstResponder];
         [self hidden];
         

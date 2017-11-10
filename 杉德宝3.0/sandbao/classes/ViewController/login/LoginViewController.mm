@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "PayNucHelper.h"
 
+#import "ForgetLoginPwdViewController.h"
 #import "RegistViewController.h"
 #import "SmsCheckViewController.h"
 
@@ -37,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+    
     [self createUI];
     
 }
@@ -56,11 +59,12 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_FORGETPWD) {
-        //忘记密码
-        NSLog(@"点击了忘记密码");
+        //@"点击了忘记密码"
+        ForgetLoginPwdViewController *forgetVC = [[ForgetLoginPwdViewController alloc] init];
+        [self.navigationController pushViewController:forgetVC animated:YES];
     }
     if (btn.tag == BTN_TAG_LOGIN) {
-        //登录
+        //@"登录"
         if (phoneNum.length>0 && loginPwd.length>0) {
             [self loginUser];
         }else{
@@ -68,7 +72,7 @@
         }
     }
     if (btn.tag == BTN_TAG_REGIST) {
-        //注册
+        //@"注册"
         RegistViewController *regVc = [[RegistViewController alloc] init];
         [self.navigationController pushViewController:regVc animated:YES];
     }

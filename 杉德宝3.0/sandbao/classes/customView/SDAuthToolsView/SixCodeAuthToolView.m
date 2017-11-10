@@ -8,10 +8,13 @@
 
 #import "SixCodeAuthToolView.h"
 
+#define TIME_OUT 61
+
 @interface SixCodeAuthToolView ()<UITextFieldDelegate>{
     
     NSInteger codeLabCount;
     UIButton *requestSmsBtn;
+    dispatch_source_t timer;
 }
 @property (nonatomic, strong) NSMutableArray *codeLabArr; //保存codeLab的数组
 @end
@@ -71,7 +74,7 @@
         noCopyTextfield.userInteractionEnabled = NO;
         self.titleLab.text = @"验证码";
         //取缓存中的倒计时
-        NSInteger currentTimeOut = [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentTimeOut"] integerValue];
+        NSInteger currentTimeOut = [SixCodeAuthToolView getCurrentTimeOut];
         if (currentTimeOut>0) {
             //以当前timeOut 开启GCD定时器
             [self createTimer:currentTimeOut];
@@ -233,6 +236,10 @@
     
 }
 
+
+
+
+
 #pragma mark - 定时器 (GCD)
 - (void)createTimer:(NSInteger)currentTimeOut {
     
@@ -244,7 +251,7 @@
     if (currentTimeOut>0) {
         timeout = currentTimeOut;
     }else{
-        timeout = 11;
+        timeout = TIME_OUT;
     }
     
     
@@ -252,7 +259,7 @@
     dispatch_queue_t global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     //创建一个定时器，并将定时器的任务交给全局队列执行(并行，不会造成主线程阻塞)
-    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, global);
+    timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, global);
     
     // 设置触发的间隔时间
     dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 1.0 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
@@ -342,11 +349,26 @@
     
 }
 
-#pragma mark - 清除存储的currentTimeOut
-+ (void)cleanCurrentTimeOut{
+#pragma mark - 停止计时器(当短信输入且验证成功)
+-(void)stopTimer{
     
     [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"currentTimeOut"];
+    if(timer){
+        dispatch_source_cancel(timer);
+        timer = nil;
+    }
+}
+
+#pragma mark - 外部调用开启短信倒计时(非按钮事件调用)
+- (void)startTimeOut{
     
+    [self createTimer:TIME_OUT];
+}
+
+#pragma mark - 获取当前存储的currentTimeOut
++ (NSInteger)getCurrentTimeOut{
+    
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"currentTimeOut"] integerValue];
 }
 
 @end

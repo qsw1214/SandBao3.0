@@ -14,7 +14,7 @@
 
 typedef NS_ENUM(NSInteger,BankCardType) {
     
-    debitCard = 1, //借记卡
+    debitCard = 0, //借记卡
     creditCard,    //贷记卡
     
 };
@@ -197,7 +197,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 }
 
 //查询银行卡后,追加UI
-- (void)appendUI:(NSInteger)carType{
+- (void)appendUI:(BankCardType)cardType{
     
     
     //bankAuthToolView
@@ -217,7 +217,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
     
     //如果是信用卡
-    if (carType == creditCard) {
+    if (cardType == creditCard) {
         validAuthToolView = [ValidAuthToolView createAuthToolViewOY:0];
         validAuthToolView.tip.text = @"请输入正确有效期";
         validAuthToolView.successBlock = ^(NSString *textfieldText) {
@@ -252,7 +252,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         make.size.mas_equalTo(bankPhoneNoAuthToolView.size);
     }];
     
-    if (carType == creditCard) {
+    if (cardType == creditCard) {
         [validAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
             make.centerX.equalTo(self.baseScrollView);
@@ -266,12 +266,11 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     }
 
     [moreBankListBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (carType == creditCard) {
+        if (cardType == creditCard) {
             make.top.equalTo(cvnAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
         }else{
             make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
         }
-        
         make.right.equalTo(bankPhoneNoAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
         make.size.mas_equalTo(moreBankListBtnSize);
     }];
@@ -285,7 +284,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     
     CGFloat appendViewHeight;
-    if (carType == creditCard) {
+    if (cardType == creditCard) {
         //重置contentSize
         appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + moreBankListBtn.height + validAuthToolView.height + cvnAuthToolView.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
         //保存追加的UI子View
@@ -372,7 +371,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                     //追加UI
                     [self appendUI:debitCard];
                 }
-                
             }];
         }];
         if (error) return ;
@@ -411,6 +409,8 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                             smsVC.identityNoStr = identityNoStr;
                             smsVC.realNameStr = realNameStr;
                             smsVC.bankCardNoStr = bankCardNoStr;
+                            smsVC.cvnStr = cvnStr;
+                            smsVC.expiryStr = validStr;
                             smsVC.smsCheckType = SMS_CHECKTYPE_REALNAME;
                             [self.navigationController pushViewController:smsVC animated:YES];
                         }else{

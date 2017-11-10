@@ -67,12 +67,18 @@
     
     
     //titleLab1
-    UILabel *titleLab = [Tool createLable:@"修改支付密码" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    UILabel *titleLab = [Tool createLable:@"修改登录密码" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
     
     //titleLab2
     UILabel *titleDesLab;
-    NSString *titleDesStr = [NSString stringWithFormat:@"请为%@设置一个新的登陆密码",[CommParameter sharedInstance].userName];
+    NSString *titleDesStr;
+    
+    if ([CommParameter sharedInstance].userName.length>0) {
+        titleDesStr = [NSString stringWithFormat:@"请为%@设置一个新的登陆密码",[CommParameter sharedInstance].userName];
+    }else{
+        titleDesStr = @"设置的密码至少包含8-20位字母数字组合";
+    }
     titleDesLab = [Tool createLable:titleDesStr attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleDesLab];
 
@@ -188,8 +194,16 @@
                 [self.HUD hidden];
                 [Tool showDialog:@"登录密码修改成功,请重新登录" defulBlock:^{
                     
-                    //退出重新登录
-                    [Tool presetnLoginVC:self];
+                    //修改登录密码 - 成功返回
+                    if (self.verifyType == VERIFY_TYPE_CHANGELOGPWD) {
+                        //退出重新登录
+                        [Tool presetnLoginVC:self];
+                    }
+                    //忘记登录密码 - 成功返回
+                    if (self.verifyType == VERIFY_TYPE_FORGETLOGPWD) {
+                        //返回导航rootView
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }
                     
                 }];
                 

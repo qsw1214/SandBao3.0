@@ -124,9 +124,9 @@
     }
     if (btn.tag == BTN_TAG_TRANSFER) {
         //@"转账"
-        if ([balanceLab.text floatValue] == 0) {
-            [Tool showDialog:@"您的余额不足,不能进行转账"];
-        }
+//        if ([balanceLab.text floatValue] == 0) {
+//            [Tool showDialog:@"您的余额不足,不能进行转账"];
+//        }
         SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"个人银行卡"]) {
                 BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];

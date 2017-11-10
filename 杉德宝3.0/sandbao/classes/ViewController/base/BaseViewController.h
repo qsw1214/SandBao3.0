@@ -163,6 +163,7 @@
 #pragma mark - 修改支付/登陆密码
 #define VERIFY_TYPE_CHANGEPATPWD 2001 //修改支付密码
 #define VERIFY_TYPE_CHANGELOGPWD 2002 //修改登录密码
+#define VERIFY_TYPE_FORGETLOGPWD 2003 //忘记登录密码
 
 #pragma mark - 按钮Tag:tag
 #define BTN_TAG_JUSTCLICK  99999  //仅点击(标识)

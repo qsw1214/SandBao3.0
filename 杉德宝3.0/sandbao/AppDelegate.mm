@@ -142,9 +142,6 @@
 #pragma mark - 设置window属性
 - (void)setWindows{
     
-    //清空上一次用户误操作留下的timeOut
-    [SixCodeAuthToolView cleanCurrentTimeOut];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIImageView * imgv =  [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     imgv.image = [UIImage imageNamed:@"Stars"];

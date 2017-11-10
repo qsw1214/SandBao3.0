@@ -156,28 +156,47 @@
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
-        paynuc.set("tTokenType", [self.tokenType UTF8String]);
-        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
-            error = YES;
-        } successBlock:^{
-            
-        }];
-        if (error) return ;
-        
-        
-        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthGroups/v1" errorBlock:^(SDRequestErrorType type) {
-            error = YES;
-        } successBlock:^{
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self.HUD hidden];
-                
-                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authGroups").c_str()];
-                self.authGroupTypeArr = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
-                //刷新UI
-                [self tableviewRefrush];
+        //忘记登录密码 - 流程
+        if (self.verifyType == VERIFY_TYPE_FORGETLOGPWD) {
+            [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthGroups/v1" errorBlock:^(SDRequestErrorType type) {
+                error = YES;
+            } successBlock:^{
+                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                    [self.HUD hidden];
+                    
+                    NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authGroups").c_str()];
+                    self.authGroupTypeArr = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                    //刷新UI
+                    [self tableviewRefrush];
+                }];
             }];
-        }];
-        if (error) return ;
+            if (error) return ;
+        }
+        
+        //修改支付/登录密码 - 流程
+        else{
+            paynuc.set("tTokenType", [self.tokenType UTF8String]);
+            [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+                error = YES;
+            } successBlock:^{
+                
+            }];
+            if (error) return ;
+            
+            [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthGroups/v1" errorBlock:^(SDRequestErrorType type) {
+                error = YES;
+            } successBlock:^{
+                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                    [self.HUD hidden];
+                    
+                    NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authGroups").c_str()];
+                    self.authGroupTypeArr = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                    //刷新UI
+                    [self tableviewRefrush];
+                }];
+            }];
+            if (error) return ;
+        }
     }];
     
     

@@ -206,12 +206,22 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
+                //修改支付密码
                 if (self.verifyType == VERIFY_TYPE_CHANGEPATPWD) {
                     ChangePayPwdViewController *changePayPwdVC = [[ChangePayPwdViewController alloc] init];
+                    changePayPwdVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
                     [self.navigationController pushViewController:changePayPwdVC animated:YES];
                 }
+                //修改登录密码
                 if (self.verifyType == VERIFY_TYPE_CHANGELOGPWD) {
                     ChangeLogPwdViewController *changeLogPwdVC = [[ChangeLogPwdViewController alloc] init];
+                    changeLogPwdVC.verifyType = VERIFY_TYPE_CHANGELOGPWD;
+                    [self.navigationController pushViewController:changeLogPwdVC animated:YES];
+                }
+                //忘记登录密码
+                if (self.verifyType == VERIFY_TYPE_FORGETLOGPWD) {
+                    ChangeLogPwdViewController *changeLogPwdVC = [[ChangeLogPwdViewController alloc] init];
+                    changeLogPwdVC.verifyType = VERIFY_TYPE_FORGETLOGPWD;
                     [self.navigationController pushViewController:changeLogPwdVC animated:YES];
                 }
                 

@@ -10,7 +10,12 @@
 #import "PayNucHelper.h"
 #import "AddBankCardCell.h"
 #import "SmsCheckViewController.h"
-
+typedef NS_ENUM(NSInteger,BankCardType) {
+    
+    debitCard = 0, //借记卡
+    creditCard,    //贷记卡
+    
+};
 @interface AddBankCardSecViewController ()
 {
     
@@ -18,18 +23,35 @@
     AddBankCardCell *cardRealNameCell;
     AddBankCardCell *cardIdentityNoCell;
     
-    NSString *bankPhoneNoStr;
+    
+    
+    ValidAuthToolView *validAuthToolView;
+    
+    CvnAuthToolView *cvnAuthToolView;
+    
+    BankCardType cardType;
     
 }
+@property (nonatomic, strong) NSString *bankPhoneNoStr;
+@property (nonatomic, strong) NSString *validStr;       //卡有效期
+@property (nonatomic, strong) NSString *cvnStr;       //cvn
 @end
 
 @implementation AddBankCardSecViewController
+
+@synthesize bankPhoneNoStr;
+@synthesize validStr;
+@synthesize cvnStr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //检查卡类型
+    [self checkCardType];
+    
     [self createUI];
+    
 }
 
 
@@ -103,6 +125,27 @@
     };
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
     
+    //信用卡
+    if (cardType == creditCard) {
+        validAuthToolView = [ValidAuthToolView createAuthToolViewOY:0];
+        validAuthToolView.tip.text = @"请输入正确有效期";
+        validAuthToolView.successBlock = ^(NSString *textfieldText) {
+            validStr = textfieldText;
+        };
+        [self.baseScrollView addSubview:validAuthToolView];
+        
+        cvnAuthToolView = [CvnAuthToolView createAuthToolViewOY:0];
+        cvnAuthToolView.tip.text = @"请输入正确CVN";
+        cvnAuthToolView.successBlock = ^(NSString *textfieldText) {
+            cvnStr = textfieldText;
+        };
+        [self.baseScrollView addSubview:cvnAuthToolView];
+
+    }
+    
+    
+    
+    
     //nextBtn
     UIButton *nextBarbtn = [Tool createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
     nextBarbtn.tag = BTN_TAG_NEXT;
@@ -140,14 +183,29 @@
         make.size.mas_equalTo(bankPhoneNoAuthToolView.size);
     }];
     
+    if (cardType == creditCard) {
+        [validAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
+            make.centerX.equalTo(self.baseScrollView);
+            make.size.mas_equalTo(validAuthToolView.size);
+        }];
+        [cvnAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(validAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
+            make.centerX.equalTo(self.baseScrollView);
+            make.size.mas_equalTo(cvnAuthToolView.size);
+        }];
+    }
+    
     [nextBarbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_50);
+        if (cardType == creditCard) {
+            make.top.equalTo(cvnAuthToolView.mas_bottom).offset(UPDOWNSPACE_50);
+        }else{
+            make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_50);
+        }
+        
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];
-    
-    
-    
     
 }
 
@@ -179,6 +237,8 @@
                             smsVC.payToolDic = self.payToolDic;
                             smsVC.userInfoDic = self.userInfoDic;
                             smsVC.phoneNoStr = bankPhoneNoStr;
+                            smsVC.cvnStr = cvnStr;
+                            smsVC.expiryStr = validStr;
                             smsVC.smsCheckType = SMS_CHECKTYPE_ADDBANKCARD;
                             [self.navigationController pushViewController:smsVC animated:YES];
                         }else{
@@ -197,13 +257,17 @@
     
 }
 
-
-
-
-
-
-
-
+-(void)checkCardType{
+    
+    //信用卡
+    if ([[self.payToolDic objectForKey:@"authTools"] count]>0){
+        cardType = creditCard;
+    }
+    //借记卡
+    else{
+        cardType = debitCard;
+    }
+}
 
 
 

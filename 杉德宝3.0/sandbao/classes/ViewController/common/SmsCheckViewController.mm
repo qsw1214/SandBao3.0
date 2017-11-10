@@ -30,6 +30,27 @@
     
     [self createUI];
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //如果倒计时已经为零,则允许自动触发短信发送
+    if ( [SixCodeAuthToolView getCurrentTimeOut] == 0) {
+        //获取短信验证码
+        [self shortMsg];
+        //短信开始倒计时
+        [smsCodeAuthToolView startTimeOut];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    //短息发送成功,界面消失 - 停止计时器
+    [smsCodeAuthToolView stopTimer];
+    
+}
+
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -187,7 +208,6 @@
                 smsCodeAuthToolView.noCopyTextfield.userInteractionEnabled = YES;
                 //短息发送成功,自动弹出键盘
                 [smsCodeAuthToolView.noCopyTextfield becomeFirstResponder];
-                
             }];
         }];
         if (error) return ;

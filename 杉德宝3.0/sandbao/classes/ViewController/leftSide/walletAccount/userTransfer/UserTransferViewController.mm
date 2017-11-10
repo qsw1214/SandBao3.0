@@ -7,8 +7,11 @@
 //
 
 #import "UserTransferViewController.h"
+#import "PayNucHelper.h"
 
-@interface UserTransferViewController ()<UITextFieldDelegate>
+typedef void(^TransferPayStateBlock)(NSArray *paramArr);
+
+@interface UserTransferViewController ()<UITextFieldDelegate,SDPayViewDelegate>
 {
     UIView *headView;
     UIView *bodyView;
@@ -16,6 +19,16 @@
     
     UITextField *moneyTextfield;
 }
+/**
+ work域
+ */
+@property (nonatomic, strong) NSDictionary *wordDic;
+
+/**
+ 支付工具控件
+ */
+@property (nonatomic, strong) SDPayView *payView;
+
 @end
 
 @implementation UserTransferViewController
@@ -26,6 +39,8 @@
     
     [self create_HeadView];
     [self create_BodyView];
+    [self create_PayView];
+    
 }
 
 
@@ -57,6 +72,8 @@
     //转账!
     if (btn.tag == BTN_TAG_TRANSFER) {
         
+        //
+        [self fee];
         
     }
     
@@ -234,8 +251,12 @@
         make.size.mas_equalTo(bottomTipLab.size);
     }];
     
-    
-    
+}
+- (void)create_PayView{
+    self.payView = [SDPayView getPayView];
+    self.payView.style = SDPayViewOnlyPwd;
+    self.payView.delegate = self;
+    [self.view addSubview:self.payView];
 }
 
 
@@ -252,6 +273,189 @@
     }
     
 }
+
+#pragma mark - SDPayViewDelegate
+- (void)payViewPwd:(NSString *)pwdStr paySuccessView:(SDPaySuccessAnimationView *)successView{
+    
+    //支付动画开始
+    [successView animationStart];
+    
+    [self pay:pwdStr transferPaySuccessBlock:^(NSArray *paramArr){
+        //支付成功
+        [successView animationSuccess];
+        dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
+        dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            
+            //转账成功
+            
+        });
+    } transferPayErrorBlock:^(NSArray *paramArr){
+        //支付失败
+        [successView animationStopClean];
+        [self.payView hidPayTool];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+}
+
+
+- (void)payViewForgetPwd:(NSString *)type{
+    
+    if ([type isEqualToString:PAYTOOL_PAYPASS]) {
+        //修改支付密码
+    }
+    if ([type isEqualToString:PAYTOOL_ACCPASS]) {
+        //修改杉德卡密码
+    }
+    
+}
+
+
+
+
+
+
+
+
+#pragma mark - 业务逻辑
+#pragma mark fee手续费
+-(void)fee{
+    
+    //work
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        //1.费率
+        //work
+        NSMutableDictionary *workDic = [[NSMutableDictionary alloc] initWithCapacity:0];
+        [workDic setObject:@"transfer" forKey:@"type"];
+        NSInteger cashFen = [moneyTextfield.text floatValue]*100;
+        [workDic setObject:[NSString stringWithFormat:@"%ld",(long)cashFen] forKey:@"transAmt"];  //转一元
+        NSString *workStr = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
+        paynuc.set("work", [workStr UTF8String]);
+        
+        //inpayTool
+        NSString  *inPayToolstr = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)self.inPayToolDic];
+        paynuc.set("inPayTool", [inPayToolstr UTF8String]);
+        
+        //outpayTool
+        NSString *outPayToolStr = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)self.outPayToolDic];
+        paynuc.set("outPayTool", [outPayToolStr UTF8String]);
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"business/fee/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                //接受手续费
+                NSString *workStr = [NSString stringWithUTF8String:paynuc.get("work").c_str()];
+                NSDictionary *workDictI = [[PayNucHelper sharedInstance] jsonStringToDictionary:workStr];
+                self.wordDic = [[NSMutableDictionary alloc] initWithDictionary:workDictI];
+                
+                [self.payView showPayTool];
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+}
+
+#pragma mark 转账
+-(void)pay:(NSString *)param transferPaySuccessBlock:(TransferPayStateBlock)successblock transferPayErrorBlock:(TransferPayStateBlock)errorblock{
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        //2.支付
+        //work
+        //本地计算fee
+        NSString *feerate =  [self.wordDic objectForKey:@"feeRate"];
+        NSInteger feerateValue = [feerate integerValue];
+        CGFloat   feerateFloat =  feerateValue/100;
+        NSInteger cashFen = [moneyTextfield.text floatValue]*100;
+        NSInteger feeFloat =  cashFen * feerateFloat;
+        NSString *feeLocalStr = [NSString stringWithFormat:@"%ld",feeFloat];
+        NSMutableDictionary *workDicGet = [NSMutableDictionary dictionaryWithDictionary:self.wordDic];
+        [workDicGet removeObjectForKey:@"fee"];
+        [workDicGet setObject:feeLocalStr forKey:@"fee"];
+        [workDicGet setObject:@"transfer" forKey:@"type"];
+        
+        [workDicGet setObject:[NSString stringWithFormat:@"%ld",(long)cashFen] forKey:@"transAmt"];  //转一元
+        NSString *workStrGet = [[PayNucHelper sharedInstance] dictionaryToJson:workDicGet];
+        paynuc.set("work", [workStrGet UTF8String]);
+        
+        //inPayTool
+        NSString  *inPayToolstr = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)self.inPayToolDic];
+        paynuc.set("inPayTool", [inPayToolstr UTF8String]);
+        
+        
+        //outPayTool
+        //获取对应outPayTool的authTools 填充密码
+        NSArray *authTools = [_outPayToolDic objectForKey:@"authTools"];
+        NSDictionary *authToolsDic = authTools[0];
+        NSDictionary *passDic = [authToolsDic objectForKey:@"pass"];
+        NSMutableDictionary *authToolDicM = [[NSMutableDictionary alloc] initWithDictionary:authToolsDic];
+        [authToolDicM removeObjectForKey:@"pass"];
+        NSMutableDictionary *passDicM = [[NSMutableDictionary alloc] initWithDictionary:passDic];
+        [passDicM removeObjectForKey:@"password"];
+        [passDicM removeObjectForKey:@"encryptType"];
+        [passDicM setObject:@"sand" forKey:@"encryptType"];
+        if ([[authToolsDic objectForKey:@"type"] isEqualToString:@"paypass"]){
+            [passDicM setValue:[[PayNucHelper sharedInstance] pinenc:param type:@"paypass"] forKey:@"password"];
+        }
+        else if([[authToolsDic objectForKey:@"type"] isEqualToString:@"accpass"]){
+            [passDicM setValue:[[PayNucHelper sharedInstance] pinenc:param type:@"accpass"] forKey:@"password"];
+        }
+        [authToolDicM setObject:passDicM forKey:@"pass"];
+        NSMutableArray *atuhToolsM = [[NSMutableArray alloc] initWithArray:authTools];
+        [atuhToolsM removeObjectAtIndex:0];
+        [atuhToolsM addObject:authToolDicM];
+        
+        NSMutableDictionary *outPayToolM = [[NSMutableDictionary alloc] initWithDictionary:self.outPayToolDic];
+        [outPayToolM removeObjectForKey:@"authTools"];
+        [outPayToolM setObject:atuhToolsM forKey:@"authTools"];
+        NSString *outPayToolStrAcc2Acc = [[PayNucHelper sharedInstance] dictionaryToJson:outPayToolM];
+        paynuc.set("outPayTool", [outPayToolStrAcc2Acc UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"business/acc2acc/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                errorblock(nil);
+                if (type == respCodeErrorType) {
+                    UIViewController *transferBeginVc = self.navigationController.viewControllers[1];
+                    [self.navigationController popToViewController:transferBeginVc animated:YES];
+                }
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                successblock(@[@(cashFen)]);
+            }];
+        }];
+        if (error) return ;
+    }];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
