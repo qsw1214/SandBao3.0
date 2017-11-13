@@ -12,7 +12,7 @@
 
 #include "HttpComm.h"
 #import "SDLog.h"
-
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 /*
  run_ok              = 0,
@@ -78,6 +78,24 @@ static PayNucHelper *payNucHelperSharedInstance = nil;
         paynuc.set("cfg_httpAddress", [[NSString stringWithFormat:@"%@app/api/",AddressHTTP] UTF8String]);//生产
         [SDLog setLogFlag:NO];
     }
+}
+
+
+/**
+ 获取终端附近的WIFI的SSID列表
+
+ @return 列表信息
+ */
+- (id)getSSIDInfo {
+    NSArray *ifs = (__bridge_transfer id)CNCopySupportedInterfaces();
+    NSLog(@"Supported interfaces: %@", ifs);
+    id info = nil;
+    for (NSString *ifnam in ifs) {
+        info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        NSLog(@"%@ => %@", ifnam, info);
+        if (info && [info count]) { break; }
+    }
+    return info;
 }
 
 /**

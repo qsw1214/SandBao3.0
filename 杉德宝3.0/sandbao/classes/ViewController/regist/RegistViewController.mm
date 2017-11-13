@@ -101,7 +101,7 @@
     //PhoneAuthToolView
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     phoneAuthToolView.titleLab.text = @"你的手机号";
-    phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474888");
+    phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474188");
     phoneAuthToolView.textfiled.placeholder = @"输入手机号";
     phoneAuthToolView.tip.text = @"请输入正确手机号";
     phoneAuthToolView.successBlock = ^(NSString *textfieldText) {

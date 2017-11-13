@@ -88,6 +88,10 @@
     
     if (btn.tag == BTN_TAG_RECHARGE) {
         //@"充值"
+        if ([[rechargeInPayToolDic objectForKey:@"available"] boolValue] == NO){
+            [Tool showDialog:@"账户暂时无法充值 available == NO"];
+            //return ;
+        }
         //1.代付凭证已激活
         if (payForAnthoerFlag) {
             SDRechargePopView *popview =  [SDRechargePopView showRechargePopView:@"选择充值账户" rechargeChooseBlock:^(NSString *cellName) {
@@ -119,22 +123,29 @@
                 }
             }];
             popview.chooseBtnTitleArr = @[@"银行卡充值"];
-            
         }
     }
     if (btn.tag == BTN_TAG_TRANSFER) {
-        //@"转账"
-//        if ([balanceLab.text floatValue] == 0) {
-//            [Tool showDialog:@"您的余额不足,不能进行转账"];
-//        }
+        if ([[transferOutPayToolDic objectForKey:@"available"] boolValue] == NO){
+            [Tool showDialog:@"账户暂时无法转账 available == NO"];
+            //return ;
+        }
         SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"个人银行卡"]) {
+                if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                    [Tool showDialog:@"账户余额不足,无法转账到银行卡"];
+                    return ;
+                }
                 BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];
                 bankCardTransferVC.transferOutPayToolDic = transferOutPayToolDic;
                 bankCardTransferVC.tTokenType = @"02000201";
                 [self.navigationController pushViewController:bankCardTransferVC animated:YES];
             }
             if ([cellName isEqualToString:@"杉德宝用户"]) {
+                if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                    [Tool showDialog:@"账户余额不足,无法转账到杉德宝用户"];
+                    return ;
+                }
                 UserTransferBeginViewController *sandUserTransferVC = [[UserTransferBeginViewController alloc] init];
                 [self.navigationController pushViewController:sandUserTransferVC animated:YES];
             }

@@ -229,7 +229,7 @@
 		28D7E5961FA9A53F00518042 /* UserTransferPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5931FA9A53F00518042 /* UserTransferPageViewController.m */; };
 		28D7E5971FA9A53F00518042 /* UserTransferBeginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5951FA9A53F00518042 /* UserTransferBeginViewController.mm */; };
 		28D7E59A1FA9A80A00518042 /* UserTransferViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5991FA9A80A00518042 /* UserTransferViewController.mm */; };
-		28D7E59D1FA9BF3800518042 /* UserHongbaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E59C1FA9BF3800518042 /* UserHongbaoViewController.m */; };
+		28D7E59D1FA9BF3800518042 /* UserHongbaoViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E59C1FA9BF3800518042 /* UserHongbaoViewController.mm */; };
 		28D7E5A71FA9D15A00518042 /* PaymentBaseCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5A01FA9D15A00518042 /* PaymentBaseCellView.m */; };
 		28D7E5A81FA9D15A00518042 /* PaymentCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5A21FA9D15A00518042 /* PaymentCodeCell.m */; };
 		28D7E5A91FA9D15A00518042 /* PaymentNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5A41FA9D15A00518042 /* PaymentNoCell.m */; };
@@ -693,7 +693,7 @@
 		28D7E5981FA9A80A00518042 /* UserTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTransferViewController.h; sourceTree = "<group>"; };
 		28D7E5991FA9A80A00518042 /* UserTransferViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UserTransferViewController.mm; sourceTree = "<group>"; };
 		28D7E59B1FA9BF3800518042 /* UserHongbaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserHongbaoViewController.h; sourceTree = "<group>"; };
-		28D7E59C1FA9BF3800518042 /* UserHongbaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserHongbaoViewController.m; sourceTree = "<group>"; };
+		28D7E59C1FA9BF3800518042 /* UserHongbaoViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UserHongbaoViewController.mm; sourceTree = "<group>"; };
 		28D7E59F1FA9D15A00518042 /* PaymentBaseCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentBaseCellView.h; sourceTree = "<group>"; };
 		28D7E5A01FA9D15A00518042 /* PaymentBaseCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentBaseCellView.m; sourceTree = "<group>"; };
 		28D7E5A11FA9D15A00518042 /* PaymentCodeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentCodeCell.h; sourceTree = "<group>"; };
@@ -1711,7 +1711,7 @@
 				28D7E5981FA9A80A00518042 /* UserTransferViewController.h */,
 				28D7E5991FA9A80A00518042 /* UserTransferViewController.mm */,
 				28D7E59B1FA9BF3800518042 /* UserHongbaoViewController.h */,
-				28D7E59C1FA9BF3800518042 /* UserHongbaoViewController.m */,
+				28D7E59C1FA9BF3800518042 /* UserHongbaoViewController.mm */,
 				281431321FB54DB0000F4063 /* UserTransferFinishViewController.h */,
 				281431331FB54DB0000F4063 /* UserTransferFinishViewController.m */,
 			);
@@ -2502,7 +2502,7 @@
 				288421BB1F8E0A2100082E7C /* Base64Util.m in Sources */,
 				A7EFB15F1EB9A8DD009AA369 /* MQTTSessionSynchron.m in Sources */,
 				288421911F8E091200082E7C /* NSDate+time.m in Sources */,
-				28D7E59D1FA9BF3800518042 /* UserHongbaoViewController.m in Sources */,
+				28D7E59D1FA9BF3800518042 /* UserHongbaoViewController.mm in Sources */,
 				A7FF2FE41E160A800068A2F7 /* DragCellCollectionView.m in Sources */,
 				28981B8B1FA01FA8004CFC95 /* BankPickerView.m in Sources */,
 				281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */,

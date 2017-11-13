@@ -199,16 +199,10 @@
             
         } else {
             //3.不可用支付工具部分
-            if ([[dic objectForKey:@"available"] boolValue] == NO|| [@"0" isEqualToString:[NSString stringWithFormat:@"%@",[[dic objectForKey:@"account"] objectForKey:@"useableBalance"]]]) {
+            if ([[dic objectForKey:@"available"] boolValue] == NO) {
                 itemBtn.userInteractionEnabled = NO;
-                
-                if ([[dic objectForKey:@"available"] boolValue] == NO) {
-                    bankLimitLabel.text = @"暂不支持当前交易";
-                }else if([@"0" isEqualToString:[[dic objectForKey:@"account"] objectForKey:@"useableBalance"]]){
-                    bankLimitLabel.text = [NSString stringWithFormat:@"可用余额%.2f元 (暂不支持当前交易)",userBalanceFloat];;
-                }
+                bankLimitLabel.text = @"暂不支持当前交易";
                 bankNameLabel.textColor = [UIColor lightGrayColor];
-                
                 stateImageView.hidden = YES;
             }
         }

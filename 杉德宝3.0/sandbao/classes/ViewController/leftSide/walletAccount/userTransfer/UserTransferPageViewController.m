@@ -97,11 +97,13 @@
     [self.baseScrollView addSubview:headIconImgeView];
     
     //accountNoLab
-    UILabel *accountNoLab = [Tool createLable:@"杉德宝账号:138******88" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    NSString *accountNoStr = [NSString stringWithFormat:@"杉德宝账号:%@",[self.userInfoDic objectForKey:@"userName"]];
+    UILabel *accountNoLab = [Tool createLable:accountNoStr attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:accountNoLab];
     
     //realNameLab
-    UILabel *realNameLab = [Tool createLable:@"真实姓名:Flora" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentCenter];
+    NSString *realNameStr = [NSString stringWithFormat:@"真实姓名:%@",[self.userInfoDic objectForKey:@"userRealName"]];
+    UILabel *realNameLab = [Tool createLable:realNameStr attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:realNameLab];
     
     //transferBtn

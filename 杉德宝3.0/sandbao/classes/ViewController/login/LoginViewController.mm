@@ -94,8 +94,8 @@
     //PhoneAuthToolView
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
-    phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474888");
-    phoneNum = SHOWTOTEST(@"15151474888");;
+    phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474188");
+    phoneNum = SHOWTOTEST(@"15151474188");;
     phoneAuthToolView.successBlock = ^(NSString *textfieldText) {
         phoneNum = textfieldText;
     };

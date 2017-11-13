@@ -211,7 +211,7 @@
                 NSString *payToolsStr = [NSString stringWithUTF8String:paynuc.get("payTools").c_str()];
                 self.ownPayToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:payToolsStr];
                 
-                //判
+                //检查他方支付工具/我方支付工具是否可用
                 BOOL isCanTransfer = [self checkCanTransferByOtherPayTools:self.otherPayToolsArr ownPayTools:self.ownPayToolsArr];
                 
                 if (isCanTransfer) {
@@ -248,11 +248,11 @@
     
     if (ownSandWalletDic == nil || ![[ownSandWalletDic objectForKey:@"available"] boolValue]) {
         [Tool showDialog:@"无可用支付工具"];
-        return NO;
+//        return NO;
     }
     if (otherSandWalletDic == nil || ![[otherSandWalletDic objectForKey:@"available"] boolValue] ) {
         [Tool showDialog:@"对方无可用支付工具"];
-        return NO;
+//        return NO;
     }
     return YES;
 }

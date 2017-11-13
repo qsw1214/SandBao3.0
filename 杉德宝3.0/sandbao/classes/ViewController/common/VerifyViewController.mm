@@ -117,8 +117,8 @@
                 //cardNoAuthToolView
                 CardNoAuthToolView *cardNoAuthToolView = [CardNoAuthToolView createAuthToolViewOY:0];
                 cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
-                cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6217001210062891245");
-                _bankCardNoStr = SHOWTOTEST(@"6217001210062891245");
+                cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6212261001042568540");
+                _bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
                 cardNoAuthToolView.successBlock = ^(NSString *textfieldText) {
                     _bankCardNoStr = textfieldText;
                 };
@@ -205,6 +205,9 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                
+                //短息验证成功 - 停止计时器
+                [self.smsCodeAuthToolView stopTimer];
                 
                 //修改支付密码
                 if (self.verifyType == VERIFY_TYPE_CHANGEPATPWD) {

@@ -94,8 +94,8 @@
     //cardNoAuthToolView
     cardNoAuthToolView = [CardNoAuthToolView createAuthToolViewOY:0];
     cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
-    cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6217001210062891245");
-    bankCardNoStr = SHOWTOTEST(@"6217001210062891245");
+    cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6212261001042568540");
+    bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
     cardNoAuthToolView.successBlock = ^(NSString *textfieldText) {
         bankCardNoStr = textfieldText;
     };

@@ -79,7 +79,6 @@
 
 @implementation LeftSideMenuViewController
 
-
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
@@ -130,7 +129,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    
+
     //加载子控制器
     [self addSubViewController];
     

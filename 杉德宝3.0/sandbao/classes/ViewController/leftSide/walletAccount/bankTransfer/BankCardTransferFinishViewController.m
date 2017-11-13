@@ -76,7 +76,8 @@
     [stypeOne addSubview:titleLab];
     
     //titleDesLab
-    UILabel *titleDesLab = [Tool createLable:@"中国建设银行(尾号1111)" attributeStr:nil font:FONT_10_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    NSString *titleDesStr = [NSString stringWithFormat:@"%@(%@)",self.bankTitle,self.bankNo];
+    UILabel *titleDesLab = [Tool createLable:titleDesStr attributeStr:nil font:FONT_10_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [stypeOne addSubview:titleDesLab];
     
     stypeOne.width = SCREEN_WIDTH;

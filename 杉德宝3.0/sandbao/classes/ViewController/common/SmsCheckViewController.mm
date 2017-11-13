@@ -42,15 +42,6 @@
         [smsCodeAuthToolView startTimeOut];
     }
 }
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    
-    //短息发送成功,界面消失 - 停止计时器
-    [smsCodeAuthToolView stopTimer];
-    
-}
-
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -250,6 +241,9 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
+                //短息验证成功 - 停止计时器
+                [smsCodeAuthToolView stopTimer];
+                
                 //更新用户数据信息
                 [Tool refreshUserInfo:[NSString stringWithUTF8String:paynuc.get("userInfo").c_str()]];
                 //更新用户数据库
@@ -422,6 +416,9 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
+                //短息验证成功 - 停止计时器
+                [smsCodeAuthToolView stopTimer];
+                
                 //跳转设置登陆密码
                 LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
                 setLogpwdVC.phoneNoStr = self.phoneNoStr;
@@ -510,6 +507,10 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                
+                //短息验证成功 - 停止计时器
+                [smsCodeAuthToolView stopTimer];
+                
                 [CommParameter sharedInstance].realNameFlag = YES;
                 PayPwdViewController *payPwdVC = [[PayPwdViewController alloc] init];
                 [self.navigationController pushViewController:payPwdVC animated:YES];
@@ -591,6 +592,9 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
+                //短息验证成功 - 停止计时器
+                [smsCodeAuthToolView stopTimer];
+                
                 [Tool showDialog:@"绑卡成功" defulBlock:^{
                     [self ownPayTools_addBakcCard];
                 }];
@@ -663,6 +667,7 @@
     
     VerifyViewController *verifyVC = [[VerifyViewController alloc] init];
     verifyVC.authToolArr = authToolsArr;
+    verifyVC.smsCodeAuthToolView = smsCodeAuthToolView;
     verifyVC.verifyType = self.verifyType;
     [self.navigationController pushViewController:verifyVC animated:YES];
     

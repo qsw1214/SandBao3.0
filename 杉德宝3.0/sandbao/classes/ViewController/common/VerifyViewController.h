@@ -12,6 +12,12 @@
 
 
 /**
+ 短信视图(接受短信视图实例,执行短信验证成功后,短信倒计时停止,不负责在此类展示)
+ */
+@property (nonatomic, strong) SixCodeAuthToolView *smsCodeAuthToolView;
+
+
+/**
  使用鉴权类型(修改支付/登陆密码)
  */
 @property (nonatomic, assign) NSInteger verifyType;

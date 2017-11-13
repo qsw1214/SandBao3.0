@@ -11,6 +11,15 @@
 @interface BankCardTransferFinishViewController : BaseViewController
 
 
+/**
+ 银行标题
+ */
+@property (nonatomic, strong) NSString *bankTitle;
 
+
+/**
+ 银行卡尾号
+ */
+@property (nonatomic, strong) NSString *bankNo;
 
 @end

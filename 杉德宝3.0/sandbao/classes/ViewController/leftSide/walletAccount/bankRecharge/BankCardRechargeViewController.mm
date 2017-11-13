@@ -16,7 +16,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 /**
  银行卡充值
  */
-@interface BankCardRechargeViewController ()<SDPayViewDelegate>
+@interface BankCardRechargeViewController ()<SDPayViewDelegate,UITextFieldDelegate>
 {
     
     UIView *headView;
@@ -100,11 +100,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_RECHARGE) {
-        
         if (moneyTextfield.text.length>0) {
-            
-            [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"现金账户充值"];
+            [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"钱包账户充值"];
             [self fee];
+        }else{
+            [Tool showDialog:@"请输入充值金额"];
         }
     }
     
@@ -120,16 +120,16 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self.baseScrollView addSubview:headView];
     
     //bankIcon
-    UIImage *bankIconImag = [UIImage imageNamed:@"banklist_gh"];
+    UIImage *bankIconImag = [UIImage imageNamed:@"unknow_BankCard"];
     bankIconImgView = [Tool createImagView:bankIconImag];
     [headView addSubview:bankIconImgView];
     
     //bankName
-    bankNameLab = [Tool createLable:@"中国工商银行储蓄卡" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    bankNameLab = [Tool createLable:@"unknown" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNameLab];
     
     //bankNum
-    bankNumLab = [Tool createLable:@"尾号0008" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    bankNumLab = [Tool createLable:@"尾号unknown" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNumLab];
     
     headView.height = bankIconImag.size.height + UPDOWNSPACE_16*2;
@@ -212,6 +212,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     moneyTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
     moneyTextfield.height += UPDOWNSPACE_30*2;
     moneyTextfield.width = SCREEN_WIDTH - LEFTRIGHTSPACE_55;
+    moneyTextfield.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFiledEditChanged:) name:UITextFieldTextDidChangeNotification object:moneyTextfield];
     [bodyView addSubview:moneyTextfield];
     
     //line
@@ -301,6 +303,97 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self.view addSubview:self.payView];
 }
 
+#pragma mark - Notifaction - 金额输入框值监听
+- (void)textFiledEditChanged:(NSNotification *)obj
+{
+    UITextField *textField = (UITextField *)obj.object;
+    NSString *content = textField.text;
+    
+    
+    textField.placeholder = @"0.0";
+    //金额输入控制
+    //输入"." 变"0."
+    if ([content length]>0&&[[content substringToIndex:1] isEqualToString:@"."]) {
+        textField.text = @"0.";
+    }
+    //两个".." 变"."
+    if ([content componentsSeparatedByString:@"."].count>2) {
+        textField.text = [content substringToIndex:content.length - 1];
+    }
+    //两个"0"  变"0."
+    if ([content isEqualToString:@"00"]) {
+        textField.text = @"0.";
+    }
+    //输入"0X" 变"0."
+    if ([content floatValue]>1 && [[content substringToIndex:1] isEqualToString:@"0"]) {
+        textField.text = @"0.";
+    }
+    
+}
+
+
+#pragma mark - textfieldDelegate
+#pragma mark 限制键盘输入某些字符
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([textField.placeholder rangeOfString:@"0.0"].location !=NSNotFound) {
+        return [self limitPayMoneyDot:textField shouldChangeCharactersInRange:range replacementString:string dotPreBits:6 dotAfterBits:2];
+    }
+    return YES;
+    
+}
+/**
+ *  付款金额限制代码
+ *
+ *  @param textField    当前textField
+ *  @param range        range
+ *  @param string       string
+ *  @param dotPreBits   小数点前整数位数
+ *  @param dotAfterBits 小数点后位数
+ *
+ *  @return shouldChangeCharactersInRange 代理方法中 可以限制金额格式
+ */
+#define myDotNumbers     @"0123456789.\n"
+#define myNumbers          @"0123456789\n"
+- (BOOL) limitPayMoneyDot:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string dotPreBits:(int)dotPreBits dotAfterBits:(int)dotAfterBits
+
+{
+    if ([string isEqualToString:@"\n"]||[string isEqualToString:@""])
+    { //按下return
+        return YES;
+    }
+    
+    
+    NSCharacterSet *cs;
+    NSUInteger nDotLoc = [textField.text rangeOfString:@"."].location;
+    if (NSNotFound == nDotLoc && 0 != range.location) {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers]invertedSet];
+        if ([string isEqualToString:@"."]) {
+            return YES;
+        }
+        if (textField.text.length>=dotPreBits) {  //小数点前面6位
+            return NO;
+        }
+    }
+    else {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myDotNumbers] invertedSet];
+        if (textField.text.length>=9) {
+            return  NO;
+        }
+    }
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if (!basicTest) {
+        return NO;
+    }
+    if (NSNotFound != nDotLoc && range.location > nDotLoc +dotAfterBits) {//小数点后面两位
+        return NO;
+    }
+    return YES;
+}
+
+
+
 
 #pragma mark - SDPayViewDelegate
 - (void)payViewSelectPayToolDic:(NSMutableDictionary *)selectPayToolDict{
@@ -389,47 +482,58 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
                 
                 NSString *rechargePayTools = [NSString stringWithUTF8String:paynuc.get("payTools").c_str()];
                 NSArray *rechargePayToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:rechargePayTools];
+                //校验支付工具
+                [self checkInPayToolsOutPayTools:rechargePayToolsArray];
                 
-                //0.排序
-                rechargePayToolsArray = [Tool orderForPayTools:rechargePayToolsArray];
-                
-                if ([rechargePayToolsArray count] <= 0) {
-                    [Tool showDialog:@"无可用方式,请绑卡重试" defulBlock:^{
-                        
-                    }];
-                } else {
-                    
-                    //1.过滤用支付工具
-                    payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
-                    payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
-                    for (int i = 0; i<rechargePayToolsArray.count; i++) {
-                        if ([@"0" isEqualToString:[NSString stringWithFormat:@"%@",[[rechargePayToolsArray[i] objectForKey:@"account"] objectForKey:@"useableBalance"]]] || [[rechargePayToolsArray[i] objectForKey:@"available"] boolValue]== NO) {
-                            //不可用支付工具集
-                            [payToolsArrayUnusableM addObject:rechargePayToolsArray[i]];
-                        }else{
-                            //可用支付工具集
-                            [payToolsArrayUsableM addObject:rechargePayToolsArray[i]];
-                        }
-                    }
-                    if (payToolsArrayUnusableM.count == rechargePayToolsArray.count) {
-                        [Tool showDialog:@"无可用支付工具" defulBlock:^{
-                            [self.navigationController popViewControllerAnimated:YES];
-                        }];
-                        return ;
-                    }
-                    //2.设置VC默认显示的支付
-                    self.rechargeOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
-                    //刷新页面信息
-                    [self resetBankNameLabelAndIconImageView];
-                    //3.设置支付方式列表
-                    [self initPayMode:rechargePayToolsArray];
-                }
             }];
         }];
         if (error) return ;
     }];
     
 }
+/**
+ 校验支付工具
+ 
+ @param rechargePayToolsArray void
+ */
+- (void)checkInPayToolsOutPayTools:(NSArray*)rechargePayToolsArray{
+    
+    //检测支付工具
+    if (rechargePayToolsArray.count>0) {
+        //0.排序
+        rechargePayToolsArray = [Tool orderForPayTools:rechargePayToolsArray];
+        //1.过滤用支付工具
+        payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
+        payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
+        for (int i = 0; i<rechargePayToolsArray.count; i++) {
+            if ([[rechargePayToolsArray[i] objectForKey:@"available"] boolValue]== NO) {
+                //不可用支付工具集
+                [payToolsArrayUnusableM addObject:rechargePayToolsArray[i]];
+            }else{
+                //可用支付工具集
+                [payToolsArrayUsableM addObject:rechargePayToolsArray[i]];
+            }
+        }
+        if (payToolsArrayUsableM.count >0) {
+            //2.设置VC默认显示的支付
+            self.rechargeOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
+            //刷新页面信息
+            [self resetBankNameLabelAndIconImageView];
+            //3.设置支付方式列表
+            [self initPayMode:rechargePayToolsArray];
+        }else{
+            [Tool showDialog:@"无可用支付工具" defulBlock:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+        }
+    }else{
+        [Tool showDialog:@"无可用工具下发" defulBlock:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }
+
+}
+
 
 /**
  重置文字和icon图片
