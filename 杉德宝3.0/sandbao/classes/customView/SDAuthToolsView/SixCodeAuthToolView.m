@@ -359,6 +359,11 @@
     }
 }
 
+#pragma mark -设置倒计时时间为零
++ (void)setZeroForCurrentTimeOut{
+    [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"currentTimeOut"];
+}
+
 #pragma mark - 外部调用开启短信倒计时(非按钮事件调用)
 - (void)startTimeOut{
     

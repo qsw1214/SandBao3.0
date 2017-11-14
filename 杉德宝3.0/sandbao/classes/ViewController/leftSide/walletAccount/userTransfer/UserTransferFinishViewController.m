@@ -48,14 +48,6 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
-    if (btn.tag == BTN_TAG_SEARCH) {
-
-        
-        
-    }
-    
-    
-    
 }
 
 
@@ -74,7 +66,7 @@
     
     
     //transferMoneyLab
-    UILabel *transferMoneyLab = [Tool createLable:@"1000000" attributeStr:nil font:FONT_28_SFUIT_Rrgular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
+    UILabel *transferMoneyLab = [Tool createLable:self.amtStr attributeStr:nil font:FONT_28_SFUIT_Rrgular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:transferMoneyLab];
     
     

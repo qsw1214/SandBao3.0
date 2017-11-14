@@ -23,14 +23,18 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     UIView *tipView;
     UIView *bodyView;
     
+    UILabel *tipLab;
     UIImageView *bankIconImgView;
     UILabel *bankNameLab;
     UILabel *bankNumLab;
     UITextField *moneyTextfield;
     
     
+    
     NSMutableArray *payToolsArrayUsableM;  //可用支付工具
     NSMutableArray *payToolsArrayUnusableM; //不可用支付工具
+    
+    CGFloat limitFloat;
     
 }
 /**
@@ -100,13 +104,18 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_RECHARGE) {
-        if (moneyTextfield.text.length>0) {
+        if (moneyTextfield.text.length>0 && [moneyTextfield.text floatValue]<=limitFloat) {
             [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"钱包账户充值"];
             [self fee];
         }else{
             [Tool showDialog:@"请输入充值金额"];
         }
     }
+    
+    if (btn.tag == BTN_TAG_SHOWALLMONEY) {
+        moneyTextfield.text = [NSString stringWithFormat:@"%.2f",limitFloat];
+    }
+    
     
 }
 
@@ -170,7 +179,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self.baseScrollView addSubview:tipView];
     
     //tipLab
-    UILabel *tipLab = [Tool createLable:@"该卡最多可免费充值1000.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    tipLab = [Tool createLable:@"该卡最多可免费充值(unknown)元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [tipView addSubview:tipLab];
     
     tipView.height = tipLab.height + UPDOWNSPACE_15*2;
@@ -415,13 +424,17 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
             //充值成功
-            
+            RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+            rechargeFinishVC.amtMoneyStr = moneyTextfield.text;
+            rechargeFinishVC.payOutName = [self.rechargeOutPayToolDic objectForKey:@"title"];
+            rechargeFinishVC.payOutNo = [[self.rechargeOutPayToolDic objectForKey:@"account"] objectForKey:@"accNo"];
+            [self.navigationController pushViewController:rechargeFinishVC animated:YES];
         });
     } rechagreErrorBlock:^(NSArray *paramArr){
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [self resetBankNameLabelAndIconImageView];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
 }
 
@@ -531,7 +544,6 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }
-
 }
 
 
@@ -539,6 +551,9 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
  重置文字和icon图片
  */
 - (void)resetBankNameLabelAndIconImageView{
+    
+    //获取limit信息
+    limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.rechargeOutPayToolDic objectForKey:@"limit"]]/100;
     
     NSString *accNo  = [[payToolsArrayUsableM[0] objectForKey:@"account"] objectForKey:@"accNo"];
     NSString *title = [payToolsArrayUsableM[0] objectForKey:@"title"];
@@ -548,6 +563,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     bankNumLab.text = [NSString stringWithFormat:@"尾号%@",lastfournumber];
     NSString *imgName = [Tool getIconImageName:[payToolsArrayUsableM[0] objectForKey:@"type"] title:title imaUrl:nil];
     bankIconImgView.image = [UIImage imageNamed:imgName];
+    tipLab.text = [NSString stringWithFormat:@"该卡最多可免费充值%.2f元",limitFloat];
+    
 }
 
 /**
@@ -639,7 +656,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
-        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [@"999" floatValue] * 100];
+        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
         
         NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
         [workDic setValue:@"recharge" forKey:@"type"];

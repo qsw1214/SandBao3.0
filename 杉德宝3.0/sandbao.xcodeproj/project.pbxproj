@@ -115,7 +115,7 @@
 		28A8AEB71FAB25E500FA1EC1 /* SDRechargePop_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA91FAB25E500FA1EC1 /* SDRechargePop_sel@3x.png */; };
 		28A8AEB81FAB25E500FA1EC1 /* SDRechargePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEAB1FAB25E500FA1EC1 /* SDRechargePopView.m */; };
 		28A8AEB91FAB25E500FA1EC1 /* SDSearchPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEAE1FAB25E500FA1EC1 /* SDSearchPop.m */; };
-		28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */; };
+		28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.mm */; };
 		28A8AEC11FAB635900FA1EC1 /* MyCenterCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AEC01FAB635900FA1EC1 /* MyCenterCellView.m */; };
 		28B6490D1FAC17A30074A390 /* HomeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28B6490B1FAC17A30074A390 /* HomeViewController.mm */; };
 		28B649141FAC45040074A390 /* BaseViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28B649131FAC45040074A390 /* BaseViewController.mm */; };
@@ -539,7 +539,7 @@
 		28A8AEAD1FAB25E500FA1EC1 /* SDSearchPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSearchPop.h; sourceTree = "<group>"; };
 		28A8AEAE1FAB25E500FA1EC1 /* SDSearchPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSearchPop.m; sourceTree = "<group>"; };
 		28A8AEBB1FAB573400FA1EC1 /* MyCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterViewController.h; sourceTree = "<group>"; };
-		28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterViewController.m; sourceTree = "<group>"; };
+		28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyCenterViewController.mm; sourceTree = "<group>"; };
 		28A8AEBF1FAB635900FA1EC1 /* MyCenterCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCenterCellView.h; sourceTree = "<group>"; };
 		28A8AEC01FAB635900FA1EC1 /* MyCenterCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCenterCellView.m; sourceTree = "<group>"; };
 		28B6490B1FAC17A30074A390 /* HomeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HomeViewController.mm; sourceTree = "<group>"; };
@@ -1484,7 +1484,7 @@
 			children = (
 				28A8AEBE1FAB631D00FA1EC1 /* view */,
 				28A8AEBB1FAB573400FA1EC1 /* MyCenterViewController.h */,
-				28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.m */,
+				28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.mm */,
 			);
 			path = myCenter;
 			sourceTree = "<group>";
@@ -1746,8 +1746,8 @@
 			children = (
 				28D7E5831FA9A50C00518042 /* BankCardRechargeViewController.h */,
 				28D7E5841FA9A50C00518042 /* BankCardRechargeViewController.mm */,
-				28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.m */,
 				28D7E5AF1FA9D5E400518042 /* RechargeFinishViewController.h */,
+				28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.m */,
 			);
 			path = bankRecharge;
 			sourceTree = "<group>";
@@ -2546,7 +2546,7 @@
 				A7EFB15D1EB9A8DD009AA369 /* MQTTSessionLegacy.m in Sources */,
 				28BCE8AA1FB046CB00D62F94 /* AddBankCardSecViewController.mm in Sources */,
 				28BCE8C61FB190B300D62F94 /* ChangeLogPwdViewController.mm in Sources */,
-				28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.m in Sources */,
+				28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.mm in Sources */,
 				28BCE8C21FB18FD500D62F94 /* VerifyTypeViewController.mm in Sources */,
 				28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */,
 				288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */,

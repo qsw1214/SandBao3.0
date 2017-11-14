@@ -7,14 +7,17 @@
 //
 
 #import "MyCenterViewController.h"
-
+#import "PayNucHelper.h"
 #import "MyCenterCellView.h"
 
 #import "SDBottomPop.h"
+#import "Base64Util.h"
+#import "GzipUtility.h"
 
-
-@interface MyCenterViewController ()
-
+@interface MyCenterViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+{
+    NSString *base64Str;
+}
 @end
 
 @implementation MyCenterViewController
@@ -61,7 +64,24 @@
         NSLog(@"头像");
         
         [SDBottomPop showBottomPopView:@"更换头像" cellNameList:@[@"拍照上传",@"从相册上传"] suerBlock:^(NSString *cellName) {
-            
+            if ([cellName isEqualToString:@"拍照上传"]) {
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                picker.delegate = self;
+                //设置选择后的图片可被编辑
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:nil];
+            }
+            if ([cellName isEqualToString:@"从相册上传"]) {
+                //[self getImageFromIpc]; //从相机获取相册
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.delegate = self;
+                //设置选择后的图片可被编辑
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:nil];
+
+            }
         }];
         
     }
@@ -168,9 +188,96 @@
     
 }
 
+#pragma mark -UIImagePickerControllerDelegate
+// 获取图片后的操作
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    // 销毁控制器
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    // 获取原始图片
+    UIImage *image = info[UIImagePickerControllerEditedImage];
+    
+    //压缩 64*64
+    UIGraphicsBeginImageContext(CGSizeMake(64, 64));
+    CGRect thumbnailRect = CGRectZero;
+    thumbnailRect.size.width = 64;
+    thumbnailRect.size.height = 64;
+    [image drawInRect:thumbnailRect];
+    UIImage * newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //数据格式化
+    NSData *data = UIImageJPEGRepresentation(newImage, 0.6f);
+    data = [GzipUtility gzipData:data];
+    
+    
+    //base64
+    base64Str = [Base64Util base64EncodedStringFrom:data];
+    
+    NSData *dataW = [base64Str dataUsingEncoding:NSUTF8StringEncoding];
+    if (dataW.length >4000) {
+        [Tool showDialog:@"图片过大,请重新选择"];
+        return;
+    }
+    
+    //上传头像
+    [self updataPhoto];
+    
+    
+    
+}
+
+
 
 #pragma mark - 业务逻辑
-
+#pragma mark 上传头像
+- (void)updataPhoto{
+    
+    //成功获取图片后 直接上传
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01002001");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:0];
+        [userInfo setValue:base64Str forKey:@"avatar"];
+        [userInfo setValue:@"" forKey:@"nick"];
+        [userInfo setValue:@"" forKey:@"remainState"];
+        NSString *userInfostr = [[PayNucHelper sharedInstance] dictionaryToJson:userInfo];
+        paynuc.set("userInfo", [userInfostr UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/resetUserBaseInfo/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                [CommParameter sharedInstance].avatar = base64Str;
+                [Tool showDialog:@"头像修改成功"];
+                
+                //刷新头像
+                NSString *str = [CommParameter sharedInstance].avatar;
+                NSData *data = [Base64Util dataWithBase64EncodedString:str];
+                data = [GzipUtility uncompressZippedData:data];
+                UIImage *image = [UIImage imageWithData:data];
+                
+                //沙盒缓存此头像
+                [[NSUserDefaults standardUserDefaults] setObject:@{@"data":data} forKey:[NSString stringWithFormat:@"HEAD_AVATAR_DATA%@",[CommParameter sharedInstance].userId]];
+            }];
+        }];
+        if (error) return ;
+    }];
+    
+}
 
 
 

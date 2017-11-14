@@ -142,6 +142,9 @@
 #pragma mark - 设置window属性
 - (void)setWindows{
     
+    //设置短信倒计时归零
+    [SixCodeAuthToolView setZeroForCurrentTimeOut];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     UIImageView * imgv =  [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     imgv.image = [UIImage imageNamed:@"Stars"];

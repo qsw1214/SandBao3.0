@@ -31,7 +31,6 @@
 
 
 @property (nonatomic, copy) SDBottomPopSureBlock sureblock;
-@property (nonatomic, copy) SDBottomPopCancleBlock cancleblock;
 
 @end
 
@@ -141,7 +140,6 @@
     if (btn.tag == btn_tag_cancle) {
         
         [self hidden];
-        self.cancleblock();
 
     }else{
         

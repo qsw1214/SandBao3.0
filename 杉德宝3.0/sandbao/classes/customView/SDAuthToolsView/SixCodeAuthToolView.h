@@ -62,6 +62,12 @@ typedef NS_ENUM(NSInteger,CodeAuthToolStyle){
  */
 -(void)stopTimer;
 
+
+/**
+ 设置倒计时时间为零
+ */
++ (void)setZeroForCurrentTimeOut;
+
 /**
  获取当前倒计时时间
 

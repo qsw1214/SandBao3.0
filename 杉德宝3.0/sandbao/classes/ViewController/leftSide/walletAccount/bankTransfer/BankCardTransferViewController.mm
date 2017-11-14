@@ -27,6 +27,8 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     
     NSMutableArray *payToolsArrayUsableM;  //可用支付工具
     NSMutableArray *payToolsArrayUnusableM; //不可用支付工具
+    
+    CGFloat limitFloat;
 }
 /**
  转入支付工具(提现)
@@ -94,12 +96,15 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_TRANSFER) {
-        if (moneyTextfield.text.length>0) {
+        if (moneyTextfield.text.length>0 && [moneyTextfield.text floatValue]<=limitFloat) {
             [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"提现到个人银行卡"];
             [self fee];
         }else{
             [Tool showDialog:@"请输入提现金额"];
         }
+    }
+    if (btn.tag == BTN_TAG_SHOWALLMONEY) {
+        moneyTextfield.text = [NSString stringWithFormat:@"%.2f",limitFloat];
     }
 }
 
@@ -163,7 +168,9 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     [self.baseScrollView addSubview:tipView];
     
     //tipLab
-    UILabel *tipLab = [Tool createLable:@"该卡最多可转账9,999,999,00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    //获取limit信息
+    limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.transferOutPayToolDic objectForKey:@"limit"]]/100;
+    UILabel *tipLab = [Tool createLable:[NSString stringWithFormat:@"该卡最多可转账:%.2f元",limitFloat] attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [tipView addSubview:tipLab];
     
     tipView.height = tipLab.height + UPDOWNSPACE_15*2;
@@ -415,7 +422,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [self resetBankNameLabelAndIconImageView];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
     }];
     

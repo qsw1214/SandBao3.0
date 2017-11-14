@@ -79,7 +79,8 @@
     [headView addSubview:titleLab];
     
     //moneyLab
-    UILabel *moneyLab = [Tool createLable:@"+1000.00" attributeStr:nil font:FONT_28_SFUIT_Rrgular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
+    NSString *addMoneyStr = [NSString stringWithFormat:@"+ %@",self.amtMoneyStr];
+    UILabel *moneyLab = [Tool createLable:addMoneyStr attributeStr:nil font:FONT_28_SFUIT_Rrgular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [headView addSubview:moneyLab];
     
     //rechargeFinishLab
@@ -126,7 +127,7 @@
     [bodyView addSubview:payObjectLab];
     
     //payObjectDetLab
-    UILabel *payObjectDetLab = [Tool createLable:@"个人银行卡" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentRight];
+    UILabel *payObjectDetLab = [Tool createLable:self.payOutName attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentRight];
     [bodyView addSubview:payObjectDetLab];
     
     //line
@@ -135,18 +136,43 @@
     line.size = CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_20, 1);
     [bodyView addSubview:line];
     
+    UILabel *payInfoLab;
+    UILabel *payInfoLabDesLab;
+    UIView *lineTwo;
+    if (self.payOutNo.length>0) {
+        //payInfoLab
+        payInfoLab = [Tool createLable:@"扣款信息" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+        [bodyView addSubview:payInfoLab];
+
+        //payInfoLabDesLab
+        payInfoLabDesLab = [Tool createLable:self.payOutNo attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentRight];
+        [bodyView addSubview:payInfoLabDesLab];
+        
+        //line
+        lineTwo = [[UIView alloc] init];
+        lineTwo.backgroundColor = COLOR_A1A2A5_3;
+        lineTwo.size = CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_20, 1);
+        [bodyView addSubview:lineTwo];
+    }
+   
     //payMoneyLab
-    UILabel *payMoneyLab = [Tool createLable:@"扣款信息" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    UILabel *payMoneyLab = [Tool createLable:@"扣款金额" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:payMoneyLab];
     
     //payMoneyDetLab
-    UILabel *payMoneyDetLab = [Tool createLable:@"-1000.00" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentRight];
+    NSString *minusMoneyStr = [NSString stringWithFormat:@"- %@",self.amtMoneyStr];
+    UILabel *payMoneyDetLab = [Tool createLable:minusMoneyStr attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentRight];
     [bodyView addSubview:payMoneyDetLab];
     
     
     payObjectDetLab.width = SCREEN_WIDTH - LEFTRIGHTSPACE_35 - payObjectLab.width - LEFTRIGHTSPACE_35;
     payMoneyDetLab.width = SCREEN_WIDTH - LEFTRIGHTSPACE_35 - payMoneyLab.width - LEFTRIGHTSPACE_35;
-    bodyView.height = (UPDOWNSPACE_25 + payObjectLab.height + UPDOWNSPACE_25)*2;
+    
+    if (self.payOutNo.length>0) {
+        bodyView.height = (UPDOWNSPACE_25 + payObjectLab.height + UPDOWNSPACE_25)*3;
+    }else{
+        bodyView.height = (UPDOWNSPACE_25 + payObjectLab.height + UPDOWNSPACE_25)*2;
+    }
     
     
     [bodyView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -173,14 +199,41 @@
         make.size.mas_equalTo(line.size);
     }];
     
+    if (self.payOutNo.length>0) {
+        [payInfoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(line.mas_bottom).offset(UPDOWNSPACE_25);
+            make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_35);
+            make.size.mas_equalTo(payInfoLab.size);
+        }];
+        
+        [payInfoLabDesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(line.mas_bottom).offset(UPDOWNSPACE_25);
+            make.left.equalTo(payInfoLab.mas_right).offset(LEFTRIGHTSPACE_00);
+            make.size.mas_equalTo(CGSizeMake(payMoneyDetLab.width, payMoneyDetLab.height));
+        }];
+        
+        [lineTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(payInfoLab.mas_bottom).offset(UPDOWNSPACE_25);
+            make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_20);
+            make.size.mas_equalTo(line.size);
+        }];
+    }
     [payMoneyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line.mas_bottom).offset(UPDOWNSPACE_25);
+        if (self.payOutNo.length>0) {
+            make.top.equalTo(lineTwo.mas_bottom).offset(UPDOWNSPACE_25);
+        }else{
+           make.top.equalTo(line.mas_bottom).offset(UPDOWNSPACE_25);
+        }
         make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_35);
         make.size.mas_equalTo(payMoneyLab.size);
     }];
    
     [payMoneyDetLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line.mas_bottom).offset(UPDOWNSPACE_25);
+        if (self.payOutNo.length>0) {
+             make.top.equalTo(lineTwo.mas_bottom).offset(UPDOWNSPACE_25);
+        }else{
+             make.top.equalTo(line.mas_bottom).offset(UPDOWNSPACE_25);
+        }
         make.left.equalTo(payMoneyLab.mas_right).offset(LEFTRIGHTSPACE_00);
         make.size.mas_equalTo(CGSizeMake(payMoneyDetLab.width, payMoneyDetLab.height));
     }];

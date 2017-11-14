@@ -89,8 +89,8 @@
     if (btn.tag == BTN_TAG_RECHARGE) {
         //@"充值"
         if ([[rechargeInPayToolDic objectForKey:@"available"] boolValue] == NO){
-            [Tool showDialog:@"账户暂时无法充值 available == NO"];
-            //return ;
+//            [Tool showDialog:@"账户暂时无法充值 available == NO"];
+//            return ;
         }
         //1.代付凭证已激活
         if (payForAnthoerFlag) {
@@ -127,8 +127,8 @@
     }
     if (btn.tag == BTN_TAG_TRANSFER) {
         if ([[transferOutPayToolDic objectForKey:@"available"] boolValue] == NO){
-            [Tool showDialog:@"账户暂时无法转账 available == NO"];
-            //return ;
+//            [Tool showDialog:@"账户暂时无法转账 available == NO"];
+//            return ;
         }
         SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"个人银行卡"]) {

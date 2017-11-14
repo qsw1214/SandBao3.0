@@ -127,7 +127,7 @@
     [stypeTwo addSubview:titleLab];
     
     //titleDesLab
-    UILabel *titleDesLab = [Tool createLable:@"00:30前" attributeStr:nil font:FONT_10_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    UILabel *titleDesLab = [Tool createLable:@"00:00前" attributeStr:nil font:FONT_10_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [stypeTwo addSubview:titleDesLab];
     
     stypeTwo.width = SCREEN_WIDTH;

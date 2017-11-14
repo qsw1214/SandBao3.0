@@ -8,6 +8,7 @@
 
 #import "UserTransferViewController.h"
 #import "PayNucHelper.h"
+#import "UserTransferFinishViewController.h"
 
 typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 
@@ -18,6 +19,8 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     UIView *bottomView;
     
     UITextField *moneyTextfield;
+    
+    CGFloat limitFloat;
 }
 /**
  work域
@@ -72,9 +75,11 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     //转账!
     if (btn.tag == BTN_TAG_TRANSFER) {
         
-        //
-        [self fee];
-        
+        if (moneyTextfield.text.length>0 && [moneyTextfield.text floatValue] <= limitFloat) {
+            [self fee];
+        }else{
+            [Tool showDialog:@"请输入转账金额"];
+        }
     }
     
 }
@@ -82,7 +87,6 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 
 #pragma mark  - UI绘制
 - (void)create_HeadView{
-  
     
     headView = [[UIView alloc] init];
     headView.backgroundColor = COLOR_FFFFFF;
@@ -91,15 +95,24 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     //iconImgView
     UIImage *iconimg = [UIImage imageNamed:@"transfer_headIcon"];
     UIImageView *headIconImgeView = [Tool createImagView:iconimg];
+    headIconImgeView.layer.cornerRadius = iconimg.size.height/2;
+    headIconImgeView.layer.masksToBounds = YES;
+    NSString *avatarImgStr = [self.userInfoDic objectForKey:@"avatar"];
+    if (avatarImgStr.length>0) {
+        headIconImgeView.image = [Tool avatarImageWith:avatarImgStr];
+    }
     [self.baseScrollView addSubview:headIconImgeView];
     
     //accountNoLab
-    UILabel *accountNoLab = [Tool createLable:@"杉德宝账号:138******88" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    NSString *accountNoStr = [NSString stringWithFormat:@"杉德宝账号:%@",[self.userInfoDic objectForKey:@"userName"]];
+    UILabel *accountNoLab = [Tool createLable:accountNoStr attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:accountNoLab];
     
     //realNameLab
-    UILabel *realNameLab = [Tool createLable:@"真实姓名:Flora" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentCenter];
+    NSString *realNameStr = [NSString stringWithFormat:@"真实姓名:%@",[self.userInfoDic objectForKey:@"userRealName"]];
+    UILabel *realNameLab = [Tool createLable:realNameStr attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:realNameLab];
+
     
     headView.height = UPDOWNSPACE_20 + iconimg.size.height + UPDOWNSPACE_11 + accountNoLab.height + UPDOWNSPACE_10 + realNameLab.height + UPDOWNSPACE_20;
     
@@ -132,9 +145,12 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 }
 
 - (void)create_BodyView{
+    //获取limit信息
+    limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.outPayToolDic objectForKey:@"limit"]]/100;
     
     //tipLab
-    UILabel *limitTipLab = [Tool createLable:@"该账户最多可转账999.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5     alignment:NSTextAlignmentLeft];
+    NSString *limitStr = [NSString stringWithFormat:@"您的账户本次最多可转账:%.2f元",limitFloat];
+    UILabel *limitTipLab = [Tool createLable:limitStr attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5     alignment:NSTextAlignmentLeft];
     [self.baseScrollView addSubview:limitTipLab];
     
     [limitTipLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -160,11 +176,12 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     
     //moneyTextfield
     moneyTextfield = [Tool createTextField:@"0.00" font:FONT_36_SFUIT_Rrgular textColor:COLOR_343339_5];
-    moneyTextfield.keyboardType = UIKeyboardTypeNumberPad;
+    moneyTextfield.keyboardType = UIKeyboardTypeDecimalPad;
     moneyTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
     moneyTextfield.height += UPDOWNSPACE_30*2;
     moneyTextfield.width = SCREEN_WIDTH - LEFTRIGHTSPACE_55;
     moneyTextfield.delegate = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFiledEditChanged:) name:UITextFieldTextDidChangeNotification object:moneyTextfield];
     [bodyView addSubview:moneyTextfield];
     
     
@@ -258,21 +275,96 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     self.payView.delegate = self;
     [self.view addSubview:self.payView];
 }
-
-
-#pragma mark textfielDelegate
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+#pragma mark - Notifaction - 金额输入框值监听
+- (void)textFiledEditChanged:(NSNotification *)obj
+{
+    UITextField *textField = (UITextField *)obj.object;
+    NSString *content = textField.text;
     
-    if ([textField.text floatValue]< 999.00) {
-        if (bottomView.subviews.count > 0) {
-            [bottomView removeFromSuperview];
-        }
+    
+    textField.placeholder = @"0.0";
+    //金额输入控制
+    //输入"." 变"0."
+    if ([content length]>0&&[[content substringToIndex:1] isEqualToString:@"."]) {
+        textField.text = @"0.";
     }
-    if ([moneyTextfield.text floatValue] > 999) {
-        [self create_bottomView];
+    //两个".." 变"."
+    if ([content componentsSeparatedByString:@"."].count>2) {
+        textField.text = [content substringToIndex:content.length - 1];
+    }
+    //两个"0"  变"0."
+    if ([content isEqualToString:@"00"]) {
+        textField.text = @"0.";
+    }
+    //输入"0X" 变"0."
+    if ([content floatValue]>1 && [[content substringToIndex:1] isEqualToString:@"0"]) {
+        textField.text = @"0.";
     }
     
 }
+
+
+#pragma mark - textfieldDelegate
+#pragma mark 限制键盘输入某些字符
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if ([textField.placeholder rangeOfString:@"0.0"].location !=NSNotFound) {
+        return [self limitPayMoneyDot:textField shouldChangeCharactersInRange:range replacementString:string dotPreBits:6 dotAfterBits:2];
+    }
+    return YES;
+    
+}
+/**
+ *  付款金额限制代码
+ *
+ *  @param textField    当前textField
+ *  @param range        range
+ *  @param string       string
+ *  @param dotPreBits   小数点前整数位数
+ *  @param dotAfterBits 小数点后位数
+ *
+ *  @return shouldChangeCharactersInRange 代理方法中 可以限制金额格式
+ */
+#define myDotNumbers     @"0123456789.\n"
+#define myNumbers          @"0123456789\n"
+- (BOOL) limitPayMoneyDot:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string dotPreBits:(int)dotPreBits dotAfterBits:(int)dotAfterBits
+
+{
+    if ([string isEqualToString:@"\n"]||[string isEqualToString:@""])
+    { //按下return
+        return YES;
+    }
+    
+    
+    NSCharacterSet *cs;
+    NSUInteger nDotLoc = [textField.text rangeOfString:@"."].location;
+    if (NSNotFound == nDotLoc && 0 != range.location) {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers]invertedSet];
+        if ([string isEqualToString:@"."]) {
+            return YES;
+        }
+        if (textField.text.length>=dotPreBits) {  //小数点前面6位
+            return NO;
+        }
+    }
+    else {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:myDotNumbers] invertedSet];
+        if (textField.text.length>=9) {
+            return  NO;
+        }
+    }
+    NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    BOOL basicTest = [string isEqualToString:filtered];
+    if (!basicTest) {
+        return NO;
+    }
+    if (NSNotFound != nDotLoc && range.location > nDotLoc +dotAfterBits) {//小数点后面两位
+        return NO;
+    }
+    return YES;
+}
+
+
 
 #pragma mark - SDPayViewDelegate
 - (void)payViewPwd:(NSString *)pwdStr paySuccessView:(SDPaySuccessAnimationView *)successView{
@@ -287,7 +379,8 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
             
             //转账成功
-            
+            UserTransferFinishViewController *transferFinishVC = [[UserTransferFinishViewController alloc] init];
+            [self.navigationController pushViewController:transferFinishVC animated:YES];
         });
     } transferPayErrorBlock:^(NSArray *paramArr){
         //支付失败
@@ -366,6 +459,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 -(void)pay:(NSString *)param transferPaySuccessBlock:(TransferPayStateBlock)successblock transferPayErrorBlock:(TransferPayStateBlock)errorblock{
     
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [self.HUD hidden];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{

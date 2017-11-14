@@ -10,4 +10,10 @@
 
 @interface UserTransferFinishViewController : BaseViewController
 
+
+/**
+ 转账金额
+ */
+@property (nonatomic, strong) NSString *amtStr;
+
 @end

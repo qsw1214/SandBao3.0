@@ -247,7 +247,7 @@
     NSDictionary *otherSandWalletDic = [otherPayToolDic objectForKey:@"sandWalletDic"];
     
     if (ownSandWalletDic == nil || ![[ownSandWalletDic objectForKey:@"available"] boolValue]) {
-        [Tool showDialog:@"无可用支付工具"];
+        [Tool showDialog:@"我方无可用支付工具"];
 //        return NO;
     }
     if (otherSandWalletDic == nil || ![[otherSandWalletDic objectForKey:@"available"] boolValue] ) {

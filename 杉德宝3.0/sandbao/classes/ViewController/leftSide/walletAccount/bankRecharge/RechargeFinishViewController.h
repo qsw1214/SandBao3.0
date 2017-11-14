@@ -10,4 +10,23 @@
 
 @interface RechargeFinishViewController : BaseViewController
 
+
+/**
+ 交易金额
+ */
+@property (nonatomic, strong) NSString *amtMoneyStr;
+
+/**
+ 付款方名称
+ */
+@property (nonatomic, strong) NSString *payOutName;
+
+/**
+ 付款卡号
+ */
+@property (nonatomic, strong) NSString *payOutNo;
+
+
+
+
 @end

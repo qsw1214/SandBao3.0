@@ -61,6 +61,9 @@
         
         //跳转去转账
         UserTransferViewController *userTransferVC = [[UserTransferViewController alloc] init];
+        userTransferVC.userInfoDic = self.userInfoDic;
+        userTransferVC.inPayToolDic = self.inPayToolDic;
+        userTransferVC.outPayToolDic = self.outPayToolDic;
         [self.navigationController pushViewController:userTransferVC animated:YES];
         
     }
@@ -75,6 +78,9 @@
         
         //跳转去红包
         UserHongbaoViewController *userHongbaoVC = [[UserHongbaoViewController alloc] init];
+        userHongbaoVC.userInfoDic = self.userInfoDic;
+        userHongbaoVC.inPayToolDic = self.inPayToolDic;
+        userHongbaoVC.outPayToolDic = self.outPayToolDic;
         [self.navigationController pushViewController:userHongbaoVC animated:YES];
         
     }
@@ -94,6 +100,12 @@
     //iconImgView
     UIImage *iconimg = [UIImage imageNamed:@"transfer_headIcon"];
     UIImageView *headIconImgeView = [Tool createImagView:iconimg];
+    headIconImgeView.layer.cornerRadius = iconimg.size.height/2;
+    headIconImgeView.layer.masksToBounds = YES;
+    NSString *avatarImgStr = [self.userInfoDic objectForKey:@"avatar"];
+    if (avatarImgStr.length>0) {
+        headIconImgeView.image = [Tool avatarImageWith:avatarImgStr];
+    }
     [self.baseScrollView addSubview:headIconImgeView];
     
     //accountNoLab

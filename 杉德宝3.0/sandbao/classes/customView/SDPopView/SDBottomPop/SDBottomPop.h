@@ -10,7 +10,6 @@
 
 
 typedef void(^SDBottomPopSureBlock)(NSString *cellName);
-typedef void(^SDBottomPopCancleBlock)();
 
 @interface SDBottomPop : UIView
 
