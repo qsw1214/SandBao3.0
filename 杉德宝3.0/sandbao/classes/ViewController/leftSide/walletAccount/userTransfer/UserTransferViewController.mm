@@ -75,10 +75,10 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     //转账!
     if (btn.tag == BTN_TAG_TRANSFER) {
         
-        if (moneyTextfield.text.length>0 && [moneyTextfield.text floatValue] <= limitFloat) {
+        if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue] <= limitFloat) {
             [self fee];
         }else{
-            [Tool showDialog:@"请输入转账金额"];
+            [Tool showDialog:@"请输入正确金额"];
         }
     }
     
@@ -380,13 +380,17 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
             
             //转账成功
             UserTransferFinishViewController *transferFinishVC = [[UserTransferFinishViewController alloc] init];
+            transferFinishVC.amtStr = moneyTextfield.text;
+            transferFinishVC.titleStr = @"转账成功";
             [self.navigationController pushViewController:transferFinishVC animated:YES];
         });
     } transferPayErrorBlock:^(NSArray *paramArr){
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [Tool showDialog:@"转账失败" defulBlock:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
     }];
 }
 

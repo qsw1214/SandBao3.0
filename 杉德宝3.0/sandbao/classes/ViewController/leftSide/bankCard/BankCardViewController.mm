@@ -333,7 +333,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     //银行卡 数组初始化
     bankArray = [NSMutableArray arrayWithCapacity:0];
     
-    NSDictionary *ownPayToolDic = [Tool getOwnPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     bankArray = [ownPayToolDic objectForKey:@"bankArray"];
    
     //银行卡列表刷新数据

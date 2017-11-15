@@ -11,8 +11,15 @@
 @interface UserTransferFinishViewController : BaseViewController
 
 
+
 /**
- 转账金额
+ 提示文字
+ */
+@property (nonatomic, strong) NSString *titleStr;
+
+
+/**
+ 金额
  */
 @property (nonatomic, strong) NSString *amtStr;
 

@@ -23,6 +23,11 @@ typedef NS_ENUM(NSInteger,MyCenterCellType){
 
 
 /**
+ 头像图片
+ */
+@property (nonatomic, strong) UIImage *headIconImg;
+
+/**
  头像字符串
  */
 @property (nonatomic, strong) NSString *headIconImgStr;

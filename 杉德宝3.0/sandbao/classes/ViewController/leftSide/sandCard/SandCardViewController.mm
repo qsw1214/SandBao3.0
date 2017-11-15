@@ -240,7 +240,7 @@
     //杉德卡 数组初始化
     sandArray = [NSMutableArray arrayWithCapacity:0];
     
-    NSDictionary *ownPayToolDic = [Tool getOwnPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     sandArray = [ownPayToolDic objectForKey:@"sandArray"];
     
     

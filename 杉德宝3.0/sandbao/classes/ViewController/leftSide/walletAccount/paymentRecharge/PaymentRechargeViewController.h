@@ -10,4 +10,16 @@
 
 @interface PaymentRechargeViewController : BaseViewController
 
+/**
+ 被充值支付工具
+ */
+@property (nonatomic, strong)NSMutableDictionary *rechargeInPayToolDic;
+
+
+/**
+ tTokenType
+ */
+@property (nonatomic, strong) NSString *tTokenType;
+
+
 @end

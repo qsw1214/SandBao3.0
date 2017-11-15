@@ -96,11 +96,11 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_TRANSFER) {
-        if (moneyTextfield.text.length>0 && [moneyTextfield.text floatValue]<=limitFloat) {
+        if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue]<=limitFloat) {
             [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"提现到个人银行卡"];
             [self fee];
         }else{
-            [Tool showDialog:@"请输入提现金额"];
+            [Tool showDialog:@"请输入正确金额"];
         }
     }
     if (btn.tag == BTN_TAG_SHOWALLMONEY) {
@@ -422,7 +422,10 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [Tool showDialog:@"转入银行卡失败" defulBlock:^{
+             [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+       
         
     }];
     
@@ -431,10 +434,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        //修改支付密码
-//        VerificationModeViewController *mVerificationModeViewController = [[VerificationModeViewController alloc] init];
-//        mVerificationModeViewController.tokenType = @"01000601";
-//        [self.navigationController pushViewController:mVerificationModeViewController animated:YES];
+        
     }
     
 }
@@ -442,14 +442,13 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-//        BindingBankViewController *mBindingBankViewController = [[BindingBankViewController alloc] init];
-//        [self.navigationController pushViewController:mBindingBankViewController animated:YES];
-        return;
+        
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         
     }
 }
+
 #pragma mark - 业务逻辑
 #pragma mark 查询支付工具
 - (void)getPayTools{
@@ -579,18 +578,13 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         __block BOOL error = NO;
         NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
         
-        NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
-        [workDic setValue:@"withdraw" forKey:@"type"];
-        [workDic setValue:@"" forKey:@"merOrderId"];
-        [workDic setValue:@"" forKey:@"sandTN"];
-        [workDic setValue:@"" forKey:@"thirdParty"];
-        [workDic setValue:transAmt forKey:@"transAmt"];
-        [workDic setValue:@"" forKey:@"remark"];
-        [workDic setValue:@"" forKey:@"feeType"];
-        [workDic setValue:@"" forKey:@"fee"];
-        [workDic setValue:@"" forKey:@"feeRate"];
+        NSDictionary *workDic = [[NSDictionary alloc] init];
+        workDic = @{
+                    @"type":@"withdraw",
+                    @"transAmt":transAmt
+                    };
         
-        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
+        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)workDic];
         NSString *outPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferOutPayToolDic];
         NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferInPayToolDic];
         
@@ -631,18 +625,15 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         __block BOOL error = NO;
         NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
         
-        NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
-        [workDic setValue:@"withdraw" forKey:@"type"];
-        [workDic setValue:@"" forKey:@"merOrderId"];
-        [workDic setValue:@"" forKey:@"sandTN"];
-        [workDic setValue:@"" forKey:@"thirdParty"];
-        [workDic setValue:transAmt forKey:@"transAmt"];
-        [workDic setValue:@"" forKey:@"remark"];
-        [workDic setValue:[paramDic objectForKey:@"feeType"] forKey:@"feeType"];
-        [workDic setValue:@"" forKey:@"fee"];
-        [workDic setValue:[paramDic objectForKey:@"feeRate"] forKey:@"feeRate"];
+        NSDictionary *workDic = [[NSDictionary alloc] init];
+        workDic = @{
+                    @"type":@"withdraw",
+                    @"transAmt":transAmt,
+                    @"feeType":[paramDic objectForKey:@"feeType"],
+                    @"feeRate":[paramDic objectForKey:@"feeRate"]
+                    };
         
-        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
+        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)workDic];
         NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferInPayToolDic];
         
         NSMutableDictionary *outPayToolDic = [NSMutableDictionary dictionaryWithDictionary:self.transferOutPayToolDic];

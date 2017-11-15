@@ -305,7 +305,7 @@
     [CommParameter sharedInstance].phoneNo = [userInfoDic objectForKey:@"phoneNo"];
     [CommParameter sharedInstance].userId = [userInfoDic objectForKey:@"userId"];
     [CommParameter sharedInstance].payPassFlag = [[userInfoDic objectForKey:@"payPassFlag"] boolValue];
-    [CommParameter sharedInstance].PayForAnthoerFlag = [[userInfoDic objectForKey:@"PayForAnthoerFlag"] boolValue];
+    [CommParameter sharedInstance].payForAnotherFlag = [[userInfoDic objectForKey:@"payForAnotherFlag"] boolValue];
     [CommParameter sharedInstance].realNameFlag = [[userInfoDic objectForKey:@"realNameFlag"] boolValue];
     [CommParameter sharedInstance].safeQuestionFlag = [[userInfoDic objectForKey:@"safeQuestionFlag"] boolValue];
     [CommParameter sharedInstance].nick = [userInfoDic objectForKey:@"nick"];
@@ -313,7 +313,7 @@
 }
 
 #pragma mark - 装配我方支付工具
-+ (NSDictionary*)getOwnPayToolsInfo:(NSArray*)ownPayToolsArr{
++ (NSDictionary*)getPayToolsInfo:(NSArray*)ownPayToolsArr{
     
     NSMutableDictionary *infoDic = [NSMutableDictionary dictionaryWithCapacity:0];
     
@@ -324,7 +324,7 @@
     //杉德宝钱包账户 初始化
     NSMutableDictionary *sandWalletDic = [NSMutableDictionary dictionaryWithCapacity:0];
     //代付凭证 初始化
-    NSMutableDictionary *payForAnthoerDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    NSMutableDictionary *payForAnotherDic = [NSMutableDictionary dictionaryWithCapacity:0];
     
     for (int i = 0; i < ownPayToolsArr.count; i++) {
         NSDictionary *dic = ownPayToolsArr[i];
@@ -379,14 +379,14 @@
         }
         //代付凭证
         else if ([@"1014" isEqualToString:type]) {
-            payForAnthoerDic = (NSMutableDictionary*)dic;
+            payForAnotherDic = (NSMutableDictionary*)dic;
         }
     }
     
     [infoDic setObject:bankArray forKey:@"bankArray"];
     [infoDic setObject:sandArray forKey:@"sandArray"];
     [infoDic setObject:sandWalletDic forKey:@"sandWalletDic"];
-    [infoDic setObject:payForAnthoerDic forKey:@"payForAnthoerDic"];
+    [infoDic setObject:payForAnotherDic forKey:@"payForAnotherDic"];
     
     return infoDic;
     
@@ -419,25 +419,29 @@
     
 }
 
-
-
-#pragma mark - 头像缓存获取
-+ (UIImage*)headAvatarDataGetWithSQLUid:(NSString*)uid{
-    
-    NSDictionary *userImageDataDic = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"HEAD_AVATAR_DATA%@",uid]];
-    NSData *userImageData = [userImageDataDic objectForKey:@"data"];
-    
-    UIImage *headImage;
-    
-    if (userImageData) {
-        headImage = [UIImage imageWithData:userImageData];
-    }else{
-        headImage = [UIImage imageNamed:@"banaba_cot"];
-    }
-    
-    return headImage;
-    
-}
+#pragma mark - 头像数据的存储
+//+ (void)headAvatarDataSetViewSQLUid:(NSString*)uid data:(NSData *)data{
+//    //沙盒缓存此头像
+//    [[NSUserDefaults standardUserDefaults] setObject:@{@"data":data} forKey:[NSString stringWithFormat:@"HEAD_AVATAR_DATA%@",uid]];
+//}
+//
+#pragma mark - 头像数据的获取
+//+ (UIImage*)headAvatarDataGetWithSQLUid:(NSString*)uid{
+//    
+//    NSDictionary *userImageDataDic = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"HEAD_AVATAR_DATA%@",uid]];
+//    NSData *userImageData = [userImageDataDic objectForKey:@"data"];
+//    
+//    UIImage *headImage;
+//    
+//    if (userImageData) {
+//        headImage = [UIImage imageWithData:userImageData];
+//    }else{
+//        headImage = [UIImage imageNamed:@"banaba_cot"];
+//    }
+//    
+//    return headImage;
+//    
+//}
 
 #pragma mark - 银行icon数据获取
 + (NSArray*)getBankIconInfo:(NSString*)bankName{

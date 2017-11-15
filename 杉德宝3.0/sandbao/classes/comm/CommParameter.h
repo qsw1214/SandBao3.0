@@ -24,7 +24,7 @@
 @property (nonatomic, strong) NSString *avatar; //头像
 @property (nonatomic, assign) BOOL realNameFlag; //实名认证flag
 @property (nonatomic, assign) BOOL payPassFlag;  //是否设置支付密码flag
-@property (nonatomic, assign) BOOL PayForAnthoerFlag; //代付凭证是否激活标志
+@property (nonatomic, assign) BOOL payForAnotherFlag; //代付凭证是否激活标志
 @property (nonatomic, assign) BOOL safeQuestionFlag; //开通快捷flag
 
 #pragma mark - ownPayTools

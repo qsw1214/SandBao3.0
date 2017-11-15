@@ -42,4 +42,14 @@
  */
 + (NSString*)deviceVersion;
 
+
+
+/**
+ 获取ssid
+ 
+ @return ssid
+ */
++ (id)fetchSSIDInfo;
+
+
 @end

@@ -39,7 +39,6 @@
     
     __block UserTransferFinishViewController *weakSelf = self;
     self.navCoverView.rightBlock = ^{
-        NSLog(@"完成");
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };
     
@@ -61,12 +60,12 @@
     
     
     //transferFinishLab
-    UILabel *transferFinishLab = [Tool createLable:@"转账成功" attributeStr:nil font:FONT_15_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+    UILabel *transferFinishLab = [Tool createLable:self.titleStr attributeStr:nil font:FONT_15_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:transferFinishLab];
     
     
     //transferMoneyLab
-    UILabel *transferMoneyLab = [Tool createLable:self.amtStr attributeStr:nil font:FONT_28_SFUIT_Rrgular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
+    UILabel *transferMoneyLab = [Tool createLable:[NSString stringWithFormat:@"-%@",self.amtStr] attributeStr:nil font:FONT_28_SFUIT_Rrgular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:transferMoneyLab];
     
     
@@ -85,7 +84,7 @@
     }];
     
     [transferMoneyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headView.mas_bottom).offset(UPDOWNSPACE_15);
+        make.top.equalTo(transferFinishLab.mas_bottom).offset(UPDOWNSPACE_15);
         make.centerX.equalTo(headView);
         make.size.mas_equalTo(transferMoneyLab.size);
     }];

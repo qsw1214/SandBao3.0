@@ -34,7 +34,7 @@ static CommParameter *commParameterSharedInstance = nil;
     NSLog(@" _userId :%@",_userId);
     NSLog(@" _realNameFlag :%d",_realNameFlag);
     NSLog(@" _payPassFlag :%d",_payPassFlag);
-    NSLog(@" _PayForAnthoerFlag :%d",_PayForAnthoerFlag);
+    NSLog(@" _payForAnotherFlag :%d",_payForAnotherFlag);
     
     NSLog(@" _safeQuestionFlag :%d",_safeQuestionFlag);
     NSLog(@" _nick :%@",_nick);
@@ -63,7 +63,7 @@ static CommParameter *commParameterSharedInstance = nil;
     
     _realNameFlag = nil; //实名认证flag
     _payPassFlag = nil;  //是否设置支付密码flag
-    _PayForAnthoerFlag = nil; //代付凭证是否激活标志
+    _payForAnotherFlag = nil; //代付凭证是否激活标志
     _safeQuestionFlag = nil; //开通快捷flag
     
     _ownPayToolsArray = nil; //我方支付工具组

@@ -218,8 +218,8 @@
                     //转账第二步
                     UserTransferPageViewController *transferPageVC = [[UserTransferPageViewController alloc] init];
                     transferPageVC.userInfoDic = self.otherUserInfoDic;
-                    transferPageVC.inPayToolDic = [[Tool getOwnPayToolsInfo:self.otherPayToolsArr] objectForKey:@"sandWalletDic"];
-                    transferPageVC.outPayToolDic = [[Tool getOwnPayToolsInfo:self.ownPayToolsArr] objectForKey:@"sandWalletDic"];
+                    transferPageVC.inPayToolDic = [[Tool getPayToolsInfo:self.otherPayToolsArr] objectForKey:@"sandWalletDic"];
+                    transferPageVC.outPayToolDic = [[Tool getPayToolsInfo:self.ownPayToolsArr] objectForKey:@"sandWalletDic"];
                     [self.navigationController pushViewController:transferPageVC animated:YES];
                 }
                 
@@ -240,19 +240,19 @@
  */
 - (BOOL)checkCanTransferByOtherPayTools:(NSArray*)otherPayToolsArray ownPayTools:(NSArray*)ownPayToolsArray{
     
-    NSDictionary *ownPayToolDic =  [Tool getOwnPayToolsInfo:ownPayToolsArray];
+    NSDictionary *ownPayToolDic =  [Tool getPayToolsInfo:ownPayToolsArray];
     NSDictionary *ownSandWalletDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
     
-    NSDictionary *otherPayToolDic = [Tool getOwnPayToolsInfo:otherPayToolsArray];
+    NSDictionary *otherPayToolDic = [Tool getPayToolsInfo:otherPayToolsArray];
     NSDictionary *otherSandWalletDic = [otherPayToolDic objectForKey:@"sandWalletDic"];
     
     if (ownSandWalletDic == nil || ![[ownSandWalletDic objectForKey:@"available"] boolValue]) {
-        [Tool showDialog:@"我方无可用支付工具"];
+//        [Tool showDialog:@"我方无可用支付工具"];
 //        return NO;
     }
     if (otherSandWalletDic == nil || ![[otherSandWalletDic objectForKey:@"available"] boolValue] ) {
         [Tool showDialog:@"对方无可用支付工具"];
-//        return NO;
+        return NO;
     }
     return YES;
 }

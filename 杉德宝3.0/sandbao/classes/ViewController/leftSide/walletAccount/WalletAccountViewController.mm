@@ -103,6 +103,8 @@
                 }
                 if ([cellName isEqualToString:@"代付凭证充值"]) {
                     PaymentRechargeViewController *paymentRechargeVC = [[PaymentRechargeViewController alloc] init];
+                    paymentRechargeVC.rechargeInPayToolDic = rechargeInPayToolDic;
+                    paymentRechargeVC.tTokenType = @"02000101";
                     [self.navigationController pushViewController:paymentRechargeVC animated:YES];
                 }
             }];
@@ -328,7 +330,7 @@
  */
 - (void)settingData
 {
-    NSDictionary *ownPayToolDic = [Tool getOwnPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     
     //钱包账户_被充值_支付工具 - 初始化
     rechargeInPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -344,14 +346,13 @@
 }
 
 
-
 #pragma mark - 本类公共方法调用
 
 #pragma mark 检查代付凭证标识
 - (void)checkPayAnthoerFlag{
     
     //取代付凭证标识
-    payForAnthoerFlag = [CommParameter sharedInstance].PayForAnthoerFlag;
+    payForAnthoerFlag = [CommParameter sharedInstance].payForAnotherFlag;
 }
 
 

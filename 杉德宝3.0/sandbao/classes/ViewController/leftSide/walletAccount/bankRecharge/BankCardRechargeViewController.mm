@@ -104,11 +104,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_RECHARGE) {
-        if (moneyTextfield.text.length>0 && [moneyTextfield.text floatValue]<=limitFloat) {
+        if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue]<=limitFloat) {
             [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"钱包账户充值"];
             [self fee];
         }else{
-            [Tool showDialog:@"请输入充值金额"];
+            [Tool showDialog:@"请输入正确金额"];
         }
     }
     
@@ -434,17 +434,16 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [Tool showDialog:@"充值失败" defulBlock:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
     }];
 }
 
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        //修改支付密码
-        //        VerificationModeViewController *mVerificationModeViewController = [[VerificationModeViewController alloc] init];
-        //        mVerificationModeViewController.tokenType = @"01000601";
-        //        [self.navigationController pushViewController:mVerificationModeViewController animated:YES];
+        
     }
     
 }
@@ -452,9 +451,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        //        BindingBankViewController *mBindingBankViewController = [[BindingBankViewController alloc] init];
-        //        [self.navigationController pushViewController:mBindingBankViewController animated:YES];
-        return;
+        
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         
@@ -602,18 +599,13 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         __block BOOL error = NO;
         NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
         
-        NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
-        [workDic setValue:@"recharge" forKey:@"type"];
-        [workDic setValue:@"" forKey:@"merOrderId"];
-        [workDic setValue:@"" forKey:@"sandTN"];
-        [workDic setValue:@"" forKey:@"thirdParty"];
-        [workDic setValue:transAmt forKey:@"transAmt"];
-        [workDic setValue:@"" forKey:@"remark"];
-        [workDic setValue:@"" forKey:@"feeType"];
-        [workDic setValue:@"" forKey:@"fee"];
-        [workDic setValue:@"" forKey:@"feeRate"];
+        NSDictionary *workDic = [[NSDictionary alloc] init];
+        workDic = @{
+                    @"type":@"recharge",
+                    @"transAmt":transAmt,
+                    };
         
-        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
+        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)workDic];
         
         NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeInPayToolDic];
 
@@ -658,28 +650,21 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         __block BOOL error = NO;
         NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
         
-        NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
-        [workDic setValue:@"recharge" forKey:@"type"];
-        [workDic setValue:@"" forKey:@"merOrderId"];
-        [workDic setValue:@"" forKey:@"sandTN"];
-        [workDic setValue:@"" forKey:@"thirdParty"];
-        [workDic setValue:transAmt forKey:@"transAmt"];
-        [workDic setValue:@"" forKey:@"remark"];
-        [workDic setValue:[paramDic objectForKey:@"feeType"] forKey:@"feeType"];
-        [workDic setValue:@"" forKey:@"fee"];
-        [workDic setValue:[paramDic objectForKey:@"feeRate"] forKey:@"feeRate"];
-        
-        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
-        [SDLog logDebug:work];
+        NSDictionary *workDic = [[NSDictionary alloc] init];
+        workDic = @{
+                    @"type":@"recharge",
+                    @"transAmt":transAmt,
+                    @"feeType":[paramDic objectForKey:@"feeType"],
+                    @"feeRate":[paramDic objectForKey:@"feeRate"]
+                    };
+
+        NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)workDic];
         
         NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeInPayToolDic];
-        [SDLog logDebug:inPayTool];
+        
         
         NSArray *authToolsArray = [self.rechargeOutPayToolDic objectForKey:@"authTools"];
-        
         NSMutableArray *tempAuthToolsArray = [[NSMutableArray alloc] init];
-        
-        
         NSMutableDictionary *dic = authToolsArray[0];
         NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:dic];
         [authToolsDic removeObjectForKey:@"pass"];
@@ -698,7 +683,6 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         [self.rechargeOutPayToolDic setObject:tempAuthToolsArray forKey:@"authTools"];
         
         NSString *outPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeOutPayToolDic];
-        [SDLog logDebug:outPayTool];
         
         paynuc.set("work", [work UTF8String]);
         paynuc.set("inPayTool", [inPayTool UTF8String]);

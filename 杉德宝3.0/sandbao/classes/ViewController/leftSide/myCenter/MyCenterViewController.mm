@@ -17,6 +17,9 @@
 @interface MyCenterViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     NSString *base64Str;
+    UIImagePickerController *picker;
+    
+    MyCenterCellView *headCell;
 }
 @end
 
@@ -24,6 +27,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    //用户刷新数据信息
+    [self refreshUI];
     
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
@@ -65,7 +71,7 @@
         
         [SDBottomPop showBottomPopView:@"更换头像" cellNameList:@[@"拍照上传",@"从相册上传"] suerBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"拍照上传"]) {
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker = [[UIImagePickerController alloc] init];
                 picker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 picker.delegate = self;
                 //设置选择后的图片可被编辑
@@ -73,8 +79,7 @@
                 [self presentViewController:picker animated:YES completion:nil];
             }
             if ([cellName isEqualToString:@"从相册上传"]) {
-                //[self getImageFromIpc]; //从相机获取相册
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker = [[UIImagePickerController alloc] init];
                 picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                 picker.delegate = self;
                 //设置选择后的图片可被编辑
@@ -105,7 +110,7 @@
 - (void)createUI{
     __block MyCenterViewController *weakSelf = self;
     
-    MyCenterCellView *headCell = [MyCenterCellView createSetCellViewOY:0];
+    headCell = [MyCenterCellView createSetCellViewOY:0];
     headCell.cellType = myCenterCellType_Head;
     headCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
@@ -192,9 +197,6 @@
 // 获取图片后的操作
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    // 销毁控制器
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
     // 获取原始图片
     UIImage *image = info[UIImagePickerControllerEditedImage];
     
@@ -263,15 +265,14 @@
                 
                 [CommParameter sharedInstance].avatar = base64Str;
                 [Tool showDialog:@"头像修改成功"];
-                
                 //刷新头像
                 NSString *str = [CommParameter sharedInstance].avatar;
                 NSData *data = [Base64Util dataWithBase64EncodedString:str];
                 data = [GzipUtility uncompressZippedData:data];
-                UIImage *image = [UIImage imageWithData:data];
-                
-                //沙盒缓存此头像
-                [[NSUserDefaults standardUserDefaults] setObject:@{@"data":data} forKey:[NSString stringWithFormat:@"HEAD_AVATAR_DATA%@",[CommParameter sharedInstance].userId]];
+                //销毁照片控制器
+                [picker dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
             }];
         }];
         if (error) return ;
@@ -284,6 +285,14 @@
 
 
 
+
+#pragma mark - 本类公共方法调用
+#pragma mark 刷新用户信息
+- (void)refreshUI{
+    
+    //刷新头像数据
+    headCell.headIconImg = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
+}
 
 
 

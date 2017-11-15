@@ -29,7 +29,7 @@
 
 - (void)setSuperView{
     //super View Set
-    self.midTitleLab.text = @"请选择付款方式";
+    self.midTitleLab.text = @"请选择收付款方式";
     [self.leftBtn setImage:[UIImage imageNamed:@"payGoBack"] forState:UIControlStateNormal];
     [self.leftBtn addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
 }

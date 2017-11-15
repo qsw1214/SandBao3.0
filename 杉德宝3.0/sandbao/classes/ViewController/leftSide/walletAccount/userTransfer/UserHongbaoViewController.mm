@@ -7,8 +7,9 @@
 //
 
 #import "UserHongbaoViewController.h"
-
 #import "PayNucHelper.h"
+#import "UserTransferFinishViewController.h"
+
 typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 @interface UserHongbaoViewController ()<UITextFieldDelegate,SDPayViewDelegate>
 {
@@ -48,7 +49,6 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
-    self.baseScrollView.backgroundColor = COLOR_F5F5F5;
     
 }
 #pragma mark - 重写父类-导航设置方法
@@ -70,7 +70,8 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     
     //转账!
     if (btn.tag == BTN_TAG_TRANSFER) {
-        if (moneyTextfield.text.length>0 && [moneyTextfield.text floatValue] <= limitFloat) {
+        [self.baseScrollView endEditing:YES];
+        if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue] <= limitFloat) {
             [self fee];
         }else{
             [Tool showDialog:@"请输入转账金额"];
@@ -156,7 +157,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     moneyTextfield.layer.borderWidth = 1.f;
     moneyTextfield.layer.cornerRadius = 5.f;
     moneyTextfield.layer.masksToBounds = YES;
-    moneyTextfield.keyboardType = UIKeyboardTypeNumberPad;
+    moneyTextfield.keyboardType = UIKeyboardTypeDecimalPad;
     moneyTextfield.clearButtonMode = UITextFieldViewModeWhileEditing;
     moneyTextfield.delegate = self;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFiledEditChanged:) name:UITextFieldTextDidChangeNotification object:moneyTextfield];
@@ -167,7 +168,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     [bodyView addSubview:moneyTextfield];
 
     //transferBtn
-    UIButton *transferBtn = [Tool createButton:@"→" attributeStr:nil font:FONT_36_SFUIT_Rrgular textColor:COLOR_FFFFFF];
+    UIButton *transferBtn = [Tool createButton:@"转" attributeStr:nil font:FONT_36_SFUIT_Rrgular textColor:COLOR_FFFFFF];
     transferBtn.tag = BTN_TAG_TRANSFER;
     transferBtn.backgroundColor = COLOR_358BEF;
     transferBtn.layer.cornerRadius = 5.f;
@@ -176,7 +177,8 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     [bodyView addSubview:transferBtn];
 
     //limitTipLab
-    UILabel *limitTipLab = [Tool createLable:@"最高可发200.00元红包" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    NSString *limitStr = [NSString stringWithFormat:@"最高可发:%.2f元红包",limitFloat];
+    UILabel *limitTipLab = [Tool createLable:limitStr attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:limitTipLab];
     
     
@@ -185,7 +187,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     
     transferBtn.height = moneyTextfield.height;
     
-    moneyTextfield.width = SCREEN_WIDTH - LEFTRIGHTSPACE_35*2 - transferBtn.height - LEFTRIGHTSPACE_09;
+    moneyTextfield.width = SCREEN_WIDTH - LEFTRIGHTSPACE_30*2 - transferBtn.height - LEFTRIGHTSPACE_04;
     
     transferBtn.width = moneyTextfield.height;
     
@@ -202,13 +204,13 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     
     [moneyTextfield mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(bodyView.mas_top);
-        make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_35);
+        make.left.equalTo(bodyView.mas_left).offset(LEFTRIGHTSPACE_30);
         make.size.mas_equalTo(CGSizeMake(moneyTextfield.width, moneyTextfield.height));
     }];
     
     [transferBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(moneyTextfield.mas_top);
-        make.right.mas_equalTo(bodyView.mas_right).offset(-LEFTRIGHTSPACE_35);
+        make.right.mas_equalTo(bodyView.mas_right).offset(-LEFTRIGHTSPACE_30);
         make.size.mas_equalTo(CGSizeMake(transferBtn.width, transferBtn.height));
     }];
     
@@ -330,13 +332,18 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
             
             //转账成功
-            
+            UserTransferFinishViewController *transferFinishVC = [[UserTransferFinishViewController alloc] init];
+            transferFinishVC.amtStr = moneyTextfield.text;
+            transferFinishVC.titleStr = @"红包派送成功";
+            [self.navigationController pushViewController:transferFinishVC animated:YES];
         });
     } transferPayErrorBlock:^(NSArray *paramArr){
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [Tool showDialog:@"转账失败" defulBlock:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
     }];
 }
 
@@ -406,6 +413,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 -(void)pay:(NSString *)param transferPaySuccessBlock:(TransferPayStateBlock)successblock transferPayErrorBlock:(TransferPayStateBlock)errorblock{
     
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [self.HUD hidden];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{

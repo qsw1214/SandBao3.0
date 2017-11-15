@@ -48,6 +48,8 @@
         UIImage *headImg = [UIImage imageNamed:@"index_avatar"];
         headImgView = [[UIImageView alloc] init];
         headImgView.image = headImg;
+        headImgView.layer.cornerRadius = headImg.size.height/2;
+        headImgView.layer.masksToBounds = YES;
         [self insertSubview:headImgView atIndex:1];
         
         CGFloat headImgViewOY = (self.frame.size.height - headImg.size.height)/2;
@@ -98,6 +100,11 @@
         
     }
 
+}
+
+- (void)setHeadIconImg:(UIImage *)headIconImg{
+    _headIconImg = headIconImg;
+    headImgView.image = _headIconImg;
 }
 
 - (void)setHeadIconImgStr:(NSString *)headIconImgStr{

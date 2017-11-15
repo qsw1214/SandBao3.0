@@ -10,6 +10,7 @@
 
 
 #import "UIDevice+DeviceoInfo.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 @implementation UIDevice (DeviceoInfo)
 
@@ -118,6 +119,25 @@
         ||[deviceString isEqualToString:@"iPad4,9"])      return @"iPad mini 3";
     
     return deviceString;
+}
+
+
+/**
+ 获取ssid
+
+ @return ssid
+ */
++ (id)fetchSSIDInfo
+{
+    NSArray *ifs = (__bridge id)CNCopySupportedInterfaces();
+    id infossid = nil;
+    for (NSString *ifnam in ifs) {
+        infossid = (__bridge id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        if (infossid && [infossid count]) {
+            break;
+        }
+    }
+    return infossid ;
 }
 
 @end

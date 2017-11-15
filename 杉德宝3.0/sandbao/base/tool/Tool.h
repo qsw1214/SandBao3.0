@@ -130,7 +130,7 @@ typedef void(^DefulBtnBlock)();
  @param ownPayToolsArr 支付工具数组
  @return 支付工具分类
  */
-+ (NSDictionary*)getOwnPayToolsInfo:(NSArray*)ownPayToolsArr;
++ (NSDictionary*)getPayToolsInfo:(NSArray*)ownPayToolsArr;
 
 
 #pragma mark - 头像图片转换(avatar的两种形式_1.文件形式的base64_2.网络Url的Base64)
@@ -143,8 +143,16 @@ typedef void(^DefulBtnBlock)();
  */
 +(UIImage*)avatarImageWith:(NSString*)avatar;
 
+#pragma mark - 头像数据的存储
+/**
+ 头像数据的存储
 
-#pragma mark - 头像缓存获取
+ @param uid 数据库userConfig的表名字段
+ @param data 图片数据
+ */
++ (void)headAvatarDataSetViewSQLUid:(NSString*)uid data:(NSData *)data;
+
+#pragma mark - 头像数据的获取
 /**
  获取缓存的头像
 
