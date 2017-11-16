@@ -86,15 +86,27 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleGradient;
-    self.navCoverView.midTitleStr = @"首页";
     self.navCoverView.letfImgStr = @"index_avatar";
     self.navCoverView.rightImgStr = @"index_msg";
+    [self.navCoverView appendRightItem:@"index_icon_phone"];
     __block HomeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
+    //最右边按钮事件
     self.navCoverView.rightBlock = ^{
+        //@"消息"
+        
+    };
+    //右边第二个按钮事件(由右向左数)
+    self.navCoverView.rightSecBlock = ^{
+        //@"客服"
+        [Tool showDialog:@"为您拨打客服热线" message:@"021-962567" leftBtnString:@"取消" rightBtnString:@"呼叫" leftBlock:^{
+            
+        } rightBlock:^{
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"]];
+        }];
         
     };
     
@@ -403,7 +415,7 @@
     NSDictionary *sandWalletDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
     NSString *moneyStr = [[sandWalletDic objectForKey:@"account"] objectForKey:@"balance"];
     moneyStr = [NSString stringWithFormat:@"%.2f",[moneyStr floatValue]/100];
-    NSString *moneyMidStr = [moneyStr substringToIndex:1];
+    NSString *moneyMidStr = [moneyStr substringToIndex:(moneyStr.length - 3)];
     NSString *moneyRightStr = [moneyStr substringFromIndex:(moneyStr.length - 3)];
     
     moneyBtnMidLab.text = moneyMidStr;

@@ -93,8 +93,8 @@
 
     PaymentPwdCell *paymentPwdCell = [PaymentPwdCell createPaymentCellViewOY:0];
     paymentPwdCell.tip.text = @"请输入正确代付凭证密码";
-    paymentPwdCell.textfield.text = SHOWTOTEST(@"9BBAC1B76257897F");
-    paymentPwd = SHOWTOTEST(@"9BBAC1B76257897F");
+    paymentPwdCell.textfield.text = SHOWTOTEST(@"0AEAE740AC0A5925");
+    paymentPwd = SHOWTOTEST(@"0AEAE740AC0A5925");
     paymentPwdCell.successBlock = ^(NSString *textfieldText) {
         paymentPwd = textfieldText;
     };
@@ -299,10 +299,11 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                
+                NSString *work = [NSString stringWithUTF8String:paynuc.get("work").c_str()];
+                NSDictionary *workDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];
                 //充值成功
                 RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
-                rechargeFinishVC.amtMoneyStr = [self.wordDic objectForKey:@"transAmt"];
+                rechargeFinishVC.amtMoneyStr = [NSString stringWithFormat:@"%.2f",[[workDic objectForKey:@"transAmt"] floatValue]/100];
                 rechargeFinishVC.payOutName = [self.rechargeOutPayToolDic objectForKey:@"title"];
                 [self.navigationController pushViewController:rechargeFinishVC animated:YES];
                 

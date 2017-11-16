@@ -79,8 +79,8 @@
     
     PaymentNoCell *paymentNoCell = [PaymentNoCell createPaymentCellViewOY:0];
     paymentNoCell.tip.text = @"请输入正确代付凭证号";
-    paymentNoCell.textfield.text = SHOWTOTEST(@"6662000000000121");
-    paymentNo = SHOWTOTEST(@"6662000000000121");
+    paymentNoCell.textfield.text = SHOWTOTEST(@"6662000700000132");
+    paymentNo = SHOWTOTEST(@"6662000700000132");
     paymentNoCell.successBlock = ^(NSString *textfieldText) {
         paymentNo = textfieldText;
     };
@@ -88,8 +88,8 @@
     
     PaymentCodeCell *paymenCodeCell = [PaymentCodeCell createPaymentCellViewOY:0];
     paymenCodeCell.tip.text = @"请输入正确代付凭证校验码";
-    paymenCodeCell.textfield.text = SHOWTOTEST(@"675789");
-    paymenCode = SHOWTOTEST(@"675789");
+    paymenCodeCell.textfield.text = SHOWTOTEST(@"095536");
+    paymenCode = SHOWTOTEST(@"095536");
     paymenCodeCell.line.hidden = YES;
     paymenCodeCell.successBlock = ^(NSString *textfieldText) {
         paymenCode = textfieldText;
@@ -149,19 +149,16 @@
                     @"accNo":paymentNo
                     };
         
-        NSDictionary *type = [NSDictionary dictionary];
-        type = @{
-                 @"cardCheckCode":paymenCode
-                 };
         NSDictionary *authTool = [NSDictionary dictionary];
         authTool = @{
-                     @"type":type
+                     @"type":@"cardCheckCode",
+                     @"cardCheckCode":paymenCode
                      };
         NSDictionary *payTool = [NSDictionary dictionary];
         payTool = @{
                     @"type":@"1014",
                     @"account":account,
-                    @"authTool":@[authTool]
+                    @"authTools":@[authTool]
                     };
         
         NSString *payTools = [[PayNucHelper sharedInstance] arrayToJSON:(NSMutableArray*)@[payTool]];

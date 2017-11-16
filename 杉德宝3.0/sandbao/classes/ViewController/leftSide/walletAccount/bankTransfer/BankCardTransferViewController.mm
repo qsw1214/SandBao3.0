@@ -117,10 +117,15 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     headView.backgroundColor = COLOR_FFFFFF;
     [self.baseScrollView addSubview:headView];
     
-    //bankIcon
+    //bankIconBackGroundView
     UIImage *bankIconImag = [UIImage imageNamed:@"unknow_BankCard"];
+    UIView *bankIconBackGroundView = [[UIView alloc] init];
+    bankIconBackGroundView.backgroundColor = COLOR_EFEFF4;
+    [headView addSubview:bankIconBackGroundView];
+    
+    //bankIcon
     bankIconImgView = [Tool createImagView:bankIconImag];
-    [headView addSubview:bankIconImgView];
+    [bankIconBackGroundView addSubview:bankIconImgView];
     
     //bankName
     bankNameLab = [Tool createLable:@"unknown" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
@@ -130,8 +135,13 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     bankNumLab = [Tool createLable:@"尾号unknown" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNumLab];
     
-    headView.height = bankIconImag.size.height + UPDOWNSPACE_16*2;
-    CGFloat bankNameLabW = SCREEN_WIDTH - bankIconImgView.width - LEFTRIGHTSPACE_35 - LEFTRIGHTSPACE_09;
+    bankIconBackGroundView.size = CGSizeMake(bankIconImag.size.width + LEFTRIGHTSPACE_09*2, bankIconImag.size.height + LEFTRIGHTSPACE_09*2);
+    bankIconBackGroundView.layer.cornerRadius = bankIconBackGroundView.size.width/2;
+    bankIconBackGroundView.layer.masksToBounds = YES;
+    
+    headView.height = bankIconBackGroundView.height + UPDOWNSPACE_16*2;
+    CGFloat bankNameLabW = SCREEN_WIDTH - bankIconBackGroundView.width - LEFTRIGHTSPACE_35 - LEFTRIGHTSPACE_09;
+    
     
     [headView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_bottom).offset(UPDOWNSPACE_10);
@@ -139,24 +149,29 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, headView.height));
     }];
     
-    [bankIconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [bankIconBackGroundView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_16);
         make.left.equalTo(headView.mas_left).offset(LEFTRIGHTSPACE_35);
+        make.size.mas_equalTo(bankIconBackGroundView.size);
+    }];
+    
+    [bankIconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(bankIconBackGroundView.mas_centerX);
+        make.centerY.equalTo(bankIconBackGroundView.mas_centerY);
         make.size.mas_equalTo(bankIconImgView.size);
     }];
     
     [bankNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bankIconImgView.mas_top);
-        make.left.equalTo(bankIconImgView.mas_right).offset(LEFTRIGHTSPACE_09);
+        make.top.equalTo(bankIconBackGroundView.mas_top).offset(UPDOWNSPACE_05);
+        make.left.equalTo(bankIconBackGroundView.mas_right).offset(LEFTRIGHTSPACE_09);
         make.size.mas_equalTo(CGSizeMake(bankNameLabW, bankNameLab.height));
     }];
     
     [bankNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(bankIconImgView.mas_bottom);
-        make.left.equalTo(bankIconImgView.mas_right).offset(LEFTRIGHTSPACE_09);
+        make.bottom.equalTo(bankIconBackGroundView.mas_bottom).offset(-UPDOWNSPACE_05);
+        make.left.equalTo(bankIconBackGroundView.mas_right).offset(LEFTRIGHTSPACE_09);
         make.size.mas_equalTo(CGSizeMake(bankNameLabW, bankNumLab.height));
     }];
-    
     
 }
 
@@ -167,10 +182,10 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     tipView.backgroundColor = COLOR_F5F5F5;
     [self.baseScrollView addSubview:tipView];
     
-    //tipLab
-    //获取limit信息
+    //获取limit信息 - (提现limit-限制转出账户可转出金额)
     limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.transferOutPayToolDic objectForKey:@"limit"]]/100;
-    UILabel *tipLab = [Tool createLable:[NSString stringWithFormat:@"该卡最多可转账:%.2f元",limitFloat] attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    //tipLab
+    UILabel *tipLab = [Tool createLable:[NSString stringWithFormat:@"最多可对该卡转账:%.2f元",limitFloat] attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [tipView addSubview:tipLab];
     
     tipView.height = tipLab.height + UPDOWNSPACE_15*2;

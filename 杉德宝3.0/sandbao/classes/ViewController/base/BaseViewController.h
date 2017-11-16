@@ -134,6 +134,8 @@
 #define COLOR_F5F5F5 HexRGBA(0xF5F5F5,0.7f)
 //白色
 #define COLOR_FFFFFF HexRGBA(0xFFFFFF,1.f)
+//灰白
+#define COLOR_EFEFF4 HexRGBA(0xEFEFF4,1.f)
 //深蓝
 #define COLOR_358BEF HexRGBA(0x358BEF,1.f)
 //浅蓝

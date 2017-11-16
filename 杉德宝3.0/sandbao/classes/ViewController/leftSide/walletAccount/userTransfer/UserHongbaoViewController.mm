@@ -142,7 +142,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 
 - (void)create_BodyView{
     
-    //获取limit信息
+    //获取limit信息 - (转账limit-限制转出账户可转出金额)
     limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.outPayToolDic objectForKey:@"limit"]]/100;
     
     //bodyView

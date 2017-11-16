@@ -14,8 +14,11 @@
     UILabel *labTitle;
     UIButton *leftBtn;
     UIButton *rightBtn;
+    
     UIImageView *imgLeftV;
     UIImageView *imgRightV;
+    UIImageView *imgRightSecV; //右边第二个图片(从右往左数)
+    
     UILabel *labLeft;
     UILabel *labRight;
     CGFloat leftSpace;
@@ -103,6 +106,21 @@
     
    
 }
+
+- (void)appendRightItem:(NSString*)imgName{
+    //右边第二个图标
+    imgRightSecV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
+    imgRightSecV.userInteractionEnabled = YES;
+    [baseView addSubview:imgRightSecV];
+
+    //添加手势
+    UITapGestureRecognizer *gesrec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicRightSec:)];
+    [imgRightSecV addGestureRecognizer:gesrec];
+    
+    //frame
+    imgRightSecV.frame = CGRectMake(rightBtn.frame.origin.x, rightBtn.frame.origin.y, imgRightSecV.frame.size.width, imgRightSecV.frame.size.height);
+}
+
 
 - (void)setStyle:(NavCoverViewStyle)style{
     
@@ -219,7 +237,9 @@
     _rightBlock();
     
 }
-
+- (void)clicRightSec:(UIButton*)btn{
+    _rightSecBlock();
+}
 
 
 

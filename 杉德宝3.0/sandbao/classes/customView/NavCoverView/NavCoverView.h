@@ -18,6 +18,10 @@ typedef void(^NavCoverLeftActionBlock)(void);
  */
 typedef void(^NavCoverRightActionBalck)(void);
 
+
+
+
+
 @protocol NavCoverLeftDelegate<NSObject>
 
 
@@ -86,6 +90,11 @@ typedef NS_ENUM(NSInteger,NavCoverViewStyle){
  */
 @property (nonatomic, copy) NavCoverRightActionBalck rightBlock;
 
+/**
+ 回调 - 导航右边第二个事件触发
+ */
+@property (nonatomic, copy) NavCoverRightActionBalck rightSecBlock;
+
 
 
 /**
@@ -95,6 +104,13 @@ typedef NS_ENUM(NSInteger,NavCoverViewStyle){
  */
 + (NavCoverView*)createNavCorverView;
 
+
+/**
+ 追加一个右边图标
+
+ @param imgName 图片名
+ */
+- (void)appendRightItem:(NSString*)imgName;
 
 
 @end
