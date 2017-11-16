@@ -54,6 +54,7 @@
 		28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */; };
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
+		2857416E1FBD763400AA25A1 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857416D1FBD763400AA25A1 /* MessageViewController.m */; };
 		28574C5B1F4E72BF0003090D /* libpaynuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28574C5A1F4E72BF0003090D /* libpaynuc.a */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
@@ -434,6 +435,8 @@
 		28491BD01F38719F00E2B30C /* PresentAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentAnimatedTransitioning.h; sourceTree = "<group>"; };
 		28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentAnimatedTransitioning.m; sourceTree = "<group>"; };
 		2853C5771EE134C100DFF407 /* h5test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = h5test.html; sourceTree = "<group>"; };
+		2857416C1FBD763400AA25A1 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
+		2857416D1FBD763400AA25A1 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
 		28574C5A1F4E72BF0003090D /* libpaynuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpaynuc.a; sourceTree = "<group>"; };
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
@@ -1127,6 +1130,15 @@
 			path = SDViewControllerAnimatedTransitioning;
 			sourceTree = "<group>";
 		};
+		2857416B1FBD762800AA25A1 /* message */ = {
+			isa = PBXGroup;
+			children = (
+				2857416C1FBD763400AA25A1 /* MessageViewController.h */,
+				2857416D1FBD763400AA25A1 /* MessageViewController.m */,
+			);
+			path = message;
+			sourceTree = "<group>";
+		};
 		286BFCA91EE92A3100FD9731 /* SDScanView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1504,6 +1516,7 @@
 				28B649151FAC451D0074A390 /* view */,
 				28B6490C1FAC17A30074A390 /* HomeViewController.h */,
 				28B6490B1FAC17A30074A390 /* HomeViewController.mm */,
+				2857416B1FBD762800AA25A1 /* message */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -2539,6 +2552,7 @@
 				28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */,
 				28B6491B1FAC451D0074A390 /* SDMajletView.m in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
+				2857416E1FBD763400AA25A1 /* MessageViewController.m in Sources */,
 				A7EFB1631EB9A8DD009AA369 /* MQTTSSLSecurityPolicyTransport.m in Sources */,
 				283B0FD41FAAFBA00010ADAA /* SandItemTableViewCell.m in Sources */,
 				28B649811FAC654A0074A390 /* SDPayKeyBoardView.m in Sources */,

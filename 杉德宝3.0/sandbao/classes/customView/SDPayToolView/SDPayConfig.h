@@ -25,7 +25,7 @@
 #define textGrayColor Rgba(140,144,157)
 #define textBlackColor Rgba(28,28,28)
 #define forgetPwdTextColor Rgba(34, 123, 207)
-#define paySuccessAnimationViewCricleColor Rgba(65,131,215)
+#define paySuccessAnimationViewCricleColor Rgba(0,173,193)
 
 #define pwdBackGroundColor Rgba(225, 225, 225)
 #define pwdBorderColor Rgba(64,101,180)

@@ -11,6 +11,7 @@
 
 #import "RealNameViewController.h"
 #import "VerifyTypeViewController.h"
+#import "MessageViewController.h"
 
 #import "GradualView.h"
 #import "SDMajletView.h"
@@ -97,6 +98,8 @@
     //最右边按钮事件
     self.navCoverView.rightBlock = ^{
         //@"消息"
+        MessageViewController *messageVC = [[MessageViewController alloc] init];
+        [weakSelf.navigationController pushViewController:messageVC animated:YES];
         
     };
     //右边第二个按钮事件(由右向左数)
