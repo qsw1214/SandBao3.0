@@ -11,6 +11,7 @@
 #import "RechargeFinishViewController.h"
 
 #import "PaymentPwdCell.h"
+#import<CommonCrypto/CommonDigest.h>
 
 @interface PaymentRechargeViewController ()
 {
@@ -93,8 +94,8 @@
 
     PaymentPwdCell *paymentPwdCell = [PaymentPwdCell createPaymentCellViewOY:0];
     paymentPwdCell.tip.text = @"请输入正确代付凭证密码";
-    paymentPwdCell.textfield.text = SHOWTOTEST(@"0AEAE740AC0A5925");
-    paymentPwd = SHOWTOTEST(@"0AEAE740AC0A5925");
+    paymentPwdCell.textfield.text = SHOWTOTEST(@"C70128CCBADE6881");
+    paymentPwd = SHOWTOTEST(@"C70128CCBADE6881");
     paymentPwdCell.successBlock = ^(NSString *textfieldText) {
         paymentPwd = textfieldText;
     };
@@ -245,9 +246,7 @@
 #pragma mark 确认充值
 - (void)recharge:(NSString *)param paramDic:(NSDictionary *)paramDic
 {
-    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
-    [self.HUD hidden];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
@@ -274,11 +273,11 @@
         NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:dic];
         [authToolsDic removeObjectForKey:@"pass"];
         NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
-        if ([[authToolsDic objectForKey:@"type"] isEqualToString:@"cardCheckCode"]){
-            [passDic setValue:param forKey:@"password"];
+        if ([[authToolsDic objectForKey:@"type"] isEqualToString:@"sha1pass"]){
+            [passDic setValue:[self sha1:param] forKey:@"password"];
         }
         [passDic setValue:@"" forKey:@"description"];
-        [passDic setValue:@"" forKey:@"encryptType"];
+        [passDic setValue:@"sand" forKey:@"encryptType"];
         [passDic setValue:@"" forKey:@"regular"];
         [authToolsDic setObject:passDic forKey:@"pass"];
         [tempAuthToolsArray addObject:authToolsDic];
@@ -320,7 +319,26 @@
 
 
 
-
+//sha1加密方式
+- (NSString *)sha1:(NSString *)input
+{
+    //const char *cstr = [input cStringUsingEncoding:NSUTF8StringEncoding];
+    //NSData *data = [NSData dataWithBytes:cstr length:input.length];
+    
+    NSData *data = [input dataUsingEncoding:NSUTF8StringEncoding];
+    
+    uint8_t digest[CC_SHA1_DIGEST_LENGTH];
+    
+    CC_SHA1(data.bytes, (unsigned int)data.length, digest);
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+    
+    for(int i=0; i<CC_SHA1_DIGEST_LENGTH; i++) {
+        [output appendFormat:@"%02x", digest[i]];
+    }
+    
+    return output;
+}
 
 
 

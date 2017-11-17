@@ -14,12 +14,20 @@
 #import "Base64Util.h"
 #import "GzipUtility.h"
 
+#import "IdentityDetailViewController.h"
+#import "NickNameViewController.h"
+
+
 @interface MyCenterViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     NSString *base64Str;
     UIImagePickerController *picker;
     
     MyCenterCellView *headCell;
+    MyCenterCellView *identityCell;
+    MyCenterCellView *accountCell;
+    MyCenterCellView *erCodeCell;
+    MyCenterCellView *nameHeadCell;
 }
 @end
 
@@ -67,8 +75,7 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_CHANGEHEADIMG) {
-        NSLog(@"头像");
-        
+        //@"头像"
         [SDBottomPop showBottomPopView:@"更换头像" cellNameList:@[@"拍照上传",@"从相册上传"] suerBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"拍照上传"]) {
                 picker = [[UIImagePickerController alloc] init];
@@ -91,7 +98,17 @@
         
     }
     if (btn.tag == BTN_TAG_CHECKIDENTITY) {
-        NSLog(@"身份认证");
+        //@"身份认证"
+        [SDBottomPop showBottomPopView:@"身份认证" cellNameList:@[@"查看身份信息",@"修改昵称"] suerBlock:^(NSString *cellName) {
+            if ([cellName isEqualToString:@"查看身份信息"]) {
+                IdentityDetailViewController *identityDetalVC = [[IdentityDetailViewController alloc] init];
+                [self.navigationController pushViewController:identityDetalVC animated:YES];
+            }
+            if ([cellName isEqualToString:@"修改昵称"]) {
+                NickNameViewController *nickNameVC = [[NickNameViewController alloc] init];
+                [self.navigationController pushViewController:nickNameVC animated:YES];
+            }
+        }];
     }
     if (btn.tag == BTN_TAG_CHECKACCOUNT) {
         NSLog(@"杉德宝账号");
@@ -119,7 +136,7 @@
     };
     [self.baseScrollView addSubview:headCell];
     
-    MyCenterCellView *identityCell = [MyCenterCellView createSetCellViewOY:0];
+    identityCell = [MyCenterCellView createSetCellViewOY:0];
     identityCell.cellType = myCenterCellType_Identity;
     identityCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
@@ -128,7 +145,7 @@
     };
     [self.baseScrollView addSubview:identityCell];
     
-    MyCenterCellView *accountCell = [MyCenterCellView createSetCellViewOY:0];
+    accountCell = [MyCenterCellView createSetCellViewOY:0];
     accountCell.cellType = myCenterCellType_Account;
     accountCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
@@ -138,7 +155,7 @@
     [self.baseScrollView addSubview:accountCell];
     
     
-    MyCenterCellView *erCodeCell = [MyCenterCellView createSetCellViewOY:0];
+    erCodeCell = [MyCenterCellView createSetCellViewOY:0];
     erCodeCell.cellType = myCenterCellType_ErCode;
     erCodeCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
@@ -147,7 +164,7 @@
     };
     [self.baseScrollView addSubview:erCodeCell];
     
-    MyCenterCellView *nameHeadCell = [MyCenterCellView createSetCellViewOY:0];
+    nameHeadCell = [MyCenterCellView createSetCellViewOY:0];
     nameHeadCell.cellType = myCenterCellType_NameHead;
     nameHeadCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
@@ -292,6 +309,16 @@
     
     //刷新头像数据
     headCell.headIconImg = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
+    
+    //昵称数据
+    if ([CommParameter sharedInstance].nick.length>0) {
+        identityCell.nickNameStr = [CommParameter sharedInstance].nick;
+    }else{
+       identityCell.nickNameStr = @"设置昵称";
+    }
+    //账号
+    accountCell.accountNo = [CommParameter sharedInstance].userName;
+    
 }
 
 

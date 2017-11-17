@@ -420,6 +420,10 @@
     moneyStr = [NSString stringWithFormat:@"%.2f",[moneyStr floatValue]/100];
     NSString *moneyMidStr = [moneyStr substringToIndex:(moneyStr.length - 3)];
     NSString *moneyRightStr = [moneyStr substringFromIndex:(moneyStr.length - 3)];
+    if ([moneyStr floatValue] == 0) {
+        moneyMidStr = @"---";
+        moneyRightStr = @"";
+    }
     
     moneyBtnMidLab.text = moneyMidStr;
     moneyBtnRightLab.text = moneyRightStr;

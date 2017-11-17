@@ -43,6 +43,8 @@
 		282D90351EF769B000CF8C28 /* SDMBPRotaion.png in Resources */ = {isa = PBXBuildFile; fileRef = 282D902F1EF769B000CF8C28 /* SDMBPRotaion.png */; };
 		282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282D90311EF769B000CF8C28 /* SDMBProgressView.m */; };
 		282D90391EF769D000CF8C28 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 282D90381EF769D000CF8C28 /* MBProgressHUD.m */; };
+		2834E4331FBE8348007F1F61 /* IdentityDetailCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2834E4321FBE8348007F1F61 /* IdentityDetailCellView.m */; };
+		2834E4361FBEB813007F1F61 /* NickNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2834E4351FBEB813007F1F61 /* NickNameViewController.mm */; };
 		283B0FD41FAAFBA00010ADAA /* SandItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 283B0FD31FAAFBA00010ADAA /* SandItemTableViewCell.m */; };
 		283DBD0F1ECA960D00B84E3E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283DBD0E1ECA960D00B84E3E /* QuartzCore.framework */; };
 		283DBD111ECA965A00B84E3E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283DBD101ECA965A00B84E3E /* CoreText.framework */; };
@@ -55,6 +57,7 @@
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
 		2857416E1FBD763400AA25A1 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857416D1FBD763400AA25A1 /* MessageViewController.m */; };
+		285741721FBD903900AA25A1 /* IdentityDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 285741711FBD903900AA25A1 /* IdentityDetailViewController.mm */; };
 		28574C5B1F4E72BF0003090D /* libpaynuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28574C5A1F4E72BF0003090D /* libpaynuc.a */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
@@ -408,6 +411,10 @@
 		282D90311EF769B000CF8C28 /* SDMBProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMBProgressView.m; sourceTree = "<group>"; };
 		282D90371EF769D000CF8C28 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		282D90381EF769D000CF8C28 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		2834E4311FBE8348007F1F61 /* IdentityDetailCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityDetailCellView.h; sourceTree = "<group>"; };
+		2834E4321FBE8348007F1F61 /* IdentityDetailCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityDetailCellView.m; sourceTree = "<group>"; };
+		2834E4341FBEB813007F1F61 /* NickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickNameViewController.h; sourceTree = "<group>"; };
+		2834E4351FBEB813007F1F61 /* NickNameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NickNameViewController.mm; sourceTree = "<group>"; };
 		283B0FD21FAAFBA00010ADAA /* SandItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandItemTableViewCell.h; sourceTree = "<group>"; };
 		283B0FD31FAAFBA00010ADAA /* SandItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandItemTableViewCell.m; sourceTree = "<group>"; };
 		283DBD0E1ECA960D00B84E3E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -437,6 +444,8 @@
 		2853C5771EE134C100DFF407 /* h5test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = h5test.html; sourceTree = "<group>"; };
 		2857416C1FBD763400AA25A1 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		2857416D1FBD763400AA25A1 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
+		285741701FBD903900AA25A1 /* IdentityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityDetailViewController.h; sourceTree = "<group>"; };
+		285741711FBD903900AA25A1 /* IdentityDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IdentityDetailViewController.mm; sourceTree = "<group>"; };
 		28574C5A1F4E72BF0003090D /* libpaynuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpaynuc.a; sourceTree = "<group>"; };
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
@@ -1047,6 +1056,22 @@
 			path = SDMBProgressIMG;
 			sourceTree = "<group>";
 		};
+		2834E4301FBE819E007F1F61 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				2834E4311FBE8348007F1F61 /* IdentityDetailCellView.h */,
+				2834E4321FBE8348007F1F61 /* IdentityDetailCellView.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		2834E4371FBECA5E007F1F61 /* myQrCode */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = myQrCode;
+			sourceTree = "<group>";
+		};
 		283B0FD11FAAFB970010ADAA /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1137,6 +1162,18 @@
 				2857416D1FBD763400AA25A1 /* MessageViewController.m */,
 			);
 			path = message;
+			sourceTree = "<group>";
+		};
+		2857416F1FBD901800AA25A1 /* identity */ = {
+			isa = PBXGroup;
+			children = (
+				2834E4301FBE819E007F1F61 /* view */,
+				285741701FBD903900AA25A1 /* IdentityDetailViewController.h */,
+				285741711FBD903900AA25A1 /* IdentityDetailViewController.mm */,
+				2834E4341FBEB813007F1F61 /* NickNameViewController.h */,
+				2834E4351FBEB813007F1F61 /* NickNameViewController.mm */,
+			);
+			path = identity;
 			sourceTree = "<group>";
 		};
 		286BFCA91EE92A3100FD9731 /* SDScanView */ = {
@@ -1497,6 +1534,8 @@
 				28A8AEBE1FAB631D00FA1EC1 /* view */,
 				28A8AEBB1FAB573400FA1EC1 /* MyCenterViewController.h */,
 				28A8AEBC1FAB573400FA1EC1 /* MyCenterViewController.mm */,
+				2857416F1FBD901800AA25A1 /* identity */,
+				2834E4371FBECA5E007F1F61 /* myQrCode */,
 			);
 			path = myCenter;
 			sourceTree = "<group>";
@@ -2545,6 +2584,7 @@
 				28D7E5911FA9A52C00518042 /* BankCardTransferViewController.mm in Sources */,
 				A7D24CDB1E973D9E00688506 /* WebViewProgressView.m in Sources */,
 				2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */,
+				2834E4331FBE8348007F1F61 /* IdentityDetailCellView.m in Sources */,
 				28765CB41FA77036006F2A06 /* SetCellView.m in Sources */,
 				A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */,
 				28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */,
@@ -2602,6 +2642,7 @@
 				28B6491A1FAC451D0074A390 /* SDMajletCell.m in Sources */,
 				A7FF2FE31E160A800068A2F7 /* DataModel.m in Sources */,
 				28D7E5971FA9A53F00518042 /* UserTransferBeginViewController.mm in Sources */,
+				2834E4361FBEB813007F1F61 /* NickNameViewController.mm in Sources */,
 				28D289B01FA2CA8000C3787E /* SandCardViewController.mm in Sources */,
 				28981B8C1FA01FA8004CFC95 /* NoCopyTextField.m in Sources */,
 				28D7E5A81FA9D15A00518042 /* PaymentCodeCell.m in Sources */,
@@ -2640,6 +2681,7 @@
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,
 				288421931F8E091200082E7C /* NSRegularExpression+Verification.m in Sources */,
 				28BCE8BD1FB18FBD00D62F94 /* SmsCheckViewController.mm in Sources */,
+				285741721FBD903900AA25A1 /* IdentityDetailViewController.mm in Sources */,
 				288421B21F8E095E00082E7C /* MqttStatus.m in Sources */,
 				28BCE8A71FB03E5900D62F94 /* AddBankCardViewController.mm in Sources */,
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,

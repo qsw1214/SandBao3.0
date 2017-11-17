@@ -124,7 +124,6 @@
 }
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -132,6 +131,9 @@
 
     //加载子控制器
     [self addSubViewController];
+    
+    //增加监听 - 监听昵称变化
+    [self addNotifaction_NickName];
     
     //加载UI
     [self createUI_headView];
@@ -712,6 +714,7 @@
         if ([CommParameter sharedInstance].nick.length>0) {
             realNameLab.text = [CommParameter sharedInstance].nick;
             realNameLab.textColor = COLOR_343339;
+            realNameLab.layer.borderWidth = 0.f;
         }else{
             realNameLab.text = @"已实名认证";
             realNameLab.textColor = COLOR_74D478;
@@ -720,6 +723,17 @@
             realNameLab.layer.borderWidth = 0.5f;
         }
     }
+}
+
+#pragma mark 昵称变化监听
+//昵称接受通知
+- (void)addNotifaction_NickName{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nickNameNoitfaction) name:@"Nick_Name_Changed" object:nil];
+}
+- (void)nickNameNoitfaction{
+    realNameLab.text = [CommParameter sharedInstance].nick;
+    realNameLab.textColor = COLOR_343339;
+    realNameLab.layer.borderWidth = 0.f;
 }
 
 

@@ -690,7 +690,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
             [passDic setValue:[[PayNucHelper sharedInstance] pinenc:param type:@"accpass"] forKey:@"password"];
         }
         [passDic setValue:@"" forKey:@"description"];
-        [passDic setValue:@"" forKey:@"encryptType"];
+        [passDic setValue:@"sand" forKey:@"encryptType"];
         [passDic setValue:@"" forKey:@"regular"];
         [authToolsDic setObject:passDic forKey:@"pass"];
         [tempAuthToolsArray addObject:authToolsDic];

@@ -109,7 +109,8 @@
 
 - (void)appendRightItem:(NSString*)imgName{
     //右边第二个图标
-    imgRightSecV = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
+    UIImage *rightSecImg =  [UIImage imageNamed:imgName];
+    imgRightSecV = [[UIImageView alloc] initWithImage:rightSecImg];
     imgRightSecV.userInteractionEnabled = YES;
     [baseView addSubview:imgRightSecV];
 
@@ -117,8 +118,9 @@
     UITapGestureRecognizer *gesrec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clicRightSec:)];
     [imgRightSecV addGestureRecognizer:gesrec];
     
+    CGFloat imgRightSecVOX = [UIScreen mainScreen].bounds.size.width - (leftSpace + imgRightV.frame.size.width + rightSecImg.size.width);
     //frame
-    imgRightSecV.frame = CGRectMake(rightBtn.frame.origin.x, rightBtn.frame.origin.y, imgRightSecV.frame.size.width, imgRightSecV.frame.size.height);
+    imgRightSecV.frame = CGRectMake(imgRightSecVOX, rightBtn.frame.origin.y, imgRightSecV.frame.size.width, imgRightSecV.frame.size.height);
 }
 
 
