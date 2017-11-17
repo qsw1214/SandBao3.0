@@ -11,6 +11,8 @@
 #import "SDBottomPop.h"
 
 #import "SandItemTableViewCell.h"
+#import "AddSandCardViewController.h"
+
 
 @interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -61,12 +63,19 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
+    self.navCoverView.rightTitleStr = @"添加";
     self.navCoverView.midTitleStr = @"杉德卡";
     
     __block SandCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
+    
+    self.navCoverView.rightBlock = ^{
+        AddSandCardViewController *addSandCardVC = [[AddSandCardViewController alloc] init];
+        [weakSelf.navigationController pushViewController:addSandCardVC animated:YES];
+    };
+    
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
@@ -257,7 +266,6 @@
             make.centerX.equalTo(self.baseScrollView);
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.baseScrollView.height - self.bottomBtn.height));
         }];
-        
     }else{
         self.noCardLab.hidden = NO;
         [self.bottomBtn setTitle:@"添加杉德卡" forState:UIControlStateNormal];

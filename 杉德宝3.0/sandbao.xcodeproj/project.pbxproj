@@ -83,6 +83,7 @@
 		288421BB1F8E0A2100082E7C /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421B81F8E0A2100082E7C /* Base64Util.m */; };
 		288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421BA1F8E0A2100082E7C /* GzipUtility.m */; };
 		288421C01F8E0A7800082E7C /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421BF1F8E0A7800082E7C /* Tool.m */; };
+		289729761FBEE8ED0041373E /* AddSandCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289729751FBEE8ED0041373E /* AddSandCardViewController.m */; };
 		28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B5E1FA01FA8004CFC95 /* AuthToolBaseView.m */; };
 		28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B601FA01FA8004CFC95 /* BankAuthToolView.m */; };
 		28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B621FA01FA8004CFC95 /* CardNoAuthToolView.m */; };
@@ -495,6 +496,8 @@
 		288421BA1F8E0A2100082E7C /* GzipUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipUtility.m; sourceTree = "<group>"; };
 		288421BE1F8E0A7800082E7C /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
 		288421BF1F8E0A7800082E7C /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
+		289729741FBEE8ED0041373E /* AddSandCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSandCardViewController.h; sourceTree = "<group>"; };
+		289729751FBEE8ED0041373E /* AddSandCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddSandCardViewController.m; sourceTree = "<group>"; };
 		28981B5D1FA01FA8004CFC95 /* AuthToolBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthToolBaseView.h; sourceTree = "<group>"; };
 		28981B5E1FA01FA8004CFC95 /* AuthToolBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthToolBaseView.m; sourceTree = "<group>"; };
 		28981B5F1FA01FA8004CFC95 /* BankAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAuthToolView.h; sourceTree = "<group>"; };
@@ -1371,6 +1374,8 @@
 				283B0FD11FAAFB970010ADAA /* view */,
 				28D289AE1FA2CA8000C3787E /* SandCardViewController.h */,
 				28D289AF1FA2CA8000C3787E /* SandCardViewController.mm */,
+				289729741FBEE8ED0041373E /* AddSandCardViewController.h */,
+				289729751FBEE8ED0041373E /* AddSandCardViewController.m */,
 			);
 			path = sandCard;
 			sourceTree = "<group>";
@@ -2567,6 +2572,7 @@
 				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
+				289729761FBEE8ED0041373E /* AddSandCardViewController.m in Sources */,
 				28D7E58A1FA9A51600518042 /* PaymentActiveViewController.mm in Sources */,
 				28B649141FAC45040074A390 /* BaseViewController.mm in Sources */,
 				28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */,
