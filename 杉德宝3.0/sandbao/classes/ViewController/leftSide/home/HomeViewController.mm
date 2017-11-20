@@ -141,6 +141,7 @@
     [headView setRect:CGRectMake(LEFTRIGHTSPACE_00, UPDOWNSPACE_0, SCREEN_WIDTH, UPDOWNSPACE_122)];
     [self.baseScrollView addSubview:headView];
     
+    
     [headView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top);
         make.left.equalTo(self.baseScrollView.mas_left);
@@ -317,7 +318,7 @@
     
     
     
-    //杉德服务
+    //限时服务
     UILabel *limitServerLab = [Tool createLable:@"限时服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
     [self.baseScrollView addSubview:limitServerLab];
     
@@ -328,7 +329,12 @@
     
     //majletView
     SDMajletView *limitServerView = [SDMajletView createMajletViewOY:0];
-    limitServerView.cellSpace = LEFTRIGHTSPACE_12;
+    if (SCREEN_WIDTH == SCREEN_WIDTH_375) {
+        limitServerView.cellSpace = LEFTRIGHTSPACE_15;
+    }
+    if (SCREEN_WIDTH == SCREEN_WIDTH_414) {
+        limitServerView.cellSpace = LEFTRIGHTSPACE_25;
+    }
     limitServerView.columnNumber = 3;
     limitServerView.majletArr = self.limitServerArr;
     limitServerView.titleNameBlock = ^(NSString *titleName) {
@@ -413,7 +419,7 @@
     self.navCoverView.leftImg = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
     
     //2.刷新 moneyBtn 金额信息
-    //获取金额数据
+    //获取且拼装金额数据
     NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     NSDictionary *sandWalletDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
     NSString *moneyStr = [[sandWalletDic objectForKey:@"account"] objectForKey:@"balance"];
@@ -424,10 +430,10 @@
         moneyMidStr = @"---";
         moneyRightStr = @"";
     }
-    
     moneyBtnMidLab.text = moneyMidStr;
     moneyBtnRightLab.text = moneyRightStr;
     
+    //中间金额模块约束重置
     CGSize moneyBtnMidLabSize = [moneyBtnMidLab sizeThatFits:CGSizeZero];
     CGSize moneyBtnRightLabSize = [moneyBtnRightLab sizeThatFits:CGSizeZero];
     
@@ -439,6 +445,16 @@
         make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_30);
         make.centerX.equalTo(headView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(moneyBtn.width, payBtn.height));
+    }];
+    
+    [moneyBtnLeftLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(moneyBtn.mas_top).offset(UPDOWNSPACE_05);
+        if (upLabWidth>bottomLabWidth) {
+            make.left.equalTo(moneyBtn.mas_left);
+        }else{
+            make.left.equalTo(moneyBtn.mas_left).offset((bottomLabWidth-upLabWidth)/2);
+        }
+        make.size.mas_equalTo(moneyBtnLeftLab.size);
     }];
     
     [moneyBtnMidLab mas_remakeConstraints:^(MASConstraintMaker *make) {

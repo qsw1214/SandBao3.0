@@ -349,7 +349,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         paynuc.set("account", [account UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/queryCardDetail/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-             
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];

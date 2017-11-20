@@ -19,8 +19,12 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //基础配置 - self.navCoverView
+    [self setNavCoverView];
+    
     //基础配置 - 禁用RESideMenu的侧滑手势(子类控制器需要开启时,子类自己去修改为YES开启)
     self.sideMenuViewController.panGestureEnabled = NO;
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,8 +38,6 @@
     //基础配置 - self.baseScrollView
     [self setBaseScrollview];
     
-    //基础配置 - self.navCoverView
-    [self setNavCoverView];
 }
 
 - (void)setBaseScrollview{
@@ -63,6 +65,10 @@
 
 - (void)setNavCoverView{
     
+    //避免重复创建
+    if (self.navCoverView) {
+        [self.navCoverView removeFromSuperview];
+    }
     self.navCoverView = [NavCoverView createNavCorverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.midTitleStr = @"";

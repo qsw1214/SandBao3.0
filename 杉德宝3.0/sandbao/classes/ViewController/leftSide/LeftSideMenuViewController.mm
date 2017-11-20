@@ -305,19 +305,13 @@
         make.size.mas_equalTo(accountBtn.size);
     }];
     
-    if (SCREEN_WIDTH == SCREEN_WIDTH_320) {
-        [rightArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(headView.mas_centerY);
-            make.right.equalTo(headView.mas_right).offset(LEFTRIGHTSPACE_00);
-            make.size.mas_equalTo(rightArrowBtn.size);
-        }];
-    }else{
-        [rightArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.equalTo(headView.mas_centerY);
-            make.right.equalTo(headView.mas_right).offset(-LEFTRIGHTSPACE_20);
-            make.size.mas_equalTo(rightArrowBtn.size);
-        }];
-    }
+
+    [rightArrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(headView.mas_centerY);
+        make.right.equalTo(headView.mas_right).offset(-LEFTRIGHTSPACE_20);
+        make.size.mas_equalTo(rightArrowBtn.size);
+    }];
+    
 }
 
 - (void)createUI_tableView{

@@ -42,6 +42,8 @@
         self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
         self.backgroundColor = [UIColor whiteColor];
         [self createUI];
+        //默认状态栏白色
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     }return self;
     
 }
@@ -130,11 +132,14 @@
     
     if (_style == NavCoverStyleWhite) {
         self.backgroundColor = [UIColor whiteColor];
+        //修改状态栏黑色
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
         
     }
     if (_style == NavCoverStyleGradient) {
         layerRGB.colors = @[(__bridge id)[UIColor colorWithRed:69/255.0 green:145/255.0 blue:241/255.0 alpha:1].CGColor,(__bridge id)[UIColor colorWithRed:108/255.0 green:185/255.0 blue:249/255.0 alpha:1].CGColor];
-        
+        //修改状态栏白色
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     }
     
     

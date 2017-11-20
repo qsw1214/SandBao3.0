@@ -269,7 +269,9 @@
                         [authToolsArray addObject:authToolsArr[i]];
                     }
                 }else{
-                     [Tool showDialog:@"无鉴权工具下发"];
+                    [Tool showDialog:@"无鉴权工具下发" defulBlock:^{
+                        [self exitApplication];
+                    }];
                 }
                 
             }];

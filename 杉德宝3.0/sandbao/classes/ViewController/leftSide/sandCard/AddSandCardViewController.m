@@ -11,6 +11,11 @@
 @interface AddSandCardViewController ()
 {
     NSString *sandCardNoStr;
+    
+    NSString *sandCardCodeStr;  //校验码
+    
+    NSString *sandCardCodeCheckStr; //再次输入校验码
+    
 }
 @property (nonatomic, strong) UIButton *bottomBtn;
 @end
@@ -63,6 +68,7 @@
     
     //sandCardNoView
     CardNoAuthToolView *sandCardNoView = [CardNoAuthToolView createAuthToolViewOY:0];
+    sandCardNoView.backgroundColor = [UIColor whiteColor];
     sandCardNoView.titleLab.text = @"杉德卡卡号";
     sandCardNoView.tip.text = @"请输入正确杉德卡卡号";
     sandCardNoView.textfiled.placeholder = @"请输入杉德卡卡号";
@@ -72,12 +78,27 @@
     [self.baseScrollView addSubview:sandCardNoView];
     
     //sandCardCodeView
+    PwdAuthToolView *sandCardCodeView = [PwdAuthToolView createAuthToolViewOY:0];
+    sandCardCodeView.backgroundColor = [UIColor whiteColor];
+    sandCardCodeView.titleLab.text = @"卡片校验码";
+    sandCardCodeView.textfiled.placeholder  = @"请输入卡片校验码";
+    sandCardCodeView.tip.text = @"请输入正确的卡片校验码";
+    sandCardCodeView.successBlock = ^(NSString *textfieldText) {
+        sandCardCodeStr = textfieldText;
+    };
+    [self.baseScrollView addSubview:sandCardCodeView];
+    
     
     //sandCardCodeCheckView
-    
-    
-    
-    
+    PwdAuthToolView *sandCardCodeCheckView = [PwdAuthToolView createAuthToolViewOY:0];
+    sandCardCodeCheckView.backgroundColor = [UIColor whiteColor];
+    sandCardCodeCheckView.titleLab.text = @"确认校验码";
+    sandCardCodeCheckView.textfiled.placeholder = @"请输入卡片校验码";
+    sandCardCodeCheckView.tip.text = @"请输入正确的卡片校验码";
+    sandCardCodeCheckView.successBlock = ^(NSString *textfieldText) {
+        sandCardCodeCheckStr = textfieldText;
+    };
+    [self.baseScrollView addSubview:sandCardCodeCheckView];
     
     
     //bottomBtn
@@ -86,7 +107,35 @@
     self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
     [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:self.bottomBtn];
-    self.bottomBtn.height += UPDOWNSPACE_23;
+    self.bottomBtn.height = UPDOWNSPACE_64;
+    
+    
+    
+    [sandCardNoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_10);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(sandCardNoView.size);
+    }];
+    
+    [sandCardCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(sandCardNoView.mas_bottom);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(sandCardCodeView.size);
+    }];
+    
+    [sandCardCodeCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(sandCardCodeView.mas_bottom);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(sandCardCodeCheckView.size);
+    }];
+    
+    [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.baseScrollView);
+        make.bottom.equalTo(self.baseScrollView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.bottomBtn.height));
+    }];
+    
+    
 }
 
 

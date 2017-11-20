@@ -497,9 +497,13 @@
                     NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
                     //实名成功,开通快捷失败(后端默认实名成功)
                     if ([@"050004" isEqualToString:respCode]) {
+                        //短息验证成功 - 停止计时器
+                        [smsCodeAuthToolView stopTimer];
+                        [CommParameter sharedInstance].realNameFlag = YES;
                         NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                         [Tool showDialog:respMsg defulBlock:^{
-                            
+                            PayPwdViewController *payPwdVC = [[PayPwdViewController alloc] init];
+                            [self.navigationController pushViewController:payPwdVC animated:YES];
                         }];
                     }
                 }
@@ -507,10 +511,8 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                
                 //短息验证成功 - 停止计时器
                 [smsCodeAuthToolView stopTimer];
-                
                 [CommParameter sharedInstance].realNameFlag = YES;
                 PayPwdViewController *payPwdVC = [[PayPwdViewController alloc] init];
                 [self.navigationController pushViewController:payPwdVC animated:YES];
@@ -578,12 +580,14 @@
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
+                    //短息验证成功 - 停止计时器
+                    [smsCodeAuthToolView stopTimer];
                     NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                     //绑卡成功,开通快捷失败(后端默认绑卡成功)
                     if ([@"050005" isEqualToString:respCode]) {
-                        NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                         [Tool showDialog:respMsg defulBlock:^{
-                            [self.navigationController popToRootViewControllerAnimated:YES];
+                            [self ownPayTools_addBakcCard];
                         }];
                     }
                 }
@@ -591,14 +595,11 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                
                 //短息验证成功 - 停止计时器
                 [smsCodeAuthToolView stopTimer];
-                
                 [Tool showDialog:@"绑卡成功" defulBlock:^{
                     [self ownPayTools_addBakcCard];
                 }];
-                
             }];
         }];
         if (error) return ;

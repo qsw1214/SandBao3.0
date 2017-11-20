@@ -230,8 +230,7 @@
     chooseBtn.tag = 100 + index;
     [chooseBtn addTarget:self action:@selector(chooseClick:) forControlEvents:UIControlEventTouchUpInside];
     //imge
-    UIImage *imgNol = [UIImage imageNamed:@"recharge_chooseBtn"];
-    UIImage *imgSel = [UIImage imageNamed:@"recharge_chooseBtn"];
+    UIImage *imgNol = [UIImage imageNamed:@"recharge_not_chooseBtn"];
     UIImageView *chooseBtnImgeView = [[UIImageView alloc] init];
     chooseBtnImgeView.image = imgNol;
     [chooseBtn addSubview:chooseBtnImgeView];
@@ -302,6 +301,13 @@
         NSString *str = _chooseBtnTitleArr[index];
         [self hidden];
         
+        //修改所选按钮的选中图片
+        for (int i = 0; i<btn.subviews.count; i++) {
+            if ([btn.subviews[i] isKindOfClass:[UIImageView class]]) {
+                UIImageView *imagV = btn.subviews[i];
+                imagV.image = [UIImage imageNamed:@"recharge_chooseBtn"];
+            }
+        }
         //延迟0.35 等待动画结束后 回调消息
         [self performSelector:@selector(delayBlockCellName:) withObject:str afterDelay:0.35];
     }
@@ -312,6 +318,7 @@
     
 }
 - (void)delayBlockCellName:(NSString*)obj{
+    
     
     self.chooseBlock(obj);
     

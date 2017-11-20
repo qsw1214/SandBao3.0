@@ -335,22 +335,30 @@
     //钱包账户_被充值_支付工具 - 初始化
     rechargeInPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
     rechargeInPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
-    NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];
-    NSString *moneyStr_fen = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
     
-    NSString *moneyYuanStr = [moneyStr_fen substringToIndex:(moneyStr_fen.length -2)];
-    NSString *moneyFenStr  = [moneyStr_fen substringFromIndex:(moneyStr_fen.length - 2)];
-    
-    if ([balacneStr floatValue] != 0) {
-        balanceLab.text = [NSString stringWithFormat:@"%@.%@",moneyYuanStr,moneyFenStr];
+    if (rechargeInPayToolDic == nil) {
+        //钱包账户未成功开通
+        [Tool showDialog:@"钱包账户不存在,请联系客服!" defulBlock:^{
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"]];
+        }];
     }else{
-        balanceLab.text = @"0.00";
+        
+        NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];
+        NSString *moneyStr_fen = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
+        
+        NSString *moneyYuanStr = [moneyStr_fen substringToIndex:(moneyStr_fen.length -2)];
+        NSString *moneyFenStr  = [moneyStr_fen substringFromIndex:(moneyStr_fen.length - 2)];
+        
+        if ([balacneStr floatValue] != 0) {
+            balanceLab.text = [NSString stringWithFormat:@"%@.%@",moneyYuanStr,moneyFenStr];
+        }else{
+            balanceLab.text = @"0.00";
+        }
+        
+        //钱包账户_被转账_支付工具
+        transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
+        transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
     }
-    
-    //钱包账户_被转账_支付工具
-    transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
-    transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
-
     
 }
 

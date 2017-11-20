@@ -94,8 +94,8 @@
 
     PaymentPwdCell *paymentPwdCell = [PaymentPwdCell createPaymentCellViewOY:0];
     paymentPwdCell.tip.text = @"请输入正确代付凭证密码";
-    paymentPwdCell.textfield.text = SHOWTOTEST(@"C0BD23BDEA6E9641");
-    paymentPwd = SHOWTOTEST(@"C0BD23BDEA6E9641");
+    paymentPwdCell.textfield.text = SHOWTOTEST(@"469686289040E142");
+    paymentPwd = SHOWTOTEST(@"469686289040E142");
     paymentPwdCell.successBlock = ^(NSString *textfieldText) {
         paymentPwd = textfieldText;
     };
