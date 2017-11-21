@@ -8,6 +8,12 @@
 
 #import "AuthToolBaseView.h"
 
+typedef NS_ENUM(NSInteger,PwdAuthToolViewType){
+    PwdAuthToolLoginPwdType = 0,
+    PwdAuthToolSandPayPwdType
+};
+
+
 /**
  输入框内容通过回调
  */
@@ -21,7 +27,10 @@ typedef void(^TextSuccessBlock_PwdAuthTool)(NSString *textfieldText);
  */
 @property (nonatomic, copy) TextSuccessBlock_PwdAuthTool successBlock;
 
-
+/**
+ 密码框类型 (登陆密码类型,杉德卡支付密码类型)
+ */
+@property (nonatomic, assign) PwdAuthToolViewType type;
 
 
 @end

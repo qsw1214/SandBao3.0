@@ -8,6 +8,12 @@
 
 #import "PwdAuthToolView.h"
 
+@interface PwdAuthToolView (){
+    UIButton *eyeBtn;
+}
+
+@end
+
 @implementation PwdAuthToolView
 
 /**
@@ -29,6 +35,8 @@
         self.titleLab.text = @"密码";
         self.textfiled.placeholder = @"输入登陆密码";
         self.textfiled.clearButtonMode = UITextFieldViewModeNever;
+        //默认类型 == 登陆密码 类型
+        self.type = PwdAuthToolLoginPwdType;
         [self addUI];
     }return self;
     
@@ -47,7 +55,7 @@
     UIImage *imageEyedeful = [UIImage imageNamed:@"login_icon_eye_default"];
     UIImage *iamgeEyeSelect = [UIImage imageNamed:@"login_icon_eye_lighted"];
     
-    UIButton *eyeBtn = [[UIButton alloc] init];
+    eyeBtn = [[UIButton alloc] init];
     [eyeBtn setImage:imageEyedeful forState:UIControlStateNormal];
     [eyeBtn setImage:iamgeEyeSelect forState:UIControlStateSelected];
     eyeBtn.selected = NO;
@@ -65,6 +73,14 @@
     
     
 }
+
+- (void)setType:(PwdAuthToolViewType)type{
+    _type = type;
+    self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
+    eyeBtn.hidden = YES;
+    
+}
+
 - (void)click:(UIButton*)btn{
     
     btn.selected = !btn.selected;
@@ -87,24 +103,43 @@
         [self showTip];
         return NO;
     }
-    //超过20长度不能再输入且警告提示
-    if (textField.text.length >=20 && ![string isEqualToString:@""]) {
-        [self showTip];
-        return NO;
+    //登录密码模式
+    if (self.type == PwdAuthToolLoginPwdType) {
+        //超过20长度不能再输入且警告提示
+        if (textField.text.length >=20 && ![string isEqualToString:@""]) {
+            [self showTip];
+            return NO;
+        }
+        //限制输入纯数字纯字母
+        if (![self restrictionwithTypeStr:OnlyNum_letterVerifi string:string]) {
+            [self showTip];
+            return NO;
+        }
+        
+        //实时获取输入的框内的text,校验后返回
+        NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if (currentText.length >= 8 && currentText.length <= 20) {
+            if ([self validatePasswordNumAndLetter:currentText] && currentText.length > 0) {
+                _successBlock(currentText);
+            }
+        }
     }
-    //限制输入纯数字纯字母
-    if (![self restrictionwithTypeStr:OnlyNum_letterVerifi string:string]) {
-        [self showTip];
-        return NO;
-    }
-    
-    //实时获取输入的框内的text,校验后返回
-    NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
-    if (currentText.length >= 8 && currentText.length <= 20) {
-        if ([self validatePasswordNumAndLetter:currentText] && currentText.length > 0) {
+    //杉德卡密码模式
+    if (self.type == PwdAuthToolSandPayPwdType) {
+        //超过6长度不能再输入且警告提示
+        if (textField.text.length >=6 && ![string isEqualToString:@""]) {
+            [self showTip];
+            return NO;
+        }
+        
+        //实时获取输入的框内的text,校验后返回
+        NSString *currentText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        if (currentText.length == 6) {
             _successBlock(currentText);
         }
     }
+    
+    
     
     return YES;
 }
@@ -123,13 +158,25 @@
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    
-    if (((![self validatePasswordNumAndLetter:textField.text]) || !(textField.text.length>=8 && textField.text.length<=20)) && (textField.text.length>0)) {
-        [self deleteErrorTextAnimation:textField];
-        [self showTip];
-    }else if([self validatePasswordNumAndLetter:textField.text] && textField.text>0){
-        _successBlock(textField.text);
+    //登录密码模式
+    if (self.type == PwdAuthToolLoginPwdType) {
+        if (((![self validatePasswordNumAndLetter:textField.text]) || !(textField.text.length>=8 && textField.text.length<=20)) && (textField.text.length>0)) {
+            [self deleteErrorTextAnimation:textField];
+            [self showTip];
+        }else if([self validatePasswordNumAndLetter:textField.text] && textField.text>0){
+            _successBlock(textField.text);
+        }
     }
+    //杉德卡密码模式
+    if (self.type == PwdAuthToolSandPayPwdType) {
+        if ((!(textField.text.length == 6)) && (textField.text.length>0)) {
+            [self deleteErrorTextAnimation:textField];
+            [self showTip];
+        }else if(textField.text>0){
+            _successBlock(textField.text);
+        }
+    }
+    
 }
 
 

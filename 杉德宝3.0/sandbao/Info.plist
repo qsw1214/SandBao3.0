@@ -87,6 +87,8 @@
 	<array>
 		<string>SF-UI-Text-Regular.otf</string>
 		<string>opensans.ttf</string>
+		<string>SF-UI-Display-Regular.otf</string>
+		<string>SFText-Medium.otf</string>
 	</array>
 </dict>
 </plist>

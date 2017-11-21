@@ -7,6 +7,8 @@
 //
 
 #import "AddSandCardViewController.h"
+#import "PayNucHelper.h"
+
 
 @interface AddSandCardViewController ()
 {
@@ -18,9 +20,18 @@
     
 }
 @property (nonatomic, strong) UIButton *bottomBtn;
+
 @end
 
 @implementation AddSandCardViewController
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //绑卡_查询鉴权工具
+    [self bingding_getAuthTools];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,15 +39,12 @@
     
     [self createUI];
     
-    
 }
 
 
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
-    
-    self.baseScrollView.backgroundColor = COLOR_F5F5F5;
     
 }
 #pragma mark - 重写父类-导航设置方法
@@ -59,6 +67,19 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    if (btn.tag == BTN_TAG_BINDSANDCARD) {
+        if (sandCardNoStr.length>0 && sandCardCodeStr.length>0 && sandCardCodeCheckStr.length>0) {
+            
+            //两次输入一致
+            if ([sandCardCodeStr isEqualToString:sandCardCodeCheckStr]) {
+                //绑定杉德卡
+                [self bindingSandCard];
+            }
+            
+        }else{
+            [Tool showDialog:@"请完成卡信息填写"];
+        }
+    }
     
 }
 
@@ -72,6 +93,8 @@
     sandCardNoView.titleLab.text = @"杉德卡卡号";
     sandCardNoView.tip.text = @"请输入正确杉德卡卡号";
     sandCardNoView.textfiled.placeholder = @"请输入杉德卡卡号";
+    sandCardNoView.textfiled.text = SHOWTOTEST(@"7280000100004581");
+    sandCardNoStr = SHOWTOTEST(@"7280000100004581");
     sandCardNoView.successBlock = ^(NSString *textfieldText) {
         sandCardNoStr = textfieldText;
     };
@@ -79,10 +102,13 @@
     
     //sandCardCodeView
     PwdAuthToolView *sandCardCodeView = [PwdAuthToolView createAuthToolViewOY:0];
+    sandCardCodeView.type = PwdAuthToolSandPayPwdType;
     sandCardCodeView.backgroundColor = [UIColor whiteColor];
     sandCardCodeView.titleLab.text = @"卡片校验码";
     sandCardCodeView.textfiled.placeholder  = @"请输入卡片校验码";
     sandCardCodeView.tip.text = @"请输入正确的卡片校验码";
+    sandCardCodeView.textfiled.text = SHOWTOTEST(@"728060");
+    sandCardCodeStr = SHOWTOTEST(@"728060");
     sandCardCodeView.successBlock = ^(NSString *textfieldText) {
         sandCardCodeStr = textfieldText;
     };
@@ -91,10 +117,13 @@
     
     //sandCardCodeCheckView
     PwdAuthToolView *sandCardCodeCheckView = [PwdAuthToolView createAuthToolViewOY:0];
+    sandCardCodeCheckView.type = PwdAuthToolSandPayPwdType;
     sandCardCodeCheckView.backgroundColor = [UIColor whiteColor];
     sandCardCodeCheckView.titleLab.text = @"确认校验码";
     sandCardCodeCheckView.textfiled.placeholder = @"请输入卡片校验码";
     sandCardCodeCheckView.tip.text = @"请输入正确的卡片校验码";
+    sandCardCodeCheckView.textfiled.text = SHOWTOTEST(@"728060");
+    sandCardCodeCheckStr = SHOWTOTEST(@"728060");
     sandCardCodeCheckView.successBlock = ^(NSString *textfieldText) {
         sandCardCodeCheckStr = textfieldText;
     };
@@ -104,9 +133,9 @@
     //bottomBtn
     self.bottomBtn = [Tool createButton:@"绑定" attributeStr:nil font:FONT_14_Regular textColor:COLOR_FFFFFF];
     self.bottomBtn.backgroundColor = COLOR_58A5F6;
-    self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
+    self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
     [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.baseScrollView addSubview:self.bottomBtn];
+    [self.view addSubview:self.bottomBtn];
     self.bottomBtn.height = UPDOWNSPACE_64;
     
     
@@ -131,7 +160,7 @@
     
     [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.baseScrollView);
-        make.bottom.equalTo(self.baseScrollView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.bottom.equalTo(self.view.mas_bottom).offset(UPDOWNSPACE_0);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.bottomBtn.height));
     }];
     
@@ -139,13 +168,86 @@
 }
 
 
+#pragma mark - 业务逻辑
+#pragma mark 绑卡_查询鉴权工具
+- (void)bingding_getAuthTools
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01001701");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+                NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+    
+}
 
-
-
-
-
-
-
+#pragma mark - 绑定杉德卡
+- (void)bindingSandCard
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
+        NSMutableDictionary *authToolDic = [[NSMutableDictionary alloc] init];
+        [authToolDic setValue:@"cardCheckCode" forKey:@"type"];
+        [authToolDic setValue:sandCardCodeStr forKey:@"cardCheckCode"];
+        [authToolsArray1 addObject:authToolDic];
+        NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
+        
+        paynuc.set("authTools", [authTools UTF8String]);
+        
+        
+        //账户
+        NSMutableDictionary *payToolDic = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
+        [accountDic setValue:sandCardNoStr forKey:@"accNo"];
+        [accountDic setValue:@"02" forKey:@"kind"];
+        [payToolDic setValue:@"1003" forKey:@"type"];
+        [payToolDic setObject:accountDic forKey:@"account"];
+        
+        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:payToolDic];
+        
+        paynuc.set("payTool", [payTool UTF8String]);
+        paynuc.set("userInfo", [[CommParameter sharedInstance].userInfo UTF8String]);
+        paynuc.set("authTools", [authTools UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/bandCard/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                [Tool showDialog:@"绑卡成功" defulBlock:^{
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                }];
+            }];
+        }];
+        if (error) return ;
+    }];
+    
+}
 
 
 

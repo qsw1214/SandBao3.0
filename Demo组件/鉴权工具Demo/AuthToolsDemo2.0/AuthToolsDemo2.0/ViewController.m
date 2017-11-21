@@ -58,7 +58,7 @@
 //    [self testFour];
 //
 //    //密码框的测试
-//    [self testFiv];
+    [self testFiv];
 //
 //    //姓名框的测试
 //     [self testSix];
@@ -72,7 +72,7 @@
 //    //CVN测试
 //    [self testnine];
     //有效期测试
-    [self testten];
+//    [self testten];
     
 }
 
@@ -119,7 +119,6 @@
         NSLog(@"身份证号 : %@",textfieldText);
     };
 
-    
     [self.scrollview addSubview:idv];
     
 }
@@ -137,13 +136,23 @@
 
 - (void)testFiv{
     
-    
+    //默认模式(登陆密码模式)
     PwdAuthToolView *pwd = [PwdAuthToolView createAuthToolViewOY:100];
     pwd.tip.text = @"请输入8-20位数字字母组合密码";
     pwd.successBlock = ^(NSString *textfieldText){
         NSLog(@"密码 : %@",textfieldText);
     };
     [self.scrollview addSubview:pwd];
+    
+    
+    //杉德密码模式
+    PwdAuthToolView *pwd1 = [PwdAuthToolView createAuthToolViewOY:100+pwd.frame.size.height];
+    pwd1.type = PwdAuthToolSandPayPwdType;
+    pwd1.tip.text = @"请输入6位数字密码";
+    pwd1.successBlock = ^(NSString *textfieldText){
+        NSLog(@"密码 : %@",textfieldText);
+    };
+    [self.scrollview addSubview:pwd1];
     
 }
 

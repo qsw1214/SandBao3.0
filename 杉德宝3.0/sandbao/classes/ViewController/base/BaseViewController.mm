@@ -59,7 +59,7 @@
     self.baseScrollView.delegate = self;
     
     //配置所有baseScrollview子类 frame
-    self.baseScrollView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - UPDOWNSPACE_64);
+    self.baseScrollView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
     [self.view addSubview:self.baseScrollView];
 }
 

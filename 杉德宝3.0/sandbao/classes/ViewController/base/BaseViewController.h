@@ -62,6 +62,7 @@
 #define LEFTRIGHTSPACE_120 ((120.f/SCREEN_WIDTH_375) * SCREEN_WIDTH)
 #define LEFTRIGHTSPACE_55  ((55.f/SCREEN_WIDTH_375) * SCREEN_WIDTH)
 #define LEFTRIGHTSPACE_50  ((50.f/SCREEN_WIDTH_375) * SCREEN_WIDTH)
+#define LEFTRIGHTSPACE_45  ((45.f/SCREEN_WIDTH_375) * SCREEN_WIDTH)
 #define LEFTRIGHTSPACE_40  ((40.f/SCREEN_WIDTH_375) * SCREEN_WIDTH)
 #define LEFTRIGHTSPACE_35  ((35.f/SCREEN_WIDTH_375) * SCREEN_WIDTH)
 #define LEFTRIGHTSPACE_30  ((30.f/SCREEN_WIDTH_375) * SCREEN_WIDTH)
@@ -79,6 +80,7 @@
  *UI设计以6为模板
  *@return 各机型对应比例的高
  */
+#define UPDOWNSPACE_197  ((197.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_160  ((160.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_122  ((122.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_112  ((112.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
@@ -91,6 +93,7 @@
 #define UPDOWNSPACE_43   ((43.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_40   ((40.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_36   ((36.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
+#define UPDOWNSPACE_34   ((34.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_30   ((30.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_28   ((28.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_25   ((25.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
@@ -108,6 +111,8 @@
 
 
 #pragma mark - 字体:font
+
+#define FONT_50_SFUDisplay_Regular [UIFont fontWithName:@"SFUIDisplay-Regular" size:50]
 #define FONT_36_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:36]
 #define FONT_36_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:36]
 #define FONT_35_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:35]
@@ -118,6 +123,7 @@
 #define FONT_20_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:20]
 #define FONT_18_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:18]
 #define FONT_16_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:16]
+#define FONT_16_PingFangSC_Light  [UIFont fontWithName:@"PingFangSC-Light" size:16]
 #define FONT_15_Regular [UIFont fontWithName:@"PingFang-SC-Regular" size:15]
 #define FONT_15_Medium  [UIFont fontWithName:@"PingFang-SC-Medium" size:15]
 #define FONT_14_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:14]
@@ -128,6 +134,7 @@
 #define FONT_11_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:11]
 #define FONT_10_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:10]
 #define FONT_10_DINAlter [UIFont fontWithName:@"DINAlternate-Bold" size:10]
+#define FONT_10_PingFangSC_Light  [UIFont fontWithName:@"PingFangSC-Light" size:10]
 #define FONT_08_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:8]
 
 
@@ -142,6 +149,8 @@
 #define COLOR_343339_7 HexRGBA(0x343339,0.7f)
 //黑色(0.5透明度)
 #define COLOR_343339_5 HexRGBA(0x343339,0.5f)
+//按钮灰
+#define COLOR_D9D9D9 HexRGBA(0xD9D9D9,0.5f)
 //线灰
 #define COLOR_A1A2A5_3 HexRGBA(0xA1A2A5,0.3f)
 //灰色
@@ -217,7 +226,7 @@
 #define BTN_TAG_CHECKACCOUNT  100029 //杉德宝账号
 #define BTN_TAG_MYERCODE  100030 //我的二维码
 #define BTN_TAG_MYHEADNAME  100031 //我的发票抬头
-
+#define BTN_TAG_CARDNUMFULL 100032 //银行卡超限
 
 /**
  项目工程:所有VC控制器均继承BaseViewController

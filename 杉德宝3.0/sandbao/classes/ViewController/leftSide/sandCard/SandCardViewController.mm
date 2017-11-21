@@ -12,18 +12,24 @@
 
 #import "SandItemTableViewCell.h"
 #import "AddSandCardViewController.h"
+#import "SandCardDetailViewController.h"
 
 
-@interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource,SDPayViewDelegate>
 {
     //杉德卡数组
     NSMutableArray *sandArray;
     
     CGFloat cellHeight;
+    
 }
 @property (nonatomic, strong) UILabel *noCardLab;
 @property (nonatomic, strong) UIButton *bottomBtn;
 @property (nonatomic, strong) UITableView *sandTableView;
+/**
+ 支付工具控件
+ */
+@property (nonatomic, strong) SDPayView *payView;
 @end
 
 @implementation SandCardViewController
@@ -48,6 +54,7 @@
     // Do any additional setup after loading the view.
     
     [self createUI];
+    [self create_PayView];
 }
 
 
@@ -63,17 +70,11 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.rightTitleStr = @"添加";
     self.navCoverView.midTitleStr = @"杉德卡";
     
     __block SandCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
-    };
-    
-    self.navCoverView.rightBlock = ^{
-        AddSandCardViewController *addSandCardVC = [[AddSandCardViewController alloc] init];
-        [weakSelf.navigationController pushViewController:addSandCardVC animated:YES];
     };
     
 }
@@ -82,17 +83,9 @@
     
     //绑定杉德卡
     if (btn.tag == BTN_TAG_BINDSANDCARD) {
-        
+        AddSandCardViewController *addSandCardVC = [[AddSandCardViewController alloc] init];
+        [self.navigationController pushViewController:addSandCardVC animated:YES];
     }
-    //解绑
-    if (btn.tag == BTN_TAG_UNBINDCARD) {
-        [SDBottomPop showBottomPopView:@"解除此杉德卡绑定" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
-            if ([cellName isEqualToString:@"确认解除绑定"]) {
-                
-            }
-        }];
-    }
-    
 }
 
 #pragma mark  - UI绘制
@@ -107,8 +100,8 @@
     self.bottomBtn.backgroundColor = COLOR_58A5F6;
     [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
-    [self.baseScrollView addSubview:self.bottomBtn];
-    self.bottomBtn.height += UPDOWNSPACE_23;
+    [self.view addSubview:self.bottomBtn];
+    self.bottomBtn.height = UPDOWNSPACE_64;
     
     //tableview
     self.sandTableView = [[UITableView alloc] init];
@@ -128,7 +121,7 @@
     
     [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.baseScrollView);
-        make.top.equalTo(self.baseScrollView.mas_bottom).offset(self.baseScrollView.height - self.bottomBtn.height);
+        make.bottom.equalTo(self.view.mas_bottom);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.bottomBtn.height));
     }];
     
@@ -139,6 +132,13 @@
     }];
 
 }
+- (void)create_PayView{
+    self.payView = [SDPayView getPayView];
+    self.payView.style = SDPayViewOnlyPwd;
+    self.payView.delegate = self;
+    [self.view addSubview:self.payView];
+}
+
 
 #pragma mark - tableViewDelegate
 /**
@@ -182,7 +182,16 @@
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    
+    SandCardDetailViewController *sandCardDetailVC = [[SandCardDetailViewController alloc] init];
+    
+    sandCardDetailVC.payToolDic = sandArray[indexPath.row];
+    
+    [self.navigationController pushViewController:sandCardDetailVC animated:YES];
+    
 }
+
+
 
 
 
@@ -255,8 +264,6 @@
     
     if (sandArray.count>0) {
         self.noCardLab.hidden = YES;
-        [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
-        self.bottomBtn.tag = BTN_TAG_UNBINDCARD;
         
         //杉德卡列表刷新数据
         [self.sandTableView reloadData];
@@ -274,9 +281,6 @@
     
   
 }
-
-
-
 
 
 

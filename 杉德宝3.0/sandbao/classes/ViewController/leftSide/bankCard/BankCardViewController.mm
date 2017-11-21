@@ -79,29 +79,26 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.rightTitleStr = @"添加";
     self.navCoverView.midTitleStr = @"银行卡";
     
     __block BankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
-    self.navCoverView.rightBlock = ^{
-        
-        //添加银行卡
-        AddBankCardViewController *addVC = [[AddBankCardViewController alloc] init];
-        [weakSelf.navigationController pushViewController:addVC animated:YES];
-        
-    };
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    //卡数量超限
+    if (btn.tag == BTN_TAG_CARDNUMFULL) {
+        [Tool showDialog:@"您最多只能绑三张银行卡,如需绑定新卡,请先解绑"];
+    }
     //绑卡
     if (btn.tag == BTN_TAG_BINDBANKCARD) {
         //添加银行卡
         AddBankCardViewController *addVC = [[AddBankCardViewController alloc] init];
         [self.navigationController pushViewController:addVC animated:YES];
+        
     }
     //解绑
     if (btn.tag == BTN_TAG_UNBINDCARD) {
@@ -113,9 +110,6 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         }];
         
     }
-    
-    
-    
 }
 
 
@@ -132,8 +126,8 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     self.bottomBtn.backgroundColor = COLOR_58A5F6;
     self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
     [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.baseScrollView addSubview:self.bottomBtn];
-    self.bottomBtn.height += UPDOWNSPACE_23;
+    [self.view addSubview:self.bottomBtn];
+    self.bottomBtn.height = UPDOWNSPACE_64;
     
     //tableview
     self.bankTableView = [[UITableView alloc] init];
@@ -155,7 +149,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.baseScrollView);
-        make.top.equalTo(self.baseScrollView.mas_bottom).offset(self.baseScrollView.height - self.bottomBtn.height);
+        make.bottom.equalTo(self.view.mas_bottom);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.bottomBtn.height));
     }];
     
@@ -341,10 +335,14 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     if (bankArray.count>0) {
         self.noCardLab.hidden = YES;
-        [self.bottomBtn setTitle:@"解除绑定" forState:UIControlStateNormal];
-        self.bottomBtn.tag = BTN_TAG_UNBINDCARD;
-        
-        
+        if (bankArray.count>=3) {
+            self.bottomBtn.backgroundColor = COLOR_D9D9D9;
+            self.bottomBtn.tag = BTN_TAG_CARDNUMFULL;
+        }else{
+            self.bottomBtn.backgroundColor = COLOR_358BEF;
+            self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
+        }
+       
         [self.bankTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.bankTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.baseScrollView);
@@ -352,6 +350,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.baseScrollView.height - self.bottomBtn.height));
         }];
     }else{
+        self.bottomBtn.userInteractionEnabled = YES;
         self.noCardLab.hidden = NO;
         [self.bottomBtn setTitle:@"添加银行卡" forState:UIControlStateNormal];
         self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
