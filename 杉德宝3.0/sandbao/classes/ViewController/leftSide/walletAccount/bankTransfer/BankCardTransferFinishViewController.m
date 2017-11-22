@@ -43,7 +43,7 @@
     self.navCoverView.midTitleStr = @"转账结果详情";
     self.navCoverView.rightTitleStr = @"完成";
     
-    __block BankCardTransferFinishViewController *weakSelf = self;
+    __weak BankCardTransferFinishViewController *weakSelf = self;
     self.navCoverView.rightBlock = ^{
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };

@@ -39,10 +39,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 
 @implementation AddBankCardSecViewController
 
-@synthesize bankPhoneNoStr;
-@synthesize validStr;
-@synthesize cvnStr;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -51,7 +47,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     [self checkCardType];
     
     [self createUI];
-    
 }
 
 
@@ -69,7 +64,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"填写银行卡信息";
-    __block AddBankCardSecViewController *weakSelf = self;
+    __weak AddBankCardSecViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -80,7 +75,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     if (btn.tag == BTN_TAG_NEXT) {
         
-        if (bankPhoneNoStr.length>0) {
+        if (self.bankPhoneNoStr.length>0) {
             [self getAuthTools];
         }else{
             [Tool showDialog:@"请输入银行预留手机号"];
@@ -91,7 +86,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakSelf = self;
     
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"填写银行卡信息" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
@@ -121,7 +116,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     bankPhoneNoAuthToolView.titleLab.text = @"银行预留手机号";
     bankPhoneNoAuthToolView.tip.text = @"请输入正确的银行预留手机号";
     bankPhoneNoAuthToolView.successBlock = ^(NSString *textfieldText) {
-        bankPhoneNoStr = textfieldText;
+        weakSelf.bankPhoneNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
     
@@ -130,14 +125,14 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         validAuthToolView = [ValidAuthToolView createAuthToolViewOY:0];
         validAuthToolView.tip.text = @"请输入正确有效期";
         validAuthToolView.successBlock = ^(NSString *textfieldText) {
-            validStr = textfieldText;
+            weakSelf.validStr = textfieldText;
         };
         [self.baseScrollView addSubview:validAuthToolView];
         
         cvnAuthToolView = [CvnAuthToolView createAuthToolViewOY:0];
         cvnAuthToolView.tip.text = @"请输入正确CVN";
         cvnAuthToolView.successBlock = ^(NSString *textfieldText) {
-            cvnStr = textfieldText;
+            weakSelf.cvnStr = textfieldText;
         };
         [self.baseScrollView addSubview:cvnAuthToolView];
 
@@ -209,7 +204,10 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
 }
 
-
+- (void)dealloc{
+    
+    NSLog(@"dasdf");
+}
 #pragma mark 获取鉴权工具
 
 /**
@@ -217,10 +215,12 @@ typedef NS_ENUM(NSInteger,BankCardType) {
  */
 - (void)getAuthTools
 {
+
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        
         __block BOOL error = NO;
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
@@ -236,9 +236,9 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                             SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
                             smsVC.payToolDic = self.payToolDic;
                             smsVC.userInfoDic = self.userInfoDic;
-                            smsVC.phoneNoStr = bankPhoneNoStr;
-                            smsVC.cvnStr = cvnStr;
-                            smsVC.expiryStr = validStr;
+                            smsVC.phoneNoStr = self.bankPhoneNoStr;
+                            smsVC.cvnStr = self.cvnStr;
+                            smsVC.expiryStr = self.validStr;
                             smsVC.smsCheckType = SMS_CHECKTYPE_ADDBANKCARD;
                             [self.navigationController pushViewController:smsVC animated:YES];
                         }else{

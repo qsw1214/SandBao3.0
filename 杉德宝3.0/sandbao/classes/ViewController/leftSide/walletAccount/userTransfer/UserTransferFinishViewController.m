@@ -37,7 +37,7 @@
     self.navCoverView.midTitleStr = @"结果详情";
     self.navCoverView.rightTitleStr = @"完成";
     
-    __block UserTransferFinishViewController *weakSelf = self;
+    __weak UserTransferFinishViewController *weakSelf = self;
     self.navCoverView.rightBlock = ^{
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };

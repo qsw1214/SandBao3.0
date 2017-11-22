@@ -1,27 +1,35 @@
 //
-//  MessageViewController.m
+//  TestViewController.m
 //  sandbao
 //
-//  Created by tianNanYiHao on 2017/11/16.
+//  Created by tianNanYiHao on 2017/11/22.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "MessageViewController.h"
+#import "TestViewController.h"
 
-@interface MessageViewController ()
+@interface TestViewController ()
 
 @end
 
-@implementation MessageViewController
-
+@implementation TestViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [self creaetUI];
-    
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -32,9 +40,10 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.midTitleStr = @"消息中心";
+    self.navCoverView.midTitleStr = @"测试";
     
-    __weak MessageViewController *weakSelf = self;
+
+    __weak TestViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -43,31 +52,18 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
 
+    
 }
 
 
 #pragma mark  - UI绘制
-- (void)creaetUI{
-    
-    UIImage *backGroundImg = [UIImage imageNamed:@"billpage_empty"];
-    UIImageView *backGroundImgView = [Tool createImagView:backGroundImg];
-    [self.baseScrollView addSubview:backGroundImgView];
-    
-    [backGroundImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top);
-        make.centerX.equalTo(self.baseScrollView.mas_centerX);
-        make.size.mas_equalTo(self.baseScrollView.size);
-    }];
-    
+
+- (void)create_HeadView{
     
 }
 
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 /*
 #pragma mark - Navigation

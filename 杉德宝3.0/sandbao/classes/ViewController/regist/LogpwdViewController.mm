@@ -12,14 +12,13 @@
 #import "RealNameViewController.h"
 
 @interface LogpwdViewController ()
-
-
+{
+    
+}
 @property (nonatomic, strong) NSString *loginPwdStr; //登陆密码字符串
-
-
 @end
 @implementation LogpwdViewController
-@synthesize loginPwdStr;
+
 
 
 - (void)viewDidLoad {
@@ -38,7 +37,7 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
-    __block LogpwdViewController *weakSelf = self;
+    __weak LogpwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         // 返回 RegistViewController
         [weakSelf.navigationController popToViewController:[weakSelf.navigationController.viewControllers objectAtIndex:1] animated:YES];
@@ -49,7 +48,7 @@
     
     if (btn.tag == BTN_TAG_NEXT) {
         //下一步
-        if (loginPwdStr.length > 0 ) {
+        if (self.loginPwdStr.length > 0 ) {
             [self registerUser];
         }
     }
@@ -57,7 +56,7 @@
 }
 #pragma mark  - UI绘制
 - (void)createUI{
-
+    __weak typeof(self) weakself = self;
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"设置登录密码" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
@@ -72,7 +71,7 @@
     pwdAuthToolView.textfiled.text = SHOWTOTEST(@"qqqqqq111");
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
     pwdAuthToolView.successBlock = ^(NSString *textfieldText) {
-        loginPwdStr = textfieldText;
+        weakself.loginPwdStr = textfieldText;
     };
     [self.baseScrollView addSubview:pwdAuthToolView];
     
@@ -135,7 +134,7 @@
         [loginpassDic setValue:@"loginpass" forKey:@"type"];
         NSMutableDictionary *passDic1 = [[NSMutableDictionary alloc] init];
         [passDic1 setValue:@"sand" forKey:@"encryptType"];
-        [passDic1 setValue:[NSString stringWithUTF8String:paynuc.lgnenc([loginPwdStr UTF8String]).c_str()] forKey:@"password"];
+        [passDic1 setValue:[NSString stringWithUTF8String:paynuc.lgnenc([self.loginPwdStr UTF8String]).c_str()] forKey:@"password"];
         [loginpassDic setObject:passDic1 forKey:@"pass"];
         [regAuthToolsArray addObject:loginpassDic];
         NSString *regAuthTools = [[PayNucHelper sharedInstance] arrayToJSON:regAuthToolsArray];

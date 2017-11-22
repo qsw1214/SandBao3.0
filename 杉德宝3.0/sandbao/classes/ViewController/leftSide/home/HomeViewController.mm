@@ -90,7 +90,7 @@
     self.navCoverView.letfImgStr = @"index_avatar";
     self.navCoverView.rightImgStr = @"index_msg";
     [self.navCoverView appendRightItem:@"index_icon_phone"];
-    __block HomeViewController *weakSelf = self;
+    __weak HomeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
@@ -136,6 +136,7 @@
 //创建头部
 - (void)create_HeadView{
 
+    
     //headView
     headView = [[GradualView alloc] init];
     [headView setRect:CGRectMake(LEFTRIGHTSPACE_00, UPDOWNSPACE_0, SCREEN_WIDTH, UPDOWNSPACE_122)];
@@ -276,6 +277,8 @@
 
 
 - (void)create_bodyView{
+    
+    __weak typeof(self) weakself = self;
     
     //杉德服务
     UILabel *sandServerLab = [Tool createLable:@"杉德服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];

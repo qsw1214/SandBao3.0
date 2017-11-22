@@ -51,7 +51,7 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
     
-    __block VerifyTypeViewController *weakSelf = self;
+    __weak VerifyTypeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };

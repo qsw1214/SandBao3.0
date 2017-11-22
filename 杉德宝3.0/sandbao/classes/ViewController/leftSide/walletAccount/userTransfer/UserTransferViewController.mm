@@ -62,7 +62,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     self.navCoverView.midTitleStr = @"转账到杉德宝账户";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
-    __block UserTransferViewController *weakSelf = self;
+    __weak UserTransferViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };

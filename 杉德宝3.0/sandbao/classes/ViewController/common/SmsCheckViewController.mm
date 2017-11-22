@@ -52,7 +52,7 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
 
-    __block SmsCheckViewController *weakSelf = self;
+    __weak SmsCheckViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -66,7 +66,7 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"验证手机" attributeStr:nil font:FONT_28_Medium textColor:COLOR_358BEF alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
@@ -83,44 +83,43 @@
     //smsCodeAuth:sixCodeAuth
     smsCodeAuthToolView = [SixCodeAuthToolView createAuthToolViewOY:0];
     smsCodeAuthToolView.style = SmsCodeAuthTool;
-    __block SmsCheckViewController *selfBlock = self;
     smsCodeAuthToolView.successBlock = ^(NSString *textfieldText) {
         
-        switch (selfBlock.smsCheckType) {
+        switch (weakself.smsCheckType) {
             case SMS_CHECKTYPE_LOGINT:
             {
                 //输入短信成功后,进入登录流程
-                selfBlock.smsCodeString = textfieldText;
-                [selfBlock loginUser];
+                weakself.smsCodeString = textfieldText;
+                [weakself loginUser];
                 
             }
                 break;
             case SMS_CHECKTYPE_REGIST:
             {
                 //输入短信成功后, checkUser检测用户
-                selfBlock.smsCodeString = textfieldText;
-                [selfBlock checkUser];
+                weakself.smsCodeString = textfieldText;
+                [weakself checkUser];
             }
                 break;
             case SMS_CHECKTYPE_REALNAME:
             {
                 //输入短信成功后,进行实名认证
-                selfBlock.smsCodeString = textfieldText;
-                [selfBlock realUserName];
+                weakself.smsCodeString = textfieldText;
+                [weakself realUserName];
             }
                 break;
             case SMS_CHECKTYPE_ADDBANKCARD:
             {
                 //输入短信成功后,addBankCard绑卡流程
-                selfBlock.smsCodeString = textfieldText;
-                [selfBlock addBankCard];
+                weakself.smsCodeString = textfieldText;
+                [weakself addBankCard];
             }
                 break;
             case SMS_CHECKTYPE_VERIFYTYPE:
             {
                 //输入短信成功后,跳转verifyVC进行进一步鉴权工具填写
-                selfBlock.smsCodeString = textfieldText;
-                [selfBlock pushToVerifyViewController];
+                weakself.smsCodeString = textfieldText;
+                [weakself pushToVerifyViewController];
                 
             }
                 break;
@@ -131,7 +130,7 @@
     };
     smsCodeAuthToolView.successRequestBlock = ^(NSString *textfieldText) {
         //触发 - 获取短信码请求
-        [selfBlock shortMsg];
+        [weakself shortMsg];
     };
     [self.baseScrollView addSubview:smsCodeAuthToolView];
     

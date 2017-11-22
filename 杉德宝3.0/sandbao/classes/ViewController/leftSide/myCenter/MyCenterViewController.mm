@@ -63,7 +63,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"个人信息";
     
-    __block MyCenterViewController *weakSelf = self;
+    __weak MyCenterViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
@@ -125,14 +125,14 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    __block MyCenterViewController *weakSelf = self;
+    __weak typeof(self) weakself = self;
     
     headCell = [MyCenterCellView createSetCellViewOY:0];
     headCell.cellType = myCenterCellType_Head;
     headCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_CHANGEHEADIMG;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:headCell];
     
@@ -141,7 +141,7 @@
     identityCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_CHECKIDENTITY;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:identityCell];
     
@@ -150,7 +150,7 @@
     accountCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_CHECKACCOUNT;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:accountCell];
     
@@ -160,7 +160,7 @@
     erCodeCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_MYERCODE;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:erCodeCell];
     
@@ -169,7 +169,7 @@
     nameHeadCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_MYHEADNAME;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     nameHeadCell.line.hidden = YES;
     [self.baseScrollView addSubview:nameHeadCell];

@@ -42,7 +42,7 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
     
-    __block ChangeLogPwdViewController *weakSelf = self;
+    __weak ChangeLogPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -53,7 +53,7 @@
     
     if (btn.tag == BTN_TAG_NEXT) {
         
-        if (_loginPwdStr.length>0) {
+        if (self.loginPwdStr.length>0) {
             [self setRegAuthTools];
         }
     }
@@ -65,6 +65,7 @@
 #pragma mark  - UI绘制
 - (void)createUI{
     
+    __weak typeof(self) weakself = self;
     
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"修改登录密码" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
@@ -86,9 +87,9 @@
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
     pwdAuthToolView.textfiled.text = SHOWTOTEST(@"qqqqqq111");
-    _loginPwdStr = SHOWTOTEST(@"qqqqqq111");
+    self.loginPwdStr = SHOWTOTEST(@"qqqqqq111");
     pwdAuthToolView.successBlock = ^(NSString *textfieldText) {
-        _loginPwdStr = textfieldText;
+        weakself.loginPwdStr = textfieldText;
     };
     [self.baseScrollView addSubview:pwdAuthToolView];
     

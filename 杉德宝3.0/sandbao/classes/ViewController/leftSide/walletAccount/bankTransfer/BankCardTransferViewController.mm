@@ -85,7 +85,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     self.navCoverView.midTitleStr = @"转账到个人银行卡";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
-    __block BankCardTransferViewController *weakSelf = self;
+    __weak BankCardTransferViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };

@@ -16,6 +16,7 @@
 		280B5BBF1FC2D7E100319F82 /* recharge_not_chooseBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280B5BBD1FC2D7E100319F82 /* recharge_not_chooseBtn@3x.png */; };
 		280B5BC21FC3FB3700319F82 /* SandCardDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 280B5BC11FC3FB3700319F82 /* SandCardDetailViewController.mm */; };
 		280B5BC41FC4011A00319F82 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 280B5BC31FC4011A00319F82 /* SF-UI-Display-Regular.otf */; };
+		280B5C0C1FC563D300319F82 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280B5C0B1FC563D300319F82 /* TestViewController.m */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
 		281431341FB54DB0000F4063 /* UserTransferFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281431331FB54DB0000F4063 /* UserTransferFinishViewController.m */; };
 		2814313C1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2814313B1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm */; };
@@ -364,6 +365,8 @@
 		280B5BC11FC3FB3700319F82 /* SandCardDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandCardDetailViewController.mm; sourceTree = "<group>"; };
 		280B5BC31FC4011A00319F82 /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
 		280B5BC51FC4042B00319F82 /* SFText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-Medium.otf"; sourceTree = "<group>"; };
+		280B5C0A1FC563D300319F82 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		280B5C0B1FC563D300319F82 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+easyFrame.h"; sourceTree = "<group>"; };
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
 		281431321FB54DB0000F4063 /* UserTransferFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTransferFinishViewController.h; sourceTree = "<group>"; };
@@ -1120,6 +1123,8 @@
 			children = (
 				28466F451FA8160500FA64FF /* AboutUSViewController.h */,
 				28466F461FA8160500FA64FF /* AboutUSViewController.m */,
+				280B5C0A1FC563D300319F82 /* TestViewController.h */,
+				280B5C0B1FC563D300319F82 /* TestViewController.m */,
 			);
 			path = aboutUs;
 			sourceTree = "<group>";
@@ -2572,6 +2577,7 @@
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
 				28D289AD1FA2CA7000C3787E /* BankCardViewController.mm in Sources */,
 				28B649801FAC654A0074A390 /* SDPayAnimtion.m in Sources */,
+				280B5C0C1FC563D300319F82 /* TestViewController.m in Sources */,
 				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,

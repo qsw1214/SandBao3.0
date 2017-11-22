@@ -90,8 +90,6 @@
         UILabel *bankNumLabel = [[UILabel alloc] init];
         [self.backgroundImageView addSubview:bankNumLabel];
         self.bankNumLabel = bankNumLabel;
-        
-        
     
     }
     
@@ -304,6 +302,50 @@
     }
     
     return bankType;
+}
+
+#pragma mark 重写layoutSubview - 自定义删除按钮
+
+- (void)layoutSubviews{
+    
+    [super layoutSubviews];
+    
+    UIView *deleteView = nil;
+    
+    for (UIView *view in self.subviews) {
+        
+        if ([view isKindOfClass:NSClassFromString(@"UITableViewCellDeleteConfirmationView")]) {
+            deleteView = view;
+            
+            CGFloat OX = deleteView.frame.origin.x;
+            CGFloat width = deleteView.frame.size.width;
+            CGFloat height = cellHeight - 10;
+
+            //系统多次回调 - 需确保frame值固定
+            deleteView.frame = CGRectMake(OX, 10, width, height);
+            
+            deleteView.backgroundColor = [UIColor colorWithRed:255/255.f green:173/255.f blue:69/255.f alpha:1.0f];
+            deleteView.layer.cornerRadius = 5.f;
+            deleteView.layer.masksToBounds = YES;
+            
+            break;
+        }
+    }
+    
+    
+    if (deleteView.subviews.count>0) {
+        
+        UIButton *deleteBtn = deleteView.subviews[0];
+        if (deleteBtn) {
+            deleteBtn.backgroundColor = [UIColor colorWithRed:255/255.f green:173/255.f blue:69/255.f alpha:1.0f];
+        }
+    }
+    
+    
+    
+    
+    
+    
 }
 
 

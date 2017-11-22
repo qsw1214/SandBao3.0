@@ -19,7 +19,7 @@
 @end
 
 @implementation ForgetLoginPwdViewController
-@synthesize phoneNum;
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -47,7 +47,7 @@
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"general_icon_back";
 
-    __block ForgetLoginPwdViewController *weakSelf = self;
+    __weak ForgetLoginPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -57,7 +57,7 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     if (btn.tag == BTN_TAG_NEXT) {
-        if (phoneNum.length>0) {
+        if (self.phoneNum.length>0) {
             //@"忘记登录密码"
             //上送鉴权工具 + 校验用户
             [self setAuthToolsAndCheckUser];
@@ -67,7 +67,7 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"输入要找回密码的账号" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
@@ -77,9 +77,9 @@
     phoneAuthToolView.titleLab.text = @"你的手机号";
     phoneAuthToolView.tip.text = @"请输入格式正确的手机号";
     phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474188");
-    phoneNum = SHOWTOTEST(@"15151474188");;
+    self.phoneNum = SHOWTOTEST(@"15151474188");;
     phoneAuthToolView.successBlock = ^(NSString *textfieldText) {
-        phoneNum = textfieldText;
+        weakself.phoneNum = textfieldText;
     };
     [self.baseScrollView addSubview:phoneAuthToolView];
     
@@ -163,7 +163,7 @@
         
         //验证用户数否存在
         NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
-        [userInfoDic setValue:phoneNum forKey:@"userName"];
+        [userInfoDic setValue:self.phoneNum forKey:@"userName"];
         NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
         [SDLog logTest:userInfo];
         

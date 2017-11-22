@@ -8,6 +8,7 @@
 
 #import "AboutUSViewController.h"
 #import "SetCellView.h"
+#import "TestViewController.h"
 @interface AboutUSViewController ()
 {
     
@@ -41,7 +42,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"关于我们";
     
-    __block AboutUSViewController *weakSelf = self;
+    __weak AboutUSViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -58,13 +59,14 @@
     }
     if (btn.tag == BTN_TAG_ABOUTSAND) {
         NSLog(@"杉德宝隐私政策");
+        TestViewController *testVC = [[TestViewController alloc] init];
+        [self.navigationController pushViewController:testVC animated:YES];
     }
     
 }
 
 
 #pragma mark  - UI绘制
-
 - (void)create_HeadView{
     
     
@@ -121,12 +123,12 @@
 
 - (void)create_BodyView{
     
+    __weak typeof(self) weakself = self;
     
     bodyView = [[UIView alloc] init];
     bodyView.backgroundColor = COLOR_FFFFFF;
     [self.baseScrollView addSubview:bodyView];
-    
-    __block AboutUSViewController *weakSelf = self;
+
     
     //versionCell
     SetCellView *versionCell = [SetCellView createSetCellViewOY:0];
@@ -134,7 +136,7 @@
     versionCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_VERSION;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:versionCell];
     
@@ -145,7 +147,7 @@
     starCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_TOSTAR;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:starCell];
 
@@ -156,7 +158,7 @@
     aboutSandBaoCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_ABOUTSAND;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:aboutSandBaoCell];
     
@@ -186,12 +188,8 @@
         make.size.mas_equalTo(aboutSandBaoCell.size);
     }];
     
-    
-    
-    
-    
-    
 }
+
 
 
 

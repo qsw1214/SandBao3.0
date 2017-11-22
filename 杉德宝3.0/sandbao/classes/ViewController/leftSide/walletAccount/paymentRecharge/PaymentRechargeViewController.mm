@@ -15,9 +15,10 @@
 
 @interface PaymentRechargeViewController ()
 {
-    NSString *paymentPwd;
+    
     
 }
+@property (nonatomic, strong) NSString *paymentPwd;
 /**
  充值支付工具
  */
@@ -64,7 +65,7 @@
     self.navCoverView.letfImgStr = @"general_icon_back";
     
     
-    __block PaymentRechargeViewController *weakSelf = self;
+    __weak PaymentRechargeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -76,7 +77,7 @@
     
     if (btn.tag == BTN_TAG_RECHARGE) {
         
-        if (paymentPwd.length>0) {
+        if (self.paymentPwd.length>0) {
             [self fee];
         }else{
             [Tool showDialog:@"请输入正确信息"];
@@ -91,13 +92,13 @@
 #pragma mark  - UI绘制
 
 - (void)createUI{
-
+    __weak typeof(self) weakself = self;
     PaymentPwdCell *paymentPwdCell = [PaymentPwdCell createPaymentCellViewOY:0];
     paymentPwdCell.tip.text = @"请输入正确代付凭证密码";
     paymentPwdCell.textfield.text = SHOWTOTEST(@"469686289040E142");
-    paymentPwd = SHOWTOTEST(@"469686289040E142");
+    self.paymentPwd = SHOWTOTEST(@"469686289040E142");
     paymentPwdCell.successBlock = ^(NSString *textfieldText) {
-        paymentPwd = textfieldText;
+        weakself.paymentPwd = textfieldText;
     };
     paymentPwdCell.line.hidden = YES;
     [self.baseScrollView addSubview:paymentPwdCell];
@@ -234,7 +235,7 @@
                 self.wordDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];
                 
                 //代付凭证充值
-                [self recharge:paymentPwd paramDic:self.wordDic ];
+                [self recharge:self.paymentPwd paramDic:self.wordDic ];
                 
             }];
         }];

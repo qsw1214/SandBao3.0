@@ -28,17 +28,12 @@
 
 @interface SDRequestHelp(){
     int fr;
-    __block NSString *respCode;
-    __block NSString *respMsg;
-    
 }
-
+@property (nonatomic, strong) NSString *respCode;
+@property (nonatomic, strong) NSString *respMsg;
 @end
 
 @implementation SDRequestHelp
-@synthesize HUD;
-@synthesize controller;
-
 //单例构造
 static id _instance;
 + (instancetype)shareSDRequest{
@@ -79,13 +74,15 @@ static id _instance;
  @return 成功/错误Type
  */
 - (SDRequestErrorType)errorDisposeWithfuncName:(NSString*)funcName{
+    
+    __weak typeof(self) weakSelf = self;
     //判断对象一: fr
     if (fr) {
         if(fr == 1){
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (HUD) {
-                    [HUD hidden];
-                    [SDMBProgressView showSDMBProgressLoadErrorImgINView:controller.view];
+                if (weakSelf.HUD) {
+                    [weakSelf.HUD hidden];
+                    [SDMBProgressView showSDMBProgressLoadErrorImgINView:weakSelf.controller.view];
                 }
             });
             return frErrorType;
@@ -103,8 +100,8 @@ static id _instance;
     }
     else{
         //判断对象二:respCode = 100000
-        respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
-        if ([@"100000" isEqualToString: respCode]) {
+        weakSelf.respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
+        if ([@"100000" isEqualToString:weakSelf.respCode]) {
             return successType;
         }else{
             /*1.特殊处理集合:
@@ -114,10 +111,10 @@ static id _instance;
              *050004 -> 实名成功,开通快捷失败(后端默认实名成功)->HUD消失
              */
             NSArray *array = @[@"030005",@"030012",@"050005",@"050004"];
-            if ([self respCodeArray:array respCode:respCode]) {
+            if ([self respCodeArray:array respCode:weakSelf.respCode]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (HUD) {
-                        [HUD hidden];
+                    if (weakSelf.HUD) {
+                        [weakSelf.HUD hidden];
                     }
                 });
                 return respCodeErrorType;
@@ -125,12 +122,12 @@ static id _instance;
             /*2.常规处理一:
              *sToken失效处理->HUD消失/退出登录界面
              */
-            else if([@"020002" isEqualToString:respCode]|| [@"040006" isEqualToString:respCode]){
+            else if([@"020002" isEqualToString:weakSelf.respCode]|| [@"040006" isEqualToString:weakSelf.respCode]){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (HUD) {
-                        [HUD hidden];
+                    if (weakSelf.HUD) {
+                        [weakSelf.HUD hidden];
                         [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
-                            [Tool presetnLoginVC:controller];
+                            [Tool presetnLoginVC:weakSelf.controller];
                         }];
                     }
                 });
@@ -141,9 +138,9 @@ static id _instance;
              */
             else{
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (HUD) {
-                        [HUD hidden];
-                        respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    if (weakSelf.HUD) {
+                        [weakSelf.HUD hidden];
+                        weakSelf.respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                         NSString *authToolStr = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
                         NSArray *arrTools = [[PayNucHelper sharedInstance] jsonStringToArray:authToolStr];
                         if (arrTools.count>0) {
@@ -153,11 +150,11 @@ static id _instance;
                                 [Tool showDialog:checkResultMsg];
                             }else{
                                 //respMsg错误码提示
-                                [Tool showDialog:respMsg];
+                                [Tool showDialog:weakSelf.respMsg];
                             }
                         }else{
                             //respMsg错误码提示
-                            [Tool showDialog:respMsg];
+                            [Tool showDialog:weakSelf.respMsg];
                         }
                     }
                 });

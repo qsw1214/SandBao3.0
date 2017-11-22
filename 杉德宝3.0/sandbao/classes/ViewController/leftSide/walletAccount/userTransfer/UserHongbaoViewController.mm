@@ -58,7 +58,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     self.navCoverView.midTitleStr = @"发红包";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
-    __block UserHongbaoViewController *weakSelf = self;
+    __weak UserHongbaoViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };

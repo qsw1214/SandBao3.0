@@ -42,7 +42,7 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
     
-    __block VerifyViewController *weakSelf = self;
+    __weak VerifyViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -52,7 +52,7 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_NEXT) {
-        if (_loginpPwdStr.length>0 || _paypassPwdStr.length>0 || _identityNoStr.length>0 || _bankCardNoStr.length>0) {
+        if (self.loginpPwdStr.length>0 || self.paypassPwdStr.length>0 || self.identityNoStr.length>0 || self.bankCardNoStr.length>0) {
             
             [self setAuthTools];
             
@@ -66,7 +66,7 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-
+    __weak typeof(self) weakself = self;
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"请继续验证" attributeStr:nil font:FONT_28_Medium textColor:COLOR_358BEF alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
@@ -87,9 +87,9 @@
                 PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
                 pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
                 pwdAuthToolView.textfiled.text = SHOWTOTEST(@"qqqqqq111");
-                _loginpPwdStr = SHOWTOTEST(@"qqqqqq111");
+                self.loginpPwdStr = SHOWTOTEST(@"qqqqqq111");
                 pwdAuthToolView.successBlock = ^(NSString *textfieldText) {
-                    _loginpPwdStr = textfieldText;
+                    weakself.loginpPwdStr = textfieldText;
                 };
                 [baseAuthToolView addSubview:pwdAuthToolView];
                 baseAuthToolView.size = pwdAuthToolView.size;
@@ -99,7 +99,7 @@
                 SixCodeAuthToolView *payCodeAuthTool = [SixCodeAuthToolView createAuthToolViewOY:0];
                 payCodeAuthTool.style = PayCodeAuthTool;
                 payCodeAuthTool.successBlock = ^(NSString *textfieldText) {
-                    _paypassPwdStr = textfieldText;
+                    weakself.paypassPwdStr = textfieldText;
                 };
                 [baseAuthToolView addSubview:payCodeAuthTool];
                  baseAuthToolView.size = payCodeAuthTool.size;
@@ -118,9 +118,9 @@
                 CardNoAuthToolView *cardNoAuthToolView = [CardNoAuthToolView createAuthToolViewOY:0];
                 cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
                 cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6212261001042568540");
-                _bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
+                self.bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
                 cardNoAuthToolView.successBlock = ^(NSString *textfieldText) {
-                    _bankCardNoStr = textfieldText;
+                    weakself.bankCardNoStr = textfieldText;
                 };
                 [baseAuthToolView addSubview:cardNoAuthToolView];
                 baseAuthToolView.size = cardNoAuthToolView.size;
@@ -133,9 +133,9 @@
                 IdentityAuthToolView *identityAuthToolView = [IdentityAuthToolView createAuthToolViewOY:0];
                 identityAuthToolView.tip.text = @"请输入有效身份证件号";
                 identityAuthToolView.textfiled.text = SHOWTOTEST(@"320981199001053212");
-                _identityNoStr = SHOWTOTEST(@"320981199001053212");
+                self.identityNoStr = SHOWTOTEST(@"320981199001053212");
                 identityAuthToolView.successBlock = ^(NSString *textfieldText) {
-                    _identityNoStr = textfieldText;
+                    weakself.identityNoStr = textfieldText;
                 };
                 [baseAuthToolView addSubview:identityAuthToolView];
                 baseAuthToolView.size = identityAuthToolView.size;

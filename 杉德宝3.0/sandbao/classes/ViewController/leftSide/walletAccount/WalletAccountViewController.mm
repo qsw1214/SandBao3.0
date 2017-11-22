@@ -78,7 +78,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"钱包账户";
     
-    __block WalletAccountViewController *weakSelf = self;
+    __weak WalletAccountViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };

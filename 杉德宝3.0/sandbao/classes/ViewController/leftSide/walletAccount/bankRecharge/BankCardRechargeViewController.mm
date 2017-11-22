@@ -93,7 +93,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     self.navCoverView.letfImgStr = @"general_icon_back";
 
     
-    __block BankCardRechargeViewController *weakSelf = self;
+    __weak BankCardRechargeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -716,14 +716,6 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     }];
     
 }
-
-
-
-
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

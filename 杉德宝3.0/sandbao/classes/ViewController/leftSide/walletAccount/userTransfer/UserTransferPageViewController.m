@@ -42,7 +42,7 @@
     self.navCoverView.midTitleStr = @"个人主页";
     self.navCoverView.letfImgStr = @"general_icon_back";
     
-    __block UserTransferPageViewController *weakSelf = self;
+    __weak UserTransferPageViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };

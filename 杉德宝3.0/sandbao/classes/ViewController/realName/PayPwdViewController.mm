@@ -16,20 +16,16 @@
 
 @interface PayPwdViewController ()
 {
-    // 6位密码
-    NSString *sixCodeStr;
-    
     //查询待注册鉴权工具
     NSArray *regAuthToolsArr;
-    
-    
 }
+@property (nonatomic, assign) NSString *sixCodeStr; // 6位密码
 @property (nonatomic, assign) NSInteger SIX_CODE_STATE;
 
 @end
 
 @implementation PayPwdViewController
-@synthesize SIX_CODE_STATE;
+
 
 
 - (void)viewDidLoad {
@@ -37,7 +33,7 @@
     // Do any additional setup after loading the view.
 
     
-    SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
+    self.SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
     
     
     [self createUI];
@@ -56,7 +52,7 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
 
-    __block PayPwdViewController *weakSelf = self;
+    __weak PayPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -67,12 +63,12 @@
     
     if (btn.tag == BTN_TAG_NEXT) {
         
-        if (SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
+        if (self.SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
             //验证支付密码成功, dismiss方式返回HomeViewController
             [self setRegAuthTools];
             
         }
-        if (SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN || SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
+        if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN || self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self createUI];
         }
@@ -86,7 +82,7 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"设置支付密码" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
@@ -94,10 +90,10 @@
     
     //titleLab2
     UILabel *titleDesLab;
-    if (SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
+    if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
         titleDesLab = [Tool createLable:@"输入6位数字支付密码" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     }
-    if (SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN) {
+    if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN) {
         titleDesLab = [Tool createLable:@"再次输入6位数字支付密码" attributeStr:nil font:FONT_16_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     }
     [self.baseScrollView addSubview:titleDesLab];
@@ -107,16 +103,16 @@
     payCodeAuthTool.style = PayCodeAuthTool;
     payCodeAuthTool.successBlock = ^(NSString *textfieldText) {
         
-        if (sixCodeStr.length == 0) {
-            sixCodeStr = textfieldText;
-            SIX_CODE_STATE = SIX_CODE_STATE_INPUT_AGAIN;
+        if (weakself.sixCodeStr.length == 0) {
+            weakself.sixCodeStr = textfieldText;
+            weakself.SIX_CODE_STATE = SIX_CODE_STATE_INPUT_AGAIN;
         }
-        else if (sixCodeStr.length > 0) {
-            if ([sixCodeStr isEqualToString:textfieldText]) {
-                SIX_CODE_STATE = SIX_CODE_STATE_CHECK_OK;
+        else if (weakself.sixCodeStr.length > 0) {
+            if ([weakself.sixCodeStr isEqualToString:textfieldText]) {
+                weakself.SIX_CODE_STATE = SIX_CODE_STATE_CHECK_OK;
             }else{
-                SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
-                sixCodeStr = nil;
+                weakself.SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
+                weakself.sixCodeStr = nil;
             }
         }
     };
@@ -215,7 +211,7 @@
         NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:authToolDict];
         //[authToolsDic removeObjectForKey:@"pass"];
         NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
-        [passDic setValue:[[PayNucHelper sharedInstance] pinenc:sixCodeStr type:@"paypass"] forKey:@"password"];
+        [passDic setValue:[[PayNucHelper sharedInstance] pinenc:self.sixCodeStr type:@"paypass"] forKey:@"password"];
         [passDic setValue:@"sand" forKey:@"encryptType"];
         [authToolsDic setObject:passDic forKey:@"pass"];
         [tempArray addObject:authToolsDic];

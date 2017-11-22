@@ -11,8 +11,9 @@
 
 @interface NickNameViewController ()
 {
-    NSString *nickNameStr;
+    
 }
+@property (nonatomic, strong) NSString *nickNameStr;
 @end
 
 @implementation NickNameViewController
@@ -38,7 +39,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"昵称修改";
     
-    __block NickNameViewController *weakSelf = self;
+    __weak NickNameViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -51,7 +52,7 @@
     
     if (btn.tag == BTN_TAG_NEXT) {
         
-        if (nickNameStr.length>0) {
+        if (self.nickNameStr.length>0) {
             //修改用户基础信息(昵称)
             [self resetUserBaseInfo];
         }else{
@@ -63,14 +64,14 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     //nickNameAuthToolView
     NameAuthToolView *nickNameAuthToolView = [NameAuthToolView createAuthToolViewOY:0];
     nickNameAuthToolView.titleLab.text = @"昵称";
     nickNameAuthToolView.textfiled.placeholder = @"请填写您的昵称";
     nickNameAuthToolView.tip.text = @"请正确输入您的昵称";
     nickNameAuthToolView.successBlock = ^(NSString *textfieldText) {
-        nickNameStr = textfieldText;
+        weakself.nickNameStr = textfieldText;
     };
     [self.baseScrollView addSubview:nickNameAuthToolView];
     
@@ -118,7 +119,7 @@
         
         
         NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:0];
-        [userInfo setValue:nickNameStr forKey:@"nick"];
+        [userInfo setValue:self.nickNameStr forKey:@"nick"];
         [userInfo setValue:@"" forKey:@"avatar"];
         [userInfo setValue:@"" forKey:@"remainState"];
         NSString *userInfostr = [[PayNucHelper sharedInstance] dictionaryToJson:userInfo];
@@ -130,7 +131,7 @@
                 [self.HUD hidden];
                 
                 //昵称修改成功 - 通知侧边栏刷新个人信息
-                [CommParameter sharedInstance].nick = nickNameStr;
+                [CommParameter sharedInstance].nick = self.nickNameStr;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Nick_Name_Changed" object:nil];
                 
                 [Tool showDialog:@"昵称修改成功" defulBlock:^{

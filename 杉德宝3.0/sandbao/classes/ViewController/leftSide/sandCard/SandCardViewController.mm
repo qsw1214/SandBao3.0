@@ -72,7 +72,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"杉德卡";
     
-    __block SandCardViewController *weakSelf = self;
+    __weak SandCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };

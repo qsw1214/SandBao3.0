@@ -25,9 +25,7 @@
 
 
 @implementation LoginViewController
-@synthesize phoneNum;
-@synthesize loginPwd;
-@synthesize authToolsArray;
+
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -65,7 +63,7 @@
     }
     if (btn.tag == BTN_TAG_LOGIN) {
         //@"登录"
-        if (phoneNum.length>0 && loginPwd.length>0) {
+        if (self.phoneNum.length>0 && self.loginPwd.length>0) {
             [self loginUser];
         }else{
             [Tool showDialog:@"请输入正确的登陆账号及密码"];
@@ -81,7 +79,7 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"欢迎回来" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [self.baseScrollView addSubview:titleLab];
@@ -95,9 +93,9 @@
     PhoneAuthToolView *phoneAuthToolView = [PhoneAuthToolView createAuthToolViewOY:0];
     phoneAuthToolView.tip.text = @"请输入能登陆的手机号";
     phoneAuthToolView.textfiled.text = SHOWTOTEST(@"15151474188");
-    phoneNum = SHOWTOTEST(@"15151474188");;
+    self.phoneNum = SHOWTOTEST(@"15151474188");;
     phoneAuthToolView.successBlock = ^(NSString *textfieldText) {
-        phoneNum = textfieldText;
+        weakself.phoneNum = textfieldText;
     };
     [self.baseScrollView addSubview:phoneAuthToolView];
     
@@ -105,9 +103,9 @@
     PwdAuthToolView *pwdAuthToolView = [PwdAuthToolView createAuthToolViewOY:0];
     pwdAuthToolView.tip.text = @"密码必须包含8-20位的字母数字组合";
     pwdAuthToolView.textfiled.text = SHOWTOTEST(@"qqqqqq111");
-    loginPwd = SHOWTOTEST(@"qqqqqq111");
+    self.loginPwd = SHOWTOTEST(@"qqqqqq111");
     pwdAuthToolView.successBlock = ^(NSString *textfieldText) {
-        loginPwd = textfieldText;
+        weakself.loginPwd = textfieldText;
     };
     [self.baseScrollView addSubview:pwdAuthToolView];
     
@@ -189,7 +187,7 @@
  */
 - (void)load
 {
-    authToolsArray = [[NSMutableArray alloc] init];
+    self.authToolsArray = [[NSMutableArray alloc] init];
     
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
@@ -266,7 +264,7 @@
                 
                 if (authToolsArr.count>0) {
                     for (int i = 0; i < authToolsArr.count; i++) {
-                        [authToolsArray addObject:authToolsArr[i]];
+                        [self.authToolsArray addObject:authToolsArr[i]];
                     }
                 }else{
                     [Tool showDialog:@"无鉴权工具下发" defulBlock:^{
@@ -299,13 +297,13 @@
         [authToolsDic1 setValue:@"loginpass" forKey:@"type"];
         NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
         [passDic setValue:@"sand" forKey:@"encryptType"];
-        [passDic setValue:[NSString stringWithUTF8String:paynuc.lgnenc([loginPwd UTF8String]).c_str()] forKey:@"password"];
+        [passDic setValue:[NSString stringWithUTF8String:paynuc.lgnenc([self.loginPwd UTF8String]).c_str()] forKey:@"password"];
         [authToolsDic1 setObject:passDic forKey:@"pass"];
         [authToolSArr addObject:authToolsDic1];
         NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolSArr];
         
         NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
-        [userInfoDic setValue:phoneNum forKey:@"userName"];
+        [userInfoDic setValue:self.phoneNum forKey:@"userName"];
         NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
 
         paynuc.set("authTools", [authTools UTF8String]);
@@ -324,7 +322,7 @@
                                 if ([[authToolDic objectForKey:@"type"] isEqualToString:@"sms"]) {
                                     //跳转去加强鉴权页面验证
                                     SmsCheckViewController *smsCheckVC = [[SmsCheckViewController alloc] init];
-                                    smsCheckVC.phoneNoStr = phoneNum;
+                                    smsCheckVC.phoneNoStr = self.phoneNum;
                                     smsCheckVC.smsCheckType = SMS_CHECKTYPE_LOGINT;
                                     smsCheckVC.userInfo = userInfo;
                                     smsCheckVC.loginAuthToolArray = authToolSArr;

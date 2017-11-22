@@ -28,7 +28,7 @@ typedef enum {
 @interface SDBannerView : UIView
 // 根据确定的rect创建轮播
 @property (nonatomic,assign) CGRect rect;
-@property (nonatomic,strong) id<SDBannerViewDelegate> delegate;
+@property (nonatomic,weak) id<SDBannerViewDelegate> delegate;
 
 
 

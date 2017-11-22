@@ -40,7 +40,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"杉德积分";
  
-    __block SandPointsViewController *weakSelf = self;
+    __weak SandPointsViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };

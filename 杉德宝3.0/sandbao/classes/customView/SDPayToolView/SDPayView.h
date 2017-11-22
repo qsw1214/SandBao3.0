@@ -58,7 +58,7 @@ typedef enum {
 
 @interface SDPayView : UIView
 
-@property (nonatomic, assign)id<SDPayViewDelegate>delegate;
+@property (nonatomic, weak)id<SDPayViewDelegate>delegate;
 
 
 /**

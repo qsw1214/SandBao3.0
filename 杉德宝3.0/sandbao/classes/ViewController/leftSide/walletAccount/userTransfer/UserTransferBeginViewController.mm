@@ -52,7 +52,7 @@
     self.navCoverView.letfImgStr = @"general_icon_back";
     self.navCoverView.rightImgStr = @"searchpage_saoyisao";
     
-    __block UserTransferBeginViewController *weakSelf = self;
+    __weak UserTransferBeginViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };

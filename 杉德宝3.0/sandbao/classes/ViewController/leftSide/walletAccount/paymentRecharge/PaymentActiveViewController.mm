@@ -22,9 +22,11 @@
  */
 @interface PaymentActiveViewController ()
 {
-    NSString *paymentNo;
-    NSString *paymenCode;
+    
+    
 }
+@property (nonatomic, strong) NSString *paymentNo;
+@property (nonatomic, strong) NSString *paymenCode;
 @end
 
 @implementation PaymentActiveViewController
@@ -51,7 +53,7 @@
     self.navCoverView.letfImgStr = @"general_icon_back";
     
     
-    __block PaymentActiveViewController *weakSelf = self;
+    __weak PaymentActiveViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -62,7 +64,7 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_PAYMENTACTIVE) {
-        if (paymentNo.length>0 && paymenCode.length>0) {
+        if (self.paymentNo.length>0 && self.paymenCode.length>0) {
             //激活代付凭证权限
             [self getBalances];
         }else{
@@ -76,23 +78,23 @@
 #pragma mark  - UI绘制
 
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     PaymentNoCell *paymentNoCell = [PaymentNoCell createPaymentCellViewOY:0];
     paymentNoCell.tip.text = @"请输入正确代付凭证号";
     paymentNoCell.textfield.text = SHOWTOTEST(@"6662000700000132");
-    paymentNo = SHOWTOTEST(@"6662000700000132");
+    self.paymentNo = SHOWTOTEST(@"6662000700000132");
     paymentNoCell.successBlock = ^(NSString *textfieldText) {
-        paymentNo = textfieldText;
+        weakself.paymentNo = textfieldText;
     };
     [self.baseScrollView addSubview:paymentNoCell];
     
     PaymentCodeCell *paymenCodeCell = [PaymentCodeCell createPaymentCellViewOY:0];
     paymenCodeCell.tip.text = @"请输入正确代付凭证校验码";
     paymenCodeCell.textfield.text = SHOWTOTEST(@"095536");
-    paymenCode = SHOWTOTEST(@"095536");
+    self.paymenCode = SHOWTOTEST(@"095536");
     paymenCodeCell.line.hidden = YES;
     paymenCodeCell.successBlock = ^(NSString *textfieldText) {
-        paymenCode = textfieldText;
+        weakself.paymenCode = textfieldText;
     };
     [self.baseScrollView addSubview:paymenCodeCell];
     
@@ -146,13 +148,13 @@
         //此处需要手动拼装支付工具报文
         NSDictionary *account = [NSDictionary dictionary];
         account = @{
-                    @"accNo":paymentNo
+                    @"accNo":self.paymentNo
                     };
         
         NSDictionary *authTool = [NSDictionary dictionary];
         authTool = @{
                      @"type":@"cardCheckCode",
-                     @"cardCheckCode":paymenCode
+                     @"cardCheckCode":self.paymenCode
                      };
         NSDictionary *payTool = [NSDictionary dictionary];
         payTool = @{

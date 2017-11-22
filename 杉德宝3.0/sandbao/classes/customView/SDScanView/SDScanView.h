@@ -16,7 +16,7 @@
 
 @interface SDScanView : UIView
 
-@property (nonatomic, assign) id<SDScanViewDelegate>delegate;
+@property (nonatomic, weak) id<SDScanViewDelegate>delegate;
 
 
 @end

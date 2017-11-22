@@ -47,7 +47,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"设置";
   
-    __block SetViewController *weakSelf = self;
+    __weak SetViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
@@ -87,7 +87,7 @@
 #pragma mark  - UI绘制
 - (void)creaetUI{
     
-    __block SetViewController *weakSelf = self;
+    __weak typeof(self) weakself = self;
     
     //changePayPwdCell
     SetCellView *changePayPwdCell = [SetCellView createSetCellViewOY:0];
@@ -95,7 +95,7 @@
     changePayPwdCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_CHANGPAYPWD;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:changePayPwdCell];
     
@@ -106,7 +106,7 @@
     changeLogPwdCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_CHANGLOGPWD;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:changeLogPwdCell];
     
@@ -117,7 +117,7 @@
     feedBackCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_FEEDBACK;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:feedBackCell];
     
@@ -128,7 +128,7 @@
     aboutCell.clickBlock = ^{
         UIButton *btn = [UIButton new];
         btn.tag = BTN_TAG_ABOUTUS;
-        [weakSelf performSelector:@selector(buttonClick:) withObject:btn];
+        [weakself performSelector:@selector(buttonClick:) withObject:btn];
     };
     [self.baseScrollView addSubview:aboutCell];
     

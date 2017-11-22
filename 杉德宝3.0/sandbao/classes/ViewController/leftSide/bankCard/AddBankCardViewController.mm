@@ -11,8 +11,7 @@
 #import "AddBankCardSecViewController.h"
 @interface AddBankCardViewController ()
 {
-     CardNoAuthToolView *cardNoAuthToolView;
-     NSString *bankCardNoStr;  //银行卡号
+    CardNoAuthToolView *cardNoAuthToolView;
     
     UIButton *nextBarbtn;
     
@@ -22,7 +21,7 @@
     
     NSArray *appendUIArr;        //保存追加UI的子view
 }
-
+@property (nonatomic, strong) NSString *bankCardNoStr;  //银行卡号
 @end
 
 @implementation AddBankCardViewController
@@ -55,7 +54,7 @@
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"绑定银行卡";
-    __block AddBankCardViewController *weakSelf = self;
+    __weak AddBankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -65,7 +64,7 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_NEXT) {
-        if (bankCardNoStr.length>0) {
+        if (self.bankCardNoStr.length>0) {
             
             [self queryCardDetail];
         }
@@ -83,6 +82,8 @@
 #pragma mark  - UI绘制
 - (void)createUI{
     
+    __weak typeof(self) weakself = self;
+    
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"绑定银行卡" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
@@ -95,9 +96,9 @@
     cardNoAuthToolView = [CardNoAuthToolView createAuthToolViewOY:0];
     cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
     cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6212261001042568540");
-    bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
+    self.bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
     cardNoAuthToolView.successBlock = ^(NSString *textfieldText) {
-        bankCardNoStr = textfieldText;
+        weakself.bankCardNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:cardNoAuthToolView];
     
@@ -221,7 +222,7 @@
         
         NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
         [accountDic setValue:@"03" forKey:@"kind"];
-        [accountDic setValue:[NSString stringWithFormat:@"%@", bankCardNoStr] forKey:@"accNo"];
+        [accountDic setValue:[NSString stringWithFormat:@"%@", self.bankCardNoStr] forKey:@"accNo"];
         NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountDic];
         [SDLog logTest:account];
         paynuc.set("account", [account UTF8String]);

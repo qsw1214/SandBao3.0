@@ -48,12 +48,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 @end
 
 @implementation RealNameViewController
-@synthesize realNameStr;
-@synthesize bankCardNoStr;
-@synthesize identityNoStr;
-@synthesize bankPhoneNoStr;
-@synthesize validStr;
-@synthesize cvnStr;
+
 
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -89,7 +84,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     }
     if (btn.tag == BTN_TAG_NEXT) {
         //下一步 - 实名验证手机号
-        if (realNameStr.length>0 && identityNoStr.length>0 && bankCardNoStr.length>0) {
+        if (self.realNameStr.length>0 && self.identityNoStr.length>0 && self.bankCardNoStr.length>0) {
             [self queryCardDetail];
             
         }else{
@@ -97,7 +92,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         }
     }
     if (btn.tag == BTN_TAG_REALNAME) {
-        if (realNameStr.length>0 && identityNoStr.length>0 && bankCardNoStr.length>0 && bankPhoneNoStr.length>0) {
+        if (self.realNameStr.length>0 && self.identityNoStr.length>0 && self.bankCardNoStr.length>0 && self.bankPhoneNoStr.length>0) {
             [self getAuthTools];
         }
         else{
@@ -108,7 +103,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"实名认证" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
@@ -122,9 +117,9 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     NameAuthToolView *nameAuthToolView = [NameAuthToolView createAuthToolViewOY:0];
     nameAuthToolView.tip.text = @"请输入真实有效姓名";
     nameAuthToolView.textfiled.text = SHOWTOTEST(@"刘斐斐");
-    realNameStr = SHOWTOTEST(@"刘斐斐");
+    self.realNameStr = SHOWTOTEST(@"刘斐斐");
     nameAuthToolView.successBlock = ^(NSString *textfieldText) {
-        realNameStr = textfieldText;
+        weakself.realNameStr = textfieldText;
     };
     [self.baseScrollView addSubview:nameAuthToolView];
     
@@ -132,9 +127,9 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     IdentityAuthToolView *identityAuthToolView = [IdentityAuthToolView createAuthToolViewOY:0];
     identityAuthToolView.tip.text = @"请输入有效身份证件号";
     identityAuthToolView.textfiled.text = SHOWTOTEST(@"320981199001053212");
-    identityNoStr = SHOWTOTEST(@"320981199001053212");
+    self.identityNoStr = SHOWTOTEST(@"320981199001053212");
     identityAuthToolView.successBlock = ^(NSString *textfieldText) {
-        identityNoStr = textfieldText;
+        weakself.identityNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:identityAuthToolView];
     
@@ -142,9 +137,9 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     cardNoAuthToolView = [CardNoAuthToolView createAuthToolViewOY:0];
     cardNoAuthToolView.tip.text = @"请输入有效银行卡卡号";
     cardNoAuthToolView.textfiled.text = SHOWTOTEST(@"6212261001042568540");
-    bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
+    self.bankCardNoStr = SHOWTOTEST(@"6212261001042568540");
     cardNoAuthToolView.successBlock = ^(NSString *textfieldText) {
-        bankCardNoStr = textfieldText;
+        weakself.bankCardNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:cardNoAuthToolView];
     
@@ -198,7 +193,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 
 //查询银行卡后,追加UI
 - (void)appendUI:(BankCardType)cardType{
-    
+    __weak typeof(self) weakself = self;
     
     //bankAuthToolView
     BankAuthToolView *bankAuthToolView = [BankAuthToolView createAuthToolViewOY:0];
@@ -212,7 +207,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     bankPhoneNoAuthToolView.titleLab.text = @"银行预留手机号";
     bankPhoneNoAuthToolView.tip.text = @"请输入正确的银行预留手机号";
     bankPhoneNoAuthToolView.successBlock = ^(NSString *textfieldText) {
-        bankPhoneNoStr = textfieldText;
+        weakself.bankPhoneNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
     
@@ -221,14 +216,14 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         validAuthToolView = [ValidAuthToolView createAuthToolViewOY:0];
         validAuthToolView.tip.text = @"请输入正确有效期";
         validAuthToolView.successBlock = ^(NSString *textfieldText) {
-            validStr = textfieldText;
+            weakself.validStr = textfieldText;
         };
         [self.baseScrollView addSubview:validAuthToolView];
         
         cvnAuthToolView = [CvnAuthToolView createAuthToolViewOY:0];
         cvnAuthToolView.tip.text = @"请输入正确CVN";
         cvnAuthToolView.successBlock = ^(NSString *textfieldText) {
-            cvnStr = textfieldText;
+            weakself.cvnStr = textfieldText;
         };
         [self.baseScrollView addSubview:cvnAuthToolView];
     }
@@ -310,7 +305,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         //清空 数组
         appendUIArr = nil;
         //清空 银行卡 及 手机号信息
-        bankPhoneNoStr = nil;
+        self.bankPhoneNoStr = nil;
         
         //重置约束
         nextBarbtn.tag = BTN_TAG_NEXT;
@@ -343,7 +338,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         
         NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
         [accountDic setValue:@"03" forKey:@"kind"];
-        [accountDic setValue:[NSString stringWithFormat:@"%@", bankCardNoStr] forKey:@"accNo"];
+        [accountDic setValue:[NSString stringWithFormat:@"%@", self.bankCardNoStr] forKey:@"accNo"];
         NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountDic];
         [SDLog logTest:account];
         paynuc.set("account", [account UTF8String]);
@@ -404,12 +399,12 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                             SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
                             smsVC.payToolDic = payToolDic;
                             smsVC.userInfoDic = userInfoDic;
-                            smsVC.phoneNoStr = bankPhoneNoStr;
-                            smsVC.identityNoStr = identityNoStr;
-                            smsVC.realNameStr = realNameStr;
-                            smsVC.bankCardNoStr = bankCardNoStr;
-                            smsVC.cvnStr = cvnStr;
-                            smsVC.expiryStr = validStr;
+                            smsVC.phoneNoStr = self.bankPhoneNoStr;
+                            smsVC.identityNoStr = self.identityNoStr;
+                            smsVC.realNameStr = self.realNameStr;
+                            smsVC.bankCardNoStr = self.bankCardNoStr;
+                            smsVC.cvnStr = self.cvnStr;
+                            smsVC.expiryStr = self.validStr;
                             smsVC.smsCheckType = SMS_CHECKTYPE_REALNAME;
                             [self.navigationController pushViewController:smsVC animated:YES];
                         }else{

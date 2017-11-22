@@ -56,8 +56,8 @@
 
 @interface DragCellCollectionView : UICollectionView
 
-@property (nonatomic, assign) id<DragCellCollectionViewDelegate> delegate;
-@property (nonatomic, assign) id<DragCellCollectionViewDataSource> dataSource;
+@property (nonatomic, weak) id<DragCellCollectionViewDelegate> delegate;
+@property (nonatomic, weak) id<DragCellCollectionViewDataSource> dataSource;
 
 /**长按多少秒触发拖动手势，默认1秒，如果设置为0，表示手指按下去立刻就触发拖动*/
 @property (nonatomic, assign) NSTimeInterval minimumPressDuration;

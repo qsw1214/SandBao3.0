@@ -43,7 +43,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"身份信息";
     
-    __block IdentityDetailViewController *weakSelf = self;
+    __weak IdentityDetailViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -133,7 +133,7 @@
 }
 
 - (void)create_BodyView{
-    
+    __weak typeof(self) weakself = self;
     bodyView = [[UIView alloc] init];
     bodyView.backgroundColor = COLOR_FFFFFF;
     [self.baseScrollView addSubview:bodyView];

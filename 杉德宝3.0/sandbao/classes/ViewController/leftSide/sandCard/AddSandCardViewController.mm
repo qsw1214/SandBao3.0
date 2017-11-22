@@ -12,13 +12,12 @@
 
 @interface AddSandCardViewController ()
 {
-    NSString *sandCardNoStr;
-    
-    NSString *sandCardCodeStr;  //校验码
-    
-    NSString *sandCardCodeCheckStr; //再次输入校验码
-    
+ 
 }
+@property (nonatomic, strong) NSString *sandCardNoStr;
+@property (nonatomic, strong) NSString *sandCardCodeStr;  //校验码
+@property (nonatomic, strong) NSString *sandCardCodeCheckStr; //再次输入校验码
+
 @property (nonatomic, strong) UIButton *bottomBtn;
 
 @end
@@ -54,7 +53,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"添加杉德卡";
     
-    __block AddSandCardViewController *weakSelf = self;
+    __weak AddSandCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -68,10 +67,10 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_BINDSANDCARD) {
-        if (sandCardNoStr.length>0 && sandCardCodeStr.length>0 && sandCardCodeCheckStr.length>0) {
+        if (self.sandCardNoStr.length>0 && self.sandCardCodeStr.length>0 && self.sandCardCodeCheckStr.length>0) {
             
             //两次输入一致
-            if ([sandCardCodeStr isEqualToString:sandCardCodeCheckStr]) {
+            if ([self.sandCardCodeStr isEqualToString:self.sandCardCodeCheckStr]) {
                 //绑定杉德卡
                 [self bindingSandCard];
             }
@@ -86,6 +85,7 @@
 #pragma mark  - UI绘制
 - (void)createUI{
     
+    __weak typeof(self) weakself = self;
     
     //sandCardNoView
     CardNoAuthToolView *sandCardNoView = [CardNoAuthToolView createAuthToolViewOY:0];
@@ -94,9 +94,9 @@
     sandCardNoView.tip.text = @"请输入正确杉德卡卡号";
     sandCardNoView.textfiled.placeholder = @"请输入杉德卡卡号";
     sandCardNoView.textfiled.text = SHOWTOTEST(@"7280000100004581");
-    sandCardNoStr = SHOWTOTEST(@"7280000100004581");
+    self.sandCardNoStr = SHOWTOTEST(@"7280000100004581");
     sandCardNoView.successBlock = ^(NSString *textfieldText) {
-        sandCardNoStr = textfieldText;
+        weakself.sandCardNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:sandCardNoView];
     
@@ -108,9 +108,9 @@
     sandCardCodeView.textfiled.placeholder  = @"请输入卡片校验码";
     sandCardCodeView.tip.text = @"请输入正确的卡片校验码";
     sandCardCodeView.textfiled.text = SHOWTOTEST(@"728060");
-    sandCardCodeStr = SHOWTOTEST(@"728060");
+    self.sandCardCodeStr = SHOWTOTEST(@"728060");
     sandCardCodeView.successBlock = ^(NSString *textfieldText) {
-        sandCardCodeStr = textfieldText;
+        weakself.sandCardCodeStr = textfieldText;
     };
     [self.baseScrollView addSubview:sandCardCodeView];
     
@@ -123,9 +123,9 @@
     sandCardCodeCheckView.textfiled.placeholder = @"请输入卡片校验码";
     sandCardCodeCheckView.tip.text = @"请输入正确的卡片校验码";
     sandCardCodeCheckView.textfiled.text = SHOWTOTEST(@"728060");
-    sandCardCodeCheckStr = SHOWTOTEST(@"728060");
+    self.sandCardCodeCheckStr = SHOWTOTEST(@"728060");
     sandCardCodeCheckView.successBlock = ^(NSString *textfieldText) {
-        sandCardCodeCheckStr = textfieldText;
+        weakself.sandCardCodeCheckStr = textfieldText;
     };
     [self.baseScrollView addSubview:sandCardCodeCheckView];
     
@@ -192,8 +192,8 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
-                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
-                NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
+//                NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+//                NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
                 
             }];
         }];
@@ -213,7 +213,7 @@
         NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
         NSMutableDictionary *authToolDic = [[NSMutableDictionary alloc] init];
         [authToolDic setValue:@"cardCheckCode" forKey:@"type"];
-        [authToolDic setValue:sandCardCodeStr forKey:@"cardCheckCode"];
+        [authToolDic setValue:self.sandCardCodeStr forKey:@"cardCheckCode"];
         [authToolsArray1 addObject:authToolDic];
         NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
         
@@ -223,7 +223,7 @@
         //账户
         NSMutableDictionary *payToolDic = [[NSMutableDictionary alloc] init];
         NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
-        [accountDic setValue:sandCardNoStr forKey:@"accNo"];
+        [accountDic setValue:self.sandCardNoStr forKey:@"accNo"];
         [accountDic setValue:@"02" forKey:@"kind"];
         [payToolDic setValue:@"1003" forKey:@"type"];
         [payToolDic setObject:accountDic forKey:@"account"];

@@ -81,7 +81,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"银行卡";
     
-    __block BankCardViewController *weakSelf = self;
+    __weak BankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
@@ -219,6 +219,25 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         }
     }];
     
+    
+}
+
+#pragma mark - tableView删除回调
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"解绑";
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [bankArray removeObjectAtIndex:indexPath.row];
+        [self.bankTableView deleteRowsAtIndexPaths:nil withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
     
 }
 

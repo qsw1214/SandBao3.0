@@ -39,7 +39,7 @@
     self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"理财中心";
 
-    __block FinancicleCenterViewController *weakSelf = self;
+    __weak FinancicleCenterViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };

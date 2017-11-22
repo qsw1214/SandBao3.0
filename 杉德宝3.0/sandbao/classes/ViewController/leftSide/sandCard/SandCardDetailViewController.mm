@@ -47,7 +47,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"杉德卡详情";
     
-    __block SandCardDetailViewController *weakSelf = self;
+    __weak SandCardDetailViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -56,6 +56,14 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    //web跳转
+    if (btn.tag == BTN_TAG_ENTERWEBVC) {
+        
+    }
+    //解绑卡
+    if (btn.tag == BTN_TAG_UNBINDCARD) {
+        [self unbingding_getAuthTools];
+    }
 }
 
 #pragma mark  - UI绘制
@@ -115,7 +123,41 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     //detailView
     UIView *detailView = [[UIView alloc] init];
     detailView.backgroundColor = COLOR_FFFFFF;
+    detailView.layer.borderColor = COLOR_343339_5.CGColor;
+    detailView.layer.borderWidth = 0.5f;
     [self.baseScrollView addSubview:detailView];
+    
+    //cardInstructionLab
+    UILabel *cardInstructionLab = [Tool createLable:@"卡片使用说明" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    [self.baseScrollView addSubview:cardInstructionLab];
+    
+    //cardWebBtn
+    UIButton *cardWebBtn = [Tool createButton:@"http://www.sandlife.com.cn" attributeStr:nil font:FONT_12_Regular textColor:COLOR_FF5D31];
+    cardWebBtn.tag = BTN_TAG_ENTERWEBVC;
+    [cardWebBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.baseScrollView addSubview:cardWebBtn];
+    
+    //line
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = COLOR_A1A2A5_3;
+    line.size = CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_45, 1);
+    [self.baseScrollView addSubview:line];
+    
+    
+    //carQrCodeLab
+    UILabel *carQrCodeLab = [Tool createLable:@"卡片二维码" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    [self.baseScrollView addSubview:carQrCodeLab];
+    
+    UIImage *qrImg = [UIImage imageNamed:@"set_erCode"];
+    UIImageView *qrCodeImgView = [Tool createImagView:qrImg];
+    [self.baseScrollView addSubview:qrCodeImgView];
+    
+    //unBingdingBtn
+    UIButton *unBingdingBtn = [Tool createBarButton:@"解绑" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    unBingdingBtn.tag = BTN_TAG_UNBINDCARD;
+    [unBingdingBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.baseScrollView addSubview:unBingdingBtn];
+    
     
     
     [cardDetailLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -127,14 +169,45 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     [detailView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardDetailLab.mas_bottom).offset(UPDOWNSPACE_14);
         make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_45);
-        
+        make.size.mas_equalTo(CGSizeMake(LEFTRIGHTSPACE_286, UPDOWNSPACE_100));
+    }];
+    
+    [cardInstructionLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(detailView.mas_bottom).offset(UPDOWNSPACE_16);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(cardInstructionLab.size);
+    }];
+   
+    [cardWebBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cardInstructionLab.mas_bottom).offset(UPDOWNSPACE_25);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(cardWebBtn.size);
+    }];
+    
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cardWebBtn.mas_bottom).offset(UPDOWNSPACE_0);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(line.size);
     }];
     
     
+    [carQrCodeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(cardWebBtn.mas_bottom).offset(UPDOWNSPACE_20);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(carQrCodeLab.size);
+    }];
     
+    [qrCodeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(carQrCodeLab.mas_bottom).offset(UPDOWNSPACE_20);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(qrCodeImgView.size);
+    }];
     
-    
-    
+    [unBingdingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(qrCodeImgView.mas_bottom).offset(UPDOWNSPACE_30);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(unBingdingBtn.size);
+    }];
 }
 
 -(void)create_PayView{

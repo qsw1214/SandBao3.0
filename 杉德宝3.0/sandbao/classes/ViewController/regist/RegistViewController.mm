@@ -20,9 +20,6 @@
 @end
 
 @implementation RegistViewController
-@synthesize phoneNoStr;
-@synthesize authToolsArray;
-@synthesize regAuthToolsArray;
 
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -30,8 +27,8 @@
     
     //流程每次进入均刷新
     //注册流程开始
-    authToolsArray = nil;
-    regAuthToolsArray = nil;
+    self.authToolsArray = nil;
+    self.regAuthToolsArray = nil;
     [self getAuthToolsRegAuthTools];
 }
 
@@ -53,7 +50,7 @@
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
 
-    __block RegistViewController *weakSelf = self;
+    __weak RegistViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -63,13 +60,13 @@
     
     if (btn.tag == BTN_TAG_NEXT) {
         //下一步
-        if (phoneNoStr.length > 0) {
-            if (authToolsArray.count>0) {
-                for (int i = 0; i<authToolsArray.count; i++) {
-                    NSDictionary *authToolDic = authToolsArray[i];
+        if (self.phoneNoStr.length > 0) {
+            if (self.authToolsArray.count>0) {
+                for (int i = 0; i<self.authToolsArray.count; i++) {
+                    NSDictionary *authToolDic = self.authToolsArray[i];
                     if ([[authToolDic objectForKey:@"type"] isEqualToString:@"sms"]) {
                         SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
-                        smsVC.phoneNoStr = phoneNoStr;
+                        smsVC.phoneNoStr = self.phoneNoStr;
                         smsVC.smsCheckType = SMS_CHECKTYPE_REGIST;
                         [self.navigationController pushViewController:smsVC animated:YES];
                     }else{
@@ -92,7 +89,7 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    
+    __weak typeof(self) weakself = self;
     //titleLab1
     UILabel *titleLab = [Tool createLable:@"输入你的手机号" attributeStr:nil font:FONT_28_Medium textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
@@ -105,7 +102,7 @@
     phoneAuthToolView.textfiled.placeholder = @"输入手机号";
     phoneAuthToolView.tip.text = @"请输入正确手机号";
     phoneAuthToolView.successBlock = ^(NSString *textfieldText) {
-        phoneNoStr = textfieldText;
+        weakself.phoneNoStr = textfieldText;
     };
     [self.baseScrollView addSubview:phoneAuthToolView];
     
@@ -191,7 +188,7 @@
         } successBlock:^{
             NSString *authTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
             //获取鉴权工具集组
-            authToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:authTools];
+            self.authToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:authTools];
         }];
         if (error) return ;
         
@@ -205,7 +202,7 @@
                 
                 NSString *regAuthTools = [NSString stringWithUTF8String:paynuc.get("regAuthTools").c_str()];
                 //获取待更新鉴权工具集组
-                regAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
+                self.regAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
                 
                 
             }];

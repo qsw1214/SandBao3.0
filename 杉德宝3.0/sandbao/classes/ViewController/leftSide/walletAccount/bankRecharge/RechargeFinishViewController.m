@@ -52,7 +52,7 @@
     self.navCoverView.rightTitleStr = @"完成";
  
     
-    __block RechargeFinishViewController *weakSelf = self;
+    __weak RechargeFinishViewController *weakSelf = self;
     self.navCoverView.rightBlock = ^{
         [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };
