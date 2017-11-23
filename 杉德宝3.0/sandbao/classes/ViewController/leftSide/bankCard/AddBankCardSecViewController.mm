@@ -47,7 +47,9 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     [self checkCardType];
     
     [self createUI];
+    
 }
+
 
 
 
@@ -204,10 +206,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
 }
 
-- (void)dealloc{
-    
-    NSLog(@"dasdf");
-}
 #pragma mark 获取鉴权工具
 
 /**
@@ -215,7 +213,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
  */
 - (void)getAuthTools
 {
-
+    
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
@@ -268,9 +266,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         cardType = debitCard;
     }
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

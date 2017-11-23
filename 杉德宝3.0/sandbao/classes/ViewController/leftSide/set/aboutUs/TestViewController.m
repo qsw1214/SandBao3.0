@@ -9,10 +9,20 @@
 #import "TestViewController.h"
 
 @interface TestViewController ()
-
+{
+    
+}
 @end
 
 @implementation TestViewController
+
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,10 +35,6 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
@@ -63,7 +69,10 @@
 }
 
 
-
+- (void)dealloc{
+    NSLog(@"dfsdfsa");
+    
+}
 
 /*
 #pragma mark - Navigation
