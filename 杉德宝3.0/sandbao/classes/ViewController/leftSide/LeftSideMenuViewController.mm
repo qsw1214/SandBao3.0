@@ -9,7 +9,7 @@
 #import "LeftSideMenuViewController.h"
 #import "PayNucHelper.h"
 
-
+#import "LoginViewController.h"
 #import "MyCenterViewController.h"
 #import "HomeViewController.h"
 #import "MyBillViewController.h"
@@ -64,6 +64,7 @@
 @property (nonatomic, strong) SandCardViewController         *sandCardVC;
 @property (nonatomic, strong) SetViewController              *setVC;
 
+
 @property (nonatomic, strong) UINavigationController *myCenterNav;
 @property (nonatomic, strong) UINavigationController *homeNav;
 @property (nonatomic, strong) UINavigationController *myBillNav;
@@ -79,19 +80,6 @@
 
 @implementation LeftSideMenuViewController
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-
-    //登陆描述字符串为空时,允许以下操作
-    if (self.loginTypeStr.length == 0) {
-        
-        //重置内容控制器为Home,(如明登陆/修改登录密码退出后重登录需要调用)
-        [self goHomeViewController];
-        
-        //用户刷新数据信息
-        [self refreshUI];
-    }
-}
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
@@ -132,6 +120,9 @@
     //加载子控制器
     [self addSubViewController];
     
+    //增加监听 - 监听用户信息变化
+    [self addNotifaction_UserInfo];
+    
     //增加监听 - 监听昵称变化
     [self addNotifaction_NickName];
     
@@ -161,7 +152,6 @@
     
     //退出
     if (btn.tag == BTN_TAG_LOGOUT) {
-
         [self loginOut];
     }
     //个人信息
@@ -175,6 +165,7 @@
 }
 
 - (void)addSubViewController{
+    
     self.myCenterVC = [[MyCenterViewController alloc] init];
     self.homeVC = [[HomeViewController alloc] init];
     self.myBillVC = [[MyBillViewController alloc] init];
@@ -194,6 +185,11 @@
     self.bankCardNav = [[UINavigationController alloc] initWithRootViewController:self.bankCardVC];
     self.sandCardNav = [[UINavigationController alloc] initWithRootViewController:self.sandCardVC];
     self.setNav = [[UINavigationController alloc] initWithRootViewController:self.setVC];
+    
+    
+    //全局变量存储所需要的 带导航视图控制器
+    [CommParameter sharedInstance].homeNav = self.homeNav;
+
     
     
 }
@@ -477,17 +473,8 @@
     BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
     
     if (result) {
-        //明登陆 - 切换到首页
-        [self goHomeViewController];
-        
-        //跳转Login
-        LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
-        [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-        UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-        [self presentViewController:navLogin animated:YES completion:nil];
-        
-       
-        
+        //明登陆 - 切换到登陆页
+        [self goLoginViewController];
     }
 }
 #pragma mark 暗登陆
@@ -657,9 +644,10 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                
-                //3.退出到登录界面
-                [Tool presetnLoginVC:self.sideMenuViewController];
+                //1. 退出成功 - 滚动到顶部
+                [self.baseScrollView setContentOffset:CGPointMake(0, 0)];
+                //2. 退出成功 - 归位到login页
+                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
             }];
         }];
         if (error) return ;
@@ -669,20 +657,23 @@
 
 
 #pragma mark - 本类公共方法调用
-#pragma mark 跳转首页
-- (void)goHomeViewController{
+#pragma mark 明登陆 - 去登陆页
+- (void)goLoginViewController{
     
+    //局部变量 - 实例登陆页 - 完成登陆后便于系统回收
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
+    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
+    //当前控制器归位的Login页
+    [self.sideMenuViewController setContentViewController:loginNav];
+    
+    
+}
+#pragma mark 暗登陆/ - 去首页
+- (void)goHomeViewController{
     //确保归位到首页时,所有的leftSide子控制器都可以侧滑
     self.sideMenuViewController.panGestureEnabled = YES;
     //当前控制器归位到Home页
     [self.sideMenuViewController setContentViewController:self.homeNav];
-    //隐藏侧边
-    [self.sideMenuViewController hideMenuViewController];
-    //滚动到顶部
-    self.baseScrollView.scrollsToTop = YES;
-    //置空登陆描述
-    self.loginTypeStr = nil;
-    
 }
 #pragma mark 刷新用户信息
 
@@ -719,11 +710,18 @@
     }
 }
 
+#pragma mark 用户信息变化监听
+- (void)addNotifaction_UserInfo{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"User_Info_Changed" object:nil];
+}
+
 #pragma mark 昵称变化监听
 //昵称接受通知
 - (void)addNotifaction_NickName{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nickNameNoitfaction) name:@"Nick_Name_Changed" object:nil];
 }
+
+
 - (void)nickNameNoitfaction{
     realNameLab.text = [CommParameter sharedInstance].nick;
     realNameLab.textColor = COLOR_343339;

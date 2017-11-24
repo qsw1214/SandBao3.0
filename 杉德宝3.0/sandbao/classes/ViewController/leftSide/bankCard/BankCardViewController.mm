@@ -41,9 +41,9 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -210,16 +210,6 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 {
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    selectPayToolDic = bankArray[indexPath.row];
-    
-    [SDBottomPop showBottomPopView:@"解除绑定后银行服务将不可用" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
-        if ([cellName isEqualToString:@"确认解除绑定"]) {
-            [self getAuthTools];
-        }
-    }];
-    
-    
 }
 
 #pragma mark - tableView删除回调
@@ -235,8 +225,13 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [bankArray removeObjectAtIndex:indexPath.row];
-        [self.bankTableView deleteRowsAtIndexPaths:nil withRowAnimation:UITableViewRowAnimationAutomatic];
+        //侧滑 - 解绑银行卡
+        selectPayToolDic = bankArray[indexPath.row];
+        [SDBottomPop showBottomPopView:@"解除绑定后银行服务将不可用" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
+            if ([cellName isEqualToString:@"确认解除绑定"]) {
+                [self getAuthTools];
+            }
+        }];
     }
     
 }
@@ -256,6 +251,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
             [Tool showDialog:@"解绑成功" defulBlock:^{
                 [self ownPayTools];
+                
             }];
             
             
@@ -264,9 +260,11 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         //解绑失败
         [successView animationStopClean];
         [self.payView hidPayTool];
+        [self.bankTableView reloadData];
     }];
     
 }
+
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {

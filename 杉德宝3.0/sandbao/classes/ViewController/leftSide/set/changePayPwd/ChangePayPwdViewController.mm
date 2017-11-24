@@ -164,10 +164,8 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"支付密码修改失败" defulBlock:^{
-                    //dismiss回主页
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
+                //返回
+                [self.navigationController popViewControllerAnimated:YES];
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
@@ -214,10 +212,8 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"支付密码修改失败" defulBlock:^{
-                    //dismiss回主页
-                    [self.navigationController popViewControllerAnimated:YES];
-                }];
+                //返回
+                [self.navigationController popViewControllerAnimated:YES];
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{

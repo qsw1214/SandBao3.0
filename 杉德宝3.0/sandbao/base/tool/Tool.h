@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIViewController+RESideMenu.h>
 typedef void(^LeftBtnBlock)();
 typedef void(^RightBtnBlock)();
 typedef void(^DefulBtnBlock)();
@@ -60,13 +60,11 @@ typedef void(^DefulBtnBlock)();
 
 #pragma mark - 跳转登陆页
 /**
- 跳转登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
+ 归位到登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
  
- @param viewController 当前控制器
+ @param sideMenuViewController sideMenuViewController
  */
-+(void)presetnLoginVC:(UIViewController*)viewController;
-
-
++ (void)setContentViewControllerWithLoginFromSideMentuVIewController:(id)sideMenuViewController;
 
 
 

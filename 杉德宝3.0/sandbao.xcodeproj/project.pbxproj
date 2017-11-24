@@ -880,6 +880,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7DF3C8C1DC718CA00243EF6 /* CoreTelephony.framework in Frameworks */,
 				282A48CE1F27337D00821A15 /* libSDWebImage.a in Frameworks */,
 				A7DF3C8E1DC718D800243EF6 /* SystemConfiguration.framework in Frameworks */,
 				280621E91EF8F05100346D1A /* AVFoundation.framework in Frameworks */,
@@ -887,7 +888,6 @@
 				280621E51EF8F03800346D1A /* CoreMotion.framework in Frameworks */,
 				280621E31EF8F02F00346D1A /* OpenGLES.framework in Frameworks */,
 				A7DF3C821DC7188100243EF6 /* JavaScriptCore.framework in Frameworks */,
-				A7DF3C8C1DC718CA00243EF6 /* CoreTelephony.framework in Frameworks */,
 				283DBD111ECA965A00B84E3E /* CoreText.framework in Frameworks */,
 				A7DF3C8A1DC718BD00243EF6 /* Security.framework in Frameworks */,
 				A7DF3C841DC7188B00243EF6 /* ImageIO.framework in Frameworks */,
@@ -2824,6 +2824,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/PgySDK/sdk",
+					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/analytics",
+					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/common",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sandbao/sandbao-Prefix.pch";
@@ -2863,6 +2865,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/PgySDK/sdk",
+					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/analytics",
+					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/common",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sandbao/sandbao-Prefix.pch";

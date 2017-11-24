@@ -58,6 +58,9 @@
     //检测是否实名/设置支付密码
     [self checkRealNameOrSetPayPwd];
     
+    //通知LeftSideMenuViewController 刷新用户信息UI
+    [self postNotifactionToLeftSideMenuWithUserInfoRefrush];
+    
 }
 
 - (void)viewDidLoad {
@@ -394,9 +397,9 @@
             [Tool showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"登出" leftBlock:^{
                 RealNameViewController *realName = [[RealNameViewController alloc] init];
                 UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
-                [self presentViewController:realNameNav animated:YES completion:nil];
+                [self.sideMenuViewController setContentViewController:realNameNav];
             } rightBlock:^{
-                [Tool presetnLoginVC:self];
+                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
             }];
             return;
         }
@@ -407,9 +410,10 @@
                 VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
                 verifyTypeVC.tokenType = @"01000601";
                 verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
-                [self.navigationController pushViewController:verifyTypeVC animated:YES];
+                UINavigationController *verifyTypeNav = [[UINavigationController alloc] initWithRootViewController:verifyTypeVC];
+                [self.sideMenuViewController setContentViewController:verifyTypeNav];
             } rightBlock:^{
-                [Tool presetnLoginVC:self];
+               [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
             }];
         }
     }
@@ -472,6 +476,9 @@
         make.size.mas_equalTo(moneyBtnRightLabSize);
     }];
 }
-
+#pragma mark 通知左侧边栏刷新用户信息UI
+- (void)postNotifactionToLeftSideMenuWithUserInfoRefrush{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Info_Changed" object:nil];
+}
 
 @end

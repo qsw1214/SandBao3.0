@@ -42,8 +42,9 @@
     
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
-    
 }
+
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     

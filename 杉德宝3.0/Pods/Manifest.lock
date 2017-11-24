@@ -6,6 +6,7 @@ PODS:
   - SDWebImage (4.1.0):
     - SDWebImage/Core (= 4.1.0)
   - SDWebImage/Core (4.1.0)
+  - UMengAnalytics-NO-IDFA (4.2.5)
 
 DEPENDENCIES:
   - IQKeyboardManager
@@ -13,6 +14,7 @@ DEPENDENCIES:
   - pop
   - RESideMenu (~> 4.0.7)
   - SDWebImage (~> 4.0)
+  - UMengAnalytics-NO-IDFA
 
 SPEC CHECKSUMS:
   IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
@@ -20,7 +22,8 @@ SPEC CHECKSUMS:
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
 
-PODFILE CHECKSUM: 1add3fdf408d3fe287fa34c7865cd7be3c872552
+PODFILE CHECKSUM: 857e601f1840c7c57d541f4a2f92b80caf6e61d8
 
 COCOAPODS: 1.2.1

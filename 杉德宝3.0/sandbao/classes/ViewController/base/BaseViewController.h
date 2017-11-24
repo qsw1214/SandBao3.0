@@ -13,6 +13,7 @@
 //三方库头文件
 #import "Masonry.h"
 #import "RESideMenu.h"
+#import "UMMobClick/MobClick.h"
 
 //类扩展头文件
 #import "UIView+easyFrame.h"

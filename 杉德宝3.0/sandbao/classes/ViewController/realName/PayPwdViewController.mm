@@ -222,9 +222,8 @@
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [Tool showDialog:@"支付密码设置失败" defulBlock:^{
-                    //dismiss回主页
-                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    //归位回主页
+                    [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
                 }];
             }];
         } successBlock:^{
@@ -233,9 +232,8 @@
                 
                 [Tool showDialog:@"支付密码设置成功" defulBlock:^{
                     [CommParameter sharedInstance].payPassFlag = YES;
-                    //dismiss回主页
-                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                    [self dismissViewControllerAnimated:YES completion:nil];
+                    //归位回主页
+                    [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
                 }];
                 
             }];

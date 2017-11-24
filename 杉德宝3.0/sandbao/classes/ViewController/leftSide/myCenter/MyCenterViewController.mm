@@ -17,7 +17,6 @@
 #import "IdentityDetailViewController.h"
 #import "NickNameViewController.h"
 
-
 @interface MyCenterViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     NSString *base64Str;
@@ -32,16 +31,6 @@
 @end
 
 @implementation MyCenterViewController
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    //用户刷新数据信息
-    [self refreshUI];
-    
-    //允许RESideMenu的返回手势
-    self.sideMenuViewController.panGestureEnabled = YES;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

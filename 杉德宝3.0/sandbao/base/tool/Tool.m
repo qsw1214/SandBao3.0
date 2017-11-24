@@ -101,12 +101,13 @@
 
 
 #pragma mark - 跳转登陆页
+
 /**
- 跳转登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
- 
- @param viewController 当前控制器
+ 归位到登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
+
+ @param sideMenuViewController sideMenuViewController
  */
-+(void)presetnLoginVC:(UIViewController*)viewController{
++ (void)setContentViewControllerWithLoginFromSideMentuVIewController:(id)sideMenuViewController{
     
     //0.退出前 当前活跃状态的账户更新数据
     BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
@@ -120,18 +121,26 @@
         
         //3.跳转登陆页面
         LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
-        [mLoginViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
-        [viewController presentViewController:navLogin animated:YES completion:nil];
-        [viewController.navigationController popToRootViewControllerAnimated:YES];
-        
+        //类型判断
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(sideMenuViewController)];
+        //3.1 RESideMenu
+        if ([className isEqualToString:@"RESideMenu"]) {
+            RESideMenu *object = sideMenuViewController;
+            [object setContentViewController:navLogin];
+            [object hideMenuViewController];
+        }
+        //3.2 UIViewController
+        else{
+            UIViewController *controller = sideMenuViewController;
+            RESideMenu *object = controller.sideMenuViewController;
+            [object setContentViewController:navLogin];
+            [object hideMenuViewController];
+        }
     }else{
         return;
     }
-    
 }
-
-
 
 #pragma mark - 支付工具排序
 /**

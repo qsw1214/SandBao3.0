@@ -9,7 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface CommParameter : NSObject
+#pragma mark - *********用户退出后不进行置空*********
+#pragma mark - HomeNav
+@property (nonatomic, strong) UINavigationController *homeNav;  //全局的首页实例
 
+
+
+
+#pragma mark - *********用户退出后置空*********
 #pragma mark - sToken
 @property (nonatomic, strong) NSString *sToken;   //用户活动状态标识
 

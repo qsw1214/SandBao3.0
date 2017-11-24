@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "SDMBProgressView.h"
 
-
 /**
  请求成功/失败类型
 

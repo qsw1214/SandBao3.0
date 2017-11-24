@@ -21,26 +21,20 @@
 #import "RESideMenu.h"
 #import "LeftSideMenuViewController.h"
 
+#import "UMMobClick/MobClick.h"
+
 @interface AppDelegate ()<WeiboSDKDelegate>
 
 @end
 
 @implementation AppDelegate
 
-- (BOOL)testView{
-    // 1.创建窗口
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // 2.
-    LeftSideMenuViewController *fs = [[LeftSideMenuViewController alloc] init];
-    self.window.rootViewController = fs;
-    // 3.显示窗口
-    [self.window makeKeyAndVisible];
-    
-    return YES;
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    //-1. 友盟相关设置
+    [self UMSetAbout];
+    
     // 0.注册微博微信SDK
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:WB_App_Key];
@@ -52,11 +46,9 @@
     // 2.window设置
     [self setWindows];
 
-//    return [self testView];
     
     // 3.loading
     NSInteger loadingResult = [Loading startLoading];
-//    loadingResult = 2;
     switch (loadingResult) {
             //load失败
             case 0:
@@ -114,6 +106,22 @@
     
     
     return YES;
+}
+
+#pragma mark 友盟相关设置
+- (void)UMSetAbout{
+
+    UMConfigInstance.appKey = @"59edaad7a40fa37273000561";
+    UMConfigInstance.channelId = nil;
+    UMConfigInstance.eSType = E_UM_NORMAL;
+    UMConfigInstance.ePolicy = SEND_INTERVAL;
+    [MobClick setLogSendInterval:90];
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
+    
+    //开启集成测试模式
+    [MobClick setLogEnabled:YES];
+    
+
 }
 
 #pragma  mark IQKeyBoard键盘库设置

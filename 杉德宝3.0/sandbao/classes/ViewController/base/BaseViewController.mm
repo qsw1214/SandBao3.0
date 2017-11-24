@@ -25,6 +25,14 @@
     //基础配置 - 禁用RESideMenu的侧滑手势(子类控制器需要开启时,子类自己去修改为YES开启)
     self.sideMenuViewController.panGestureEnabled = NO;
     
+    //基础配置 - 友盟页面统计埋点 - 进入页面
+    [MobClick beginLogPageView:[NSString stringWithUTF8String:object_getClassName(self)]];
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    //基础配置 - 友盟页面统计埋点 - 离开页面
+    [MobClick endLogPageView:[NSString stringWithUTF8String:object_getClassName(self)]];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

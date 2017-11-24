@@ -360,9 +360,8 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
-                //登陆成功:
-                [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                [self dismissViewControllerAnimated:YES completion:nil];
+                //登陆成功: - 当前页归位到Home
+                [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
                 
             }];
         }];
@@ -371,6 +370,9 @@
     }];
 }
 
+- (void)dealloc{
+    NSLog(@"短信页 -- 回收");
+}
 
 #pragma mark - =-=-=-=-=-=  用户注册模式   =-=-=-=-=-=
 #pragma mark 校验用户

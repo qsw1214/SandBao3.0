@@ -25,7 +25,6 @@
 #import "PayNuc.h"
 #import "PayNucHelper.h"
 
-
 @interface SDRequestHelp(){
     int fr;
 }
@@ -127,7 +126,7 @@ static id _instance;
                     if (weakSelf.HUD) {
                         [weakSelf.HUD hidden];
                         [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
-                            [Tool presetnLoginVC:weakSelf.controller];
+                            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller];
                         }];
                     }
                 });
