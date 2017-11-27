@@ -119,7 +119,7 @@
         //2. 登出->mqtt结束
         [[MqttClientManager shareInstance] close:YES];
         
-        //3.跳转登陆页面
+        //3.跳转登陆页面 
         LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         //类型判断

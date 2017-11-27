@@ -370,10 +370,6 @@
     }];
 }
 
-- (void)dealloc{
-    NSLog(@"短信页 -- 回收");
-}
-
 #pragma mark - =-=-=-=-=-=  用户注册模式   =-=-=-=-=-=
 #pragma mark 校验用户
 - (void)checkUser{

@@ -32,6 +32,16 @@
 
 @implementation MyCenterViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //允许RESideMenu的返回手势
+    self.sideMenuViewController.panGestureEnabled = YES;
+    
+    //刷新用户信息
+    [self refreshUI];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -269,12 +279,12 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
+                //头像修改成功 - 通知侧边栏刷新个人信息
                 [CommParameter sharedInstance].avatar = base64Str;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Avatar_Changed" object:nil];
+                
                 [Tool showDialog:@"头像修改成功"];
-                //刷新头像
-                NSString *str = [CommParameter sharedInstance].avatar;
-                NSData *data = [Base64Util dataWithBase64EncodedString:str];
-                data = [GzipUtility uncompressZippedData:data];
+                
                 //销毁照片控制器
                 [picker dismissViewControllerAnimated:YES completion:^{
                     

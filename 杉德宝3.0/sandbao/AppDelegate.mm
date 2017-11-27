@@ -115,7 +115,7 @@
     UMConfigInstance.channelId = nil;
     UMConfigInstance.eSType = E_UM_NORMAL;
     UMConfigInstance.ePolicy = SEND_INTERVAL;
-    [MobClick setLogSendInterval:90];
+    [MobClick setLogSendInterval:120];
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     
     //开启集成测试模式

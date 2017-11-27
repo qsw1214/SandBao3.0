@@ -74,9 +74,7 @@
     }
     
 }
-- (void)dealloc{
-    NSLog(@"登陆页 -- 回收");
-}
+
 #pragma mark  - UI绘制
 - (void)createUI{
     __weak typeof(self) weakself = self;

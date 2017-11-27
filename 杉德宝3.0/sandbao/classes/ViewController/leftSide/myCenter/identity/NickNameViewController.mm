@@ -50,9 +50,11 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    [self.baseScrollView endEditing:YES];
+    
     if (btn.tag == BTN_TAG_NEXT) {
-        
         if (self.nickNameStr.length>0) {
+            
             //修改用户基础信息(昵称)
             [self resetUserBaseInfo];
         }else{

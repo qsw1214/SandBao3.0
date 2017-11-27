@@ -68,12 +68,6 @@
     
 }
 
-
-- (void)dealloc{
-    NSLog(@"dfsdfsa");
-    
-}
-
 /*
 #pragma mark - Navigation
 

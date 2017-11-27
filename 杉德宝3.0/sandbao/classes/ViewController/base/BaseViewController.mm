@@ -155,5 +155,12 @@
     
 }
 
+- (void)dealloc{
+    
+    NSString *viewControllerName = [NSString stringWithUTF8String:object_getClassName(self)];
+    NSLog(@"\n->\n(%@ -- 回收)\n->",viewControllerName);
+    
+}
+
 
 @end

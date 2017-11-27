@@ -183,8 +183,9 @@ static id _instance;
 #pragma mark - **********************网络请求FUNC**********************
 
 - (void)requestWihtFuncName:(NSString*)funcname errorBlock:(SDResponseErrorBlock)errorBlock successBlock:(SDResponseSuccessBlock)successBlock{
+    
     fr = 0;
-    NSLog(@"+++++++++++++++++++++++++%@++++++++++++++++++++++++",funcname);
+    
     fr = paynuc.func([funcname UTF8String]);
     
     

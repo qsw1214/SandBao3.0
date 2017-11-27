@@ -68,9 +68,11 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
+    [self.baseScrollView endEditing:YES];
+    
     //转账!
     if (btn.tag == BTN_TAG_TRANSFER) {
-        [self.baseScrollView endEditing:YES];
+        
         if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue] <= limitFloat) {
             [self fee];
         }else{

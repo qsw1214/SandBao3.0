@@ -126,6 +126,9 @@
     //增加监听 - 监听昵称变化
     [self addNotifaction_NickName];
     
+    //增加监听 - 监听头像变化
+    [self addNotifaction_avatar];
+    
     //加载UI
     [self createUI_headView];
     [self createUI_tableView];
@@ -668,15 +671,31 @@
     
     
 }
-#pragma mark 暗登陆/ - 去首页
+#pragma mark 暗登陆 - 去首页
 - (void)goHomeViewController{
     //确保归位到首页时,所有的leftSide子控制器都可以侧滑
     self.sideMenuViewController.panGestureEnabled = YES;
     //当前控制器归位到Home页
     [self.sideMenuViewController setContentViewController:self.homeNav];
 }
-#pragma mark 刷新用户信息
 
+#pragma mark 用户信息变化监听
+- (void)addNotifaction_UserInfo{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"User_Info_Changed" object:nil];
+}
+
+#pragma mark 昵称变化监听
+//昵称接受通知
+- (void)addNotifaction_NickName{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"Nick_Name_Changed" object:nil];
+}
+#pragma mark 头像变化监听
+- (void)addNotifaction_avatar{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"Avatar_Changed" object:nil];
+}
+
+
+#pragma mark 刷新用户信息
 - (void)refreshUI{
     
     //0.刷新用户名(用户手机号)
@@ -684,7 +703,7 @@
     
     //1.刷新头像数据
     headImgView.image = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
-
+    
     //2.刷新实名认证FLag
     if ([CommParameter sharedInstance].realNameFlag == NO) {
         realNameImgView.image = [UIImage imageNamed:@"center_profile_card"];
@@ -710,24 +729,6 @@
     }
 }
 
-#pragma mark 用户信息变化监听
-- (void)addNotifaction_UserInfo{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"User_Info_Changed" object:nil];
-}
-
-#pragma mark 昵称变化监听
-//昵称接受通知
-- (void)addNotifaction_NickName{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nickNameNoitfaction) name:@"Nick_Name_Changed" object:nil];
-}
-
-
-- (void)nickNameNoitfaction{
-    realNameLab.text = [CommParameter sharedInstance].nick;
-    realNameLab.textColor = COLOR_343339;
-    realNameLab.layer.borderWidth = 0.f;
-}
-
 
 - (void)exitApplication {
     //来 加个动画，给用户一个友好的退出界面
@@ -745,4 +746,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)dealloc{
+    
+    //App结束,清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
 @end
