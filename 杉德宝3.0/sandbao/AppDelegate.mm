@@ -121,7 +121,9 @@
     //开启集成测试模式
     [MobClick setLogEnabled:YES];
     
-
+    //开启CrashReport收集
+    [MobClick setCrashReportEnabled:YES];
+    
 }
 
 #pragma  mark IQKeyBoard键盘库设置
@@ -142,7 +144,7 @@
     
     keyboardManager.shouldShowTextFieldPlaceholder = NO; // 是否显示占位文字placehordel
     
-    keyboardManager.placeholderFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:14]; // 设置占位文字的字体
+    keyboardManager.placeholderFont = [UIFont systemFontOfSize:14]; // 设置占位文字的字体
     
     keyboardManager.keyboardDistanceFromTextField = 30.f; // 输入框距离键盘的距离
 

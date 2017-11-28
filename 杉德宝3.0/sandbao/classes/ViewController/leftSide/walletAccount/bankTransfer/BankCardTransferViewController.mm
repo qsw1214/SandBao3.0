@@ -475,6 +475,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         __block BOOL error = NO;
         
         paynuc.set("tTokenType", [self.tTokenType UTF8String]);
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{
@@ -521,7 +522,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
         payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
         for (int i = 0; i<rechargePayToolsArray.count; i++) {
-            if ([[rechargePayToolsArray[i] objectForKey:@"available"] boolValue]== NO) {
+            if ([[rechargePayToolsArray[i] objectForKey:@"available"] boolValue]== NO || [[rechargePayToolsArray[i] objectForKey:@"type"] isEqualToString:@"1014"]) {
                 //不可用支付工具集
                 [payToolsArrayUnusableM addObject:rechargePayToolsArray[i]];
             }else{

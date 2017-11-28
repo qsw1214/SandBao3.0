@@ -127,6 +127,7 @@
         if (error) return ;
         
         paynuc.set("tTokenType", "01000401");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{

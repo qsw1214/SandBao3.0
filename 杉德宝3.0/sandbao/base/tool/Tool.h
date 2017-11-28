@@ -195,6 +195,16 @@ typedef void(^DefulBtnBlock)();
 + (NSString *)getIconImageName:(NSString*)type title:(NSString*)title imaUrl:(NSString*)imaUrl;
 
 
+#pragma mark  - 拼装终端标记域(cgf_tempFp)
+/**
+ 拼装终端标记域(cgf_tempFp)
+
+ @param onlyDynamicData 仅动态数据域上送
+ @return json串
+ */
++ (NSString *)setCfgTempFp:(BOOL)onlyDynamicData;
+
+
 #pragma mark - ImageView工厂方法
 
 /**

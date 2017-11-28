@@ -156,6 +156,8 @@
     //退出
     if (btn.tag == BTN_TAG_LOGOUT) {
         [self loginOut];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_Logout];
     }
     //个人信息
     if (btn.tag == BTN_TAG_JUSTCLICK) {
@@ -429,34 +431,50 @@
     if ([titleName isEqualToString:@"返回首页"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.homeNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_Home];
     }
     if ([titleName isEqualToString:@"我的账单"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.myBillNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_Bill];
     }
     if ([titleName isEqualToString:@"钱包账户"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.walletAccNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_Wallet];
     }
     if ([titleName isEqualToString:@"杉德积分"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.sandPointNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_Sandpoint];
     }
     if ([titleName isEqualToString:@"理财中心"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.financicleNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_Financial];
     }
     if ([titleName isEqualToString:@"银行卡"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.bankCardNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_BankCard];
     }
     if ([titleName isEqualToString:@"杉德卡"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.sandCardNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_SandCard];
     }
     if ([titleName isEqualToString:@"设置"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.setNav];
+        //友盟自定义时间统计 - 计数事件
+        [MobClick event:UM_Setting];
     }
     
     //隐藏Menu控制器
@@ -495,6 +513,7 @@
         paynuc.set("sToken", [[CommParameter sharedInstance].sToken UTF8String]);
         paynuc.set("creditFp", [creditFp UTF8String]);
         paynuc.set("tTokenType", "01001401");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
@@ -563,6 +582,7 @@
         __block BOOL error = NO;
         
         paynuc.set("tTokenType", "01001501");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
@@ -634,6 +654,7 @@
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         paynuc.set("tTokenType", "01000301");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{

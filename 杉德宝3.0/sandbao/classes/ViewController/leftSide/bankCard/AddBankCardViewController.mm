@@ -214,6 +214,7 @@
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         paynuc.set("tTokenType", "01001001");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{

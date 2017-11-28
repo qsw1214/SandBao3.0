@@ -464,7 +464,7 @@
     
     NSArray *bankNameArray = @[@"工商银行",@"建设银行",@"农业银行",@"招商银行",@"交通银行",@"中国银行",@"光大银行",@"民生银行",@"兴业银行",@"中信银行",@"广发银行",@"浦发银行",@"平安银行",@"华夏银行",@"宁波银行",@"东亚银行",@"上海银行",@"中国邮储银行",@"南京银行",@"上海农商行",@"渤海银行",@"成都银行",@"北京银行",@"徽商银行",@"天津银行"];
     
-    NSArray *bankImageNameArray = @[@"banklist_gs",@"banklist_js",@"banklist_nh",@"banklist_zs",@"banklist_jt",@"banklist_gh",@"banklist_gd",@"banklist_ms",@"banklist_xy",@"banklist_zx",@"banklist_gf",@"banklist_pf",@"banklist_pa",@"banklist_hx",@"banklist_nb",@"banklist_dy",@"banklist_sh",@"banklist_yz",@"banklist_nj",@"banklist_shns",@"banklist_bh",@"banklist_cd",@"banklist_bj",@"banklist_hs",@"banklist_tj"];
+    NSArray *bankImageNameArray = @[@"banklist_gs",@"banklist_js",@"banklist_nh",@"banklist_zs",@"banklist_jh",@"banklist_gh",@"banklist_gd",@"banklist_ms",@"banklist_xy",@"banklist_zx",@"banklist_gf",@"banklist_pf",@"banklist_pa",@"banklist_hx",@"banklist_nb",@"banklist_dy",@"banklist_sh",@"banklist_yz",@"banklist_nj",@"banklist_shns",@"banklist_bh",@"banklist_cd",@"banklist_bj",@"banklist_hs",@"banklist_tj"];
     
     for (int i = 0; i<bankNameArray.count; i++) {
         if ([bankName containsString:[bankNameArray[i] substringToIndex:2]]) {
@@ -680,6 +680,95 @@
         }
     }
     return @"qvip_pay_imageholder";
+}
+
+
+
+#pragma mark  - 拼装终端标记域(cgf_tempFp)
++ (NSString *)setCfgTempFp:(BOOL)onlyDynamicData{
+    
+    NSDictionary *OS = [NSDictionary dictionary];
+    OS = @{
+           @"SystemName":[UIDevice deviceVersion],
+           @"SystemVersion":[UIDevice phoneVersion]
+           };
+    NSDictionary *Equipment = [NSDictionary dictionary];
+    Equipment = @{
+                  @"DeviceName":[UIDevice phoneName],
+                  @"IDFV":[UIDevice UUIDString]
+                  };
+    
+    NSDictionary *StaticData = [NSDictionary dictionary];
+    StaticData = @{
+                   @"OS":OS,
+                   @"Equipment":Equipment
+                   };
+    
+    
+    
+    NSDictionary *Coordinate = [NSDictionary dictionary];
+    Coordinate = @{
+                   @"Type":@"GPS",
+                   @"Long":@"",
+                   @"Lat":@""
+                   };
+    
+    NSDictionary *DynamicData = [NSDictionary dictionary];
+    
+    if ([UIDevice fetchSSIDInfo] != nil) {
+        NSDictionary *ssIDdic = [NSDictionary dictionary];
+        ssIDdic = (NSDictionary*)[UIDevice fetchSSIDInfo];
+        NSData *data = [ssIDdic objectForKey:@"SSIDDATA"];
+        NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        ssIDdic = @{
+                    @"BSSID":[ssIDdic objectForKey:@"BSSID"],
+                    @"SSID":[ssIDdic objectForKey:@"SSID"],
+                    @"SSIDDATA":dataStr
+                    };
+        
+        DynamicData = @{
+                        @"IPAddress":@"",
+                        @"Coordinate":Coordinate,
+                        @"District":@"",
+                        @"SSIDs":@[ssIDdic]
+                        };
+    }else{
+        DynamicData = @{
+                        @"IPAddress":@"",
+                        @"Coordinate":Coordinate,
+                        @"District":@"",
+                        @"SSIDs":@""
+                        };
+    }
+    
+    NSDictionary *cfg_termFp = [NSDictionary dictionary];
+    if (!onlyDynamicData) {
+        cfg_termFp = @{
+                       @"Version(*)":@"TRACE-1",
+                       @"HostType(*)":@"APP",
+                       @"OSType(*)":@"IOS",
+                       @"StaticData":StaticData,
+                       @"DynamicData":DynamicData
+                       };
+    }else{
+        cfg_termFp = @{
+                       @"Version(*)":@"TRACE-1",
+                       @"HostType(*)":@"APP",
+                       @"OSType(*)":@"IOS",
+                       @"StaticData":@"",
+                       @"DynamicData":DynamicData
+                       };
+    }
+    
+    //转json串
+    if (cfg_termFp != nil) {
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(NSMutableDictionary*)cfg_termFp options:NSJSONWritingPrettyPrinted error:&error];
+        NSString *str = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        return [[str stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+    }
+    
+    return @"";
 }
 
 

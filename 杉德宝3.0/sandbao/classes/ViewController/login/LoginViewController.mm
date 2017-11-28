@@ -63,6 +63,8 @@
         //@"登录"
         if (self.phoneNum.length>0 && self.loginPwd.length>0) {
             [self loginUser];
+            //友盟自定义时间统计 - 计数事件
+            [MobClick event:UM_Login];
         }else{
             [Tool showDialog:@"请输入正确的登陆账号及密码"];
         }
@@ -218,6 +220,7 @@
         if (error) return;
         
         paynuc.set("tTokenType", "01000201");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@("token/getTtoken/v1") errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{

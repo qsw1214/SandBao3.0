@@ -340,6 +340,7 @@
         __block BOOL error = NO;
         
         paynuc.set("tTokenType", "01001501");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{
@@ -362,6 +363,11 @@
                 
                 //登陆成功: - 当前页归位到Home
                 [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                
+                //友盟埋点 - 账号统计 - 开始
+                [MobClick profileSignInWithPUID:[CommParameter sharedInstance].userId provider:@"sand"];
+                //友盟埋点 - 账号统计 - 结束
+                [MobClick profileSignOff];
                 
             }];
         }];
@@ -615,6 +621,7 @@
         __block BOOL error = NO;
         
         paynuc.set("tTokenType", "01001501");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{

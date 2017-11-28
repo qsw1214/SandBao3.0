@@ -124,6 +124,17 @@
 // 判断是否为iPhone6 plus
 #define iPhone6plus (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 
+//友盟自定义事件统计 - 事件计数 - 事件id
+#define UM_BankCard @"bankcard"  //银行卡
+#define UM_Bill @"bill" //我的账单
+#define UM_Financial @"financial"  //理财
+#define UM_Home @"home"  //首页
+#define UM_Login @"login"  //登录
+#define UM_Logout @"logout" //登出
+#define UM_SandCard @"sandcard" //杉德卡
+#define UM_Sandpoint @"sandpoint"  //杉德积分
+#define UM_Setting @"setting"  //设置
+#define UM_Wallet @"wallet"  //钱包账户
 
 
 
@@ -181,9 +192,9 @@
 
 //用哪个开哪个
 //显示给开发人员 (显示输入数据)
-#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
+//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
 //显示给测试人员 (隐藏输入数据)
-//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
+#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
 
 
 

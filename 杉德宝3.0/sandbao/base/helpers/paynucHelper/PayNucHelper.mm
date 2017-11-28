@@ -57,7 +57,7 @@ static PayNucHelper *payNucHelperSharedInstance = nil;
     PostWithData_Address = PostWithData;
     paynuc.init();
     paynuc.set("cfg_appMark", "sandbao-ios-1.0");
-    paynuc.set("cfg_termFp", [[self cfgTempFp] UTF8String]);
+    paynuc.set("cfg_termFp", [[Tool setCfgTempFp:NO] UTF8String]);
     if (flag) {
         paynuc.set("cfg_test", "true");
         paynuc.set("cfg_debug", "true");
@@ -72,49 +72,6 @@ static PayNucHelper *payNucHelperSharedInstance = nil;
     }
 }
 
-/**
- 拼装TempFp报文
-
- @return 报文json串
- */
-- (NSString *)cfgTempFp{
-    NSDictionary *OS = [NSDictionary dictionary];
-    OS = @{
-           @"SystemName":[UIDevice deviceVersion],
-           @"SystemVersion":[UIDevice phoneVersion]
-           };
-    NSDictionary *Equipment = [NSDictionary dictionary];
-    Equipment = @{
-                  @"DeviceName":[UIDevice phoneName],
-                  @"IDFV":[UIDevice UUIDString]
-                  };
-    
-    NSDictionary *StaticData = [NSDictionary dictionary];
-    StaticData = @{
-                   @"OS":OS,
-                   @"Equipment":Equipment
-                   };
-    
-    NSDictionary *DynamicData = [NSDictionary dictionary];
-    DynamicData = @{
-                    @"IPAddress":@"",
-                    @"Coordinate":@"",
-                    @"District":@"",
-                    @"SSIDs":[UIDevice fetchSSIDInfo]
-                    };
-    
-    NSDictionary *cfg_termFp = [NSDictionary dictionary];
-    cfg_termFp = @{
-                   @"Version(*)":@"TRACE-1",
-                   @"HostType(*)":@"APP",
-                   @"OSType(*)":@"IOS",
-                   @"StaticData":StaticData,
-                   @"DynamicData":@""
-                   };
-    
-    NSString *cfg_termFpStr = [self dictionaryToJson:(NSMutableDictionary*)cfg_termFp];
-    return cfg_termFpStr;
-}
 
 /**
  获取终端附近的WIFI的SSID列表
