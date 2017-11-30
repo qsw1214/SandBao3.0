@@ -685,8 +685,8 @@
 
 
 #pragma mark  - 拼装终端标记域(cgf_tempFp)
-+ (NSString *)setCfgTempFp:(BOOL)onlyDynamicData{
-    
++ (NSString*)setCfgTempFpStaticDataFlag:(BOOL)StaticDataFlag DynamicDataFlag:(BOOL)DynamicDataFlag {
+
     NSDictionary *OS = [NSDictionary dictionary];
     OS = @{
            @"SystemName":[UIDevice deviceVersion],
@@ -698,23 +698,42 @@
                   @"IDFV":[UIDevice UUIDString]
                   };
     
+    //静态标记域
     NSDictionary *StaticData = [NSDictionary dictionary];
-    StaticData = @{
-                   @"OS":OS,
-                   @"Equipment":Equipment
-                   };
+    if (StaticDataFlag) {
+        StaticData = @{
+                       @"OS":OS,
+                       @"Equipment":Equipment
+                       };
+    }else{
+        StaticData = @{
+                       @"OS":@"",
+                       @"Equipment":@""
+                       };
+    }
+
+    /////////////////////////////////////////////////////////////////////
     
-    
-    
+    NSArray *locatonArray = nil;
+    NSString *longitude = nil;
+    NSString *latitude = nil;
+    if (DynamicDataFlag) {
+        locatonArray = [[LocationUtil shareLocationManager] startUpdatingLocation];
+        longitude  = [locatonArray firstObject];
+        latitude = [locatonArray lastObject];
+    }else{
+        longitude  = @"";
+        latitude = @"";
+    }
     NSDictionary *Coordinate = [NSDictionary dictionary];
     Coordinate = @{
                    @"Type":@"GPS",
-                   @"Long":@"",
-                   @"Lat":@""
+                   @"Long":longitude,
+                   @"Lat":latitude
                    };
     
+    //动态标记域
     NSDictionary *DynamicData = [NSDictionary dictionary];
-    
     if ([UIDevice fetchSSIDInfo] != nil) {
         NSDictionary *ssIDdic = [NSDictionary dictionary];
         ssIDdic = (NSDictionary*)[UIDevice fetchSSIDInfo];
@@ -741,24 +760,17 @@
                         };
     }
     
+    /////////////////////////////////////////////////////////////////////
+    
+    //终端(整体)标记域
     NSDictionary *cfg_termFp = [NSDictionary dictionary];
-    if (!onlyDynamicData) {
-        cfg_termFp = @{
-                       @"Version(*)":@"TRACE-1",
-                       @"HostType(*)":@"APP",
-                       @"OSType(*)":@"IOS",
-                       @"StaticData":StaticData,
-                       @"DynamicData":DynamicData
-                       };
-    }else{
-        cfg_termFp = @{
-                       @"Version(*)":@"TRACE-1",
-                       @"HostType(*)":@"APP",
-                       @"OSType(*)":@"IOS",
-                       @"StaticData":@"",
-                       @"DynamicData":DynamicData
-                       };
-    }
+    cfg_termFp = @{
+                   @"Version":@"TRACE-1",
+                   @"HostType":@"APP",
+                   @"OSType":@"IOS",
+                   @"StaticData":StaticData,
+                   @"DynamicData":DynamicData
+                   };
     
     //转json串
     if (cfg_termFp != nil) {

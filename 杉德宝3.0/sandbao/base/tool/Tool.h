@@ -199,10 +199,11 @@ typedef void(^DefulBtnBlock)();
 /**
  拼装终端标记域(cgf_tempFp)
 
- @param onlyDynamicData 仅动态数据域上送
+ @param StaticDataFlag 静态数据域标记
+ @param DynamicDataFlag 动态数据域标记
  @return json串
  */
-+ (NSString *)setCfgTempFp:(BOOL)onlyDynamicData;
++ (NSString*)setCfgTempFpStaticDataFlag:(BOOL)StaticDataFlag DynamicDataFlag:(BOOL)DynamicDataFlag;
 
 
 #pragma mark - ImageView工厂方法

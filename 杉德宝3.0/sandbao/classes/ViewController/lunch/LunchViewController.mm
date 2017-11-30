@@ -49,9 +49,7 @@
 
 #pragma mark  - UI绘制
 - (void)setBaseInfo{
-    //修改状态栏白色
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
-    
+
     
     UIImage *headImage = [UIImage fullscreenAllIphoneImageWithName:@"loading.png"];
     UIImageView *headImageView = [[UIImageView alloc] init];

@@ -340,7 +340,7 @@
         __block BOOL error = NO;
         
         paynuc.set("tTokenType", "01001501");
-        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{
@@ -621,7 +621,7 @@
         __block BOOL error = NO;
         
         paynuc.set("tTokenType", "01001501");
-        paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{

@@ -176,7 +176,7 @@
         //修改支付/登录密码 - 流程
         else{
             paynuc.set("tTokenType", [self.tokenType UTF8String]);
-            paynuc.set("cfg_termFp", [[Tool setCfgTempFp:YES] UTF8String]);
+            paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
             [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
                 error = YES;
             } successBlock:^{

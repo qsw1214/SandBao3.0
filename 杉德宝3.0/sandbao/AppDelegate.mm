@@ -32,6 +32,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    //-2. 启动定位 - 实例化
+    [LocationUtil shareLocationManager];
+
     //-1. 友盟相关设置
     [self UMSetAbout];
     
@@ -118,8 +121,8 @@
     [MobClick setLogSendInterval:120];
     [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     
-    //开启集成测试模式
-    [MobClick setLogEnabled:YES];
+    //集成测试模式 - 打印日志
+    [MobClick setLogEnabled:NO];
     
     //开启CrashReport收集
     [MobClick setCrashReportEnabled:YES];
