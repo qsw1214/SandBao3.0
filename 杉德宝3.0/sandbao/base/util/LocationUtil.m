@@ -107,57 +107,77 @@ static LocationUtil *locationManagerInstance = nil;
     }
     //权限已开启
     else{
-        //3分钟时间差内 - 保持不更新
-        NSDate *oldDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"oldDate"];
-        NSDate *newDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"newDate"];;
         
-        if (oldDate == nil || newDate == nil) {
-            oldDate = [NSDate date];
-            newDate = [NSDate date];
-            [[NSUserDefaults standardUserDefaults] setObject:oldDate forKey:@"oldDate"];
-            [[NSUserDefaults standardUserDefaults] setObject:newDate forKey:@"newDate"];
-        }else{
-            oldDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"oldDate"];
-            //新时间总是 - 取当前最新时间
-            newDate = [NSDate date];
-            NSTimeInterval value = newDate.timeIntervalSince1970 - oldDate.timeIntervalSince1970;
-            float min = (value / 60); //秒
+        //3分钟时间差
+        BOOL isThreeMinutesOver =  [self ThreeMinutesOver];
+        
+        if (isThreeMinutesOver) {
+            // @" -= -= -=-=  时间间隔大于3min 允许定位 -=-=-=-=-= "
             
-            if (min > 3) {  //3min
-                //更新旧时间为当前时间
-                oldDate = [NSDate date];
-                [[NSUserDefaults standardUserDefaults] setObject:oldDate forKey:@"oldDate"];
-                
-                // @" -= -= -=-=  时间间隔大于3min 允许定位 -=-=-=-=-= "
-                
-                //开始定位
-                //循环结束标识 - 初始化
-                _runLoopOver = NO;
-                
-                //开始定位 - 等待回调 - 耗时操作
-                [self.locationManager startUpdatingLocation];
-                
-                //只要循环结束标识为NO,则当前流程一直等待,(仅当前流程等待,不影响其他线程执行或整个程序执行)
-                while(!_runLoopOver){
-                    [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-                }
-                
-                //一旦获取经纬度数组回调, 则当前流程执行返回值返回
-                if (_runLoopOver) {
-                    return  _locationArr;
-                }
+            //开始定位
+            //循环结束标识 - 初始化
+            _runLoopOver = NO;
+            
+            //开始定位 - 等待回调 - 耗时操作
+            [self.locationManager startUpdatingLocation];
+            
+            //只要循环结束标识为NO,则当前流程一直等待,(仅当前流程等待,不影响其他线程执行或整个程序执行)
+            while(!_runLoopOver){
+                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+            }
+            
+            //一旦获取经纬度数组回调, 则当前流程执行返回值返回
+            if (_runLoopOver) {
+                return  _locationArr;
+            }
+        }
+        else{
+            // @" -= -= -=-=  还在3min内 无需定位 -=-=-=-=-= "
+            if (_locationArr) {
+                return _locationArr;
             }else{
-                // @" -= -= -=-=  还在3min内 无需定位 -=-=-=-=-= "
-                if (_locationArr) {
-                    return _locationArr;
-                }else{
-                    return  @[@"",@""];
-                }
+                return  @[@"",@""];
             }
         }
     }
-    
     return @[@"",@""];
+}
+
+
+/**
+ 3分钟时间差
+
+ @return 是否超过3分钟时间差
+ */
+- (BOOL)ThreeMinutesOver{
+    
+    //3分钟时间差内 - 保持不更新
+    NSDate *oldDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"oldDate"];
+    NSDate *newDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"newDate"];;
+    
+    if (oldDate == nil || newDate == nil) {
+        oldDate = [NSDate date];
+        newDate = [NSDate date];
+        [[NSUserDefaults standardUserDefaults] setObject:oldDate forKey:@"oldDate"];
+        [[NSUserDefaults standardUserDefaults] setObject:newDate forKey:@"newDate"];
+    }else{
+        oldDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"oldDate"];
+        //新时间总是 - 取当前最新时间
+        newDate = [NSDate date];
+        NSTimeInterval value = newDate.timeIntervalSince1970 - oldDate.timeIntervalSince1970;
+        float min = (value / 60); //秒
+        
+        if (min > 3) {  //3min
+            //更新旧时间为当前时间
+            oldDate = [NSDate date];
+            [[NSUserDefaults standardUserDefaults] setObject:oldDate forKey:@"oldDate"];
+            
+            return YES;
+        }else{
+            return NO;
+        }
+    }
+    return NO;
 }
 
 #pragma mark - 代理
@@ -177,14 +197,12 @@ static LocationUtil *locationManagerInstance = nil;
    
     NSLog(@"经度：%f,纬度：%f,海拔：%f,航向：%f,行走速度：%f", longitude, latitude,location.altitude,location.course,location.speed);
     
-    //定位好以后 , 即执行关闭
-    [manager stopUpdatingLocation];//不用的时候关闭更新位置服务
-    
     _runLoopOver = YES;
     
     _locationArr = @[longitudeStr,latitudeStr];
 
-    
+    //定位好以后 , 即执行关闭
+    [manager stopUpdatingLocation];//不用的时候关闭更新位置服务
     
     
     
