@@ -721,17 +721,14 @@
         locatonArray = [[LocationUtil shareLocationManager] startUpdatingLocation];
         longitude  = [locatonArray firstObject];
         latitude = [locatonArray lastObject];
-    }else{
-        longitude  = @"";
-        latitude = @"";
     }
     NSDictionary *Coordinate = [NSDictionary dictionary];
     Coordinate = @{
                    @"Type":@"GPS",
-                   @"Long":longitude,
-                   @"Lat":latitude
+                   @"Long":longitude==nil?@"":longitude,
+                   @"Lat":latitude==nil?@"":latitude
                    };
-    
+
     //动态标记域
     NSDictionary *DynamicData = [NSDictionary dictionary];
     if ([UIDevice fetchSSIDInfo] != nil) {
