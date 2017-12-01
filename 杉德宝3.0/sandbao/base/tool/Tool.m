@@ -14,6 +14,7 @@
 #import "Base64Util.h"
 #import "GzipUtility.h"
 #import "LoginViewController.h"
+#import "HDAlertView.h"
 
 #define Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
 
@@ -39,14 +40,25 @@
  */
 + (void)showDialog:(NSString *)message{
     
-    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:@"提示" message:message buttonTitles:@"确认",nil, nil];
-    alertView.alertViewStyle = CustomAlertViewStyleDefault;
+//    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:@"提示" message:message buttonTitles:@"确认",nil, nil];
+//    alertView.alertViewStyle = CustomAlertViewStyleDefault;
+//    
+//    [alertView showWithCompletion:^(NSInteger selectIndex) {
+//        if (selectIndex == 0) {
+//            // do  nothing
+//        }
+//    }];
     
-    [alertView showWithCompletion:^(NSInteger selectIndex) {
-        if (selectIndex == 0) {
-            // do  nothing
-        }
+    HDAlertView *alertView = [HDAlertView alertViewWithTitle:@"提示" andMessage:message];
+    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
+    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
+    alertView.isSupportRotating = YES;
+    
+    [alertView addButtonWithTitle:@"确定" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
+        // do nothing
     }];
+    
+    [alertView show];
 
 }
 
@@ -61,14 +73,26 @@
  @param defulblock 默认事件回调
  */
 + (void)showDialog:(NSString *)message defulBlock:(DefulBtnBlock)defulblock{
-    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:@"提示" message:message buttonTitles:@"我知道了",nil, nil];
-    alertView.alertViewStyle = CustomAlertViewStyleDefault;
+//    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:@"提示" message:message buttonTitles:@"我知道了",nil, nil];
+//    alertView.alertViewStyle = CustomAlertViewStyleDefault;
+//    
+//    [alertView showWithCompletion:^(NSInteger selectIndex) {
+//        if (selectIndex == 0) {
+//            defulblock();
+//        }
+//    }];
     
-    [alertView showWithCompletion:^(NSInteger selectIndex) {
-        if (selectIndex == 0) {
-            defulblock();
-        }
+    HDAlertView *alertView = [HDAlertView alertViewWithTitle:@"提示" andMessage:message];
+    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
+    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
+    alertView.isSupportRotating = YES;
+    
+    [alertView addButtonWithTitle:@"我知道了" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
+        defulblock();
     }];
+    
+    [alertView show];
+    
 }
 
 
@@ -85,17 +109,32 @@
  */
 + (void)showDialog:(NSString*)title message:(NSString*)message leftBtnString:(NSString*)leftString rightBtnString:(NSString*)rightString leftBlock:(LeftBtnBlock)leftbtnblock rightBlock:(RightBtnBlock)rightbtnblock{
     
-    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:title message:message buttonTitles:leftString,rightString, nil];
-    alertView.alertViewStyle = CustomAlertViewStyleDefault;
+//    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:title message:message buttonTitles:leftString,rightString, nil];
+//    alertView.alertViewStyle = CustomAlertViewStyleDefault;
+//    
+//    [alertView showWithCompletion:^(NSInteger selectIndex) {
+//        if (selectIndex == 0) {
+//            leftbtnblock();
+//        }
+//        else if(selectIndex == 1){
+//            rightbtnblock();
+//        }
+//    }];
     
-    [alertView showWithCompletion:^(NSInteger selectIndex) {
-        if (selectIndex == 0) {
-            leftbtnblock();
-        }
-        else if(selectIndex == 1){
-            rightbtnblock();
-        }
+    HDAlertView *alertView = [HDAlertView alertViewWithTitle:title andMessage:message];
+    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
+    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
+    alertView.isSupportRotating = YES;
+    
+    [alertView addButtonWithTitle:leftString type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
+        leftbtnblock();
     }];
+    
+    [alertView addButtonWithTitle:rightString type:HDAlertViewButtonTypeDestructive handler:^(HDAlertView *alertView) {
+        rightbtnblock();
+    }];
+    
+    [alertView show];
     
 }
 
@@ -778,6 +817,21 @@
     }
     
     return @"";
+}
+
+
+
+
+#pragma mark - 结束App
++ (void)exitApplication:(UIViewController*)vc {
+    //来 加个动画，给用户一个友好的退出界面
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        vc.view.window.alpha = 0;
+    } completion:^(BOOL finished) {
+        exit(0);
+    }];
+    
 }
 
 

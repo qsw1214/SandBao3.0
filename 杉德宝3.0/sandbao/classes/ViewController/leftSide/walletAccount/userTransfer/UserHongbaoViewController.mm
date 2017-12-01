@@ -474,10 +474,6 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 errorblock(nil);
-                if (type == respCodeErrorType) {
-                    UIViewController *transferBeginVc = self.navigationController.viewControllers[1];
-                    [self.navigationController popToViewController:transferBeginVc animated:YES];
-                }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{

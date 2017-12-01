@@ -62,8 +62,6 @@ typedef void(^SDDispatchGlobalQueue)();
  */
 @property (nonatomic, strong) UIViewController *controller;
 
-
-
 //单利构造方法
 + (instancetype)shareSDRequest;
 
@@ -84,6 +82,18 @@ typedef void(^SDDispatchGlobalQueue)();
  */
 - (void)dispatchToMainQueue:(SDDispatchMainQueue)block;
 
+
+
+/**
+ 关闭 respCpdeErrorType 模式下 自动处理消息展示功能
+ */
+- (void)closedRespCpdeErrorAutomatic;
+
+
+/**
+ 开启 respCpdeErrorType 模式下 自动处理消息展示功能 - (默认开启)
+ */
+- (void)openRespCpdeErrorAutomatic;
 
 
 /**

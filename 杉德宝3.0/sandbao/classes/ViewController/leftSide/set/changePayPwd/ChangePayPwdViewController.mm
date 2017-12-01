@@ -51,12 +51,10 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.letfImgStr = @"login_icon_back";
-    
     __weak ChangePayPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };
-    
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
@@ -218,12 +216,20 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                [Tool showDialog:@"支付密码修改成功" defulBlock:^{
-                    [CommParameter sharedInstance].payPassFlag = YES;
-                    //pop返回主页
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                }];
                 
+                if ([CommParameter sharedInstance].payPassFlag == NO) {
+                    [Tool showDialog:@"支付密码设置成功" defulBlock:^{
+                        [CommParameter sharedInstance].payPassFlag = YES;
+                        //归位home主页
+                        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                    }];
+                }else{
+                    [Tool showDialog:@"支付密码修改成功" defulBlock:^{
+                        [CommParameter sharedInstance].payPassFlag = YES;
+                        //pop返回set页
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                    }];
+                }
             }];
         }];
         if (error) return ;

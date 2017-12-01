@@ -32,9 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    
     self.SIX_CODE_STATE = SIX_CODE_STATE_INPUT_FIRST;
-    
     
     [self createUI];
     
@@ -45,18 +43,13 @@
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
+    self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, SCREEN_WIDTH, SCREEN_HEIGHT-UPDOWNSPACE_20);
     
 }
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
-    self.navCoverView.letfImgStr = @"login_icon_back";
 
-    __weak PayPwdViewController *weakSelf = self;
-    self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-    };
-    
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
@@ -64,7 +57,7 @@
     if (btn.tag == BTN_TAG_NEXT) {
         
         if (self.SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
-            //验证支付密码成功, dismiss方式返回HomeViewController
+            //设置支付密码 - 上送鉴权
             [self setRegAuthTools];
             
         }
@@ -159,27 +152,36 @@
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"支付密码设置失败" defulBlock:^{
-                    //dismiss回主页
-                    [self setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-                    [self dismissViewControllerAnimated:YES completion:nil];
-                }];
+                if (type == respCodeErrorType) {
+                    [Tool showDialog:@"获取鉴权失败,点击重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        //重新getRegAuthTools
+                        [self getRegAuthTools];
+                    }];
+                }else{
+                    [Tool showDialog:@"网络连接失败,即将进入杉德宝" defulBlock:^{
+                        //归位回主页
+                        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                    }];
+                }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 
                 NSString *regAuthTools = [NSString stringWithUTF8String:paynuc.get("regAuthTools").c_str()];
                 regAuthToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
                 if (![[[regAuthToolsArr firstObject] objectForKey:@"type"] isEqualToString:@"paypass"]) {
-                    [Tool showDialog:@"下发鉴权工具有误"];
+                    [Tool showDialog:@"下发鉴权工具有误" defulBlock:^{
+                        //归位回主页
+                        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                    }];
                 }
-                
-                
-                
             }];
         }];
         if (error) return ;
@@ -220,29 +222,20 @@
         paynuc.set("regAuthTools", [regAuthTools UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"支付密码设置失败" defulBlock:^{
-                    //归位回主页
-                    [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
-                }];
-            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
                 [Tool showDialog:@"支付密码设置成功" defulBlock:^{
                     [CommParameter sharedInstance].payPassFlag = YES;
-                    //归位回主页
+                    //归位home主页
                     [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
                 }];
                 
             }];
         }];
         if (error) return ;
-    
     }];
-    
-
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

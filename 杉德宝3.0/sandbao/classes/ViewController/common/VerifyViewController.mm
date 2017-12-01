@@ -44,7 +44,7 @@
     
     __weak VerifyViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };
     
 }
@@ -197,11 +197,6 @@
         paynuc.set("authTools", [authTools UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                if (type == respCodeErrorType) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];

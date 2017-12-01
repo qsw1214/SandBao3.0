@@ -205,6 +205,13 @@ typedef void(^DefulBtnBlock)();
  */
 + (NSString*)setCfgTempFpStaticDataFlag:(BOOL)StaticDataFlag DynamicDataFlag:(BOOL)DynamicDataFlag;
 
+#pragma mark - 结束App
+/**
+ 结束App
+
+ @param vc 控制器
+ */
++ (void)exitApplication:(UIViewController*)vc;
 
 #pragma mark - ImageView工厂方法
 

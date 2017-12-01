@@ -28,22 +28,48 @@
 @interface SDRequestHelp(){
     int fr;
 }
+
+/**
+ 消息错误码
+ */
 @property (nonatomic, strong) NSString *respCode;
+
+/**
+ 消息错误信息
+ */
 @property (nonatomic, strong) NSString *respMsg;
+
+/**
+ *respCodeErrorType模式下,自动处理标识
+ *(自动处理功能:HUD小时,消息内容展示,默认为YES)
+ */
+@property (nonatomic, assign) BOOL respCodeErrorAutomatic;
+
 @end
 
 @implementation SDRequestHelp
 //单例构造
-static id _instance;
-+ (instancetype)shareSDRequest{
+static SDRequestHelp *_instance = nil;
+
++ (SDRequestHelp*)shareSDRequest{
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _instance = [[self alloc] init];
-        
     });
     return _instance;
 }
+
+- (instancetype)init{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if ([super init]) {
+            self.respCodeErrorAutomatic = YES;
+        }
+    });
+    return self;
+}
+
 
 #pragma mark - **********************error公共处理方法**********************
 
@@ -134,6 +160,7 @@ static id _instance;
             }
             /*3.常规处理二:
              *respCode常规处理->HUD消失/展示错误消息
+             *respCode常规处理->HUD消失/不展示错误消息,由程序员手动配置操作
              */
             else{
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -142,18 +169,21 @@ static id _instance;
                         weakSelf.respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                         NSString *authToolStr = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
                         NSArray *arrTools = [[PayNucHelper sharedInstance] jsonStringToArray:authToolStr];
-                        if (arrTools.count>0) {
-                            //checkResultMsg错误码提示
-                            NSString *checkResultMsg = [[arrTools firstObject] objectForKey:@"checkResultMsg"];
-                            if (checkResultMsg.length>0) {
-                                [Tool showDialog:checkResultMsg];
+                        //自动处理
+                        if (self.respCodeErrorAutomatic) {
+                            if (arrTools.count>0) {
+                                //checkResultMsg错误码提示
+                                NSString *checkResultMsg = [[arrTools firstObject] objectForKey:@"checkResultMsg"];
+                                if (checkResultMsg.length>0) {
+                                    [Tool showDialog:checkResultMsg];
+                                }else{
+                                    //respMsg错误码提示
+                                    [Tool showDialog:weakSelf.respMsg];
+                                }
                             }else{
                                 //respMsg错误码提示
                                 [Tool showDialog:weakSelf.respMsg];
                             }
-                        }else{
-                            //respMsg错误码提示
-                            [Tool showDialog:weakSelf.respMsg];
                         }
                     }
                 });
@@ -182,25 +212,37 @@ static id _instance;
 
 #pragma mark - **********************网络请求FUNC**********************
 
+- (void)closedRespCpdeErrorAutomatic{
+    self.respCodeErrorAutomatic = NO;
+}
+
+- (void)openRespCpdeErrorAutomatic{
+    self.respCodeErrorAutomatic = YES;
+}
+
+
 - (void)requestWihtFuncName:(NSString*)funcname errorBlock:(SDResponseErrorBlock)errorBlock successBlock:(SDResponseSuccessBlock)successBlock{
     
     fr = 0;
     
     fr = paynuc.func([funcname UTF8String]);
     
-    
     //error过滤成功,回调成功block,过滤失败,回调失败block
     SDRequestErrorType errorType = [self errorDisposeWithfuncName:funcname];
     
     //流程走完,需要立即回调successBlock,以免下一步流程获取数据失败或提早调用
     if (errorType == successType) {
+        
         successBlock();
     }
     if (errorType == frErrorType) {
-        errorBlock(frErrorType);
+       
+        errorBlock(frErrorType); //若fr情况导致失败,不需要特别处理,流程没有成功,可以重发
     }
     if (errorType == respCodeErrorType) {
+        
         errorBlock(respCodeErrorType);
+
     }
 
        

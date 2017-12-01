@@ -15,4 +15,5 @@
  */
 @property (nonatomic, assign) NSInteger verifyType;
 
+
 @end

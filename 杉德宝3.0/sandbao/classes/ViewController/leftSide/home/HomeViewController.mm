@@ -47,16 +47,16 @@
     
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
     
     //用户刷新数据信息
     [self refreshUI];
     
     //检测是否实名/设置支付密码
     [self checkRealNameOrSetPayPwd];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     
     //通知LeftSideMenuViewController 刷新用户信息UI
     [self postNotifactionToLeftSideMenuWithUserInfoRefrush];

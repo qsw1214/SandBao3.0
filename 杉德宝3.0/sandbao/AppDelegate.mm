@@ -147,7 +147,7 @@
     
     keyboardManager.shouldShowTextFieldPlaceholder = NO; // 是否显示占位文字placehordel
     
-    keyboardManager.placeholderFont = [UIFont systemFontOfSize:14]; // 设置占位文字的字体
+    keyboardManager.placeholderFont = [UIFont fontWithName:@"PingFang-SC-Regular" size:14]; // 设置占位文字的字体
     
     keyboardManager.keyboardDistanceFromTextField = 30.f; // 输入框距离键盘的距离
 

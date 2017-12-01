@@ -74,8 +74,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
-    self.navCoverView.hidden = YES;
-    
+     self.navCoverView.hidden = YES;
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{

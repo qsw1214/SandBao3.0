@@ -21,3 +21,4 @@
  */
 @property (nonatomic, strong) NSString *smsCodeString;
 @end
+

@@ -85,21 +85,11 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [Tool showDialog:_errorInfo defulBlock:^{
-            [self exitApplication];
+            [Tool exitApplication:self];
         }];
     });
    
 
-}
-
-- (void)exitApplication {
-    //来 加个动画，给用户一个友好的退出界面
-    [UIView animateWithDuration:0.4 animations:^{
-        self.view.window.alpha = 0;
-    } completion:^(BOOL finished) {
-        exit(0);
-    }];
-    
 }
 
 

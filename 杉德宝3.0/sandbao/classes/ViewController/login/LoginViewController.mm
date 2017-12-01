@@ -197,68 +197,76 @@
         
         //获取未登录钱sToken(虚拟)
         paynuc.set("creditFp", "684599B093B8F673A9BE6A7F2AC4E45E");
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getStoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
-                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg defulBlock:^{
-                        //退出处理
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        //重新申请sToken
+                        [self load];
                     }];
                 }
                 else{
-                    [Tool showDialog:@"网络请求失败,请退出重试" defulBlock:^{
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //退出处理
-                        [self exitApplication];
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
         } successBlock:^{
-            
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
         }];
         if (error) return;
         
         paynuc.set("tTokenType", "01000201");
         paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@("token/getTtoken/v1") errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
-                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        //重新申请tTtoken
+                        [self load];
                     }];
                 }
                 else{
-                    [Tool showDialog:@"网络请求失败,请退出重试" defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
         } successBlock:^{
-            
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
         }];
         if (error) return;
         
-        
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
-                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        //重新申请鉴权工具
+                        [self load];
                     }];
                 }
                 else{
-                    [Tool showDialog:@"网络请求失败,请退出重试" defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 NSString *AuthToolstr = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
                 NSArray *authToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:AuthToolstr];
@@ -269,7 +277,7 @@
                     }
                 }else{
                     [Tool showDialog:@"无鉴权工具下发" defulBlock:^{
-                        [self exitApplication];
+                        [Tool exitApplication:self];
                     }];
                 }
                 
@@ -354,17 +362,6 @@
 
 
 
-
-- (void)exitApplication {
-    //来 加个动画，给用户一个友好的退出界面
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.view.window.alpha = 0;
-    } completion:^(BOOL finished) {
-        exit(0);
-    }];
-    
-}
 
 
 

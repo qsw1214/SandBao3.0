@@ -32,13 +32,20 @@
 
 @implementation VerifyTypeViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    //请求鉴权工具集组
+     [self getAuthCroups];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self createUI];
     
-    [self getAuthCroups];
+   
 }
 
 #pragma mark - 重写父类-baseScrollView设置
@@ -49,12 +56,16 @@
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
-    self.navCoverView.letfImgStr = @"login_icon_back";
     
-    __weak VerifyTypeViewController *weakSelf = self;
-    self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-    };
+    if ([CommParameter sharedInstance].payPassFlag == NO) {
+        self.navCoverView.hidden = YES;
+    }else{
+        self.navCoverView.letfImgStr = @"login_icon_back";
+        __weak VerifyTypeViewController *weakSelf = self;
+        self.navCoverView.leftBlock = ^{
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        };
+    }
     
 }
 #pragma mark - 重写父类-点击方法集合
@@ -74,6 +85,7 @@
     
     //还款方式列表
     authGroupsTableView = [[UITableView alloc] init];
+    authGroupsTableView.backgroundColor = [UIColor whiteColor];
     authGroupsTableView.delegate = self;
     authGroupsTableView.dataSource = self;
     authGroupsTableView.scrollEnabled = NO;

@@ -237,7 +237,7 @@
     [headView addSubview:realNameLab];
     
     //couponBtn
-    UIButton *couponBtn = [Tool createButton:@"小白积分2000 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FFFFFF];
+    UIButton *couponBtn = [Tool createButton:@"小白积分 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FFFFFF];
     couponBtn.layer.masksToBounds = YES;
     couponBtn.backgroundColor = COLOR_58A5F6;
     couponBtn.width += LEFTRIGHTSPACE_04;
@@ -583,41 +583,49 @@
         
         paynuc.set("tTokenType", "01001501");
         paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取Ttoken失败,请退出" defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接失败,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
                     }];
                 }else{
-                    [Tool showDialog:@"网络连接超时" defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
         } successBlock:^{
-            
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
         }];
         if (error) return;
         
         
         paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取支付工具失败,请退出" defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"加载支付工具失败,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
                     }];
                 }else{
-                    [Tool showDialog:@"网络连接超时" defulBlock:^{
-                        [self exitApplication];
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 
                 NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
@@ -751,16 +759,6 @@
 }
 
 
-- (void)exitApplication {
-    //来 加个动画，给用户一个友好的退出界面
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        self.view.window.alpha = 0;
-    } completion:^(BOOL finished) {
-        exit(0);
-    }];
-    
-}
 
 
 - (void)didReceiveMemoryWarning {

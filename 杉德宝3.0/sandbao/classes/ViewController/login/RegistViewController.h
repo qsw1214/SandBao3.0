@@ -11,3 +11,4 @@
 @interface RegistViewController : BaseViewController
 
 @end
+

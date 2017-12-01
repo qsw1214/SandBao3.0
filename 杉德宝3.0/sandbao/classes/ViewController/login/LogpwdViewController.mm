@@ -50,6 +50,8 @@
         //下一步
         if (self.loginPwdStr.length > 0 ) {
             [self registerUser];
+        }else{
+            [Tool showDialog:@"请输入正确登陆密码"];
         }
     }
     
@@ -208,11 +210,17 @@
         
         result = [SDSqlite insertData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"insert into usersconfig (uid, userName, active, sToken, credit_fp, lets) values ('%@', '%@', '%@', '%@', '%@', '%@')", [CommParameter sharedInstance].userId, self.phoneNoStr, @"0", sToken, creditFp, letsJson]];
     }
-    //注册成功->跳转实名
+    //注册成成功 -> 归位到实名认证页 
     if (result == YES) {
-        //实名
-        RealNameViewController *realNameVC = [[RealNameViewController alloc] init];
-        [self.navigationController pushViewController:realNameVC animated:YES];
+        
+        [Tool showDialog:@"注册成功,恭喜您" message:@"立即实名认证,体验更多功能!" leftBtnString:@"进入杉德宝" rightBtnString:@"实名认证" leftBlock:^{
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+        } rightBlock:^{
+            //去实名
+            RealNameViewController *realName = [[RealNameViewController alloc] init];
+            UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
+            [self.sideMenuViewController setContentViewController:realNameNav];
+        }];
     }
 }
 
