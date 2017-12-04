@@ -54,7 +54,7 @@
 
     __weak SmsCheckViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navCoverView popToPenultimateViewController:weakSelf];
     };
 }
 #pragma mark - 重写父类-点击方法集合

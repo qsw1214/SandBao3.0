@@ -247,11 +247,11 @@
     NSDictionary *otherPayToolDic = [Tool getPayToolsInfo:otherPayToolsArray];
     NSDictionary *otherSandWalletDic = [otherPayToolDic objectForKey:@"sandWalletDic"];
     
-    if (ownSandWalletDic == nil || ![[ownSandWalletDic objectForKey:@"available"] boolValue]) {
+    if (ownSandWalletDic.count == 0 || ![[ownSandWalletDic objectForKey:@"available"] boolValue]) {
 //        [Tool showDialog:@"我方无可用支付工具"];
 //        return NO;
     }
-    if (otherSandWalletDic == nil || ![[otherSandWalletDic objectForKey:@"available"] boolValue] ) {
+    if (otherSandWalletDic.count == 0 || ![[otherSandWalletDic objectForKey:@"available"] boolValue] ) {
         [Tool showDialog:@"对方无可用支付工具"];
         return NO;
     }

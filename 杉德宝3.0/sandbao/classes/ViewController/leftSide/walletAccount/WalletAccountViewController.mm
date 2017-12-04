@@ -338,11 +338,14 @@
     rechargeInPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
     rechargeInPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
     
-    if (rechargeInPayToolDic == nil) {
-        //钱包账户未成功开通
-        [Tool showDialog:@"钱包账户不存在,请联系客服!" defulBlock:^{
+    //钱包账户未成功开通
+    if (rechargeInPayToolDic.count == 0) {
+        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+        } rightBlock:^{
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"]];
         }];
+        
     }else{
         
         NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];

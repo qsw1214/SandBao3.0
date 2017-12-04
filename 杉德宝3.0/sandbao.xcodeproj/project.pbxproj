@@ -64,6 +64,8 @@
 		28574C5B1F4E72BF0003090D /* libpaynuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28574C5A1F4E72BF0003090D /* libpaynuc.a */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
+		287585B41FD53A8C00DACC8E /* notPay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287585B21FD53A8C00DACC8E /* notPay@2x.png */; };
+		287585B51FD53A8C00DACC8E /* notPay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287585B31FD53A8C00DACC8E /* notPay@3x.png */; };
 		28765CB11FA75D98006F2A06 /* SetCellBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28765CB01FA75D98006F2A06 /* SetCellBaseView.m */; };
 		28765CB41FA77036006F2A06 /* SetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28765CB31FA77036006F2A06 /* SetCellView.m */; };
 		288421911F8E091200082E7C /* NSDate+time.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884217A1F8E091200082E7C /* NSDate+time.m */; };
@@ -461,6 +463,8 @@
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
 		286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
+		287585B21FD53A8C00DACC8E /* notPay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notPay@2x.png"; sourceTree = "<group>"; };
+		287585B31FD53A8C00DACC8E /* notPay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notPay@3x.png"; sourceTree = "<group>"; };
 		28765CAF1FA75D98006F2A06 /* SetCellBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCellBaseView.h; sourceTree = "<group>"; };
 		28765CB01FA75D98006F2A06 /* SetCellBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCellBaseView.m; sourceTree = "<group>"; };
 		28765CB21FA77036006F2A06 /* SetCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCellView.h; sourceTree = "<group>"; };
@@ -1729,6 +1733,8 @@
 				28B6497D1FAC654A0074A390 /* payListSelectedState@3x.png */,
 				28B6497E1FAC654A0074A390 /* qvip_pay_imageholder@2x.png */,
 				28B6497F1FAC654A0074A390 /* qvip_pay_imageholder@3x.png */,
+				287585B21FD53A8C00DACC8E /* notPay@2x.png */,
+				287585B31FD53A8C00DACC8E /* notPay@3x.png */,
 			);
 			path = commImg;
 			sourceTree = "<group>";
@@ -1892,8 +1898,8 @@
 			children = (
 				28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */,
 				28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */,
-				28B6490A1FAC17770074A390 /* home */,
 				28A8AEBA1FAB571000FA1EC1 /* myCenter */,
+				28B6490A1FAC17770074A390 /* home */,
 				28D289B41FA2D29900C3787E /* myBill */,
 				288D7FB21FA2C8C4001CCAC1 /* walletAccount */,
 				288D7FB31FA2C8CB001CCAC1 /* sandPoints */,
@@ -2432,6 +2438,7 @@
 				28DA88881EEA7FCD00754259 /* tab_button_mine_sel@2x.png in Resources */,
 				28DA887E1EEA7FCD00754259 /* tab_button_home_normal.png in Resources */,
 				A7DF3DEB1DC7202B00243EF6 /* indicator6@3x.png in Resources */,
+				287585B51FD53A8C00DACC8E /* notPay@3x.png in Resources */,
 				280B5BBE1FC2D7E100319F82 /* recharge_not_chooseBtn@2x.png in Resources */,
 				2821B7831E778B2200F093D7 /* loading@2x.png in Resources */,
 				28DA887F1EEA7FCD00754259 /* tab_button_home_normal@2x.png in Resources */,
@@ -2440,6 +2447,7 @@
 				28B6498E1FAC654A0074A390 /* banklist_dy@2x.png in Resources */,
 				28B649B31FAC654A0074A390 /* banklist_xy@3x.png in Resources */,
 				A7DF3DEC1DC7202B00243EF6 /* indicator7.png in Resources */,
+				287585B41FD53A8C00DACC8E /* notPay@2x.png in Resources */,
 				28DA887D1EEA7FCD00754259 /* tab_bg@3x.png in Resources */,
 				A7DF3DDD1DC7202B00243EF6 /* indicator2.png in Resources */,
 				28DA88861EEA7FCD00754259 /* tab_button_mine_normal@3x.png in Resources */,

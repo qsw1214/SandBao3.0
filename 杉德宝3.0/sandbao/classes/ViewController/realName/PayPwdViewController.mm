@@ -59,15 +59,11 @@
         if (self.SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
             //设置支付密码 - 上送鉴权
             [self setRegAuthTools];
-            
         }
         if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN || self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self createUI];
         }
-        
-        
-        
     }
     
 }

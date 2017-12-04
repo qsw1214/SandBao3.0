@@ -44,7 +44,7 @@
     
     __weak VerifyViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        [weakSelf.navCoverView popToPenultimateViewController:weakSelf];
     };
     
 }

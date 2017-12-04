@@ -410,6 +410,7 @@
                 VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
                 verifyTypeVC.tokenType = @"01000601";
                 verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+                verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
                 UINavigationController *verifyTypeNav = [[UINavigationController alloc] initWithRootViewController:verifyTypeVC];
                 [self.sideMenuViewController setContentViewController:verifyTypeNav];
             } rightBlock:^{
@@ -434,8 +435,8 @@
     NSString *moneyMidStr = [moneyStr substringToIndex:(moneyStr.length - 3)];
     NSString *moneyRightStr = [moneyStr substringFromIndex:(moneyStr.length - 3)];
     if ([moneyStr floatValue] == 0) {
-        moneyMidStr = @"---";
-        moneyRightStr = @"";
+        moneyMidStr = @"0";
+        moneyRightStr = @".00";
     }
     moneyBtnMidLab.text = moneyMidStr;
     moneyBtnRightLab.text = moneyRightStr;

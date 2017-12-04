@@ -133,7 +133,7 @@
 }
 
 - (void)create_BodyView{
-    __weak typeof(self) weakself = self;
+    
     bodyView = [[UIView alloc] init];
     bodyView.backgroundColor = COLOR_FFFFFF;
     [self.baseScrollView addSubview:bodyView];

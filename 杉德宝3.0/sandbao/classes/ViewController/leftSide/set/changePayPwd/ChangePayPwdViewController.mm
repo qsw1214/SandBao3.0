@@ -53,7 +53,13 @@
     self.navCoverView.letfImgStr = @"login_icon_back";
     __weak ChangePayPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        if ([CommParameter sharedInstance].payPassFlag == NO) {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+           [weakSelf.navCoverView popToPenultimateViewController:weakSelf];
+        }
+        
+        
     };
 }
 #pragma mark - 重写父类-点击方法集合

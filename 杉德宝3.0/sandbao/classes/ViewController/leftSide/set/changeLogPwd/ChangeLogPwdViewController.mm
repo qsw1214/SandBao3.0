@@ -44,7 +44,7 @@
     
     __weak ChangeLogPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        [weakSelf.navCoverView popToPenultimateViewController:weakSelf];
     };
     
 }

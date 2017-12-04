@@ -61,6 +61,7 @@
         VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
         verifyTypeVC.tokenType = @"01000601";
         verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
         [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     if (btn.tag == BTN_TAG_CHANGLOGPWD) {
@@ -68,6 +69,7 @@
         VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
         verifyTypeVC.tokenType = @"01000501";
         verifyTypeVC.verifyType = VERIFY_TYPE_CHANGELOGPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
         [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     if (btn.tag == BTN_TAG_FEEDBACK) {

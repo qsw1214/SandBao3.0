@@ -113,4 +113,12 @@ typedef NS_ENUM(NSInteger,NavCoverViewStyle){
 - (void)appendRightItem:(NSString*)imgName;
 
 
+/**
+ 导航返回事件;
+ 返回栈底倒数第二层 (若倒数第二层视图控制器是自身,则回退root)
+ 
+ @param vc 当前控制器
+ */
+- (void)popToPenultimateViewController:(UIViewController*)vc;
+
 @end

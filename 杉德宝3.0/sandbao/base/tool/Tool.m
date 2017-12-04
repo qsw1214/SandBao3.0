@@ -370,9 +370,9 @@
     //杉德卡 数组初始化
     NSMutableArray *sandArray = [NSMutableArray arrayWithCapacity:0];
     //杉德宝钱包账户 初始化
-    NSMutableDictionary *sandWalletDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    NSDictionary *sandWalletDic = [[NSDictionary alloc] init];
     //代付凭证 初始化
-    NSMutableDictionary *payForAnotherDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    NSDictionary *payForAnotherDic = [[NSDictionary alloc] init];
     
     for (int i = 0; i < ownPayToolsArr.count; i++) {
         NSDictionary *dic = ownPayToolsArr[i];
@@ -395,7 +395,7 @@
         }
         //杉德卡钱包账户
         else if ([@"1005" isEqualToString:type]) {
-            sandWalletDic = (NSMutableDictionary*)dic;
+            sandWalletDic = dic;
         }
         //电子记名卡账户
         else if ([@"1006" isEqualToString:type]) {
@@ -427,9 +427,10 @@
         }
         //代付凭证
         else if ([@"1014" isEqualToString:type]) {
-            payForAnotherDic = (NSMutableDictionary*)dic;
+            payForAnotherDic = dic;
         }
     }
+    
     
     [infoDic setObject:bankArray forKey:@"bankArray"];
     [infoDic setObject:sandArray forKey:@"sandArray"];
@@ -503,7 +504,7 @@
     
     NSArray *bankNameArray = @[@"工商银行",@"建设银行",@"农业银行",@"招商银行",@"交通银行",@"中国银行",@"光大银行",@"民生银行",@"兴业银行",@"中信银行",@"广发银行",@"浦发银行",@"平安银行",@"华夏银行",@"宁波银行",@"东亚银行",@"上海银行",@"中国邮储银行",@"南京银行",@"上海农商行",@"渤海银行",@"成都银行",@"北京银行",@"徽商银行",@"天津银行"];
     
-    NSArray *bankImageNameArray = @[@"banklist_gs",@"banklist_js",@"banklist_nh",@"banklist_zs",@"banklist_jh",@"banklist_gh",@"banklist_gd",@"banklist_ms",@"banklist_xy",@"banklist_zx",@"banklist_gf",@"banklist_pf",@"banklist_pa",@"banklist_hx",@"banklist_nb",@"banklist_dy",@"banklist_sh",@"banklist_yz",@"banklist_nj",@"banklist_shns",@"banklist_bh",@"banklist_cd",@"banklist_bj",@"banklist_hs",@"banklist_tj"];
+    NSArray *bankImageNameArray = @[@"banklist_gs",@"banklist_js",@"banklist_nh",@"banklist_zs",@"banklist_jt",@"banklist_gh",@"banklist_gd",@"banklist_ms",@"banklist_xy",@"banklist_zx",@"banklist_gf",@"banklist_pf",@"banklist_pa",@"banklist_hx",@"banklist_nb",@"banklist_dy",@"banklist_sh",@"banklist_yz",@"banklist_nj",@"banklist_shns",@"banklist_bh",@"banklist_cd",@"banklist_bj",@"banklist_hs",@"banklist_tj"];
     
     for (int i = 0; i<bankNameArray.count; i++) {
         if ([bankName containsString:[bankNameArray[i] substringToIndex:2]]) {

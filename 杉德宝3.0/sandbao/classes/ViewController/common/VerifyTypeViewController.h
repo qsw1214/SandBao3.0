@@ -22,4 +22,10 @@
 @property (nonatomic, assign) NSInteger verifyType;
 
 
+/**
+ 发送的手机好
+ */
+@property (nonatomic, strong) NSString *phoneNoStr;
+
+
 @end

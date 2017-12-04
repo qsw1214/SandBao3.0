@@ -22,6 +22,8 @@ string PostWithData(string url, string data)
     
     SDNetwork *sdNetwork = [[SDNetwork alloc] init];
     
+    sdNetwork.timeoutInterval = 45; //45秒超时
+    
     string senddata = "data=" + data;
     
     NSString* recvdata = [sdNetwork httpSystemPost:[NSString stringWithUTF8String:url.c_str()] messageInfo:[NSString stringWithUTF8String:senddata.c_str()]];

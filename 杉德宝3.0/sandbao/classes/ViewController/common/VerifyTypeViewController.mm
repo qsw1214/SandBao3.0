@@ -255,6 +255,7 @@
                             smsVC.verifyAuthToolsArr = tempAuthToolsArray;
                             smsVC.smsCheckType = SMS_CHECKTYPE_VERIFYTYPE;
                             smsVC.verifyType = self.verifyType;
+                            smsVC.phoneNoStr = self.phoneNoStr;
                             [self.navigationController pushViewController:smsVC animated:YES];
                         }
                     }
