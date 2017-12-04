@@ -9,7 +9,7 @@
 #import "BankCardRechargeViewController.h"
 #import "PayNucHelper.h"
 #import "RechargeFinishViewController.h"
-
+#import "VerifyTypeViewController.h"
 
 typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 
@@ -461,7 +461,12 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        
+        //修改支付密码
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000601";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     
 }
