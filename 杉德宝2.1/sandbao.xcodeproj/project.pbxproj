@@ -66,6 +66,8 @@
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
 		287585B41FD53A8C00DACC8E /* notPay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287585B21FD53A8C00DACC8E /* notPay@2x.png */; };
 		287585B51FD53A8C00DACC8E /* notPay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287585B31FD53A8C00DACC8E /* notPay@3x.png */; };
+		287585FD1FD66ADA00DACC8E /* PayQrcodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287585FC1FD66ADA00DACC8E /* PayQrcodeViewController.m */; };
+		287586011FD66AFF00DACC8E /* SDSelectBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287586001FD66AFF00DACC8E /* SDSelectBarView.m */; };
 		28765CB11FA75D98006F2A06 /* SetCellBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28765CB01FA75D98006F2A06 /* SetCellBaseView.m */; };
 		28765CB41FA77036006F2A06 /* SetCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28765CB31FA77036006F2A06 /* SetCellView.m */; };
 		288421911F8E091200082E7C /* NSDate+time.m in Sources */ = {isa = PBXBuildFile; fileRef = 2884217A1F8E091200082E7C /* NSDate+time.m */; };
@@ -465,6 +467,10 @@
 		286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
 		287585B21FD53A8C00DACC8E /* notPay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notPay@2x.png"; sourceTree = "<group>"; };
 		287585B31FD53A8C00DACC8E /* notPay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notPay@3x.png"; sourceTree = "<group>"; };
+		287585FB1FD66ADA00DACC8E /* PayQrcodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayQrcodeViewController.h; sourceTree = "<group>"; };
+		287585FC1FD66ADA00DACC8E /* PayQrcodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayQrcodeViewController.m; sourceTree = "<group>"; };
+		287585FF1FD66AFF00DACC8E /* SDSelectBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSelectBarView.h; sourceTree = "<group>"; };
+		287586001FD66AFF00DACC8E /* SDSelectBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSelectBarView.m; sourceTree = "<group>"; };
 		28765CAF1FA75D98006F2A06 /* SetCellBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCellBaseView.h; sourceTree = "<group>"; };
 		28765CB01FA75D98006F2A06 /* SetCellBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetCellBaseView.m; sourceTree = "<group>"; };
 		28765CB21FA77036006F2A06 /* SetCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetCellView.h; sourceTree = "<group>"; };
@@ -1208,6 +1214,24 @@
 			path = SDScanView;
 			sourceTree = "<group>";
 		};
+		287585FA1FD66ABC00DACC8E /* PayQrcode */ = {
+			isa = PBXGroup;
+			children = (
+				287585FB1FD66ADA00DACC8E /* PayQrcodeViewController.h */,
+				287585FC1FD66ADA00DACC8E /* PayQrcodeViewController.m */,
+			);
+			path = PayQrcode;
+			sourceTree = "<group>";
+		};
+		287585FE1FD66AF800DACC8E /* SDSelectBarView */ = {
+			isa = PBXGroup;
+			children = (
+				287585FF1FD66AFF00DACC8E /* SDSelectBarView.h */,
+				287586001FD66AFF00DACC8E /* SDSelectBarView.m */,
+			);
+			path = SDSelectBarView;
+			sourceTree = "<group>";
+		};
 		28765CAE1FA75D41006F2A06 /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -1581,6 +1605,7 @@
 				28B649151FAC451D0074A390 /* view */,
 				28B6490C1FAC17A30074A390 /* HomeViewController.h */,
 				28B6490B1FAC17A30074A390 /* HomeViewController.mm */,
+				287585FA1FD66ABC00DACC8E /* PayQrcode */,
 				2857416B1FBD762800AA25A1 /* message */,
 			);
 			path = home;
@@ -2209,6 +2234,7 @@
 		A7FF2F941E1601CB0068A2F7 /* customView */ = {
 			isa = PBXGroup;
 			children = (
+				287585FE1FD66AF800DACC8E /* SDSelectBarView */,
 				28B649231FAC654A0074A390 /* SDPayToolView */,
 				28A8AE9C1FAB25E500FA1EC1 /* SDPopView */,
 				28981B5C1FA01FA8004CFC95 /* SDAuthToolsView */,
@@ -2617,6 +2643,7 @@
 				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
 				28D28F2F1FD15C0000B3F00B /* NSString+HDExtension.m in Sources */,
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
+				287586011FD66AFF00DACC8E /* SDSelectBarView.m in Sources */,
 				A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */,
 				289729761FBEE8ED0041373E /* AddSandCardViewController.mm in Sources */,
 				28D7E58A1FA9A51600518042 /* PaymentActiveViewController.mm in Sources */,
@@ -2686,6 +2713,7 @@
 				28D28F2E1FD15C0000B3F00B /* HDAlertView.m in Sources */,
 				28D7E5AA1FA9D15A00518042 /* PaymentPwdCell.m in Sources */,
 				28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */,
+				287585FD1FD66ADA00DACC8E /* PayQrcodeViewController.m in Sources */,
 				288421C01F8E0A7800082E7C /* Tool.m in Sources */,
 				28D7E59A1FA9A80A00518042 /* UserTransferViewController.mm in Sources */,
 				A7EFB1621EB9A8DD009AA369 /* MQTTSSLSecurityPolicyEncoder.m in Sources */,

@@ -12,6 +12,8 @@
 #import "RealNameViewController.h"
 #import "VerifyTypeViewController.h"
 #import "MessageViewController.h"
+#import "PayQrcodeViewController.h"
+
 
 #import "GradualView.h"
 #import "SDMajletView.h"
@@ -124,7 +126,9 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_INOUTPAY) {
-        NSLog(@"点击了  收付款");
+        //@"点击了  收付款"
+        PayQrcodeViewController *payQrcodeVC = [[PayQrcodeViewController alloc] init];
+        [self.navigationController pushViewController:payQrcodeVC animated:YES];
     }
     if (btn.tag == BTN_TAG_BLANCE) {
         NSLog(@"点击了  余额(万元)");

@@ -233,9 +233,6 @@
         
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/login/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
