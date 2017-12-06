@@ -51,11 +51,15 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
+    self.navCoverView.rightImgStr = @"searchpage_saoyisao";
     self.navCoverView.midTitleStr = @"收付款";
     
     __weak PayQrcodeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
+    };
+    self.navCoverView.rightBlock = ^{
+        NSLog(@"扫一扫");
     };
     
 }
