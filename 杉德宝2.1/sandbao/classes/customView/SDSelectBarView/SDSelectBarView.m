@@ -71,6 +71,12 @@
         lab.frame = CGRectMake(labSpace/2 + i*labMaxWidth, labSpace/2, labMaxWidth, labMaxHeight);
         [whiteBgView addSubview:lab];
         [titleLabArray addObject:lab];
+        
+        if (i == 0) {
+            lab.layer.backgroundColor = [UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0].CGColor;
+            lab.textColor = [UIColor whiteColor];
+            lab.userInteractionEnabled = NO;
+        }
     }
     
     //设置frame

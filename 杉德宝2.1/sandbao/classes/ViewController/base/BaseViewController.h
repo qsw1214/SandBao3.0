@@ -159,7 +159,7 @@
 //灰色
 #define COLOR_666666 HexRGBA(0x666666,1.f)
 //背景灰
-#define COLOR_F5F5F5 HexRGBA(0xF5F5F5,0.7f)
+#define COLOR_F5F5F5 HexRGBA(0xF5F5F5,1.f)
 //白色
 #define COLOR_FFFFFF HexRGBA(0xFFFFFF,1.f)
 //灰白

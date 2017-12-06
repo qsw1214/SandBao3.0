@@ -48,6 +48,13 @@
 		282D90391EF769D000CF8C28 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 282D90381EF769D000CF8C28 /* MBProgressHUD.m */; };
 		2834E4331FBE8348007F1F61 /* IdentityDetailCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2834E4321FBE8348007F1F61 /* IdentityDetailCellView.m */; };
 		2834E4361FBEB813007F1F61 /* NickNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2834E4351FBEB813007F1F61 /* NickNameViewController.mm */; };
+		2837EAD91FD7E13300C10A57 /* list_icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD11FD7E13300C10A57 /* list_icon_more@2x.png */; };
+		2837EADA1FD7E13300C10A57 /* list_icon_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD21FD7E13300C10A57 /* list_icon_more@3x.png */; };
+		2837EADB1FD7E13300C10A57 /* payToolDef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD31FD7E13300C10A57 /* payToolDef@2x.png */; };
+		2837EADC1FD7E13300C10A57 /* payToolDef@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD41FD7E13300C10A57 /* payToolDef@3x.png */; };
+		2837EADD1FD7E13300C10A57 /* shoufukuan_icon_pay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD51FD7E13300C10A57 /* shoufukuan_icon_pay@2x.png */; };
+		2837EADE1FD7E13300C10A57 /* shoufukuan_icon_pay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD61FD7E13300C10A57 /* shoufukuan_icon_pay@3x.png */; };
+		2837EADF1FD7E13300C10A57 /* SDQrcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2837EAD81FD7E13300C10A57 /* SDQrcodeView.m */; };
 		283B0FD41FAAFBA00010ADAA /* SandItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 283B0FD31FAAFBA00010ADAA /* SandItemTableViewCell.m */; };
 		283DBD0F1ECA960D00B84E3E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283DBD0E1ECA960D00B84E3E /* QuartzCore.framework */; };
 		283DBD111ECA965A00B84E3E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 283DBD101ECA965A00B84E3E /* CoreText.framework */; };
@@ -430,6 +437,14 @@
 		2834E4321FBE8348007F1F61 /* IdentityDetailCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityDetailCellView.m; sourceTree = "<group>"; };
 		2834E4341FBEB813007F1F61 /* NickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NickNameViewController.h; sourceTree = "<group>"; };
 		2834E4351FBEB813007F1F61 /* NickNameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NickNameViewController.mm; sourceTree = "<group>"; };
+		2837EAD11FD7E13300C10A57 /* list_icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@2x.png"; sourceTree = "<group>"; };
+		2837EAD21FD7E13300C10A57 /* list_icon_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@3x.png"; sourceTree = "<group>"; };
+		2837EAD31FD7E13300C10A57 /* payToolDef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payToolDef@2x.png"; sourceTree = "<group>"; };
+		2837EAD41FD7E13300C10A57 /* payToolDef@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payToolDef@3x.png"; sourceTree = "<group>"; };
+		2837EAD51FD7E13300C10A57 /* shoufukuan_icon_pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_pay@2x.png"; sourceTree = "<group>"; };
+		2837EAD61FD7E13300C10A57 /* shoufukuan_icon_pay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_pay@3x.png"; sourceTree = "<group>"; };
+		2837EAD71FD7E13300C10A57 /* SDQrcodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDQrcodeView.h; sourceTree = "<group>"; };
+		2837EAD81FD7E13300C10A57 /* SDQrcodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDQrcodeView.m; sourceTree = "<group>"; };
 		283B0FD21FAAFBA00010ADAA /* SandItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandItemTableViewCell.h; sourceTree = "<group>"; };
 		283B0FD31FAAFBA00010ADAA /* SandItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandItemTableViewCell.m; sourceTree = "<group>"; };
 		283DBD0E1ECA960D00B84E3E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -1096,6 +1111,29 @@
 			children = (
 			);
 			path = myQrCode;
+			sourceTree = "<group>";
+		};
+		2837EACF1FD7E13300C10A57 /* SDQrcodeView */ = {
+			isa = PBXGroup;
+			children = (
+				2837EAD01FD7E13300C10A57 /* img */,
+				2837EAD71FD7E13300C10A57 /* SDQrcodeView.h */,
+				2837EAD81FD7E13300C10A57 /* SDQrcodeView.m */,
+			);
+			path = SDQrcodeView;
+			sourceTree = "<group>";
+		};
+		2837EAD01FD7E13300C10A57 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				2837EAD11FD7E13300C10A57 /* list_icon_more@2x.png */,
+				2837EAD21FD7E13300C10A57 /* list_icon_more@3x.png */,
+				2837EAD31FD7E13300C10A57 /* payToolDef@2x.png */,
+				2837EAD41FD7E13300C10A57 /* payToolDef@3x.png */,
+				2837EAD51FD7E13300C10A57 /* shoufukuan_icon_pay@2x.png */,
+				2837EAD61FD7E13300C10A57 /* shoufukuan_icon_pay@3x.png */,
+			);
+			path = img;
 			sourceTree = "<group>";
 		};
 		283B0FD11FAAFB970010ADAA /* view */ = {
@@ -2234,6 +2272,7 @@
 		A7FF2F941E1601CB0068A2F7 /* customView */ = {
 			isa = PBXGroup;
 			children = (
+				2837EACF1FD7E13300C10A57 /* SDQrcodeView */,
 				287585FE1FD66AF800DACC8E /* SDSelectBarView */,
 				28B649231FAC654A0074A390 /* SDPayToolView */,
 				28A8AE9C1FAB25E500FA1EC1 /* SDPopView */,
@@ -2392,17 +2431,20 @@
 				28B649911FAC654A0074A390 /* banklist_gd@3x.png in Resources */,
 				282D90331EF769B000CF8C28 /* SDMBPerror.png in Resources */,
 				28B649951FAC654A0074A390 /* banklist_gh@3x.png in Resources */,
+				2837EADC1FD7E13300C10A57 /* payToolDef@3x.png in Resources */,
 				28B649AE1FAC654A0074A390 /* banklist_shns@2x.png in Resources */,
 				A7DF3DE91DC7202B00243EF6 /* indicator6.png in Resources */,
 				28A8AEB11FAB25E500FA1EC1 /* login_list_icon_closed@3x.png in Resources */,
 				28B649C91FAC654B0074A390 /* payGoBack@3x.png in Resources */,
 				28B649A91FAC654A0074A390 /* banklist_pa@3x.png in Resources */,
+				2837EADE1FD7E13300C10A57 /* shoufukuan_icon_pay@3x.png in Resources */,
 				28B649A71FAC654A0074A390 /* banklist_nj@3x.png in Resources */,
 				28B649C61FAC654B0074A390 /* payClosed@2x.png in Resources */,
 				28B6498F1FAC654A0074A390 /* banklist_dy@3x.png in Resources */,
 				A7DF3DF11DC7202B00243EF6 /* indicator8@3x.png in Resources */,
 				28B649BE1FAC654B0074A390 /* list_sand_logo@2x.png in Resources */,
 				28B649B61FAC654A0074A390 /* banklist_zs@2x.png in Resources */,
+				2837EAD91FD7E13300C10A57 /* list_icon_more@2x.png in Resources */,
 				28B6498B1FAC654A0074A390 /* banklist_bj@3x.png in Resources */,
 				28A8AEB01FAB25E500FA1EC1 /* login_list_icon_closed@2x.png in Resources */,
 				28B649C81FAC654B0074A390 /* payGoBack@2x.png in Resources */,
@@ -2477,6 +2519,7 @@
 				28DA887D1EEA7FCD00754259 /* tab_bg@3x.png in Resources */,
 				A7DF3DDD1DC7202B00243EF6 /* indicator2.png in Resources */,
 				28DA88861EEA7FCD00754259 /* tab_button_mine_normal@3x.png in Resources */,
+				2837EADD1FD7E13300C10A57 /* shoufukuan_icon_pay@2x.png in Resources */,
 				28B649A81FAC654A0074A390 /* banklist_pa@2x.png in Resources */,
 				28B649AC1FAC654A0074A390 /* banklist_sh@2x.png in Resources */,
 				A7DF3DF41DC7202B00243EF6 /* indicator9@3x.png in Resources */,
@@ -2493,6 +2536,7 @@
 				28B649901FAC654A0074A390 /* banklist_gd@2x.png in Resources */,
 				A7DF3DE71DC7202B00243EF6 /* indicator5@2x.png in Resources */,
 				A7DF3DE11DC7202B00243EF6 /* indicator3@2x.png in Resources */,
+				2837EADB1FD7E13300C10A57 /* payToolDef@2x.png in Resources */,
 				28B649891FAC654A0074A390 /* banklist_bh@3x.png in Resources */,
 				28B6499C1FAC654A0074A390 /* banklist_js@2x.png in Resources */,
 				28B649BA1FAC654A0074A390 /* list_cash@2x.png in Resources */,
@@ -2532,6 +2576,7 @@
 				28B649CE1FAC654B0074A390 /* qvip_pay_imageholder@2x.png in Resources */,
 				28B649C41FAC654B0074A390 /* payChooseBtn@2x.png in Resources */,
 				28B649B51FAC654A0074A390 /* banklist_yz@3x.png in Resources */,
+				2837EADA1FD7E13300C10A57 /* list_icon_more@3x.png in Resources */,
 				A7DF3DE41DC7202B00243EF6 /* indicator4@2x.png in Resources */,
 				28B649CD1FAC654B0074A390 /* payListSelectedState@3x.png in Resources */,
 			);
@@ -2640,6 +2685,7 @@
 				28D289AD1FA2CA7000C3787E /* BankCardViewController.mm in Sources */,
 				28B649801FAC654A0074A390 /* SDPayAnimtion.m in Sources */,
 				280B5C0C1FC563D300319F82 /* TestViewController.m in Sources */,
+				2837EADF1FD7E13300C10A57 /* SDQrcodeView.m in Sources */,
 				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
 				28D28F2F1FD15C0000B3F00B /* NSString+HDExtension.m in Sources */,
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
