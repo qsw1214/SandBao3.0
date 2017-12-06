@@ -1,0 +1,252 @@
+//
+//  SDQrcodeView.m
+//  SDQrcodeView
+//
+//  Created by tianNanYiHao on 2017/12/5.
+//  Copyright © 2017年 tianNanYiHao. All rights reserved.
+//
+
+#import "SDQrcodeView.h"
+
+
+#define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
+#define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+@interface SDQrcodeView (){
+    
+    //标题视图
+    UIView *headView;
+    //二维码展示视图
+    UIView *bodyView;
+    //付款码 - 支付工具展示视图
+    UIView *payToolShowView;
+    
+    //整体宽度
+    CGFloat selfViewW;
+    //整体高度
+    CGFloat selfViewH;
+    
+    //标题视图 - 标题
+    UILabel *titleLab;
+    //二维码展示视图 - 二维码描述标题
+    UILabel *qrCodeDesLab;
+}
+
+
+@end
+
+@implementation SDQrcodeView
+
+#pragma mark - 初始化+私有方法集
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    
+    if ([super initWithFrame:frame]) {
+        
+        self.backgroundColor = [UIColor whiteColor];
+        
+        //整体宽度
+        selfViewW = [UIScreen mainScreen].bounds.size.width - AdapterWfloat(50)*2;
+        
+        [self createUI];
+    }
+    return self;
+}
+
+- (void)createUI{
+    
+    [self createHeadView];
+    
+    [self createBodyView];
+    
+}
+
+- (void)createHeadView{
+    
+    
+    
+    headView = [[UIView alloc] init];
+    headView.backgroundColor = [UIColor colorWithRed:247/255.0 green:248/255.0 blue:250/255.0 alpha:1/1.0];
+    [self addSubview:headView];
+    
+    UIImage *iconImg = [UIImage imageNamed:@"shoufukuan_icon_pay"];
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.image = iconImg;
+    [headView addSubview:iconView];
+    
+    titleLab = [[UILabel alloc] init];
+    titleLab.text = @"这里是标题";
+    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
+    titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+    [headView addSubview:titleLab];
+    
+    //虚线
+    UIView *pointlineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, selfViewW, 1)];
+    pointlineView.backgroundColor = [UIColor whiteColor];
+    [self drawLineOfDashByCAShapeLayer:pointlineView lineLength:6 lineSpacing:2 lineColor:[UIColor colorWithRed:210/255.0 green:217/255.0 blue:225/255.0 alpha:1/1.0]];
+    [headView addSubview:pointlineView];
+    
+    
+    CGFloat leftSpace = AdapterWfloat(10);
+    CGFloat updownSpace = AdapterHfloat(29);
+    CGFloat headViewH = updownSpace *2 + iconImg.size.height;
+    
+    CGSize titleLabSize = [titleLab sizeThatFits:CGSizeZero];
+    CGFloat titleLabOY  = (headViewH - titleLabSize.height)/2;
+    CGFloat titleLabOX  = leftSpace + iconImg.size.width + leftSpace;
+    
+    headView.frame = CGRectMake(0, 0, selfViewW, headViewH);
+    iconView.frame = CGRectMake(leftSpace, updownSpace, iconImg.size.width, iconImg.size.height);
+    titleLab.frame = CGRectMake(titleLabOX, titleLabOY, titleLabSize.width, titleLabSize.height);
+    pointlineView.frame = CGRectMake(0, headView.frame.size.height - 1, selfViewW, 1);
+   
+    
+    
+}
+
+- (void)createBodyView{
+    
+    bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:bodyView];
+    
+    qrCodeDesLab = [[UILabel alloc] init];
+    qrCodeDesLab.text = @"这里是二维码描述";
+    qrCodeDesLab.textAlignment = NSTextAlignmentCenter;
+    qrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    qrCodeDesLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+    [bodyView addSubview:qrCodeDesLab];
+    
+    UIImageView *qrCodeImgView = [[UIImageView alloc] init];
+    qrCodeImgView.backgroundColor = [UIColor redColor];
+    [bodyView addSubview:qrCodeImgView];
+    
+    CGFloat leftRightSpace = AdapterWfloat(60);
+    CGFloat upSpace = AdapterHfloat(25);
+    CGFloat qrCodeImgViewWH = selfViewW - 2*leftRightSpace;
+    
+    CGSize qrCodeDesLabSize = [qrCodeDesLab sizeThatFits:CGSizeZero];
+    CGFloat qrCodeImgViewOY = upSpace + qrCodeDesLabSize.height + upSpace;
+    CGFloat bodyViewH       = qrCodeImgViewOY + qrCodeImgViewWH;
+    selfViewH = headView.frame.size.height + bodyViewH;
+    
+    qrCodeDesLab.frame = CGRectMake(0, upSpace, selfViewW, qrCodeDesLabSize.height);
+    qrCodeImgView.frame = CGRectMake(leftRightSpace, qrCodeImgViewOY, qrCodeImgViewWH, qrCodeImgViewWH);
+    
+    
+    bodyView.frame = CGRectMake(0, headView.frame.size.height, selfViewW, bodyViewH);
+    self.frame = CGRectMake(0, 0, headView.frame.size.width, selfViewH);
+    
+}
+
+
+#pragma mark - 公共方法
+
+
+/**
+ 创建 付款码 - 支付工具展示视图
+ */
+- (void)createPayToolShowView{
+    
+    payToolShowView = [[UIView alloc] init];
+    payToolShowView.backgroundColor = [UIColor whiteColor];
+    
+    [self addSubview:payToolShowView];
+    UIImage *payToolIconImg = [UIImage imageNamed:@"payToolDef"];
+    UIImageView *payToolIconImgV = [[UIImageView alloc] init];
+    payToolIconImgV.image = payToolIconImg;
+    [payToolShowView addSubview:payToolIconImgV];
+    
+    UILabel *payToolNameLab = [[UILabel alloc] init];
+    //@"这里是支付工具描述"
+    payToolNameLab.text = self.payToolNameStr;
+    payToolNameLab.textAlignment = NSTextAlignmentCenter;
+    payToolNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    payToolNameLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+    [payToolShowView addSubview:payToolNameLab];
+    
+    UIImage *leftEnterImg = [UIImage imageNamed:@"list_icon_more"];
+    UIImageView *leftEnterImgV = [[UIImageView alloc] init];
+    leftEnterImgV.image = leftEnterImg;
+    [payToolShowView addSubview:leftEnterImgV];
+    
+    UIButton *coverBtn = [[UIButton alloc] init];
+    coverBtn.backgroundColor = [UIColor clearColor];
+    [coverBtn addTarget:self action:@selector(changePayTool:) forControlEvents:UIControlEventTouchUpInside];
+    [payToolShowView addSubview:coverBtn];
+    
+    CGFloat space = AdapterWfloat(7);
+    CGFloat upSpace = AdapterHfloat(25);
+    CGSize  payToolNameLabSize = [payToolNameLab sizeThatFits:CGSizeZero];
+    
+    CGFloat allItemWidth = payToolIconImg.size.width + space + payToolNameLabSize.width + leftEnterImg.size.width;
+    
+    CGFloat payToolShowViewOY = headView.frame.size.height + bodyView.frame.size.height;
+    CGFloat payToolShowViewH  = upSpace + payToolIconImg.size.height + upSpace;
+    payToolShowView.frame = CGRectMake(0, payToolShowViewOY, selfViewW, payToolShowViewH);
+    
+    coverBtn.frame = CGRectMake(0, 0, selfViewW, payToolShowViewH);
+    
+    CGFloat payToolIconImgVOX = (selfViewW - allItemWidth)/2;
+    CGFloat payToolIconImgVOY = (payToolShowViewH - payToolIconImg.size.height)/2;
+    payToolIconImgV.frame     = CGRectMake(payToolIconImgVOX, payToolIconImgVOY, payToolIconImg.size.width, payToolIconImg.size.height);
+    
+    CGFloat payToolNameLabOX = payToolIconImgVOX + payToolIconImg.size.width + space;
+    CGFloat payToolNameLabOY = (payToolShowViewH - payToolNameLabSize.height)/2;
+    payToolNameLab.frame     = CGRectMake(payToolNameLabOX, payToolNameLabOY, payToolNameLabSize.width, payToolNameLabSize.height);
+    
+    CGFloat leftEnterImgVOX = payToolNameLabOX + payToolNameLabSize.width;
+    CGFloat leftEnterImgVOY = (payToolShowViewH - leftEnterImg.size.height)/2;
+    leftEnterImgV.frame     = CGRectMake(leftEnterImgVOX, leftEnterImgVOY, leftEnterImg.size.width, leftEnterImg.size.height);
+    
+    
+    selfViewH += payToolShowViewH;
+    self.frame = CGRectMake(0, 0, headView.frame.size.width, selfViewH);
+}
+
+#pragma mark - setter$getter
+- (void)setTitleStr:(NSString *)titleStr{
+    _titleStr = titleStr;
+    titleLab.text = _titleStr;
+}
+
+- (void)setQrCodeDesStr:(NSString *)qrCodeDesStr{
+    _qrCodeDesStr = qrCodeDesStr;
+    qrCodeDesLab.text = _qrCodeDesStr;
+}
+
+- (void)changePayTool:(UIButton*)btn{
+    
+    
+}
+
+/**
+ *  通过 CAShapeLayer 方式绘制虚线
+ *
+ *  param lineView:       需要绘制成虚线的view
+ *  param lineLength:     虚线的宽度
+ *  param lineSpacing:    虚线的间距
+ *  param lineColor:      虚线的颜色
+ **/
+- (void)drawLineOfDashByCAShapeLayer:(UIView *)lineView lineLength:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor {
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    [shapeLayer setBounds:lineView.bounds];
+    [shapeLayer setPosition:CGPointMake(CGRectGetWidth(lineView.frame) / 2, CGRectGetHeight(lineView.frame))];
+    [shapeLayer setFillColor:[UIColor clearColor].CGColor];
+    //  设置虚线颜色为blackColor
+    [shapeLayer setStrokeColor:lineColor.CGColor];
+    //  设置虚线宽度
+    [shapeLayer setLineWidth:CGRectGetHeight(lineView.frame)];
+    [shapeLayer setLineJoin:kCALineJoinRound];
+    //  设置线宽，线间距
+    [shapeLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:lineLength], [NSNumber numberWithInt:lineSpacing], nil]];
+    //  设置路径
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    CGPathAddLineToPoint(path, NULL,CGRectGetWidth(lineView.frame), 0);
+    [shapeLayer setPath:path];
+    CGPathRelease(path);
+    //  把绘制好的虚线添加上来
+    [lineView.layer addSublayer:shapeLayer];
+}
+
+@end
