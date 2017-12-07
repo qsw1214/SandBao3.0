@@ -87,7 +87,7 @@
     alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
     alertView.isSupportRotating = YES;
     
-    [alertView addButtonWithTitle:@"我知道了" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
+    [alertView addButtonWithTitle:@"确定" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
         defulblock();
     }];
     
@@ -95,6 +95,28 @@
     
 }
 
+
+#pragma mark - 弹出带标题对话框+默认事件处理
+/**
+ 弹出带标题对话框+默认事件处理
+
+ @param title 标题
+ @param message 信息
+ @param defulblock 默认事件处理
+ */
++ (void)showDialog:(NSString*)title message:(NSString*)message defulBlock:(DefulBtnBlock)defulblock{
+    
+    HDAlertView *alertView = [HDAlertView alertViewWithTitle:title andMessage:message];
+    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
+    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
+    alertView.isSupportRotating = YES;
+    
+    [alertView addButtonWithTitle:@"确定" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
+        defulblock();
+    }];
+    
+    [alertView show];
+}
 
 #pragma mark - 弹出带标题对话框+事件处理
 /**

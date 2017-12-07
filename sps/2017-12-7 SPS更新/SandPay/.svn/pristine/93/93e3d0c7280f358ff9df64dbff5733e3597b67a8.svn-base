@@ -1,0 +1,712 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5B0E8B8918288E600062AF65 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B0E8B8818288E600062AF65 /* Foundation.framework */; };
+		6A5ABCC71DBDF50F0096C914 /* CustomIOSAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCAF1DBDF50F0096C914 /* CustomIOSAlertView.h */; };
+		6A5ABCC81DBDF50F0096C914 /* CustomIOSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCB01DBDF50F0096C914 /* CustomIOSAlertView.m */; };
+		6A5ABCC91DBDF50F0096C914 /* DataPickViewController_sps.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCB11DBDF50F0096C914 /* DataPickViewController_sps.h */; };
+		6A5ABCCA1DBDF50F0096C914 /* DataPickViewController_sps.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCB21DBDF50F0096C914 /* DataPickViewController_sps.m */; };
+		6A5ABCCB1DBDF50F0096C914 /* Global.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCB31DBDF50F0096C914 /* Global.h */; };
+		6A5ABCCC1DBDF50F0096C914 /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCB41DBDF50F0096C914 /* Global.m */; };
+		6A5ABCCD1DBDF50F0096C914 /* RunCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCB51DBDF50F0096C914 /* RunCode.h */; };
+		6A5ABCCE1DBDF50F0096C914 /* RXCheckout.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCB61DBDF50F0096C914 /* RXCheckout.h */; };
+		6A5ABCCF1DBDF50F0096C914 /* RXCheckout.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCB71DBDF50F0096C914 /* RXCheckout.mm */; };
+		6A5ABCD01DBDF50F0096C914 /* RXHttpPipe.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCB81DBDF50F0096C914 /* RXHttpPipe.h */; };
+		6A5ABCD11DBDF50F0096C914 /* RXHttpPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCB91DBDF50F0096C914 /* RXHttpPipe.m */; };
+		6A5ABCD41DBDF50F0096C914 /* RXSPSCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCBC1DBDF50F0096C914 /* RXSPSCode.h */; };
+		6A5ABCD51DBDF50F0096C914 /* RXSPSEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCBD1DBDF50F0096C914 /* RXSPSEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABCD61DBDF50F0096C914 /* RXSPSEntry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCBE1DBDF50F0096C914 /* RXSPSEntry.mm */; };
+		6A5ABCD91DBDF50F0096C914 /* SVProgressHUD_sps.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCC11DBDF50F0096C914 /* SVProgressHUD_sps.h */; };
+		6A5ABCDA1DBDF50F0096C914 /* SVProgressHUD_sps.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCC21DBDF50F0096C914 /* SVProgressHUD_sps.m */; };
+		6A5ABCDB1DBDF50F0096C914 /* UITextField+CheckLenght.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCC31DBDF50F0096C914 /* UITextField+CheckLenght.h */; };
+		6A5ABCDC1DBDF50F0096C914 /* UITextField+CheckLenght.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCC41DBDF50F0096C914 /* UITextField+CheckLenght.m */; };
+		6A5ABCDD1DBDF50F0096C914 /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCC51DBDF50F0096C914 /* Utils.h */; };
+		6A5ABCDE1DBDF50F0096C914 /* Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCC61DBDF50F0096C914 /* Utils.mm */; };
+		6A5ABCE91DBDF5B30096C914 /* cpucard.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCE01DBDF5B30096C914 /* cpucard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABCEA1DBDF5B30096C914 /* Rwatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCE11DBDF5B30096C914 /* Rwatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABCEB1DBDF5B30096C914 /* Rwatch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCE21DBDF5B30096C914 /* Rwatch.mm */; };
+		6A5ABCEC1DBDF5B30096C914 /* RXBluetooth_38901.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCE31DBDF5B30096C914 /* RXBluetooth_38901.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABCED1DBDF5B30096C914 /* RXBluetooth_38901.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCE41DBDF5B30096C914 /* RXBluetooth_38901.mm */; };
+		6A5ABCEE1DBDF5B30096C914 /* RXBluetooth_Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCE51DBDF5B30096C914 /* RXBluetooth_Helper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABCEF1DBDF5B30096C914 /* RXBluetooth_Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCE61DBDF5B30096C914 /* RXBluetooth_Helper.m */; };
+		6A5ABCF01DBDF5B30096C914 /* Str2Data.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCE71DBDF5B30096C914 /* Str2Data.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABCF11DBDF5B30096C914 /* Str2Data.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABCE81DBDF5B30096C914 /* Str2Data.mm */; };
+		6A5ABCF41DBDF5E00096C914 /* idkey.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCF21DBDF5E00096C914 /* idkey.h */; };
+		6A5ABCF51DBDF5E00096C914 /* npcode.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCF31DBDF5E00096C914 /* npcode.h */; };
+		6A5ABCFB1DBDF6510096C914 /* rx_coder_pi.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCF61DBDF6510096C914 /* rx_coder_pi.h */; };
+		6A5ABCFC1DBDF6510096C914 /* rx_iso7816.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCF71DBDF6510096C914 /* rx_iso7816.h */; };
+		6A5ABCFD1DBDF6510096C914 /* rx_rtp_193.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCF81DBDF6510096C914 /* rx_rtp_193.h */; };
+		6A5ABCFE1DBDF6510096C914 /* rx_rtp_18843.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCF91DBDF6510096C914 /* rx_rtp_18843.h */; };
+		6A5ABCFF1DBDF6510096C914 /* sd_secretshell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABCFA1DBDF6510096C914 /* sd_secretshell.h */; };
+		6A5ABD011DBDF6930096C914 /* xjson.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABD001DBDF6930096C914 /* xjson.h */; };
+		6A5ABD021DBDF7AE0096C914 /* RXSandPayCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D421B300D5000E6D23C /* RXSandPayCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABD031DBDF7AE0096C914 /* rx_coder_pii.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D441B300D5000E6D23C /* rx_coder_pii.h */; };
+		6A5ABD041DBDF7AE0096C914 /* rx_des.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D451B300D5000E6D23C /* rx_des.h */; };
+		6A5ABD051DBDF7AE0096C914 /* rx_md5.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D461B300D5000E6D23C /* rx_md5.h */; };
+		6A5ABD061DBDF7AE0096C914 /* rx_rand.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D471B300D5000E6D23C /* rx_rand.h */; };
+		6A5ABD071DBDF7AE0096C914 /* stdrfx.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D481B300D5000E6D23C /* stdrfx.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABD081DBDF7AE0096C914 /* xhead.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D611B300D5000E6D23C /* xhead.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABD091DBDF7AE0096C914 /* xstring.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D621B300D5000E6D23C /* xstring.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABD0C1DBDF8230096C914 /* gv.h in Headers */ = {isa = PBXBuildFile; fileRef = D51D0D401B300D5000E6D23C /* gv.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A5ABD521DBE08190096C914 /* RXPayUI.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABD511DBE08190096C914 /* RXPayUI.mm */; };
+		6A5ABD541DBE08D20096C914 /* RXPayUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABD531DBE08D20096C914 /* RXPayUI.h */; };
+		6A5ABD571DBE094A0096C914 /* RXSPSOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5ABD551DBE094A0096C914 /* RXSPSOperation.h */; };
+		6A5ABD581DBE094A0096C914 /* RXSPSOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6A5ABD561DBE094A0096C914 /* RXSPSOperation.mm */; };
+		A72B28001E265A3700063107 /* UIScrollView+UITouch.h in Headers */ = {isa = PBXBuildFile; fileRef = A72B27FE1E265A3700063107 /* UIScrollView+UITouch.h */; };
+		A72B28011E265A3700063107 /* UIScrollView+UITouch.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B27FF1E265A3700063107 /* UIScrollView+UITouch.m */; };
+		A7B37D9A1E14AD38006B18D1 /* UPPaymentControl.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B37D971E14AD38006B18D1 /* UPPaymentControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7B37D9B1E14AD38006B18D1 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A7B37D991E14AD38006B18D1 /* libPaymentControl.a */; };
+		A7B37DA71E14B001006B18D1 /* SandUPPayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A7B37DA51E14B001006B18D1 /* SandUPPayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7B37DA81E14B001006B18D1 /* SandUPPayDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B37DA61E14B001006B18D1 /* SandUPPayDelegate.m */; };
+		D51D0D631B300D5000E6D23C /* libpaycore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D51D0D411B300D5000E6D23C /* libpaycore.a */; };
+		D5A96BEE1B32C744000CF69B /* DBUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = D5A96BE91B32C744000CF69B /* DBUtil.h */; };
+		D5A96BF01B32C744000CF69B /* Document.h in Headers */ = {isa = PBXBuildFile; fileRef = D5A96BEB1B32C744000CF69B /* Document.h */; };
+		D5A96BF11B32C744000CF69B /* NetworkProcess.h in Headers */ = {isa = PBXBuildFile; fileRef = D5A96BEC1B32C744000CF69B /* NetworkProcess.h */; };
+		D5A96BF21B32C744000CF69B /* sandLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D5A96BED1B32C744000CF69B /* sandLibrary.a */; };
+		D5ACEB3C1B329C4E0090268A /* Comm.h in Headers */ = {isa = PBXBuildFile; fileRef = D5ACEB351B329C4E0090268A /* Comm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5ACEB3D1B329C4E0090268A /* Comm.mm in Sources */ = {isa = PBXBuildFile; fileRef = D5ACEB361B329C4E0090268A /* Comm.mm */; };
+		D5DCAF0F1B450EF100A7DB73 /* NSString+Extension.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAEFF1B450EF100A7DB73 /* NSString+Extension.h */; };
+		D5DCAF101B450EF100A7DB73 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCAF001B450EF100A7DB73 /* NSString+Extension.m */; };
+		D5DCAF111B450EF100A7DB73 /* Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAF011B450EF100A7DB73 /* Singleton.h */; };
+		D5DCAF121B450EF100A7DB73 /* UIAlertView+Quick.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAF031B450EF100A7DB73 /* UIAlertView+Quick.h */; };
+		D5DCAF131B450EF100A7DB73 /* UIAlertView+Quick.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCAF041B450EF100A7DB73 /* UIAlertView+Quick.m */; };
+		D5DCAF141B450EF100A7DB73 /* UIView+Extension.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAF051B450EF100A7DB73 /* UIView+Extension.h */; };
+		D5DCAF151B450EF100A7DB73 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCAF061B450EF100A7DB73 /* UIView+Extension.m */; };
+		D5DCAF161B450EF100A7DB73 /* ZCAudioTool.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAF071B450EF100A7DB73 /* ZCAudioTool.h */; };
+		D5DCAF171B450EF100A7DB73 /* ZCAudioTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCAF081B450EF100A7DB73 /* ZCAudioTool.m */; };
+		D5DCAF181B450EF100A7DB73 /* ZCTradeInputView.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAF091B450EF100A7DB73 /* ZCTradeInputView.h */; };
+		D5DCAF191B450EF100A7DB73 /* ZCTradeInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCAF0A1B450EF100A7DB73 /* ZCTradeInputView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D5DCAF1A1B450EF100A7DB73 /* ZCTradeKeyboard.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAF0B1B450EF100A7DB73 /* ZCTradeKeyboard.h */; };
+		D5DCAF1B1B450EF100A7DB73 /* ZCTradeKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCAF0C1B450EF100A7DB73 /* ZCTradeKeyboard.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D5DCAF1C1B450EF100A7DB73 /* ZCTradeView.h in Headers */ = {isa = PBXBuildFile; fileRef = D5DCAF0D1B450EF100A7DB73 /* ZCTradeView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5DCAF1D1B450EF100A7DB73 /* ZCTradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DCAF0E1B450EF100A7DB73 /* ZCTradeView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F7673B451B6F0F8500438F06 /* CommParameter.h in Headers */ = {isa = PBXBuildFile; fileRef = F7673B431B6F0F8500438F06 /* CommParameter.h */; };
+		F7673B461B6F0F8500438F06 /* CommParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = F7673B441B6F0F8500438F06 /* CommParameter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5B0E8B8318288E600062AF65 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5B0E8B8518288E600062AF65 /* libSandPay.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSandPay.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B0E8B8818288E600062AF65 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5B0E8B8C18288E600062AF65 /* SandPay-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SandPay-Prefix.pch"; sourceTree = "<group>"; };
+		6A5ABCAF1DBDF50F0096C914 /* CustomIOSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOSAlertView.h; sourceTree = "<group>"; };
+		6A5ABCB01DBDF50F0096C914 /* CustomIOSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOSAlertView.m; sourceTree = "<group>"; };
+		6A5ABCB11DBDF50F0096C914 /* DataPickViewController_sps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPickViewController_sps.h; sourceTree = "<group>"; };
+		6A5ABCB21DBDF50F0096C914 /* DataPickViewController_sps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataPickViewController_sps.m; sourceTree = "<group>"; };
+		6A5ABCB31DBDF50F0096C914 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		6A5ABCB41DBDF50F0096C914 /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
+		6A5ABCB51DBDF50F0096C914 /* RunCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCode.h; sourceTree = "<group>"; };
+		6A5ABCB61DBDF50F0096C914 /* RXCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXCheckout.h; sourceTree = "<group>"; };
+		6A5ABCB71DBDF50F0096C914 /* RXCheckout.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RXCheckout.mm; sourceTree = "<group>"; };
+		6A5ABCB81DBDF50F0096C914 /* RXHttpPipe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXHttpPipe.h; sourceTree = "<group>"; };
+		6A5ABCB91DBDF50F0096C914 /* RXHttpPipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXHttpPipe.m; sourceTree = "<group>"; };
+		6A5ABCBC1DBDF50F0096C914 /* RXSPSCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSPSCode.h; sourceTree = "<group>"; };
+		6A5ABCBD1DBDF50F0096C914 /* RXSPSEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSPSEntry.h; sourceTree = "<group>"; };
+		6A5ABCBE1DBDF50F0096C914 /* RXSPSEntry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RXSPSEntry.mm; sourceTree = "<group>"; };
+		6A5ABCC11DBDF50F0096C914 /* SVProgressHUD_sps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD_sps.h; sourceTree = "<group>"; };
+		6A5ABCC21DBDF50F0096C914 /* SVProgressHUD_sps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD_sps.m; sourceTree = "<group>"; };
+		6A5ABCC31DBDF50F0096C914 /* UITextField+CheckLenght.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+CheckLenght.h"; sourceTree = "<group>"; };
+		6A5ABCC41DBDF50F0096C914 /* UITextField+CheckLenght.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+CheckLenght.m"; sourceTree = "<group>"; };
+		6A5ABCC51DBDF50F0096C914 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		6A5ABCC61DBDF50F0096C914 /* Utils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Utils.mm; sourceTree = "<group>"; };
+		6A5ABCE01DBDF5B30096C914 /* cpucard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpucard.h; sourceTree = "<group>"; };
+		6A5ABCE11DBDF5B30096C914 /* Rwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rwatch.h; sourceTree = "<group>"; };
+		6A5ABCE21DBDF5B30096C914 /* Rwatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Rwatch.mm; sourceTree = "<group>"; };
+		6A5ABCE31DBDF5B30096C914 /* RXBluetooth_38901.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBluetooth_38901.h; sourceTree = "<group>"; };
+		6A5ABCE41DBDF5B30096C914 /* RXBluetooth_38901.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RXBluetooth_38901.mm; sourceTree = "<group>"; };
+		6A5ABCE51DBDF5B30096C914 /* RXBluetooth_Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBluetooth_Helper.h; sourceTree = "<group>"; };
+		6A5ABCE61DBDF5B30096C914 /* RXBluetooth_Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBluetooth_Helper.m; sourceTree = "<group>"; };
+		6A5ABCE71DBDF5B30096C914 /* Str2Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Str2Data.h; sourceTree = "<group>"; };
+		6A5ABCE81DBDF5B30096C914 /* Str2Data.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Str2Data.mm; sourceTree = "<group>"; };
+		6A5ABCF21DBDF5E00096C914 /* idkey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idkey.h; sourceTree = "<group>"; };
+		6A5ABCF31DBDF5E00096C914 /* npcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = npcode.h; sourceTree = "<group>"; };
+		6A5ABCF61DBDF6510096C914 /* rx_coder_pi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_coder_pi.h; sourceTree = "<group>"; };
+		6A5ABCF71DBDF6510096C914 /* rx_iso7816.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_iso7816.h; sourceTree = "<group>"; };
+		6A5ABCF81DBDF6510096C914 /* rx_rtp_193.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_rtp_193.h; sourceTree = "<group>"; };
+		6A5ABCF91DBDF6510096C914 /* rx_rtp_18843.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_rtp_18843.h; sourceTree = "<group>"; };
+		6A5ABCFA1DBDF6510096C914 /* sd_secretshell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sd_secretshell.h; sourceTree = "<group>"; };
+		6A5ABD001DBDF6930096C914 /* xjson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xjson.h; sourceTree = "<group>"; };
+		6A5ABD511DBE08190096C914 /* RXPayUI.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RXPayUI.mm; sourceTree = "<group>"; };
+		6A5ABD531DBE08D20096C914 /* RXPayUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXPayUI.h; sourceTree = "<group>"; };
+		6A5ABD551DBE094A0096C914 /* RXSPSOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSPSOperation.h; sourceTree = "<group>"; };
+		6A5ABD561DBE094A0096C914 /* RXSPSOperation.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RXSPSOperation.mm; sourceTree = "<group>"; };
+		A72B27FE1E265A3700063107 /* UIScrollView+UITouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+UITouch.h"; sourceTree = "<group>"; };
+		A72B27FF1E265A3700063107 /* UIScrollView+UITouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+UITouch.m"; sourceTree = "<group>"; };
+		A7B37D971E14AD38006B18D1 /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
+		A7B37D991E14AD38006B18D1 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
+		A7B37DA51E14B001006B18D1 /* SandUPPayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandUPPayDelegate.h; sourceTree = "<group>"; };
+		A7B37DA61E14B001006B18D1 /* SandUPPayDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandUPPayDelegate.m; sourceTree = "<group>"; };
+		D51D0D401B300D5000E6D23C /* gv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gv.h; sourceTree = "<group>"; };
+		D51D0D411B300D5000E6D23C /* libpaycore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpaycore.a; sourceTree = "<group>"; };
+		D51D0D421B300D5000E6D23C /* RXSandPayCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSandPayCore.h; sourceTree = "<group>"; };
+		D51D0D441B300D5000E6D23C /* rx_coder_pii.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_coder_pii.h; sourceTree = "<group>"; };
+		D51D0D451B300D5000E6D23C /* rx_des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_des.h; sourceTree = "<group>"; };
+		D51D0D461B300D5000E6D23C /* rx_md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_md5.h; sourceTree = "<group>"; };
+		D51D0D471B300D5000E6D23C /* rx_rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rx_rand.h; sourceTree = "<group>"; };
+		D51D0D481B300D5000E6D23C /* stdrfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stdrfx.h; sourceTree = "<group>"; };
+		D51D0D611B300D5000E6D23C /* xhead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xhead.h; sourceTree = "<group>"; };
+		D51D0D621B300D5000E6D23C /* xstring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xstring.h; sourceTree = "<group>"; };
+		D51D0D6E1B300D9100E6D23C /* sandpay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = sandpay.bundle; sourceTree = "<group>"; };
+		D5A96BE91B32C744000CF69B /* DBUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUtil.h; sourceTree = "<group>"; };
+		D5A96BEB1B32C744000CF69B /* Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
+		D5A96BEC1B32C744000CF69B /* NetworkProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkProcess.h; sourceTree = "<group>"; };
+		D5A96BED1B32C744000CF69B /* sandLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = sandLibrary.a; sourceTree = "<group>"; };
+		D5ACEB351B329C4E0090268A /* Comm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comm.h; sourceTree = "<group>"; };
+		D5ACEB361B329C4E0090268A /* Comm.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Comm.mm; sourceTree = "<group>"; };
+		D5DCAEFF1B450EF100A7DB73 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		D5DCAF001B450EF100A7DB73 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		D5DCAF011B450EF100A7DB73 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		D5DCAF031B450EF100A7DB73 /* UIAlertView+Quick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Quick.h"; sourceTree = "<group>"; };
+		D5DCAF041B450EF100A7DB73 /* UIAlertView+Quick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Quick.m"; sourceTree = "<group>"; };
+		D5DCAF051B450EF100A7DB73 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		D5DCAF061B450EF100A7DB73 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		D5DCAF071B450EF100A7DB73 /* ZCAudioTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCAudioTool.h; sourceTree = "<group>"; };
+		D5DCAF081B450EF100A7DB73 /* ZCAudioTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCAudioTool.m; sourceTree = "<group>"; };
+		D5DCAF091B450EF100A7DB73 /* ZCTradeInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeInputView.h; sourceTree = "<group>"; };
+		D5DCAF0A1B450EF100A7DB73 /* ZCTradeInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeInputView.m; sourceTree = "<group>"; };
+		D5DCAF0B1B450EF100A7DB73 /* ZCTradeKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeKeyboard.h; sourceTree = "<group>"; };
+		D5DCAF0C1B450EF100A7DB73 /* ZCTradeKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeKeyboard.m; sourceTree = "<group>"; };
+		D5DCAF0D1B450EF100A7DB73 /* ZCTradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCTradeView.h; sourceTree = "<group>"; };
+		D5DCAF0E1B450EF100A7DB73 /* ZCTradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCTradeView.m; sourceTree = "<group>"; };
+		F7673B431B6F0F8500438F06 /* CommParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommParameter.h; sourceTree = "<group>"; };
+		F7673B441B6F0F8500438F06 /* CommParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommParameter.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5B0E8B8218288E600062AF65 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7B37D9B1E14AD38006B18D1 /* libPaymentControl.a in Frameworks */,
+				D51D0D631B300D5000E6D23C /* libpaycore.a in Frameworks */,
+				5B0E8B8918288E600062AF65 /* Foundation.framework in Frameworks */,
+				D5A96BF21B32C744000CF69B /* sandLibrary.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5B0E8B7C18288E600062AF65 = {
+			isa = PBXGroup;
+			children = (
+				5B0E8B8A18288E600062AF65 /* SandPay */,
+				5B0E8B8718288E600062AF65 /* Frameworks */,
+				5B0E8B8618288E600062AF65 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5B0E8B8618288E600062AF65 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5B0E8B8518288E600062AF65 /* libSandPay.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5B0E8B8718288E600062AF65 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5B0E8B8818288E600062AF65 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B0E8B8A18288E600062AF65 /* SandPay */ = {
+			isa = PBXGroup;
+			children = (
+				6A5ABCDF1DBDF5B30096C914 /* rwatch */,
+				D5DCAEFE1B450EF100A7DB73 /* ZCTradeView */,
+				D5ACEB331B329C4E0090268A /* paycode */,
+				D51D0D3F1B300D5000E6D23C /* paycore */,
+				D51D0D431B300D5000E6D23C /* rxbase */,
+				A7B37D9C1E14AF56006B18D1 /* sandUPPayDelegate */,
+				D51D0D491B300D5000E6D23C /* sps */,
+				D51D0D601B300D5000E6D23C /* sz */,
+				A7B37D951E14AD38006B18D1 /* paymentcontrol */,
+				5B0E8B8B18288E600062AF65 /* Supporting Files */,
+			);
+			path = SandPay;
+			sourceTree = "<group>";
+		};
+		5B0E8B8B18288E600062AF65 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D51D0D6E1B300D9100E6D23C /* sandpay.bundle */,
+				5B0E8B8C18288E600062AF65 /* SandPay-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6A5ABCDF1DBDF5B30096C914 /* rwatch */ = {
+			isa = PBXGroup;
+			children = (
+				6A5ABCE01DBDF5B30096C914 /* cpucard.h */,
+				6A5ABCE11DBDF5B30096C914 /* Rwatch.h */,
+				6A5ABCE21DBDF5B30096C914 /* Rwatch.mm */,
+				6A5ABCE31DBDF5B30096C914 /* RXBluetooth_38901.h */,
+				6A5ABCE41DBDF5B30096C914 /* RXBluetooth_38901.mm */,
+				6A5ABCE51DBDF5B30096C914 /* RXBluetooth_Helper.h */,
+				6A5ABCE61DBDF5B30096C914 /* RXBluetooth_Helper.m */,
+				6A5ABCE71DBDF5B30096C914 /* Str2Data.h */,
+				6A5ABCE81DBDF5B30096C914 /* Str2Data.mm */,
+			);
+			path = rwatch;
+			sourceTree = "<group>";
+		};
+		A7B37D951E14AD38006B18D1 /* paymentcontrol */ = {
+			isa = PBXGroup;
+			children = (
+				A7B37D961E14AD38006B18D1 /* inc */,
+				A7B37D981E14AD38006B18D1 /* libs */,
+			);
+			path = paymentcontrol;
+			sourceTree = "<group>";
+		};
+		A7B37D961E14AD38006B18D1 /* inc */ = {
+			isa = PBXGroup;
+			children = (
+				A7B37D971E14AD38006B18D1 /* UPPaymentControl.h */,
+			);
+			path = inc;
+			sourceTree = "<group>";
+		};
+		A7B37D981E14AD38006B18D1 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				A7B37D991E14AD38006B18D1 /* libPaymentControl.a */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		A7B37D9C1E14AF56006B18D1 /* sandUPPayDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				A7B37DA51E14B001006B18D1 /* SandUPPayDelegate.h */,
+				A7B37DA61E14B001006B18D1 /* SandUPPayDelegate.m */,
+			);
+			path = sandUPPayDelegate;
+			sourceTree = "<group>";
+		};
+		D51D0D3F1B300D5000E6D23C /* paycore */ = {
+			isa = PBXGroup;
+			children = (
+				D51D0D401B300D5000E6D23C /* gv.h */,
+				6A5ABCF21DBDF5E00096C914 /* idkey.h */,
+				6A5ABCF31DBDF5E00096C914 /* npcode.h */,
+				D51D0D411B300D5000E6D23C /* libpaycore.a */,
+				D51D0D421B300D5000E6D23C /* RXSandPayCore.h */,
+			);
+			path = paycore;
+			sourceTree = "<group>";
+		};
+		D51D0D431B300D5000E6D23C /* rxbase */ = {
+			isa = PBXGroup;
+			children = (
+				6A5ABCF61DBDF6510096C914 /* rx_coder_pi.h */,
+				6A5ABCF71DBDF6510096C914 /* rx_iso7816.h */,
+				6A5ABCF81DBDF6510096C914 /* rx_rtp_193.h */,
+				6A5ABCF91DBDF6510096C914 /* rx_rtp_18843.h */,
+				6A5ABCFA1DBDF6510096C914 /* sd_secretshell.h */,
+				D51D0D441B300D5000E6D23C /* rx_coder_pii.h */,
+				D51D0D451B300D5000E6D23C /* rx_des.h */,
+				D51D0D461B300D5000E6D23C /* rx_md5.h */,
+				D51D0D471B300D5000E6D23C /* rx_rand.h */,
+				D51D0D481B300D5000E6D23C /* stdrfx.h */,
+			);
+			path = rxbase;
+			sourceTree = "<group>";
+		};
+		D51D0D491B300D5000E6D23C /* sps */ = {
+			isa = PBXGroup;
+			children = (
+				A72B27FE1E265A3700063107 /* UIScrollView+UITouch.h */,
+				A72B27FF1E265A3700063107 /* UIScrollView+UITouch.m */,
+				6A5ABCAF1DBDF50F0096C914 /* CustomIOSAlertView.h */,
+				6A5ABCB01DBDF50F0096C914 /* CustomIOSAlertView.m */,
+				6A5ABCB11DBDF50F0096C914 /* DataPickViewController_sps.h */,
+				6A5ABCB21DBDF50F0096C914 /* DataPickViewController_sps.m */,
+				6A5ABCB31DBDF50F0096C914 /* Global.h */,
+				6A5ABCB41DBDF50F0096C914 /* Global.m */,
+				6A5ABCB51DBDF50F0096C914 /* RunCode.h */,
+				6A5ABCB61DBDF50F0096C914 /* RXCheckout.h */,
+				6A5ABCB71DBDF50F0096C914 /* RXCheckout.mm */,
+				6A5ABCB81DBDF50F0096C914 /* RXHttpPipe.h */,
+				6A5ABCB91DBDF50F0096C914 /* RXHttpPipe.m */,
+				6A5ABD531DBE08D20096C914 /* RXPayUI.h */,
+				6A5ABD511DBE08190096C914 /* RXPayUI.mm */,
+				6A5ABD551DBE094A0096C914 /* RXSPSOperation.h */,
+				6A5ABD561DBE094A0096C914 /* RXSPSOperation.mm */,
+				6A5ABCBC1DBDF50F0096C914 /* RXSPSCode.h */,
+				6A5ABCBD1DBDF50F0096C914 /* RXSPSEntry.h */,
+				6A5ABCBE1DBDF50F0096C914 /* RXSPSEntry.mm */,
+				6A5ABCC11DBDF50F0096C914 /* SVProgressHUD_sps.h */,
+				6A5ABCC21DBDF50F0096C914 /* SVProgressHUD_sps.m */,
+				6A5ABCC31DBDF50F0096C914 /* UITextField+CheckLenght.h */,
+				6A5ABCC41DBDF50F0096C914 /* UITextField+CheckLenght.m */,
+				6A5ABCC51DBDF50F0096C914 /* Utils.h */,
+				6A5ABCC61DBDF50F0096C914 /* Utils.mm */,
+			);
+			path = sps;
+			sourceTree = "<group>";
+		};
+		D51D0D601B300D5000E6D23C /* sz */ = {
+			isa = PBXGroup;
+			children = (
+				6A5ABD001DBDF6930096C914 /* xjson.h */,
+				D51D0D611B300D5000E6D23C /* xhead.h */,
+				D51D0D621B300D5000E6D23C /* xstring.h */,
+			);
+			path = sz;
+			sourceTree = "<group>";
+		};
+		D5A96BE81B32C744000CF69B /* sandLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				D5A96BE91B32C744000CF69B /* DBUtil.h */,
+				D5A96BEB1B32C744000CF69B /* Document.h */,
+				D5A96BEC1B32C744000CF69B /* NetworkProcess.h */,
+				D5A96BED1B32C744000CF69B /* sandLibrary.a */,
+			);
+			path = sandLibrary;
+			sourceTree = "<group>";
+		};
+		D5ACEB331B329C4E0090268A /* paycode */ = {
+			isa = PBXGroup;
+			children = (
+				D5ACEB341B329C4E0090268A /* comm */,
+				D5A96BE81B32C744000CF69B /* sandLibrary */,
+			);
+			path = paycode;
+			sourceTree = "<group>";
+		};
+		D5ACEB341B329C4E0090268A /* comm */ = {
+			isa = PBXGroup;
+			children = (
+				F7673B431B6F0F8500438F06 /* CommParameter.h */,
+				F7673B441B6F0F8500438F06 /* CommParameter.m */,
+				D5ACEB351B329C4E0090268A /* Comm.h */,
+				D5ACEB361B329C4E0090268A /* Comm.mm */,
+			);
+			path = comm;
+			sourceTree = "<group>";
+		};
+		D5DCAEFE1B450EF100A7DB73 /* ZCTradeView */ = {
+			isa = PBXGroup;
+			children = (
+				D5DCAEFF1B450EF100A7DB73 /* NSString+Extension.h */,
+				D5DCAF001B450EF100A7DB73 /* NSString+Extension.m */,
+				D5DCAF011B450EF100A7DB73 /* Singleton.h */,
+				D5DCAF031B450EF100A7DB73 /* UIAlertView+Quick.h */,
+				D5DCAF041B450EF100A7DB73 /* UIAlertView+Quick.m */,
+				D5DCAF051B450EF100A7DB73 /* UIView+Extension.h */,
+				D5DCAF061B450EF100A7DB73 /* UIView+Extension.m */,
+				D5DCAF071B450EF100A7DB73 /* ZCAudioTool.h */,
+				D5DCAF081B450EF100A7DB73 /* ZCAudioTool.m */,
+				D5DCAF091B450EF100A7DB73 /* ZCTradeInputView.h */,
+				D5DCAF0A1B450EF100A7DB73 /* ZCTradeInputView.m */,
+				D5DCAF0B1B450EF100A7DB73 /* ZCTradeKeyboard.h */,
+				D5DCAF0C1B450EF100A7DB73 /* ZCTradeKeyboard.m */,
+				D5DCAF0D1B450EF100A7DB73 /* ZCTradeView.h */,
+				D5DCAF0E1B450EF100A7DB73 /* ZCTradeView.m */,
+			);
+			path = ZCTradeView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D51D0D6F1B300E8700E6D23C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5DCAF161B450EF100A7DB73 /* ZCAudioTool.h in Headers */,
+				6A5ABCEE1DBDF5B30096C914 /* RXBluetooth_Helper.h in Headers */,
+				6A5ABCF01DBDF5B30096C914 /* Str2Data.h in Headers */,
+				6A5ABCE91DBDF5B30096C914 /* cpucard.h in Headers */,
+				6A5ABCD51DBDF50F0096C914 /* RXSPSEntry.h in Headers */,
+				6A5ABD541DBE08D20096C914 /* RXPayUI.h in Headers */,
+				6A5ABCEA1DBDF5B30096C914 /* Rwatch.h in Headers */,
+				A7B37DA71E14B001006B18D1 /* SandUPPayDelegate.h in Headers */,
+				6A5ABD091DBDF7AE0096C914 /* xstring.h in Headers */,
+				A7B37D9A1E14AD38006B18D1 /* UPPaymentControl.h in Headers */,
+				6A5ABD071DBDF7AE0096C914 /* stdrfx.h in Headers */,
+				6A5ABD081DBDF7AE0096C914 /* xhead.h in Headers */,
+				6A5ABD021DBDF7AE0096C914 /* RXSandPayCore.h in Headers */,
+				6A5ABCEC1DBDF5B30096C914 /* RXBluetooth_38901.h in Headers */,
+				6A5ABD0C1DBDF8230096C914 /* gv.h in Headers */,
+				D5DCAF111B450EF100A7DB73 /* Singleton.h in Headers */,
+				6A5ABD031DBDF7AE0096C914 /* rx_coder_pii.h in Headers */,
+				6A5ABD041DBDF7AE0096C914 /* rx_des.h in Headers */,
+				6A5ABD051DBDF7AE0096C914 /* rx_md5.h in Headers */,
+				6A5ABD061DBDF7AE0096C914 /* rx_rand.h in Headers */,
+				6A5ABCFB1DBDF6510096C914 /* rx_coder_pi.h in Headers */,
+				6A5ABCC91DBDF50F0096C914 /* DataPickViewController_sps.h in Headers */,
+				F7673B451B6F0F8500438F06 /* CommParameter.h in Headers */,
+				6A5ABCCD1DBDF50F0096C914 /* RunCode.h in Headers */,
+				D5DCAF1C1B450EF100A7DB73 /* ZCTradeView.h in Headers */,
+				D5DCAF0F1B450EF100A7DB73 /* NSString+Extension.h in Headers */,
+				6A5ABCDD1DBDF50F0096C914 /* Utils.h in Headers */,
+				D5DCAF121B450EF100A7DB73 /* UIAlertView+Quick.h in Headers */,
+				6A5ABCFC1DBDF6510096C914 /* rx_iso7816.h in Headers */,
+				D5ACEB3C1B329C4E0090268A /* Comm.h in Headers */,
+				D5DCAF1A1B450EF100A7DB73 /* ZCTradeKeyboard.h in Headers */,
+				A72B28001E265A3700063107 /* UIScrollView+UITouch.h in Headers */,
+				D5DCAF181B450EF100A7DB73 /* ZCTradeInputView.h in Headers */,
+				6A5ABD011DBDF6930096C914 /* xjson.h in Headers */,
+				D5A96BEE1B32C744000CF69B /* DBUtil.h in Headers */,
+				6A5ABCF41DBDF5E00096C914 /* idkey.h in Headers */,
+				6A5ABCCE1DBDF50F0096C914 /* RXCheckout.h in Headers */,
+				D5A96BF11B32C744000CF69B /* NetworkProcess.h in Headers */,
+				6A5ABD571DBE094A0096C914 /* RXSPSOperation.h in Headers */,
+				D5A96BF01B32C744000CF69B /* Document.h in Headers */,
+				6A5ABCFD1DBDF6510096C914 /* rx_rtp_193.h in Headers */,
+				6A5ABCFF1DBDF6510096C914 /* sd_secretshell.h in Headers */,
+				6A5ABCDB1DBDF50F0096C914 /* UITextField+CheckLenght.h in Headers */,
+				6A5ABCD01DBDF50F0096C914 /* RXHttpPipe.h in Headers */,
+				6A5ABCD41DBDF50F0096C914 /* RXSPSCode.h in Headers */,
+				D5DCAF141B450EF100A7DB73 /* UIView+Extension.h in Headers */,
+				6A5ABCF51DBDF5E00096C914 /* npcode.h in Headers */,
+				6A5ABCD91DBDF50F0096C914 /* SVProgressHUD_sps.h in Headers */,
+				6A5ABCFE1DBDF6510096C914 /* rx_rtp_18843.h in Headers */,
+				6A5ABCC71DBDF50F0096C914 /* CustomIOSAlertView.h in Headers */,
+				6A5ABCCB1DBDF50F0096C914 /* Global.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5B0E8B8418288E600062AF65 /* SandPay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B0E8B9318288E600062AF65 /* Build configuration list for PBXNativeTarget "SandPay" */;
+			buildPhases = (
+				5B0E8B8118288E600062AF65 /* Sources */,
+				5B0E8B8218288E600062AF65 /* Frameworks */,
+				5B0E8B8318288E600062AF65 /* CopyFiles */,
+				D51D0D6F1B300E8700E6D23C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SandPay;
+			productName = SandPay;
+			productReference = 5B0E8B8518288E600062AF65 /* libSandPay.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5B0E8B7D18288E600062AF65 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = PengLin;
+			};
+			buildConfigurationList = 5B0E8B8018288E600062AF65 /* Build configuration list for PBXProject "SandPay" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5B0E8B7C18288E600062AF65;
+			productRefGroup = 5B0E8B8618288E600062AF65 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5B0E8B8418288E600062AF65 /* SandPay */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5B0E8B8118288E600062AF65 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6A5ABCDA1DBDF50F0096C914 /* SVProgressHUD_sps.m in Sources */,
+				6A5ABCDE1DBDF50F0096C914 /* Utils.mm in Sources */,
+				6A5ABCCC1DBDF50F0096C914 /* Global.m in Sources */,
+				D5DCAF191B450EF100A7DB73 /* ZCTradeInputView.m in Sources */,
+				D5DCAF171B450EF100A7DB73 /* ZCAudioTool.m in Sources */,
+				6A5ABCD11DBDF50F0096C914 /* RXHttpPipe.m in Sources */,
+				6A5ABCCA1DBDF50F0096C914 /* DataPickViewController_sps.m in Sources */,
+				A72B28011E265A3700063107 /* UIScrollView+UITouch.m in Sources */,
+				D5DCAF151B450EF100A7DB73 /* UIView+Extension.m in Sources */,
+				A7B37DA81E14B001006B18D1 /* SandUPPayDelegate.m in Sources */,
+				6A5ABCEF1DBDF5B30096C914 /* RXBluetooth_Helper.m in Sources */,
+				6A5ABCDC1DBDF50F0096C914 /* UITextField+CheckLenght.m in Sources */,
+				6A5ABCD61DBDF50F0096C914 /* RXSPSEntry.mm in Sources */,
+				D5DCAF131B450EF100A7DB73 /* UIAlertView+Quick.m in Sources */,
+				6A5ABCC81DBDF50F0096C914 /* CustomIOSAlertView.m in Sources */,
+				6A5ABCCF1DBDF50F0096C914 /* RXCheckout.mm in Sources */,
+				6A5ABCED1DBDF5B30096C914 /* RXBluetooth_38901.mm in Sources */,
+				6A5ABCF11DBDF5B30096C914 /* Str2Data.mm in Sources */,
+				D5DCAF101B450EF100A7DB73 /* NSString+Extension.m in Sources */,
+				D5DCAF1D1B450EF100A7DB73 /* ZCTradeView.m in Sources */,
+				6A5ABD581DBE094A0096C914 /* RXSPSOperation.mm in Sources */,
+				6A5ABCEB1DBDF5B30096C914 /* Rwatch.mm in Sources */,
+				D5DCAF1B1B450EF100A7DB73 /* ZCTradeKeyboard.m in Sources */,
+				6A5ABD521DBE08190096C914 /* RXPayUI.mm in Sources */,
+				F7673B461B6F0F8500438F06 /* CommParameter.m in Sources */,
+				D5ACEB3D1B329C4E0090268A /* Comm.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5B0E8B9118288E600062AF65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_BITCODE = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALID_ARCHS = "armv7 arm64";
+			};
+			name = Debug;
+		};
+		5B0E8B9218288E600062AF65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_BITCODE = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 arm64";
+			};
+			name = Release;
+		};
+		5B0E8B9418288E600062AF65 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SandPay.dst;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SandPay/SandPay-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SandPay/paycore\"",
+					"\"$(SRCROOT)/SandPay/upmp/libs/Release-iphoneos\"",
+					"$(PROJECT_DIR)/SandPay/paycore",
+					"$(PROJECT_DIR)/SandPay/upmp/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/SandPay/paycode/sandLibrary",
+					"$(PROJECT_DIR)/SandPay/paymentcontrol/libs",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		5B0E8B9518288E600062AF65 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SandPay.dst;
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SandPay/SandPay-Prefix.pch";
+				HEADER_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SandPay/paycore\"",
+					"\"$(SRCROOT)/SandPay/upmp/libs/Release-iphoneos\"",
+					"$(PROJECT_DIR)/SandPay/paycore",
+					"$(PROJECT_DIR)/SandPay/upmp/libs/Release-iphoneos",
+					"$(PROJECT_DIR)/SandPay/paycode/sandLibrary",
+					"$(PROJECT_DIR)/SandPay/paymentcontrol/libs",
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-all_load";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5B0E8B8018288E600062AF65 /* Build configuration list for PBXProject "SandPay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B0E8B9118288E600062AF65 /* Debug */,
+				5B0E8B9218288E600062AF65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B0E8B9318288E600062AF65 /* Build configuration list for PBXNativeTarget "SandPay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B0E8B9418288E600062AF65 /* Debug */,
+				5B0E8B9518288E600062AF65 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5B0E8B7D18288E600062AF65 /* Project object */;
+}

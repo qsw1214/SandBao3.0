@@ -9,7 +9,7 @@
 #import "PayQrcodeViewController.h"
 #import "SDSelectBarView.h"
 #import "SDQrcodeView.h"
-
+#import "ScannerViewController.h"
 @interface PayQrcodeViewController ()
 {
     
@@ -59,7 +59,9 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     self.navCoverView.rightBlock = ^{
-        NSLog(@"扫一扫");
+        //@"扫一扫"
+        ScannerViewController *mScannerViewController = [[ScannerViewController alloc] init];
+        [weakSelf.navigationController pushViewController:mScannerViewController animated:YES];
     };
     
 }

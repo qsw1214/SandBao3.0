@@ -1,6 +1,8 @@
 PODS:
   - IQKeyboardManager (3.3.7)
   - Masonry (1.0.2)
+  - Pgyer (2.8.7)
+  - PgyUpdate (1.4)
   - pop (1.0.10)
   - RESideMenu (4.0.7)
   - SDWebImage (4.1.0):
@@ -11,6 +13,8 @@ PODS:
 DEPENDENCIES:
   - IQKeyboardManager
   - Masonry
+  - Pgyer
+  - PgyUpdate
   - pop
   - RESideMenu (~> 4.0.7)
   - SDWebImage (~> 4.0)
@@ -19,11 +23,13 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
+  Pgyer: 94e52b954e7595c86fa5ba70a154cb1d31d4be0d
+  PgyUpdate: 9e90cb8071e84df415d7ea56dbfc497f7be11d8c
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
 
-PODFILE CHECKSUM: 857e601f1840c7c57d541f4a2f92b80caf6e61d8
+PODFILE CHECKSUM: 0b224cb1fee445c541969b4bf16071085851375f
 
 COCOAPODS: 1.2.1

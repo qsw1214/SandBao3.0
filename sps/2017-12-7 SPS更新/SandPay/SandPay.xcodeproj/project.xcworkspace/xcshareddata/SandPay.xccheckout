@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6CEE6E73-BD30-4BCB-A3A8-0263BD319295</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SandPay</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>60e5d789-7500-4031-9b5e-62be68ed616d++2624</key>
+		<string>http://Yue.jl@172.28.250.14/svn/SDDS008000</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>trunk/source_code/SandPay/SandPay.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>60e5d789-7500-4031-9b5e-62be68ed616d++2624</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>60e5d789-7500-4031-9b5e-62be68ed616d++2624</key>
+		<string>http://Yue.jl@172.28.250.14/svn</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://Yue.jl@172.28.250.14/svn/SDDS008000/trunk/source_code/SandPay/SandPay.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>60e5d789-7500-4031-9b5e-62be68ed616d++2624</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>60e5d789-7500-4031-9b5e-62be68ed616d++2624</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SDDS008000</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -225,6 +225,7 @@
 		28BCE8C21FB18FD500D62F94 /* VerifyTypeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8BF1FB18FD500D62F94 /* VerifyTypeViewController.mm */; };
 		28BCE8C31FB18FD500D62F94 /* VerifyViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8C11FB18FD500D62F94 /* VerifyViewController.mm */; };
 		28BCE8C61FB190B300D62F94 /* ChangeLogPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8C51FB190B300D62F94 /* ChangeLogPwdViewController.mm */; };
+		28C362471FD912CB007F067C /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C362461FD912CB007F067C /* ScannerViewController.m */; };
 		28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */; };
 		28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A61FA2CA4900C3787E /* SandPointsViewController.m */; };
 		28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */; };
@@ -703,6 +704,8 @@
 		28BCE8C11FB18FD500D62F94 /* VerifyViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VerifyViewController.mm; sourceTree = "<group>"; };
 		28BCE8C41FB190B300D62F94 /* ChangeLogPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeLogPwdViewController.h; sourceTree = "<group>"; };
 		28BCE8C51FB190B300D62F94 /* ChangeLogPwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ChangeLogPwdViewController.mm; sourceTree = "<group>"; };
+		28C362451FD912CB007F067C /* ScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScannerViewController.h; sourceTree = "<group>"; };
+		28C362461FD912CB007F067C /* ScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScannerViewController.m; sourceTree = "<group>"; };
 		28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountViewController.h; sourceTree = "<group>"; };
 		28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WalletAccountViewController.mm; sourceTree = "<group>"; };
 		28D289A51FA2CA4900C3787E /* SandPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandPointsViewController.h; sourceTree = "<group>"; };
@@ -1257,6 +1260,8 @@
 			children = (
 				287585FB1FD66ADA00DACC8E /* PayQrcodeViewController.h */,
 				287585FC1FD66ADA00DACC8E /* PayQrcodeViewController.m */,
+				28C362451FD912CB007F067C /* ScannerViewController.h */,
+				28C362461FD912CB007F067C /* ScannerViewController.m */,
 			);
 			path = PayQrcode;
 			sourceTree = "<group>";
@@ -2748,6 +2753,7 @@
 				28D28F1A1FCD511100B3F00B /* LocationUtil.m in Sources */,
 				28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */,
 				28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */,
+				28C362471FD912CB007F067C /* ScannerViewController.m in Sources */,
 				28A8AEAF1FAB25E500FA1EC1 /* SDBottomPop.m in Sources */,
 				A7FF2FE91E160A800068A2F7 /* MinletsData.m in Sources */,
 				282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */,

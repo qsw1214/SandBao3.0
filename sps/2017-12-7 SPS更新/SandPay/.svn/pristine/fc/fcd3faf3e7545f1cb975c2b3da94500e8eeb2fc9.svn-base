@@ -1,0 +1,25 @@
+//
+//  RXSPSCode.h
+//  sps2-dev
+//
+//  Created by Rick Xing on 6/24/13.
+//  Copyright (c) 2013 Rick Xing. All rights reserved.
+//
+
+#ifndef sps2_dev_RXSPSCode_h
+#define sps2_dev_RXSPSCode_h
+
+#define SPS_OK                          @"0000"
+#define SPS_USER_EXIT                   @"0001"
+
+#define SPS_UNKNOWN_ERROR               @"9999"
+#define SPS_UNKNOWN_ERROR_DESC          @"系统未知错误"
+
+#define SPS_NET_ERROR                   @"3001"
+#define SPS_NET_ERROR_DESC              @"网络连接异常"
+#define SPS_VERIFY_ERROR                @"3002"
+#define SPS_VERIFY_ERROR_DESC           @"安全验证出现异常"
+#define SPS_SERVER_RESP_ERROR           @"3003"
+#define SPS_SERVER_RESP_ERROR_DESC      @"服务器应答错误"
+
+#endif

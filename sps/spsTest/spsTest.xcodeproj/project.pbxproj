@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2824BB041FD928EC00C267AB /* libSandPay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2824BB031FD928EC00C267AB /* libSandPay.a */; };
 		287586101FD6801F00DACC8E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2875860F1FD6801F00DACC8E /* main.m */; };
 		287586131FD6801F00DACC8E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 287586121FD6801F00DACC8E /* AppDelegate.m */; };
 		287586161FD6801F00DACC8E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 287586151FD6801F00DACC8E /* ViewController.m */; };
@@ -29,7 +30,6 @@
 		28A6A5701FD6B61200A3BED0 /* sandbaolibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A6A56B1FD6B61200A3BED0 /* sandbaolibrary.a */; };
 		28A6A6011FD791F400A3BED0 /* SDSandSPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A6A5FF1FD791F400A3BED0 /* SDSandSPS.m */; };
 		28A6A6031FD7A72800A3BED0 /* sandpay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 28A6A6021FD7A72800A3BED0 /* sandpay.bundle */; };
-		28A6A6051FD7C47A00A3BED0 /* libSandPay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A6A6041FD7C47A00A3BED0 /* libSandPay.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2824BB031FD928EC00C267AB /* libSandPay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSandPay.a; sourceTree = "<group>"; };
 		2875860B1FD6801F00DACC8E /* spsTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = spsTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2875860F1FD6801F00DACC8E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		287586111FD6801F00DACC8E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -86,7 +87,6 @@
 		28A6A5FE1FD791F400A3BED0 /* SDSandSPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSandSPS.h; sourceTree = "<group>"; };
 		28A6A5FF1FD791F400A3BED0 /* SDSandSPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSandSPS.m; sourceTree = "<group>"; };
 		28A6A6021FD7A72800A3BED0 /* sandpay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = sandpay.bundle; sourceTree = "<group>"; };
-		28A6A6041FD7C47A00A3BED0 /* libSandPay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSandPay.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +104,7 @@
 				28A6A5701FD6B61200A3BED0 /* sandbaolibrary.a in Frameworks */,
 				28A6A5531FD6B35600A3BED0 /* libSystem.tbd in Frameworks */,
 				28A6A5511FD6B34100A3BED0 /* CoreText.framework in Frameworks */,
-				28A6A6051FD7C47A00A3BED0 /* libSandPay.a in Frameworks */,
+				2824BB041FD928EC00C267AB /* libSandPay.a in Frameworks */,
 				28A6A54F1FD6B32F00A3BED0 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,7 +236,7 @@
 				28A6A5FD1FD791F400A3BED0 /* RXSPSEntry.h */,
 				28A6A5FE1FD791F400A3BED0 /* SDSandSPS.h */,
 				28A6A5FF1FD791F400A3BED0 /* SDSandSPS.m */,
-				28A6A6041FD7C47A00A3BED0 /* libSandPay.a */,
+				2824BB031FD928EC00C267AB /* libSandPay.a */,
 			);
 			path = testFile;
 			sourceTree = "<group>";

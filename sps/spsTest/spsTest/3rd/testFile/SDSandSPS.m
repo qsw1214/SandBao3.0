@@ -10,9 +10,9 @@
 #import "RXSPSEntry.h"
 #import "SDLog.h"
 
-//#define  kSandPaySpSURL @"https://query-test.sandpay.com.cn/mobile/controller.srv"
+#define  kSandPaySpSURL @"https://query-test.sandpay.com.cn/mobile/controller.srv"
 
-#define  kSandPaySpSURL @"https://jzb.sandpay.com.cn/mobile/controller.srv"
+//#define  kSandPaySpSURL @"https://jzb.sandpay.com.cn/mobile/controller.srv"
 
 
 static SDSandSPS *sharedInstance;

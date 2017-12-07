@@ -153,14 +153,10 @@
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取鉴权失败" message:@"进入杉德宝,设置支付密码" leftBtnString:@"重试" rightBtnString:@"进入杉德宝" leftBlock:^{
-                        //重新getRegAuthTools
-                        [self getRegAuthTools];
-                    } rightBlock:^{
+                    [Tool showDialog:@"获取鉴权失败" message:@"进入杉德宝,设置支付密码" defulBlock:^{
                         //归位回主页
                         [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
                     }];
-                    
                 }else{
                     [Tool showDialog:@"网络连接失败,即将进入杉德宝" defulBlock:^{
                         //归位回主页

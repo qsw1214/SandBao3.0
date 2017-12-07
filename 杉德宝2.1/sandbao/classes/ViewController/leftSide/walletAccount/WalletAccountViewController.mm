@@ -349,13 +349,15 @@
     }else{
         
         NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];
-        NSString *moneyStr_fen = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
+        balacneStr = [NSString stringWithFormat:@"%.2f",[balacneStr floatValue]/100];
         
-        NSString *moneyYuanStr = [moneyStr_fen substringToIndex:(moneyStr_fen.length -2)];
-        NSString *moneyFenStr  = [moneyStr_fen substringFromIndex:(moneyStr_fen.length - 2)];
+        NSString *moneyYuanFormatterStr = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
+        
+        NSString *moneyYuanStr = [moneyYuanFormatterStr substringToIndex:(moneyYuanFormatterStr.length -3)];
+        NSString *moneyFenStr  = [moneyYuanFormatterStr substringFromIndex:(moneyYuanFormatterStr.length - 3)];
         
         if ([balacneStr floatValue] != 0) {
-            balanceLab.text = [NSString stringWithFormat:@"%@.%@",moneyYuanStr,moneyFenStr];
+            balanceLab.text = [NSString stringWithFormat:@"%@%@",moneyYuanStr,moneyFenStr];
         }else{
             balanceLab.text = @"0.00";
         }

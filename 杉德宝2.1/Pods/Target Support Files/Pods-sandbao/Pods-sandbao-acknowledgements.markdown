@@ -51,6 +51,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+## PgyUpdate
+
+Copyright 2015 pgyer.com. All rights reserved.
+
+
+## Pgyer
+
+Copyright 2015 pgyer.com. All rights reserved.
+
+
 ## RESideMenu
 
 Copyright (c) 2013 Roman Efimov (https://github.com/romaonthego).

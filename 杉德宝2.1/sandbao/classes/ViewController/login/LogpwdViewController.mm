@@ -210,12 +210,10 @@
         
         result = [SDSqlite insertData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"insert into usersconfig (uid, userName, active, sToken, credit_fp, lets) values ('%@', '%@', '%@', '%@', '%@', '%@')", [CommParameter sharedInstance].userId, self.phoneNoStr, @"0", sToken, creditFp, letsJson]];
     }
+    
     //注册成成功 -> 归位到实名认证页 
     if (result == YES) {
-        
-        [Tool showDialog:@"注册成功,恭喜您" message:@"立即实名认证,体验更多功能!" leftBtnString:@"进入杉德宝" rightBtnString:@"实名认证" leftBlock:^{
-            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
-        } rightBlock:^{
+        [Tool showDialog:@"恭喜您,注册成功!" message:@"立即实名认证,体验更多功能!" defulBlock:^{
             //去实名
             RealNameViewController *realName = [[RealNameViewController alloc] init];
             UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];

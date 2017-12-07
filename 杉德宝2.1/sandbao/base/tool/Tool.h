@@ -41,7 +41,16 @@ typedef void(^DefulBtnBlock)();
  */
 + (void)showDialog:(NSString *)message defulBlock:(DefulBtnBlock)defulblock;
 
+#pragma mark - 弹出带标题对话框+默认事件处理
 
+/**
+ 弹出带标题对话框+默认事件处理
+ 
+ @param title 标题
+ @param message 信息
+ @param defulblock 默认事件处理
+ */
++ (void)showDialog:(NSString*)title message:(NSString*)message defulBlock:(DefulBtnBlock)defulblock;
 
 #pragma mark - 弹出带标题对话框+事件处理
 

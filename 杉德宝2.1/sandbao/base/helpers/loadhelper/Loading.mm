@@ -14,7 +14,8 @@
 + (NSInteger)startLoading{
     
     // 0.测试/生产开关/指纹采集 (paynuc相关参数必须先设置好)
-    [[PayNucHelper sharedInstance] changeEnvironment:NO];
+//    [[PayNucHelper sharedInstance] changeEnvironment:NO]; //生产
+    [[PayNucHelper sharedInstance] changeEnvironment:YES];//测试
     
     // 2.LOADING : 两步认证+数据库创建+明暗登录判定 (0:load失败 1:load成功+明登陆 2:load成功+暗登陆)
     // 2.1 load

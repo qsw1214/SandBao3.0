@@ -34,8 +34,9 @@ typedef void(^NavCoverRightActionBalck)(void);
  - NavCoverStyleGradient: 渐变色模式
  */
 typedef NS_ENUM(NSInteger,NavCoverViewStyle){
-    NavCoverStyleWhite = 0,
-    NavCoverStyleGradient
+    NavCoverStyleWhite = 0,  //白色
+    NavCoverStyleGradient,   //蓝渐变
+    NavCoverStyleClean       //透明
 };
 
 
