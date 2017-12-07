@@ -39,6 +39,7 @@
 		2821B7821E778B2200F093D7 /* loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77D1E778B2200F093D7 /* loading.png */; };
 		2821B7831E778B2200F093D7 /* loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2821B77E1E778B2200F093D7 /* loading@2x.png */; };
 		2821B7D01E77E22700F093D7 /* GradualView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2821B7CF1E77E22700F093D7 /* GradualView.m */; };
+		2824BB071FD97BC600C267AB /* SandTnOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2824BB061FD97BC600C267AB /* SandTnOrderViewController.m */; };
 		282A48CE1F27337D00821A15 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A48CD1F27337D00821A15 /* libSDWebImage.a */; };
 		282D90321EF769B000CF8C28 /* SDActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282D902B1EF769B000CF8C28 /* SDActivityView.m */; };
 		282D90331EF769B000CF8C28 /* SDMBPerror.png in Resources */ = {isa = PBXBuildFile; fileRef = 282D902D1EF769B000CF8C28 /* SDMBPerror.png */; };
@@ -424,6 +425,8 @@
 		2821B77E1E778B2200F093D7 /* loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading@2x.png"; sourceTree = "<group>"; };
 		2821B7CE1E77E22700F093D7 /* GradualView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradualView.h; sourceTree = "<group>"; };
 		2821B7CF1E77E22700F093D7 /* GradualView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradualView.m; sourceTree = "<group>"; };
+		2824BB051FD97BC600C267AB /* SandTnOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandTnOrderViewController.h; sourceTree = "<group>"; };
+		2824BB061FD97BC600C267AB /* SandTnOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandTnOrderViewController.m; sourceTree = "<group>"; };
 		282A48CD1F27337D00821A15 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../../../Library/Developer/Xcode/DerivedData/sandbao-ayiadrxmozfpmiadtzajtbozkvgl/Build/Products/Debug-iphoneos/SDWebImage/libSDWebImage.a"; sourceTree = "<group>"; };
 		282D902A1EF769B000CF8C28 /* SDActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDActivityView.h; sourceTree = "<group>"; };
 		282D902B1EF769B000CF8C28 /* SDActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDActivityView.m; sourceTree = "<group>"; };
@@ -1262,6 +1265,8 @@
 				287585FC1FD66ADA00DACC8E /* PayQrcodeViewController.m */,
 				28C362451FD912CB007F067C /* ScannerViewController.h */,
 				28C362461FD912CB007F067C /* ScannerViewController.m */,
+				2824BB051FD97BC600C267AB /* SandTnOrderViewController.h */,
+				2824BB061FD97BC600C267AB /* SandTnOrderViewController.m */,
 			);
 			path = PayQrcode;
 			sourceTree = "<group>";
@@ -2718,6 +2723,7 @@
 				28765CB41FA77036006F2A06 /* SetCellView.m in Sources */,
 				A7DF3C5F1DC7152A00243EF6 /* AppDelegate.mm in Sources */,
 				28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */,
+				2824BB071FD97BC600C267AB /* SandTnOrderViewController.m in Sources */,
 				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
 				28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */,
 				28B6491B1FAC451D0074A390 /* SDMajletView.m in Sources */,

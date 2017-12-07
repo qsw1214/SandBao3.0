@@ -207,9 +207,10 @@
     [self.baseScrollView addSubview:headView];
     
     //headImgView
+    CGFloat headImgViewWH = LEFTRIGHTSPACE_66;
     UIImage *headImg = [UIImage imageNamed:@"center_profile_avatar"];
     headImgView = [Tool createImagView:headImg];
-    headImgView.layer.cornerRadius = headImg.size.height/2;
+    headImgView.layer.cornerRadius = headImgViewWH/2;
     headImgView.layer.masksToBounds = YES;
     headImgView.userInteractionEnabled = YES;
     [headView addSubview:headImgView];
@@ -218,13 +219,13 @@
     UIButton *headCoverBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
     headCoverBtn.backgroundColor = [UIColor clearColor];
     headCoverBtn.tag = BTN_TAG_JUSTCLICK;
-    headCoverBtn.frame = CGRectMake(0, 0, headImg.size.width, headImg.size.height);
+    headCoverBtn.frame = CGRectMake(0, 0, headImgViewWH, headImgViewWH);
     [headCoverBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [headImgView addSubview:headCoverBtn];
     
     
     //titleLab
-    nickNameLab = [Tool createLable:@"1515****388" attributeStr:nil font:FONT_13_OpenSan textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    nickNameLab = [Tool createLable:@"1515****388" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_12_Regular:FONT_16_Regular) textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headView addSubview:nickNameLab];
     
     //realNameImgView
@@ -233,11 +234,11 @@
     [headView addSubview:realNameImgView];
     
     //realNameLab
-    realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FF5D31 alignment:NSTextAlignmentLeft];
+    realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_08_Regular:FONT_12_Regular) textColor:COLOR_FF5D31 alignment:NSTextAlignmentLeft];
     [headView addSubview:realNameLab];
     
     //couponBtn
-    UIButton *couponBtn = [Tool createButton:@"小白积分 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_FFFFFF];
+    UIButton *couponBtn = [Tool createButton:@"小白积分 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_08_Regular:FONT_12_Regular) textColor:COLOR_FFFFFF];
     couponBtn.layer.masksToBounds = YES;
     couponBtn.backgroundColor = COLOR_58A5F6;
     couponBtn.width += LEFTRIGHTSPACE_04;
@@ -246,7 +247,7 @@
     [headView addSubview:couponBtn];
     
     //accountBtn
-    UIButton *accountBtn = [Tool createButton:@"开通辅助账户 >" attributeStr:nil font:FONT_08_Regular textColor:COLOR_58A5F6];
+    UIButton *accountBtn = [Tool createButton:@"开通辅助账户 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_08_Regular:FONT_12_Regular) textColor:COLOR_58A5F6];
     accountBtn.layer.masksToBounds = YES;
     accountBtn.layer.borderColor = COLOR_58A5F6.CGColor;
     accountBtn.layer.borderWidth = 1.f;
@@ -264,46 +265,48 @@
     [headView addSubview:rightArrowBtn];
     
     
+    
+    
     [headView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_64);
         make.left.equalTo(self.baseScrollView.mas_left).offset(0);
-        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width, headImg.size.height));
+        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width, headImgViewWH));
     }];
     
     [headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_0);
         make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_20);
-        make.size.mas_equalTo(headImgView.size);
+        make.size.mas_equalTo(CGSizeMake(headImgViewWH, headImgViewWH));
     }];
     
     [nickNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_0);
         make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
-        make.size.mas_equalTo(nickNameLab.size);
+        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width - headImgViewWH - LEFTRIGHTSPACE_20-LEFTRIGHTSPACE_15, nickNameLab.height));
     }];
     
     [realNameImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(nickNameLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.centerY.equalTo(headView);
         make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
         make.size.mas_equalTo(realNameImgView.size);
     }];
     
     [realNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(nickNameLab.mas_bottom).offset(UPDOWNSPACE_09);
+        make.centerY.equalTo(headView);
         make.left.equalTo(realNameImgView.mas_right).offset(LEFTRIGHTSPACE_04);
         make.size.mas_equalTo(realNameLab.size);
     }];
     
     [couponBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(realNameLab.mas_bottom).offset(UPDOWNSPACE_09);
         make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
         make.size.mas_equalTo(couponBtn.size);
+        make.bottom.equalTo(headView.mas_bottom);
     }];
     
     [accountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(realNameLab.mas_bottom).offset(UPDOWNSPACE_09);
         make.left.equalTo(couponBtn.mas_right).offset(LEFTRIGHTSPACE_09);
         make.size.mas_equalTo(accountBtn.size);
+        make.bottom.equalTo(headView.mas_bottom);
     }];
     
 

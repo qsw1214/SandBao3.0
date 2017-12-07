@@ -20,6 +20,8 @@
 @interface ScannerViewController ()<SDScanViewDelegate>
 {
     SDScanView *scanView;
+    UIImageView *bgImgV;
+    BOOL isCanScanner; //设备是否可以授权扫码
 }
 @end
 
@@ -29,9 +31,15 @@
 - (void)viewDidAppear:(BOOL)animated{
     
     [super viewDidAppear:animated];
-    
-    
-    
+
+    if (!isCanScanner) {
+        [Tool showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"考虑一下" rightBtnString:@"去设置" leftBlock:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        } rightBlock:^{
+            //去设置
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }];
+    }
 }
 
 - (void)viewDidLoad {
@@ -70,7 +78,8 @@
 - (void)creaetUI{
     
     
-    UIImageView *bgImgV = [Tool createImagView:[UIImage imageNamed:@"general_page_wrong"]];
+    isCanScanner = NO;
+    bgImgV = [Tool createImagView:[UIImage imageNamed:@"general_page_wrong"]];
     [self.baseScrollView addSubview:bgImgV];
     [bgImgV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView);
@@ -82,43 +91,31 @@
     NSString *mediaType = AVMediaTypeVideo;//读取媒体类型
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
     if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
-        //创建error页面避免页面空白
-        NSString *errorStr = @"应用相机权限受限,请在设置中启用";
-        [Tool showDialog:errorStr defulBlock:^{
-//            [self.navigationController popViewControllerAnimated:YES];
-            
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }];
-    }else{
         
+        isCanScanner = NO;
+
+    }else{
+        isCanScanner = YES;
         scanView = [[SDScanView alloc] init];
         scanView.delegate = self;
         [self.baseScrollView addSubview:scanView];
         
     }
     
-  
-    
-
-    
 }
 
 #pragma mark SDScanViewDelegate
+//根据返回字符串包含的信息判断哪种二维码
+//SAND_TN:tn号
+//SAND_USER：12434
+//SAND_MER：3445
+//SAND_AUTH：1234
+//SAND_LOGIN_CODE:tToken
 -(void)SDScanViewOutputMetadataObjects:(NSArray *)metadataObjs{
     
     AVMetadataMachineReadableCodeObject *obj = [metadataObjs objectAtIndex:0];
     
-    [SDLog logTest:obj.stringValue];
-    
-    //根据返回字符串包含的信息判断哪种二维码
-    //SAND_TN:tn号
-    //SAND_USER：12434
-    //SAND_MER：3445
-    //SAND_AUTH：1234
-    //SAND_LOGIN_CODE:tToken
-    
     NSArray *stringArr = [obj.stringValue componentsSeparatedByString:@":"];
-    
     
     if ([[stringArr firstObject] isEqualToString:@"SAND_TN"]) {
         //启动支付
@@ -134,13 +131,13 @@
         
     }
     else if ([[stringArr firstObject] isEqualToString:@"SAND_LOGIN_CODE"]) {
-        //启动扫码登陆
+//        //启动扫码登陆
 //        [self  presentScanLoginViewcontroller : obj.stringValue];
-        //pop一下
-        [self.navigationController popViewControllerAnimated:NO];
+//        //pop一下
+//        [self.navigationController popViewControllerAnimated:NO];
     }else{
         [Tool showDialog:@"您的二维码有误,请确认后再扫" defulBlock:^{
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
         }];
     }
     
