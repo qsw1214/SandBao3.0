@@ -226,7 +226,7 @@
         [accountDic setValue:@"03" forKey:@"kind"];
         [accountDic setValue:[NSString stringWithFormat:@"%@", self.bankCardNoStr] forKey:@"accNo"];
         NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountDic];
-        [SDLog logTest:account];
+
         paynuc.set("account", [account UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/queryCardDetail/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;

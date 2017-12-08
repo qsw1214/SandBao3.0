@@ -225,7 +225,7 @@
     
     
     //titleLab
-    nickNameLab = [Tool createLable:@"1515****388" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_12_Regular:FONT_16_Regular) textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    nickNameLab = [Tool createLable:@"1515****388" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_14_Regular:FONT_16_Regular) textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headView addSubview:nickNameLab];
     
     //realNameImgView
@@ -234,11 +234,11 @@
     [headView addSubview:realNameImgView];
     
     //realNameLab
-    realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_08_Regular:FONT_12_Regular) textColor:COLOR_FF5D31 alignment:NSTextAlignmentLeft];
+    realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_10_Regular:FONT_12_Regular) textColor:COLOR_FF5D31 alignment:NSTextAlignmentLeft];
     [headView addSubview:realNameLab];
     
     //couponBtn
-    UIButton *couponBtn = [Tool createButton:@"小白积分 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_08_Regular:FONT_12_Regular) textColor:COLOR_FFFFFF];
+    UIButton *couponBtn = [Tool createButton:@"小白积分 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_10_Regular:FONT_12_Regular) textColor:COLOR_FFFFFF];
     couponBtn.layer.masksToBounds = YES;
     couponBtn.backgroundColor = COLOR_58A5F6;
     couponBtn.width += LEFTRIGHTSPACE_04;
@@ -247,7 +247,7 @@
     [headView addSubview:couponBtn];
     
     //accountBtn
-    UIButton *accountBtn = [Tool createButton:@"开通辅助账户 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_08_Regular:FONT_12_Regular) textColor:COLOR_58A5F6];
+    UIButton *accountBtn = [Tool createButton:@"开通辅助账户 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_10_Regular:FONT_12_Regular) textColor:COLOR_58A5F6];
     accountBtn.layer.masksToBounds = YES;
     accountBtn.layer.borderColor = COLOR_58A5F6.CGColor;
     accountBtn.layer.borderWidth = 1.f;

@@ -113,7 +113,12 @@
         [Tool showDialog:@"为您拨打客服热线" message:@"021-962567" leftBtnString:@"取消" rightBtnString:@"呼叫" leftBlock:^{
             
         } rightBlock:^{
-             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"]];
+            if (IOS_VERSION_9 || IOS_VERSION_8) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"]];
+            }else{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"] options:@{} completionHandler:nil];
+            }
+            
         }];
         
     };
@@ -304,7 +309,7 @@
     sandServerView.columnNumber = 4;
     sandServerView.majletArr = self.sandServerArr;
     sandServerView.titleNameBlock = ^(NSString *titleName) {
-        [SDLog logTest:[NSString stringWithFormat:@"  titleName == %@",titleName]];
+        NSLog(@"titleName == %@",titleName);
     };
     [bodyViewOne addSubview:sandServerView];
     
@@ -351,7 +356,7 @@
     limitServerView.columnNumber = 3;
     limitServerView.majletArr = self.limitServerArr;
     limitServerView.titleNameBlock = ^(NSString *titleName) {
-        [SDLog logTest:[NSString stringWithFormat:@"  titleName == %@",titleName]];
+        NSLog(@"titleName == %@",titleName);
     };
     [bodyViewTwo addSubview:limitServerView];
     

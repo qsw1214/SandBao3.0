@@ -213,7 +213,7 @@
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
     //sps启动回调
-    if ([url.absoluteString containsString:@"com.sand.sandbao"]) {
+    if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
         //查询活跃状态用户数量(1个且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
@@ -241,7 +241,7 @@
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
     //sps启动回调
-    if ([url.absoluteString containsString:@"com.sand.sandbao"]) {
+    if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
         //查询活跃状态用户数量(1且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
@@ -266,7 +266,7 @@
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
     //sps启动回调
-    if ([url.absoluteString containsString:@"com.sand.sandbao"]) {
+    if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
         //查询活跃状态用户数量(1且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];

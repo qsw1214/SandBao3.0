@@ -619,7 +619,6 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
                 
                 NSString *fee = [self.wordDic objectForKey:@"fee"];
                 NSString *feeAmt = [NSString stringWithFormat:@"%.2f", [transAmt floatValue] * [fee floatValue]];
-                [SDLog logDebug:[NSString stringWithFormat:@"手续费:%@", feeAmt]];
                 
                 //弹出支付工具
                 [self.payView showPayTool];

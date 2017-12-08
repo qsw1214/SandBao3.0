@@ -64,7 +64,7 @@
     //flowLayout布局
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     CGFloat spaceCount = _columnNumber + 1 ; //(间隙count永远比列数多1)
-    CGFloat cellWith = (SCREEN_WIDTH- spaceCount*_cellSpace)/_columnNumber;
+    CGFloat cellWith = ([UIScreen mainScreen].bounds.size.width- spaceCount*_cellSpace)/_columnNumber;
     //cell size
     UIImage *iconImag = [UIImage imageNamed:@"index_service_01"];
     cellHeight = iconImag.size.height*2;
@@ -77,7 +77,7 @@
     //布局最小列间距
     flowLayout.minimumInteritemSpacing = _cellSpace;
     
-    collectionview = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0) collectionViewLayout:flowLayout];
+    collectionview = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 0) collectionViewLayout:flowLayout];
     collectionview.scrollEnabled = NO;
     collectionview.backgroundColor = [UIColor whiteColor];
     //复用ID必须和代理中的ID一致
@@ -106,7 +106,7 @@
     
     CGFloat collectionViewH = lineCount*(cellHeight + _cellSpace);
     
-    collectionview.frame = CGRectMake(0, 0, SCREEN_WIDTH, collectionViewH);
+    collectionview.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, collectionViewH);
     
     self.frame = collectionview.frame;
     

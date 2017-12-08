@@ -166,7 +166,6 @@
         NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
         [userInfoDic setValue:self.phoneNum forKey:@"userName"];
         NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
-        [SDLog logTest:userInfo];
         
         paynuc.set("userInfo", [userInfo UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/checkUser/v1" errorBlock:^(SDRequestErrorType type) {

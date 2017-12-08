@@ -78,7 +78,6 @@
     _type = type;
     self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
     eyeBtn.hidden = YES;
-    
 }
 
 - (void)click:(UIButton*)btn{

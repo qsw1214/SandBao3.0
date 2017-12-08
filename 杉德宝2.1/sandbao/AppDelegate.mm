@@ -197,15 +197,15 @@
     // 执行响应操作
     // 如果当前App在前台,执行操作
     if (application.applicationState == UIApplicationStateActive) {
-        [SDLog logTest:@"执行前台对应的操作"];
+        NSLog(@"执行前台对应的操作");
     } else if (application.applicationState == UIApplicationStateInactive) {
         // 后台进入前台
-        [SDLog logTest:@"执行后台进入前台对应的操作"];
-        [SDLog logTest:[NSString stringWithFormat:@"%@",notification.userInfo]];
+        NSLog(@"执行后台进入前台对应的操作");
+        NSLog(@"%@",notification.userInfo);
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     } else if (application.applicationState == UIApplicationStateBackground) {
         // 当前App在后台
-        [SDLog logTest:@"执行后台对应的操作"];
+        NSLog(@"执行后台对应的操作");
     }
 
 }

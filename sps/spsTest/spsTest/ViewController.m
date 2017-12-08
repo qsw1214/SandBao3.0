@@ -25,6 +25,9 @@
     self.view.backgroundColor = [UIColor grayColor];
     
     self.navigationController.automaticallyAdjustsScrollViewInsets = NO;
+    
+    
+    
 }
 
 
@@ -44,6 +47,8 @@
     [sps CallSps:str];
     
 }
+
+
 
 
 - (void)RXSPSReturn:(NSString *)jsonData{

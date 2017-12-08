@@ -39,7 +39,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.sand.sandbao</string>
+				<string>sandbao</string>
 			</array>
 		</dict>
 	</array>
@@ -52,7 +52,7 @@
 		<string>weibosdk</string>
 		<string>weibosdk2.5</string>
 		<string>sinaweibosso</string>
-		<string>moniJiuZhangApp</string>
+		<string>sdb_v0.0.0.1</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -8,6 +8,27 @@
 
 #import "UIImage+image.h"
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+
+// 判断是否为iPhone4
+#define iPhone4 (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+// 判断是否为iPhone5
+#define iPhone5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+// 判断是否为iPhone6
+#define iPhone6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+// 判断是否为iPhone6 plus
+#define iPhone6plus (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+
+
+
 @implementation UIImage (image)
 
 /**
@@ -17,7 +38,7 @@
  */
 + (UIImage *)fullscreenImageWithName:(NSString *)name
 {
-    if (iPhone3g || iPhone4) {
+    if (iPhone4) {
         name = [name filenameAppend:@""];
     } else if (iPhone5 || iPhone6) {
         name = [name filenameAppend:@"@2x"];
@@ -36,7 +57,7 @@
  */
 + (UIImage *)fullscreenAllIphoneImageWithName:(NSString *)name
 {
-    if (iPhone3g || iPhone4) {
+    if (iPhone4) {
         name = [name filenameAppend:@""];
     } else if (iPhone5) {
         name = [name filenameAppend:@"-568h@2x"];
@@ -59,7 +80,7 @@
  */
 + (UIImage *)fullscreenIphoneImageWithName:(NSString *)name
 {
-    if (iPhone4 || iPhone3g) {
+    if (iPhone4) {
         name = [name filenameAppend:@""];
     } else if (iPhone5) {
         name = [name filenameAppend:@"-568h@2x"];

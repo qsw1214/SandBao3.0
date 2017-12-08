@@ -85,7 +85,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         //下一步 - 实名验证手机号
         if (self.realNameStr.length>0 && self.identityNoStr.length>0 && self.bankCardNoStr.length>0) {
             [self queryCardDetail];
-            
         }else{
             [Tool showDialog:@"请输入完整验证信息"];
         }
@@ -340,7 +339,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         [accountDic setValue:@"03" forKey:@"kind"];
         [accountDic setValue:[NSString stringWithFormat:@"%@", self.bankCardNoStr] forKey:@"accNo"];
         NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountDic];
-        [SDLog logTest:account];
+
         paynuc.set("account", [account UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/queryCardDetail/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;

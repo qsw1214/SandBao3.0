@@ -289,8 +289,8 @@ static RXSPSEntry *sharedInstance = nil;
         }
         else if(RunCode == RunCode_PayCore_Error){
             //[SVProgressHUD_sps dismissWithError:[NSString stringWithUTF8String:payCore.respResult.Buffer()]];
-//             NSString *returnString = [NSString stringWithFormat:@"{\"responseCode\":\"100005\",\"rspMsg\":\"%@\"}",[NSString stringWithUTF8String:payCore.respResult.Buffer()]];
-            NSString *returnString = @"{\"responseCode\":\"100005\",\"rspMsg\":\"服务器应答错误\"}";;
+             NSString *returnString = [NSString stringWithFormat:@"{\"responseCode\":\"%@\",\"rspMsg\":\"%@\"}",[NSString stringWithUTF8String:payCore.respCode.Buffer()],[NSString stringWithUTF8String:payCore.respResult.Buffer()]];
+//            NSString *returnString = @"{\"responseCode\":\"100005\",\"rspMsg\":\"服务器应答错误\"}";
             [self.delegate RXSPSReturn:returnString];
             
         }else if(RunCode == RunCode_Network_Error){

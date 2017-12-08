@@ -14,7 +14,7 @@
 
 #import "ScannerViewController.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "SandTnOrderViewController.h"
 #import "SDScanView.h"
 
 @interface ScannerViewController ()<SDScanViewDelegate>
@@ -37,7 +37,12 @@
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             //去设置
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            if (IOS_VERSION_9 || IOS_VERSION_8) {
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+            }else{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+            }
+            
         }];
     }
 }
@@ -137,7 +142,8 @@
 //        [self.navigationController popViewControllerAnimated:NO];
     }else{
         [Tool showDialog:@"您的二维码有误,请确认后再扫" defulBlock:^{
-            [self.navigationController popViewControllerAnimated:YES];
+            [self TNOrder:[stringArr lastObject]];
+//            [self.navigationController popViewControllerAnimated:YES];
         }];
     }
     
@@ -152,6 +158,12 @@
 //    mOrderInfoNatiVeViewController.controllerIndex = SDQRPAY; //设置支付类型为扫码支付
 //    mOrderInfoNatiVeViewController.TN = TN;
 //    [self.navigationController pushViewController:mOrderInfoNatiVeViewController animated:YES];
+    
+    SandTnOrderViewController *sandTNOrderVC  = [[SandTnOrderViewController alloc] init];
+    [self.navigationController pushViewController:sandTNOrderVC animated:YES];
+    
+    
+    
     
 }
 
