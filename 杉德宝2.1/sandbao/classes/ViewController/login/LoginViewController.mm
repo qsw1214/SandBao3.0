@@ -351,10 +351,137 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                //do nothing
+                
+                //正常状态下不走,为了审核通过,允许在不加强鉴权时,直接明登陆通过
+                //更新用户数据信息
+                [Tool refreshUserInfo:[NSString stringWithUTF8String:paynuc.get("userInfo").c_str()]];
+                //更新用户数据库
+                [self updateUserData];
             }];
         }];
         if (error) return;
+    }];
+}
+
+/**
+*@brief 更新用户数据
+*/
+- (void)updateUserData
+{
+    NSString *creditFp = [NSString stringWithUTF8String:paynuc.get("creditFp").c_str()];
+    [CommParameter sharedInstance].sToken = [NSString stringWithUTF8String:paynuc.get("sToken").c_str()];
+    
+    //查询minlets数据库最新子件
+    NSMutableArray *minletsArray = [SDSqlite selectData:[SqliteHelper shareSqliteHelper].sandBaoDB tableName:@"minlets" columnArray:MINLETS_ARR ];
+    //查询登陆用户数据
+    long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where uid = '%@'", [CommParameter sharedInstance].userId]];
+    
+    BOOL result;
+    if (count > 0) {
+        //1.激活登陆用户
+        result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@', userName = '%@' ,credit_fp = '%@'  where uid = '%@'", @"0", [CommParameter sharedInstance].sToken, self.phoneNum, creditFp, [CommParameter sharedInstance].userId]];
+        
+        //2.更新该用户下lets信息
+        //查询此用户对应的lets信息
+        NSString *letsStr = [SDSqlite selectStringData:[SqliteHelper shareSqliteHelper].sandBaoDB tableName:@"usersconfig" columnName:@"lets" whereColumnString:@"uid" whereParamString:[CommParameter sharedInstance].userId];
+        //如果该用户lets信息在minlets库中不存在则删除之
+        NSArray *lensArr = [[PayNucHelper sharedInstance] jsonStringToArray:letsStr];
+        NSMutableArray *lensArrM = [NSMutableArray arrayWithCapacity:0];
+        //取交集
+        for (int i = 0; i<lensArr.count; i++) {
+            for (int ii = 0; ii<minletsArray.count; ii++) {
+                if ([[lensArr[i] objectForKey:@"letId"] isEqualToString:[minletsArray[ii] objectForKey:@"id"]]) {
+                    [lensArrM addObject:lensArr[i]];
+                }
+            }
+        }
+        //更新该用户lets信息
+        NSString *letsStrNew = [[PayNucHelper sharedInstance] arrayToJSON:lensArrM];
+        [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB  tableName:@"usersconfig" columnArray:(NSMutableArray*)@[@"lets"] paramArray:(NSMutableArray *)@[letsStrNew] whereColumnString:@"uid" whereParamString:[CommParameter sharedInstance].userId];
+    } else {
+        NSInteger minletsArrayCount = [minletsArray count];
+        NSMutableArray *letsDicArray = [[NSMutableArray alloc] init];
+        if (minletsArrayCount > 8) {
+            for (int i = 0; i < 7; i++) {
+                NSMutableDictionary *letsDic = [[NSMutableDictionary alloc] init];
+                NSMutableDictionary *minletsDic = minletsArray[i];
+                [letsDic setValue:[minletsDic objectForKey:@"id"] forKey:@"letId"];
+                [letsDicArray addObject:letsDic];
+            }
+        } else {
+            for (int i = 0; i < minletsArrayCount; i++) {
+                NSMutableDictionary *letsDic = [[NSMutableDictionary alloc] init];
+                NSMutableDictionary *minletsDic = minletsArray[i];
+                [letsDic setValue:[minletsDic objectForKey:@"id"] forKey:@"letId"];
+                [letsDicArray addObject:letsDic];
+            }
+        }
+        
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:letsDicArray options:NSJSONWritingPrettyPrinted error:&error];
+        NSString *letsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        letsJson = [[letsJson stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        result = [SDSqlite insertData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"insert into usersconfig (uid, userName, active, sToken, credit_fp, lets) values ('%@', '%@', '%@', '%@', '%@', '%@')", [CommParameter sharedInstance].userId, self.phoneNum, @"0", [CommParameter sharedInstance].sToken, creditFp, letsJson]];
+    }
+    
+    
+    if (result == YES) {
+        [self ownPayTools_login];
+    } else {
+        //数据写入失败->返回直接登陆
+        [Tool showDialog:@"用户数据存储失败,请返回重新登陆" defulBlock:^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }];
+    }
+}
+
+
+/**
+ 更新我方支付工具_登陆模式下
+ */
+- (void)ownPayTools_login
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].self.HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        paynuc.set("tTokenType", "01001501");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
+                //根据order 字段排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //登陆成功: - 当前页归位到Home
+                [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                
+                //友盟埋点 - 账号统计 - 开始
+                [MobClick profileSignInWithPUID:[CommParameter sharedInstance].userId provider:@"sand"];
+                //友盟埋点 - 账号统计 - 结束
+                [MobClick profileSignOff];
+                
+            }];
+        }];
+        if (error) return ;
+        
     }];
 }
 
