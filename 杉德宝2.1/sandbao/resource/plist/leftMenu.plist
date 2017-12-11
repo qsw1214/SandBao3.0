@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-    <dict>
-        <key>imgName</key>
-        <string>center_menu_00</string>
-        <key>title</key>
-        <string>返回首页</string>
-    </dict>
 	<dict>
 		<key>imgName</key>
 		<string>center_menu_01</string>

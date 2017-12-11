@@ -305,7 +305,6 @@
 }
 
 #pragma mark 重写layoutSubview - 自定义删除按钮
-
 - (void)layoutSubviews{
     
     [super layoutSubviews];
@@ -327,12 +326,9 @@
             deleteView.backgroundColor = [UIColor colorWithRed:255/255.f green:173/255.f blue:69/255.f alpha:1.0f];
             deleteView.layer.cornerRadius = 5.f;
             deleteView.layer.masksToBounds = YES;
-            
             break;
         }
     }
-    
-    
     if (deleteView.subviews.count>0) {
         
         UIButton *deleteBtn = deleteView.subviews[0];
@@ -340,11 +336,6 @@
             deleteBtn.backgroundColor = [UIColor colorWithRed:255/255.f green:173/255.f blue:69/255.f alpha:1.0f];
         }
     }
-    
-    
-    
-    
-    
     
 }
 

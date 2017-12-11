@@ -9,13 +9,6 @@
 #ifndef sandbao_Prefix_pch
 #define sandbao_Prefix_pch
 
-#define IS_IOS7 SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")
-
-#ifndef __IPHONE_5_0
-#warning "This project uses features only available in iOS SDK 5.0 and later."
-#endif
-
-
 #ifdef __OBJC__
 #import <Availability.h>
 #import <UIKit/UIKit.h>
@@ -54,7 +47,7 @@
 #define IOS_VERSION_8 (([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=9.0)? (YES):(NO))
 #define IOS_VERSION_9 (([[[UIDevice currentDevice] systemVersion] floatValue] >=9.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=10.0)? (YES):(NO))
 #define IOS_VERSION_10 (([[[UIDevice currentDevice] systemVersion] floatValue] >=10.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=11.0)? (YES):(NO))
-#define IOS_VERSION_11 (([[[UIDevice currentDevice] systemVersion] floatValue] >=11.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=12.0)? (YES):(NO))
+#define IOS_VERSION_11 (([[[UIDevice currentDevice] systemVersion] floatValue] >=11.0)? (YES):(NO))
 
 // 打印的宏
 #ifdef DEBUG
@@ -122,9 +115,9 @@
 //#define AddressHTTP @"https://sdb.sandpay.com.cn/"                          //生产
 
 #pragma mark - 2.测试环境地址
-//#define AddressHTTP @"http://172.28.250.242:17892/"                         //测试
+#define AddressHTTP @"http://172.28.250.242:17892/"                         //测试
 
-#define AddressHTTP @"http://192.168.22.157:9081/"                          //测试2
+//#define AddressHTTP @"http://192.168.22.157:9081/"                          //测试2
 
 //#define AddressHTTP @"http://172.28.247.111:17892/"                         //测试3
 
@@ -154,9 +147,9 @@
 
 //用哪个开哪个
 //显示给开发人员 (显示输入数据)
-#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
+//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
 //显示给测试人员 (隐藏输入数据)
-//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
+#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
 
 
 

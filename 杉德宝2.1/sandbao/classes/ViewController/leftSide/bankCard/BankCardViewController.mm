@@ -14,7 +14,7 @@
 #import "SDBottomPop.h"
 
 #import "AddBankCardViewController.h"
-
+#import "CardBaseTableView.h"
 typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 
 @interface BankCardViewController ()<UITableViewDelegate,UITableViewDataSource,SDPayViewDelegate>
@@ -31,7 +31,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 }
 @property (nonatomic, strong) UILabel *noCardLab;
 @property (nonatomic, strong) UIButton *bottomBtn;
-@property (nonatomic, strong) UITableView *bankTableView;
+@property (nonatomic, strong) CardBaseTableView *bankTableView;
 @property (nonatomic, strong) SDPayView *payView;
 @property (nonatomic, strong) NSArray *authTools;
 @end
@@ -83,7 +83,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     __weak BankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+        [weakSelf.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
     };
 }
 #pragma mark - 重写父类-点击方法集合
@@ -130,17 +130,17 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     self.bottomBtn.height = UPDOWNSPACE_64;
     
     //tableview
-    self.bankTableView = [[UITableView alloc] init];
+    cellHeight = UPDOWNSPACE_160;
+    self.bankTableView = [[CardBaseTableView alloc] init];
+    self.bankTableView.cellHeight = cellHeight;
     self.bankTableView.delegate = self;
     self.bankTableView.dataSource = self;
     self.bankTableView.scrollEnabled = YES;
     self.bankTableView.backgroundColor = COLOR_F5F5F5;
     self.bankTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.baseScrollView addSubview:self.bankTableView];
+
     
-
-    cellHeight = UPDOWNSPACE_160;
-
     [self.noCardLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_160);
         make.centerX.equalTo(self.baseScrollView);
@@ -170,8 +170,6 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     [self.view addSubview:self.payView];
 
 }
-
-
 #pragma mark tableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -213,17 +211,17 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 }
 
 #pragma mark - tableView删除回调
-
+//设置编辑类型 - 删除
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
     return UITableViewCellEditingStyleDelete;
 }
-
+//设置删除按钮的文字
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
     return @"解绑";
 }
-
+//开启侧滑编辑功能
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    //如果编辑类型为删除 - 删除 
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //侧滑 - 解绑银行卡
         selectPayToolDic = bankArray[indexPath.row];
@@ -233,8 +231,29 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
             }
         }];
     }
-    
 }
+
+//iSO11之后,侧滑删除
+- ( UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //删除
+    if (@available(iOS 11.0, *)) {
+        UIContextualAction *deleteRowAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+            //侧滑 - 解绑银行卡
+            selectPayToolDic = bankArray[indexPath.row];
+            [SDBottomPop showBottomPopView:@"解除绑定后银行服务将不可用" cellNameList:@[@"确认解除绑定"] suerBlock:^(NSString *cellName) {
+                if ([cellName isEqualToString:@"确认解除绑定"]) {
+                    [self getAuthTools];
+                }
+            }];
+        }];
+
+        deleteRowAction.backgroundColor = [UIColor blueColor];
+        UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteRowAction]];
+        return config;
+    }
+    return nil;
+}
+
 
 #pragma mark - SDPayViewDelegate
 - (void)payViewPwd:(NSString *)pwdStr paySuccessView:(SDPaySuccessAnimationView *)successView{

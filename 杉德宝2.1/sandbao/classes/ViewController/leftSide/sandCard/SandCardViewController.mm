@@ -13,7 +13,7 @@
 #import "SandItemTableViewCell.h"
 #import "AddSandCardViewController.h"
 #import "SandCardDetailViewController.h"
-
+#import "CardBaseTableView.h"
 
 @interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource,SDPayViewDelegate>
 {
@@ -25,7 +25,7 @@
 }
 @property (nonatomic, strong) UILabel *noCardLab;
 @property (nonatomic, strong) UIButton *bottomBtn;
-@property (nonatomic, strong) UITableView *sandTableView;
+@property (nonatomic, strong) CardBaseTableView *sandTableView;
 /**
  支付工具控件
  */
@@ -74,7 +74,7 @@
     
     __weak SandCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+        [weakSelf.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
     };
     
 }
@@ -104,14 +104,16 @@
     self.bottomBtn.height = UPDOWNSPACE_64;
     
     //tableview
-    self.sandTableView = [[UITableView alloc] init];
+    cellHeight = UPDOWNSPACE_122;
+    self.sandTableView = [[CardBaseTableView alloc] init];
+    self.sandTableView.cellHeight = cellHeight;
     self.sandTableView.delegate = self;
     self.sandTableView.dataSource = self;
     self.sandTableView.scrollEnabled = YES;
     self.sandTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.baseScrollView addSubview:self.sandTableView];
     
-    cellHeight = UPDOWNSPACE_122;
+    
     
     [self.noCardLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_160);

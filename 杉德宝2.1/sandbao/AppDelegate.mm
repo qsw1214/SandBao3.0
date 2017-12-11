@@ -127,7 +127,8 @@
 #pragma mark 友盟相关设置
 - (void)UMSetAbout{
 
-    UMConfigInstance.appKey = @"59edaad7a40fa37273000561";
+//    UMConfigInstance.appKey = @"59edaad7a40fa37273000561";//接入统计
+    UMConfigInstance.appKey = @"";//不接入统计
     UMConfigInstance.channelId = nil;
     UMConfigInstance.eSType = E_UM_NORMAL;
     UMConfigInstance.ePolicy = SEND_INTERVAL;

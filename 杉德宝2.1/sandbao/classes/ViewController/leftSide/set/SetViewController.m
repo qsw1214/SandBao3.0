@@ -49,7 +49,7 @@
   
     __weak SetViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+        [weakSelf.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
     };
     
 }

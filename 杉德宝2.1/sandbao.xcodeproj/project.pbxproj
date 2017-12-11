@@ -22,6 +22,7 @@
 		2814313C1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2814313B1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm */; };
 		281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475B1F96E25B007D4D3A /* LoginViewController.mm */; };
 		281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747B51F9847DB007D4D3A /* RealNameViewController.mm */; };
+		281A38DF1FDE647200714D0C /* CardBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281A38DE1FDE647200714D0C /* CardBaseTableView.m */; };
 		281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA8B1F90BC6A0000D1F5 /* Loading.mm */; };
 		281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281D10601E6FDAEF0031806C /* NavCoverView.m */; };
 		281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F64321E792A970005AE86 /* NSData+SDDataCache.m */; };
@@ -396,6 +397,8 @@
 		2817475B1F96E25B007D4D3A /* LoginViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LoginViewController.mm; sourceTree = "<group>"; };
 		281747B41F9847DB007D4D3A /* RealNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealNameViewController.h; sourceTree = "<group>"; };
 		281747B51F9847DB007D4D3A /* RealNameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RealNameViewController.mm; sourceTree = "<group>"; };
+		281A38DD1FDE647200714D0C /* CardBaseTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardBaseTableView.h; sourceTree = "<group>"; };
+		281A38DE1FDE647200714D0C /* CardBaseTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardBaseTableView.m; sourceTree = "<group>"; };
 		281AEA8A1F90BC6A0000D1F5 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
 		281AEA8B1F90BC6A0000D1F5 /* Loading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Loading.mm; sourceTree = "<group>"; };
 		281D105F1E6FDAEF0031806C /* NavCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavCoverView.h; sourceTree = "<group>"; };
@@ -1877,6 +1880,8 @@
 		28D7E5741FA885BC00518042 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				281A38DD1FDE647200714D0C /* CardBaseTableView.h */,
+				281A38DE1FDE647200714D0C /* CardBaseTableView.m */,
 				28D7E5751FA885CE00518042 /* BankItemTableViewCell.h */,
 				28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */,
 				28BCE8AB1FB04E8100D62F94 /* AddBankCardCell.h */,
@@ -2011,17 +2016,9 @@
 			children = (
 				28D289F71FA32E1800C3787E /* Font */,
 				A7DF3D531DC7202B00243EF6 /* image */,
-				A7694B911EA0C2A500BB6369 /* database */,
 				A7694C501EA0C2A500BB6369 /* plist */,
 			);
 			path = resource;
-			sourceTree = "<group>";
-		};
-		A7694B911EA0C2A500BB6369 /* database */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = database;
 			sourceTree = "<group>";
 		};
 		A7694C501EA0C2A500BB6369 /* plist */ = {
@@ -2785,6 +2782,7 @@
 				28D28F2E1FD15C0000B3F00B /* HDAlertView.m in Sources */,
 				28D7E5AA1FA9D15A00518042 /* PaymentPwdCell.m in Sources */,
 				28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */,
+				281A38DF1FDE647200714D0C /* CardBaseTableView.m in Sources */,
 				287585FD1FD66ADA00DACC8E /* PayQrcodeViewController.m in Sources */,
 				288421C01F8E0A7800082E7C /* Tool.m in Sources */,
 				28D7E59A1FA9A80A00518042 /* UserTransferViewController.mm in Sources */,

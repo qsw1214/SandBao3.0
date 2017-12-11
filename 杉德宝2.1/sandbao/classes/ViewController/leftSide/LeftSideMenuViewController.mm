@@ -429,14 +429,7 @@
     
     NSDictionary *dict = dataArray[indexPath.row];
     NSString *titleName = [dict objectForKey:@"title"];
-
     
-    if ([titleName isEqualToString:@"返回首页"]) {
-        //重置RESdieMeun的主控制器
-        [self.sideMenuViewController setContentViewController:self.homeNav];
-        //友盟自定义时间统计 - 计数事件
-        [MobClick event:UM_Home];
-    }
     if ([titleName isEqualToString:@"我的账单"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.myBillNav];

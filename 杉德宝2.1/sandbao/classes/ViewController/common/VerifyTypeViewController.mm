@@ -91,7 +91,6 @@
     authGroupsTableView.scrollEnabled = NO;
     authGroupsTableView.userInteractionEnabled = YES;
     [self.baseScrollView addSubview:authGroupsTableView];
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
     cellHeight = 60;
     

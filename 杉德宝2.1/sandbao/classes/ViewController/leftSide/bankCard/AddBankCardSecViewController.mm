@@ -14,7 +14,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     debitCard = 0, //借记卡
     creditCard,    //贷记卡
-    
 };
 @interface AddBankCardSecViewController ()
 {

@@ -53,7 +53,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     //配置所有baseScrollview子类 不被navgationController下压64
-    self.automaticallyAdjustsScrollViewInsets = NO;
+   
+    if (@available(iOS 11.0, *)) {
+        self.baseScrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    } else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
     
     //配置所有baseScrollview子类 且隐藏自带两个imageView(VerticalScrollIndicator/HorizontalScrollIndicator)
     self.baseScrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];

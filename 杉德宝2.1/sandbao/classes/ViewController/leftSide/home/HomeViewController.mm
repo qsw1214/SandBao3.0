@@ -97,7 +97,6 @@
     [self.navCoverView appendRightItem:@"index_icon_phone"];
     __weak HomeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        
         [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
     };
     //最右边按钮事件

@@ -81,7 +81,7 @@
     
     __weak WalletAccountViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf presentLeftMenuViewController:weakSelf.sideMenuViewController];
+        [weakSelf.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
     };
 }
 #pragma mark - 重写父类-点击方法集合
