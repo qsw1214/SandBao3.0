@@ -9,7 +9,10 @@
 #import "BaseViewController.h"
 
 @interface VerifyTypeViewController : BaseViewController
-
+/**
+ 从首页进入设置支付密码
+ */
+@property (nonatomic, assign) BOOL setPayPassFromeHomeNav;
 
 /**
  类型

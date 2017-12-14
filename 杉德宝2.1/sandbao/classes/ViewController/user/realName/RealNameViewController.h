@@ -10,4 +10,10 @@
 
 @interface RealNameViewController : BaseViewController
 
+
+/**
+ 从Home首页进入的实名认证
+ */
+@property (nonatomic, assign) BOOL realNameFromeHomeNav;
+
 @end

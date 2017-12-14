@@ -58,7 +58,20 @@
     [super setNavCoverView];
     
     if ([CommParameter sharedInstance].payPassFlag == NO) {
-        self.navCoverView.hidden = YES;
+        if (self.setPayPassFromeHomeNav) {
+            self.navCoverView.letfImgStr = @"login_icon_back";
+            __weak VerifyTypeViewController *weakSelf = self;
+            self.navCoverView.leftBlock = ^{
+                [Tool showDialog:@"您还未设置支付密码" message:@"是否放弃设置" leftBtnString:@"继续设置" rightBtnString:@"退出杉德宝" leftBlock:^{
+                    //do no thing
+                } rightBlock:^{
+                    [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf];
+                }];
+            };
+        }else{
+            self.navCoverView.hidden = YES;
+        }
+        
     }else{
         self.navCoverView.letfImgStr = @"login_icon_back";
         __weak VerifyTypeViewController *weakSelf = self;

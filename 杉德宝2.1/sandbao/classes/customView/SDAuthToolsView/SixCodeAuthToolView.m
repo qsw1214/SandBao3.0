@@ -8,7 +8,7 @@
 
 #import "SixCodeAuthToolView.h"
 
-#define TIME_OUT 61
+#define TIME_OUT 31
 
 @interface SixCodeAuthToolView ()<UITextFieldDelegate>{
     
@@ -295,7 +295,7 @@
                 NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我获取短信"];
                 [atr addAttributes:@{
                                      NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
-                                     NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                                     NSForegroundColorAttributeName:[UIColor colorWithRed:242/255.0 green:9/255.0 blue:9/255.0 alpha:1/1.0]
                                      } range:NSMakeRange(2, 2)];
                 [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
 
@@ -311,7 +311,7 @@
                 NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:time];
                 [atr addAttributes:@{
                                      NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
-                                     NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                                     NSForegroundColorAttributeName:[UIColor colorWithRed:242/255.0 green:9/255.0 blue:9/255.0 alpha:1/1.0]
                                      } range:NSMakeRange(1, 2)];
                 [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
             });
