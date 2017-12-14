@@ -490,7 +490,7 @@ typedef void(^CashRechargeStateBlock)(NSArray *paramArr);
  */
 - (void)verificationInput
 {
-    if (moneyTextField.text.length >8 || moneyTextField.text<0) {
+    if (moneyTextField.text.length >8 || moneyTextField.text.length<0) {
         return [Tool showDialog:@"输入金额位数不正确,请重新输入"];
     }
     

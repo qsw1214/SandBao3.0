@@ -304,6 +304,7 @@
                 NSDictionary *workDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];
                 //充值成功
                 RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+                rechargeFinishVC.transTypeName = @"钱包充值成功";
                 rechargeFinishVC.amtMoneyStr = [NSString stringWithFormat:@"%.2f",[[workDic objectForKey:@"transAmt"] floatValue]/100];
                 rechargeFinishVC.payOutName = [self.rechargeOutPayToolDic objectForKey:@"title"];
                 [self.navigationController pushViewController:rechargeFinishVC animated:YES];

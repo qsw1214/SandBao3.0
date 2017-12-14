@@ -68,7 +68,6 @@
     // mid标题
     labTitle = [[UILabel alloc] init];
     labTitle.frame = CGRectMake(15, 20, self.frame.size.width-2*15, 64-20);
-    labTitle.text = @"测试测试测试";
     labTitle.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:15];
     labTitle.textAlignment = NSTextAlignmentCenter;
     [baseView addSubview:labTitle];
@@ -76,16 +75,14 @@
     //左边按钮
     leftBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [leftBtn addTarget:self action:@selector(clickLeft:) forControlEvents:UIControlEventTouchUpInside];
-    UIImage *imgleft = [UIImage imageNamed:@"index_avatar"];
-    imgLeftV = [[UIImageView alloc] initWithImage:imgleft];
+    imgLeftV = [[UIImageView alloc] init];
     [leftBtn addSubview:imgLeftV];
     
     labLeft = [[UILabel alloc] initWithFrame:CGRectZero];
     labLeft.textAlignment = NSTextAlignmentLeft;
-    labLeft.font =[UIFont fontWithName:@"PingFang-SC-Regular" size:15];
+    labLeft.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:15];
     labLeft.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [leftBtn addSubview:labLeft];
-    
     [baseView addSubview:leftBtn];
     
     
@@ -93,8 +90,7 @@
     //右边的按钮
     rightBtn = [[UIButton alloc] initWithFrame:CGRectZero];
     [rightBtn addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
-    UIImage *imgRight = [UIImage imageNamed:@"index_avatar"];
-    imgRightV = [[UIImageView alloc] initWithImage:imgRight];
+    imgRightV = [[UIImageView alloc] init];
     [rightBtn addSubview:imgRightV];
     
     labRight = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -109,6 +105,11 @@
    
 }
 
+/**
+ 追加右边第二个图标
+
+ @param imgName 图标名字
+ */
 - (void)appendRightItem:(NSString*)imgName{
     //右边第二个图标
     UIImage *rightSecImg =  [UIImage imageNamed:imgName];
@@ -126,6 +127,11 @@
 }
 
 
+/**
+ 设置导航条样式
+
+ @param style 样式
+ */
 - (void)setStyle:(NavCoverViewStyle)style{
     
     _style = style;
@@ -150,98 +156,158 @@
     
 }
 
+/**
+ 设置中间文字
+
+ @param midTitleStr 文字
+ */
 - (void)setMidTitleStr:(NSString *)midTitleStr{
     
-    _midTitleStr = midTitleStr;
-    
-    labTitle.text = midTitleStr;
-    
-    if (_style == NavCoverStyleWhite) {
-        labTitle.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+    if (midTitleStr.length == 0) {
+        labTitle.frame = CGRectZero;
+        return;
+    }else{
+        _midTitleStr = midTitleStr;
+        
+        labTitle.text = midTitleStr;
+        
+        if (_style == NavCoverStyleWhite) {
+            labTitle.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+        }
+        if (_style == NavCoverStyleGradient) {
+            labTitle.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1/1.0];
+        }
+        if (_style == NavCoverStyleClean) {
+            labTitle.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1/1.0];
+        }
+        
+        //frame
+        CGSize labTitleSize = [labTitle sizeThatFits:CGSizeZero];
+        CGFloat labTitleOY = (baseView.frame.size.height - labTitleSize.height)/2;
+        CGFloat labTitleOX = (baseView.frame.size.width - labTitleSize.width)/2;
+        labTitle.frame = CGRectMake(labTitleOX, labTitleOY, labTitleSize.width, labTitleSize.height);
     }
-    if (_style == NavCoverStyleGradient) {
-        labTitle.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1/1.0];
-    }
-    if (_style == NavCoverStyleClean) {
-        labTitle.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1/1.0];
-    }
-    
-    //frame
-    CGSize labTitleSize = [labTitle sizeThatFits:CGSizeZero];
-    CGFloat labTitleOY = (baseView.frame.size.height - labTitleSize.height)/2;
-    CGFloat labTitleOX = (baseView.frame.size.width - labTitleSize.width)/2;
-    labTitle.frame = CGRectMake(labTitleOX, labTitleOY, labTitleSize.width, labTitleSize.height);
-
 }
 
+
+/**
+ 设置左边图片名
+
+ @param letfImgStr 字符串
+ */
 - (void)setLetfImgStr:(NSString *)letfImgStr{
+    if (letfImgStr.length == 0 || !letfImgStr) {
+        imgLeftV.frame = CGRectZero;
+        leftBtn.frame = CGRectZero;
+        return;
+    }else{
+        _letfImgStr = letfImgStr;
+        
+        imgLeftV.image = [UIImage imageNamed:letfImgStr];
+
+        CGFloat imgLeftVOY = (baseView.frame.size.height - imgLeftV.image.size.height)/2;
+        imgLeftV.frame = CGRectMake(leftSpace, imgLeftVOY, imgLeftV.image.size.width, imgLeftV.image.size.height);
+        leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
+    }
     
-    _letfImgStr = letfImgStr;
-    
-    imgLeftV.image = [UIImage imageNamed:letfImgStr];
-   
-    CGFloat imgLeftVOY = (baseView.frame.size.height - imgLeftV.image.size.height)/2;
-    imgLeftV.frame = CGRectMake(leftSpace, imgLeftVOY, imgLeftV.image.size.width, imgLeftV.image.size.height);
-    leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
 
 }
+
+/**
+ 设置左边图片
+
+ @param leftImg img
+ */
 - (void)setLeftImg:(UIImage *)leftImg{
-    _leftImg = leftImg;
-    
-    CGSize defulImgSize = CGSizeMake(34, 34); //根据UI给出数据
-    
-    imgLeftV.image = _leftImg;
-    
-    imgLeftV.layer.cornerRadius = defulImgSize.height/2;
-    imgLeftV.layer.masksToBounds = YES;
-    
-    CGFloat imgLeftVOY = (baseView.frame.size.height - defulImgSize.height)/2;
-    imgLeftV.frame = CGRectMake(leftSpace, imgLeftVOY, defulImgSize.width, defulImgSize.height);
-    leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
+    if (!leftImg) {
+        imgLeftV.frame = CGRectZero;
+        leftBtn.frame = CGRectZero;
+        return;
+    }else{
+        _leftImg = leftImg;
+        
+        CGSize defulImgSize = CGSizeMake(34, 34); //根据UI给出数据
+        
+        imgLeftV.image = _leftImg;
+        
+        imgLeftV.layer.cornerRadius = defulImgSize.height/2;
+        imgLeftV.layer.masksToBounds = YES;
+        
+        CGFloat imgLeftVOY = (baseView.frame.size.height - defulImgSize.height)/2;
+        imgLeftV.frame = CGRectMake(leftSpace, imgLeftVOY, defulImgSize.width, defulImgSize.height);
+        leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
+    }
 }
 
 - (void)setLeftTitleStr:(NSString *)leftTitleStr{
-    
-    _leftTitleStr = leftTitleStr;
-    
-    labLeft.text = leftTitleStr;
-    
-    CGSize labSize = [labLeft sizeThatFits:CGSizeZero];
-    CGFloat labLeftOY = (baseView.frame.size.height - labSize.height)/2;
-    labLeft.frame = CGRectMake(leftSpace, labLeftOY, labSize.width, labSize.height);
-    leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
-
+    if (!leftTitleStr || leftTitleStr.length == 0) {
+        labLeft.frame = CGRectZero;
+        leftBtn.frame = CGRectZero;
+        return;
+    }else{
+        _leftTitleStr = leftTitleStr;
+        
+        labLeft.text = leftTitleStr;
+        
+        CGSize labSize = [labLeft sizeThatFits:CGSizeZero];
+        CGFloat labLeftOY = (baseView.frame.size.height - labSize.height)/2;
+        labLeft.frame = CGRectMake(leftSpace, labLeftOY, labSize.width, labSize.height);
+        leftBtn.frame = CGRectMake(0, 0, self.frame.size.width/4, baseView.frame.size.height);
+    }
 }
 
 
+/**
+ 设置右边图标名
+
+ @param rightImgStr 字符串
+ */
 - (void)setRightImgStr:(NSString *)rightImgStr{
     
-    _rightImgStr = rightImgStr;
+    if (rightImgStr.length == 0 || !rightImgStr) {
+        imgRightV.frame = CGRectZero;
+        rightBtn.frame = CGRectZero;
+        return;
+    }else{
+        _rightImgStr = rightImgStr;
+        
+        imgRightV.image = [UIImage imageNamed:rightImgStr];
+        
+        CGFloat imgRightVOY = (baseView.frame.size.height - imgRightV.image.size.height)/2;
+        CGFloat imgRightVOX = (baseView.frame.size.width/4 - leftSpace - imgRightV.image.size.width);
+        imgRightV.frame = CGRectMake(imgRightVOX, imgRightVOY, imgRightV.image.size.width, imgRightV.image.size.height);
+        
+        CGFloat rightBtnOX = baseView.frame.size.width*3/4;
+        rightBtn.frame = CGRectMake(rightBtnOX, 0, self.frame.size.width/4, baseView.frame.size.height);
+    }
     
-    imgRightV.image = [UIImage imageNamed:rightImgStr];
-    
-    CGFloat imgRightVOY = (baseView.frame.size.height - imgRightV.image.size.height)/2;
-    CGFloat imgRightVOX = (baseView.frame.size.width/4 - leftSpace - imgRightV.image.size.width);
-    imgRightV.frame = CGRectMake(imgRightVOX, imgRightVOY, imgRightV.image.size.width, imgRightV.image.size.height);
-    
-    CGFloat rightBtnOX = baseView.frame.size.width*3/4;
-    rightBtn.frame = CGRectMake(rightBtnOX, 0, self.frame.size.width/4, baseView.frame.size.height);
 
 }
 
-- (void)setRightTitleStr:(NSString *)rightTitleStr{
-    _rightTitleStr = rightTitleStr;
-    
-    labRight.text = rightTitleStr;
-    
-    CGSize labSize = [labRight sizeThatFits:CGSizeZero];
-    CGFloat labLeftOY = (baseView.frame.size.height - labSize.height)/2;
-    CGFloat labLeftOX = (baseView.frame.size.width/4 - leftSpace - labSize.width);
-    labRight.frame = CGRectMake(labLeftOX, labLeftOY, labSize.width, labSize.height);
+/**
+ 设置右边标题
 
-    CGFloat rightBtnOX = baseView.frame.size.width*3/4;
-    rightBtn.frame = CGRectMake(rightBtnOX, 0, self.frame.size.width/4, baseView.frame.size.height);
+ @param rightTitleStr 标题
+ */
+- (void)setRightTitleStr:(NSString *)rightTitleStr{
     
+    if (rightTitleStr.length == 0 || !rightTitleStr) {
+        labRight.frame = CGRectZero;
+        rightBtn.frame = CGRectZero;
+        return;
+    }else{
+        _rightTitleStr = rightTitleStr;
+        
+        labRight.text = rightTitleStr;
+        
+        CGSize labSize = [labRight sizeThatFits:CGSizeZero];
+        CGFloat labLeftOY = (baseView.frame.size.height - labSize.height)/2;
+        CGFloat labLeftOX = (baseView.frame.size.width/4 - leftSpace - labSize.width);
+        labRight.frame = CGRectMake(labLeftOX, labLeftOY, labSize.width, labSize.height);
+        
+        CGFloat rightBtnOX = baseView.frame.size.width*3/4;
+        rightBtn.frame = CGRectMake(rightBtnOX, 0, self.frame.size.width/4, baseView.frame.size.height);
+    }
 }
 
 

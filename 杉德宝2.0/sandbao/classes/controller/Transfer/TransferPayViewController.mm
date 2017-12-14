@@ -769,7 +769,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
  */
 - (void)verificationInput
 {
-    if (cashTextfield.text.length >8 || cashTextfield.text<0) {
+    if (cashTextfield.text.length >8 || cashTextfield.text.length<0) {
         return [Tool showDialog:@"输入金额位数不正确,请重新输入"];
     }
     if (_limitFloat < [cashTextfield.text floatValue]) {

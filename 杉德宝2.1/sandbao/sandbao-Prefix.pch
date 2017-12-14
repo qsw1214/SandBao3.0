@@ -64,10 +64,8 @@
 #define LOGOUTNOTICEBARITEM @"logoutNoticeBarItem"
 //退出后 重置MQTT的clientID
 #define LOGOUTNOTICEMQTT @"logoutNoticeMQTT"
-//登录情况下,第三方应用调用杉德宝启动SPS支付
-#define OPENSPSPAYNOTICELOGIN @"openSPSPaynoticeLogin"
-//未登录情况下,第三方应用调用杉德宝启动SPS支付
-#define OPENSPSPAYNOTICELOGOUT @"openSPSPaynoticeLogout"
+//杉德宝已启动 : 用户已登录 + OPENSPSPAYNOTICELOGOUT
+#define OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN @"openSPSPaynoticeLogin"
 
 
 //数据库表名配置
@@ -147,9 +145,9 @@
 
 //用哪个开哪个
 //显示给开发人员 (显示输入数据)
-//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
+#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
 //显示给测试人员 (隐藏输入数据)
-#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
+//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
 
 
 

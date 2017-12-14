@@ -138,7 +138,7 @@
     self.payView = [SDPayView getPayView];
     self.payView.style = SDPayViewOnlyPwd;
     self.payView.delegate = self;
-    [self.view addSubview:self.payView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 }
 
 

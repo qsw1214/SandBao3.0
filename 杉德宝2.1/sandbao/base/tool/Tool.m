@@ -14,6 +14,7 @@
 #import "Base64Util.h"
 #import "GzipUtility.h"
 #import "LoginViewController.h"
+#import "SpsLunchViewController.h"
 #import "HDAlertView.h"
 
 #define Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
@@ -160,6 +161,35 @@
     
 }
 
+#pragma mark - 跳转SpsLunch页
++ (void)setContentViewControllerWithSpsLunchFromSideMentuViewController:(id)sideMenuViewController url:(NSString*)urlStr{
+    
+    NSArray *urlArr = [urlStr componentsSeparatedByString:@"TN:"];
+    urlArr = [[urlArr lastObject] componentsSeparatedByString:@"?"];
+    NSString *tn = [urlArr firstObject];
+    
+    SpsLunchViewController *vc = [[SpsLunchViewController alloc] init];
+    vc.schemeStr = urlStr;
+    vc.TN = tn;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    //类型判断
+    NSString *className = [NSString stringWithUTF8String:object_getClassName(sideMenuViewController)];
+    //1 RESideMenu
+    if ([className isEqualToString:@"RESideMenu"]) {
+        RESideMenu *object = sideMenuViewController;
+        [object setContentViewController:nav];
+        [object hideMenuViewController];
+    }
+    //2 UIViewController
+    else{
+        UIViewController *controller = sideMenuViewController;
+        RESideMenu *object = controller.sideMenuViewController;
+        [object setContentViewController:nav];
+        [object hideMenuViewController];
+    }
+    //用完置为空
+    [CommParameter sharedInstance].userInfo = nil;
+}
 
 #pragma mark - 跳转登陆页
 
@@ -681,6 +711,9 @@
     else if ([@"1012" isEqualToString:type]) {
         return @"网银贷记卡";
     }
+    else if ([@"1014" isEqualToString:type]) {
+        return @"代付凭证";
+    }
     else{
         return @"   ";
     }
@@ -733,6 +766,9 @@
     else if ([@"1012" isEqualToString:type]) {
         NSArray *bankInfoArr = [self getBankIconInfo:title];
         return [bankInfoArr[0] accessibilityIdentifier];
+    }
+    else if ([@"1014" isEqualToString:type]) {
+        return @"list_sand_logo";
     }
     else if([@"PAYLIST_BTN_ADDCARD" isEqualToString:type]){ //添加卡按钮
         if ([imaUrl isEqualToString:@"list_yinlian_AddCard"]) {
@@ -932,7 +968,8 @@
     midLab.textColor = titleColor;
     midLab.font = font;
     midLab.text = str;
-    [btn addSubview:midLab];
+    //防止lab遮挡按钮的点击事件,因此添加其layer - (待验证)
+    [btn.layer addSublayer:midLab.layer];
     
     //frame
     CGFloat upSpace = 20;

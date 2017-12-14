@@ -20,9 +20,11 @@
 #pragma mark - sToken
 @property (nonatomic, strong) NSString *sToken;   //用户活动状态标识
 
+#pragma mark - URL Schemes
+@property (nonatomic, strong) NSString *urlSchemes; //第三方App低调杉德宝支付的URL Schemes
+
 #pragma mark - userInfo域
 @property (nonatomic, strong) NSString *userInfo; //用户信息json串
-
 @property (nonatomic, strong) NSString *userName; //用户名
 @property (nonatomic, strong) NSString *userRealName; //用户实名
 @property (nonatomic, strong) NSString *phoneNo; //手机号

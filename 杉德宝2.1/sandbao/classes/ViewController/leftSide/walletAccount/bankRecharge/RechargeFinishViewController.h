@@ -12,6 +12,11 @@
 
 
 /**
+ 交易类型描述
+ */
+@property (nonatomic, strong) NSString *transTypeName;
+
+/**
  交易金额
  */
 @property (nonatomic, strong) NSString *amtMoneyStr;

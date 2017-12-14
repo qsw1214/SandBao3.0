@@ -339,7 +339,7 @@
         return [bankInfoArr[0] accessibilityIdentifier];
     }
     else if ([@"1014" isEqualToString:type]) {
-        
+        return @"list_sand_logo";
     }
     else if([PAYTOOL_PAYPASS isEqualToString:type] || [PAYTOOL_ACCPASS isEqualToString:type]){ //添加卡按钮
         if ([imaUrl isEqualToString:@"list_yinlian_AddCard"]) {

@@ -14,4 +14,5 @@
  */
 @property (nonatomic, assign) NSString * loginTypeStr;
 
+
 @end

@@ -27,7 +27,7 @@ static CommParameter *commParameterSharedInstance = nil;
 - (void)showCommParameter{
     
     NSLog(@"******************************");
-    
+    NSLog(@" _urlSchemes :%@",_urlSchemes);
     NSLog(@" _userName :%@",_userName);
     NSLog(@" _userRealName :%@",_userRealName);
     NSLog(@" _phoneNo :%@",_phoneNo);
@@ -35,7 +35,6 @@ static CommParameter *commParameterSharedInstance = nil;
     NSLog(@" _realNameFlag :%d",_realNameFlag);
     NSLog(@" _payPassFlag :%d",_payPassFlag);
     NSLog(@" _payForAnotherFlag :%d",_payForAnotherFlag);
-    
     NSLog(@" _safeQuestionFlag :%d",_safeQuestionFlag);
     NSLog(@" _nick :%@",_nick);
     NSLog(@" _avatar :%@",_avatar);
@@ -52,15 +51,16 @@ static CommParameter *commParameterSharedInstance = nil;
 -(void)cleanCommParameter{
     
     _sToken = nil;   //用户活动状态标识
-    _userInfo = nil; //用户信息
     
+    _urlSchemes = nil;
+    
+    _userInfo = nil; //用户信息
     _userName = nil; //用户名
     _userRealName = nil; //用户实名
     _phoneNo = nil; //手机号
     _userId = nil;  //用户id
     _nick = nil; //昵称
     _avatar = nil; //头像
-    
     _realNameFlag = nil; //实名认证flag
     _payPassFlag = nil;  //是否设置支付密码flag
     _payForAnotherFlag = nil; //代付凭证是否激活标志

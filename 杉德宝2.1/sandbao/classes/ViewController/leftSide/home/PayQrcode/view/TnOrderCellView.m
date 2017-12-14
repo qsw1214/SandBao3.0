@@ -8,6 +8,11 @@
 
 #import "TnOrderCellView.h"
 
+@interface TnOrderCellView(){
+    UILabel *rightLab;
+}
+@end
+
 @implementation TnOrderCellView
 
 + (instancetype)createSetCellViewOY:(CGFloat)OY{
@@ -23,22 +28,27 @@
         self.titleLab.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:13];
         self.titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
         self.titleStr = @"这里是标题";
+        [self addRightLab];
     }
     return self;
     
 }
 
-- (void)setRightStr:(NSString *)rightStr{
-    
-    
-    _rightStr = rightStr;
-    UILabel *rightLab = [[UILabel alloc] init];
-    rightLab.text = _rightStr;
+- (void)addRightLab{
+    rightLab = [[UILabel alloc] init];
     rightLab.numberOfLines = 0;
     rightLab.textAlignment = NSTextAlignmentRight;
     rightLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
     rightLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [self insertSubview:rightLab atIndex:1];
+}
+
+
+- (void)setRightStr:(NSString *)rightStr{
+    
+    _rightStr = rightStr;
+    
+    rightLab.text = _rightStr;
     
     CGFloat rightLabRealWidth = [self.titleLab sizeThatFits:CGSizeZero].width;
     

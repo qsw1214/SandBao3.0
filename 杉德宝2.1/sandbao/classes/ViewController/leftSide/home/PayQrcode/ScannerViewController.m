@@ -142,8 +142,7 @@
 //        [self.navigationController popViewControllerAnimated:NO];
     }else{
         [Tool showDialog:@"您的二维码有误,请确认后再扫" defulBlock:^{
-            [self TNOrder:[stringArr lastObject]];
-//            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
         }];
     }
     
@@ -154,17 +153,10 @@
 #pragma mark - 业务逻辑
 - (void)TNOrder:(NSString*)TN
 {
-//    OrderInfoNatiVeViewController *mOrderInfoNatiVeViewController = [[OrderInfoNatiVeViewController alloc] init];
-//    mOrderInfoNatiVeViewController.controllerIndex = SDQRPAY; //设置支付类型为扫码支付
-//    mOrderInfoNatiVeViewController.TN = TN;
-//    [self.navigationController pushViewController:mOrderInfoNatiVeViewController animated:YES];
-    
     SandTnOrderViewController *sandTNOrderVC  = [[SandTnOrderViewController alloc] init];
+    sandTNOrderVC.TN = TN;
+    sandTNOrderVC.type = SandTnOrderTypeC2B; //正扫
     [self.navigationController pushViewController:sandTNOrderVC animated:YES];
-    
-    
-    
-    
 }
 
 

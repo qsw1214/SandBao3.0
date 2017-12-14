@@ -215,7 +215,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     self.payView = [SDPayView getPayView];
     self.payView.style = SDPayViewOnlyPwd;
     self.payView.delegate = self;
-    [self.view addSubview:self.payView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
     
     
 }
@@ -237,6 +237,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         //解绑失败
         [successView animationStopClean];
         [self.payView hidPayTool];
+        [Tool showDialog:@"解绑失败"];
     }];
 }
 

@@ -120,14 +120,15 @@
     //加载子控制器
     [self addSubViewController];
     
-    //增加监听 - 监听用户信息变化
+    //增加监听
+    //监听用户信息变化
     [self addNotifaction_UserInfo];
-    
-    //增加监听 - 监听昵称变化
+    //监听昵称变化
     [self addNotifaction_NickName];
-    
-    //增加监听 - 监听头像变化
+    //监听头像变化
     [self addNotifaction_avatar];
+    //监听OtherAppOpen启动 - 当杉德宝已启动+已登陆
+    [self addNotifaction_otherAppOpen];
     
     //加载UI
     [self createUI_headView];
@@ -142,8 +143,7 @@
     
     //重置frame.width
     CGFloat leftSideWidth = SCREEN_WIDTH * (1-0.258);
-    self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_20, leftSideWidth, SCREEN_HEIGHT-UPDOWNSPACE_20);
-    
+    self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_0, leftSideWidth, SCREEN_HEIGHT);
 }
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
@@ -359,7 +359,7 @@
     [logOutbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.baseScrollView.mas_left);
         make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width, logOutImg.size.height*2));
-        make.bottom.equalTo(tableview.mas_bottom).offset(UPDOWNSPACE_89);
+        make.bottom.equalTo(tableview.mas_bottom).offset(UPDOWNSPACE_69);
     }];
     
     [logOutImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -629,10 +629,17 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
-                //暗登陆成 - 切换到首页
-                [self goHomeViewController];
-                //暗登陆成 - 刷新UI数据
-                [self refreshUI];
+                //暗登陆成功 - 第三方启动 - sps
+                if ([CommParameter sharedInstance].urlSchemes.length>0) {
+                    [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:[CommParameter sharedInstance].urlSchemes];
+                }
+                //暗登陆成功 - 用户自启动 - 常规
+                else{
+                    //切换到首页
+                    [self goHomeViewController];
+                    //刷新UI数据
+                    [self refreshUI];
+                }
             }];
         }];
         if (error) return;
@@ -708,7 +715,6 @@
 - (void)addNotifaction_UserInfo{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"User_Info_Changed" object:nil];
 }
-
 #pragma mark 昵称变化监听
 //昵称接受通知
 - (void)addNotifaction_NickName{
@@ -718,7 +724,10 @@
 - (void)addNotifaction_avatar{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"Avatar_Changed" object:nil];
 }
-
+#pragma mark 监听OtherAppOpen启动
+- (void)addNotifaction_otherAppOpen{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openSpsLunch:) name:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
+}
 
 #pragma mark 刷新用户信息
 - (void)refreshUI{
@@ -753,7 +762,11 @@
         }
     }
 }
-
+#pragma mark 第三方App起动sps支付
+- (void)openSpsLunch:(NSNotification*)noti{
+    NSString *schemesStr = noti.object;
+    [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:schemesStr];
+}
 
 
 

@@ -104,9 +104,13 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_RECHARGE) {
-        if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue]<=limitFloat) {
-            [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"钱包账户充值"];
-            [self fee];
+        if ([moneyTextfield.text floatValue]>0) {
+            if ([moneyTextfield.text floatValue]<=limitFloat) {
+                [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"钱包账户充值"];
+                [self fee];
+            }else{
+                [Tool showDialog:@"金额超限!"];
+            }
         }else{
             [Tool showDialog:@"请输入正确金额"];
         }
@@ -327,7 +331,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)create_PayView{
     self.payView = [SDPayView getPayView];
     self.payView.delegate = self;
-    [self.view addSubview:self.payView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 }
 
 #pragma mark - Notifaction - 金额输入框值监听
@@ -443,6 +447,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
             //充值成功
             RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+            rechargeFinishVC.transTypeName = @"钱包充值成功";
             rechargeFinishVC.amtMoneyStr = moneyTextfield.text;
             rechargeFinishVC.payOutName = [self.rechargeOutPayToolDic objectForKey:@"title"];
             rechargeFinishVC.payOutNo = [[self.rechargeOutPayToolDic objectForKey:@"account"] objectForKey:@"accNo"];
@@ -568,13 +573,13 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
  */
 - (void)resetBankNameLabelAndIconImageView{
     
-    NSString *accNo  = [[payToolsArrayUsableM[0] objectForKey:@"account"] objectForKey:@"accNo"];
-    NSString *title = [payToolsArrayUsableM[0] objectForKey:@"title"];
+    NSString *accNo  = [[self.rechargeOutPayToolDic  objectForKey:@"account"] objectForKey:@"accNo"];
+    NSString *title = [self.rechargeOutPayToolDic  objectForKey:@"title"];
     NSString *lastfournumber = accNo.length>=4?lastfournumber = [accNo substringFromIndex:accNo.length-4]:lastfournumber = @"暂无显示";
     
     bankNameLab.text = [NSString stringWithFormat:@"%@",title];
     bankNumLab.text = [NSString stringWithFormat:@"尾号%@",lastfournumber];
-    NSString *imgName = [Tool getIconImageName:[payToolsArrayUsableM[0] objectForKey:@"type"] title:title imaUrl:nil];
+    NSString *imgName = [Tool getIconImageName:[self.rechargeOutPayToolDic objectForKey:@"type"] title:title imaUrl:nil];
     bankIconImgView.image = [UIImage imageNamed:imgName];
     
 }

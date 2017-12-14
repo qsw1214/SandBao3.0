@@ -66,6 +66,15 @@ typedef void(^DefulBtnBlock)();
  */
 + (void)showDialog:(NSString*)title message:(NSString*)message leftBtnString:(NSString*)leftString rightBtnString:(NSString*)rightString leftBlock:(LeftBtnBlock)leftbtnblock rightBlock:(RightBtnBlock)rightbtnblock;
 
+#pragma mark - 跳转SpsLunch页
+
+/**
+ 跳转SpsLunch页
+
+ @param sideMenuViewController sideMenuViewController description
+ @param urlStr url schemes
+ */
++ (void)setContentViewControllerWithSpsLunchFromSideMentuViewController:(id)sideMenuViewController url:(NSString*)urlStr;
 
 #pragma mark - 跳转登陆页
 /**

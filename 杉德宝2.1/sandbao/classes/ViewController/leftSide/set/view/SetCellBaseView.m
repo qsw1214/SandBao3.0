@@ -34,9 +34,13 @@
     
     
     //rightimgeVIew
-    UIImage *rightImg = [UIImage imageNamed:self.rightImgStr];
     self.rightImgView = [[UIImageView alloc] init];
-    self.rightImgView.image = rightImg;
+    if (self.rightImgStr.length == 0 || !self.rightImgStr) {
+        self.rightImgView.frame = CGRectZero;
+    }else{
+        UIImage *rightImg = [UIImage imageNamed:self.rightImgStr];
+        self.rightImgView.image = rightImg;
+    }
     [self addSubview:self.rightImgView];
     
     

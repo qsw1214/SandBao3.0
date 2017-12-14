@@ -52,76 +52,73 @@
     [self UMSetAbout];
     
     // 0.注册微博微信SDK
-    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK enableDebugMode:NO];
     [WeiboSDK registerApp:WB_App_Key];
-    
     
     // 1.IQkeyBoard配置
     [self IQKeyBoardSet];
     
     // 2.window设置
     [self setWindows];
-
     
     // 3.loading
+    [self loading:launchOptions];
+
+    return YES;
+}
+
+
+- (void)loading:(NSDictionary *)launchOptions{
+    
     NSInteger loadingResult = [Loading startLoading];
-    switch (loadingResult) {
-            //load失败
-            case 0:
-            {
-                SDNetwork *sdnet = [[SDNetwork alloc] init];
-                if ([@"" isEqualToString:[sdnet stringWithNetworkType]]) {
-                    [self loadingError:@"无网络连接"];
-                }else{
-                    [self loadingError:@"网络异常"];
-                }
-            }
-                break;
-            //明登陆引导
-            case 1:
-            {
-                //lunchVC
-                LunchViewController *lunchVC = [[LunchViewController alloc] init];
-                
-                UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
-                //leftVC
-                LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
-                leftVC.loginTypeStr = @"PWD_LOGIN";
-                
-                //RESidenMenu控制器
-                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
-                
-                self.window.rootViewController = sideMenuVC;
-            }
-
-                break;
-            //暗登陆引导
-            case 2:
-            {
-                //lunchVC
-                LunchViewController *lunchVC = [[LunchViewController alloc] init];
-
-                UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
-                //leftVC
-                LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
-                leftVC.loginTypeStr = @"NO_PWD_LOGIN";
-                
-                //RESidenMenu控制器
-                RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
-                
-                self.window.rootViewController = sideMenuVC;
-            }
-                
-                break;
-            default:
-                break;
+    //判断久彰App调用启动
+    NSString *loginTypeStr;
+    NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+    if (url) {
+        loadingResult += 10;
+        [CommParameter sharedInstance].urlSchemes = [NSString stringWithFormat:@"%@",url];
+    }
+    //load失败
+    if (loadingResult == 0 || loadingResult == 10) {
+        
+        SDNetwork *sdnet = [[SDNetwork alloc] init];
+        if ([@"" isEqualToString:[sdnet stringWithNetworkType]]) {
+            [self loadingError:@"无网络连接"];
+        }else{
+            [self loadingError:@"网络异常"];
+        }
+    }
+    //杉德宝未启动 : 用户自启动+明登陆引导
+    if (loadingResult == 1) {
+        loginTypeStr = @"PWD_LOGIN";
+    }
+    //杉德宝未启动 : 用户自启动+暗登陆引导
+    if (loadingResult == 2) {
+        loginTypeStr = @"NO_PWD_LOGIN";
+    }
+    //杉德宝未启动 : OtherApp启动+明登陆引导
+    if (loadingResult == 11) {
+        loginTypeStr = @"PWD_LOGIN";
+    }
+    //杉德宝未启动 : OtherApp启动+暗登陆引导
+    if (loadingResult == 12) {
+        loginTypeStr = @"NO_PWD_LOGIN";
     }
     
+    //lunchVC
+    LunchViewController *lunchVC = [[LunchViewController alloc] init];
+    UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
+    
+    //leftVC
+    LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
+    leftVC.loginTypeStr = loginTypeStr;
+    //RESidenMenu控制器
+    RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
+    
+    self.window.rootViewController = sideMenuVC;
     // 3.显示窗口
     [self.window makeKeyAndVisible];
     
-    
-    return YES;
 }
 
 #pragma mark 友盟相关设置
@@ -245,6 +242,89 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+//接受微博或微信等各类App的起调
+#pragma mark 9.0之后
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+    
+    //微博启动回调
+    if ([WeiboSDK handleOpenURL:url delegate:self]) {
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    //sps启动回调
+    if ([url.absoluteString containsString:@"sandbao"]) {
+        NSString *urlStr = [NSString stringWithFormat:@"%@",url];
+        [CommParameter sharedInstance].urlSchemes = urlStr;
+        //查询活跃状态用户数量(1个且只能为1)
+        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
+        //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
+        if (count > 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:urlStr];
+        }else{
+            //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
+        }
+        return YES;
+    }
+    
+    
+    return NO;
+    
+}
+
+#pragma mark 9.0之前
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    
+    //微博启动回调
+    if ([WeiboSDK handleOpenURL:url delegate:self]) {
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    //sps启动回调
+    if ([url.absoluteString containsString:@"sandbao"]) {
+        NSString *urlStr = [NSString stringWithFormat:@"%@",url];
+        [CommParameter sharedInstance].urlSchemes = urlStr;
+        //查询活跃状态用户数量(1个且只能为1)
+        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
+        //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
+        if (count > 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:urlStr];
+        }else{
+            //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
+        }
+        return YES;
+    }
+    
+    
+    return NO;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation{
+    
+    //微博启动回调
+    if ([WeiboSDK handleOpenURL:url delegate:self]) {
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    //sps启动回调
+    if ([url.absoluteString containsString:@"sandbao"]) {
+        NSString *urlStr = [NSString stringWithFormat:@"%@",url];
+        [CommParameter sharedInstance].urlSchemes = urlStr;
+        //查询活跃状态用户数量(1个且只能为1)
+        long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
+        //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
+        if (count > 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:urlStr];
+        }else{
+            //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
+        }
+        return YES;
+    }
+    
+    
+    return NO;
+}
+
+
+
 
 
 

@@ -228,7 +228,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     self.payView = [SDPayView getPayView];
     self.payView.style = SDPayViewOnlyPwd;
     self.payView.delegate = self;
-    [self.view addSubview:self.payView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 }
 
 
@@ -343,7 +343,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [Tool showDialog:@"转账失败" defulBlock:^{
+        [Tool showDialog:@"红包发送失败" defulBlock:^{
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];
     }];

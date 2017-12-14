@@ -167,7 +167,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     self.payView = [SDPayView getPayView];
     self.payView.style = SDPayViewOnlyPwd;
     self.payView.delegate = self;
-    [self.view addSubview:self.payView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 
 }
 #pragma mark tableViewDelegate
@@ -247,7 +247,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
             }];
         }];
 
-        deleteRowAction.backgroundColor = [UIColor blueColor];
+        deleteRowAction.backgroundColor = COLOR_FF7D5A;
         UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteRowAction]];
         return config;
     }
@@ -279,7 +279,9 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         //解绑失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [self.bankTableView reloadData];
+        [Tool showDialog:@"解绑失败" defulBlock:^{
+            [self.bankTableView reloadData];
+        }];
     }];
     
 }

@@ -75,8 +75,12 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     //转账!
     if (btn.tag == BTN_TAG_TRANSFER) {
         
-        if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue] <= limitFloat) {
-            [self fee];
+        if ([moneyTextfield.text floatValue]>0 ) {
+            if ([moneyTextfield.text floatValue] <= limitFloat) {
+                [self fee];
+            }else{
+                [Tool showDialog:@"金额超限!"];
+            }
         }else{
             [Tool showDialog:@"请输入正确金额"];
         }
@@ -273,7 +277,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     self.payView = [SDPayView getPayView];
     self.payView.style = SDPayViewOnlyPwd;
     self.payView.delegate = self;
-    [self.view addSubview:self.payView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 }
 #pragma mark - Notifaction - 金额输入框值监听
 - (void)textFiledEditChanged:(NSNotification *)obj

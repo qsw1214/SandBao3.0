@@ -48,7 +48,7 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
-    self.navCoverView.midTitleStr = @"充值完成";
+    self.navCoverView.midTitleStr = self.transTypeName;
     self.navCoverView.rightTitleStr = @"完成";
  
     
@@ -84,7 +84,7 @@
     [headView addSubview:moneyLab];
     
     //rechargeFinishLab
-    UILabel *rechargeFinishLab = [Tool createLable:@"充值成功" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+    UILabel *rechargeFinishLab = [Tool createLable:self.transTypeName attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     [headView addSubview:rechargeFinishLab];
     
     headView.width = SCREEN_WIDTH;
