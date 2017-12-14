@@ -8,11 +8,13 @@
 
 #import "SpsLunchViewController.h"
 #import "PayNucHelper.h"
-
+#import "SpsLoadingView.h"
 #import "SandTnOrderViewController.h"
 typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 @interface SpsLunchViewController ()<SDPayViewDelegate>
 {
+    
+    UIView *headView;
     
     NSDictionary *successWorkDic; //支付成功后返回的work
     
@@ -34,6 +36,11 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
  */
 @property (nonatomic, strong) NSMutableDictionary *selectedPayDict;
 
+/**
+ loading加载动画
+ */
+@property (nonatomic, strong) SpsLoadingView *spsLoadingView;
+
 @end
 
 @implementation SpsLunchViewController
@@ -51,6 +58,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     // Do any additional setup after loading the view.
     
     [self createUI];
+    [self create_PayView];
     
     [self TNOrder:self.TN];
     
@@ -64,6 +72,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
+    self.navCoverView.style = NavCoverStyleGradient;
     self.navCoverView.hidden = YES;
 }
 
@@ -76,13 +85,52 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 #pragma mark  - UI绘制
 - (void)createUI{
     
-
+    self.spsLoadingView = [[SpsLoadingView alloc] initWithFrame:CGRectMake(0, 0, LEFTRIGHTSPACE_100, LEFTRIGHTSPACE_100)];
+    [self.baseScrollView addSubview:self.spsLoadingView];
+    [self.spsLoadingView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_64 + UPDOWNSPACE_40);
+        make.size.mas_equalTo(self.spsLoadingView.size);
+    }];
+    
+    
+    
+    headView = [[UIView alloc] init];
+    headView.alpha = 0.f;
+    [self.baseScrollView addSubview:headView];
+    
+    UIImageView *headImgView = [Tool createImagView:nil];
+    headImgView.size = CGSizeMake(LEFTRIGHTSPACE_80, LEFTRIGHTSPACE_80);
+    
+    headImgView.layer.borderColor = [UIColor whiteColor].CGColor;
+    headImgView.layer.borderWidth = 2.f;
+    headImgView.image = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
+    headImgView.layer.cornerRadius = headImgView.width/2;
+    headImgView.layer.masksToBounds = YES;
+    [headView addSubview:headImgView];
+    
+    UILabel *phoneNumLab = [Tool createLable:[CommParameter sharedInstance].userName attributeStr:nil font:FONT_15_Medium textColor:COLOR_F5F5F5 alignment:NSTextAlignmentCenter];
+    [headView addSubview:phoneNumLab];
+    headView.size = CGSizeMake(phoneNumLab.width, phoneNumLab.height+headImgView.height);
+    headView.frame = CGRectMake((SCREEN_WIDTH - headView.width)/2, SCREEN_HEIGHT/2, headView.width, headView.height);
+    
+    [headImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headView.mas_top);
+        make.centerX.equalTo(headView.mas_centerX);
+        make.size.mas_equalTo(headImgView.size);
+    }];
+    
+    [phoneNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headImgView.mas_bottom);
+        make.centerX.equalTo(headView.mas_centerX);
+        make.size.mas_equalTo(phoneNumLab.size);
+    }];
+    
 }
 - (void)create_PayView{
     self.payView = [SDPayView getPayView];
     self.payView.delegate = self;
     [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
-    
 }
 
 #pragma mark - SDPayViewDelegate
@@ -93,6 +141,11 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     //刷新页面信息
     [self resetTnOrderInfo];
     
+}
+//点击关闭sps的回调
+- (void)payViewClickCloseBtn{
+    
+    [self payGoBackByisSuccess:NO];
 }
 - (void)payViewPwd:(NSString *)pwdStr paySuccessView:(SDPaySuccessAnimationView *)successView{
     
@@ -139,7 +192,9 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 #pragma mark 获取支付工具
 - (void)TNOrder:(NSString*)TN
 {
+    [self.spsLoadingView startCircleAnimation];
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    self.HUD.hidden = YES;
     [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
@@ -171,6 +226,8 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
+                [self.spsLoadingView stopCircleAnimation];
+                [self headViewAnimation];
                 
                 NSString *payTools = [NSString stringWithUTF8String:paynuc.get("payTools").c_str()];
                 NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:payTools];
@@ -245,6 +302,10 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     for (int i = 0; i < unavailableArrayCount; i++) {
         [payToolsArrayUsableM addObject:payToolsArrayUnusableM[i]];
     }
+    
+    //初始化支付工具完成 - 弹出sps支付工具
+    [self.payView setPayInfo:payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%.2f",[[orderDic objectForKey:@"amount"] floatValue]/100] orderTypeStr:@"付款给久彰"];
+    [self.payView showPayTool];
 }
 
 #pragma mark 订单支付
@@ -343,6 +404,17 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         }
     }
 }
+#pragma mark 头像上滑动画
+- (void)headViewAnimation{
+    
+    [UIView animateWithDuration:0.5f animations:^{
+        headView.frame = CGRectMake((SCREEN_WIDTH - headView.width)/2, UPDOWNSPACE_64, headView.width, headView.height);
+        headView.alpha = 1.f;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
 
 #pragma mark 支付完成/取消 回调
 - (void)payGoBackByisSuccess:(BOOL)success{
@@ -355,17 +427,15 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@paySussess",backURL]]];
         }
     }else{
-        
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:backURL]]) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@notPyaSuccess",backURL]]];
         }
     }
-    
     //延迟执行效果
     [self performSelector:@selector(outApp) withObject:nil afterDelay:0.4f];
 }
 - (void)outApp{
-    [Tool exitApplication:self];
+    [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
     
 }
 

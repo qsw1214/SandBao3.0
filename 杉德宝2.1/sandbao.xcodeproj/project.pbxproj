@@ -52,6 +52,7 @@
 		2834E4331FBE8348007F1F61 /* IdentityDetailCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2834E4321FBE8348007F1F61 /* IdentityDetailCellView.m */; };
 		2834E4361FBEB813007F1F61 /* NickNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2834E4351FBEB813007F1F61 /* NickNameViewController.mm */; };
 		2836AD601FE1122C00BAB209 /* SpsLunchViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2836AD5F1FE1122C00BAB209 /* SpsLunchViewController.mm */; };
+		2836ADAD1FE26C0E00BAB209 /* SpsLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2836ADAC1FE26C0E00BAB209 /* SpsLoadingView.m */; };
 		2837EAD91FD7E13300C10A57 /* list_icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD11FD7E13300C10A57 /* list_icon_more@2x.png */; };
 		2837EADA1FD7E13300C10A57 /* list_icon_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD21FD7E13300C10A57 /* list_icon_more@3x.png */; };
 		2837EADB1FD7E13300C10A57 /* payToolDef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2837EAD31FD7E13300C10A57 /* payToolDef@2x.png */; };
@@ -450,6 +451,8 @@
 		2834E4351FBEB813007F1F61 /* NickNameViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NickNameViewController.mm; sourceTree = "<group>"; };
 		2836AD5E1FE1122C00BAB209 /* SpsLunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpsLunchViewController.h; sourceTree = "<group>"; };
 		2836AD5F1FE1122C00BAB209 /* SpsLunchViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SpsLunchViewController.mm; sourceTree = "<group>"; };
+		2836ADAB1FE26C0D00BAB209 /* SpsLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpsLoadingView.h; sourceTree = "<group>"; };
+		2836ADAC1FE26C0E00BAB209 /* SpsLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpsLoadingView.m; sourceTree = "<group>"; };
 		2837EAD11FD7E13300C10A57 /* list_icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@2x.png"; sourceTree = "<group>"; };
 		2837EAD21FD7E13300C10A57 /* list_icon_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@3x.png"; sourceTree = "<group>"; };
 		2837EAD31FD7E13300C10A57 /* payToolDef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payToolDef@2x.png"; sourceTree = "<group>"; };
@@ -1142,6 +1145,7 @@
 		2836AD5D1FE111EE00BAB209 /* spsLunch */ = {
 			isa = PBXGroup;
 			children = (
+				2836ADAA1FE26BFD00BAB209 /* view */,
 				2836AD5E1FE1122C00BAB209 /* SpsLunchViewController.h */,
 				2836AD5F1FE1122C00BAB209 /* SpsLunchViewController.mm */,
 			);
@@ -1196,6 +1200,15 @@
 				2824BB061FD97BC600C267AB /* SandTnOrderViewController.mm */,
 			);
 			path = sandOrder;
+			sourceTree = "<group>";
+		};
+		2836ADAA1FE26BFD00BAB209 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				2836ADAB1FE26C0D00BAB209 /* SpsLoadingView.h */,
+				2836ADAC1FE26C0E00BAB209 /* SpsLoadingView.m */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 		2837EACF1FD7E13300C10A57 /* SDQrcodeView */ = {
@@ -2805,6 +2818,7 @@
 				28A8AEB81FAB25E500FA1EC1 /* SDRechargePopView.m in Sources */,
 				A7EFB15D1EB9A8DD009AA369 /* MQTTSessionLegacy.m in Sources */,
 				28BCE8AA1FB046CB00D62F94 /* AddBankCardSecViewController.mm in Sources */,
+				2836ADAD1FE26C0E00BAB209 /* SpsLoadingView.m in Sources */,
 				28BCE8C61FB190B300D62F94 /* ChangeLogPwdViewController.mm in Sources */,
 				28A8AEBD1FAB573400FA1EC1 /* MyCenterViewController.mm in Sources */,
 				28BCE8C21FB18FD500D62F94 /* VerifyTypeViewController.mm in Sources */,

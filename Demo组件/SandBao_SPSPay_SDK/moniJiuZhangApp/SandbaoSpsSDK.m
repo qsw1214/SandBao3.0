@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 #define SAND_SCHEMES @"sandbao"
-#define JZ_SCHEMES   @"sdb_v0.0.0.1"
+#define OTHER_SCHEMES   @"sandbaoPay"
 //杉德宝AppStore:APPID
 #define STOREAPPID @"0000000"
 
@@ -21,7 +21,7 @@
     
     //跳转杉德宝
     //    NSString *urlStr = @"com.sand.sandbao://TN:2094032421?moniJiuZhangApp";
-    NSString *urlStr = [NSString stringWithFormat:@"%@://TN:%@?%@",SAND_SCHEMES,TNnumber,JZ_SCHEMES];
+    NSString *urlStr = [NSString stringWithFormat:@"%@://TN:%@?%@",SAND_SCHEMES,TNnumber,OTHER_SCHEMES];
     
     NSURL *url = [NSURL URLWithString:urlStr];
     UIApplication *application = [UIApplication sharedApplication];
@@ -45,7 +45,7 @@
 //判断是否可以打开久彰app
 +(BOOL)canOpenUrl:(NSURL*)url{
     
-    if ([url.absoluteString containsString:JZ_SCHEMES]) {
+    if ([url.absoluteString containsString:OTHER_SCHEMES]) {
         return YES;
     }
     return NO;
@@ -55,7 +55,7 @@
 +(BOOL)jumpBackPayInfo:(NSURL*)url infoBlock:(SdSpsPayBack)block{
     
     //sps启动回调
-    if ([url.absoluteString containsString:JZ_SCHEMES]) {
+    if ([url.absoluteString containsString:OTHER_SCHEMES]) {
         
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
         NSArray *arr = [urlStr componentsSeparatedByString:@"://"];

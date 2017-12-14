@@ -29,6 +29,7 @@
 }
 - (IBAction)pay:(id)sender {
     
+    
     //SDK
     [SandbaoSpsSDK jumpToSandBaoForPay:_tn];
 

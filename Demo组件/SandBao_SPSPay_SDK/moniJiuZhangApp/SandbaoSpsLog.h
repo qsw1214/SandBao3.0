@@ -19,7 +19,7 @@
 </array>
 */
 #三.在工程中注册URL Schemes
-#在项目 TARGETS -> Info - > URL Types - > 新增 URL Schemes 填入值: sdb_v0.0.0.1
+#在项目 TARGETS -> Info - > URL Types - > 新增 URL Schemes 填入值: sandbaoPay
 
 
 

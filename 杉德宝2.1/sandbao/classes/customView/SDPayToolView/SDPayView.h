@@ -51,6 +51,11 @@ typedef enum {
  */
 - (void)payViewAddPayToolCard:(NSString*)type;
 
+/**
+ 点击关闭按钮
+ */
+- (void)payViewClickCloseBtn;
+
 @end
 
 

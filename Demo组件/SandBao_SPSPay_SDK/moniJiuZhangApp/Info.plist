@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sdb_v0.0.0.1</string>
+				<string>sandbaoPay</string>
 			</array>
 		</dict>
 	</array>

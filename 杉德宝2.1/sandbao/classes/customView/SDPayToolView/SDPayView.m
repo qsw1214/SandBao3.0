@@ -240,7 +240,11 @@
     [SDPayAnimtion payToolOrderViewAnimation:self.payToolOrderView frame:SDPayToolOrderViewRightTranslationFrame showState:YES];
     [SDPayAnimtion payToolPwdViewAnimation:self.payToolPwdView frame:SDPayToolPwdViewDidLoadFrame showState:YES];
 }
+
 - (void)payToolOrderViewJumpToClosePayView{
+    if ([self.delegate respondsToSelector:@selector(payViewClickCloseBtn)]) {
+        [self.delegate payViewClickCloseBtn];
+    }
     [self hiddenOverNow];
 }
 
