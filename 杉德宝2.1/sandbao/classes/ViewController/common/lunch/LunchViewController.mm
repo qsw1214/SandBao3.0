@@ -15,6 +15,7 @@
 #import "SDDrowNoticeView.h"
 #import "LoginViewController.h"
 
+//启动图 lunch
 @interface LunchViewController ()
 {
     
@@ -50,7 +51,6 @@
 #pragma mark  - UI绘制
 - (void)setBaseInfo{
 
-    
     UIImage *headImage = [UIImage fullscreenAllIphoneImageWithName:@"loading.png"];
     UIImageView *headImageView = [[UIImageView alloc] init];
     headImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -60,35 +60,29 @@
         make.center.equalTo(self.view);
     }];
     
+    
     //显示Build版本lab
-    UILabel *versionLab = [[UILabel alloc] init];
     NSString *strVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] ;
-    versionLab.text = [NSString stringWithFormat:@"Build版本号: %@",strVersion];
-    versionLab.textAlignment = NSTextAlignmentCenter;
-    CGSize versionLabsize = CGSizeMake(SCREEN_SIZE.width - 2*15, 15);
-    versionLab.textColor = [UIColor whiteColor];
+    NSString *strVersionInfo = [NSString stringWithFormat:@"Build版本号: %@",strVersion];
+    UILabel *versionLab = [Tool createLable:strVersionInfo attributeStr:nil font:FONT_12_Regular textColor:COLOR_F5F5F5 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:versionLab];
     [versionLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(headImageView.mas_bottom).offset(-20);
+        make.bottom.equalTo(headImageView.mas_bottom).offset(-UPDOWNSPACE_20);
         make.centerX.equalTo(headImageView.mas_centerX).offset(0);
-        make.size.mas_equalTo(versionLabsize);
+        make.size.mas_equalTo(versionLab.size);
     }];
-    
+
     //显示version版本
-    UILabel *versionLab1 = [[UILabel alloc] init];
     NSString *strVersion1 = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] ;
     //    CFBundleShortVersionString
     //    CFBundleVersion
-    versionLab1.text = [NSString stringWithFormat:@"@Version版本号: %@",strVersion1];
-    versionLab1.textAlignment = NSTextAlignmentCenter;
-    versionLab1.font = [UIFont systemFontOfSize:11];
-    CGSize versionLabsize1 = CGSizeMake(SCREEN_SIZE.width - 2*15, 15);
-    versionLab1.textColor = [UIColor lightGrayColor];
+    NSString *versionLab1Info = [NSString stringWithFormat:@"@Version版本号: %@",strVersion1];
+    UILabel *versionLab1 = [Tool createLable:versionLab1Info attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:versionLab1];
     [versionLab1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(headImageView.mas_bottom).offset(-40);
+        make.bottom.equalTo(headImageView.mas_bottom).offset(-UPDOWNSPACE_40);
         make.centerX.equalTo(headImageView.mas_centerX).offset(0);
-        make.size.mas_equalTo(versionLabsize1);
+        make.size.mas_equalTo(versionLab1.size);
     }];
 }
 

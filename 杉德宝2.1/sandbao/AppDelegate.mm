@@ -88,6 +88,7 @@
             [self loadingError:@"网络异常"];
         }
     }
+    
     //杉德宝未启动 : 用户自启动+明登陆引导
     if (loadingResult == 1) {
         loginTypeStr = @"PWD_LOGIN";

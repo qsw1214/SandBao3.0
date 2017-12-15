@@ -22,7 +22,7 @@ string PostWithData(string url, string data)
     
     SDNetwork *sdNetwork = [[SDNetwork alloc] init];
     
-    sdNetwork.timeoutInterval = 45; //45秒超时
+    sdNetwork.timeoutInterval = 30; //30秒超时
     
     string senddata = "data=" + data;
     

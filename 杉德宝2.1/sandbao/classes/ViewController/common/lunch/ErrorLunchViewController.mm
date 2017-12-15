@@ -7,7 +7,7 @@
 //
 
 #import "ErrorLunchViewController.h"
-
+//启动图 - 启动失败
 @interface ErrorLunchViewController ()
 
 @end

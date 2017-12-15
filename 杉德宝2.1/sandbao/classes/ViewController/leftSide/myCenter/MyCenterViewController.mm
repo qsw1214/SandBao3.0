@@ -16,6 +16,7 @@
 
 #import "IdentityDetailViewController.h"
 #import "NickNameViewController.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface MyCenterViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -77,24 +78,53 @@
         //@"头像"
         [SDBottomPop showBottomPopView:@"更换头像" cellNameList:@[@"拍照上传",@"从相册上传"] suerBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"拍照上传"]) {
-                picker = [[UIImagePickerController alloc] init];
-                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                picker.delegate = self;
-                //设置选择后的图片可被编辑
-                picker.allowsEditing = YES;
-                [self presentViewController:picker animated:YES completion:nil];
+                //检测相机权限是否支持
+                NSString *mediaType = AVMediaTypeVideo;//读取媒体类型
+                AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
+                if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
+                    [Tool showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"暂不启用" rightBtnString:@"去启用" leftBlock:^{
+                        //do no thing
+                    } rightBlock:^{
+                        //去设置
+                        if (IOS_VERSION_9 || IOS_VERSION_8) {
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                        }else{
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+                        }
+                    }];
+                }else{
+                    picker = [[UIImagePickerController alloc] init];
+                    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                    picker.delegate = self;
+                    //设置选择后的图片可被编辑
+                    picker.allowsEditing = YES;
+                    [self presentViewController:picker animated:YES completion:nil];
+                }
             }
             if ([cellName isEqualToString:@"从相册上传"]) {
-                picker = [[UIImagePickerController alloc] init];
-                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                picker.delegate = self;
-                //设置选择后的图片可被编辑
-                picker.allowsEditing = YES;
-                [self presentViewController:picker animated:YES completion:nil];
-
+                // 检测相册权限是否支持
+                ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+                if (status == ALAuthorizationStatusRestricted || status == ALAuthorizationStatusDenied) {
+                    [Tool showDialog:@"相册权限受限" message:@"请在设置中启用" leftBtnString:@"暂不启用" rightBtnString:@"去启用" leftBlock:^{
+                        // do no thing
+                    } rightBlock:^{
+                        //去设置
+                        if (IOS_VERSION_9 || IOS_VERSION_8) {
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                        }else{
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+                        }
+                    }];
+                } else {
+                    picker = [[UIImagePickerController alloc] init];
+                    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                    picker.delegate = self;
+                    //设置选择后的图片可被编辑
+                    picker.allowsEditing = YES;
+                    [self presentViewController:picker animated:YES completion:nil];
+                }
             }
         }];
-        
     }
     if (btn.tag == BTN_TAG_CHECKIDENTITY) {
         //@"身份认证"

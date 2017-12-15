@@ -9,6 +9,8 @@
 #import "LeftSideMenuViewController.h"
 #import "PayNucHelper.h"
 
+#import "LunchGuideViewController.h"
+
 #import "LoginViewController.h"
 #import "MyCenterViewController.h"
 #import "HomeViewController.h"
@@ -92,9 +94,18 @@
             //1.明登录
             if (count <= 0 && [self.loginTypeStr isEqualToString:@"PWD_LOGIN"])
             {
-                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                    [self pwdLogin];
-                }];
+                //第一次安装 - 明登陆
+                if (![[NSUserDefaults standardUserDefaults] objectForKey:FIRST_INSTALL_APP]) {
+                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                        LunchGuideViewController *lunchGuideVC = [[LunchGuideViewController alloc] init];
+                        [self.sideMenuViewController setContentViewController:lunchGuideVC];
+                    }];
+                }else{
+                    //常规 - 明登陆
+                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                        [self pwdLogin];
+                    }];
+                }
             }
             //2.暗登陆
             else
@@ -237,25 +248,6 @@
     realNameLab = [Tool createLable:@"去实名认证" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_10_Regular:FONT_12_Regular) textColor:COLOR_FF5D31 alignment:NSTextAlignmentLeft];
     [headView addSubview:realNameLab];
     
-    //couponBtn
-    UIButton *couponBtn = [Tool createButton:@"小白积分 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_10_Regular:FONT_12_Regular) textColor:COLOR_FFFFFF];
-    couponBtn.layer.masksToBounds = YES;
-    couponBtn.backgroundColor = COLOR_58A5F6;
-    couponBtn.width += LEFTRIGHTSPACE_04;
-    couponBtn.height -= UPDOWNSPACE_10;
-    couponBtn.layer.cornerRadius = couponBtn.height/2;
-    [headView addSubview:couponBtn];
-    
-    //accountBtn
-    UIButton *accountBtn = [Tool createButton:@"开通辅助账户 >" attributeStr:nil font:(SCREEN_WIDTH == SCREEN_WIDTH_320?FONT_10_Regular:FONT_12_Regular) textColor:COLOR_58A5F6];
-    accountBtn.layer.masksToBounds = YES;
-    accountBtn.layer.borderColor = COLOR_58A5F6.CGColor;
-    accountBtn.layer.borderWidth = 1.f;
-    accountBtn.width += LEFTRIGHTSPACE_04;
-    accountBtn.height -= UPDOWNSPACE_10;
-    accountBtn.layer.cornerRadius = accountBtn.height/2;
-    [headView addSubview:accountBtn];
-    
     
     //rightArrowBtn
     UIButton *rightArrowBtn = [[UIButton alloc] init];
@@ -295,18 +287,6 @@
         make.centerY.equalTo(headView);
         make.left.equalTo(realNameImgView.mas_right).offset(LEFTRIGHTSPACE_04);
         make.size.mas_equalTo(realNameLab.size);
-    }];
-    
-    [couponBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
-        make.size.mas_equalTo(couponBtn.size);
-        make.bottom.equalTo(headView.mas_bottom);
-    }];
-    
-    [accountBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(couponBtn.mas_right).offset(LEFTRIGHTSPACE_09);
-        make.size.mas_equalTo(accountBtn.size);
-        make.bottom.equalTo(headView.mas_bottom);
     }];
     
 

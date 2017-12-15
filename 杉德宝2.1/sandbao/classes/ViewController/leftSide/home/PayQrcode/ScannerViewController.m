@@ -33,7 +33,7 @@
     [super viewDidAppear:animated];
 
     if (!isCanScanner) {
-        [Tool showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"考虑一下" rightBtnString:@"去设置" leftBlock:^{
+        [Tool showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"暂不设置" rightBtnString:@"去设置" leftBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             //去设置
@@ -42,7 +42,7 @@
             }else{
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
             }
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }];
     }
 }
