@@ -611,6 +611,7 @@
                 
                 //暗登陆成功 - 第三方启动 - sps
                 if ([CommParameter sharedInstance].urlSchemes.length>0) {
+                    //归位到spsLunch页
                     [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:[CommParameter sharedInstance].urlSchemes];
                 }
                 //暗登陆成功 - 用户自启动 - 常规
@@ -744,10 +745,11 @@
 }
 #pragma mark 第三方App起动sps支付
 - (void)openSpsLunch:(NSNotification*)noti{
-    NSString *schemesStr = noti.object;
-    [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:schemesStr];
+    
+    //App从后台激活,进入前台,接受通知后,当前页面归位到spsLunch页
+    //归位到spsLunch页
+    [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:[CommParameter sharedInstance].urlSchemes];
 }
-
 
 
 - (void)didReceiveMemoryWarning {

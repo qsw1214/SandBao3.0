@@ -11,7 +11,7 @@
 #import "SandbaoSpsSDK.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 {
-    UIView *viw;
+   
 }
 @end
 
@@ -32,7 +32,6 @@
     if ([SandbaoSpsSDK canOpenUrl:url]) {
         return  [SandbaoSpsSDK jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
             NSLog(@"%@",urlStr);
-            [viw removeFromSuperview];
             UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message: urlStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
             [view show];
         }];
@@ -46,7 +45,6 @@
     if ([SandbaoSpsSDK canOpenUrl:url]) {
         return  [SandbaoSpsSDK jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
             NSLog(@"%@",urlStr);
-            [viw removeFromSuperview];
             UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message: urlStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
             [view show];
         }];
@@ -59,16 +57,14 @@
 #pragma mark 9.0之后
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
-    
+    //回调
     if ([SandbaoSpsSDK canOpenUrl:url]) {
         return  [SandbaoSpsSDK jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
             NSLog(@"%@",urlStr);
-            [viw removeFromSuperview];
             UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message: urlStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
             [view show];
         }];
     }
-    
     return nil;
     
 }
@@ -83,12 +79,6 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-    
-    viw = [[UIView alloc] initWithFrame:_window.bounds];
-    viw.layer.contents = (__bridge id)[UIImage imageNamed:@"LaunchImage"].CGImage;
-    [_window addSubview:viw];
-
 }
 
 

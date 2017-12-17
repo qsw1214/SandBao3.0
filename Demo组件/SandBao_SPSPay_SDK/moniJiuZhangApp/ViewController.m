@@ -23,7 +23,7 @@
     self.title = @"这就当做是久璋App吧🙃";
     self.view.backgroundColor = [UIColor whiteColor];
     
-    _tnlab.text = @"ad26ec0e5f63fcf175ad55083a9f1e75";
+    _tnlab.text = @"9a5ecabd1e38207e7293ebe5dd40ba94";
     
     
 }

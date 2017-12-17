@@ -360,6 +360,7 @@
                 
                 //明登陆成功 - 第三方启动 - sps
                 if ([CommParameter sharedInstance].urlSchemes.length>0) {
+                    //归位到spsLunch页
                     [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:[CommParameter sharedInstance].urlSchemes];
                 }
                 //明登陆成功 - 用户自启动 - 常规

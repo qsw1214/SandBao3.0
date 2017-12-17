@@ -1,5 +1,5 @@
 //
-//  SandTnOrderViewController.h
+//  TnOrderViewController.h
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/12/7.
@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger,SandTnOrderType){
     SandTnOrderTypeSps,
 };
 
-@interface SandTnOrderViewController : BaseViewController
+@interface TnOrderViewController : BaseViewController
 
 /**
  TN

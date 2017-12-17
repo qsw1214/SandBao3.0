@@ -79,7 +79,7 @@
     [headView addSubview:titleLab];
     
     //moneyLab
-    NSString *addMoneyStr = [NSString stringWithFormat:@"+ %@",self.amtMoneyStr];
+    NSString *addMoneyStr = [NSString stringWithFormat:@"%@",self.amtMoneyStr];
     UILabel *moneyLab = [Tool createLable:addMoneyStr attributeStr:nil font:FONT_28_SFUIT_Rrgular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [headView addSubview:moneyLab];
     

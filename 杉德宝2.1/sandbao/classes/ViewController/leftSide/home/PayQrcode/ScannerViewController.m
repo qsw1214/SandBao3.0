@@ -14,7 +14,7 @@
 
 #import "ScannerViewController.h"
 #import <AVFoundation/AVFoundation.h>
-#import "SandTnOrderViewController.h"
+#import "TnOrderViewController.h"
 #import "SDScanView.h"
 
 @interface ScannerViewController ()<SDScanViewDelegate>
@@ -37,10 +37,8 @@
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             //去设置
-            if (IOS_VERSION_9 || IOS_VERSION_8) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-            }else{
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
+                [Tool openUrl:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
             }
             [self.navigationController popViewControllerAnimated:YES];
         }];
@@ -153,7 +151,7 @@
 #pragma mark - 业务逻辑
 - (void)TNOrder:(NSString*)TN
 {
-    SandTnOrderViewController *sandTNOrderVC  = [[SandTnOrderViewController alloc] init];
+    TnOrderViewController *sandTNOrderVC  = [[TnOrderViewController alloc] init];
     sandTNOrderVC.TN = TN;
     sandTNOrderVC.type = SandTnOrderTypeC2B; //正扫
     [self.navigationController pushViewController:sandTNOrderVC animated:YES];

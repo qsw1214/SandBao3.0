@@ -161,7 +161,28 @@
     
 }
 
+#pragma mark - url跳转
+/**
+ url跳转
+
+ @param url 地址
+ */
++ (void)openUrl:(NSURL*)url{
+    
+    if (IOS_VERSION_9 || IOS_VERSION_8) {
+        [[UIApplication sharedApplication] openURL:url];
+    }else{
+        [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+    }
+}
+
+
 #pragma mark - 跳转SpsLunch页
+/**
+ 跳转SpsLunch页
+ 
+ @return url
+ */
 + (void)setContentViewControllerWithSpsLunchFromSideMentuViewController:(id)sideMenuViewController url:(NSString*)urlStr{
     
     NSArray *urlArr = [urlStr componentsSeparatedByString:@"TN:"];
@@ -188,7 +209,6 @@
         [object hideMenuViewController];
     }
     //用完置为空
-    [CommParameter sharedInstance].userInfo = nil;
 }
 
 #pragma mark - 跳转登陆页

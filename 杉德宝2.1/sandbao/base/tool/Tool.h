@@ -66,8 +66,15 @@ typedef void(^DefulBtnBlock)();
  */
 + (void)showDialog:(NSString*)title message:(NSString*)message leftBtnString:(NSString*)leftString rightBtnString:(NSString*)rightString leftBlock:(LeftBtnBlock)leftbtnblock rightBlock:(RightBtnBlock)rightbtnblock;
 
-#pragma mark - 跳转SpsLunch页
+#pragma mark - url跳转
+/**
+ url跳转
+ 
+ @param url 地址
+ */
++ (void)openUrl:(NSURL*)url;
 
+#pragma mark - 跳转SpsLunch页
 /**
  跳转SpsLunch页
 

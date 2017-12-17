@@ -86,10 +86,8 @@
                         //do no thing
                     } rightBlock:^{
                         //去设置
-                        if (IOS_VERSION_9 || IOS_VERSION_8) {
-                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                        }else{
-                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+                        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
+                            [Tool openUrl:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                         }
                     }];
                 }else{
@@ -109,10 +107,8 @@
                         // do no thing
                     } rightBlock:^{
                         //去设置
-                        if (IOS_VERSION_9 || IOS_VERSION_8) {
-                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                        }else{
-                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+                        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]]) {
+                            [Tool openUrl:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                         }
                     }];
                 } else {

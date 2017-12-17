@@ -112,12 +112,10 @@
         [Tool showDialog:@"为您拨打客服热线" message:@"021-962567" leftBtnString:@"取消" rightBtnString:@"呼叫" leftBlock:^{
             
         } rightBlock:^{
-            if (IOS_VERSION_9 || IOS_VERSION_8) {
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"]];
-            }else{
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:021-962567"] options:@{} completionHandler:nil];
+            //呼叫
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
+                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
             }
-            
         }];
         
     };

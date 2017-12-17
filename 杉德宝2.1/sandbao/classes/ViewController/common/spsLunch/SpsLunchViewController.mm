@@ -9,7 +9,7 @@
 #import "SpsLunchViewController.h"
 #import "PayNucHelper.h"
 #import "SpsLoadingView.h"
-#import "SandTnOrderViewController.h"
+#import "TnOrderViewController.h"
 typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 @interface SpsLunchViewController ()<SDPayViewDelegate>
 {
@@ -165,9 +165,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         //支付失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [Tool showDialog:@"支付失败" defulBlock:^{
-            [self payGoBackByisSuccess:NO];
-        }];
+        [self payGoBackByisSuccess:NO];
     }];
 }
 
@@ -195,19 +193,31 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     [self.spsLoadingView startCircleAnimation];
     self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
     self.HUD.hidden = YES;
-    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+//    [SDRequestHelp shareSDRequest].HUD = self.HUD;
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
         paynuc.set("tTokenType", "04000101");
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self payGoBackByisSuccess:NO];
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络异常" defulBlock:^{
+                        [self payGoBackByisSuccess:NO];
+                    }];
+                }
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    [Tool showDialog:respMsg defulBlock:^{
+                        [self payGoBackByisSuccess:NO];
+                    }];
+                }
             }];
         } successBlock:^{
-            
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
         }];
         if (error) return ;
         
@@ -218,12 +228,25 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
         
         paynuc.set("work", [work UTF8String]);
+         [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getPayToolsForPay/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self payGoBackByisSuccess:NO];
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络异常" defulBlock:^{
+                        [self payGoBackByisSuccess:NO];
+                    }];
+                }
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    [Tool showDialog:respMsg defulBlock:^{
+                        [self payGoBackByisSuccess:NO];
+                    }];
+                }
             }];
         } successBlock:^{
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 [self.spsLoadingView stopCircleAnimation];
@@ -361,12 +384,25 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         paynuc.set("work", [work UTF8String]);
         paynuc.set("payTool", [payTool UTF8String]);
         paynuc.set("authTools", [@"[]" UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"business/pay/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                errorBlock(nil);
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络异常" defulBlock:^{
+                        [self payGoBackByisSuccess:NO];
+                    }];
+                }
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    [Tool showDialog:respMsg defulBlock:^{
+                        [self payGoBackByisSuccess:NO];
+                    }];
+                }
             }];
         } successBlock:^{
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 NSString *work = [NSString stringWithUTF8String:paynuc.get("work").c_str()];
@@ -424,21 +460,26 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     backURL = [backURL stringByAppendingString:@"://"];
     if (success) {
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:backURL]]) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@paySussess",backURL]]];
-        }
-    }else{
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:backURL]]) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@notPyaSuccess",backURL]]];
+            [Tool openUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@paySussess",backURL]]];
         }
     }
+    else{
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:backURL]]) {
+            [Tool openUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@notPyaSuccess",backURL]]];
+        }
+    }
+    
     //延迟执行效果
-    [self performSelector:@selector(outApp) withObject:nil afterDelay:0.4f];
+    [self performSelector:@selector(outSps) withObject:nil afterDelay:0.4f];
+    
+
 }
-- (void)outApp{
+- (void)outSps{
+    //回调后, 杉德宝App内部处理
+    [CommParameter sharedInstance].urlSchemes = nil;
     [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
     
 }
-
 
 
 

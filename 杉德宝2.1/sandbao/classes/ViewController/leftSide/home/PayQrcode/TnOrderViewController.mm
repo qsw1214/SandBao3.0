@@ -1,19 +1,19 @@
 //
-//  SandTnOrderViewController.m
+//  TnOrderViewController.m
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/12/7.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "SandTnOrderViewController.h"
+#import "TnOrderViewController.h"
 #import "PayNucHelper.h"
 
 #import "TnOrderCellView.h"
 #import "RechargeFinishViewController.h"
 
 typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
-@interface SandTnOrderViewController ()<SDPayViewDelegate>
+@interface TnOrderViewController ()<SDPayViewDelegate>
 {
     UIView *headView;
     UIView *bodyView;
@@ -47,7 +47,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 
 @end
 
-@implementation SandTnOrderViewController
+@implementation TnOrderViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,7 +71,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     self.navCoverView.midTitleStr = @"杉德宝安全支付";
     self.navCoverView.rightTitleStr = @"取消";
     
-    __weak SandTnOrderViewController *weakSelf = self;
+    __weak TnOrderViewController *weakSelf = self;
     if (self.type == SandTnOrderTypeC2B) {
         self.navCoverView.rightBlock = ^{
             //正扫返回
@@ -292,10 +292,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 UIViewController *secVC = self.navigationController.viewControllers[1];
                 [self.navigationController popToViewController:secVC animated:YES];
             }
-            if (self.type == SandTnOrderTypeC2B) {
+            if (self.type == SandTnOrderTypeB2C) {
                 //反扫失败
             }
-            if (self.type == SandTnOrderTypeC2B) {
+            if (self.type == SandTnOrderTypeSps) {
                 //sps失败
             }
         }];

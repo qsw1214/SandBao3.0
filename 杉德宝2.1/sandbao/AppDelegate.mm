@@ -261,7 +261,7 @@
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
         //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
         if (count > 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:urlStr];
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
         }else{
             //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
         }
@@ -288,7 +288,7 @@
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
         //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
         if (count > 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:urlStr];
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
         }else{
             //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
         }
@@ -313,7 +313,7 @@
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
         //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
         if (count > 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:urlStr];
+            [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
         }else{
             //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
         }
