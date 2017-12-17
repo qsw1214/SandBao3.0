@@ -81,7 +81,8 @@
     
     __weak WalletAccountViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+        //归位Home或SpsLunch
+        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
     };
 }
 #pragma mark - 重写父类-点击方法集合
@@ -341,7 +342,8 @@
     //钱包账户未成功开通
     if (rechargeInPayToolDic.count == 0) {
         [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
-            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+            //归位Home或SpsLunch
+            [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
         } rightBlock:^{
             //呼叫
             if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {

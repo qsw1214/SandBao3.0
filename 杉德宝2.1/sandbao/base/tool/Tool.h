@@ -74,16 +74,8 @@ typedef void(^DefulBtnBlock)();
  */
 + (void)openUrl:(NSURL*)url;
 
-#pragma mark - 跳转SpsLunch页
-/**
- 跳转SpsLunch页
 
- @param sideMenuViewController sideMenuViewController description
- @param urlStr url schemes
- */
-+ (void)setContentViewControllerWithSpsLunchFromSideMentuViewController:(id)sideMenuViewController url:(NSString*)urlStr;
-
-#pragma mark - 跳转登陆页
+#pragma mark - 归位登陆页
 /**
  归位到登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
  
@@ -91,7 +83,13 @@ typedef void(^DefulBtnBlock)();
  */
 + (void)setContentViewControllerWithLoginFromSideMentuVIewController:(id)sideMenuViewController;
 
-
+#pragma mark - 归位Home页或SpsLunch页
+/**
+ 归位到Home页
+ 
+ @param sideMenuViewController sideMenuViewController description
+ */
++ (void)setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:(id)sideMenuViewController;
 
 #pragma mark - 支付工具排序
 /**

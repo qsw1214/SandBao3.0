@@ -201,18 +201,18 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getStoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        //退出处理
+                        [Tool exitApplication:self];
+                    }];
+                }
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
                         [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //重新申请sToken
                         [self load];
-                    }];
-                }
-                else{
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
-                        //退出处理
-                        [Tool exitApplication:self];
                     }];
                 }
             }];
@@ -227,17 +227,17 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@("token/getTtoken/v1") errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
+                    }];
+                }
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
                         [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //重新申请tTtoken
                         [self load];
-                    }];
-                }
-                else{
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
-                        [Tool exitApplication:self];
                     }];
                 }
             }];
@@ -250,17 +250,17 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                        [Tool exitApplication:self];
+                    }];
+                }
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
                         [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //重新申请鉴权工具
                         [self load];
-                    }];
-                }
-                else{
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
-                        [Tool exitApplication:self];
                     }];
                 }
             }];
@@ -319,12 +319,12 @@
         paynuc.set("userInfo", [userInfo UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/login/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            if (type == respCodeErrorType) {
-                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
                     NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
                     if ([@"030005" isEqualToString:respCode]){
                         NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
-                        NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];                        
+                        NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
                         if (tempAuthToolsArray.count>0) {
                             for (int i = 0; i<tempAuthToolsArray.count; i++) {
                                 NSDictionary *authToolDic = tempAuthToolsArray[i];
@@ -344,10 +344,10 @@
                             [Tool showDialog:@"下发鉴权工具为空"];
                         }
                     }else{
-                         [self load];
+                        [self load];
                     }
-                }];
-            }
+                }
+            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
@@ -470,16 +470,8 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
-                //明登陆成功 - 第三方启动 - sps
-                if ([CommParameter sharedInstance].urlSchemes.length>0) {
-                    //归位到spsLunch页
-                    [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:[CommParameter sharedInstance].urlSchemes];
-                }
-                //明登陆成功 - 用户自启动 - 常规
-                else{
-                    //当前页归位到Home
-                    [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
-                }
+                //归位Home或SpsLunch
+                [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                 //友盟埋点 - 账号统计 - 开始
                 [MobClick profileSignInWithPUID:[CommParameter sharedInstance].userId provider:@"sand"];
                 //友盟埋点 - 账号统计 - 结束

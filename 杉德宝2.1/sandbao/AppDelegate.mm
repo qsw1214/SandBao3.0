@@ -71,16 +71,19 @@
 - (void)loading:(NSDictionary *)launchOptions{
     
     NSInteger loadingResult = [Loading startLoading];
-    //判断久彰App调用启动
-    NSString *loginTypeStr;
+    //判断久彰App调用启动方式
     NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
-    if (url) {
-        loadingResult += 10;
+    if (!url) {
+        //用户自启动杉德宝App - 设置全局变量urlScheme为nil
+        [CommParameter sharedInstance].urlSchemes = nil;
+    }else{
+        //第三方App唤起杉德宝App - 设置全局变量 urlSchemes
         [CommParameter sharedInstance].urlSchemes = [NSString stringWithFormat:@"%@",url];
     }
+    
+    NSString *loginTypeStr;
     //load失败
-    if (loadingResult == 0 || loadingResult == 10) {
-        
+    if (loadingResult == 0) {
         SDNetwork *sdnet = [[SDNetwork alloc] init];
         if ([@"" isEqualToString:[sdnet stringWithNetworkType]]) {
             [self loadingError:@"无网络连接"];
@@ -88,23 +91,15 @@
             [self loadingError:@"网络异常"];
         }
     }
-    
-    //杉德宝未启动 : 用户自启动+明登陆引导
+    //明登陆引导
     if (loadingResult == 1) {
         loginTypeStr = @"PWD_LOGIN";
     }
-    //杉德宝未启动 : 用户自启动+暗登陆引导
+    //暗登陆引导
     if (loadingResult == 2) {
         loginTypeStr = @"NO_PWD_LOGIN";
     }
-    //杉德宝未启动 : OtherApp启动+明登陆引导
-    if (loadingResult == 11) {
-        loginTypeStr = @"PWD_LOGIN";
-    }
-    //杉德宝未启动 : OtherApp启动+暗登陆引导
-    if (loadingResult == 12) {
-        loginTypeStr = @"NO_PWD_LOGIN";
-    }
+
     
     //lunchVC
     LunchViewController *lunchVC = [[LunchViewController alloc] init];
@@ -249,13 +244,14 @@
 #pragma mark 9.0之后
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
-    //微博启动回调
+    //微博启动杉德宝
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
-    //sps启动回调
+    //第三方App启动杉德宝(sps)
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
+        //
         [CommParameter sharedInstance].urlSchemes = urlStr;
         //查询活跃状态用户数量(1个且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
@@ -267,22 +263,20 @@
         }
         return YES;
     }
-    
-    
     return NO;
-    
 }
 
 #pragma mark 9.0之前
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     
-    //微博启动回调
+    //微博启动杉德宝
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
-    //sps启动回调
+    //第三方App启动杉德宝(sps)
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
+        //
         [CommParameter sharedInstance].urlSchemes = urlStr;
         //查询活跃状态用户数量(1个且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
@@ -294,20 +288,19 @@
         }
         return YES;
     }
-    
-    
     return NO;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation{
     
-    //微博启动回调
+    //微博启动杉德宝
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
-    //sps启动回调
+    //第三方App启动杉德宝(sps)
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
+        //
         [CommParameter sharedInstance].urlSchemes = urlStr;
         //查询活跃状态用户数量(1个且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
@@ -319,8 +312,6 @@
         }
         return YES;
     }
-    
-    
     return NO;
 }
 

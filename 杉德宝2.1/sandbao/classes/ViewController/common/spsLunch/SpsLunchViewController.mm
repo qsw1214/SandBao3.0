@@ -48,8 +48,12 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    
+    
     //检测是否实名/设置支付密码
     [self checkRealNameOrSetPayPwd];
+    //实名/设置支付密码后,需返回到SPSLunch页(即本类,但此时 URLSchemes值已经被 setController方法清空,等设置支付密码完成后,不能重新进入SpsLunch,因此,在跳转设置支付密码时,要把 urlSchemes字符串重新赋值,)
+    
 }
 
 
@@ -475,9 +479,10 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 
 }
 - (void)outSps{
-    //回调后, 杉德宝App内部处理
+    //sps启动支付成功/失败 urlScheme清空
     [CommParameter sharedInstance].urlSchemes = nil;
-    [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+    //归位Home或SpsLunch
+    [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
     
 }
 

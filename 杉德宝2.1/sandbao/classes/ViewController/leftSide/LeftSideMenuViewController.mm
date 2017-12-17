@@ -465,14 +465,7 @@
 #pragma mark 明登陆
 
 - (void)pwdLogin{
-    //如果走明登陆,则数据库状态则全部要为无激活用户状态 (1为不活跃,0位活跃且只有一个活跃用户)
-    //跟新数据库,走明登陆则数据库活跃用户全部置为不活跃,
-    BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
-    
-    if (result) {
-        //明登陆 - 切换到登陆页
-        [self goLoginViewController];
-    }
+    [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self];
 }
 #pragma mark 暗登陆
 - (void)noPwdLogin{
@@ -609,18 +602,11 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
-                //暗登陆成功 - 第三方启动 - sps
-                if ([CommParameter sharedInstance].urlSchemes.length>0) {
-                    //归位到spsLunch页
-                    [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:[CommParameter sharedInstance].urlSchemes];
-                }
-                //暗登陆成功 - 用户自启动 - 常规
-                else{
-                    //切换到首页
-                    [self goHomeViewController];
-                    //刷新UI数据
-                    [self refreshUI];
-                }
+                //暗登陆成功
+                //刷新UI数据
+                [self refreshUI];
+                //归位Home或SpsLunch
+                [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
             }];
         }];
         if (error) return;
@@ -673,25 +659,6 @@
 
 
 #pragma mark - 本类公共方法调用
-#pragma mark 明登陆 - 去登陆页
-- (void)goLoginViewController{
-    
-    //局部变量 - 实例登陆页 - 完成登陆后便于系统回收
-    LoginViewController *loginVC = [[LoginViewController alloc] init];
-    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:loginVC];
-    //当前控制器归位的Login页
-    [self.sideMenuViewController setContentViewController:loginNav];
-    
-    
-}
-#pragma mark 暗登陆 - 去首页
-- (void)goHomeViewController{
-    //确保归位到首页时,所有的leftSide子控制器都可以侧滑
-    self.sideMenuViewController.panGestureEnabled = YES;
-    //当前控制器归位到Home页
-    [self.sideMenuViewController setContentViewController:self.homeNav];
-}
-
 #pragma mark 用户信息变化监听
 - (void)addNotifaction_UserInfo{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"User_Info_Changed" object:nil];
@@ -747,8 +714,9 @@
 - (void)openSpsLunch:(NSNotification*)noti{
     
     //App从后台激活,进入前台,接受通知后,当前页面归位到spsLunch页
-    //归位到spsLunch页
-    [Tool setContentViewControllerWithSpsLunchFromSideMentuViewController:self.sideMenuViewController url:[CommParameter sharedInstance].urlSchemes];
+    
+    //归位Home或SpsLunch
+    [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
 }
 
 

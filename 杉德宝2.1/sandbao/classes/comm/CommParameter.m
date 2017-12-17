@@ -52,7 +52,7 @@ static CommParameter *commParameterSharedInstance = nil;
     
     _sToken = nil;   //用户活动状态标识
     
-    _urlSchemes = nil;
+    _urlSchemes = nil; //第三方启动的URL Schemes
     
     _userInfo = nil; //用户信息
     _userName = nil; //用户名

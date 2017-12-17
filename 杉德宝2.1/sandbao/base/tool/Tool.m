@@ -176,42 +176,7 @@
     }
 }
 
-
-#pragma mark - 跳转SpsLunch页
-/**
- 跳转SpsLunch页
- 
- @return url
- */
-+ (void)setContentViewControllerWithSpsLunchFromSideMentuViewController:(id)sideMenuViewController url:(NSString*)urlStr{
-    
-    NSArray *urlArr = [urlStr componentsSeparatedByString:@"TN:"];
-    urlArr = [[urlArr lastObject] componentsSeparatedByString:@"?"];
-    NSString *tn = [urlArr firstObject];
-    
-    SpsLunchViewController *vc = [[SpsLunchViewController alloc] init];
-    vc.schemeStr = urlStr;
-    vc.TN = tn;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    //类型判断
-    NSString *className = [NSString stringWithUTF8String:object_getClassName(sideMenuViewController)];
-    //1 RESideMenu
-    if ([className isEqualToString:@"RESideMenu"]) {
-        RESideMenu *object = sideMenuViewController;
-        [object setContentViewController:nav];
-        [object hideMenuViewController];
-    }
-    //2 UIViewController
-    else{
-        UIViewController *controller = sideMenuViewController;
-        RESideMenu *object = controller.sideMenuViewController;
-        [object setContentViewController:nav];
-        [object hideMenuViewController];
-    }
-    //用完置为空
-}
-
-#pragma mark - 跳转登陆页
+#pragma mark - 归位登陆页
 
 /**
  归位到登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
@@ -252,6 +217,67 @@
         return;
     }
 }
+
+#pragma mark - 归位Home页或SpsLunch页
+/**
+ 归位到Home页
+
+ @param sideMenuViewController sideMenuViewController description
+ */
++ (void)setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:(id)sideMenuViewController{
+    
+    //1.归位SpsLunch
+    if ([CommParameter sharedInstance].urlSchemes.length > 0 || [CommParameter sharedInstance].urlSchemes != nil) {
+        
+        NSArray *urlArr = [[CommParameter sharedInstance].urlSchemes  componentsSeparatedByString:@"TN:"];
+        urlArr = [[urlArr lastObject] componentsSeparatedByString:@"?"];
+        NSString *tn = [urlArr firstObject];
+        
+        SpsLunchViewController *spsLunchVC = [[SpsLunchViewController alloc] init];
+        spsLunchVC.schemeStr = [CommParameter sharedInstance].urlSchemes ;
+        spsLunchVC.TN = tn;
+        UINavigationController *spsLunchNav = [[UINavigationController alloc] initWithRootViewController:spsLunchVC];
+        //类型判断
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(sideMenuViewController)];
+        //1 RESideMenu
+        if ([className isEqualToString:@"RESideMenu"]) {
+            RESideMenu *object = sideMenuViewController;
+            [object setContentViewController:spsLunchNav];
+            [object hideMenuViewController];
+        }
+        //2 UIViewController
+        else{
+            UIViewController *controller = sideMenuViewController;
+            RESideMenu *object = controller.sideMenuViewController;
+            [object setContentViewController:spsLunchNav];
+            [object hideMenuViewController];
+        }
+        //urlScheme清空
+        [CommParameter sharedInstance].urlSchemes = nil;
+    }
+    
+    //2.归位到HomeNav
+    else{
+        //类型判断
+        NSString *className = [NSString stringWithUTF8String:object_getClassName(sideMenuViewController)];
+        //3.1 RESideMenu
+        if ([className isEqualToString:@"RESideMenu"]) {
+            RESideMenu *object = sideMenuViewController;
+            [object setContentViewController:[CommParameter sharedInstance].homeNav];
+            [object hideMenuViewController];
+        }
+        //3.2 UIViewController
+        else{
+            UIViewController *controller = sideMenuViewController;
+            RESideMenu *object = controller.sideMenuViewController;
+            [object setContentViewController:[CommParameter sharedInstance].homeNav];
+            [object hideMenuViewController];
+        }
+    }
+    
+}
+
+
 
 #pragma mark - 支付工具排序
 /**

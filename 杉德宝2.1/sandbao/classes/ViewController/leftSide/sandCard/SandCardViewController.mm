@@ -74,7 +74,8 @@
     
     __weak SandCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+        //归位Home或SpsLunch
+        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
     };
     
 }

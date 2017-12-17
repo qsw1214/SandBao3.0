@@ -152,15 +152,17 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取鉴权失败" message:@"进入杉德宝,设置支付密码" defulBlock:^{
-                        //归位回主页
-                        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络连接失败,请重新登录" defulBlock:^{
+                        //归位登录页
+                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
                     }];
-                }else{
-                    [Tool showDialog:@"网络连接失败,即将进入杉德宝" defulBlock:^{
-                        //归位回主页
-                        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                }
+                if (type == respCodeErrorType) {
+                    [Tool showDialog:@"获取鉴权失败" message:@"请重新登录" defulBlock:^{
+                        //归位登录页
+                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
                     }];
                 }
             }];
@@ -171,12 +173,7 @@
                 
                 NSString *regAuthTools = [NSString stringWithUTF8String:paynuc.get("regAuthTools").c_str()];
                 regAuthToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
-                if (![[[regAuthToolsArr firstObject] objectForKey:@"type"] isEqualToString:@"paypass"]) {
-                    [Tool showDialog:@"下发鉴权工具有误" defulBlock:^{
-                        //归位回主页
-                        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
-                    }];
-                }
+                
             }];
         }];
         if (error) return ;
@@ -215,16 +212,33 @@
         NSString *regAuthTools = [[PayNucHelper sharedInstance] arrayToJSON:tempArray];
         
         paynuc.set("regAuthTools", [regAuthTools UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    [Tool showDialog:@"网络连接失败,请重新登录" defulBlock:^{
+                        //归位登录页
+                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                    }];
+                }
+                if (type == respCodeErrorType) {
+                    [Tool showDialog:@"密码提价失败,请重新登录" defulBlock:^{
+                        //归位登录页
+                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                    }];
+                }
+            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
                 [Tool showDialog:@"支付密码设置成功" defulBlock:^{
                     [CommParameter sharedInstance].payPassFlag = YES;
-                    //归位home主页
-                    [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                    
+                    //归位Home或SpsLunch
+                    [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                 }];
                 
             }];

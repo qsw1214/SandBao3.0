@@ -226,8 +226,8 @@
                 if ([CommParameter sharedInstance].payPassFlag == NO) {
                     [Tool showDialog:@"支付密码设置成功" defulBlock:^{
                         [CommParameter sharedInstance].payPassFlag = YES;
-                        //归位home主页
-                        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+                        //归位Home或SpsLunch
+                        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
                 }else{
                     [Tool showDialog:@"支付密码修改成功" defulBlock:^{

@@ -83,7 +83,8 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     __weak BankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.sideMenuViewController setContentViewController:[CommParameter sharedInstance].homeNav];
+        //归位Home或SpsLunch
+        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
     };
 }
 #pragma mark - 重写父类-点击方法集合
