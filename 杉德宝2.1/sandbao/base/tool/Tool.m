@@ -249,6 +249,7 @@
  @param sideMenuViewController sideMenuViewController description
  */
 + (void)setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:(id)sideMenuViewController{
+    
     //1.归位SpsLunch
     if ([CommParameter sharedInstance].urlSchemes.length > 0 || [CommParameter sharedInstance].urlSchemes != nil) {
         NSArray *urlArr = [[CommParameter sharedInstance].urlSchemes  componentsSeparatedByString:@"TN:"];
@@ -296,9 +297,7 @@
             [object hideMenuViewController];
         }
     }
-    
 }
-
 
 
 #pragma mark - 支付工具排序

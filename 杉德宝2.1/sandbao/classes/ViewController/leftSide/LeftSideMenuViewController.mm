@@ -478,7 +478,6 @@
         [CommParameter sharedInstance].sToken = [userInfoDic objectForKey:@"sToken"];
         NSString *creditFp = [userInfoDic objectForKey:@"credit_fp"];
         
-        
         paynuc.set("sToken", [[CommParameter sharedInstance].sToken UTF8String]);
         paynuc.set("creditFp", [creditFp UTF8String]);
         paynuc.set("tTokenType", "01001401");

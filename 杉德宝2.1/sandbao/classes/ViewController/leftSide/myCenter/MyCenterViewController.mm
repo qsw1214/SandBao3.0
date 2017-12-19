@@ -68,8 +68,6 @@
         //归位Home或SpsLunch
         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
     };
-    
-    
 }
 
 #pragma mark - 重写父类-点击方法集合

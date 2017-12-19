@@ -50,13 +50,6 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
-    if ([CommParameter sharedInstance].sToken.length == 0) {
-        [Tool showDialog:@"sdfasd" defulBlock:^{
-            
-        }];
-    }
-    
     
      //实名/设置支付密码后,需返回到SPSLunch页(即本类,但此时 URLSchemes值已经被 setController方法清空,等设置支付密码完成后,不能重新进入SpsLunch,因此,在跳转设置支付密码时,要把 urlSchemes字符串重新赋值,)
     
@@ -73,7 +66,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     
     [self createUI];
     [self create_PayView];
-//    [self TNOrder:self.TN];
+    [self TNOrder:@"9a5ecabd1e38207e7293ebe5dd40ba94"];
     
 }
 #pragma mark - 重写父类-baseScrollView设置

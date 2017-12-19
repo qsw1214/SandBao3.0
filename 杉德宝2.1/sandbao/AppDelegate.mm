@@ -26,7 +26,10 @@
 #import <PgyUpdate/PgyUpdateManager.h>
 
 @interface AppDelegate ()<WeiboSDKDelegate>
-
+{
+    //通过URL_Schemes方式启动情况下 : APP是否未启动的标识
+    BOOL APP_DIDFINISHLUNCH_WITH_URLSCHEMES;
+}
 @end
 
 @implementation AppDelegate
@@ -76,6 +79,8 @@
     if (url) {
         //第三方App唤起杉德宝App - 设置全局变量 urlSchemes
         [CommParameter sharedInstance].urlSchemes = [NSString stringWithFormat:@"%@",url];
+        APP_DIDFINISHLUNCH_WITH_URLSCHEMES = YES; //此前APP未曾启动过
+        
     }else{
         //用户自启动杉德宝App - 设置全局变量urlScheme为nil
         [CommParameter sharedInstance].urlSchemes = nil;
@@ -245,22 +250,38 @@
 #pragma mark 9.0之后
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
-    //微博启动杉德宝
+    //微博启动杉德宝 - 使用scheme方式唤起均会回调
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
-    //第三方App启动杉德宝(sps)
+    //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
-        //
+        //全局缓存URL_Scheme
         [CommParameter sharedInstance].urlSchemes = urlStr;
         //查询活跃状态用户数量(1个且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-        //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
-        if (count > 0) {
+        
+        //当前有活跃状态用户 且 APP已启动
+        if (count > 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == NO) {
+            //直接打开APP,根据通知进入spsLunch页面
             [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
-        }else{
-            //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前有活跃状态用户 且 APP未启动
+        if (count > 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == YES) {
+            //用户暗登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前无活跃状态用户 且 APP已启动
+        if (count <= 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == NO) {
+            //直接打开APP,进行明登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前无活跃状态用户 且 APP未启动
+        if (count <= 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == YES) {
+            //用户明登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
         }
         return YES;
     }
@@ -270,22 +291,38 @@
 #pragma mark 9.0之前
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     
-    //微博启动杉德宝
+    //微博启动杉德宝 - 使用scheme方式唤起均会回调
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
-    //第三方App启动杉德宝(sps)
+    //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
-        //
+        //全局缓存URL_Scheme
         [CommParameter sharedInstance].urlSchemes = urlStr;
         //查询活跃状态用户数量(1个且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-        //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
-        if (count > 0) {
+        
+        //当前有活跃状态用户 且 APP已启动
+        if (count > 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == NO) {
+            //直接打开APP,根据通知进入spsLunch页面
             [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
-        }else{
-            //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前有活跃状态用户 且 APP未启动
+        if (count > 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == YES) {
+            //用户暗登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前无活跃状态用户 且 APP已启动
+        if (count <= 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == NO) {
+            //直接打开APP,进行明登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前无活跃状态用户 且 APP未启动
+        if (count <= 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == YES) {
+            //用户明登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
         }
         return YES;
     }
@@ -294,22 +331,38 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation{
     
-    //微博启动杉德宝
+    //微博启动杉德宝 - 使用scheme方式唤起均会回调
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
-    //第三方App启动杉德宝(sps)
+    //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
-        //
+        //全局缓存URL_Scheme
         [CommParameter sharedInstance].urlSchemes = urlStr;
         //查询活跃状态用户数量(1个且只能为1)
         long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-        //杉德宝已启动 : 用户已登录 + 消息通知让 spslunch页面归位
-        if (count > 0) {
+        
+        //当前有活跃状态用户 且 APP已启动
+        if (count > 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == NO) {
+            //直接打开APP,根据通知进入spsLunch页面
             [[NSNotificationCenter defaultCenter] postNotificationName:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
-        }else{
-            //杉德宝已启动 : 用户未登录 + 全局变量( [CommParameter sharedInstance].urlSchemes = urlStr;) 判断登陆后跳转sps
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前有活跃状态用户 且 APP未启动
+        if (count > 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == YES) {
+            //用户暗登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前无活跃状态用户 且 APP已启动
+        if (count <= 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == NO) {
+            //直接打开APP,进行明登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
+        }
+        //当前无活跃状态用户 且 APP未启动
+        if (count <= 0 && APP_DIDFINISHLUNCH_WITH_URLSCHEMES == YES) {
+            //用户明登陆,根据全局变量跳转spsLunch页面
+            APP_DIDFINISHLUNCH_WITH_URLSCHEMES = NO;
         }
         return YES;
     }
