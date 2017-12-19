@@ -7,7 +7,7 @@
 //
 
 #import "BViewController.h"
-#import "SandbaoSpsSDK.h"
+#import "SpsDock.h"
 
 @interface BViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *lab;
@@ -31,9 +31,10 @@
     
     
     //SDK
-    [SandbaoSpsSDK jumpToSandBaoForPay:_tn];
+    [SpsDock jumpToSandBaoForPay:_tn];
 
 }
+
 
 
 @end

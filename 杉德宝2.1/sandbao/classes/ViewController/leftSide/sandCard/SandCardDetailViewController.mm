@@ -328,7 +328,6 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 successBlock(nil);
-                
             }];
         }];
         if (error) return ;

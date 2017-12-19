@@ -198,7 +198,7 @@
                     //修改登录密码 - 成功返回
                     if (self.verifyType == VERIFY_TYPE_CHANGELOGPWD) {
                         //退出重新登录
-                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController forLogOut:YES];
                     }
                     //忘记登录密码 - 成功返回
                     if (self.verifyType == VERIFY_TYPE_FORGETLOGPWD) {

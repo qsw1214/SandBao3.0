@@ -73,12 +73,12 @@
     NSInteger loadingResult = [Loading startLoading];
     //判断久彰App调用启动方式
     NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
-    if (!url) {
-        //用户自启动杉德宝App - 设置全局变量urlScheme为nil
-        [CommParameter sharedInstance].urlSchemes = nil;
-    }else{
+    if (url) {
         //第三方App唤起杉德宝App - 设置全局变量 urlSchemes
         [CommParameter sharedInstance].urlSchemes = [NSString stringWithFormat:@"%@",url];
+    }else{
+        //用户自启动杉德宝App - 设置全局变量urlScheme为nil
+        [CommParameter sharedInstance].urlSchemes = nil;
     }
     
     NSString *loginTypeStr;
@@ -90,6 +90,7 @@
         }else{
             [self loadingError:@"网络异常"];
         }
+        return;
     }
     //明登陆引导
     if (loadingResult == 1) {

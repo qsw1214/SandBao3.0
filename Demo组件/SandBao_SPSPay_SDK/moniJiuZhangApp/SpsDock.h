@@ -10,7 +10,8 @@
 
 typedef void(^SdSpsPayBack)(NSString *urlStr);
 
-@interface SandbaoSpsSDK : NSObject
+
+@interface SpsDock : NSObject
 
 @property (nonatomic,assign)SdSpsPayBack block;
 

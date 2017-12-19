@@ -77,11 +77,12 @@ typedef void(^DefulBtnBlock)();
 
 #pragma mark - 归位登陆页
 /**
- 归位到登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
- 
- @param sideMenuViewController sideMenuViewController
+ 归位登陆页
+
+ @param sideMenuViewController sideMenuViewController description
+ @param forLogOut 是否用于退出登录
  */
-+ (void)setContentViewControllerWithLoginFromSideMentuVIewController:(id)sideMenuViewController;
++ (void)setContentViewControllerWithLoginFromSideMentuVIewController:(id)sideMenuViewController forLogOut:(BOOL)forLogOut;
 
 #pragma mark - 归位Home页或SpsLunch页
 /**

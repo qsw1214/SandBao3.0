@@ -154,15 +154,15 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络连接失败,请重新登录" defulBlock:^{
-                        //归位登录页
-                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                    [Tool showDialog:@"网络连接失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                        //归位Home或SpsLunch
+                        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取鉴权失败" message:@"请重新登录" defulBlock:^{
-                        //归位登录页
-                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                    [Tool showDialog:@"获取鉴权失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                        //归位Home或SpsLunch
+                        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
                 }
             }];
@@ -178,7 +178,6 @@
         }];
         if (error) return ;
     }];
-
 }
 
 
@@ -218,15 +217,16 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络连接失败,请重新登录" defulBlock:^{
-                        //归位登录页
-                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                     [Tool showDialog:@"网络连接失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                        //归位Home或SpsLunch
+                        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+                        
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"密码提价失败,请重新登录" defulBlock:^{
-                        //归位登录页
-                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                     [Tool showDialog:@"密码提交失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                        //归位Home或SpsLunch
+                        [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
                 }
             }];

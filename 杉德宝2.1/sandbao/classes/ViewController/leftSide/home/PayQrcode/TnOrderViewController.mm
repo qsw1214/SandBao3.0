@@ -289,8 +289,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [Tool showDialog:@"支付失败" defulBlock:^{
             if (self.type == SandTnOrderTypeC2B) {
                 //正扫失败
-                UIViewController *secVC = self.navigationController.viewControllers[1];
-                [self.navigationController popToViewController:secVC animated:YES];
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
             }
             if (self.type == SandTnOrderTypeB2C) {
                 //反扫失败
@@ -335,7 +334,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self.navigationController popViewControllerAnimated:YES];
+                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
             }];
         } successBlock:^{
             
@@ -470,7 +469,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
-        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [[self.selectedPayDict objectForKey:@"amount"] floatValue]];
+        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [[orderDic objectForKey:@"amount"] floatValue]];
         
         NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
         [workDic setValue:@"tnPay" forKey:@"type"];

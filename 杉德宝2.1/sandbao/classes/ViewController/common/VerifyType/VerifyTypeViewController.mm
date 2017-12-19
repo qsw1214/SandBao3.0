@@ -65,7 +65,7 @@
                 [Tool showDialog:@"您还未设置支付密码" message:@"是否放弃设置" leftBtnString:@"继续设置" rightBtnString:@"退出杉德宝" leftBlock:^{
                     //do no thing
                 } rightBlock:^{
-                    [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf];
+                    [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.sideMenuViewController forLogOut:YES];
                 }];
             };
         }else{

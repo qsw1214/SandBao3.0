@@ -152,7 +152,7 @@ static SDRequestHelp *_instance = nil;
                     if (weakSelf.HUD) {
                         [weakSelf.HUD hidden];
                         [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
-                            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller];
+                            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:NO];
                         }];
                     }
                 });

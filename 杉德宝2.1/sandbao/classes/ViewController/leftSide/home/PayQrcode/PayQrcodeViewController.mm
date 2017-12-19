@@ -39,10 +39,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    //1.刷新支付工具
-    [self ownPayTools];
-    
+
 }
 
 - (void)viewDidLoad {
@@ -206,44 +203,6 @@
     }];
 }
 #pragma mark - 业务逻辑
-#pragma mark 查询我方支付工具鉴权工具
-/**
- *@brief 查询我方支付工具
- */
-- (void)ownPayTools
-{
-    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
-    [SDRequestHelp shareSDRequest].HUD = self.HUD;
-    [SDRequestHelp shareSDRequest].controller = self;
-    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
-        __block BOOL error = NO;
-        paynuc.set("tTokenType", "01001501");
-        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
-        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
-            error = YES;
-        } successBlock:^{
-            
-        }];
-        if (error) return ;
-        
-        
-        paynuc.set("payToolKinds", "[]");
-        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
-            error = YES;
-        } successBlock:^{
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self.HUD hidden];
-                
-                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
-                //支付工具排序
-                payToolsArray = [Tool orderForPayTools:payToolsArray];
-                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
-                
-            }];
-        }];
-        if (error) return ;
-    }];
-}
 
 
 #pragma mark - 本类公共方法调用

@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             [Tool showDialog:@"您还未实名" message:@"是否放弃实名" leftBtnString:@"继续实名" rightBtnString:@"退出杉德宝" leftBlock:^{
                 //do no thing
             } rightBlock:^{
-                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf];
+                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.sideMenuViewController forLogOut:YES];
             }];
         };
         

@@ -204,7 +204,7 @@
                 //短息验证成功 - 停止计时器
                 [self.smsCodeAuthToolView stopTimer];
                 
-                //修改支付密码
+                //修改/设置支付密码
                 if (self.verifyType == VERIFY_TYPE_CHANGEPATPWD) {
                     ChangePayPwdViewController *changePayPwdVC = [[ChangePayPwdViewController alloc] init];
                     changePayPwdVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;

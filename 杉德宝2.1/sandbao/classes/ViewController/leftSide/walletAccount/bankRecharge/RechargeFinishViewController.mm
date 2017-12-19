@@ -7,6 +7,7 @@
 //
 
 #import "RechargeFinishViewController.h"
+#import "PayNucHelper.h"
 
 @interface RechargeFinishViewController ()
 {
@@ -50,11 +51,11 @@
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.midTitleStr = self.transTypeName;
     self.navCoverView.rightTitleStr = @"完成";
- 
     
     __weak RechargeFinishViewController *weakSelf = self;
     self.navCoverView.rightBlock = ^{
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        //1.刷新支付工具
+        [weakSelf ownPayTools];
     };
     
 }
@@ -239,6 +240,46 @@
     }];
 }
 
+#pragma mark - 业务逻辑
+#pragma mark 查询我方支付工具鉴权工具
+/**
+ *@brief 查询我方支付工具
+ */
+- (void)ownPayTools
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01001501");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
+                //支付工具排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            }];
+        }];
+        if (error) return ;
+    }];
+}
 
 
 - (void)didReceiveMemoryWarning {

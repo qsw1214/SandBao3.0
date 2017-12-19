@@ -14,8 +14,6 @@
 @property (nonatomic, strong) UINavigationController *homeNav;  //全局的首页实例
 
 
-
-
 #pragma mark - *********用户退出后置空*********
 #pragma mark - sToken
 @property (nonatomic, strong) NSString *sToken;   //用户活动状态标识

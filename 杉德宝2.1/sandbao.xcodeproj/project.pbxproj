@@ -265,7 +265,7 @@
 		28D7E5A91FA9D15A00518042 /* PaymentNoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5A41FA9D15A00518042 /* PaymentNoCell.m */; };
 		28D7E5AA1FA9D15A00518042 /* PaymentPwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5A61FA9D15A00518042 /* PaymentPwdCell.m */; };
 		28D7E5AD1FA9D25000518042 /* PaymentRechargeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AC1FA9D25000518042 /* PaymentRechargeViewController.mm */; };
-		28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.m */; };
+		28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.mm */; };
 		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
 		28F3770C1FB31C4500813512 /* CvnAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F377091FB31C4500813512 /* CvnAuthToolView.m */; };
@@ -740,7 +740,7 @@
 		28D7E5A61FA9D15A00518042 /* PaymentPwdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentPwdCell.m; sourceTree = "<group>"; };
 		28D7E5AB1FA9D25000518042 /* PaymentRechargeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentRechargeViewController.h; sourceTree = "<group>"; };
 		28D7E5AC1FA9D25000518042 /* PaymentRechargeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PaymentRechargeViewController.mm; sourceTree = "<group>"; };
-		28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechargeFinishViewController.m; sourceTree = "<group>"; };
+		28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RechargeFinishViewController.mm; sourceTree = "<group>"; };
 		28D7E5AF1FA9D5E400518042 /* RechargeFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFinishViewController.h; sourceTree = "<group>"; };
 		28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideMenuViewController.h; sourceTree = "<group>"; };
 		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeftSideMenuViewController.mm; sourceTree = "<group>"; };
@@ -1917,7 +1917,7 @@
 				28D7E5831FA9A50C00518042 /* BankCardRechargeViewController.h */,
 				28D7E5841FA9A50C00518042 /* BankCardRechargeViewController.mm */,
 				28D7E5AF1FA9D5E400518042 /* RechargeFinishViewController.h */,
-				28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.m */,
+				28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.mm */,
 			);
 			path = bankRecharge;
 			sourceTree = "<group>";
@@ -2550,7 +2550,7 @@
 				28F3770D1FB31C4500813512 /* ValidAuthToolView.m in Sources */,
 				A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */,
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
-				28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.m in Sources */,
+				28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */,
 				289C0D551F203FBC00360147 /* YXEasing.m in Sources */,
 				A7EFB1591EB9A8DD009AA369 /* MQTTInMemoryPersistence.m in Sources */,
 				281431341FB54DB0000F4063 /* UserTransferFinishViewController.m in Sources */,

@@ -6,7 +6,7 @@
 //  Copyright © 2017年 tianNanYiHao. All rights reserved.
 //
 
-#import "SandbaoSpsSDK.h"
+#import "SpsDock.h"
 #import <UIKit/UIKit.h>
 
 #define SAND_SCHEMES @"sandbao"
@@ -14,7 +14,7 @@
 //杉德宝AppStore:APPID
 #define STOREAPPID @"0000000"
 
-@implementation SandbaoSpsSDK
+@implementation SpsDock
 
 
 +(void)jumpToSandBaoForPay:(NSString*)TNnumber{

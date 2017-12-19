@@ -10,6 +10,9 @@
 #import "PayNucHelper.h"
 #import "SpsLoadingView.h"
 #import "TnOrderViewController.h"
+#import "RealNameViewController.h"
+#import "VerifyTypeViewController.h"
+
 typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 @interface SpsLunchViewController ()<SDPayViewDelegate>
 {
@@ -47,12 +50,19 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+
+    if ([CommParameter sharedInstance].sToken.length == 0) {
+        [Tool showDialog:@"sdfasd" defulBlock:^{
+            
+        }];
+    }
     
     
+     //实名/设置支付密码后,需返回到SPSLunch页(即本类,但此时 URLSchemes值已经被 setController方法清空,等设置支付密码完成后,不能重新进入SpsLunch,因此,在跳转设置支付密码时,要把 urlSchemes字符串重新赋值,)
     
     //检测是否实名/设置支付密码
-    [self checkRealNameOrSetPayPwd];
-    //实名/设置支付密码后,需返回到SPSLunch页(即本类,但此时 URLSchemes值已经被 setController方法清空,等设置支付密码完成后,不能重新进入SpsLunch,因此,在跳转设置支付密码时,要把 urlSchemes字符串重新赋值,)
+//    [self checkRealNameOrSetPayPwd];
+   
     
 }
 
@@ -63,8 +73,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     
     [self createUI];
     [self create_PayView];
-    
-    [self TNOrder:self.TN];
+//    [self TNOrder:self.TN];
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -228,7 +237,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         
         NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
         [workDic setValue:@"tnPay" forKey:@"type"];
-        [workDic setValue:_TN forKey:@"sandTN"];
+        [workDic setValue:self.TN forKey:@"sandTN"];
         NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
         
         paynuc.set("work", [work UTF8String]);
@@ -345,7 +354,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
-        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [[self.selectedPayDict objectForKey:@"amount"] floatValue]];
+        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [[orderDic objectForKey:@"amount"] floatValue]];
         
         NSMutableDictionary *workDic = [[NSMutableDictionary alloc] init];
         [workDic setValue:@"tnPay" forKey:@"type"];
@@ -429,16 +438,35 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     {
         //若检测未实名,进行实名
         if (![CommParameter sharedInstance].realNameFlag) {
-            
-            [Tool showDialog:@"您还未实名" message:@"请实名认证后重试" defulBlock:^{
+            [Tool showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"退出支付" leftBlock:^{
+                RealNameViewController *realName = [[RealNameViewController alloc] init];
+                realName.realNameFromeHomeNav = YES;
+                UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
+                [self.sideMenuViewController setContentViewController:realNameNav];
                 
+                // [CommParameter sharedInstance].urlSchemes 续签
+                [CommParameter sharedInstance].urlSchemes = self.schemeStr;
+            } rightBlock:^{
+                [self payGoBackByisSuccess:NO];
             }];
             return;
         }
         //若检测未设置支付密码,则修改支付密码
         if (![CommParameter sharedInstance].payPassFlag) {
-            [Tool showDialog:@"您还未设置支付密码" message:@"请设置完成后重试" defulBlock:^{
+            [Tool showDialog:@"请进行设置" message:@"检测到您还未设置支付密码" leftBtnString:@"去设置" rightBtnString:@"退出支付" leftBlock:^{
+                //由于设置支付密码挂在实名流程之下(不能单独设置),因此单独设置支付密码必须走 修改支付密码流程
+                VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+                verifyTypeVC.tokenType = @"01000601";
+                verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+                verifyTypeVC.setPayPassFromeHomeNav = YES;
+                verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
+                UINavigationController *verifyTypeNav = [[UINavigationController alloc] initWithRootViewController:verifyTypeVC];
+                [self.sideMenuViewController setContentViewController:verifyTypeNav];
                 
+                // [CommParameter sharedInstance].urlSchemes 续签
+                [CommParameter sharedInstance].urlSchemes = self.schemeStr;
+            } rightBlock:^{
+                [self payGoBackByisSuccess:NO];
             }];
             return;
         }

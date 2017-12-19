@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import "SandbaoSpsSDK.h"
+#import "SpsDock.h"
 @interface AppDelegate ()<UIAlertViewDelegate>
 {
    
@@ -29,8 +29,8 @@
 #pragma mark 9.0之前
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
     
-    if ([SandbaoSpsSDK canOpenUrl:url]) {
-        return  [SandbaoSpsSDK jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
+    if ([SpsDock canOpenUrl:url]) {
+        return  [SpsDock jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
             NSLog(@"%@",urlStr);
             UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message: urlStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
             [view show];
@@ -42,8 +42,8 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation{
     
-    if ([SandbaoSpsSDK canOpenUrl:url]) {
-        return  [SandbaoSpsSDK jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
+    if ([SpsDock canOpenUrl:url]) {
+        return  [SpsDock jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
             NSLog(@"%@",urlStr);
             UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message: urlStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
             [view show];
@@ -58,8 +58,8 @@
 -(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
     
     //回调
-    if ([SandbaoSpsSDK canOpenUrl:url]) {
-        return  [SandbaoSpsSDK jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
+    if ([SpsDock canOpenUrl:url]) {
+        return  [SpsDock jumpBackPayInfo:url infoBlock:^(NSString *urlStr) {
             NSLog(@"%@",urlStr);
             UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"提示" message: urlStr delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil, nil];
             [view show];

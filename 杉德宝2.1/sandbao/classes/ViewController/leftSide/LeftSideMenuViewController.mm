@@ -465,7 +465,7 @@
 #pragma mark 明登陆
 
 - (void)pwdLogin{
-    [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self];
+    [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController forLogOut:NO];
 }
 #pragma mark 暗登陆
 - (void)noPwdLogin{
@@ -649,7 +649,7 @@
                 //1. 退出成功 - 滚动到顶部
                 [self.baseScrollView setContentOffset:CGPointMake(0, 0)];
                 //2. 退出成功 - 归位到login页
-                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController];
+                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController forLogOut:YES];
             }];
         }];
         if (error) return ;

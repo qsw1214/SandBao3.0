@@ -177,25 +177,49 @@
 }
 
 #pragma mark - 归位登陆页
-
 /**
- 归位到登陆页(1.Stoken失效/2.点击退出按钮/3.MQTT异地登陆)
-
- @param sideMenuViewController sideMenuViewController
+ 归位登陆页
+ 
+ @param sideMenuViewController sideMenuViewController description
+ @param forLogOut 是否用于退出登录
  */
-+ (void)setContentViewControllerWithLoginFromSideMentuVIewController:(id)sideMenuViewController{
++ (void)setContentViewControllerWithLoginFromSideMentuVIewController:(id)sideMenuViewController forLogOut:(BOOL)forLogOut{
     
-    //0.退出前 当前活跃状态的账户更新数据
-    BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
-    if (result) {
-        
-        //1.清空Commparamater
-        [[CommParameter sharedInstance] cleanCommParameter];
-        
-        //2. 登出->mqtt结束
-        [[MqttClientManager shareInstance] close:YES];
-        
-        //3.跳转登陆页面 
+    //用于退出登录功能
+    if (forLogOut) {
+        //0.退出前 当前活跃状态的账户更新数据
+        BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
+        if (result) {
+            
+            //1.清空Commparamater
+            [[CommParameter sharedInstance] cleanCommParameter];
+            
+            //2. 登出->mqtt结束
+            [[MqttClientManager shareInstance] close:YES];
+            
+            //3.跳转登陆页面
+            LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
+            UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
+            //类型判断
+            NSString *className = [NSString stringWithUTF8String:object_getClassName(sideMenuViewController)];
+            //3.1 RESideMenu
+            if ([className isEqualToString:@"RESideMenu"]) {
+                RESideMenu *object = sideMenuViewController;
+                [object setContentViewController:navLogin];
+                [object hideMenuViewController];
+            }
+            //3.2 UIViewController
+            else{
+                UIViewController *controller = sideMenuViewController;
+                RESideMenu *object = controller.sideMenuViewController;
+                [object setContentViewController:navLogin];
+                [object hideMenuViewController];
+            }
+        }
+    }
+    //仅用于进入登录页功能
+    else{
+        //3.跳转登陆页面
         LoginViewController *mLoginViewController = [[LoginViewController alloc] init];
         UINavigationController *navLogin = [[UINavigationController alloc] initWithRootViewController:mLoginViewController];
         //类型判断
@@ -213,9 +237,9 @@
             [object setContentViewController:navLogin];
             [object hideMenuViewController];
         }
-    }else{
-        return;
     }
+    
+
 }
 
 #pragma mark - 归位Home页或SpsLunch页
@@ -225,10 +249,8 @@
  @param sideMenuViewController sideMenuViewController description
  */
 + (void)setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:(id)sideMenuViewController{
-    
     //1.归位SpsLunch
     if ([CommParameter sharedInstance].urlSchemes.length > 0 || [CommParameter sharedInstance].urlSchemes != nil) {
-        
         NSArray *urlArr = [[CommParameter sharedInstance].urlSchemes  componentsSeparatedByString:@"TN:"];
         urlArr = [[urlArr lastObject] componentsSeparatedByString:@"?"];
         NSString *tn = [urlArr firstObject];
@@ -252,7 +274,7 @@
             [object setContentViewController:spsLunchNav];
             [object hideMenuViewController];
         }
-        //urlScheme清空
+        //urlScheme清空 (如sToken/异地登陆等情况,用户登出后,不再支持该笔urlSchemes有效)
         [CommParameter sharedInstance].urlSchemes = nil;
     }
     

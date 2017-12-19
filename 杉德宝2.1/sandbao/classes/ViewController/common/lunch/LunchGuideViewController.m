@@ -46,8 +46,7 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_NEXT) {
-        
-        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self];
+        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController forLogOut:NO];
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:FIRST_INSTALL_APP];
     }
  

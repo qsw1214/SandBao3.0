@@ -8,7 +8,7 @@
 
 
 ##SDK使用配置##
-#一.导入SandbaoSpsSDK.a静态库
+#一.导入SpsDock.a静态库
 #二.info.plist设置白名单 (白名单值: sandbao)
 #在Xcod项目工程的info.plist -> LSApplicationQueriesSchemes -> 填入值: sandbao
 #或	
@@ -25,5 +25,5 @@
 
 ##SDK使用##
 /*
- 见 SandbaoSpsSDK.h 及 Demo
+ 见 SpsDock.h 及 Demo
  */
