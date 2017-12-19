@@ -485,12 +485,12 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     backURL = [backURL stringByAppendingString:@"://"];
     if (success) {
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:backURL]]) {
-            [Tool openUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@paySussess",backURL]]];
+            [Tool openUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@0000",backURL]]];
         }
     }
     else{
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:backURL]]) {
-            [Tool openUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@notPyaSuccess",backURL]]];
+            [Tool openUrl:[NSURL URLWithString:[NSString stringWithFormat:@"%@0001",backURL]]];
         }
     }
     

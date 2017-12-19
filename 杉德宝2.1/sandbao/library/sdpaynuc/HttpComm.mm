@@ -17,12 +17,12 @@ using namespace std;
 
 string PostWithData(string url, string data)
 {
-    [SDLog logNetwork:[NSString stringWithFormat:@"请求地址：%@", [NSString stringWithUTF8String:url.c_str()]]];
+//    [SDLog logNetwork:[NSString stringWithFormat:@"请求地址：%@", [NSString stringWithUTF8String:url.c_str()]]];
 //    [SDLog logNetwork:[NSString stringWithFormat:@"请求发送报文：%@", [NSString stringWithUTF8String:data.c_str()]]];
     
     SDNetwork *sdNetwork = [[SDNetwork alloc] init];
     
-    sdNetwork.timeoutInterval = 45; //45秒超时
+    sdNetwork.timeoutInterval = 25; //25秒超时
     
     string senddata = "data=" + data;
     

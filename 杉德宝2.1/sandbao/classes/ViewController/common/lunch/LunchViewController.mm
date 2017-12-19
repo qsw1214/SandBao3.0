@@ -61,29 +61,29 @@
     }];
     
     
-//    //显示Build版本lab
-//    NSString *strVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] ;
-//    NSString *strVersionInfo = [NSString stringWithFormat:@"Build版本号: %@",strVersion];
-//    UILabel *versionLab = [Tool createLable:strVersionInfo attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
-//    [self.baseScrollView addSubview:versionLab];
-//    [versionLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(headImageView.mas_bottom).offset(-UPDOWNSPACE_20);
-//        make.centerX.equalTo(headImageView.mas_centerX).offset(0);
-//        make.size.mas_equalTo(versionLab.size);
-//    }];
-
-    //显示version版本
-    NSString *strVersion1 = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] ;
-    //    CFBundleShortVersionString
-    //    CFBundleVersion
-    NSString *versionLab1Info = [NSString stringWithFormat:@"Version版本号:v@%@",strVersion1];
-    UILabel *versionLab1 = [Tool createLable:versionLab1Info attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
-    [self.baseScrollView addSubview:versionLab1];
-    [versionLab1 mas_makeConstraints:^(MASConstraintMaker *make) {
+    //显示Build版本lab
+    NSString *strVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] ;
+    NSString *strVersionInfo = [NSString stringWithFormat:@"Build版本号: %@",strVersion];
+    UILabel *versionLab = [Tool createLable:strVersionInfo attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    [self.baseScrollView addSubview:versionLab];
+    [versionLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(headImageView.mas_bottom).offset(-UPDOWNSPACE_20);
         make.centerX.equalTo(headImageView.mas_centerX).offset(0);
-        make.size.mas_equalTo(versionLab1.size);
+        make.size.mas_equalTo(versionLab.size);
     }];
+
+//    //显示version版本
+//    NSString *strVersion1 = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] ;
+//    //    CFBundleShortVersionString
+//    //    CFBundleVersion
+//    NSString *versionLab1Info = [NSString stringWithFormat:@"Version版本号:v@%@",strVersion1];
+//    UILabel *versionLab1 = [Tool createLable:versionLab1Info attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+//    [self.baseScrollView addSubview:versionLab1];
+//    [versionLab1 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(headImageView.mas_bottom).offset(-UPDOWNSPACE_20);
+//        make.centerX.equalTo(headImageView.mas_centerX).offset(0);
+//        make.size.mas_equalTo(versionLab1.size);
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

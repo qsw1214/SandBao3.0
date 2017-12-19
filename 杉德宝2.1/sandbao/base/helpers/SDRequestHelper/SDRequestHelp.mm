@@ -103,11 +103,18 @@ static SDRequestHelp *_instance = nil;
     __weak typeof(self) weakSelf = self;
     //判断对象一: fr
     if (fr) {
-        if(fr == 1){
+        if(fr == 1 || fr == 2 || fr == 3 || fr == 5 || fr == 6 || fr == 7){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (weakSelf.HUD) {
                     [weakSelf.HUD hidden];
-                    [SDMBProgressView showSDMBProgressLoadErrorImgINView:weakSelf.controller.view];
+                }
+                //自动处理
+                if (self.respCodeErrorAutomatic) {
+                    [SDMBProgressView showSDMBProgressLoadErrorImgINView:[UIApplication sharedApplication].keyWindow];
+                }
+                //代码手动处理
+                else{
+                    
                 }
             });
             return frErrorType;
@@ -151,10 +158,10 @@ static SDRequestHelp *_instance = nil;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (weakSelf.HUD) {
                         [weakSelf.HUD hidden];
-                        [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
-                            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:NO];
-                        }];
                     }
+                    [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
+                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:NO];
+                    }];
                 });
                 return respCodeErrorType;
             }
@@ -166,25 +173,29 @@ static SDRequestHelp *_instance = nil;
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (weakSelf.HUD) {
                         [weakSelf.HUD hidden];
-                        weakSelf.respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                        NSString *authToolStr = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
-                        NSArray *arrTools = [[PayNucHelper sharedInstance] jsonStringToArray:authToolStr];
-                        //自动处理
-                        if (self.respCodeErrorAutomatic) {
-                            if (arrTools.count>0) {
-                                //checkResultMsg错误码提示
-                                NSString *checkResultMsg = [[arrTools firstObject] objectForKey:@"checkResultMsg"];
-                                if (checkResultMsg.length>0) {
-                                    [Tool showDialog:checkResultMsg];
-                                }else{
-                                    //respMsg错误码提示
-                                    [Tool showDialog:weakSelf.respMsg];
-                                }
+                    }
+                    weakSelf.respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    NSString *authToolStr = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
+                    NSArray *arrTools = [[PayNucHelper sharedInstance] jsonStringToArray:authToolStr];
+                    //自动处理
+                    if (self.respCodeErrorAutomatic) {
+                        if (arrTools.count>0) {
+                            //checkResultMsg错误码提示
+                            NSString *checkResultMsg = [[arrTools firstObject] objectForKey:@"checkResultMsg"];
+                            if (checkResultMsg.length>0) {
+                                [Tool showDialog:checkResultMsg];
                             }else{
                                 //respMsg错误码提示
                                 [Tool showDialog:weakSelf.respMsg];
                             }
+                        }else{
+                            //respMsg错误码提示
+                            [Tool showDialog:weakSelf.respMsg];
                         }
+                    }
+                    //代理手动处理
+                    else{
+                        
                     }
                 });
                 return respCodeErrorType;

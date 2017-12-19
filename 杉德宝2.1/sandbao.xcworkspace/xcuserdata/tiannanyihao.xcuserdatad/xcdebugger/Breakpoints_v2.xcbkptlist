@@ -10,13 +10,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sandbao/classes/ViewController/leftSide/home/PayQrcode/TnOrderViewController.mm"
-            timestampString = "535299683.971289"
+            timestampString = "535374135.181334"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "354"
-            endingLineNumber = "354"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "-TNOrder:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__33-[TnOrderViewController TNOrder:]_block_invoke_2.336"
+                  moduleName = "sandbao"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tiannanyihao/Desktop/SandBao3.0/%E6%9D%89%E5%BE%B7%E5%AE%9D2.1/sandbao/classes/ViewController/leftSide/home/PayQrcode/TnOrderViewController.mm"
+                  timestampString = "535374135.351686"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "353"
+                  endingLineNumber = "353"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__33-[TnOrderViewController TNOrder:]_block_invoke_3.337"
+                  moduleName = "sandbao"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tiannanyihao/Desktop/SandBao3.0/%E6%9D%89%E5%BE%B7%E5%AE%9D2.1/sandbao/classes/ViewController/leftSide/home/PayQrcode/TnOrderViewController.mm"
+                  timestampString = "535374135.354529"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "354"
+                  endingLineNumber = "354"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

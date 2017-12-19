@@ -23,7 +23,11 @@
 
 @implementation SmsCheckViewController
 
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //页面结束 - 停止短信倒计时 - 此方法临时 - 用于解除全局短信限制
+    [smsCodeAuthToolView stopTimer];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

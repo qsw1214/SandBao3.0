@@ -95,8 +95,8 @@
     __weak typeof(self) weakself = self;
     PaymentPwdCell *paymentPwdCell = [PaymentPwdCell createPaymentCellViewOY:0];
     paymentPwdCell.tip.text = @"请输入正确代付凭证密码";
-    paymentPwdCell.textfield.text = SHOWTOTEST(@"469686289040E142");
-    self.paymentPwd = SHOWTOTEST(@"469686289040E142");
+    paymentPwdCell.textfield.text = SHOWTOTEST(@"177C98344B3B841F");
+    self.paymentPwd = SHOWTOTEST(@"177C98344B3B841F");
     paymentPwdCell.successBlock = ^(NSString *textfieldText) {
         weakself.paymentPwd = textfieldText;
     };

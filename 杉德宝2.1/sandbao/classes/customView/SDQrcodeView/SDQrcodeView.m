@@ -204,7 +204,7 @@
     payToolNameLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [payToolShowView addSubview:payToolNameLab];
     
-    UIImage *leftEnterImg = [UIImage imageNamed:@"list_icon_more"];
+    UIImage *leftEnterImg = [UIImage imageNamed:@"list_icon_goMore"];
     UIImageView *leftEnterImgV = [[UIImageView alloc] init];
     leftEnterImgV.image = leftEnterImg;
     [payToolShowView addSubview:leftEnterImgV];

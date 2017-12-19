@@ -148,9 +148,9 @@
 
 //用哪个开哪个
 //显示给开发人员 (显示输入数据)
-#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
+//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
 //显示给测试人员 (隐藏输入数据)
-//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
+#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
 
 
 

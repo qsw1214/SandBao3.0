@@ -8,7 +8,7 @@
 
 #import "SixCodeAuthToolView.h"
 
-#define TIME_OUT 31
+#define TIME_OUT 61
 
 @interface SixCodeAuthToolView ()<UITextFieldDelegate>{
     
