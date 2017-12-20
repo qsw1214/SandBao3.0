@@ -160,7 +160,7 @@ static SDRequestHelp *_instance = nil;
                         [weakSelf.HUD hidden];
                     }
                     [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
-                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:NO];
+                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:YES];
                     }];
                 });
                 return respCodeErrorType;

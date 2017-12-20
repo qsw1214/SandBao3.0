@@ -333,9 +333,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         paynuc.set("tTokenType", "04000101");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-            }];
         } successBlock:^{
             
         }];
@@ -350,9 +347,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         paynuc.set("work", [work UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getPayToolsForPay/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                 [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];

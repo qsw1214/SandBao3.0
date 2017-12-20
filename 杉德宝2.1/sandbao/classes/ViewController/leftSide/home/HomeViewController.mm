@@ -409,7 +409,7 @@
                 UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
                 [self.sideMenuViewController setContentViewController:realNameNav];
             } rightBlock:^{
-                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController forLogOut:YES];
+                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self forLogOut:YES];
             }];
             return;
         }
@@ -425,7 +425,7 @@
                 UINavigationController *verifyTypeNav = [[UINavigationController alloc] initWithRootViewController:verifyTypeVC];
                 [self.sideMenuViewController setContentViewController:verifyTypeNav];
             } rightBlock:^{
-               [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self.sideMenuViewController forLogOut:YES];
+               [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self forLogOut:YES];
             }];
         }
     }

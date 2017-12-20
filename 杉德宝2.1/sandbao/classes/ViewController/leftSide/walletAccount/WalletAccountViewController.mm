@@ -356,17 +356,17 @@
         NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];
         balacneStr = [NSString stringWithFormat:@"%.2f",[balacneStr floatValue]/100];
         
-        NSString *moneyYuanFormatterStr = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
-        
-        NSString *moneyYuanStr = [moneyYuanFormatterStr substringToIndex:(moneyYuanFormatterStr.length -3)];
-        NSString *moneyFenStr  = [moneyYuanFormatterStr substringFromIndex:(moneyYuanFormatterStr.length - 3)];
-        
+//        NSString *moneyYuanFormatterStr = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
+//
+//        NSString *moneyYuanStr = [balacneStr substringToIndex:(balacneStr.length -3)];
+//        NSString *moneyFenStr  = [balacneStr substringFromIndex:(balacneStr.length - 3)];
+
         if ([balacneStr floatValue] != 0) {
-            balanceLab.text = [NSString stringWithFormat:@"%@%@",moneyYuanStr,moneyFenStr];
+//            balanceLab.text = [NSString stringWithFormat:@"%@%@",moneyYuanStr,moneyFenStr];
+            balanceLab.text = balacneStr;
         }else{
             balanceLab.text = @"0.00";
         }
-        
         //钱包账户_被转账_支付工具
         transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
         transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];

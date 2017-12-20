@@ -214,6 +214,7 @@
                 RESideMenu *object = controller.sideMenuViewController;
                 [object setContentViewController:navLogin];
                 [object hideMenuViewController];
+                [controller.navigationController popToRootViewControllerAnimated:YES];
             }
         }
     }
@@ -236,6 +237,7 @@
             RESideMenu *object = controller.sideMenuViewController;
             [object setContentViewController:navLogin];
             [object hideMenuViewController];
+            [controller.navigationController popToRootViewControllerAnimated:YES];
         }
     }
     
