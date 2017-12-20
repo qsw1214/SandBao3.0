@@ -249,6 +249,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         }];
 
         deleteRowAction.backgroundColor = COLOR_FF7D5A;
+        deleteRowAction.title = @"解绑";
         UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteRowAction]];
         return config;
     }

@@ -54,7 +54,7 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.midTitleStr = @"绑定银行卡";
+    self.navCoverView.midTitleStr = @"";
     __weak AddBankCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];

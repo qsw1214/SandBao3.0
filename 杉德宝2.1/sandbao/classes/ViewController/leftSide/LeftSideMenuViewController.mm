@@ -218,7 +218,7 @@
     [self.baseScrollView addSubview:headView];
     
     //headImgView
-    CGFloat headImgViewWH = LEFTRIGHTSPACE_66;
+    CGFloat headImgViewWH = LEFTRIGHTSPACE_55;
     UIImage *headImg = [UIImage imageNamed:@"center_profile_avatar"];
     headImgView = [Tool createImagView:headImg];
     headImgView.layer.cornerRadius = headImgViewWH/2;
@@ -314,10 +314,21 @@
     dataArray = arrar;
     CGFloat tableViewH = UPDOWNSPACE_64 * dataArray.count;
     
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = COLOR_A1A2A5_3;
+    [self.baseScrollView addSubview:line];
+    
+    
     [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView.mas_bottom).offset(UPDOWNSPACE_25);
-        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_00);
-        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width, tableViewH));
+        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_09);
+        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width-LEFTRIGHTSPACE_09, tableViewH));
+    }];
+    
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(tableview.mas_bottom).offset(UPDOWNSPACE_10);
+        make.left.equalTo(tableview.mas_left).offset(LEFTRIGHTSPACE_15);
+        make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width-LEFTRIGHTSPACE_25*2, 0.7));
     }];
     
 }
@@ -333,7 +344,7 @@
     UIImageView *logOutImgView = [[UIImageView alloc] initWithImage:logOutImg];
     [logOutbtn addSubview:logOutImgView];
     
-    UILabel *titleLab = [Tool createLable:@"退出" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    UILabel *titleLab = [Tool createLable:@"退出" attributeStr:nil font:FONT_15_Regular textColor:COLOR_000000 alignment:NSTextAlignmentLeft];
     [logOutbtn addSubview:titleLab];
     
     [logOutbtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -399,7 +410,7 @@
     NSDictionary *dict = dataArray[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:[dict objectForKey:@"imgName"]];
     cell.textLabel.text = [dict objectForKey:@"title"];
-    cell.textLabel.textColor = COLOR_343339_7;
+    cell.textLabel.textColor = COLOR_000000;
     cell.textLabel.font = FONT_15_Regular;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

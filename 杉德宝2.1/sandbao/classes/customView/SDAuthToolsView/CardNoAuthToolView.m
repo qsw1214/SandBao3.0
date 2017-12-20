@@ -82,7 +82,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-    if (((![self validateBankCard:textField.text]) || !(textField.text.length>=16 && textField.text.length<=19)) && (textField.text.length>0)) {
+    if (((![self validateBankCard:textField.text]) || !(textField.text.length>15 && textField.text.length<=19)) && (textField.text.length>0)) {
         [self deleteErrorTextAnimation:textField];
         [self showTip];
     }else if([self validateBankCard:textField.text] && textField.text>0){

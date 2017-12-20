@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.midTitleStr = @"填写银行卡信息";
+    self.navCoverView.midTitleStr = @"";
     __weak AddBankCardSecViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     };
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
     
-    //信用卡
+    //如果是信用卡 - 创建信用卡相关视图
     if (cardType == creditCard) {
         validAuthToolView = [ValidAuthToolView createAuthToolViewOY:0];
         validAuthToolView.tip.text = @"请输入正确有效期";
@@ -136,11 +136,15 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             weakSelf.cvnStr = textfieldText;
         };
         [self.baseScrollView addSubview:cvnAuthToolView];
-
     }
-    
-    
-    
+    //如果是储蓄卡 - 删除信用卡相关的视图
+    else{
+        if (validAuthToolView) {
+            [validAuthToolView removeFromSuperview];
+        }else{
+            [cvnAuthToolView removeFromSuperview];
+        }
+    }
     
     //nextBtn
     UIButton *nextBarbtn = [Tool createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];

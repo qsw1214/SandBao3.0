@@ -135,7 +135,15 @@
     
     //frame
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_112);
+        if (SCREEN_WIDTH == SCREEN_WIDTH_320) {
+            make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_30);
+        }
+        if (SCREEN_WIDTH_375 == SCREEN_WIDTH_375) {
+            make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_89);
+        }
+        if (SCREEN_WIDTH == SCREEN_WIDTH_414) {
+            make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_112);
+        }
         make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_35);
         make.size.mas_equalTo(titleLab.size);
     }];

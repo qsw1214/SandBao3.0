@@ -54,8 +54,15 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
      //实名/设置支付密码后,需返回到SPSLunch页(即本类,但此时 URLSchemes值已经被 setController方法清空,等设置支付密码完成后,不能重新进入SpsLunch,因此,在跳转设置支付密码时,要把 urlSchemes字符串重新赋值,)
     
     //检测是否实名/设置支付密码
-//    [self checkRealNameOrSetPayPwd];
-   
+    [self checkRealNameOrSetPayPwd];
+    
+    
+}
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    //只要消失,删除sps
+    [self.payView removeFromSuperview];
     
 }
 
@@ -66,7 +73,6 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     
     [self createUI];
     [self create_PayView];
-    [self TNOrder:@"9a5ecabd1e38207e7293ebe5dd40ba94"];
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -134,6 +140,12 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     
 }
 - (void)create_PayView{
+    
+    //删除重复的sps
+    if (self.payView) {
+        [self.payView removeFromSuperview];
+    }
+    
     self.payView = [SDPayView getPayView];
     self.payView.delegate = self;
     [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
@@ -150,7 +162,6 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 }
 //点击关闭sps的回调
 - (void)payViewClickCloseBtn{
-    
     [self payGoBackByisSuccess:NO];
 }
 - (void)payViewPwd:(NSString *)pwdStr paySuccessView:(SDPaySuccessAnimationView *)successView{
@@ -163,15 +174,16 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         [successView animationSuccess];
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            
             //成功回调
-            [self payGoBackByisSuccess:YES];
+            [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
+                [self payGoBackByisSuccess:YES];
+            }];
         });
         
     } oederErrorBlock:^(NSArray *paramArr){
         //支付失败
         [successView animationStopClean];
-        [self.payView hidPayTool];
-        [self payGoBackByisSuccess:NO];
     }];
 }
 
@@ -212,13 +224,13 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
                     [Tool showDialog:@"网络异常" defulBlock:^{
-                        [self payGoBackByisSuccess:NO];
+                        
                     }];
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                     [Tool showDialog:respMsg defulBlock:^{
-                        [self payGoBackByisSuccess:NO];
+                        
                     }];
                 }
             }];
@@ -241,13 +253,13 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
                     [Tool showDialog:@"网络异常" defulBlock:^{
-                        [self payGoBackByisSuccess:NO];
+                       
                     }];
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                     [Tool showDialog:respMsg defulBlock:^{
-                        [self payGoBackByisSuccess:NO];
+                        
                     }];
                 }
             }];
@@ -397,13 +409,13 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
                     [Tool showDialog:@"网络异常" defulBlock:^{
-                        [self payGoBackByisSuccess:NO];
+                        errorBlock(nil);
                     }];
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                     [Tool showDialog:respMsg defulBlock:^{
-                        [self payGoBackByisSuccess:NO];
+                        errorBlock(nil);
                     }];
                 }
             }];
@@ -463,6 +475,10 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             }];
             return;
         }
+        
+        
+        //确保实名+有支付密码后,方可请求订单
+        [self TNOrder:self.TN];
     }
 }
 #pragma mark 头像上滑动画
