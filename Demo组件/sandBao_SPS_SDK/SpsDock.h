@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SpsSDKDelegate<NSObject>
+@protocol SpsDockDelegate<NSObject>
 
 /**
  sps回调代理
@@ -27,7 +27,7 @@
 /**
  代理
  */
-@property (nonatomic, weak)id<SpsSDKDelegate>delegate;
+@property (nonatomic, weak)id<SpsDockDelegate>delegate;
 
 
 /**

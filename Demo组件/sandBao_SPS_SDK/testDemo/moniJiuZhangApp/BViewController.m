@@ -9,7 +9,7 @@
 #import "BViewController.h"
 #import "SpsDock.h"
 #import "AppDelegate.h"
-@interface BViewController ()<SpsSDKDelegate>
+@interface BViewController ()<SpsDockDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *lab;
 
 @end
@@ -34,7 +34,7 @@
     [[SpsDock sharedInstance] callSps:_tn];
     
 }
-
+#pragma SpsSDKDelegate
 - (void)spsReturn:(NSString *)tn state:(NSString *)state{
     UIAlertView *view = [[UIAlertView alloc] initWithTitle:state message:tn delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
     [view show];
