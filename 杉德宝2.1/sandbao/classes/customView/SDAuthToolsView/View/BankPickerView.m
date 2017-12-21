@@ -12,6 +12,11 @@
 #define BankScreenW [UIScreen mainScreen].bounds.size.width
 #define BankScreenH [UIScreen mainScreen].bounds.size.height
 #define bankPickerViewDuration 0.4f
+
+#define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
+#define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
+
 @interface BankPickerView ()<UIPickerViewDelegate, UIPickerViewDataSource>
 {
     NSArray *infoArray;
@@ -122,7 +127,7 @@
         [finishBtn setTitle:@"完成" forState:UIControlStateNormal];
         finishBtn.frame = CGRectMake(BankScreenW-60, 0, 60, _bankTooBar.bounds.size.height);
         [finishBtn setTitleColor:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0] forState:UIControlStateNormal];
-        finishBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:15];
+        finishBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(15)];
         [finishBtn addTarget:self action:@selector(okClick:) forControlEvents:UIControlEventTouchUpInside];
         [_bankTooBar addSubview:finishBtn];
         
@@ -130,7 +135,7 @@
         [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
         cancelBtn.frame = CGRectMake(0, 0, 60, _bankTooBar.bounds.size.height);
         [cancelBtn setTitleColor:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0] forState:UIControlStateNormal];
-        cancelBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:15];
+        cancelBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(15)];
         [cancelBtn addTarget:self action:@selector(closeClick) forControlEvents:UIControlEventTouchUpInside];
         [_bankTooBar addSubview:cancelBtn];
         

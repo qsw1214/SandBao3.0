@@ -7,7 +7,7 @@
 //
 
 #import "SDMajletCell.h"
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface SDMajletCell()
 {
     UIImageView *iconImageView;
@@ -67,7 +67,7 @@
 
 -(void) setFont:(CGFloat)font{
     _font = font;
-    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:_font];
+    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(_font)];
     
 }
 -(void)setTitle:(NSString *)title{

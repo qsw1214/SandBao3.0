@@ -9,7 +9,7 @@
 #import "SandItemTableViewCell.h"
 
 #define labelColor RGBA(255, 255, 255, 1.0)
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface SandItemTableViewCell()
 
 //背景
@@ -163,8 +163,8 @@
  */
 - (void)settingData
 {
-    UIFont *sandNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:18];
-    UIFont *sandNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:28];
+    UIFont *sandNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:AdapterFfloat(18)];
+    UIFont *sandNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:AdapterFfloat(28)];
     
     //背景和图标
     UIColor *backgroundColor;

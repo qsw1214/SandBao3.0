@@ -9,8 +9,13 @@
 #import "SDSearchPop.h"
 
 
-#define AllHeight 88
 
+
+#define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
+#define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
+
+#define AllHeight AdapterHfloat(88)
 @interface SDSearchPop ()<UISearchBarDelegate>
 {
     
@@ -154,7 +159,7 @@
 
 - (UISearchBar*)searchBar{
     if (!_searchBar) {
-        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, AllHeight-20)];
+        _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 20, [UIScreen mainScreen].bounds.size.width, AllHeight-AdapterHfloat(20))];
         _searchBar.delegate = self;
         _searchBar.keyboardType = UIKeyboardTypeNumberPad;
         _searchBar.clearsContextBeforeDrawing = YES;

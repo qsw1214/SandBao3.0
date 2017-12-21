@@ -7,7 +7,7 @@
 //
 
 #import "MyCenterCellView.h"
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface MyCenterCellView (){
     
     UIImageView *headImgView;
@@ -63,7 +63,7 @@
         nickNameLab = [[UILabel alloc] init];
         nickNameLab.text = @"这里是昵称";
         nickNameLab.textAlignment = NSTextAlignmentRight;
-        nickNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+        nickNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
         nickNameLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
         [self insertSubview:nickNameLab atIndex:1];
         
@@ -79,7 +79,7 @@
         accountNoLab = [[UILabel alloc] init];
         accountNoLab.text = @"000****0000";
         accountNoLab.textAlignment = NSTextAlignmentRight;
-        accountNoLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+        accountNoLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
         accountNoLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
         [self insertSubview:accountNoLab atIndex:1];
         

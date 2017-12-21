@@ -90,31 +90,33 @@
     //load失败
     if (loadingResult == 0) {
         [self loadingError:@"网络异常,请退出重试"];
+        
     }
-    //明登陆引导
-    if (loadingResult == 1) {
-        loginTypeStr = @"PWD_LOGIN";
+    //load成功
+    else
+    {
+        //明登陆引导
+        if (loadingResult == 1) {
+            loginTypeStr = @"PWD_LOGIN";
+        }
+        //暗登陆引导
+        if (loadingResult == 2) {
+            loginTypeStr = @"NO_PWD_LOGIN";
+        }
+        //lunchVC
+        LunchViewController *lunchVC = [[LunchViewController alloc] init];
+        UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
+        
+        //leftVC
+        LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
+        leftVC.loginTypeStr = loginTypeStr;
+        //RESidenMenu控制器
+        RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
+        
+        self.window.rootViewController = sideMenuVC;
+        // 3.显示窗口
+        [self.window makeKeyAndVisible];
     }
-    //暗登陆引导
-    if (loadingResult == 2) {
-        loginTypeStr = @"NO_PWD_LOGIN";
-    }
-
-    
-    //lunchVC
-    LunchViewController *lunchVC = [[LunchViewController alloc] init];
-    UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
-    
-    //leftVC
-    LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
-    leftVC.loginTypeStr = loginTypeStr;
-    //RESidenMenu控制器
-    RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
-    
-    self.window.rootViewController = sideMenuVC;
-    // 3.显示窗口
-    [self.window makeKeyAndVisible];
-    
 }
 
 #pragma mark 友盟相关设置

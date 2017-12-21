@@ -7,7 +7,7 @@
 //
 
 #import "AddBankCardCell.h"
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @implementation AddBankCardCell
 
 
@@ -25,13 +25,13 @@
         self.backgroundColor = [UIColor whiteColor];
         self.titleStr = @"这里是标题";
         
-        self.titleLab.font =  [UIFont fontWithName:@"PingFangSC-Medium" size:14];
+        self.titleLab.font =  [UIFont fontWithName:@"PingFangSC-Medium" size:AdapterFfloat(14)];
         self.titleLab.textColor =  [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
         
         self.rightLab = [[UILabel alloc] init];
         self.rightLab.textColor =  [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:0.7f];
         self.rightLab.textAlignment = NSTextAlignmentRight;
-        self.rightLab.font =  [UIFont fontWithName:@"PingFangSC-Medium" size:14];
+        self.rightLab.font =  [UIFont fontWithName:@"PingFangSC-Medium" size:AdapterFfloat(14)];
         
         [self addSubview:self.rightLab];
         

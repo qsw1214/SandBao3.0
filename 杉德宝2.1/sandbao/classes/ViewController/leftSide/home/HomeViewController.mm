@@ -341,15 +341,7 @@
     
     //majletView
     SDMajletView *limitServerView = [SDMajletView createMajletViewOY:0];
-    if (SCREEN_WIDTH == SCREEN_WIDTH_320) {
-        limitServerView.cellSpace = LEFTRIGHTSPACE_15;
-    }
-    if (SCREEN_WIDTH == SCREEN_WIDTH_375) {
-        limitServerView.cellSpace = LEFTRIGHTSPACE_18;
-    }
-    if (SCREEN_WIDTH == SCREEN_WIDTH_414) {
-        limitServerView.cellSpace = LEFTRIGHTSPACE_25;
-    }
+    limitServerView.cellSpace = LEFTRIGHTSPACE_25;
     limitServerView.columnNumber = 3;
     limitServerView.majletArr = self.limitServerArr;
     limitServerView.titleNameBlock = ^(NSString *titleName) {

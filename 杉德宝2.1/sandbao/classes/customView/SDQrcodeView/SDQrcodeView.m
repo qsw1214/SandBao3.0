@@ -11,6 +11,9 @@
 
 #define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
 #define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
+
+
 @interface SDQrcodeView (){
     
     //标题视图
@@ -85,7 +88,7 @@
     
     titleLab = [[UILabel alloc] init];
     titleLab.text = @"这里是标题";
-    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
+    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(16)];
     titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [headView addSubview:titleLab];
     
@@ -122,7 +125,7 @@
     qrCodeDesLab = [[UILabel alloc] init];
     qrCodeDesLab.text = @"这里是二维码描述";
     qrCodeDesLab.textAlignment = NSTextAlignmentCenter;
-    qrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    qrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(12)];
     qrCodeDesLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [bodyView addSubview:qrCodeDesLab];
     
@@ -200,7 +203,7 @@
     //@"这里是支付工具描述"
     payToolNameLab.text = self.payToolNameStr;
     payToolNameLab.textAlignment = NSTextAlignmentCenter;
-    payToolNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    payToolNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(12)];
     payToolNameLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [payToolShowView addSubview:payToolNameLab];
     
@@ -248,7 +251,7 @@
     UIButton *setMoneyBtn = [[UIButton alloc] init];
     [setMoneyBtn setTitle:@"设置金额" forState:UIControlStateNormal];
     [setMoneyBtn setTitleColor:[UIColor colorWithRed:255/255.0 green:93/255.0 blue:49/255.0 alpha:1/1.0] forState:UIControlStateNormal];
-    setMoneyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    setMoneyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(12)];
     [setMoneyBtn addTarget:self action:@selector(setMoneyClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:setMoneyBtn];
     

@@ -17,8 +17,8 @@
 #import "SpsLunchViewController.h"
 #import "HDAlertView.h"
 
-#define Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
-
+#define Tool_Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
+#define Tool_UPDOWNSPACE_(float) ((float/667.f) * ([[UIScreen mainScreen] bounds].size.height))
 @interface Tool(){
     
 }
@@ -590,30 +590,6 @@
     
 }
 
-#pragma mark - 头像数据的存储
-//+ (void)headAvatarDataSetViewSQLUid:(NSString*)uid data:(NSData *)data{
-//    //沙盒缓存此头像
-//    [[NSUserDefaults standardUserDefaults] setObject:@{@"data":data} forKey:[NSString stringWithFormat:@"HEAD_AVATAR_DATA%@",uid]];
-//}
-//
-#pragma mark - 头像数据的获取
-//+ (UIImage*)headAvatarDataGetWithSQLUid:(NSString*)uid{
-//    
-//    NSDictionary *userImageDataDic = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"HEAD_AVATAR_DATA%@",uid]];
-//    NSData *userImageData = [userImageDataDic objectForKey:@"data"];
-//    
-//    UIImage *headImage;
-//    
-//    if (userImageData) {
-//        headImage = [UIImage imageWithData:userImageData];
-//    }else{
-//        headImage = [UIImage imageNamed:@"banaba_cot"];
-//    }
-//    
-//    return headImage;
-//    
-//}
-
 #pragma mark - 银行icon数据获取
 + (NSArray*)getBankIconInfo:(NSString*)bankName{
     
@@ -638,103 +614,103 @@
             
             if (i == 0) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 1) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
             if (i == 2) {
                 //草绿
-                backgroundColor = Rgba(154, 205, 50, 1.0);backgroundColor2 = Rgba(85, 171, 5, 1.0);
+                backgroundColor = Tool_Rgba(154, 205, 50, 1.0);backgroundColor2 = Tool_Rgba(85, 171, 5, 1.0);
             }
             if (i == 3) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 4) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
             if (i == 5) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 6) {
                 //橘黄
-                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
+                backgroundColor = Tool_Rgba(255, 127, 36, 1.0);backgroundColor2 = Tool_Rgba(255, 201, 38, 1.0);
             }
             if (i == 7) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
             if (i == 8) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 9) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 10) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
             if (i == 11) {
                 //橘黄
-                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
+                backgroundColor = Tool_Rgba(255, 127, 36, 1.0);backgroundColor2 = Tool_Rgba(255, 201, 38, 1.0);
             }
             if (i == 12) {
                 //橘黄
-                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
+                backgroundColor = Tool_Rgba(255, 127, 36, 1.0);backgroundColor2 = Tool_Rgba(255, 201, 38, 1.0);
             }
             if (i == 13) {
                 //橘黄
-                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
+                backgroundColor = Tool_Rgba(255, 127, 36, 1.0);backgroundColor2 = Tool_Rgba(255, 201, 38, 1.0);
             }
             if (i == 14) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 15) {
                 //橘黄
-                backgroundColor = Rgba(255, 127, 36, 1.0);backgroundColor2 = Rgba(255, 201, 38, 1.0);
+                backgroundColor = Tool_Rgba(255, 127, 36, 1.0);backgroundColor2 = Tool_Rgba(255, 201, 38, 1.0);
             }
             if (i == 16) {
                 //草绿
-                backgroundColor = Rgba(154, 205, 50, 1.0);backgroundColor2 = Rgba(85, 171, 5, 1.0);
+                backgroundColor = Tool_Rgba(154, 205, 50, 1.0);backgroundColor2 = Tool_Rgba(85, 171, 5, 1.0);
             }
             if (i == 17) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 18) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
             if (i == 19) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
             if (i == 20) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
             if (i == 21) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 22) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 23) {
                 //红色
-                backgroundColor = Rgba(234, 85, 115, 1.0);backgroundColor2 = Rgba(158, 14, 14, 1.0);
+                backgroundColor = Tool_Rgba(234, 85, 115, 1.0);backgroundColor2 = Tool_Rgba(158, 14, 14, 1.0);
             }
             if (i == 24) {
                 //天空蓝
-                backgroundColor = Rgba(0, 191, 255, 1.0);backgroundColor2 = Rgba(7, 78, 218, 1.0);
+                backgroundColor = Tool_Rgba(0, 191, 255, 1.0);backgroundColor2 = Tool_Rgba(7, 78, 218, 1.0);
             }
         }
     }
@@ -1042,7 +1018,7 @@
     [btn.layer addSublayer:midLab.layer];
     
     //frame
-    CGFloat upSpace = 20;
+    CGFloat upSpace = Tool_UPDOWNSPACE_(20);
     CGSize midLabSize = [midLab sizeThatFits:CGSizeZero];
     
     CGFloat selfWidth = [UIScreen mainScreen].bounds.size.width - 2*space;

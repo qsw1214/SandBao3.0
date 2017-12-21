@@ -9,7 +9,9 @@
 #import "SDBottomPop.h"
 
 #define btn_tag_cancle 200
-
+#define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
+#define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface SDBottomPop ()
 {
     
@@ -31,20 +33,17 @@
 
 
 @property (nonatomic, copy) SDBottomPopSureBlock sureblock;
-@property (nonatomic, copy) SDBottomPopCancleBlock cancleblock;
 
 @end
 
 @implementation SDBottomPop
 
 
-+ (void)showBottomPopView:(NSString*)tipStr cellNameList:(NSArray*)cellNameArr suerBlock:(SDBottomPopSureBlock)sureBlock cancleBlock:(SDBottomPopCancleBlock)cancleBlock{
++ (void)showBottomPopView:(NSString*)tipStr cellNameList:(NSArray*)cellNameArr suerBlock:(SDBottomPopSureBlock)sureBlock{
     
     SDBottomPop *pop = [[SDBottomPop alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     pop.backgroundColor = [UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1/1.0];
     pop.sureblock = sureBlock;
-    pop.cancleblock = cancleBlock;
-    
     
     //tipView
     UIView *tipView = [[UIView alloc] init];
@@ -53,13 +52,13 @@
     
     //tipLab
     UILabel *tipLab = [[UILabel alloc] init];
-    tipLab.text = @"解除绑定后银行服务将不可用";
+    tipLab.text = tipStr;
     tipLab.textAlignment = NSTextAlignmentCenter;
-    tipLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:14];
+    tipLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(14)];
     tipLab.textColor = [UIColor colorWithRed:136/255.0 green:136/255.0 blue:136/255.0 alpha:1/1.0];
     [tipView addSubview:tipLab];
     
-    CGFloat tipLabSpace = 23.f;
+    CGFloat tipLabSpace = AdapterWfloat(23);
     CGSize tipLabSize = [tipLab sizeThatFits:CGSizeZero];
     tipLab.frame = CGRectMake(0, tipLabSpace, [UIScreen mainScreen].bounds.size.width, tipLabSize.height);
     tipView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, tipLabSpace*2 + tipLabSize.height);
@@ -83,7 +82,7 @@
     }
     
     //canceBtn
-    CGFloat cancleBtnSpace = 6.f;
+    CGFloat cancleBtnSpace = AdapterHfloat(6.f);
     UIButton *cancleBtn = [pop addCancleBtn];
     [pop addSubview:cancleBtn];
     CGFloat cancleBtnOY = tipView.frame.size.height + btnCellAllHeight + cancleBtnSpace;
@@ -119,7 +118,6 @@
     if (isShow) {
         [UIView animateWithDuration:0.35 animations:^{
             self.maskBlackView.alpha = 0.4f;
-            self.alpha = 1.f;
             self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - self.allHeight, [UIScreen mainScreen].bounds.size.width, self.allHeight);
         } completion:^(BOOL finished) {
             
@@ -128,7 +126,6 @@
     if (!isShow) {
         [UIView animateWithDuration:0.35f animations:^{
             self.maskBlackView.alpha = 0.f;
-            self.alpha = 0.f;
             self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, self.allHeight);
         } completion:^(BOOL finished) {
             [self.backGroundView removeFromSuperview];
@@ -145,7 +142,6 @@
     if (btn.tag == btn_tag_cancle) {
         
         [self hidden];
-        self.cancleblock();
 
     }else{
         
@@ -178,7 +174,7 @@
     UIButton *cellBtn = [[UIButton alloc] init];
     [cellBtn setTitle:cellName forState:UIControlStateNormal];
     [cellBtn setTitleColor:[UIColor colorWithRed:230/255.0 green:67/255.0 blue:64/255.0 alpha:1/1.0] forState:UIControlStateNormal];
-    cellBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:18];
+    cellBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(18)];
     cellBtn.backgroundColor = [UIColor whiteColor];
     cellBtn.tag = 100 + index;
     [cellBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -201,12 +197,12 @@
     UIButton *cancleBtn = [[UIButton alloc] init];
     [cancleBtn setTitle:@"取消" forState:UIControlStateNormal];
     [cancleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    cancleBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:18];
+    cancleBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(18)];
     cancleBtn.backgroundColor = [UIColor whiteColor];
     cancleBtn.tag = btn_tag_cancle;
     [cancleBtn addTarget:self action:@selector(clickBtn:) forControlEvents:UIControlEventTouchUpInside];
     
-    CGFloat space = 13;
+    CGFloat space = AdapterHfloat(13);
     CGSize cancleBtnSizeOrigle = [cancleBtn sizeThatFits:CGSizeZero];
     CGSize cancleBtnSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, cancleBtnSizeOrigle.height + 2*space);
     cancleBtn.frame = CGRectMake(0, 0, cancleBtnSize.width, cancleBtnSize.height);

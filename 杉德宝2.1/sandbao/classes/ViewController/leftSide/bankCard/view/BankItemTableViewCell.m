@@ -9,7 +9,7 @@
 #import "BankItemTableViewCell.h"
 
 #define labelColor RGBA(255, 255, 255, 1.0)
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface BankItemTableViewCell()
 
 //背景
@@ -194,9 +194,9 @@
  */
 - (void)settingData
 {
-    UIFont *bankNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:18];
-    UIFont *bankTypeTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:13];
-    UIFont *bankNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:28];
+    UIFont *bankNameTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:AdapterFfloat(18)];
+    UIFont *bankTypeTextFont = [UIFont fontWithName:@"PingFang-SC-Medium" size:AdapterFfloat(13)];
+    UIFont *bankNumTextFont  = [UIFont fontWithName:@"DINAlternate-Bold" size:AdapterFfloat(28)];
 
 
     

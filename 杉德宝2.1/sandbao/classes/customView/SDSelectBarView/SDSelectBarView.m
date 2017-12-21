@@ -8,6 +8,9 @@
 
 #import "SDSelectBarView.h"
 
+#define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
+#define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface SDSelectBarView (){
     
     CGFloat labSpace; //标题lab间隙大小
@@ -104,10 +107,11 @@
     }];
     //取最长字符串标题
     UILabel *titleLab = [[UILabel alloc] init];
-    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
     titleLab.text = [resultArrayOrder firstObject];
     
-    labSpace = (12.f/375.f)*[UIScreen mainScreen].bounds.size.width;
+    labSpace = AdapterWfloat(12.f);
+    labSpace = AdapterWfloat(12.f);
     CGSize maxLabSize = [titleLab sizeThatFits:CGSizeZero];
     labMaxWidth = maxLabSize.width + labSpace*2;
     labMaxHeight = maxLabSize.height + labSpace;
@@ -126,7 +130,7 @@
     titlelab.layer.masksToBounds = YES;
     titlelab.layer.backgroundColor = [UIColor whiteColor].CGColor;
     titlelab.textAlignment = NSTextAlignmentCenter;
-    titlelab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+    titlelab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
     titlelab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     titlelab.tag = index;
     

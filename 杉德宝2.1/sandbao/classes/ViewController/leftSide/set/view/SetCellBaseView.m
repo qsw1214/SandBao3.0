@@ -7,7 +7,7 @@
 //
 
 #import "SetCellBaseView.h"
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @implementation SetCellBaseView
 
 
@@ -28,7 +28,7 @@
     
     //titleLab
     self.titleLab = [[UILabel alloc] init];
-    self.titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+    self.titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
     self.titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [self addSubview:self.titleLab ];
     

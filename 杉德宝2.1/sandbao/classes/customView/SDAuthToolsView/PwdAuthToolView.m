@@ -65,7 +65,7 @@
     //frame
     
     //往上偏移半个space
-    CGFloat eyeBtnOY = (self.frame.size.height - imageEyedeful.size.height)/2 - self.space/2;
+    CGFloat eyeBtnOY = self.titleLab.frame.size.height + ((self.textfiled.frame.size.height - imageEyedeful.size.height)/2 - self.space/2);
     //往左便宜半个space
     CGFloat eyeBtnOX = self.frame.size.width - self.leftRightSpace - imageEyedeful.size.width - self.space/2;
     //整体按钮扩大一个space

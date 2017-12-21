@@ -11,6 +11,9 @@
 
 #define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
 #define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
+
+
 @interface SDQrcodeView (){
     
     //标题视图
@@ -20,12 +23,16 @@
     
     //二维码展示视图
     UIView *bodyView;
+    //二维码展示视图 - 二维码图片
+    UIImageView *qrCodeImgView;
     //二维码展示视图 - 左边小圆点
     UIView *roundViewLeft;
     //二维码展示视图 - 右边小圆点
     UIView *roundViewRight;
     //二维码展示视图 - 二维码描述标题
     UILabel *qrCodeDesLab;
+    //二维码展示视图 - 二维码视图宽高
+    CGFloat qrCodeImgViewWH;
     
     //付款码 - 支付工具展示视图
     UIView *payToolShowView;
@@ -81,7 +88,7 @@
     
     titleLab = [[UILabel alloc] init];
     titleLab.text = @"这里是标题";
-    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
+    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(16)];
     titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [headView addSubview:titleLab];
     
@@ -118,17 +125,17 @@
     qrCodeDesLab = [[UILabel alloc] init];
     qrCodeDesLab.text = @"这里是二维码描述";
     qrCodeDesLab.textAlignment = NSTextAlignmentCenter;
-    qrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    qrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(12)];
     qrCodeDesLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [bodyView addSubview:qrCodeDesLab];
     
-    UIImageView *qrCodeImgView = [[UIImageView alloc] init];
+    qrCodeImgView = [[UIImageView alloc] init];
     qrCodeImgView.backgroundColor = [UIColor redColor];
     [bodyView addSubview:qrCodeImgView];
     
     CGFloat leftRightSpace = AdapterWfloat(60);
     CGFloat upSpace = AdapterHfloat(25);
-    CGFloat qrCodeImgViewWH = selfViewW - 2*leftRightSpace;
+    qrCodeImgViewWH = selfViewW - 2*leftRightSpace;
     
     CGSize qrCodeDesLabSize = [qrCodeDesLab sizeThatFits:CGSizeZero];
     CGFloat qrCodeImgViewOY = upSpace + qrCodeDesLabSize.height + upSpace;
@@ -196,11 +203,11 @@
     //@"这里是支付工具描述"
     payToolNameLab.text = self.payToolNameStr;
     payToolNameLab.textAlignment = NSTextAlignmentCenter;
-    payToolNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    payToolNameLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(12)];
     payToolNameLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [payToolShowView addSubview:payToolNameLab];
     
-    UIImage *leftEnterImg = [UIImage imageNamed:@"list_icon_more"];
+    UIImage *leftEnterImg = [UIImage imageNamed:@"list_icon_goMore"];
     UIImageView *leftEnterImgV = [[UIImageView alloc] init];
     leftEnterImgV.image = leftEnterImg;
     [payToolShowView addSubview:leftEnterImgV];
@@ -244,7 +251,7 @@
     UIButton *setMoneyBtn = [[UIButton alloc] init];
     [setMoneyBtn setTitle:@"设置金额" forState:UIControlStateNormal];
     [setMoneyBtn setTitleColor:[UIColor colorWithRed:255/255.0 green:93/255.0 blue:49/255.0 alpha:1/1.0] forState:UIControlStateNormal];
-    setMoneyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:12];
+    setMoneyBtn.titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(12)];
     [setMoneyBtn addTarget:self action:@selector(setMoneyClick:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:setMoneyBtn];
     
@@ -265,6 +272,11 @@
 - (void)setTitleStr:(NSString *)titleStr{
     _titleStr = titleStr;
     titleLab.text = _titleStr;
+}
+
+- (void)setQrCodeStr:(NSString *)qrCodeStr{
+    _qrCodeStr = qrCodeStr;
+    qrCodeImgView.image = [self twoDimensionCodeWithStr:_qrCodeStr size:qrCodeImgViewWH];
 }
 
 - (void)setQrCodeDesStr:(NSString *)qrCodeDesStr{
@@ -288,6 +300,8 @@
     NSLog(@"设置金额");
 }
 
+#pragma mark - 公共方法
+#pragma mark 绘制虚线
 /**
  *  通过 CAShapeLayer 方式绘制虚线
  *
@@ -316,6 +330,69 @@
     CGPathRelease(path);
     //  把绘制好的虚线添加上来
     [lineView.layer addSublayer:shapeLayer];
+}
+#pragma mark - 生成条形码
+- (UIImage *)barCodeImageWithStr:(NSString *)str
+{
+    // 1.将字符串转换成NSData
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // 2.创建条形码滤镜
+    CIFilter *filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
+    
+    // 3.恢复滤镜的默认属性
+    [filter setDefaults];
+    
+    // 4.设置滤镜inputMessage数据
+    [filter setValue:data forKey:@"inputMessage"];
+    
+    // 5.获得滤镜输出的图像
+    CIImage *urlImage = [filter outputImage];
+    
+    // 6.将CIImage 转换为UIImage
+    UIImage *image = [UIImage imageWithCIImage:urlImage];
+    
+    return image;
+}
+
+#pragma mark - 生成二维码
+- (UIImage *)twoDimensionCodeWithStr:(NSString *)str size:(CGFloat)size
+{
+    // 1.将字符串转换成NSData
+    NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+    
+    // 2.创建二维码滤镜
+    CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
+    
+    // 3.恢复默认
+    [filter setDefaults];
+    
+    // 4.给滤镜设置数据
+    [filter setValue:data forKeyPath:@"inputMessage"];
+    
+    // 5.获取滤镜输出的二维码
+    CIImage *outputImage = [filter outputImage];
+    
+    // 6.此时生成的还是CIImage，可以通过下面方式生成一个固定大小的UIImage
+    CGRect extent = CGRectIntegral(outputImage.extent);
+    CGFloat scale = MIN(size/CGRectGetWidth(extent), size/CGRectGetHeight(extent));
+    
+    // 7.创建bitmap;
+    size_t width = CGRectGetWidth(extent) * scale;
+    size_t height = CGRectGetHeight(extent) * scale;
+    CGColorSpaceRef cs = CGColorSpaceCreateDeviceGray();
+    CGContextRef bitmapRef = CGBitmapContextCreate(nil, width, height, 8, 0, cs, (CGBitmapInfo)kCGImageAlphaNone);
+    CIContext *context = [CIContext contextWithOptions:nil];
+    CGImageRef bitmapImage = [context createCGImage:outputImage fromRect:extent];
+    CGContextSetInterpolationQuality(bitmapRef, kCGInterpolationNone);
+    CGContextScaleCTM(bitmapRef, scale, scale);
+    CGContextDrawImage(bitmapRef, extent, bitmapImage);
+    
+    // 8.保存bitmap到图片
+    CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
+    CGContextRelease(bitmapRef);
+    CGImageRelease(bitmapImage);
+    return [UIImage imageWithCGImage:scaledImage];
 }
 
 @end

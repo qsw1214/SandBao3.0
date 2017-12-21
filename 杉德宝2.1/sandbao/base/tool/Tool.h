@@ -165,25 +165,6 @@ typedef void(^DefulBtnBlock)();
  */
 +(UIImage*)avatarImageWith:(NSString*)avatar;
 
-#pragma mark - 头像数据的存储
-/**
- 头像数据的存储
-
- @param uid 数据库userConfig的表名字段
- @param data 图片数据
- */
-+ (void)headAvatarDataSetViewSQLUid:(NSString*)uid data:(NSData *)data;
-
-#pragma mark - 头像数据的获取
-/**
- 获取缓存的头像
-
- @param uid 数据库userConfig的表名字段
- @return headimage
- */
-+ (UIImage*)headAvatarDataGetWithSQLUid:(NSString*)uid;
-
-
 
 #pragma mark - 银行icon数据获取
 /**

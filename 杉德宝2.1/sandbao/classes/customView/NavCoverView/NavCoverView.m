@@ -7,7 +7,7 @@
 //
 
 #import "NavCoverView.h"
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface NavCoverView (){
     
     UIView *baseView;
@@ -68,7 +68,7 @@
     // mid标题
     labTitle = [[UILabel alloc] init];
     labTitle.frame = CGRectMake(15, 20, self.frame.size.width-2*15, 64-20);
-    labTitle.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:15];
+    labTitle.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(15)];
     labTitle.textAlignment = NSTextAlignmentCenter;
     [baseView addSubview:labTitle];
     
@@ -80,7 +80,7 @@
     
     labLeft = [[UILabel alloc] initWithFrame:CGRectZero];
     labLeft.textAlignment = NSTextAlignmentLeft;
-    labLeft.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:15];
+    labLeft.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(15)];
     labLeft.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [leftBtn addSubview:labLeft];
     [baseView addSubview:leftBtn];
@@ -95,7 +95,7 @@
     
     labRight = [[UILabel alloc] initWithFrame:CGRectZero];
     labRight.textAlignment = NSTextAlignmentRight;
-    labRight.font =[UIFont fontWithName:@"PingFang-SC-Regular" size:15];
+    labRight.font =[UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(15)];
     labRight.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [rightBtn addSubview:labRight];
     

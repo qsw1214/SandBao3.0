@@ -135,15 +135,7 @@
     
     //frame
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (SCREEN_WIDTH == SCREEN_WIDTH_320) {
-            make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_30);
-        }
-        if (SCREEN_WIDTH_375 == SCREEN_WIDTH_375) {
-            make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_89);
-        }
-        if (SCREEN_WIDTH == SCREEN_WIDTH_414) {
-            make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_112);
-        }
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_112);
         make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_35);
         make.size.mas_equalTo(titleLab.size);
     }];
@@ -167,13 +159,13 @@
     }];
     
     [forgetBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(pwdAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
+        make.top.equalTo(pwdAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
         make.right.equalTo(pwdAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
         make.size.mas_equalTo(forgetBtn.size);
     }];
     
     [loginBarbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(forgetBtn.mas_bottom).offset(UPDOWNSPACE_28);
+        make.top.equalTo(forgetBtn.mas_bottom).offset(UPDOWNSPACE_20);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(loginBarbtn.size);
     }];

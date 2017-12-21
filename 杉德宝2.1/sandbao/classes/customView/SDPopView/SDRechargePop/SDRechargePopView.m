@@ -8,15 +8,20 @@
 
 #import "SDRechargePopView.h"
 
+#define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
+#define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 
-#define popWidth ([UIScreen mainScreen].bounds.size.width - 50*2)
+#define popWidth ([UIScreen mainScreen].bounds.size.width - AdapterWfloat(50)*2)
 
-#define closeBtnRightMargin 20
+#define closeBtnRightMargin AdapterWfloat(20)
 
-#define space 10
-#define chooseBtnLeftRightSpace 50
-#define chooseBtnAllUpSpace  60
+#define space AdapterWfloat(10)
+#define chooseBtnLeftRightSpace AdapterWfloat(50)
+#define chooseBtnAllUpSpace  AdapterHfloat(60)
 #define btn_tag_activity 9001
+
+
 
 @interface SDRechargePopView ()
 {
@@ -205,7 +210,7 @@
     
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
-        _titleLab.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:14];
+        _titleLab.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(14)];
         _titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
         _titleLab.textAlignment = NSTextAlignmentCenter;
         _titleLab.text = self.titleStr;
@@ -238,7 +243,7 @@
     
     //lable
     UILabel *chooseLab = [[UILabel alloc] init];
-    chooseLab.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:10];
+    chooseLab.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(10)];
     chooseLab.text = _chooseBtnTitleArr[index];
     chooseLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [chooseBtn addSubview:chooseLab];
@@ -271,12 +276,12 @@
     
     NSMutableAttributedString *activitStr = [[NSMutableAttributedString alloc] initWithString:@"点击激活,使用代付凭证充值"];
     [activitStr addAttributes:@{
-                                NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:10],
+                                NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(10)],
                                 NSForegroundColorAttributeName: [UIColor colorWithRed:255/255.0 green:93/255.0 blue:49/255.0 alpha:1/1.0]
                                 } range:NSMakeRange(2, 2)];
     UIButton *activityBtn = [[UIButton alloc] init];
     [activityBtn setAttributedTitle:activitStr forState:UIControlStateNormal];
-    activityBtn.titleLabel.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:10];
+    activityBtn.titleLabel.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(10)];
     activityBtn.backgroundColor = [UIColor clearColor];
     activityBtn.tag = btn_tag_activity;
     [activityBtn addTarget:self action:@selector(chooseClick:) forControlEvents:UIControlEventTouchUpInside];

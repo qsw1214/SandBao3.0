@@ -10,7 +10,6 @@
 
 
 typedef void(^SDBottomPopSureBlock)(NSString *cellName);
-typedef void(^SDBottomPopCancleBlock)();
 
 @interface SDBottomPop : UIView
 
@@ -21,9 +20,8 @@ typedef void(^SDBottomPopCancleBlock)();
  @param tipStr 提示文字
  @param cellNameArr 功能列表组
  @param sureBlock 点击事件回调
- @param cancleBlock 取消事件回调
  */
-+ (void)showBottomPopView:(NSString*)tipStr cellNameList:(NSArray*)cellNameArr suerBlock:(SDBottomPopSureBlock)sureBlock cancleBlock:(SDBottomPopCancleBlock)cancleBlock;
++ (void)showBottomPopView:(NSString*)tipStr cellNameList:(NSArray*)cellNameArr suerBlock:(SDBottomPopSureBlock)sureBlock;
 
 
 

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
+#define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @interface AuthToolBaseView : UIView<UITextFieldDelegate>
 
 

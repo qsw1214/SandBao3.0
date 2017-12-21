@@ -8,6 +8,8 @@
 
 #import "AuthToolBaseView.h"
 
+
+
 @interface AuthToolBaseView()
 {
     CGRect frameRect;
@@ -38,13 +40,13 @@
     //title
     titleLab = [[UILabel alloc] init];
     titleLab.text = @"这里是标题-这里是标题";
-    titleLab.font =  [UIFont fontWithName:@"PingFang-SC-Medium" size:14];
+    titleLab.font =  [UIFont fontWithName:@"PingFang-SC-Medium" size:AdapterFfloat(14)];
     titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [self addSubview:titleLab];
     
     //textFiled
     textfiled = [[UITextField alloc] init];
-    textfiled.font = [UIFont fontWithName:@"SFUIText-Medium" size:14];
+    textfiled.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(14)];
     textfiled.placeholder = @"这里是副标题 - 这里是副标题";
     textfiled.delegate = self;
     textfiled.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -61,7 +63,7 @@
     //内置红色tip
     tip = [[UILabel alloc] init];
     tip.text = @"这里是红色提示!";
-    tip.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:12];
+    tip.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(12)];
     tip.textColor = [UIColor colorWithRed:242/255.0 green:9/255.0 blue:9/255.0 alpha:1/1.0];
     tip.alpha = 0.f;
     [self addSubview:tip];
@@ -69,8 +71,8 @@
     
     
     //frame
-    leftRightSpace = 40;
-    space = 15.f;
+    leftRightSpace = AdapterWfloat(40);
+    space = AdapterHfloat(15.f);
     CGFloat lineH = 0.5f;
     
     CGSize titleLabSize = [titleLab sizeThatFits:CGSizeZero];

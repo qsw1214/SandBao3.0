@@ -7,7 +7,7 @@
 //
 
 #import "IdentityDetailCellView.h"
-
+#define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @implementation IdentityDetailCellView
 
 
@@ -35,7 +35,7 @@
     rightLab.text = _rightStr;
     rightLab.numberOfLines = 0;
     rightLab.textAlignment = NSTextAlignmentRight;
-    rightLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
+    rightLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
     rightLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [self insertSubview:rightLab atIndex:1];
     

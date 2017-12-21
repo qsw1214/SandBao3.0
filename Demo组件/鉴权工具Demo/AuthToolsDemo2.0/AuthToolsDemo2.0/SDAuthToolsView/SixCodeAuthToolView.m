@@ -93,7 +93,7 @@
     //参数预设
     codeLabCount = 6;
     
-    CGFloat space = 10;
+    CGFloat space = AdapterWfloat(10);
     CGFloat spaceAll = (codeLabCount-1) * space;
     
     CGFloat sixCodeLabAllWidth = noCopyTextfield.frame.size.width - spaceAll;
@@ -130,12 +130,12 @@
     if (_style == SmsCodeAuthTool) {
         requestSmsBtn = [[UIButton alloc] init];
         requestSmsBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-        requestSmsBtn.titleLabel.font =  [UIFont fontWithName:@"PingFang-SC-Regular" size:12];
+        requestSmsBtn.titleLabel.font =  [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(12)];
         requestSmsBtn.titleLabel.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1/1.0];
         [requestSmsBtn addTarget:self action:@selector(changeBtnSate:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我获取短信"];
         [atr addAttributes:@{
-                             NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
+                             NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(12)],
                              NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
                              } range:NSMakeRange(2, 2)];
         [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
@@ -294,8 +294,8 @@
                 requestSmsBtn.selected = NO;
                 NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:@"点我获取短信"];
                 [atr addAttributes:@{
-                                     NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
-                                     NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                                     NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(12)],
+                                     NSForegroundColorAttributeName:[UIColor colorWithRed:242/255.0 green:9/255.0 blue:9/255.0 alpha:1/1.0]
                                      } range:NSMakeRange(2, 2)];
                 [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
 
@@ -310,8 +310,8 @@
                 NSLog(@"-=-=-=-=-=-=-=-=-= -=-=-=  -=-=-= %@",time);
                 NSMutableAttributedString *atr = [[NSMutableAttributedString alloc] initWithString:time];
                 [atr addAttributes:@{
-                                     NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:12],
-                                     NSForegroundColorAttributeName:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]
+                                     NSFontAttributeName:[UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(12)],
+                                     NSForegroundColorAttributeName:[UIColor colorWithRed:242/255.0 green:9/255.0 blue:9/255.0 alpha:1/1.0]
                                      } range:NSMakeRange(1, 2)];
                 [requestSmsBtn setAttributedTitle:atr forState:UIControlStateNormal];
             });

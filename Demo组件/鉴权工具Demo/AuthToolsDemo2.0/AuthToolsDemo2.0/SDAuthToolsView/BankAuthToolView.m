@@ -62,7 +62,7 @@
     
     //显示银行卡发卡行
     chooseBankTitleLab = [[UILabel alloc] init];
-    chooseBankTitleLab.font = [UIFont fontWithName:@"PingFang-SC-Medium" size:14];
+    chooseBankTitleLab.font = [UIFont fontWithName:@"PingFang-SC-Medium" size:AdapterFfloat(14)];
     chooseBankTitleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:0.7];
     chooseBankTitleLab.text = @"选择卡种及发卡行";
     [chooseBankBtn addSubview:chooseBankTitleLab];

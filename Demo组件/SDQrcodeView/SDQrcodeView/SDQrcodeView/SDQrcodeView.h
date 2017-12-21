@@ -23,9 +23,9 @@
 @property (nonatomic, strong) NSString *qrCodeDesStr;
 
 /**
- 二维码图片
+ 二维码信息
  */
-@property (nonatomic, strong) UIImage  *qrCodeImg;
+@property (nonatomic, strong) NSString  *qrCodeStr;
 
 /**
  左右小圆点颜色 = 背景色

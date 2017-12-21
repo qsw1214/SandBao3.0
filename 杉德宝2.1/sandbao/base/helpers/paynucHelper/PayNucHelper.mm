@@ -58,6 +58,7 @@ static PayNucHelper *payNucHelperSharedInstance = nil;
     paynuc.init();
     paynuc.set("cfg_appMark", "sandbao-ios-1.0");
     paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:YES DynamicDataFlag:NO] UTF8String]);
+    
     if (flag) {
         paynuc.set("cfg_test", "true");
         paynuc.set("cfg_debug", "true");

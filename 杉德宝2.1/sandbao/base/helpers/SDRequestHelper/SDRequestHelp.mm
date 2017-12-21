@@ -122,6 +122,7 @@ static SDRequestHelp *_instance = nil;
         if(fr == 4){ //tubeID管道失效处理
             NSString *sToken = [NSString stringWithUTF8String:paynuc.get("sToken").c_str()];
             NSString *tToken = [NSString stringWithUTF8String:paynuc.get("tToken").c_str()];
+            paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:YES DynamicDataFlag:NO] UTF8String]);
             paynuc.func("CreateTube");
             paynuc.set("sToken",[sToken UTF8String]);
             paynuc.set("tToken",[tToken UTF8String]);
