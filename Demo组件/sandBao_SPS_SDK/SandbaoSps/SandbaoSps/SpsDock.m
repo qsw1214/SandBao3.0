@@ -143,10 +143,16 @@ static SpsDock *spsDockSharedInstace = nil;
             }
             return YES;
         }
-        //支付失败
-        else if ([state isEqualToString:@"0001"]){
+        //支付取消
+        if ([state isEqualToString:@"0001"]){
             if ([self.delegate respondsToSelector:@selector(spsReturn:state:)]) {
                 [self.delegate spsReturn:tn state:@"0001"];
+            }
+            return YES;
+        }
+        if ([state isEqualToString:@"0002"]) {
+            if ([self.delegate respondsToSelector:@selector(spsReturn:state:)]) {
+                [self.delegate spsReturn:tn state:@"0002"];
             }
             return YES;
         }

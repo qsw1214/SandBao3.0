@@ -2854,7 +2854,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sand.sandbao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "32ba215d-640b-4eb3-a9d3-4d9d85e23158";
+				PROVISIONING_PROFILE = "510e6b97-81b0-4d9e-85f2-1b75cb8e2277";
 				PROVISIONING_PROFILE_SPECIFIER = sandComm_Dev_Profile;
 			};
 			name = Debug;

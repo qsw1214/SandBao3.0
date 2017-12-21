@@ -89,13 +89,7 @@
     NSString *loginTypeStr;
     //load失败
     if (loadingResult == 0) {
-        SDNetwork *sdnet = [[SDNetwork alloc] init];
-        if ([@"" isEqualToString:[sdnet stringWithNetworkType]]) {
-            [self loadingError:@"无网络连接"];
-        }else{
-            [self loadingError:@"网络异常"];
-        }
-        return;
+        [self loadingError:@"网络异常,请退出重试"];
     }
     //明登陆引导
     if (loadingResult == 1) {

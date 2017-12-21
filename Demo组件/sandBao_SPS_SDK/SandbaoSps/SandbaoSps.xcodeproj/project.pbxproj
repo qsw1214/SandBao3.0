@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		288021711FEA2F4700CCE4E0 /* SpsDock.m in Sources */ = {isa = PBXBuildFile; fileRef = 288021701FEA2F4700CCE4E0 /* SpsDock.m */; };
-		288021731FEA2FC800CCE4E0 /* SpsDock.h in Headers */ = {isa = PBXBuildFile; fileRef = 2880216F1FEA2F4600CCE4E0 /* SpsDock.h */; };
+		288AE62D1FEB89DD002CF361 /* SpsDock.m in Sources */ = {isa = PBXBuildFile; fileRef = 288AE62B1FEB89DD002CF361 /* SpsDock.m */; };
+		288AE62F1FEB89F1002CF361 /* SpsDock.h in Headers */ = {isa = PBXBuildFile; fileRef = 288AE62C1FEB89DD002CF361 /* SpsDock.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		288021611FEA2F2200CCE4E0 /* CopyFiles */ = {
+		288AE61D1FEB89CD002CF361 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
@@ -24,13 +24,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		288021631FEA2F2200CCE4E0 /* libSpsDockSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSpsDockSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2880216F1FEA2F4600CCE4E0 /* SpsDock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpsDock.h; sourceTree = "<group>"; };
-		288021701FEA2F4700CCE4E0 /* SpsDock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpsDock.m; sourceTree = "<group>"; };
+		288AE61F1FEB89CD002CF361 /* libSandbaoSps.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSandbaoSps.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		288AE62B1FEB89DD002CF361 /* SpsDock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpsDock.m; sourceTree = "<group>"; };
+		288AE62C1FEB89DD002CF361 /* SpsDock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpsDock.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		288021601FEA2F2200CCE4E0 /* Frameworks */ = {
+		288AE61C1FEB89CD002CF361 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -40,108 +40,108 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2880215A1FEA2F2200CCE4E0 = {
+		288AE6161FEB89CD002CF361 = {
 			isa = PBXGroup;
 			children = (
-				288021651FEA2F2200CCE4E0 /* SpsDockSDK */,
-				288021641FEA2F2200CCE4E0 /* Products */,
+				288AE6211FEB89CD002CF361 /* SandbaoSps */,
+				288AE6201FEB89CD002CF361 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		288021641FEA2F2200CCE4E0 /* Products */ = {
+		288AE6201FEB89CD002CF361 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				288021631FEA2F2200CCE4E0 /* libSpsDockSDK.a */,
+				288AE61F1FEB89CD002CF361 /* libSandbaoSps.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		288021651FEA2F2200CCE4E0 /* SpsDockSDK */ = {
+		288AE6211FEB89CD002CF361 /* SandbaoSps */ = {
 			isa = PBXGroup;
 			children = (
-				2880216F1FEA2F4600CCE4E0 /* SpsDock.h */,
-				288021701FEA2F4700CCE4E0 /* SpsDock.m */,
+				288AE62C1FEB89DD002CF361 /* SpsDock.h */,
+				288AE62B1FEB89DD002CF361 /* SpsDock.m */,
 			);
-			path = SpsDockSDK;
+			path = SandbaoSps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		288021721FEA2FC100CCE4E0 /* Headers */ = {
+		288AE62E1FEB89EB002CF361 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				288021731FEA2FC800CCE4E0 /* SpsDock.h in Headers */,
+				288AE62F1FEB89F1002CF361 /* SpsDock.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		288021621FEA2F2200CCE4E0 /* SpsDockSDK */ = {
+		288AE61E1FEB89CD002CF361 /* SandbaoSps */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2880216C1FEA2F2200CCE4E0 /* Build configuration list for PBXNativeTarget "SpsDockSDK" */;
+			buildConfigurationList = 288AE6281FEB89CE002CF361 /* Build configuration list for PBXNativeTarget "SandbaoSps" */;
 			buildPhases = (
-				2880215F1FEA2F2200CCE4E0 /* Sources */,
-				288021601FEA2F2200CCE4E0 /* Frameworks */,
-				288021611FEA2F2200CCE4E0 /* CopyFiles */,
-				288021721FEA2FC100CCE4E0 /* Headers */,
+				288AE61B1FEB89CD002CF361 /* Sources */,
+				288AE61C1FEB89CD002CF361 /* Frameworks */,
+				288AE61D1FEB89CD002CF361 /* CopyFiles */,
+				288AE62E1FEB89EB002CF361 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = SpsDockSDK;
-			productName = SpsDockSDK;
-			productReference = 288021631FEA2F2200CCE4E0 /* libSpsDockSDK.a */;
+			name = SandbaoSps;
+			productName = SandbaoSps;
+			productReference = 288AE61F1FEB89CD002CF361 /* libSandbaoSps.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		2880215B1FEA2F2200CCE4E0 /* Project object */ = {
+		288AE6171FEB89CD002CF361 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = tianNanYiHao;
 				TargetAttributes = {
-					288021621FEA2F2200CCE4E0 = {
+					288AE61E1FEB89CD002CF361 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 2880215E1FEA2F2200CCE4E0 /* Build configuration list for PBXProject "SpsDockSDK" */;
+			buildConfigurationList = 288AE61A1FEB89CD002CF361 /* Build configuration list for PBXProject "SandbaoSps" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 2880215A1FEA2F2200CCE4E0;
-			productRefGroup = 288021641FEA2F2200CCE4E0 /* Products */;
+			mainGroup = 288AE6161FEB89CD002CF361;
+			productRefGroup = 288AE6201FEB89CD002CF361 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				288021621FEA2F2200CCE4E0 /* SpsDockSDK */,
+				288AE61E1FEB89CD002CF361 /* SandbaoSps */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2880215F1FEA2F2200CCE4E0 /* Sources */ = {
+		288AE61B1FEB89CD002CF361 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				288021711FEA2F4700CCE4E0 /* SpsDock.m in Sources */,
+				288AE62D1FEB89DD002CF361 /* SpsDock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		2880216A1FEA2F2200CCE4E0 /* Debug */ = {
+		288AE6261FEB89CE002CF361 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -196,7 +196,7 @@
 			};
 			name = Debug;
 		};
-		2880216B1FEA2F2200CCE4E0 /* Release */ = {
+		288AE6271FEB89CE002CF361 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -245,7 +245,7 @@
 			};
 			name = Release;
 		};
-		2880216D1FEA2F2200CCE4E0 /* Debug */ = {
+		288AE6291FEB89CE002CF361 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -257,7 +257,7 @@
 			};
 			name = Debug;
 		};
-		2880216E1FEA2F2200CCE4E0 /* Release */ = {
+		288AE62A1FEB89CE002CF361 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -272,25 +272,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2880215E1FEA2F2200CCE4E0 /* Build configuration list for PBXProject "SpsDockSDK" */ = {
+		288AE61A1FEB89CD002CF361 /* Build configuration list for PBXProject "SandbaoSps" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2880216A1FEA2F2200CCE4E0 /* Debug */,
-				2880216B1FEA2F2200CCE4E0 /* Release */,
+				288AE6261FEB89CE002CF361 /* Debug */,
+				288AE6271FEB89CE002CF361 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2880216C1FEA2F2200CCE4E0 /* Build configuration list for PBXNativeTarget "SpsDockSDK" */ = {
+		288AE6281FEB89CE002CF361 /* Build configuration list for PBXNativeTarget "SandbaoSps" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2880216D1FEA2F2200CCE4E0 /* Debug */,
-				2880216E1FEA2F2200CCE4E0 /* Release */,
+				288AE6291FEB89CE002CF361 /* Debug */,
+				288AE62A1FEB89CE002CF361 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 2880215B1FEA2F2200CCE4E0 /* Project object */;
+	rootObject = 288AE6171FEB89CD002CF361 /* Project object */;
 }

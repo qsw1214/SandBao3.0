@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>SpsDockSDK.xcscheme</key>
+		<key>SandbaoSps.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>288021621FEA2F2200CCE4E0</key>
+		<key>288AE61E1FEB89CD002CF361</key>
 		<dict>
 			<key>primary</key>
 			<true/>

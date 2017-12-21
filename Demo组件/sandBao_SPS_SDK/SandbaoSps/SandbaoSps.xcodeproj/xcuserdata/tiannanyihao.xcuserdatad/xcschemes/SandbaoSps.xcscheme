@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "288021621FEA2F2200CCE4E0"
-               BuildableName = "libSpsDockSDK.a"
-               BlueprintName = "SpsDockSDK"
-               ReferencedContainer = "container:SpsDockSDK.xcodeproj">
+               BlueprintIdentifier = "288AE61E1FEB89CD002CF361"
+               BuildableName = "libSandbaoSps.a"
+               BlueprintName = "SandbaoSps"
+               ReferencedContainer = "container:SandbaoSps.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,10 +47,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288021621FEA2F2200CCE4E0"
-            BuildableName = "libSpsDockSDK.a"
-            BlueprintName = "SpsDockSDK"
-            ReferencedContainer = "container:SpsDockSDK.xcodeproj">
+            BlueprintIdentifier = "288AE61E1FEB89CD002CF361"
+            BuildableName = "libSandbaoSps.a"
+            BlueprintName = "SandbaoSps"
+            ReferencedContainer = "container:SandbaoSps.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,10 +65,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288021621FEA2F2200CCE4E0"
-            BuildableName = "libSpsDockSDK.a"
-            BlueprintName = "SpsDockSDK"
-            ReferencedContainer = "container:SpsDockSDK.xcodeproj">
+            BlueprintIdentifier = "288AE61E1FEB89CD002CF361"
+            BuildableName = "libSandbaoSps.a"
+            BlueprintName = "SandbaoSps"
+            ReferencedContainer = "container:SandbaoSps.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

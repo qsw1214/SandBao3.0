@@ -14,7 +14,7 @@
  sps回调代理
 
  @param tn tn号
- @param state state [0000 == 成功 ,0001 == 取消]
+ @param state state [0000 == 成功 ,0001 == 取消 ,0002 == 异常]
  */
 - (void)spsReturn:(NSString*)tn state:(NSString*)state;
 
@@ -68,8 +68,7 @@
  (处理杉德宝户端程序通过URL启动第三方应用时传递的数据)
  
  @param url url
- @param delegate SpsSDKDelegate对象,用于接受杉德宝回调的信息
- @return 成功/失败
+ @return 唤起成功/失败
  */
 - (BOOL)handleUrl:(NSURL *)url;
 
