@@ -237,7 +237,9 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         //解绑失败
         [successView animationStopClean];
         [self.payView hidPayTool];
-        [Tool showDialog:@"解绑失败"];
+        if (paramArr.count>0) {
+            [Tool showDialog:paramArr[0]];
+        }
     }];
 }
 
@@ -319,13 +321,22 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         
         paynuc.set("payTool", [payTool UTF8String]);
         paynuc.set("authTools", [authTools UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/unbandCard/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                errorBlock(nil);
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    errorBlock(nil);
+                }
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    errorBlock(@[respMsg]);
+                }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 successBlock(nil);
             }];

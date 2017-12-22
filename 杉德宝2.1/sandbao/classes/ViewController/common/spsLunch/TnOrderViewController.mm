@@ -285,19 +285,21 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     } oederErrorBlock:^(NSArray *paramArr){
         //支付失败
         [successView animationStopClean];
-        [self.payView hidPayTool];
-        [Tool showDialog:@"支付失败" defulBlock:^{
-            if (self.type == SandTnOrderTypeC2B) {
-                //正扫失败
-                [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
-            }
-            if (self.type == SandTnOrderTypeB2C) {
-                //反扫失败
-            }
-            if (self.type == SandTnOrderTypeSps) {
-                //sps失败
-            }
-        }];
+        if (self.type == SandTnOrderTypeC2B) {
+            //正扫失败 - 支付工具归位
+            [self.payView originPayTool];
+        }
+        if (self.type == SandTnOrderTypeB2C) {
+            //反扫失败
+        }
+        if (self.type == SandTnOrderTypeSps) {
+            //sps失败
+        }
+        if (paramArr.count>0) {
+            [Tool showDialog:paramArr[0]];
+        }else{
+            [Tool showDialog:@"网络连接异常"];
+        }
     }];
 }
 
@@ -506,13 +508,22 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         paynuc.set("work", [work UTF8String]);
         paynuc.set("payTool", [payTool UTF8String]);
         paynuc.set("authTools", [@"[]" UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"business/pay/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                errorBlock(nil);
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    errorBlock(nil);
+                }
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    errorBlock(@[respMsg]);
+                }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 NSString *work = [NSString stringWithUTF8String:paynuc.get("work").c_str()];
                 successWorkDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];

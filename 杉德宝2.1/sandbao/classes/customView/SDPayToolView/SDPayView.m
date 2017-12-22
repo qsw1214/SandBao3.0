@@ -170,6 +170,16 @@
 }
 
 
+/**
+ 外部调用归位方法
+ (方法调用背景:密码输入后,接口返回任何错误信息;)
+ (调用此方法,让PayToolPwdView返回到PayToolOrderView)
+ */
+- (void)originPayTool{
+    //借用代理方法实现
+    [self payToolPwdViewjumpBackToPayToolOrderView];
+}
+
 #pragma - mark 隐藏支付工具
 /**
  延迟关闭-(各子视图未归位时调用-有延迟)

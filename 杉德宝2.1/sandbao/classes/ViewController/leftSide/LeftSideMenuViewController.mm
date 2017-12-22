@@ -361,7 +361,7 @@
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(logOutbtn.mas_centerY);
-        make.left.equalTo(logOutImgView.mas_right).offset(LEFTRIGHTSPACE_04);
+        make.left.equalTo(logOutImgView.mas_right).offset(LEFTRIGHTSPACE_15);
         make.size.mas_equalTo(titleLab.size);
     }];
     

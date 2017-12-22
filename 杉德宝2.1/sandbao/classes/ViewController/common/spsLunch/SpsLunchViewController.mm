@@ -105,7 +105,20 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 #pragma mark  - UI绘制
 - (void)createUI{
     
-    self.spsLoadingView = [[SpsLoadingView alloc] initWithFrame:CGRectMake(0, 0, LEFTRIGHTSPACE_100, LEFTRIGHTSPACE_100)];
+    //创建背景
+    UIImageView *backGroundImgView = [Tool createImagView:[UIImage imageNamed:@"loading_bg"]];
+    [self.baseScrollView addSubview:backGroundImgView];
+    
+    [backGroundImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT));
+    }];
+    
+    //loadingIcon
+    UIImage *loadIcon = [UIImage imageNamed:@"icon_loading"];
+    self.spsLoadingView = [[SpsLoadingView alloc] initWithFrame:CGRectMake(0, 0, loadIcon.size.height, loadIcon.size.height)];
+    self.spsLoadingView.iconImgStr = @"icon_loading";
     [self.baseScrollView addSubview:self.spsLoadingView];
     [self.spsLoadingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
@@ -192,6 +205,16 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     } oederErrorBlock:^(NSArray *paramArr){
         //支付失败
         [successView animationStopClean];
+        [self.payView originPayTool];
+        
+        if (paramArr.count>0) {
+            //spsLunch页特例:交易异常后,仅提示用户,且返回sps订单金额页,不进行退出操作,退出由用户触发
+            [Tool showDialog:paramArr[0]];
+        }else{
+            [Tool showDialog:@"网络连接异常" message:@"返回商户" defulBlock:^{
+                [self payGoBackByisSuccess:SPS_PAY_ERROR];
+            }];
+        }
     }];
 }
 
@@ -231,13 +254,13 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络出现异常" message:@"点击返回商户" defulBlock:^{
+                    [Tool showDialog:@"网络出现异常" message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg message:@"点击返回商户" defulBlock:^{
+                    [Tool showDialog:respMsg message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
@@ -260,13 +283,13 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络出现异常" message:@"点击返回商户" defulBlock:^{
+                    [Tool showDialog:@"网络出现异常" message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg message:@"点击返回商户" defulBlock:^{
+                    [Tool showDialog:respMsg message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
@@ -416,15 +439,11 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络出现异常" message:@"点击返回商户" defulBlock:^{
-                        [self payGoBackByisSuccess:SPS_PAY_ERROR];
-                    }];
+                    errorBlock(nil);
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg message:@"点击返回商户" defulBlock:^{
-                        [self payGoBackByisSuccess:SPS_PAY_ERROR];
-                    }];
+                    errorBlock(@[respMsg]);
                 }
             }];
         } successBlock:^{
@@ -498,7 +517,6 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     } completion:^(BOOL finished) {
         
     }];
-    
 }
 
 #pragma mark 支付完成/取消 回调
@@ -534,12 +552,6 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
     
 }
-
-
-
-
-
-
 
 
 

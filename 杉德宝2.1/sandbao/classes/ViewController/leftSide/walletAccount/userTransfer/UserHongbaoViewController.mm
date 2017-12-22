@@ -342,10 +342,12 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     } transferPayErrorBlock:^(NSArray *paramArr){
         //支付失败
         [successView animationStopClean];
-        [self.payView hidPayTool];
-        [Tool showDialog:@"红包发送失败" defulBlock:^{
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }];
+        [self.payView originPayTool];
+        if (paramArr.count>0) {
+            [Tool showDialog:paramArr[0]];
+        }else{
+            [Tool showDialog:@"网络连接异常"];
+        }
     }];
 }
 
@@ -470,13 +472,22 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         [outPayToolM setObject:atuhToolsM forKey:@"authTools"];
         NSString *outPayToolStrAcc2Acc = [[PayNucHelper sharedInstance] dictionaryToJson:outPayToolM];
         paynuc.set("outPayTool", [outPayToolStrAcc2Acc UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"business/acc2acc/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                errorblock(nil);
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    errorblock(nil);
+                }
+                if (type == respCodeErrorType) {
+                    NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
+                    errorblock(@[respMsg]);
+                }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 successblock(@[@(cashFen)]);
             }];

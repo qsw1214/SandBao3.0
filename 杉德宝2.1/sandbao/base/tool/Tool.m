@@ -18,7 +18,6 @@
 #import "HDAlertView.h"
 
 #define Tool_Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
-#define Tool_UPDOWNSPACE_(float) ((float/667.f) * ([[UIScreen mainScreen] bounds].size.height))
 @interface Tool(){
     
 }
@@ -1018,7 +1017,7 @@
     [btn.layer addSublayer:midLab.layer];
     
     //frame
-    CGFloat upSpace = Tool_UPDOWNSPACE_(20);
+    CGFloat upSpace = ((20/667.f) * ([[UIScreen mainScreen] bounds].size.height));
     CGSize midLabSize = [midLab sizeThatFits:CGSizeZero];
     
     CGFloat selfWidth = [UIScreen mainScreen].bounds.size.width - 2*space;

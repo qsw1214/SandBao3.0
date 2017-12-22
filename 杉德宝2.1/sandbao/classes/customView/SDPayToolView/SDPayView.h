@@ -103,4 +103,9 @@ typedef enum {
  */
 - (void)hidPayTool;
 
+/**
+ 外部调用归位方法
+ */
+- (void)originPayTool;
+
 @end

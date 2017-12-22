@@ -12,6 +12,11 @@
 
 
 /**
+ 杉德Icon
+ */
+@property (nonatomic, strong) NSString *iconImgStr;
+
+/**
  开始动画
  */
 - (void)startCircleAnimation;

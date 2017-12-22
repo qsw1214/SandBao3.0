@@ -9,7 +9,7 @@
 #import "SpsLoadingView.h"
 
 //圆线宽度
-#define strokeLineWidth 6.f
+#define strokeLineWidth 3.f
 //角度转弧度
 #define radian(degress) ((M_PI * (degress))/180.f)
 
@@ -25,6 +25,9 @@
     CGPoint centerPoint;
     
     UIBezierPath *path_circleStart;
+    
+    UIImageView *iconImgV;
+    
 }
 
 /**
@@ -40,11 +43,14 @@
 
 @implementation SpsLoadingView
 
-
+- (void)setIconImgStr:(NSString *)iconImgStr{
+    _iconImgStr = iconImgStr;
+    iconImgV.image = [UIImage imageNamed:_iconImgStr];
+    
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if ([super initWithFrame:frame]) {
-        
         circleFrame = frame;
         logoImgSize = CGSizeMake(circleFrame.size.width - strokeLineWidth, circleFrame.size.width - strokeLineWidth);
         centerPoint = CGPointMake(circleFrame.size.width/2, circleFrame.size.width/2);
@@ -52,10 +58,13 @@
         
         [self addCirClelayer];
         
-        [self addLogoImg];
+//        [self addLogoImg];
+        
+        [self addLogoIcon];
     }
     return self;
 }
+
 
 - (CAShapeLayer*)circleBackLayer{
     if (!_circleBackLayer) {
@@ -82,36 +91,28 @@
      UIBezierPath *path_circleBack = [UIBezierPath bezierPathWithArcCenter:centerPoint radius:radius startAngle:radian(0) endAngle:radian(360) clockwise:YES];
     self.circleBackLayer.path = path_circleBack.CGPath;
     self.circleBackLayer.fillColor = [UIColor clearColor].CGColor;
-    self.circleBackLayer.strokeColor = [UIColor blackColor].CGColor;
+    self.circleBackLayer.strokeColor = [UIColor lightGrayColor].CGColor;
     self.circleBackLayer.lineWidth = strokeLineWidth;
     self.circleBackLayer.strokeEnd = 1;
-    
-    
     
     //1.动画圆
     UIBezierPath *path_circle = [UIBezierPath bezierPathWithArcCenter:centerPoint radius:radius startAngle:radian(270) endAngle:radian(269.9) clockwise:YES];
     self.circleLayer.path = path_circle.CGPath;
     self.circleLayer.fillColor = [UIColor clearColor].CGColor;
-    self.circleLayer.strokeColor = [UIColor colorWithRed:31/255.f green:140/255.f blue:224/255.f alpha:1.f].CGColor;
+    self.circleLayer.strokeColor = [UIColor whiteColor].CGColor;
     self.circleLayer.lineWidth = strokeLineWidth;
     self.circleLayer.strokeStart = 0.f;
     self.circleLayer.strokeEnd = 0.f;
 }
-- (void)addLogoImg{
+
+
+- (void)addLogoIcon{
     
-    UILabel *logoLab = [[UILabel alloc] init];
-    logoLab.frame = CGRectMake(strokeLineWidth/2, strokeLineWidth/2, logoImgSize.width, logoImgSize.height);
-    logoLab.backgroundColor = [UIColor colorWithRed:31/255.f green:43/255.f blue:63/255.f alpha:1.f];
-    logoLab.layer.cornerRadius = logoImgSize.height/2;
-    logoLab.layer.masksToBounds = YES;
-    logoLab.text = @"杉德";
-    logoLab.textAlignment = NSTextAlignmentCenter;
-    logoLab.font = [UIFont systemFontOfSize:38];
-    logoLab.textColor = [UIColor colorWithRed:31/255.f green:140/255.f blue:224/255.f alpha:1.f];
-    [self addSubview:logoLab];
+    iconImgV = [[UIImageView alloc] init];
+    iconImgV.frame = CGRectMake(strokeLineWidth/2, strokeLineWidth/2, logoImgSize.width, logoImgSize.height);
+    [self addSubview:iconImgV];
     
 }
-
 
 - (void)startCircleAnimation{
     
@@ -125,7 +126,6 @@
     strokeStartAnimation.removedOnCompletion = NO;
     
 
-    
     CABasicAnimation *strokeEndAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
     strokeEndAnimation.duration = 1.f;
     strokeEndAnimation.repeatCount = 1;
@@ -154,5 +154,21 @@
     [self removeFromSuperview];
 
 }
+
+
+//- (void)addLogoImg{
+//
+//    UILabel *logoLab = [[UILabel alloc] init];
+//    logoLab.frame = CGRectMake(strokeLineWidth/2, strokeLineWidth/2, logoImgSize.width, logoImgSize.height);
+//    logoLab.backgroundColor = [UIColor colorWithRed:31/255.f green:43/255.f blue:63/255.f alpha:1.f];
+//    logoLab.layer.cornerRadius = logoImgSize.height/2;
+//    logoLab.layer.masksToBounds = YES;
+//    logoLab.text = @"杉德";
+//    logoLab.textAlignment = NSTextAlignmentCenter;
+//    logoLab.font = [UIFont systemFontOfSize:38];
+//    logoLab.textColor = [UIColor colorWithRed:31/255.f green:140/255.f blue:224/255.f alpha:1.f];
+//    [self addSubview:logoLab];
+//
+//}
 
 @end
