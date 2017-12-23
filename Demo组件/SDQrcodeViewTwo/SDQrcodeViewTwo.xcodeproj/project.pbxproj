@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2834A8E31FEEAA11004EB6AF /* list_icon_goMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8D91FEEAA11004EB6AF /* list_icon_goMore@2x.png */; };
+		2834A8E41FEEAA11004EB6AF /* list_icon_goMore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8DA1FEEAA11004EB6AF /* list_icon_goMore@3x.png */; };
+		2834A8E51FEEAA11004EB6AF /* payToolDef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8DB1FEEAA11004EB6AF /* payToolDef@2x.png */; };
+		2834A8E61FEEAA11004EB6AF /* payToolDef@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8DC1FEEAA11004EB6AF /* payToolDef@3x.png */; };
+		2834A8E71FEEAA11004EB6AF /* shoufukuan_icon_collection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8DD1FEEAA11004EB6AF /* shoufukuan_icon_collection@2x.png */; };
+		2834A8E81FEEAA11004EB6AF /* shoufukuan_icon_collection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8DE1FEEAA11004EB6AF /* shoufukuan_icon_collection@3x.png */; };
+		2834A8E91FEEAA11004EB6AF /* shoufukuan_icon_pay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8DF1FEEAA11004EB6AF /* shoufukuan_icon_pay@2x.png */; };
+		2834A8EA1FEEAA11004EB6AF /* shoufukuan_icon_pay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2834A8E01FEEAA11004EB6AF /* shoufukuan_icon_pay@3x.png */; };
+		2834A8EB1FEEAA11004EB6AF /* SDQrcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2834A8E21FEEAA11004EB6AF /* SDQrcodeView.m */; };
 		28C419621FEE368A00BB7CBC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C419611FEE368A00BB7CBC /* AppDelegate.m */; };
 		28C419651FEE368A00BB7CBC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C419641FEE368A00BB7CBC /* ViewController.m */; };
 		28C419681FEE368A00BB7CBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28C419661FEE368A00BB7CBC /* Main.storyboard */; };
@@ -35,6 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2834A8D91FEEAA11004EB6AF /* list_icon_goMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_goMore@2x.png"; sourceTree = "<group>"; };
+		2834A8DA1FEEAA11004EB6AF /* list_icon_goMore@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_goMore@3x.png"; sourceTree = "<group>"; };
+		2834A8DB1FEEAA11004EB6AF /* payToolDef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payToolDef@2x.png"; sourceTree = "<group>"; };
+		2834A8DC1FEEAA11004EB6AF /* payToolDef@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payToolDef@3x.png"; sourceTree = "<group>"; };
+		2834A8DD1FEEAA11004EB6AF /* shoufukuan_icon_collection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_collection@2x.png"; sourceTree = "<group>"; };
+		2834A8DE1FEEAA11004EB6AF /* shoufukuan_icon_collection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_collection@3x.png"; sourceTree = "<group>"; };
+		2834A8DF1FEEAA11004EB6AF /* shoufukuan_icon_pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_pay@2x.png"; sourceTree = "<group>"; };
+		2834A8E01FEEAA11004EB6AF /* shoufukuan_icon_pay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_pay@3x.png"; sourceTree = "<group>"; };
+		2834A8E11FEEAA11004EB6AF /* SDQrcodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDQrcodeView.h; sourceTree = "<group>"; };
+		2834A8E21FEEAA11004EB6AF /* SDQrcodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDQrcodeView.m; sourceTree = "<group>"; };
 		28C4195D1FEE368A00BB7CBC /* SDQrcodeViewTwo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDQrcodeViewTwo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28C419601FEE368A00BB7CBC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		28C419611FEE368A00BB7CBC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -78,6 +97,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2834A8D71FEEAA11004EB6AF /* SDQrcodeView */ = {
+			isa = PBXGroup;
+			children = (
+				2834A8D81FEEAA11004EB6AF /* img */,
+				2834A8E11FEEAA11004EB6AF /* SDQrcodeView.h */,
+				2834A8E21FEEAA11004EB6AF /* SDQrcodeView.m */,
+			);
+			path = SDQrcodeView;
+			sourceTree = "<group>";
+		};
+		2834A8D81FEEAA11004EB6AF /* img */ = {
+			isa = PBXGroup;
+			children = (
+				2834A8D91FEEAA11004EB6AF /* list_icon_goMore@2x.png */,
+				2834A8DA1FEEAA11004EB6AF /* list_icon_goMore@3x.png */,
+				2834A8DB1FEEAA11004EB6AF /* payToolDef@2x.png */,
+				2834A8DC1FEEAA11004EB6AF /* payToolDef@3x.png */,
+				2834A8DD1FEEAA11004EB6AF /* shoufukuan_icon_collection@2x.png */,
+				2834A8DE1FEEAA11004EB6AF /* shoufukuan_icon_collection@3x.png */,
+				2834A8DF1FEEAA11004EB6AF /* shoufukuan_icon_pay@2x.png */,
+				2834A8E01FEEAA11004EB6AF /* shoufukuan_icon_pay@3x.png */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
 		28C419541FEE368A00BB7CBC = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +145,7 @@
 		28C4195F1FEE368A00BB7CBC /* SDQrcodeViewTwo */ = {
 			isa = PBXGroup;
 			children = (
+				2834A8D71FEEAA11004EB6AF /* SDQrcodeView */,
 				28C419601FEE368A00BB7CBC /* AppDelegate.h */,
 				28C419611FEE368A00BB7CBC /* AppDelegate.m */,
 				28C419631FEE368A00BB7CBC /* ViewController.h */,
@@ -238,8 +283,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2834A8E31FEEAA11004EB6AF /* list_icon_goMore@2x.png in Resources */,
+				2834A8E41FEEAA11004EB6AF /* list_icon_goMore@3x.png in Resources */,
+				2834A8E61FEEAA11004EB6AF /* payToolDef@3x.png in Resources */,
 				28C4196D1FEE368A00BB7CBC /* LaunchScreen.storyboard in Resources */,
+				2834A8E81FEEAA11004EB6AF /* shoufukuan_icon_collection@3x.png in Resources */,
+				2834A8E51FEEAA11004EB6AF /* payToolDef@2x.png in Resources */,
 				28C4196A1FEE368A00BB7CBC /* Assets.xcassets in Resources */,
+				2834A8E91FEEAA11004EB6AF /* shoufukuan_icon_pay@2x.png in Resources */,
+				2834A8EA1FEEAA11004EB6AF /* shoufukuan_icon_pay@3x.png in Resources */,
+				2834A8E71FEEAA11004EB6AF /* shoufukuan_icon_collection@2x.png in Resources */,
 				28C419681FEE368A00BB7CBC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28C419651FEE368A00BB7CBC /* ViewController.m in Sources */,
+				2834A8EB1FEEAA11004EB6AF /* SDQrcodeView.m in Sources */,
 				28C419701FEE368A00BB7CBC /* main.m in Sources */,
 				28C419621FEE368A00BB7CBC /* AppDelegate.m in Sources */,
 			);
