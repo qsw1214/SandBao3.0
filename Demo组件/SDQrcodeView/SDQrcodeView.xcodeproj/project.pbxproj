@@ -18,8 +18,8 @@
 		2875869A1FD68C2500DACC8E /* SDQrcodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287586991FD68C2500DACC8E /* SDQrcodeView.m */; };
 		2875869E1FD68C3E00DACC8E /* shoufukuan_icon_pay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2875869C1FD68C3E00DACC8E /* shoufukuan_icon_pay@3x.png */; };
 		2875869F1FD68C3E00DACC8E /* shoufukuan_icon_pay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2875869D1FD68C3E00DACC8E /* shoufukuan_icon_pay@2x.png */; };
-		28A6A5731FD7876D00A3BED0 /* list_icon_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A6A5711FD7876D00A3BED0 /* list_icon_more@3x.png */; };
-		28A6A5741FD7876D00A3BED0 /* list_icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A6A5721FD7876D00A3BED0 /* list_icon_more@2x.png */; };
+		28A6A5731FD7876D00A3BED0 /* list_icon_goMore@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A6A5711FD7876D00A3BED0 /* list_icon_goMore@3x.png */; };
+		28A6A5741FD7876D00A3BED0 /* list_icon_goMore@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A6A5721FD7876D00A3BED0 /* list_icon_goMore@2x.png */; };
 		28A6A6081FD7CE5800A3BED0 /* payToolDef@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A6A6061FD7CE5800A3BED0 /* payToolDef@2x.png */; };
 		28A6A6091FD7CE5800A3BED0 /* payToolDef@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A6A6071FD7CE5800A3BED0 /* payToolDef@3x.png */; };
 /* End PBXBuildFile section */
@@ -62,8 +62,8 @@
 		287586991FD68C2500DACC8E /* SDQrcodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDQrcodeView.m; sourceTree = "<group>"; };
 		2875869C1FD68C3E00DACC8E /* shoufukuan_icon_pay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_pay@3x.png"; sourceTree = "<group>"; };
 		2875869D1FD68C3E00DACC8E /* shoufukuan_icon_pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_pay@2x.png"; sourceTree = "<group>"; };
-		28A6A5711FD7876D00A3BED0 /* list_icon_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@3x.png"; sourceTree = "<group>"; };
-		28A6A5721FD7876D00A3BED0 /* list_icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_more@2x.png"; sourceTree = "<group>"; };
+		28A6A5711FD7876D00A3BED0 /* list_icon_goMore@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_goMore@3x.png"; sourceTree = "<group>"; };
+		28A6A5721FD7876D00A3BED0 /* list_icon_goMore@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list_icon_goMore@2x.png"; sourceTree = "<group>"; };
 		28A6A6061FD7CE5800A3BED0 /* payToolDef@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payToolDef@2x.png"; sourceTree = "<group>"; };
 		28A6A6071FD7CE5800A3BED0 /* payToolDef@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payToolDef@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,8 +171,8 @@
 			children = (
 				28A6A6061FD7CE5800A3BED0 /* payToolDef@2x.png */,
 				28A6A6071FD7CE5800A3BED0 /* payToolDef@3x.png */,
-				28A6A5711FD7876D00A3BED0 /* list_icon_more@3x.png */,
-				28A6A5721FD7876D00A3BED0 /* list_icon_more@2x.png */,
+				28A6A5711FD7876D00A3BED0 /* list_icon_goMore@3x.png */,
+				28A6A5721FD7876D00A3BED0 /* list_icon_goMore@2x.png */,
 				2875869C1FD68C3E00DACC8E /* shoufukuan_icon_pay@3x.png */,
 				2875869D1FD68C3E00DACC8E /* shoufukuan_icon_pay@2x.png */,
 			);
@@ -288,11 +288,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28A6A5741FD7876D00A3BED0 /* list_icon_more@2x.png in Resources */,
+				28A6A5741FD7876D00A3BED0 /* list_icon_goMore@2x.png in Resources */,
 				287586711FD6898D00DACC8E /* LaunchScreen.storyboard in Resources */,
 				2875866E1FD6898D00DACC8E /* Assets.xcassets in Resources */,
 				2875869F1FD68C3E00DACC8E /* shoufukuan_icon_pay@2x.png in Resources */,
-				28A6A5731FD7876D00A3BED0 /* list_icon_more@3x.png in Resources */,
+				28A6A5731FD7876D00A3BED0 /* list_icon_goMore@3x.png in Resources */,
 				28A6A6081FD7CE5800A3BED0 /* payToolDef@2x.png in Resources */,
 				28A6A6091FD7CE5800A3BED0 /* payToolDef@3x.png in Resources */,
 				2875869E1FD68C3E00DACC8E /* shoufukuan_icon_pay@3x.png in Resources */,

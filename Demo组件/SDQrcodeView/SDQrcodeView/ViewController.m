@@ -23,13 +23,13 @@
     
     
     //1,
-//    [self ONE];
+    [self ONE];
     
     //2.
 //    [self TWO];
     
     //3
-    [self THREE];
+//    [self THREE];
 
     
     
