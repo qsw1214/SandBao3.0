@@ -52,20 +52,20 @@ typedef NS_ENUM(NSInteger,SDQrcodeViewStyle)
 @property (nonatomic, strong) NSString *payToolNameStr;
 
 
-/**
- 公共 - 创建底部空白视图
- */
-- (void)createBottomEmptyView;
-
-/**
- 付款码 - 创建底部支付工具视图
- */
-- (void)createPayToolShowView;
-
-/**
- 收款码 - 创建设置金额视图
- */
-- (void)createSetMoneyBtnView;
+///**
+// 公共 - 创建底部空白视图
+// */
+//- (void)createBottomEmptyView;
+//
+///**
+// 付款码 - 创建底部支付工具视图
+// */
+//- (void)createPayToolShowView;
+//
+///**
+// 收款码 - 创建设置金额视图
+// */
+//- (void)createSetMoneyBtnView;
 
 
 @end

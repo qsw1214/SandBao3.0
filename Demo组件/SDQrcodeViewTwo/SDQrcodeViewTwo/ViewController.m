@@ -9,7 +9,9 @@
 #import "ViewController.h"
 #import "SDQrcodeView.h"
 @interface ViewController ()
-
+{
+    SDQrcodeView *sdQrcodeView;
+}
 @end
 
 @implementation ViewController
@@ -25,15 +27,19 @@
     [self ONE];
 
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    sdQrcodeView.payToolNameStr = @"交通银行嘉定分行";
+    
+}
 - (void)ONE{
     
-    SDQrcodeView *sdQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
+    sdQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
     sdQrcodeView.style = PayQrcodeView;
     sdQrcodeView.roundRLColor = self.view.backgroundColor;
+    sdQrcodeView.oneQrCodeStr = @"asfdsafd";
     sdQrcodeView.twoQrCodeStr = @"813129131212312";
     sdQrcodeView.payToolNameStr = @"杉德卡";
-//    [sdQrcodeView createPayToolShowView];
     sdQrcodeView.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - sdQrcodeView.frame.size.width)/2, 100, sdQrcodeView.frame.size.width, sdQrcodeView.frame.size.height);
     
     [self.view addSubview:sdQrcodeView];
