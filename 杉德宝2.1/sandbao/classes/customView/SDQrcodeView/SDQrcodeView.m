@@ -8,6 +8,7 @@
 
 #import "SDQrcodeView.h"
 
+#define SDQrcodeView_Pay_First_Be_Use @"SDQrcodeView_Pay_First_Be_Use" //第一次使用付款码
 
 #define AdapterWfloat(f) ((f/375.f)*[UIScreen mainScreen].bounds.size.width)
 #define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
@@ -21,27 +22,39 @@
     //标题视图 - 标题
     UILabel *titleLab;
     
+    //白色承载View
+    UIView *whiteMaskView;
+    
     //二维码展示视图
     UIView *bodyView;
+    //二维码展示视图 - 条形码图片
+    UIImageView *oneQrcodeImgView;
+    
     //二维码展示视图 - 二维码图片
-    UIImageView *qrCodeImgView;
+    UIImageView *twoQrCodeImgView;
+    //二维码展示视图 - 二维码描述标题
+    UILabel *twoQrCodeDesLab;
+    //二维码展示视图 - 二维码视图宽高
+    CGFloat twoQrCodeImgViewWH;
+    
     //二维码展示视图 - 左边小圆点
     UIView *roundViewLeft;
     //二维码展示视图 - 右边小圆点
     UIView *roundViewRight;
-    //二维码展示视图 - 二维码描述标题
-    UILabel *qrCodeDesLab;
-    //二维码展示视图 - 二维码视图宽高
-    CGFloat qrCodeImgViewWH;
+
     
-    //付款码 - 支付工具展示视图
-    UIView *payToolShowView;
+    //公共 - 支付工具展示视图
+    UIView  *payToolShowView;
+    //公共 - 支付工具名称
+    UILabel *payToolNameLab;
     
     //整体宽度
     CGFloat selfViewW;
     //整体高度
     CGFloat selfViewH;
-
+    //当前亮度记录
+    double currentLight;
+    
 }
 
 
@@ -56,39 +69,61 @@
     if ([super initWithFrame:frame]) {
         
         self.backgroundColor = [UIColor whiteColor];
-        
+        self.userInteractionEnabled = YES;
         //整体宽度
         selfViewW = [UIScreen mainScreen].bounds.size.width - AdapterWfloat(50)*2;
-        
-        [self createUI];
     }
     return self;
 }
 
-- (void)createUI{
+- (void)setStyle:(SDQrcodeViewStyle)style{
+    _style = style;
     
-    [self createHeadView];
+    //类型 == 付款码
+    if (_style == PayQrcodeView) {
+        [self createHeadView];
+        [self createPayQrcodeBodyView];
+    }
+    //类型 == 收款码
+    if (_style == CollectionQrcordView) {
+        [self createHeadView];
+        [self createCollectionQrcodeBodyView];
+        [self createBottomEmptyView];
+    }
     
-    [self createBodyView];
     
 }
 
+
+
+/**
+ 创建头部标题视图
+ */
 - (void)createHeadView{
     
     
-    
     headView = [[UIView alloc] init];
-    headView.backgroundColor = [UIColor colorWithRed:247/255.0 green:248/255.0 blue:250/255.0 alpha:1/1.0];
+    headView.backgroundColor = [UIColor colorWithRed:228/255.0 green:230/255.0 blue:233/255.0 alpha:1/1.0];
     [self addSubview:headView];
     
-    UIImage *iconImg = [UIImage imageNamed:@"shoufukuan_icon_pay"];
+    UIImage *iconImg = nil;
+    NSString *titleStr = nil;
+    if (_style == PayQrcodeView) {
+        titleStr = @"向商家付款";
+        iconImg = [UIImage imageNamed:@"shoufukuan_icon_pay"];
+    }
+    if (_style == CollectionQrcordView) {
+        titleStr = @"二维码收款";
+        iconImg = [UIImage imageNamed:@"shoufukuan_icon_collection"];
+    }
+    
     UIImageView *iconView = [[UIImageView alloc] init];
     iconView.image = iconImg;
     [headView addSubview:iconView];
     
     titleLab = [[UILabel alloc] init];
-    titleLab.text = @"这里是标题";
-    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(16)];
+    titleLab.text = titleStr;
+    titleLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
     titleLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
     [headView addSubview:titleLab];
     
@@ -99,51 +134,132 @@
     [headView addSubview:pointlineView];
     
     
-    CGFloat leftSpace = AdapterWfloat(10);
-    CGFloat updownSpace = AdapterHfloat(29);
+    CGFloat leftSpace = AdapterWfloat(20);
+    CGFloat updownSpace = AdapterHfloat(17);
     CGFloat headViewH = updownSpace *2 + iconImg.size.height;
     
     CGSize titleLabSize = [titleLab sizeThatFits:CGSizeZero];
     CGFloat titleLabOY  = (headViewH - titleLabSize.height)/2;
-    CGFloat titleLabOX  = leftSpace + iconImg.size.width + leftSpace;
+    CGFloat titleLabOX  = AdapterHfloat(9.f) + iconImg.size.width + leftSpace;
     
     headView.frame = CGRectMake(0, 0, selfViewW, headViewH);
     iconView.frame = CGRectMake(leftSpace, updownSpace, iconImg.size.width, iconImg.size.height);
     titleLab.frame = CGRectMake(titleLabOX, titleLabOY, titleLabSize.width, titleLabSize.height);
     pointlineView.frame = CGRectMake(0, headView.frame.size.height - 1, selfViewW, 1);
-   
-    
-    
 }
 
-- (void)createBodyView{
+
+/**
+ 创建付款码_bodyView
+ */
+- (void)createPayQrcodeBodyView{
     
     bodyView = [[UIView alloc] init];
     bodyView.backgroundColor = [UIColor whiteColor];
     [self addSubview:bodyView];
     
-    qrCodeDesLab = [[UILabel alloc] init];
-    qrCodeDesLab.text = @"这里是二维码描述";
-    qrCodeDesLab.textAlignment = NSTextAlignmentCenter;
-    qrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(12)];
-    qrCodeDesLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
-    [bodyView addSubview:qrCodeDesLab];
+    //二维码条形码文字描述
+    twoQrCodeDesLab = [[UILabel alloc] init];
+    twoQrCodeDesLab.text = @"点击可查看付款码数字";
+    twoQrCodeDesLab.textAlignment = NSTextAlignmentCenter;
+    twoQrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(11)];
+    twoQrCodeDesLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:0.4f];
+    [bodyView addSubview:twoQrCodeDesLab];
+
+    //条形码图片
+    oneQrcodeImgView = [[UIImageView alloc] init];
+    oneQrcodeImgView.backgroundColor = [UIColor whiteColor];
+    oneQrcodeImgView.userInteractionEnabled = YES;
+    oneQrcodeImgView.tag = 1;
+    [self addTapShowBigImg:oneQrcodeImgView];
+    [bodyView addSubview:oneQrcodeImgView];
     
-    qrCodeImgView = [[UIImageView alloc] init];
-    qrCodeImgView.backgroundColor = [UIColor redColor];
-    [bodyView addSubview:qrCodeImgView];
     
-    CGFloat leftRightSpace = AdapterWfloat(60);
-    CGFloat upSpace = AdapterHfloat(25);
-    qrCodeImgViewWH = selfViewW - 2*leftRightSpace;
+    //二维码图片
+    twoQrCodeImgView = [[UIImageView alloc] init];
+    twoQrCodeImgView.backgroundColor = [UIColor whiteColor];
+    twoQrCodeImgView.userInteractionEnabled = YES;
+    twoQrCodeImgView.tag = 2;
+    [self addTapShowBigImg:twoQrCodeImgView];
+    [bodyView addSubview:twoQrCodeImgView];
     
-    CGSize qrCodeDesLabSize = [qrCodeDesLab sizeThatFits:CGSizeZero];
-    CGFloat qrCodeImgViewOY = upSpace + qrCodeDesLabSize.height + upSpace;
-    CGFloat bodyViewH       = qrCodeImgViewOY + qrCodeImgViewWH;
+    
+    CGFloat upSpace            = AdapterHfloat(29);
+    CGSize twoQrCodeDesLabSize = [twoQrCodeDesLab sizeThatFits:CGSizeZero];
+    
+    CGFloat oneQrCodeImgViewOX = AdapterWfloat(0);//由于条形码图片自带白色边框,因此间距Fix
+    CGFloat oneQrCodeImgViewH  = AdapterHfloat(55);
+    CGFloat oneQrCodeImgViewW  = selfViewW - oneQrCodeImgViewOX*2;
+    CGFloat oneQrCodeImgViewOY = upSpace + twoQrCodeDesLabSize.height + AdapterHfloat(0);
+    
+    CGFloat twoQrCodeImgViewOX = AdapterWfloat(55);
+    CGFloat twoQrCodeImgViewOY = oneQrCodeImgViewOY + oneQrCodeImgViewH + AdapterHfloat(20);
+    twoQrCodeImgViewWH         = selfViewW - 2*twoQrCodeImgViewOX;
+    
+    CGFloat bodyViewH          = twoQrCodeImgViewOY + twoQrCodeImgViewWH;
     selfViewH = headView.frame.size.height + bodyViewH;
     
-    qrCodeDesLab.frame = CGRectMake(0, upSpace, selfViewW, qrCodeDesLabSize.height);
-    qrCodeImgView.frame = CGRectMake(leftRightSpace, qrCodeImgViewOY, qrCodeImgViewWH, qrCodeImgViewWH);
+    twoQrCodeDesLab.frame  = CGRectMake(0, upSpace, selfViewW, twoQrCodeDesLabSize.height);
+    oneQrcodeImgView.frame = CGRectMake(oneQrCodeImgViewOX, oneQrCodeImgViewOY, oneQrCodeImgViewW, oneQrCodeImgViewH);
+    twoQrCodeImgView.frame = CGRectMake(twoQrCodeImgViewOX, twoQrCodeImgViewOY, twoQrCodeImgViewWH, twoQrCodeImgViewWH);
+    
+    
+    
+    bodyView.frame = CGRectMake(0, headView.frame.size.height, selfViewW, bodyViewH);
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, headView.frame.size.width, selfViewH);
+    
+    
+    //追加左右小圆点
+    roundViewLeft = [[UIView alloc] init];
+    roundViewLeft.frame = CGRectMake(-5, bodyViewH/2, 10, 10);
+    roundViewLeft.layer.cornerRadius = 5;
+    roundViewLeft.backgroundColor = [UIColor lightGrayColor];
+    roundViewLeft.layer.masksToBounds = YES;
+    [bodyView addSubview:roundViewLeft];
+    
+    roundViewRight = [[UIView alloc] init];
+    roundViewRight.frame = CGRectMake(selfViewW-5, bodyViewH/2, 10, 10);
+    roundViewRight.backgroundColor = [UIColor lightGrayColor];
+    roundViewRight.layer.cornerRadius = 5;
+    roundViewLeft.layer.masksToBounds = YES;
+    [bodyView addSubview:roundViewRight];
+    
+    
+}
+
+
+
+/**
+ 创建收款码_bodyView
+ */
+- (void)createCollectionQrcodeBodyView{
+    
+    bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:bodyView];
+    
+    twoQrCodeDesLab = [[UILabel alloc] init];
+    twoQrCodeDesLab.text = @"杉德宝扫一扫,向我付钱";
+    twoQrCodeDesLab.textAlignment = NSTextAlignmentCenter;
+    twoQrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(11)];
+    twoQrCodeDesLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:0.4f];
+    [bodyView addSubview:twoQrCodeDesLab];
+    
+    twoQrCodeImgView = [[UIImageView alloc] init];
+    twoQrCodeImgView.backgroundColor = [UIColor redColor];
+    [bodyView addSubview:twoQrCodeImgView];
+    
+    CGFloat leftRightSpace = AdapterWfloat(55);
+    CGFloat upSpace = AdapterHfloat(29);
+    twoQrCodeImgViewWH = selfViewW - 2*leftRightSpace;
+    
+    CGSize twoQrCodeDesLabSize = [twoQrCodeDesLab sizeThatFits:CGSizeZero];
+    CGFloat twoQrCodeImgViewOY = upSpace + twoQrCodeDesLabSize.height + upSpace;
+    CGFloat bodyViewH       = twoQrCodeImgViewOY + twoQrCodeImgViewWH;
+    selfViewH = headView.frame.size.height + bodyViewH;
+    
+    twoQrCodeDesLab.frame = CGRectMake(0, upSpace, selfViewW, twoQrCodeDesLabSize.height);
+    twoQrCodeImgView.frame = CGRectMake(leftRightSpace, twoQrCodeImgViewOY, twoQrCodeImgViewWH, twoQrCodeImgViewWH);
     
     
     bodyView.frame = CGRectMake(0, headView.frame.size.height, selfViewW, bodyViewH);
@@ -170,6 +286,9 @@
 
 #pragma mark - 公共方法
 
+/**
+ 创建空白底座
+ */
 - (void)createBottomEmptyView{
     
     UIView *bottomEmptyView = [[UIView alloc] init];
@@ -181,12 +300,12 @@
     bottomEmptyView.frame = CGRectMake(0, bottomEmptyViewHOY, selfViewW, bottomEmptyViewH);
     
     selfViewH += bottomEmptyViewH;
-    self.frame = CGRectMake(0, 0, headView.frame.size.width, selfViewH);
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, headView.frame.size.width, selfViewH);
 }
 
 
 /**
- 创建 付款码 - 支付工具展示视图
+ 创建 支付工具展示视图
  */
 - (void)createPayToolShowView{
     
@@ -199,7 +318,7 @@
     payToolIconImgV.image = payToolIconImg;
     [payToolShowView addSubview:payToolIconImgV];
     
-    UILabel *payToolNameLab = [[UILabel alloc] init];
+    payToolNameLab = [[UILabel alloc] init];
     //@"这里是支付工具描述"
     payToolNameLab.text = self.payToolNameStr;
     payToolNameLab.textAlignment = NSTextAlignmentCenter;
@@ -243,9 +362,18 @@
     
     
     selfViewH += payToolShowViewH;
-    self.frame = CGRectMake(0, 0, headView.frame.size.width, selfViewH);
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, headView.frame.size.width, selfViewH);
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:SDQrcodeView_Pay_First_Be_Use]) {
+        [self createWaringTip];
+    }
+    
 }
 
+
+/**
+ 创建 设置金额按钮
+ */
 - (void)createSetMoneyBtnView{
     
     UIButton *setMoneyBtn = [[UIButton alloc] init];
@@ -264,32 +392,100 @@
     setMoneyBtn.frame = CGRectMake(0, setMoneyBtnOY, selfViewW, setMoneyBtnH);
     
     selfViewH += setMoneyBtnH;
-    self.frame = CGRectMake(0, 0, headView.frame.size.width, selfViewH);
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, headView.frame.size.width, selfViewH);
+    
+}
+
+/**
+ 第一次使用付款码 - 提示视图
+ */
+- (void)createWaringTip{
+    
+    UIView *tipMaskView = [[UIView alloc] init];
+    tipMaskView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:tipMaskView];
+    
+    UIImage *tipIcon = [UIImage imageNamed:@"showPayQrcode"];
+    UIImageView *tipIconImgV = [[UIImageView alloc] init];
+    tipIconImgV.image = tipIcon;
+    [tipMaskView addSubview:tipIconImgV];
+    
+    UILabel *desLab = [[UILabel alloc] init];
+    desLab.text = @"该功能用于向商家付款时出示使用，请不要将付款码及数字发送给他人";
+    desLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
+    desLab.numberOfLines = 2;
+    desLab.textAlignment = NSTextAlignmentCenter;
+    desLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
+    [tipMaskView addSubview:desLab];
+    
+    UIButton *sureBtn = [[UIButton alloc] init];
+    [sureBtn setTitle:@"我知道了" forState:UIControlStateNormal];
+    [sureBtn setTitleColor:[UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0] forState:UIControlStateNormal];
+    sureBtn.titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(13)];
+    sureBtn.layer.cornerRadius = 5.f;
+    sureBtn.layer.masksToBounds= YES;
+    sureBtn.layer.borderWidth = 1.f;
+    [sureBtn addTarget:self action:@selector(closeWaringTip:) forControlEvents:UIControlEventTouchUpInside];
+    sureBtn.layer.borderColor = [UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0].CGColor;
+    [tipMaskView addSubview:sureBtn];
+    
+    
+    CGFloat tipMaskViewOY = headView.frame.size.height;
+    CGFloat tipMaskViewW  = selfViewW;
+    CGFloat tipMaskViewH  = bodyView.frame.size.height + payToolShowView.frame.size.height;
+    tipMaskView.frame = CGRectMake(0, tipMaskViewOY, tipMaskViewW, tipMaskViewH);
+    
+    CGFloat upSpace = AdapterHfloat(60);
+    CGFloat tipIconImgVOX = (selfViewW - tipIcon.size.width)/2;
+    tipIconImgV.frame = CGRectMake(tipIconImgVOX, upSpace, tipIcon.size.width, tipIcon.size.width);
+    
+    CGFloat desLabOX = AdapterWfloat(30);
+    CGFloat desLabOY = upSpace + tipIcon.size.height + AdapterHfloat(25);
+    CGFloat desLabW  = selfViewW - desLabOX*2;
+    CGSize desLabSize = [desLab sizeThatFits:CGSizeZero];
+    desLab.frame = CGRectMake(desLabOX, desLabOY, desLabW, desLabSize.height*2);
+    
+    CGFloat sureBtnOX = AdapterWfloat(64);
+    CGFloat sureBtnOY = desLabOY + desLab.frame.size.height + AdapterHfloat(30);
+    CGFloat sureBtnW  = selfViewW - sureBtnOX*2;
+    CGFloat sureBtnH  = [sureBtn sizeThatFits:CGSizeZero].height;
+    sureBtn.frame     = CGRectMake(sureBtnOX, sureBtnOY, sureBtnW, sureBtnH);
+    
+    
     
 }
 
 #pragma mark - setter$getter
-- (void)setTitleStr:(NSString *)titleStr{
-    _titleStr = titleStr;
-    titleLab.text = _titleStr;
+//条形码赋值
+- (void)setOneQrCodeStr:(NSString *)oneQrCodeStr{
+    _oneQrCodeStr = oneQrCodeStr;
+    oneQrcodeImgView.image = [self barCodeImageWithStr:_oneQrCodeStr];
 }
-
-- (void)setQrCodeStr:(NSString *)qrCodeStr{
-    _qrCodeStr = qrCodeStr;
-    qrCodeImgView.image = [self twoDimensionCodeWithStr:_qrCodeStr size:qrCodeImgViewWH];
+//二维码赋值
+- (void)setTwoQrCodeStr:(NSString *)twoQrCodeStr{
+    _twoQrCodeStr = twoQrCodeStr;
+    twoQrCodeImgView.image = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
 }
-
-- (void)setQrCodeDesStr:(NSString *)qrCodeDesStr{
-    _qrCodeDesStr = qrCodeDesStr;
-    qrCodeDesLab.text = _qrCodeDesStr;
+//支付工具名称赋值
+- (void)setPayToolNameStr:(NSString *)payToolNameStr{
+    _payToolNameStr = payToolNameStr;
+    
+    //清除旧视图,根据支付工具名称创建新视图
+    if (payToolShowView) {
+        selfViewH = headView.frame.size.height + bodyView.frame.size.height;
+        [payToolShowView removeFromSuperview];
+    }
+    
+    [self createPayToolShowView];
 }
-
+//左右小圆点颜色赋值
 - (void)setRoundRLColor:(UIColor *)roundRLColor{
     _roundRLColor = roundRLColor;
     roundViewLeft.backgroundColor = _roundRLColor;
     roundViewRight.backgroundColor = _roundRLColor;
 }
 
+#pragma  mark - btnClick_Func
 - (void)changePayTool:(UIButton*)btn{
     
     NSLog(@"切换支付工具");
@@ -300,7 +496,6 @@
     NSLog(@"设置金额");
 }
 
-#pragma mark - 公共方法
 #pragma mark 绘制虚线
 /**
  *  通过 CAShapeLayer 方式绘制虚线
@@ -393,6 +588,84 @@
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
     return [UIImage imageWithCGImage:scaledImage];
+}
+
+- (void)addTapShowBigImg:(UIView*)view{
+    UITapGestureRecognizer *taoGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchShowBigImge:)];
+    [view addGestureRecognizer:taoGesture];
+}
+- (void)touchShowBigImge:(UIGestureRecognizer*)tap{
+    //保存当前亮度
+    currentLight = [UIScreen mainScreen].brightness;
+    
+    //在层级最高处创建白色遮罩视图
+    whiteMaskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    whiteMaskView.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *hiddenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchHiddenBigImg:)];
+    [whiteMaskView addGestureRecognizer:hiddenTap];
+    whiteMaskView.alpha = 0;
+    [[UIApplication sharedApplication].keyWindow addSubview:whiteMaskView];
+    //条形码展示动画
+    if (tap.view.tag == 1) {
+        
+        //创建动画用- 条形码
+        UIImageView *oneimgv= [[UIImageView alloc] init];
+        oneimgv.backgroundColor = [UIColor whiteColor];
+        UIImage *oneImg = [self barCodeImageWithStr:_oneQrCodeStr];
+        oneimgv.image = oneImg;
+        oneimgv.frame = CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - oneImg.size.height)/2, oneImg.size.width, oneImg.size.height);
+        [whiteMaskView addSubview:oneimgv];
+        
+        [UIView animateWithDuration:0.4f animations:^{
+            //设置亮度最大
+            [UIScreen mainScreen].brightness = 1.f;
+            whiteMaskView.alpha = 1;
+            oneimgv.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
+            CGAffineTransform transformRotate = CGAffineTransformMakeRotation(M_PI_2);
+            oneimgv.transform = CGAffineTransformScale(transformRotate, 2.5, 2.5);
+        }];
+    }
+    //二维码
+    if (tap.view.tag == 2) {
+        
+        //创建动画用- 条形码
+        UIImageView *twoimgv= [[UIImageView alloc] init];
+        twoimgv.backgroundColor = [UIColor whiteColor];
+        UIImage *twoImg = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
+        twoimgv.image = twoImg;
+        twoimgv.frame = CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - twoImg.size.height)/2, twoImg.size.width, twoImg.size.height);
+        twoimgv.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
+        [whiteMaskView addSubview:twoimgv];
+        
+        [UIView animateWithDuration:0.4f animations:^{
+            //设置亮度最大
+            [UIScreen mainScreen].brightness = 1.f;
+            whiteMaskView.alpha = 1;
+            twoimgv.transform = CGAffineTransformMakeScale(1.5, 1.5);
+        }];
+    }
+    
+}
+//触发后删除
+- (void)touchHiddenBigImg:(UIGestureRecognizer*)tap{
+    
+    [UIView animateWithDuration:0.4f animations:^{
+        //亮度恢复
+        [UIScreen mainScreen].brightness = currentLight;
+        tap.view.alpha = 0.f;
+    } completion:^(BOOL finished) {
+        [tap.view removeFromSuperview];
+    }];
+    
+}
+
+
+- (void)closeWaringTip:(UIButton*)btn{
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"-=-=-=-=" forKey:SDQrcodeView_Pay_First_Be_Use];
+    //删除 tipMaskView
+    [btn.superview removeFromSuperview];
+    
 }
 
 @end

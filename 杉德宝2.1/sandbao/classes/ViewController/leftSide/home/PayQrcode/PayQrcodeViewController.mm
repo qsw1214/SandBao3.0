@@ -139,11 +139,9 @@
     [self.baseScrollView addSubview:self.collectionQrcodeBaseView];
     
     self.collectionQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
+    self.collectionQrcodeView.style = CollectionQrcordView;
     self.collectionQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
-    self.collectionQrcodeView.titleStr = @"个人收钱";
-    self.collectionQrcodeView.qrCodeDesStr = @"杉德宝扫一扫,向我付钱";
-    self.collectionQrcodeView.qrCodeStr = @"这里是二维码信息字符串";
-    [self.collectionQrcodeView createSetMoneyBtnView];
+    self.collectionQrcodeView.twoQrCodeStr = @"这里是二维码信息字符串";
     [self.collectionQrcodeBaseView addSubview:self.collectionQrcodeView];
     
     CGFloat collectionQrcodeBaseViewH = self.collectionQrcodeView.height;
@@ -169,12 +167,11 @@
     [self.baseScrollView addSubview:self.payQrcodeBaseView];
     
     self.payQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
+    self.payQrcodeView.style = PayQrcodeView;
     self.payQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
-    self.payQrcodeView.titleStr = @"向商家付款";
-    self.payQrcodeView.qrCodeDesStr = @"杉德宝扫一扫,向商家付款";
+    self.payQrcodeView.oneQrCodeStr = @"567539675747996";
+    self.payQrcodeView.twoQrCodeStr = @"这里是二维码信息字符串";
     self.payQrcodeView.payToolNameStr = @"杉德卡";
-    self.payQrcodeView.qrCodeStr = @"这里是二维码信息字符串";
-    [self.payQrcodeView createPayToolShowView];
     [self.payQrcodeBaseView addSubview:self.payQrcodeView];
     
     //bottomTip

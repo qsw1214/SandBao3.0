@@ -88,6 +88,7 @@
     if (_style == CollectionQrcordView) {
         [self createHeadView];
         [self createCollectionQrcodeBodyView];
+        [self createBottomEmptyView];
     }
     
     
@@ -167,7 +168,7 @@
 
     //条形码图片
     oneQrcodeImgView = [[UIImageView alloc] init];
-    oneQrcodeImgView.backgroundColor = [UIColor redColor];
+    oneQrcodeImgView.backgroundColor = [UIColor whiteColor];
     oneQrcodeImgView.userInteractionEnabled = YES;
     oneQrcodeImgView.tag = 1;
     [self addTapShowBigImg:oneQrcodeImgView];
@@ -176,7 +177,7 @@
     
     //二维码图片
     twoQrCodeImgView = [[UIImageView alloc] init];
-    twoQrCodeImgView.backgroundColor = [UIColor redColor];
+    twoQrCodeImgView.backgroundColor = [UIColor whiteColor];
     twoQrCodeImgView.userInteractionEnabled = YES;
     twoQrCodeImgView.tag = 2;
     [self addTapShowBigImg:twoQrCodeImgView];
@@ -233,6 +234,52 @@
  */
 - (void)createCollectionQrcodeBodyView{
     
+    bodyView = [[UIView alloc] init];
+    bodyView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:bodyView];
+    
+    twoQrCodeDesLab = [[UILabel alloc] init];
+    twoQrCodeDesLab.text = @"杉德宝扫一扫,向我付钱";
+    twoQrCodeDesLab.textAlignment = NSTextAlignmentCenter;
+    twoQrCodeDesLab.font = [UIFont fontWithName:@"PingFangSC-Regular" size:AdapterFfloat(11)];
+    twoQrCodeDesLab.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:0.4f];
+    [bodyView addSubview:twoQrCodeDesLab];
+    
+    twoQrCodeImgView = [[UIImageView alloc] init];
+    twoQrCodeImgView.backgroundColor = [UIColor redColor];
+    [bodyView addSubview:twoQrCodeImgView];
+    
+    CGFloat leftRightSpace = AdapterWfloat(55);
+    CGFloat upSpace = AdapterHfloat(29);
+    twoQrCodeImgViewWH = selfViewW - 2*leftRightSpace;
+    
+    CGSize twoQrCodeDesLabSize = [twoQrCodeDesLab sizeThatFits:CGSizeZero];
+    CGFloat twoQrCodeImgViewOY = upSpace + twoQrCodeDesLabSize.height + upSpace;
+    CGFloat bodyViewH       = twoQrCodeImgViewOY + twoQrCodeImgViewWH;
+    selfViewH = headView.frame.size.height + bodyViewH;
+    
+    twoQrCodeDesLab.frame = CGRectMake(0, upSpace, selfViewW, twoQrCodeDesLabSize.height);
+    twoQrCodeImgView.frame = CGRectMake(leftRightSpace, twoQrCodeImgViewOY, twoQrCodeImgViewWH, twoQrCodeImgViewWH);
+    
+    
+    bodyView.frame = CGRectMake(0, headView.frame.size.height, selfViewW, bodyViewH);
+    self.frame = CGRectMake(0, 0, headView.frame.size.width, selfViewH);
+    
+    
+    //追加左右小圆点
+    roundViewLeft = [[UIView alloc] init];
+    roundViewLeft.frame = CGRectMake(-5, bodyViewH/2, 10, 10);
+    roundViewLeft.layer.cornerRadius = 5;
+    roundViewLeft.backgroundColor = [UIColor lightGrayColor];
+    roundViewLeft.layer.masksToBounds = YES;
+    [bodyView addSubview:roundViewLeft];
+    
+    roundViewRight = [[UIView alloc] init];
+    roundViewRight.frame = CGRectMake(selfViewW-5, bodyViewH/2, 10, 10);
+    roundViewRight.backgroundColor = [UIColor lightGrayColor];
+    roundViewRight.layer.cornerRadius = 5;
+    roundViewLeft.layer.masksToBounds = YES;
+    [bodyView addSubview:roundViewRight];
     
 }
 

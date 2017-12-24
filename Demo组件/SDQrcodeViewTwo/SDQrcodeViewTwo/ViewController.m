@@ -29,7 +29,6 @@
 }
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    sdQrcodeView.payToolNameStr = @"交通银行嘉定分行";
     
 }
 - (void)ONE{

@@ -8,24 +8,30 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,SDQrcodeViewStyle)
+{
+    //付款码
+    PayQrcodeView = 1,
+    //收款码
+    CollectionQrcordView,
+    
+};
+
 @interface SDQrcodeView : UIView
 
 #pragma mark - 公共属性部分
 
-/**
- 标题
- */
-@property (nonatomic, strong) NSString *titleStr;
+@property (nonatomic, assign) SDQrcodeViewStyle style;
 
 /**
- 二维码图片描述
+ 条形码信息
  */
-@property (nonatomic, strong) NSString *qrCodeDesStr;
+@property (nonatomic, strong) NSString  *oneQrCodeStr;
 
 /**
  二维码信息
  */
-@property (nonatomic, strong) NSString  *qrCodeStr;
+@property (nonatomic, strong) NSString  *twoQrCodeStr;
 
 /**
  左右小圆点颜色 = 背景色
@@ -46,20 +52,20 @@
 @property (nonatomic, strong) NSString *payToolNameStr;
 
 
-/**
- 公共 - 创建底部空白视图
- */
-- (void)createBottomEmptyView;
-
-/**
- 付款码 - 创建底部支付工具视图
- */
-- (void)createPayToolShowView;
-
-/**
- 收款码 - 创建设置金额视图
- */
-- (void)createSetMoneyBtnView;
+///**
+// 公共 - 创建底部空白视图
+// */
+//- (void)createBottomEmptyView;
+//
+///**
+// 付款码 - 创建底部支付工具视图
+// */
+//- (void)createPayToolShowView;
+//
+///**
+// 收款码 - 创建设置金额视图
+// */
+//- (void)createSetMoneyBtnView;
 
 
 @end
