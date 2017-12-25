@@ -84,12 +84,20 @@
 - (void)showError{
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [Tool showDialog:_errorInfo defulBlock:^{
-            [Tool exitApplication:self];
-        }];
+        // 网络权限受限
+        if (self.errorType == 0) {
+            [Tool showDialog:@"网络权限受限" message:@"允许杉德宝使用WiFi或蜂窝无线网络" defulBlock:^{
+                [Tool openUrl:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                [Tool exitApplication:self];
+            }];
+        }
+        // 请求异常
+        if (self.errorType == 1) {
+            [Tool showDialog:_errorInfo defulBlock:^{
+                [Tool exitApplication:self];
+            }];
+        }
     });
-   
-
 }
 
 

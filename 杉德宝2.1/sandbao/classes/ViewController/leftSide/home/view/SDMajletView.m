@@ -66,7 +66,7 @@
     CGFloat spaceCount = _columnNumber + 1 ; //(间隙count永远比列数多1)
     CGFloat cellWith = ([UIScreen mainScreen].bounds.size.width- spaceCount*_cellSpace)/_columnNumber;
     //cell size
-    UIImage *iconImag = [UIImage imageNamed:@"index_service_01"];
+    UIImage *iconImag = [UIImage imageNamed:@"index_chongzhi"];
     cellHeight = iconImag.size.height*2;
     //布局item大小
     flowLayout.itemSize = CGSizeMake(cellWith, cellHeight);

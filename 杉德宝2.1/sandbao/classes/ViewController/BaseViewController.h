@@ -88,6 +88,7 @@
  */
 #define UPDOWNSPACE_(float) ((float/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_197  ((197.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
+#define UPDOWNSPACE_174  ((174.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_160  ((160.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_133  ((133.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
 #define UPDOWNSPACE_122  ((122.f/SCREEN_HEIGHT_667) * SCREEN_HEIGHT)
@@ -136,6 +137,7 @@
 #define FONT_16_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(16)]
 #define FONT_16_PingFangSC_Light  [UIFont fontWithName:@"PingFangSC-Light" size:fontSizeFit(16)]
 #define FONT_15_Regular [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(15)]
+#define FONT_18_Medium  [UIFont fontWithName:@"PingFang-SC-Medium" size:fontSizeFit(18)]
 #define FONT_15_Medium  [UIFont fontWithName:@"PingFang-SC-Medium" size:fontSizeFit(15)]
 #define FONT_14_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(14)]
 #define FONT_14_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:fontSizeFit(14)]

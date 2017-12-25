@@ -270,7 +270,7 @@
     
     if(![@"" isEqualToString:authCode] && authCode != nil){
         
-        
+    
         //生成二维码
         twoCodeImageView.image = [Tool twoDimensionCodeWithStr:authCode size:twoCodeImageViewWidth];
         

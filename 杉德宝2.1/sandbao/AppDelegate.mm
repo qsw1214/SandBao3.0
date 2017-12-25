@@ -36,7 +36,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    
 #pragma mark - ***上传AppStore前 请务必删除蒲公英SDK***
     //启动基本SDK
     // 7e2e46b54026ae02b7b963ae1e3d54b3 (上传生产版本key) com.sand.sandbao2
@@ -50,7 +50,7 @@
     
     //-2. 启动定位 - 实例化
     [LocationUtil shareLocationManager];
-
+    
     //-1. 友盟相关设置
     [self UMSetAbout];
     
@@ -66,12 +66,21 @@
     
     // 3.loading
     [self loading:launchOptions];
-
+    
     return YES;
 }
 
 
 - (void)loading:(NSDictionary *)launchOptions{
+    
+    //网络状态预判断
+    SDNetwork *netWork = [[SDNetwork alloc] init];
+    NSInteger netWorkType = [netWork integerWithNetworkType];
+    if (netWorkType == 0 || netWorkType == 5) {
+        //进入异常引导页 - 引导用户去系统设置
+        [self loadingError:nil type:0];
+        return;
+    }
     
     NSInteger loadingResult = [Loading startLoading];
     //判断久彰App调用启动方式
@@ -80,7 +89,6 @@
         //第三方App唤起杉德宝App - 设置全局变量 urlSchemes
         [CommParameter sharedInstance].urlSchemes = [NSString stringWithFormat:@"%@",url];
         APP_DIDFINISHLUNCH_WITH_URLSCHEMES = YES; //此前APP未曾启动过
-        
     }else{
         //用户自启动杉德宝App - 设置全局变量urlScheme为nil
         [CommParameter sharedInstance].urlSchemes = nil;
@@ -89,7 +97,7 @@
     NSString *loginTypeStr;
     //load失败
     if (loadingResult == 0) {
-        [self loadingError:@"网络异常,请退出重试"];
+        [self loadingError:@"网络异常,请退出重试" type:1];
         
     }
     //load成功
@@ -176,9 +184,10 @@
 
 
 #pragma mark - Loading失败 - 进入失败页
-- (void)loadingError:(NSString*)errorStr {
+- (void)loadingError:(NSString*)errorStr type:(NSInteger)errorType{
     ErrorLunchViewController *mErrorLunchViewController = [[ErrorLunchViewController alloc] init];
     mErrorLunchViewController.errorInfo = errorStr;
+    mErrorLunchViewController.errorType = errorType;
     self.window.rootViewController = mErrorLunchViewController;
     [self.window makeKeyAndVisible];
 }

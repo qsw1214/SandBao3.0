@@ -1960,8 +1960,8 @@
 				288D7FB21FA2C8C4001CCAC1 /* walletAccount */,
 				288D7FB31FA2C8CB001CCAC1 /* sandPoints */,
 				288D7FB41FA2C8D3001CCAC1 /* financileCenter */,
-				288D7FB51FA2C8DB001CCAC1 /* bankCard */,
 				288D7FB61FA2C8E4001CCAC1 /* sandCard */,
+				288D7FB51FA2C8DB001CCAC1 /* bankCard */,
 				288D7FB71FA2C8EE001CCAC1 /* set */,
 			);
 			path = leftSide;

@@ -12,6 +12,7 @@
 #pragma mark - *********用户退出后不进行置空*********
 #pragma mark - HomeNav
 @property (nonatomic, strong) UINavigationController *homeNav;  //全局的首页实例
+@property (nonatomic, strong) UINavigationController *walletAccNav; //全局的钱包账户实例
 
 
 #pragma mark - *********用户退出后置空*********

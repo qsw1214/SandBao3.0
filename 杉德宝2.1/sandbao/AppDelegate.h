@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @protocol SDWeiBoDelegate <NSObject>
 
 //登录的代理

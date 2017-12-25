@@ -11,12 +11,12 @@
 
 #import "SDSelectBarView.h"
 #import "SDQrcodeView.h"
-#import "ScannerViewController.h"
+
 @interface PayQrcodeViewController ()
 {
     
 }
-
+@property (nonatomic, strong) NSMutableArray *authCodesArray; //授权码数组
 @property (nonatomic, strong) UIView *collectionQrcodeBaseView;//收款码基础视图
 @property (nonatomic, strong) UIView *payQrcodeBaseView;//付款码基础视图
 
@@ -58,17 +58,11 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.rightImgStr = @"searchpage_saoyisao";
     self.navCoverView.midTitleStr = @"收付款";
     
     __weak PayQrcodeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
-    };
-    self.navCoverView.rightBlock = ^{
-        //@"扫一扫"
-        ScannerViewController *mScannerViewController = [[ScannerViewController alloc] init];
-        [weakSelf.navigationController pushViewController:mScannerViewController animated:YES];
     };
     
 }
@@ -96,10 +90,9 @@
                         [weakself createCollectionQrView];
                     }];
                 }
-                
             }
                 break;
-                
+
             case 1:
             {
                 if (weakself.collectionQrcodeBaseView) {
@@ -107,8 +100,14 @@
                         weakself.collectionQrcodeBaseView.alpha = 0;
                     } completion:^(BOOL finished) {
                         [weakself.collectionQrcodeBaseView removeFromSuperview];
-                        //创建 付款码 视图
-                        [weakself creaetPayQrView];
+                        
+                        if (weakself.authCodesArray.count == 0) {
+                            //点击获取授权码
+                            [weakself getAuthCodes];
+                        }else{
+                            //创建 付款码 视图
+                            [weakself creaetPayQrView];
+                        }
                     }];
                 }
             }
@@ -116,20 +115,20 @@
             default:
                 break;
         }
-        
+
     }];
-    
+
     [self.baseScrollView addSubview:self.selectBarView];
-    
+
     //默认展示 收款码
     [self createCollectionQrView];
-    
+
     [self.selectBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_11);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(self.selectBarView.size);
     }];
-    
+
 }
 
 - (void)createCollectionQrView{
@@ -145,7 +144,7 @@
     [self.collectionQrcodeBaseView addSubview:self.collectionQrcodeView];
     
     CGFloat collectionQrcodeBaseViewH = self.collectionQrcodeView.height;
-    
+
     [self.collectionQrcodeBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.selectBarView.mas_bottom).offset(UPDOWNSPACE_10);
         make.centerX.equalTo(self.baseScrollView);
@@ -158,9 +157,15 @@
         make.size.mas_equalTo(self.collectionQrcodeView.size);
     }];
     
+    
+    
+    
 }
 
 - (void)creaetPayQrView{
+    
+    NSDictionary *authCodeDic = [self.authCodesArray firstObject];
+    NSString *authCode = [authCodeDic objectForKey:@"code"];
     
     self.payQrcodeBaseView = [[UIView alloc] init];
     self.payQrcodeBaseView.backgroundColor = self.baseScrollView.backgroundColor;
@@ -169,8 +174,8 @@
     self.payQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
     self.payQrcodeView.style = PayQrcodeView;
     self.payQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
-    self.payQrcodeView.oneQrCodeStr = @"567539675747996";
-    self.payQrcodeView.twoQrCodeStr = @"这里是二维码信息字符串";
+    self.payQrcodeView.oneQrCodeStr = authCode;
+    self.payQrcodeView.twoQrCodeStr = authCode;
     self.payQrcodeView.payToolNameStr = @"杉德卡";
     [self.payQrcodeBaseView addSubview:self.payQrcodeView];
     
@@ -200,7 +205,44 @@
     }];
 }
 #pragma mark - 业务逻辑
-
+#pragma mark 获取授权码组
+- (void)getAuthCodes
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "04000301");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/getAuthCodes/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSString *authCodes = [NSString stringWithUTF8String:paynuc.get("authCodes").c_str()];
+                NSArray *tempArray = [[PayNucHelper sharedInstance] jsonStringToArray:authCodes];
+                //授权码获取
+                self.authCodesArray = [NSMutableArray arrayWithCapacity:0];
+                for (int i = 0; i < tempArray.count; i++) {
+                    [self.authCodesArray addObject:tempArray[i]];
+                }
+                //创建 付款码 视图
+                [self creaetPayQrView];
+            }];
+        }];
+        
+        if (error) return ;
+    }];
+    
+}
 
 #pragma mark - 本类公共方法调用
 

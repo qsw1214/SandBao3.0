@@ -99,7 +99,7 @@
         make.centerX.equalTo(headImageView.mas_centerX).offset(0);
         make.size.mas_equalTo(versionLabsize1);
     }]; 
-
+    
     
     //添加水波纹
     [self addWaveView];

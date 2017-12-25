@@ -205,6 +205,7 @@
     
     //全局变量存储所需要的 带导航视图控制器
     [CommParameter sharedInstance].homeNav = self.homeNav;
+    [CommParameter sharedInstance].walletAccNav = self.walletAccNav;
 
     
     

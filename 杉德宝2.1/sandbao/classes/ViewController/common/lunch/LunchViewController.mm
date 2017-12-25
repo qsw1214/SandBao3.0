@@ -29,6 +29,9 @@
     // Do any additional setup after loading the view.
     
     [self setBaseInfo];
+    
+    
+    
 }
 
 #pragma mark - 重写父类-baseScrollView设置

@@ -80,7 +80,7 @@
             UIButton *nextBtn = [[UIButton alloc] init];
             nextBtn.backgroundColor = [UIColor clearColor];
             nextBtn.tag = BTN_TAG_NEXT;
-            nextBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
+            nextBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 100);
             [nextBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             [imgCell addSubview:nextBtn];
         }

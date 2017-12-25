@@ -57,6 +57,7 @@
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     self.baseScrollView.frame = CGRectMake(0, UPDOWNSPACE_0, SCREEN_WIDTH, SCREEN_HEIGHT - UPDOWNSPACE_0);
+    self.baseScrollView.scrollEnabled = NO;
 }
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
@@ -79,7 +80,6 @@
 
 #pragma mark  - UI绘制
 - (void)creaetUI{
-    
     
     isCanScanner = NO;
     bgImgV = [Tool createImagView:[UIImage imageNamed:@"general_page_wrong"]];

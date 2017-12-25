@@ -459,7 +459,7 @@
 //条形码赋值
 - (void)setOneQrCodeStr:(NSString *)oneQrCodeStr{
     _oneQrCodeStr = oneQrCodeStr;
-    oneQrcodeImgView.image = [self barCodeImageWithStr:_oneQrCodeStr];
+    oneQrcodeImgView.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake(selfViewW, AdapterHfloat(55))];
 }
 //二维码赋值
 - (void)setTwoQrCodeStr:(NSString *)twoQrCodeStr{
@@ -527,7 +527,7 @@
     [lineView.layer addSublayer:shapeLayer];
 }
 #pragma mark - 生成条形码
-- (UIImage *)barCodeImageWithStr:(NSString *)str
+- (UIImage *)barCodeImageWithStr:(NSString *)str size:(CGSize)size
 {
     // 1.将字符串转换成NSData
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
@@ -544,8 +544,14 @@
     // 5.获得滤镜输出的图像
     CIImage *urlImage = [filter outputImage];
     
+    // 6.消除模糊
+    CGFloat scaleX = size.width / urlImage.extent.size.width;
+    CGFloat scaleY = size.height / urlImage.extent.size.height;
+    
+    CIImage *transformImg = [urlImage imageByApplyingTransform:CGAffineTransformScale(CGAffineTransformIdentity, scaleX, scaleY)];
+    
     // 6.将CIImage 转换为UIImage
-    UIImage *image = [UIImage imageWithCIImage:urlImage];
+    UIImage *image = [UIImage imageWithCIImage:transformImg];
     
     return image;
 }
@@ -605,24 +611,54 @@
     [whiteMaskView addGestureRecognizer:hiddenTap];
     whiteMaskView.alpha = 0;
     [[UIApplication sharedApplication].keyWindow addSubview:whiteMaskView];
+    
     //条形码展示动画
     if (tap.view.tag == 1) {
         
-        //创建动画用- 条形码
+        //获取条码图片
+        UIImage *oneImg = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake([UIScreen mainScreen].bounds.size.width, AdapterHfloat(100))];
+        
+        //创建动画用- 条形码背景框
+        UIView *oneBackGroundView = [[UIView alloc] init];
+        oneBackGroundView.backgroundColor = [UIColor whiteColor];
+        [whiteMaskView addSubview:oneBackGroundView];
+        
+        //条码框提示
+        UILabel *oneTipLab = [[UILabel alloc] init];
+        oneTipLab.text = @"▶付款码数字仅用于支付时向收银员出示,请勿泄露以防诈骗";
+        oneTipLab.textColor = [UIColor colorWithRed:255/255.0 green:93/255.0 blue:49/255.0 alpha:1/1.0];
+        oneTipLab.textAlignment = NSTextAlignmentCenter;
+        oneTipLab.font = [UIFont systemFontOfSize:11];
+        oneTipLab.frame = CGRectMake(0, 0, oneImg.size.width, AdapterHfloat(10));
+        [oneBackGroundView addSubview:oneTipLab];
+        
+        //条形码图片
         UIImageView *oneimgv= [[UIImageView alloc] init];
         oneimgv.backgroundColor = [UIColor whiteColor];
-        UIImage *oneImg = [self barCodeImageWithStr:_oneQrCodeStr];
+        
         oneimgv.image = oneImg;
-        oneimgv.frame = CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - oneImg.size.height)/2, oneImg.size.width, oneImg.size.height);
-        [whiteMaskView addSubview:oneimgv];
+        oneimgv.frame = CGRectMake(0, oneTipLab.frame.size.height, oneImg.size.width, oneImg.size.height);
+        [oneBackGroundView addSubview:oneimgv];
+        
+        //条码数字
+        UILabel *oneLab = [[UILabel alloc] init];
+        oneLab.text = _oneQrCodeStr;
+        oneLab.textColor = [UIColor blackColor];
+        oneLab.textAlignment = NSTextAlignmentCenter;
+        oneLab.font = [UIFont systemFontOfSize:14];
+        oneLab.frame = CGRectMake(0,oneTipLab.frame.size.height + oneImg.size.height, oneImg.size.width, AdapterHfloat(20));
+        [oneBackGroundView addSubview:oneLab];
+        
+        oneBackGroundView.frame = CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - oneImg.size.height)/2, oneImg.size.width, oneTipLab.frame.size.height+ oneImg.size.height + oneLab.frame.size.height);
+        
         
         [UIView animateWithDuration:0.4f animations:^{
             //设置亮度最大
             [UIScreen mainScreen].brightness = 1.f;
             whiteMaskView.alpha = 1;
-            oneimgv.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
+            oneBackGroundView.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
             CGAffineTransform transformRotate = CGAffineTransformMakeRotation(M_PI_2);
-            oneimgv.transform = CGAffineTransformScale(transformRotate, 2.5, 2.5);
+            oneBackGroundView.transform = CGAffineTransformScale(transformRotate, 1.5, 1.5);
         }];
     }
     //二维码
