@@ -122,7 +122,7 @@
 
     //默认展示 收款码
     [self createCollectionQrView];
-
+    
     [self.selectBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_11);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
