@@ -458,6 +458,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
                 NSDictionary *workDictI = [[PayNucHelper sharedInstance] jsonStringToDictionary:workStr];
                 self.wordDic = [[NSMutableDictionary alloc] initWithDictionary:workDictI];
                 
+                //支付控件弹出
                 [self.payView showPayTool];
                 
             }];

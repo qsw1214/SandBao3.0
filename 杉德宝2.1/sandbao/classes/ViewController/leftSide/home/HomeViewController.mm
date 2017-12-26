@@ -21,9 +21,9 @@
 @interface HomeViewController ()<MqttClientManagerDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     //headView
-    GradualView *headView;
-    UIView      *bodyViewOne;
-    UIView      *bodyViewTwo;
+    UIImageView *headBGimgView; //背景图视图
+    UIView      *headView;
+
     
     UIImageView *headIconImgView; //头像imgView
     UILabel     *headPhoneNoLab;  //用户手机号
@@ -40,6 +40,11 @@
     
     UILabel *moneyBtnBottomLab;
     
+    
+    //bodyViewOne
+    UIView      *bodyViewOne;
+    //bodyViewTwo
+    UIView      *bodyViewTwo;
     
 }
 @property (nonatomic, strong) NSMutableArray *sandServerArr; //杉德服务子件数组
@@ -82,7 +87,8 @@
     
     
     [self create_HeadView];
-    [self create_bodyView];
+    [self create_bodyViewOne];
+    [self create_bodyViewTwo];
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -149,18 +155,21 @@
 //创建头部
 - (void)create_HeadView{
 
-    
-    //headView
-    headView = [[GradualView alloc] init];
-    CGFloat headViewH = UPDOWNSPACE_174;
-    headView.rect = CGRectMake(LEFTRIGHTSPACE_00, UPDOWNSPACE_0, SCREEN_WIDTH, headViewH);
-    [self.baseScrollView addSubview:headView];
-    
-    [headView mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIImage *headBGimg = [UIImage imageNamed:@"index_bg"];
+    headBGimgView = [Tool createImagView:headBGimg];
+    headBGimgView.userInteractionEnabled = YES;
+    [self.baseScrollView addSubview:headBGimgView];
+    [headBGimgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top);
         make.left.equalTo(self.baseScrollView.mas_left);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, headViewH));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, headBGimg.size.height));
     }];
+    
+    
+    //headView
+    headView = [[UIView alloc] init];
+    headView.backgroundColor = [UIColor clearColor];
+    [headBGimgView addSubview:headView];
     
     //headWhiteView
     UIView *headWhiteView = [[UIView alloc] init];
@@ -171,12 +180,6 @@
     headWhiteView.layer.shadowOffset = CGSizeMake(0, 1.5f);
     headWhiteView.layer.shadowRadius = 3.5f;
     [headView addSubview:headWhiteView];
-    
-    [headWhiteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_15);
-        make.left.equalTo(headView.mas_left).offset(LEFTRIGHTSPACE_15);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_15, headViewH - 2*UPDOWNSPACE_15));
-    }];
     
     
     UIImage *headimg = [UIImage imageNamed:@"home_Head"];
@@ -328,22 +331,35 @@
         make.size.mas_equalTo(cardBagBottomlab.size);
     }];
     
+    
+    //根据图片+按钮+间隙 计算整个背景高度
+    CGFloat headViewH = headimg.size.height + payBtn.height + 2*UPDOWNSPACE_15 + UPDOWNSPACE_05;
+    [headView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headBGimgView.mas_top).offset(UPDOWNSPACE_05);
+        make.left.equalTo(headBGimgView.mas_left);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, headViewH));
+    }];
+    [headWhiteView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_15);
+        make.left.equalTo(headView.mas_left).offset(LEFTRIGHTSPACE_15);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_15, headViewH - 2*UPDOWNSPACE_15));
+    }];
+    
+    
 }
 
 
-- (void)create_bodyView{
-    
-    //杉德服务
-    UILabel *sandServerLab = [Tool createLable:@"杉德服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
-    [self.baseScrollView addSubview:sandServerLab];
-    
+- (void)create_bodyViewOne{
     
     //bodyViewOne
     bodyViewOne = [[UIView alloc] init];
     bodyViewOne.backgroundColor = COLOR_FFFFFF;
     [self.baseScrollView addSubview:bodyViewOne];
     
-   
+    //杉德服务
+    UILabel *sandServerLab = [Tool createLable:@"杉德服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    [bodyViewOne addSubview:sandServerLab];
+    
     //majletView
     SDMajletView *sandServerView = [SDMajletView createMajletViewOY:0];
     sandServerView.cellSpace = LEFTRIGHTSPACE_25;
@@ -354,34 +370,39 @@
     };
     [bodyViewOne addSubview:sandServerView];
     
+    CGFloat labSpaceToView = UPDOWNSPACE_11;
+    bodyViewOne.height = labSpaceToView + sandServerLab.height + labSpaceToView + sandServerView.height;
+    
+    [bodyViewOne mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headBGimgView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.centerX.equalTo(headBGimgView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, bodyViewOne.height));
+    }];
+    
     [sandServerLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headView.mas_bottom).offset(UPDOWNSPACE_10);
-        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_15);
+        make.top.equalTo(bodyViewOne.mas_top).offset(labSpaceToView);
+        make.left.equalTo(bodyViewOne.mas_left).offset(LEFTRIGHTSPACE_18);
         make.size.mas_equalTo(sandServerLab.size);
     }];
     
-    [bodyViewOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sandServerLab.mas_bottom).offset(UPDOWNSPACE_10);
-        make.centerX.equalTo(headView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, sandServerView.height));
-    }];
-    
     [sandServerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bodyViewOne.mas_top).offset(UPDOWNSPACE_0);
-        make.centerX.equalTo(headView.mas_centerX);
+        make.top.equalTo(sandServerLab.mas_bottom).offset(labSpaceToView);
+        make.centerX.equalTo(bodyViewOne.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, sandServerView.height));
     }];
     
-    
-    
-    //限时服务
-    UILabel *limitServerLab = [Tool createLable:@"限时服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
-    [self.baseScrollView addSubview:limitServerLab];
-    
+}
+
+- (void)create_bodyViewTwo{
+
     //bodyViewTwo
     bodyViewTwo = [[UIView alloc] init];
     bodyViewTwo.backgroundColor = COLOR_FFFFFF;
     [self.baseScrollView addSubview:bodyViewTwo];
+    
+    //限时服务
+    UILabel *limitServerLab = [Tool createLable:@"限时服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    [bodyViewTwo addSubview:limitServerLab];
     
     //majletView
     SDMajletView *limitServerView = [SDMajletView createMajletViewOY:0];
@@ -393,24 +414,26 @@
     };
     [bodyViewTwo addSubview:limitServerView];
     
+    CGFloat labSpaceToView = UPDOWNSPACE_11;
+    bodyViewTwo.height = labSpaceToView + limitServerLab.height + labSpaceToView + limitServerView.height;
+    
+    [bodyViewTwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(bodyViewOne.mas_bottom).offset(UPDOWNSPACE_10);
+        make.centerX.equalTo(headBGimgView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, bodyViewTwo.height));
+    }];
+    
     [limitServerLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sandServerView.mas_bottom).offset(UPDOWNSPACE_0);
-        make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_15);
+        make.top.equalTo(bodyViewTwo.mas_top).offset(labSpaceToView);
+        make.left.equalTo(bodyViewTwo.mas_left).offset(LEFTRIGHTSPACE_18);
         make.size.mas_equalTo(limitServerLab.size);
     }];
     
-    [bodyViewTwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(limitServerLab.mas_bottom).offset(UPDOWNSPACE_10);
-        make.centerX.equalTo(headView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, limitServerView.height));
-    }];
-    
     [limitServerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bodyViewTwo.mas_top).offset(UPDOWNSPACE_0);
-        make.centerX.equalTo(headView.mas_centerX);
+        make.top.equalTo(limitServerLab.mas_bottom).offset(labSpaceToView);
+        make.centerX.equalTo(headBGimgView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, limitServerView.height));
     }];
-    
     
     
 }

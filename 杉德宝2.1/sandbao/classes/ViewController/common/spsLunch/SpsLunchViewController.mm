@@ -26,13 +26,10 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 {
     
     UIView *headView;
-    
+    NSArray *payToolsArray; //从tn获取的支付工具
     NSDictionary *successWorkDic; //支付成功后返回的work
     
     CGFloat limitFloat;
-    
-    NSMutableArray *payToolsArrayUsableM;  //可用支付工具
-    NSMutableArray *payToolsArrayUnusableM; //不可用支付工具
     
     NSDictionary *orderDic; //订单信息
     
@@ -168,18 +165,25 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     }
     
     self.payView = [SDPayView getPayView];
+    self.payView.addCardType = SDPayView_ADDSANDCARD;
     self.payView.delegate = self;
     [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 }
 
 #pragma mark - SDPayViewDelegate
-- (void)payViewSelectPayToolDic:(NSMutableDictionary *)selectPayToolDict{
-    
-    self.selectedPayDict = selectPayToolDict;
-    
+- (void)payViewReturnDefulePayToolDic:(NSMutableDictionary *)defulePayToolDic{
+    //设置默认支付工具
+    self.selectedPayDict = defulePayToolDic;
     //刷新页面信息
     [self resetTnOrderInfo];
     
+}
+
+- (void)payViewSelectPayToolDic:(NSMutableDictionary *)selectPayToolDict{
+    //设置当前所选支付工具
+    self.selectedPayDict = selectPayToolDict;
+    //刷新页面信息
+    [self resetTnOrderInfo];
 }
 //点击关闭sps的回调
 - (void)payViewClickCloseBtn{
@@ -235,6 +239,12 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         
     }
 }
+- (void)payViewPayToolsError:(NSString *)errorInfo{
+    [Tool showDialog:errorInfo message:@"返回商户" defulBlock:^{
+        [self payGoBackByisSuccess:SPS_PAY_ERROR];
+    }];
+}
+
 #pragma mark - 业务逻辑
 #pragma mark 获取支付工具
 - (void)TNOrder:(NSString*)TN
@@ -302,11 +312,18 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 [self headViewAnimation];
                 
                 NSString *payTools = [NSString stringWithUTF8String:paynuc.get("payTools").c_str()];
-                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:payTools];
+                payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:payTools];
                 NSString *order = [NSString stringWithUTF8String:paynuc.get("order").c_str()];
                 orderDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:order];
-                //校验支付工具
-                [self checkInPayToolsOutPayTools:payToolsArray];
+                //0.排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                
+                //支付控件设置列表
+                [self.payView setPayTools:payToolsArray];
+                //支付控件设置信息
+                [self.payView setPayInfo:@[@"付款给商户",[NSString stringWithFormat:@"¥%.2f",[[orderDic objectForKey:@"amount"] floatValue]/100]]];
+                //支付控件弹出
+                [self.payView showPayTool];
             }];
         }];
         if (error) return ;
@@ -316,68 +333,6 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 //刷新订单页面信息
 - (void)resetTnOrderInfo{
     //SPS跳转支付,暂不需要刷新相关显示UI
-}
-
-//校验支付工具
-- (void)checkInPayToolsOutPayTools:(NSArray*)rechargePayToolsArray{
-    
-    //检测支付工具
-    if (rechargePayToolsArray.count>0) {
-        //0.排序
-        rechargePayToolsArray = [Tool orderForPayTools:rechargePayToolsArray];
-        //1.过滤用支付工具
-        payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
-        payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
-        for (int i = 0; i<rechargePayToolsArray.count; i++) {
-            if ([[rechargePayToolsArray[i] objectForKey:@"available"] boolValue]== NO || [[rechargePayToolsArray[i] objectForKey:@"type"] isEqualToString:@"1014"]) {
-                //不可用支付工具集
-                [payToolsArrayUnusableM addObject:rechargePayToolsArray[i]];
-            }else{
-                //可用支付工具集
-                [payToolsArrayUsableM addObject:rechargePayToolsArray[i]];
-            }
-        }
-        if (payToolsArrayUsableM.count >0) {
-            //2.设置VC默认显示的支付
-            self.selectedPayDict = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
-            //刷新订单页面信息
-            [self resetTnOrderInfo];
-            //3.设置支付方式列表
-            [self initPayMode:rechargePayToolsArray];
-        }else{
-            [Tool showDialog:@"无可用支付工具" defulBlock:^{
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
-        }
-    }else{
-        [Tool showDialog:@"无可用工具下发" defulBlock:^{
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-    }
-}
-
-/**
- *@brief 初始化支付方式
- */
-- (void)initPayMode:(NSArray *)paramArray
-{
-    NSMutableDictionary *bankDic = [[NSMutableDictionary alloc] init];
-    [bankDic setValue:@"PAYLTOOL_LIST_ACCPASS" forKey:@"type"];
-    [bankDic setValue:@"添加杉德卡支付" forKey:@"title"];
-    [bankDic setValue:@"list_sand_AddCard" forKey:@"img"];
-    [bankDic setValue:@"" forKey:@"limit"];
-    [bankDic setValue:@"2" forKey:@"state"];
-    [bankDic setValue:@"true" forKey:@"available"];
-    [payToolsArrayUsableM addObject:bankDic];
-    
-    NSInteger unavailableArrayCount = [payToolsArrayUnusableM count];
-    for (int i = 0; i < unavailableArrayCount; i++) {
-        [payToolsArrayUsableM addObject:payToolsArrayUnusableM[i]];
-    }
-    
-    //初始化支付工具完成 - 弹出sps支付工具
-    [self.payView setPayInfo:payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%.2f",[[orderDic objectForKey:@"amount"] floatValue]/100] orderTypeStr:@"付款给商户"];
-    [self.payView showPayTool];
 }
 
 #pragma mark 订单支付

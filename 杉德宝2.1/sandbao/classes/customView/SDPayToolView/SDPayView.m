@@ -11,6 +11,13 @@
 
 @interface SDPayView()<SDPayToolOrderViewDelegate,SDPayToolListViewDelegate,SDPayToolPwdViewDelegate>
 {
+    //可用支付工具
+    NSMutableArray *payToolsArrayUsableM;
+    //不可用支付工具
+    NSMutableArray *payToolsArrayUnusableM;
+    //处理后的整体支付工具组 (包含 可用 + 添加卡dic + 不可用)
+    NSMutableArray *newPayToolsArr;
+    
     //记录支付工具列表所选择的下标 - payToollistView
     NSInteger payToolListIndex;
     //记录要输入支付密码的支付工具 - PayToolPwdView
@@ -32,7 +39,7 @@
 
 
 
-#pragma - mark 创建且添加各子视图
+#pragma mark - 创建且添加各子视图
 /**
  添加背景遮罩view
  */
@@ -131,21 +138,96 @@
     _style = style;
 }
 
-#pragma - mark 统一配置支付信息
-- (void)setPayInfo:(NSArray*)payArray moneyStr:(NSString*)moneyStr orderTypeStr:(NSString*)orderTypeStr{
-    
-    if (_style == SDPayViewNomal) {
-        _payListArray = payArray;
-        _moneyStr = moneyStr;
-        _orderTypeStr = orderTypeStr;
-        payToolListIndex = 0;
+#pragma mark - 统一配置支付信息
+#pragma mark 配置支付工具列表
+- (void)setPayTools:(NSArray *)payTools{
+    //预处理 - 支付工具 (分三块 1-可用 2-添加卡类型 3-不可用支付工具)
+    //检测支付工具
+    if (payTools.count>0) {
+        //1.过滤用支付工具
+        payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
+        payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
+        for (int i = 0; i<payTools.count; i++) {
+            if ([[payTools[i] objectForKey:@"available"] boolValue]== NO || [[payTools[i] objectForKey:@"type"] isEqualToString:@"1014"]) {
+                //不可用支付工具集
+                [payToolsArrayUnusableM addObject:payTools[i]];
+            }else{
+                //可用支付工具集
+                [payToolsArrayUsableM addObject:payTools[i]];
+            }
+        }
+        if (payToolsArrayUsableM.count >0) {
+            //2.代理返回VC默认显示的支付
+            if ([_delegate respondsToSelector:@selector(payViewReturnDefulePayToolDic:)]) {
+                [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]]];
+            }
+            //3.设置支付方式列表
+            [self initPayMode:payTools];
+        }else{
+            //@"无可用支付工具"
+            if ([_delegate respondsToSelector:@selector(payViewPayToolsError:)]) {
+                [_delegate payViewPayToolsError:@"无可用支付工具"];
+            }
+        }
+    }else{
+        //@"无可用工具下发"
+        if ([_delegate respondsToSelector:@selector(payViewPayToolsError:)]) {
+            [_delegate payViewPayToolsError:@"无可用工具下发"];
+        }
     }
-    if (_style == SDPayViewOnlyPwd) {
-        _payListArray = payArray;
+}
+#pragma mark 配置支付订单信息
+- (void)setPayInfo:(NSArray *)orderInfo{
+    
+    if (newPayToolsArr.count>0) {
+        if (_style == SDPayViewNomal) {
+            _payListArray = newPayToolsArr;
+            _orderTypeStr = [orderInfo firstObject];
+            _moneyStr = [orderInfo lastObject];
+            payToolListIndex = 0;
+        }
+        if (_style == SDPayViewOnlyPwd) {
+            _payListArray = newPayToolsArr;
+        }
     }
 }
 
-#pragma - mark 显示支付工具- **************          (按需加载,仅先加载-支付订单信息:payToolOrderView)
+- (void)initPayMode:(NSArray *)paramArray
+{
+    newPayToolsArr = [NSMutableArray arrayWithCapacity:0];
+    //1.添加可用
+    for (int i = 0; i<payToolsArrayUsableM.count; i++) {
+        [newPayToolsArr addObject:payToolsArrayUsableM[i]];
+    }
+    
+    //2.添加卡dic
+    if (_addCardType == SDPayView_ADDBANKCARD) {
+        NSMutableDictionary *bankDic = [[NSMutableDictionary alloc] init];
+        [bankDic setValue:@"PAYLTOOL_LIST_PAYPASS" forKey:@"type"];
+        [bankDic setValue:@"添加银行卡" forKey:@"title"];
+        [bankDic setValue:@"list_yinlian_AddCard" forKey:@"img"];
+        [bankDic setValue:@"" forKey:@"limit"];
+        [bankDic setValue:@"2" forKey:@"state"];
+        [bankDic setValue:@"true" forKey:@"available"];
+        [newPayToolsArr addObject:bankDic];
+    }
+    if (_addCardType == SDPayView_ADDSANDCARD) {
+        NSMutableDictionary *cardDic = [[NSMutableDictionary alloc] init];
+        [cardDic setValue:@"PAYLTOOL_LIST_ACCPASS" forKey:@"type"];
+        [cardDic setValue:@"添加杉德卡" forKey:@"title"];
+        [cardDic setValue:@"list_sand_AddCard" forKey:@"img"];
+        [cardDic setValue:@"" forKey:@"limit"];
+        [cardDic setValue:@"2" forKey:@"state"];
+        [cardDic setValue:@"true" forKey:@"available"];
+        [newPayToolsArr addObject:cardDic];
+    }
+    //3.添加不可用
+    for (int i = 0; i < payToolsArrayUnusableM.count; i++) {
+        [newPayToolsArr addObject:payToolsArrayUnusableM[i]];
+    }
+}
+
+#pragma mark - 显示支付工具- **************          (按需加载,仅先加载-支付订单信息:payToolOrderView)
 - (void)showPayTool{
     
     if (_style == SDPayViewNomal) {
@@ -180,7 +262,7 @@
     [self payToolPwdViewjumpBackToPayToolOrderView];
 }
 
-#pragma - mark 隐藏支付工具
+#pragma - mark - 隐藏支付工具
 /**
  延迟关闭-(各子视图未归位时调用-有延迟)
  */
@@ -233,7 +315,7 @@
 }
 
 
-#pragma - mark =================各子视图代理集=================
+#pragma mark - =================各子视图代理集=================
 /*
  各个子视图每次加载,自己的代理回调负责对自己的删除
  */
@@ -301,5 +383,9 @@
         [_delegate payViewPwd:pwdStr paySuccessView:successView];
     }
 }
+
+
+
+
 
 @end

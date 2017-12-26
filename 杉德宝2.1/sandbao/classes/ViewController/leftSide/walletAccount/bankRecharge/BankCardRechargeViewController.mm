@@ -29,10 +29,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     UILabel *bankNumLab;
     UITextField *moneyTextfield;
     
-    
-    
-    NSMutableArray *payToolsArrayUsableM;  //可用支付工具
-    NSMutableArray *payToolsArrayUnusableM; //不可用支付工具
+    NSArray *rechargePayToolsArray; //获取下发支付工具组
     
     CGFloat limitFloat;
     
@@ -106,7 +103,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     if (btn.tag == BTN_TAG_RECHARGE) {
         if ([moneyTextfield.text floatValue]>0) {
             if ([moneyTextfield.text floatValue]<=limitFloat) {
-                [self.payView setPayInfo:(NSArray*)payToolsArrayUsableM moneyStr:[NSString stringWithFormat:@"¥%@",moneyTextfield.text] orderTypeStr:@"钱包账户充值"];
+                //支付控件设置信息
+                [self.payView setPayInfo:@[@"钱包账户充值",[NSString stringWithFormat:@"¥%@",moneyTextfield.text]]];
                 [self fee];
             }else{
                 [Tool showDialog:@"金额超限!"];
@@ -330,6 +328,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 }
 - (void)create_PayView{
     self.payView = [SDPayView getPayView];
+    self.payView.addCardType = SDPayView_ADDBANKCARD;
     self.payView.delegate = self;
     [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 }
@@ -427,8 +426,16 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 
 
 #pragma mark - SDPayViewDelegate
+- (void)payViewReturnDefulePayToolDic:(NSMutableDictionary *)defulePayToolDic{
+    //设置默认支付工具
+    self.rechargeOutPayToolDic = defulePayToolDic;
+    //刷新页面信息
+    [self resetBankNameLabelAndIconImageView];
+}
+
 - (void)payViewSelectPayToolDic:(NSMutableDictionary *)selectPayToolDict{
    
+    //设置当前所选支付工具
     self.rechargeOutPayToolDic = selectPayToolDict;
     
     //刷新页面信息
@@ -482,7 +489,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         
     }
 }
-
+- (void)payViewPayToolsError:(NSString *)errorInfo{
+    [Tool showDialog:errorInfo defulBlock:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+}
 
 
 #pragma mark - 业务逻辑
@@ -517,58 +528,17 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
                 [self.HUD hidden];
                 
                 NSString *rechargePayTools = [NSString stringWithUTF8String:paynuc.get("payTools").c_str()];
-                NSArray *rechargePayToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:rechargePayTools];
-                //校验支付工具
-                [self checkInPayToolsOutPayTools:rechargePayToolsArray];
-                
+                rechargePayToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:rechargePayTools];
+                //排序
+                rechargePayToolsArray = [Tool orderForPayTools:rechargePayToolsArray];
+                //支付控件设置列表
+                [self.payView setPayTools:rechargePayToolsArray];
             }];
         }];
         if (error) return ;
     }];
     
 }
-/**
- 校验支付工具
- 
- @param rechargePayToolsArray void
- */
-- (void)checkInPayToolsOutPayTools:(NSArray*)rechargePayToolsArray{
-    
-    //检测支付工具
-    if (rechargePayToolsArray.count>0) {
-        //0.排序
-        rechargePayToolsArray = [Tool orderForPayTools:rechargePayToolsArray];
-        //1.过滤用支付工具
-        payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
-        payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
-        for (int i = 0; i<rechargePayToolsArray.count; i++) {
-            if ([[rechargePayToolsArray[i] objectForKey:@"available"] boolValue]== NO || [[rechargePayToolsArray[i] objectForKey:@"type"] isEqualToString:@"1014"]) {
-                //不可用支付工具集
-                [payToolsArrayUnusableM addObject:rechargePayToolsArray[i]];
-            }else{
-                //可用支付工具集
-                [payToolsArrayUsableM addObject:rechargePayToolsArray[i]];
-            }
-        }
-        if (payToolsArrayUsableM.count >0) {
-            //2.设置VC默认显示的支付
-            self.rechargeOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]];
-            //刷新页面信息
-            [self resetBankNameLabelAndIconImageView];
-            //3.设置支付方式列表
-            [self initPayMode:rechargePayToolsArray];
-        }else{
-            [Tool showDialog:@"无可用支付工具" defulBlock:^{
-                [self.navigationController popViewControllerAnimated:YES];
-            }];
-        }
-    }else{
-        [Tool showDialog:@"无可用工具下发" defulBlock:^{
-            [self.navigationController popViewControllerAnimated:YES];
-        }];
-    }
-}
-
 
 /**
  重置文字和icon图片
@@ -585,28 +555,6 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     bankIconImgView.image = [UIImage imageNamed:imgName];
     
 }
-
-/**
- *@brief 初始化支付方式
- */
-- (void)initPayMode:(NSArray *)paramArray
-{
-    NSMutableDictionary *bankDic = [[NSMutableDictionary alloc] init];
-    [bankDic setValue:@"PAYLTOOL_LIST_PAYPASS" forKey:@"type"];
-    [bankDic setValue:@"添加银行卡充值" forKey:@"title"];
-    [bankDic setValue:@"list_yinlian_AddCard" forKey:@"img"];
-    [bankDic setValue:@"" forKey:@"limit"];
-    [bankDic setValue:@"2" forKey:@"state"];
-    [bankDic setValue:@"true" forKey:@"available"];
-    [payToolsArrayUsableM addObject:bankDic];
-    
-    NSInteger unavailableArrayCount = [payToolsArrayUnusableM count];
-    for (int i = 0; i < unavailableArrayCount; i++) {
-        [payToolsArrayUsableM addObject:payToolsArrayUnusableM[i]];
-    }
-    
-}
-
 #pragma mark 计算手续费fee
 /**
  *@brief 手续费
@@ -649,7 +597,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
                 NSString *fee = [self.wordDic objectForKey:@"fee"];
                 NSString *feeAmt = [NSString stringWithFormat:@"%.2f", [transAmt floatValue] * [fee floatValue]];
                 
-                //弹出支付工具
+                //支付工具弹出
                 [self.payView showPayTool];
             }];
         }];

@@ -283,8 +283,9 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
                 NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
                 NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
                 
-                //弹出密码框
-                [self.payView setPayInfo:tempAuthToolsArray moneyStr:nil orderTypeStr:nil];
+                //支付控件设置列表
+                [self.payView setPayTools:tempAuthToolsArray];
+                //支付控件弹出
                 [self.payView showPayTool];
                 
             }];

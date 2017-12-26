@@ -289,10 +289,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-//        //修改支付密码
-//        VerificationModeViewController *mVerificationModeViewController = [[VerificationModeViewController alloc] init];
-//        mVerificationModeViewController.tokenType = @"01000601";
-//        [self.navigationController pushViewController:mVerificationModeViewController animated:YES];
+        //修改支付密码
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         //修改杉德卡密码
@@ -429,7 +426,10 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
                 
                 //根据不同支付密码类型选择UI弹出框
                 NSMutableDictionary *dic = self.authTools[0];
-                [self.payView setPayInfo:@[dic] moneyStr:nil orderTypeStr:nil];
+                
+                //支付控件设置列表
+                [self.payView setPayTools:@[dic]];
+                //支付控件弹出
                 [self.payView showPayTool];
                 
             }];
