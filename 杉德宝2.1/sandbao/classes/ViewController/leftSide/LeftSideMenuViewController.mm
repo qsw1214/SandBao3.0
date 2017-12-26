@@ -494,24 +494,42 @@
         paynuc.set("creditFp", [creditFp UTF8String]);
         paynuc.set("tTokenType", "01001401");
         paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                //2.2 数据库中sToken失效/查询用户tToken获取失败 -> 明登陆
-                [self pwdLogin];
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    //2.2 数据库中sToken失效/查询用户tToken获取失败 -> 明登陆
+                    [self pwdLogin];
+                }
+                if (type == respCodeErrorType) {
+                    //2.2 数据库中sToken失效/查询用户tToken获取失败 -> 明登陆
+                    [self pwdLogin];
+                }
             }];
         } successBlock:^{
-            
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
         }];
         if (error) return;
+        
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/queryInfo/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                //2.3 查询用户信息失败/查询用户信息失败  - > 直接明登陆
-                [self pwdLogin];
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    //2.3 查询用户信息失败/查询用户信息失败  - > 直接明登陆
+                    [self pwdLogin];
+                }
+                if (type == respCodeErrorType) {
+                    //2.3 查询用户信息失败/查询用户信息失败  - > 直接明登陆
+                    [self pwdLogin];
+                }
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 
                 //3. 暗登陆成功
                 //更新用户数据信息

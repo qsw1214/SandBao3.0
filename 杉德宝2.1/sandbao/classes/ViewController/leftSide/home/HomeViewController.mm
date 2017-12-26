@@ -18,6 +18,9 @@
 
 #import "GradualView.h"
 #import "SDMajletView.h"
+#import "SDDrowNoticeView.h"
+
+
 @interface HomeViewController ()<MqttClientManagerDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
 {
     //headView
@@ -89,6 +92,9 @@
     [self create_HeadView];
     [self create_bodyViewOne];
     [self create_bodyViewTwo];
+    
+    // 5. MQTT
+    [self addMqtt];
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -439,16 +445,130 @@
 }
 
 #pragma mark - 业务逻辑
+#pragma mark 注册MQTT
+- (void)addMqtt{
+    
+    //1先注册代理
+    [[MqttClientManager shareInstance] registerDelegate:self];
+    
+    //2再订阅消息
+    //订阅主题不能放到子线程,不然消息Block不会回调
+    [[MqttClientManager shareInstance] loginWithIp:kIP port:kPort userName:kMqttuserNmae password:kMqttpasswd topic:kMqttTopicUSERID([CommParameter sharedInstance].userId)];
+    
+    //[[MqttClientManager shareInstance] loginWithIp:kIP port:kPort userName:kMqttuserNmae password:kMqttpasswd topic:kMqttTopicBROADCAST];
+}
+#pragma mark MQTT代理方法
+- (void)messageTopic:(NSString *)topic data:(NSDictionary *)dic
+{
+    
+    //mqtt消息落库
+//    [self setMqttlist:dic];
+    
+    NSString *msgType = [dic objectForKey:@"msgType"];
+    //提醒处理
+    if ([[dic objectForKey:@"msgLevel"] intValue] == 0) {
+        if ([@"000001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"000001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"100001" isEqualToString:msgType]) {
+            //交易信息推送
+            [self transePayNotice:dic];
+        }
+        if ([@"200001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"300001" isEqualToString:msgType]) {
+            
+        }
+        
+    }
+    //静默处理
+    if ([[dic objectForKey:@"msgLevel"] intValue] == 1) {
+        if ([@"000001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"000001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"100001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"200001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"300001" isEqualToString:msgType]) {
+            
+        }
+    }
+    //强制处理
+    if ([[dic objectForKey:@"msgLevel"] intValue] == 2) {
+        if ([@"000001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"000001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"100001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"200001" isEqualToString:msgType]) {
+            
+        }
+        if ([@"300001" isEqualToString:msgType]) {
+            //多账户登录提醒
+            [self loginOtherDevice:dic];
+        }
+    }
+}
 
+#pragma mark MQTT事件: 交易消息推送处理
+- (void)transePayNotice:(NSDictionary*)dic{
+    
+    NSString *msgTitle = [[dic objectForKey:@"data"] objectForKey:@"msgTitle"];
+    NSError *error;
+    NSData *jsonData = [[[dic objectForKey:@"data"] objectForKey:@"msgData"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *msgDataDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
+    NSString *OldStoken = [msgDataDic objectForKey:@"stoken"];
+    NSString *message = [msgDataDic objectForKey:@"msg"];
+    //根据sToken过滤消息显示
+    if ([OldStoken isEqualToString:[CommParameter sharedInstance].sToken]) {
+        //普通弹窗(系统声音)
+        NSString *mssageStr = [NSString stringWithFormat:@" %@\n %@",msgTitle,message];
+        SDDrowNoticeView *sdDrowNoticeView = [SDDrowNoticeView createDrowNoticeView:@[msgTitle,message]];
+        [[UIApplication sharedApplication].keyWindow addSubview:sdDrowNoticeView];
+        [sdDrowNoticeView animationDrown];
+    }
+    
+}
 
-
-
-
-
-
-
-
-
+/**
+ 多点登陆提醒
+ */
+#pragma mark MQTT事件: 多点登陆提醒
+- (void)loginOtherDevice:(NSDictionary*)dic{
+    //异常登陆处理
+    NSString *msgTitle = [[dic objectForKey:@"data"] objectForKey:@"msgTitle"];
+    NSError *error;
+    NSData *jsonData = [[[dic objectForKey:@"data"] objectForKey:@"msgData"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *msgDataDic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
+    
+    NSString *OldStoken = [msgDataDic objectForKey:@"stoken"];
+    NSString *message = [msgDataDic objectForKey:@"msg"];
+    //根据sToken过滤消息显示
+    if ([OldStoken isEqualToString:[CommParameter sharedInstance].sToken]) {
+        //0.播放提示音
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        AudioServicesPlaySystemSound(1312);
+        //1.退出用户登录页
+        [Tool showDialog:msgTitle message:message defulBlock:^{
+            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:self forLogOut:YES];
+        }];
+    }
+    
+}
 
 
 

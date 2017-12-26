@@ -112,10 +112,6 @@ static SDRequestHelp *_instance = nil;
                 if (self.respCodeErrorAutomatic) {
                     [SDMBProgressView showSDMBProgressLoadErrorImgINView:[UIApplication sharedApplication].keyWindow];
                 }
-                //代码手动处理
-                else{
-                    
-                }
             });
             return frErrorType;
         }
@@ -160,9 +156,11 @@ static SDRequestHelp *_instance = nil;
                     if (weakSelf.HUD) {
                         [weakSelf.HUD hidden];
                     }
-                    [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
-                        [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:YES];
-                    }];
+                    if (self.respCodeErrorAutomatic) {
+                        [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
+                            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:YES];
+                        }];
+                    }
                 });
                 return respCodeErrorType;
             }
@@ -193,10 +191,6 @@ static SDRequestHelp *_instance = nil;
                             //respMsg错误码提示
                             [Tool showDialog:weakSelf.respMsg];
                         }
-                    }
-                    //代理手动处理
-                    else{
-                        
                     }
                 });
                 return respCodeErrorType;

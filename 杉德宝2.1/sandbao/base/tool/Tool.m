@@ -938,6 +938,16 @@
     
 }
 
+#pragma mark - pop返回指定返回某个VC
+- (void)popViewControlleWithNavgationController:(UINavigationController*)nav byViewControllerName:(NSString*)vcName{
+    
+    NSArray *navSubViewcontrollers = nav.viewControllers;
+    
+    
+    
+    
+}
+
 
 #pragma mark - ImageView工厂方法
 + (UIImageView*)createImagView:(UIImage*)image{

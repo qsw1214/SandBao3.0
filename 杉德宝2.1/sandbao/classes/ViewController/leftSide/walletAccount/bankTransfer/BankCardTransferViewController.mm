@@ -451,9 +451,15 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         [successView animationStopClean];
         [self.payView originPayTool];
         if (paramArr.count>0) {
-            [Tool showDialog:paramArr[0]];
+            [Tool showDialog:paramArr[0] defulBlock:^{
+                [self.payView hidPayTool];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
         }else{
-            [Tool showDialog:@"网络连接异常"];
+            [Tool showDialog:@"网络连接异常" defulBlock:^{
+                [self.payView hidPayTool];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }];
         }
     }];
     
