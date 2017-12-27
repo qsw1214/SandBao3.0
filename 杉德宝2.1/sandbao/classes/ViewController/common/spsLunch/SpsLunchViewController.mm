@@ -207,8 +207,9 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         });
         
     } oederErrorBlock:^(NSArray *paramArr){
-        //支付失败
+        //支付失败- 动画停止
         [successView animationStopClean];
+        //支付失败 - 支付工具归位
         [self.payView originPayTool];
         
         if (paramArr.count>0) {

@@ -7,14 +7,6 @@
 //
 
 #import "BaseViewController.h"
-typedef NS_ENUM(NSInteger,SandTnOrderType){
-    //正扫(c扫b)
-    SandTnOrderTypeC2B = 0,
-    //反扫(b扫c)
-    SandTnOrderTypeB2C,
-    //sps跳转
-    SandTnOrderTypeSps,
-};
 
 @interface TnOrderViewController : BaseViewController
 
@@ -22,11 +14,6 @@ typedef NS_ENUM(NSInteger,SandTnOrderType){
  TN
  */
 @property (nonatomic, strong) NSString *TN;
-
-/**
- 类型 - 正扫/反扫/sps跳转
- */
-@property (nonatomic, assign) SandTnOrderType type;
 
 
 @end

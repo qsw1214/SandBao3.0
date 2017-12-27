@@ -71,28 +71,11 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     self.navCoverView.rightTitleStr = @"取消";
     
     __weak TnOrderViewController *weakSelf = self;
-    if (self.type == SandTnOrderTypeC2B) {
-        self.navCoverView.rightBlock = ^{
-            //正扫返回
-            UIViewController *secVC = weakSelf.navigationController.viewControllers[0];
-            [weakSelf.navigationController popToViewController:secVC animated:YES];
-        };
-    }
-    if (self.type == SandTnOrderTypeB2C) {
-        self.navCoverView.rightBlock = ^{
-            //反扫返回
-        };
-    }
-    if (self.type == SandTnOrderTypeSps) {
-        self.navCoverView.rightBlock = ^{
-            //sps跳出
-        };
-    }
-    
-    
-    
-
-
+    self.navCoverView.rightBlock = ^{
+        //正扫返回
+        UIViewController *secVC = weakSelf.navigationController.viewControllers[0];
+        [weakSelf.navigationController popToViewController:secVC animated:YES];
+    };
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
@@ -281,18 +264,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         });
         
     } oederErrorBlock:^(NSArray *paramArr){
-        //支付失败
+        //支付失败- 动画停止
         [successView animationStopClean];
-        if (self.type == SandTnOrderTypeC2B) {
-            //正扫失败 - 支付工具归位
-            [self.payView originPayTool];
-        }
-        if (self.type == SandTnOrderTypeB2C) {
-            //反扫失败
-        }
-        if (self.type == SandTnOrderTypeSps) {
-            //sps失败
-        }
+        //支付失败 - 支付工具归位
+        [self.payView originPayTool];
         if (paramArr.count>0) {
             [Tool showDialog:paramArr[0]];
         }else{
@@ -363,20 +338,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 //排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 
-                NSString *titleDes;
-                if (self.type == SandTnOrderTypeC2B) {
-                    titleDes = @"付款给扫码订单";
-                }
-                if (self.type == SandTnOrderTypeB2C) {
-                    titleDes = @"付款给商户";
-                }
-                if (self.type == SandTnOrderTypeSps) {
-                    titleDes = @"付款给久彰";
-                }
                 //支付控件设置列表
                 [self.payView setPayTools:payToolsArray];
                 //支付控件设置信息
-                [self.payView setPayInfo:@[titleDes,moneyLab.text]];
+                [self.payView setPayInfo:@[@"付款给扫码订单",moneyLab.text]];
                 //支付控件弹出
                 [self.payView showPayTool];
             }];

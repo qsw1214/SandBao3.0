@@ -743,7 +743,6 @@
 - (void)openSpsLunch:(NSNotification*)noti{
     
     //App从后台激活,进入前台,接受通知后,当前页面归位到spsLunch页
-    
     //归位Home或SpsLunch
     [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
 }

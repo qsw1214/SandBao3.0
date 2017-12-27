@@ -151,37 +151,39 @@
  */
 - (void)setPayTools:(NSArray *)payTools{
     
-    //payTools 必须是已排序过的payTools,在外部已经做好排序
-    //1.遍历 isDefault == true
-    //如果有default,则设置Default排在第一位,其余顺延
-    //如果没有default,则不做遍历
-    NSDictionary *defulPayToolDic = nil;
-    NSMutableArray *defulPayToolArrM = [NSMutableArray arrayWithCapacity:0];//包含默认支付工具(默认支付工具排第一位)的其他支付工具数组
-    for (int i = 0; i<payTools.count; i++) {
-        defulPayToolDic = payTools[i];
-        BOOL isDefault = [[defulPayToolDic objectForKey:@"isDefault"] boolValue];
-        if (isDefault) {
-            //返回默认支付工具 且 让整个支付工具顺延其后
-            if ([_delegate respondsToSelector:@selector(payViewReturnDefulePayToolDic:)]) {
-                [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:defulPayToolDic]];
-                
-                NSMutableArray *payToolsArrM = [NSMutableArray arrayWithArray:payTools];
-                [payToolsArrM removeObject:defulPayToolDic];
-                for (int j = 0; j<payToolsArrM.count; j++) {
-                    [defulPayToolArrM addObject:payToolsArrM[i]];
-                }
-                //组装数组:(包含默认支付工具(默认支付工具排第一位)的其他支付工具数组)
-                [defulPayToolArrM insertObject:defulPayToolDic atIndex:0];
-                break;
-            }
-        }
-        else{
-            //do no thing
-        }
-    }
-    //default处理过的排序支付工具
-    NSArray *defaultPayToolArr = [NSArray arrayWithArray:defulPayToolArrM];
-    payTools = defaultPayToolArr.count>0?defaultPayToolArr:payTools;
+                        //*******payTools 必须是已排序过的payTools,在外部已经做好排序*********//
+    
+    //方式一: 默认支付工具不管是否可以,均置顶
+//    //1.遍历 isDefault == true
+//    //如果有default,则设置Default排在第一位,其余顺延
+//    //如果没有default,则不做遍历
+//    NSDictionary *defulPayToolDic = nil;
+//    NSMutableArray *defulPayToolArrM = [NSMutableArray arrayWithCapacity:0];//包含默认支付工具(默认支付工具排第一位)的其他支付工具数组
+//    for (int i = 0; i<payTools.count; i++) {
+//        defulPayToolDic = payTools[i];
+//        BOOL isDefault = [[defulPayToolDic objectForKey:@"isDefault"] boolValue];
+//        if (isDefault) {
+//            //返回默认支付工具 且 让整个支付工具顺延其后
+//            if ([_delegate respondsToSelector:@selector(payViewReturnDefulePayToolDic:)]) {
+//                [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:defulPayToolDic]];
+//
+//                NSMutableArray *payToolsArrM = [NSMutableArray arrayWithArray:payTools];
+//                [payToolsArrM removeObject:defulPayToolDic];
+//                for (int j = 0; j<payToolsArrM.count; j++) {
+//                    [defulPayToolArrM addObject:payToolsArrM[i]];
+//                }
+//                //组装数组:(包含默认支付工具(默认支付工具排第一位)的其他支付工具数组)
+//                [defulPayToolArrM insertObject:defulPayToolDic atIndex:0];
+//                break;
+//            }
+//        }
+//        else{
+//            //do no thing
+//        }
+//    }
+//    //default处理过的排序支付工具
+//    NSArray *defaultPayToolArr = [NSArray arrayWithArray:defulPayToolArrM];
+//    payTools = defaultPayToolArr.count>0?defaultPayToolArr:payTools;
     
     
     //预处理 - 支付工具 (分三块 1-可用 2-添加卡类型 3-不可用支付工具)
@@ -199,10 +201,30 @@
                 [payToolsArrayUsableM addObject:payTools[i]];
             }
         }
+        //2.返回默认支付工具
+        //方式二: 在可用支付工具中检测默认支付工具,有则将其置顶,无则作罢
         if (payToolsArrayUsableM.count >0) {
-            //2.代理返回VC默认显示的支付
-            if ([_delegate respondsToSelector:@selector(payViewReturnDefulePayToolDic:)]) {
-                [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]]];
+            BOOL isDefault = NO;
+            for (int i = 0; i<payToolsArrayUsableM.count; i++) {
+                 NSDictionary *defulPayToolDic = payTools[i];
+                 isDefault = [[defulPayToolDic objectForKey:@"isDefault"] boolValue];
+                if (isDefault) {
+                    //返回默认支付工具 且 让整个支付工具顺延其后
+                    if ([_delegate respondsToSelector:@selector(payViewReturnDefulePayToolDic:)]) {
+                        [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:defulPayToolDic]];
+                        [payToolsArrayUsableM removeObject:defulPayToolDic];
+                        [payToolsArrayUsableM insertObject:defulPayToolDic atIndex:0];
+                        break;
+                    }
+                }else{
+                    // do nothing
+                }
+            }
+            //如果没有默认支付工具,则取可用优先级最高的支付工具返回
+            if (!isDefault) {
+                if ([_delegate respondsToSelector:@selector(payViewReturnDefulePayToolDic:)]) {
+                    [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]]];
+                }
             }
             //3.设置支付方式列表
             [self initPayMode];

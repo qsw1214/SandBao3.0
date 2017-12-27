@@ -463,67 +463,106 @@
     //mqtt消息落库
 //    [self setMqttlist:dic];
     
+    //消息类型
     NSString *msgType = [dic objectForKey:@"msgType"];
-    //提醒处理
-    if ([[dic objectForKey:@"msgLevel"] intValue] == 0) {
-        if ([@"000001" isEqualToString:msgType]) {
+    //0-提醒处理 1-静默处理 2-强制处理
+    NSInteger msgLevel = [[dic objectForKey:@"msgLevel"] intValue];
+    
+    
+    if ([msgType isEqualToString:@"000001"]) {
+        if (msgLevel == 0) {
             
         }
-        if ([@"000001" isEqualToString:msgType]) {
+        if (msgLevel == 1) {
             
         }
-        if ([@"100001" isEqualToString:msgType]) {
+        if (msgLevel == 2) {
+            
+        }
+    }
+    if ([msgType isEqualToString:@"000002"]) {
+        if (msgLevel == 0) {
+            
+        }
+        if (msgLevel == 1) {
+            
+        }
+        if (msgLevel == 2) {
+            
+        }
+    }
+    if ([msgType isEqualToString:@"100001"]) {
+        if (msgLevel == 0) {
             //交易信息推送
             [self transePayNotice:dic];
         }
-        if ([@"200001" isEqualToString:msgType]) {
+        if (msgLevel == 1) {
             
         }
-        if ([@"300001" isEqualToString:msgType]) {
-            
-        }
-        
-    }
-    //静默处理
-    if ([[dic objectForKey:@"msgLevel"] intValue] == 1) {
-        if ([@"000001" isEqualToString:msgType]) {
-            
-        }
-        if ([@"000001" isEqualToString:msgType]) {
-            
-        }
-        if ([@"100001" isEqualToString:msgType]) {
-            
-        }
-        if ([@"200001" isEqualToString:msgType]) {
-            
-        }
-        if ([@"300001" isEqualToString:msgType]) {
+        if (msgLevel == 2) {
             
         }
     }
-    //强制处理
-    if ([[dic objectForKey:@"msgLevel"] intValue] == 2) {
-        if ([@"000001" isEqualToString:msgType]) {
+    if ([msgType isEqualToString:@"200001"]) {
+        if (msgLevel == 0) {
             
         }
-        if ([@"000001" isEqualToString:msgType]) {
+        if (msgLevel == 1) {
             
         }
-        if ([@"100001" isEqualToString:msgType]) {
+        if (msgLevel == 2) {
             
         }
-        if ([@"200001" isEqualToString:msgType]) {
+    }
+    if ([msgType isEqualToString:@"300001"]) {
+        if (msgLevel == 0) {
             
         }
-        if ([@"300001" isEqualToString:msgType]) {
+        if (msgLevel == 1) {
+            
+        }
+        if (msgLevel == 2) {
             //多账户登录提醒
             [self loginOtherDevice:dic];
         }
     }
+    if ([msgType isEqualToString:@"400001"]) {
+        if (msgLevel == 0) {
+            
+        }
+        if (msgLevel == 1) {
+            
+        }
+        if (msgLevel == 2) {
+            
+        }
+    }
+    if ([msgType isEqualToString:@"500001"]) {
+        if (msgLevel == 0) {
+            
+        }
+        if (msgLevel == 1) {
+            
+        }
+        if (msgLevel == 2) {
+            
+        }
+    }
+    if ([msgType isEqualToString:@"600001"]) {
+        if (msgLevel == 0) {
+            //商户反扫支付推送TN号
+            [self noticeB2c:@"TN"];
+        }
+        if (msgLevel == 1) {
+            
+        }
+        if (msgLevel == 2) {
+            
+        }
+    }
 }
 
-#pragma mark MQTT事件: 交易消息推送处理
+#pragma mark MQTT事件: 交易消息推送处理(100001)
 - (void)transePayNotice:(NSDictionary*)dic{
     
     NSString *msgTitle = [[dic objectForKey:@"data"] objectForKey:@"msgTitle"];
@@ -546,7 +585,7 @@
 /**
  多点登陆提醒
  */
-#pragma mark MQTT事件: 多点登陆提醒
+#pragma mark MQTT事件: 多点登陆提醒(300001)
 - (void)loginOtherDevice:(NSDictionary*)dic{
     //异常登陆处理
     NSString *msgTitle = [[dic objectForKey:@"data"] objectForKey:@"msgTitle"];
@@ -568,8 +607,10 @@
     }
     
 }
-
-
+#pragma mark MQTT事件: 商户反扫支付通知(600001)
+- (void)noticeB2c:(NSString*)TN{
+    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:TN];
+}
 
 
 #pragma mark - 本类公共方法调用
