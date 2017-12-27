@@ -55,6 +55,19 @@
     //当前亮度记录
     double currentLight;
     
+    
+    //条形码是否显示
+    BOOL oneQrShow;
+    //二维码是否显示
+    BOOL twoQrShow;
+    
+    //弹出时 - 条形码背景视图
+    UIView *oneBackGroundView;
+    
+    //弹出时 - 二维码背景视图
+    UIImageView *twoBackGroundView;
+    
+    
 }
 
 
@@ -153,6 +166,9 @@
  创建付款码_bodyView
  */
 - (void)createPayQrcodeBodyView{
+    oneQrShow = NO;
+    twoQrShow = NO;
+    
     
     bodyView = [[UIView alloc] init];
     bodyView.backgroundColor = [UIColor whiteColor];
@@ -619,7 +635,7 @@
         UIImage *oneImg = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake([UIScreen mainScreen].bounds.size.width, AdapterHfloat(100))];
         
         //创建动画用- 条形码背景框
-        UIView *oneBackGroundView = [[UIView alloc] init];
+        oneBackGroundView = [[UIView alloc] init];
         oneBackGroundView.backgroundColor = [UIColor whiteColor];
         [whiteMaskView addSubview:oneBackGroundView];
         
@@ -629,7 +645,7 @@
         oneTipLab.textColor = [UIColor colorWithRed:255/255.0 green:93/255.0 blue:49/255.0 alpha:1/1.0];
         oneTipLab.textAlignment = NSTextAlignmentCenter;
         oneTipLab.font = [UIFont systemFontOfSize:11];
-        oneTipLab.frame = CGRectMake(0, 0, oneImg.size.width, AdapterHfloat(10));
+        oneTipLab.frame = CGRectMake(0, 0, oneImg.size.width, AdapterHfloat(12));
         [oneBackGroundView addSubview:oneTipLab];
         
         //条形码图片
@@ -653,6 +669,8 @@
         
         
         [UIView animateWithDuration:0.4f animations:^{
+            oneQrShow = YES;
+            twoQrShow = NO;
             //设置亮度最大
             [UIScreen mainScreen].brightness = 1.f;
             whiteMaskView.alpha = 1;
@@ -663,21 +681,23 @@
     }
     //二维码
     if (tap.view.tag == 2) {
+        oneQrShow = NO;
+        twoQrShow = YES;
         
         //创建动画用- 条形码
-        UIImageView *twoimgv= [[UIImageView alloc] init];
-        twoimgv.backgroundColor = [UIColor whiteColor];
+        twoBackGroundView = [[UIImageView alloc] init];
+        twoBackGroundView.backgroundColor = [UIColor whiteColor];
         UIImage *twoImg = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
-        twoimgv.image = twoImg;
-        twoimgv.frame = CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - twoImg.size.height)/2, twoImg.size.width, twoImg.size.height);
-        twoimgv.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
-        [whiteMaskView addSubview:twoimgv];
+        twoBackGroundView.image = twoImg;
+        twoBackGroundView.frame = CGRectMake(0, ([UIScreen mainScreen].bounds.size.height - twoImg.size.height)/2, twoImg.size.width, twoImg.size.height);
+        twoBackGroundView.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
+        [whiteMaskView addSubview:twoBackGroundView];
         
         [UIView animateWithDuration:0.4f animations:^{
             //设置亮度最大
             [UIScreen mainScreen].brightness = 1.f;
             whiteMaskView.alpha = 1;
-            twoimgv.transform = CGAffineTransformMakeScale(1.5, 1.5);
+            twoBackGroundView.transform = CGAffineTransformMakeScale(1.5, 1.5);
         }];
     }
     
@@ -686,6 +706,20 @@
 - (void)touchHiddenBigImg:(UIGestureRecognizer*)tap{
     
     [UIView animateWithDuration:0.4f animations:^{
+        
+        if (oneQrShow == YES) {
+            //位置恢复
+            CGAffineTransform transformRotate = CGAffineTransformMakeRotation(-M_PI_2);
+            tap.view.transform = CGAffineTransformScale(transformRotate, 1.f, 1.f);
+            oneQrShow = NO;
+            twoQrShow = NO;
+        }
+        if (twoQrShow == YES) {
+            //位置恢复
+            tap.view.transform = CGAffineTransformMakeScale(1.f, 1.f);
+            oneQrShow = NO;
+            twoQrShow = NO;
+        }
         //亮度恢复
         [UIScreen mainScreen].brightness = currentLight;
         tap.view.alpha = 0.f;

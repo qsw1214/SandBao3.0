@@ -414,6 +414,18 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
+        
+        
+        //此处增加第二次 queryCardDetail
+        //此处增加第二次 queryCardDetail
+        //此处增加第二次 queryCardDetail
+        //此处增加第二次 queryCardDetail
+        //此处增加第二次 queryCardDetail
+        //此处增加第二次 queryCardDetail
+        //此处增加第二次 queryCardDetail
+        //此处增加第二次 queryCardDetail
+        
+        
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
         } successBlock:^{

@@ -9,13 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/classes/ViewController/leftSide/walletAccount/bankRecharge/BankCardRechargeViewController.mm"
-            timestampString = "535991554.538011"
+            filePath = "sandbao/classes/customView/SDPayToolView/SDPayView.m"
+            timestampString = "536058795.231322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-buttonClick:"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "-setPayTools:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sandbao/classes/customView/SDPayToolView/SDPayView.m"
+            timestampString = "536058795.231916"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "-setPayTools:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

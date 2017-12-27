@@ -68,7 +68,7 @@
     // mid标题
     labTitle = [[UILabel alloc] init];
     labTitle.frame = CGRectMake(15, 20, self.frame.size.width-2*15, 64-20);
-    labTitle.font = [UIFont fontWithName:@"PingFang-SC-Regular" size:AdapterFfloat(15)];
+    labTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AdapterFfloat(17)];
     labTitle.textAlignment = NSTextAlignmentCenter;
     [baseView addSubview:labTitle];
     

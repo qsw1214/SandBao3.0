@@ -12,7 +12,7 @@
 #import "SDSelectBarView.h"
 #import "SDQrcodeView.h"
 
-@interface PayQrcodeViewController ()
+@interface PayQrcodeViewController ()<SDSelectBarDelegate>
 {
     
 }
@@ -45,7 +45,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self creaetUI];
+    [self creaetDefuleUI];
+    [self createSelectBar];
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -74,61 +75,47 @@
 
 
 #pragma mark  - UI绘制
-- (void)creaetUI{
+- (void)creaetDefuleUI{
     
-    __weak typeof(self) weakself = self;
-    self.selectBarView = [SDSelectBarView showSelectBarView:@[@"收款码",@"付款码"] selectBarBlock:^(NSInteger index) {
-        switch (index) {
-            case 0:
-            {
-                if (weakself.payQrcodeBaseView) {
-                    [UIView animateWithDuration:0.2 animations:^{
-                        weakself.payQrcodeBaseView.alpha = 0;
-                    } completion:^(BOOL finished) {
-                        [weakself.payQrcodeBaseView removeFromSuperview];
-                        //创建 收款码 视图
-                        [weakself createCollectionQrView];
-                    }];
-                }
-            }
-                break;
-
-            case 1:
-            {
-                if (weakself.collectionQrcodeBaseView) {
-                    [UIView animateWithDuration:0.2 animations:^{
-                        weakself.collectionQrcodeBaseView.alpha = 0;
-                    } completion:^(BOOL finished) {
-                        [weakself.collectionQrcodeBaseView removeFromSuperview];
-                        
-                        if (weakself.authCodesArray.count == 0) {
-                            //点击获取授权码
-                            [weakself getAuthCodes];
-                        }else{
-                            //创建 付款码 视图
-                            [weakself creaetPayQrView];
-                        }
-                    }];
-                }
-            }
-                break;
-            default:
-                break;
-        }
-
-    }];
-
-    [self.baseScrollView addSubview:self.selectBarView];
-
     //默认展示 收款码
-    [self createCollectionQrView];
+    self.collectionQrcodeBaseView = [[UIView alloc] init];
+    self.collectionQrcodeBaseView.backgroundColor = self.baseScrollView.backgroundColor;
+    [self.baseScrollView addSubview:self.collectionQrcodeBaseView];
+    
+    self.collectionQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
+    self.collectionQrcodeView.style = CollectionQrcordView;
+    self.collectionQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
+    self.collectionQrcodeView.twoQrCodeStr = @"这里是二维码信息字符串";
+    [self.collectionQrcodeBaseView addSubview:self.collectionQrcodeView];
+    
+    CGFloat collectionQrcodeBaseViewH = self.collectionQrcodeView.height;
+    
+    [self.collectionQrcodeBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, collectionQrcodeBaseViewH));
+    }];
+    
+    [self.collectionQrcodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionQrcodeBaseView);
+        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
+        make.size.mas_equalTo(self.collectionQrcodeView.size);
+    }];
+    
+    
+    
+}
+
+- (void)createSelectBar{
+    self.selectBarView = [[SDSelectBarView alloc] init];
+    self.selectBarView.delegate = self;
+    [self.baseScrollView addSubview:self.selectBarView];
     
     [self.selectBarView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_11);
-        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.top.equalTo(self.collectionQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
         make.size.mas_equalTo(self.selectBarView.size);
     }];
-
 }
 
 - (void)createCollectionQrView{
@@ -146,8 +133,8 @@
     CGFloat collectionQrcodeBaseViewH = self.collectionQrcodeView.height;
 
     [self.collectionQrcodeBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.selectBarView.mas_bottom).offset(UPDOWNSPACE_10);
-        make.centerX.equalTo(self.baseScrollView);
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, collectionQrcodeBaseViewH));
     }];
     
@@ -157,9 +144,13 @@
         make.size.mas_equalTo(self.collectionQrcodeView.size);
     }];
     
-    
-    
-    
+
+    //重置SelectBarView的约束
+    [self.selectBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
+        make.size.mas_equalTo(self.selectBarView.size);
+    }];
 }
 
 - (void)creaetPayQrView{
@@ -187,8 +178,8 @@
     CGFloat payQrcodeBaseViewH = self.payQrcodeView.height + UPDOWNSPACE_15;
     
     [self.payQrcodeBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.selectBarView.mas_bottom).offset(UPDOWNSPACE_10);
-        make.centerX.equalTo(self.baseScrollView);
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, payQrcodeBaseViewH));
     }];
     
@@ -203,7 +194,56 @@
         make.centerX.equalTo(self.payQrcodeBaseView);
         make.size.mas_equalTo(bottomTipLab.size);
     }];
+    
+    
+    //重置SelectBarView的约束
+    [self.selectBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.payQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(self.selectBarView.size);
+    }];
 }
+
+#pragma mark SDSelectBarViewDelegate
+- (void)selectBarClick:(NSInteger)index{
+    if (index == 1) {
+        if (self.payQrcodeBaseView) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.payQrcodeBaseView.alpha = 0;
+                self.selectBarView.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self.payQrcodeBaseView removeFromSuperview];
+                
+                //创建 收款码 视图
+                [self createCollectionQrView];
+                //创建 付款码 视图成功  选择按钮Bar恢复显示
+                self.selectBarView.alpha = 1;
+            }];
+        }
+    }
+    if (index == 2) {
+        if (self.collectionQrcodeBaseView) {
+            [UIView animateWithDuration:0.2 animations:^{
+                self.selectBarView.alpha = 0;
+                self.collectionQrcodeBaseView.alpha = 0;
+            } completion:^(BOOL finished) {
+                [self.collectionQrcodeBaseView removeFromSuperview];
+
+                if (self.authCodesArray.count == 0) {
+                    //点击获取授权码
+                    [self getAuthCodes];
+                }else{
+                    //创建 付款码 视图
+                    [self creaetPayQrView];
+                    //创建 付款码 视图成功  选择按钮Bar恢复显示
+                    self.selectBarView.alpha = 1;
+                }
+            }];
+        }
+    }
+    
+}
+
 #pragma mark - 业务逻辑
 #pragma mark 获取授权码组
 - (void)getAuthCodes
@@ -236,6 +276,9 @@
                 }
                 //创建 付款码 视图
                 [self creaetPayQrView];
+                //创建 付款码 视图成功 - 按钮选中Bar恢复显示
+                self.selectBarView.alpha = 1;
+                
             }];
         }];
         

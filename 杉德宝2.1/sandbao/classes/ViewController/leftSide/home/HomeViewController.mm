@@ -196,7 +196,6 @@
     headIconImgView.layer.shadowOpacity = 1;
     headIconImgView.layer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:headIconImgView.frame].CGPath;
     headIconImgView.layer.shadowOffset = CGSizeZero;
-    headIconImgView.layer.shadowRadius = 5;
     [headWhiteView addSubview:headIconImgView];
     
     [headIconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -209,8 +208,8 @@
     [headWhiteView addSubview:headPhoneNoLab];
     
     [headPhoneNoLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headWhiteView.mas_top).offset(UPDOWNSPACE_16);
-        make.left.equalTo(headIconImgView.mas_right).offset(LEFTRIGHTSPACE_18);
+        make.top.equalTo(headWhiteView.mas_top).offset(UPDOWNSPACE_09);
+        make.left.equalTo(headIconImgView.mas_right).offset(LEFTRIGHTSPACE_20);
         make.size.mas_equalTo(headPhoneNoLab.size);
     }];
     

@@ -74,7 +74,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     if (self.type == SandTnOrderTypeC2B) {
         self.navCoverView.rightBlock = ^{
             //正扫返回
-            UIViewController *secVC = weakSelf.navigationController.viewControllers[1];
+            UIViewController *secVC = weakSelf.navigationController.viewControllers[0];
             [weakSelf.navigationController popToViewController:secVC animated:YES];
         };
     }

@@ -140,11 +140,54 @@
 
 #pragma mark - 统一配置支付信息
 #pragma mark 配置支付工具列表
+
+/**
+ 支付工具配置
+ (配置原则)
+ (1.优先选取 isDefault == true)支付工具作为默认返回,其余支付工具顺延,(后端不保证isDefault的工具同时其orderID最小)
+ (2.若无isDefault,则取排序第一个作为默认返回)
+ 
+ @param payTools 原始支付工具集组
+ */
 - (void)setPayTools:(NSArray *)payTools{
+    
+    //payTools 必须是已排序过的payTools,在外部已经做好排序
+    //1.遍历 isDefault == true
+    //如果有default,则设置Default排在第一位,其余顺延
+    //如果没有default,则不做遍历
+    NSDictionary *defulPayToolDic = nil;
+    NSMutableArray *defulPayToolArrM = [NSMutableArray arrayWithCapacity:0];//包含默认支付工具(默认支付工具排第一位)的其他支付工具数组
+    for (int i = 0; i<payTools.count; i++) {
+        defulPayToolDic = payTools[i];
+        BOOL isDefault = [[defulPayToolDic objectForKey:@"isDefault"] boolValue];
+        if (isDefault) {
+            //返回默认支付工具 且 让整个支付工具顺延其后
+            if ([_delegate respondsToSelector:@selector(payViewReturnDefulePayToolDic:)]) {
+                [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:defulPayToolDic]];
+                
+                NSMutableArray *payToolsArrM = [NSMutableArray arrayWithArray:payTools];
+                [payToolsArrM removeObject:defulPayToolDic];
+                for (int j = 0; j<payToolsArrM.count; j++) {
+                    [defulPayToolArrM addObject:payToolsArrM[i]];
+                }
+                //组装数组:(包含默认支付工具(默认支付工具排第一位)的其他支付工具数组)
+                [defulPayToolArrM insertObject:defulPayToolDic atIndex:0];
+                break;
+            }
+        }
+        else{
+            //do no thing
+        }
+    }
+    //default处理过的排序支付工具
+    NSArray *defaultPayToolArr = [NSArray arrayWithArray:defulPayToolArrM];
+    payTools = defaultPayToolArr.count>0?defaultPayToolArr:payTools;
+    
+    
     //预处理 - 支付工具 (分三块 1-可用 2-添加卡类型 3-不可用支付工具)
     //检测支付工具
     if (payTools.count>0) {
-        //1.过滤用支付工具
+        //1.过滤可用支付工具
         payToolsArrayUsableM = [NSMutableArray arrayWithCapacity:0];
         payToolsArrayUnusableM = [NSMutableArray arrayWithCapacity:0];
         for (int i = 0; i<payTools.count; i++) {
@@ -162,7 +205,7 @@
                 [_delegate payViewReturnDefulePayToolDic:[NSMutableDictionary dictionaryWithDictionary:payToolsArrayUsableM[0]]];
             }
             //3.设置支付方式列表
-            [self initPayMode:payTools];
+            [self initPayMode];
         }else{
             //@"无可用支付工具"
             if ([_delegate respondsToSelector:@selector(payViewPayToolsError:)]) {
@@ -192,7 +235,7 @@
     }
 }
 
-- (void)initPayMode:(NSArray *)paramArray
+- (void)initPayMode
 {
     newPayToolsArr = [NSMutableArray arrayWithCapacity:0];
     //1.添加可用
