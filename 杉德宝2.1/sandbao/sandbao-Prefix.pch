@@ -68,8 +68,11 @@
 #define OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN @"openSPSPaynoticeLogin"
 //NSUserDefaults存储方式 对应key
 #define FIRST_INSTALL_APP @"FIRST_INSTALL_APP" //首次安装App的key
-//接受MQTT消息推送的通知 - 商户反扫支付通知
+//接受MQTT消息推送的通知 - 商户反扫支付通知(无密)
 #define MQTT_NOTICE_BSC_TN @"MQTT_NOTICE_BSC_TN"
+//接受MQTT消息推送的通知 - 商户反扫支付通知(有密)
+#define MQTT_NOTICE_BSC_TN_PWD @"MQTT_NOTICE_BSC_TN_PWD"
+
 
 
 //数据库表名配置

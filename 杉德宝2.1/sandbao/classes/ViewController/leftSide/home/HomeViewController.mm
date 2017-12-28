@@ -561,6 +561,7 @@
         }
         if (msgLevel == 2) {
             //商户反扫支付(无秘)推动支付结果
+            [self noticeB2c:dic];
         }
     }
     if ([msgType isEqualToString:@"600002"]) {
@@ -572,7 +573,7 @@
         }
         if (msgLevel == 2) {
             //商户反扫支付(有密)推送TN号
-            [self noticeB2c:dic];
+            [self noticeB2cWithPwd:dic];
         }
     }
 }
@@ -589,7 +590,6 @@
     //根据sToken过滤消息显示
     if ([OldStoken isEqualToString:[CommParameter sharedInstance].sToken]) {
         //普通弹窗(系统声音)
-        NSString *mssageStr = [NSString stringWithFormat:@" %@\n %@",msgTitle,message];
         SDDrowNoticeView *sdDrowNoticeView = [SDDrowNoticeView createDrowNoticeView:@[msgTitle,message]];
         [[UIApplication sharedApplication].keyWindow addSubview:sdDrowNoticeView];
         [sdDrowNoticeView animationDrown];
@@ -622,12 +622,20 @@
     }
     
 }
-#pragma mark MQTT事件: 商户反扫支付通知(600002)
+#pragma mark MQTT事件: 商户反扫支付通知(600001)
 - (void)noticeB2c:(NSDictionary*)dic{
     NSString *msgData = [[dic objectForKey:@"data"] objectForKey:@"msgData"];
     NSDictionary *tnDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:msgData];
     NSString *tn = [tnDic objectForKey:@"sandTN"];
     [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:tn];
+}
+
+#pragma mark MQTT事件: 商户反扫支付通知(600002)
+- (void)noticeB2cWithPwd:(NSDictionary*)dic{
+    NSString *msgData = [[dic objectForKey:@"data"] objectForKey:@"msgData"];
+    NSDictionary *tnDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:msgData];
+    NSString *tn = [tnDic objectForKey:@"sandTN"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN_PWD object:tn];
     
 }
 

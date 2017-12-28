@@ -33,6 +33,9 @@
     
     //基础配置 - 友盟页面统计埋点 - 离开页面
     [MobClick endLogPageView:[NSString stringWithUTF8String:object_getClassName(self)]];
+    
+    //基础配置 - 网络请求强引用当前视图控制器实例,在当前页面退出后,需清除该强引用
+    [SDRequestHelp shareSDRequest].controller = nil;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

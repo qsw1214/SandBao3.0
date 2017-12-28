@@ -69,6 +69,12 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [super viewWillAppear:animated];
 
 }
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    //定时器停止
+    [self closeTimer];
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,7 +101,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.rightImgStr = @"general_icon_morehdpi";
+    self.navCoverView.rightImgStr = @"general_icon_more";
     self.navCoverView.midTitleStr = @"收付款";
     
     __weak PayQrcodeViewController *weakSelf = self;
@@ -146,67 +152,26 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 
 #pragma mark SDSelectBarViewDelegate
 - (void)selectBarClick:(NSInteger)index{
+    //点击 授权码按钮
     if (index == 1) {
-        //        if (self.payQrcodeBaseView) {
-        //            [UIView animateWithDuration:0.2 animations:^{
-        //                self.payQrcodeBaseView.alpha = 0;
-        //                self.selectBarView.alpha = 0;
-        //            } completion:^(BOOL finished) {
-        //                [self.payQrcodeBaseView removeFromSuperview];
-        //
-        //                //创建 收款码 视图
-        //                [self createCollectionQrView];
-        //                //创建 付款码 视图成功  选择按钮Bar恢复显示
-        //                self.selectBarView.alpha = 1;
-        //            }];
-        //        }
-
-        [UIView animateWithDuration:0.2f animations:^{
-            self.selectBarView.alpha = 0;
-        } completion:^(BOOL finished) {
-            if (self.authCodesArray.count == 0) {
-                //点击获取授权码
-                [self getAuthCodes];
-            }else{
-                //创建 付款码 视图
-                [self creaetPayQrView];
-                //创建 付款码 视图成功  选择按钮Bar恢复显示
-                self.selectBarView.alpha = 1;
-            }
-        }];
+        //定时器继续
+        [self openTimer];
         
+        if (self.authCodesArray.count == 0) {
+            //点击获取授权码
+            [self getAuthCodes];
+        }else{
+            //创建 付款码 视图
+            [self creaetPayQrView];
+        }
     }
+    //点击收款码按钮
     if (index == 2) {
-        
-        //        if (self.collectionQrcodeBaseView) {
-        //            [UIView animateWithDuration:0.2 animations:^{
-        //                self.selectBarView.alpha = 0;
-        //                self.collectionQrcodeBaseView.alpha = 0;
-        //            } completion:^(BOOL finished) {
-        //                [self.collectionQrcodeBaseView removeFromSuperview];
-        //
-        //                if (self.authCodesArray.count == 0) {
-        //                    //点击获取授权码
-        //                    [self getAuthCodes];
-        //                }else{
-        //                    //创建 付款码 视图
-        //                    [self creaetPayQrView];
-        //                    //创建 付款码 视图成功  选择按钮Bar恢复显示
-        //                    self.selectBarView.alpha = 1;
-        //                }
-        //            }];
-        //        }
-        
-        [UIView animateWithDuration:0.2f animations:^{
-            self.selectBarView.alpha = 0;
-        } completion:^(BOOL finished) {
-            //创建 收款码 视图
-            [self createCollectionQrView];
-            //创建 收款码 视图成功  选择按钮Bar恢复显示
-            self.selectBarView.alpha = 1;
-        }];
-        
+        //定时器暂停
+        [self stopTimer];
 
+        //创建 收款码 视图
+        [self createCollectionQrView];
     }
 }
 
@@ -313,17 +278,31 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 //注册MQTT推送的反扫启动SPS通知
 #pragma mark 注册通知 - MQTT推送反扫TN
 - (void)addNotifactionBSC{
+    //注册有密反扫通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPayToolViewPwd:) name:MQTT_NOTICE_BSC_TN_PWD object:nil];
+    //注册无密反扫通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPayToolView:) name:MQTT_NOTICE_BSC_TN object:nil];
+    
 }
 //从通知获取MQTT推送的TN号,走支付流程
-- (void)showPayToolView:(NSNotification*)noti{
+- (void)showPayToolViewPwd:(NSNotification*)noti{
+    
+    //拿到通知后,立即暂停刷新
+    [self stopTimer];
+    
     //获取TN号
     self.TN = (NSString*)noti.object;
     //同正扫流程
     [self TNOrder:self.TN];
-    
 }
-
+//从通知获取MQTT推送的TN号,走无密通知
+- (void)showPayToolView:(NSNotification*)noti{
+    //拿到通知后,立即暂停刷新
+    [self stopTimer];
+    
+    NSString *str = (NSString*)noti.object;
+    [Tool showDialog:str];
+}
 
 
 #pragma mark - SDPayViewDelegate
@@ -375,6 +354,13 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     }];
 }
 
+- (void)payViewClickCloseBtn{
+    //支付控件触发关闭
+    //定时器开启
+    [self openTimer];
+    
+}
+
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
@@ -394,8 +380,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 - (void)payViewPayToolsError:(NSString *)errorInfo{
     [Tool showDialog:errorInfo defulBlock:^{
+        [self.payView hidPayTool];
         
-        
+        //定时器继续
+        [self openTimer];
     }];
 }
 
@@ -434,8 +422,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 }
                 //创建 付款码 视图
                 [self creaetPayQrView];
-                //创建 付款码 视图成功 - 按钮选中Bar恢复显示
-                self.selectBarView.alpha = 1;
                 //定时刷新 授权码
                 [self refreshAuthCode];
             }];
@@ -444,6 +430,33 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         if (error) return ;
     }];
     
+}
+
+#pragma mark 作废授权码
+- (void)reportAuthCode:(NSString*)authCode{
+    
+    //作废授权码,不需要关心其结果,只做上送
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        
+        paynuc.set("authCode", [authCode UTF8String]);
+        NSInteger fr =  paynuc.func("user/reportAuthCode/v1");
+        NSLog(@"-=-=-=-=-=-=-=-=-=-=%ld-=-=-=-=-=-=-=-=-=-=",(long)fr);
+        
+//        __block BOOL error = NO;
+//        paynuc.set("authCode", [authCode UTF8String]);
+//        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
+//        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/reportAuthCode/v1" errorBlock:^(SDRequestErrorType type) {
+//            error = YES;
+//            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+//               [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+//            }];
+//
+//        } successBlock:^{
+//            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+//                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+//            }];
+//        }];
+    }];
 }
 
 
@@ -597,10 +610,9 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [self readNewAuthCode];
     
     //定时一分钟刷新授权码
-    self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
+    self.timer = [NSTimer timerWithTimeInterval:5.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
-
     
 }
 //每隔一分钟读取新授权码
@@ -609,11 +621,16 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     if (self.no_authCodesArray.count>0 && self.authCodeDic) {
         //存储旧授权码
         [self.no_authCodesArray addObject:self.authCodeDic];
+        //作废旧授权码
+        [self reportAuthCode:[self.authCodeDic objectForKey:@"code"]];
     }
     
     if (self.no_authCodesArray.count == 0 && self.authCodeDic) {
-        //第一个授权码作废
+        //第一个授权码存储
         [self.no_authCodesArray addObject:self.authCodeDic];
+        //第一个授权码作废
+        [self reportAuthCode:[self.authCodeDic objectForKey:@"code"]];
+        
     }
     
     //当有授权码余量
@@ -631,20 +648,40 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         }
     }else{
         //timer停止
-        [self.timer invalidate];
-        //timer清空
-        self.timer = nil;
-        
+        [self closeTimer];
         //如果余量不足,则重新申请新授权码下发
         [self getAuthCodes];
     }
-    
-    
+}
+//继续定时器
+- (void)openTimer{
+    if (self.timer) {
+        [self.timer setFireDate:[NSDate distantPast]];
+    }
+}
+
+//暂停定时器
+- (void)stopTimer{
+    if (self.timer) {
+        [self.timer setFireDate:[NSDate distantFuture]];
+    }
+}
+
+//清除定时器
+- (void)closeTimer{
+    if (self.timer) {
+        [self.timer invalidate];
+        self.timer = nil;
+    }
 }
 
 - (void)dealloc{
     //删除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MQTT_NOTICE_BSC_TN_PWD object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MQTT_NOTICE_BSC_TN object:nil];
+    //预防性删除定时器
+    [self closeTimer];
+
 }
 
 

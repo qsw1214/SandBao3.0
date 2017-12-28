@@ -64,9 +64,12 @@
     //弹出时 - 条形码背景视图
     UIView *oneBackGroundView;
     
-    //弹出时 - 二维码背景视图
+    //弹出时 - 条形码数字
+    UILabel *oneLab;
+    //弹出时 - 条形码图片
+    UIImageView *oneimgv;
+    //弹出时 - 二维码图片
     UIImageView *twoBackGroundView;
-    
     
 }
 
@@ -474,13 +477,33 @@
 #pragma mark - setter$getter
 //条形码赋值
 - (void)setOneQrCodeStr:(NSString *)oneQrCodeStr{
-    _oneQrCodeStr = oneQrCodeStr;
-    oneQrcodeImgView.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake(selfViewW, AdapterHfloat(55))];
+    if (oneQrCodeStr.length==0) {
+        
+    }else{
+        _oneQrCodeStr = oneQrCodeStr;
+        oneQrcodeImgView.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake(selfViewW, AdapterHfloat(55))];
+        //放大时 - 放大时条形码+条形数字实时刷新
+        if (oneLab&&oneimgv) {
+            oneLab.text = _oneQrCodeStr;
+            oneimgv.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake([UIScreen mainScreen].bounds.size.width, AdapterHfloat(100))];
+        }
+    }
+    
+    
 }
 //二维码赋值
 - (void)setTwoQrCodeStr:(NSString *)twoQrCodeStr{
-    _twoQrCodeStr = twoQrCodeStr;
-    twoQrCodeImgView.image = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
+    if (twoQrCodeStr.length == 0) {
+        
+    }else{
+        _twoQrCodeStr = twoQrCodeStr;
+        twoQrCodeImgView.image = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
+        //放大时 - 放大二维码实时刷新
+        if (twoBackGroundView) {
+            twoBackGroundView.image = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
+        }
+    }
+    
 }
 //支付工具名称赋值
 - (void)setPayToolNameStr:(NSString *)payToolNameStr{
@@ -649,7 +672,7 @@
         [oneBackGroundView addSubview:oneTipLab];
         
         //条形码图片
-        UIImageView *oneimgv= [[UIImageView alloc] init];
+        oneimgv= [[UIImageView alloc] init];
         oneimgv.backgroundColor = [UIColor whiteColor];
         
         oneimgv.image = oneImg;
@@ -657,7 +680,7 @@
         [oneBackGroundView addSubview:oneimgv];
         
         //条码数字
-        UILabel *oneLab = [[UILabel alloc] init];
+        oneLab = [[UILabel alloc] init];
         oneLab.text = _oneQrCodeStr;
         oneLab.textColor = [UIColor blackColor];
         oneLab.textAlignment = NSTextAlignmentCenter;
@@ -684,7 +707,7 @@
         oneQrShow = NO;
         twoQrShow = YES;
         
-        //创建动画用- 条形码
+        //创建动画用- 二维码
         twoBackGroundView = [[UIImageView alloc] init];
         twoBackGroundView.backgroundColor = [UIColor whiteColor];
         UIImage *twoImg = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];

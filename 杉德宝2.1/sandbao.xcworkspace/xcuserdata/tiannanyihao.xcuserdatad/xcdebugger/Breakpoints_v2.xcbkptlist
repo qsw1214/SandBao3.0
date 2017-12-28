@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/classes/ViewController/leftSide/home/PayQrcode/PayQrcodeViewController.mm"
-            timestampString = "536137816.150588"
+            filePath = "sandbao/classes/ViewController/leftSide/home/HomeViewController.mm"
+            timestampString = "536153969.007817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "-selectBarClick:"
+            startingLineNumber = "627"
+            endingLineNumber = "627"
+            landmarkName = "-noticeB2c:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/classes/ViewController/leftSide/home/PayQrcode/PayQrcodeViewController.mm"
-            timestampString = "536137816.150735"
+            filePath = "sandbao/classes/ViewController/leftSide/home/HomeViewController.mm"
+            timestampString = "536153969.007895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "-selectBarClick:"
+            startingLineNumber = "564"
+            endingLineNumber = "564"
+            landmarkName = "-messageTopic:data:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sandbao/classes/ViewController/leftSide/home/HomeViewController.mm"
+            timestampString = "536153969.007953"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "635"
+            endingLineNumber = "635"
+            landmarkName = "-noticeB2cWithPwd:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

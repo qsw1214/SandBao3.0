@@ -101,6 +101,7 @@ static SDRequestHelp *_instance = nil;
 - (SDRequestErrorType)errorDisposeWithfuncName:(NSString*)funcName{
     
     __weak typeof(self) weakSelf = self;
+    
     //判断对象一: fr
     if (fr) {
         if(fr == 1 || fr == 2 || fr == 3 || fr == 5 || fr == 6 || fr == 7){
@@ -109,7 +110,7 @@ static SDRequestHelp *_instance = nil;
                     [weakSelf.HUD hidden];
                 }
                 //自动处理
-                if (self.respCodeErrorAutomatic) {
+                if (weakSelf.respCodeErrorAutomatic) {
                     [SDMBProgressView showSDMBProgressLoadErrorImgINView:[UIApplication sharedApplication].keyWindow];
                 }
             });
@@ -124,7 +125,7 @@ static SDRequestHelp *_instance = nil;
             paynuc.set("tToken",[tToken UTF8String]);
             fr = paynuc.func([funcName UTF8String]);
             //重新调用判断并返回
-            [self errorDisposeWithfuncName:funcName];
+            [weakSelf errorDisposeWithfuncName:funcName];
         }
     }
     else{
@@ -140,7 +141,7 @@ static SDRequestHelp *_instance = nil;
              *050004 -> 实名成功,开通快捷失败(后端默认实名成功)->HUD消失
              */
             NSArray *array = @[@"030005",@"030012",@"050005",@"050004"];
-            if ([self respCodeArray:array respCode:weakSelf.respCode]) {
+            if ([weakSelf respCodeArray:array respCode:weakSelf.respCode]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (weakSelf.HUD) {
                         [weakSelf.HUD hidden];
@@ -156,7 +157,7 @@ static SDRequestHelp *_instance = nil;
                     if (weakSelf.HUD) {
                         [weakSelf.HUD hidden];
                     }
-                    if (self.respCodeErrorAutomatic) {
+                    if (weakSelf.respCodeErrorAutomatic) {
                         [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
                             [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:YES];
                         }];
@@ -177,7 +178,7 @@ static SDRequestHelp *_instance = nil;
                     NSString *authToolStr = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
                     NSArray *arrTools = [[PayNucHelper sharedInstance] jsonStringToArray:authToolStr];
                     //自动处理
-                    if (self.respCodeErrorAutomatic) {
+                    if (weakSelf.respCodeErrorAutomatic) {
                         if (arrTools.count>0) {
                             //checkResultMsg错误码提示
                             NSString *checkResultMsg = [[arrTools firstObject] objectForKey:@"checkResultMsg"];
