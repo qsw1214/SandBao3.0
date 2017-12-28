@@ -362,7 +362,7 @@
     [self.baseScrollView addSubview:bodyViewOne];
     
     //杉德服务
-    UILabel *sandServerLab = [Tool createLable:@"杉德服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    UILabel *sandServerLab = [Tool createLable:@"杉德服务" attributeStr:nil font:FONT_15_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [bodyViewOne addSubview:sandServerLab];
     
     //majletView
@@ -379,7 +379,11 @@
     bodyViewOne.height = labSpaceToView + sandServerLab.height + labSpaceToView + sandServerView.height;
     
     [bodyViewOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headBGimgView.mas_bottom).offset(UPDOWNSPACE_0);
+        if (SCREEN_HEIGHT == SCREEN_HEIGHT_736){
+            make.top.equalTo(headBGimgView.mas_bottom).offset(UPDOWNSPACE_25);
+        }else{
+            make.top.equalTo(headBGimgView.mas_bottom).offset(UPDOWNSPACE_0);
+        }
         make.centerX.equalTo(headBGimgView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, bodyViewOne.height));
     }];
@@ -406,7 +410,7 @@
     [self.baseScrollView addSubview:bodyViewTwo];
     
     //限时服务
-    UILabel *limitServerLab = [Tool createLable:@"限时服务" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentLeft];
+    UILabel *limitServerLab = [Tool createLable:@"限时服务" attributeStr:nil font:FONT_15_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [bodyViewTwo addSubview:limitServerLab];
     
     //majletView
@@ -550,14 +554,25 @@
     }
     if ([msgType isEqualToString:@"600001"]) {
         if (msgLevel == 0) {
-            //商户反扫支付推送TN号
-            [self noticeB2c:@"TN"];
+           
         }
         if (msgLevel == 1) {
             
         }
         if (msgLevel == 2) {
+            //商户反扫支付(无秘)推动支付结果
+        }
+    }
+    if ([msgType isEqualToString:@"600002"]) {
+        if (msgLevel == 0) {
             
+        }
+        if (msgLevel == 1) {
+            
+        }
+        if (msgLevel == 2) {
+            //商户反扫支付(有密)推送TN号
+            [self noticeB2c:dic];
         }
     }
 }
@@ -607,9 +622,13 @@
     }
     
 }
-#pragma mark MQTT事件: 商户反扫支付通知(600001)
-- (void)noticeB2c:(NSString*)TN{
-    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:TN];
+#pragma mark MQTT事件: 商户反扫支付通知(600002)
+- (void)noticeB2c:(NSDictionary*)dic{
+    NSString *msgData = [[dic objectForKey:@"data"] objectForKey:@"msgData"];
+    NSDictionary *tnDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:msgData];
+    NSString *tn = [tnDic objectForKey:@"sandTN"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:tn];
+    
 }
 
 

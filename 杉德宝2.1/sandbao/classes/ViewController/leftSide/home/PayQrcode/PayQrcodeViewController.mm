@@ -21,14 +21,19 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
     NSDictionary *orderDic; //订单信息
     
-    NSString *amountStr; //订单金额(分)
-    
     NSDictionary *successWorkDic; //支付成功后返回的work
     
 }
 @property (nonatomic, strong) NSMutableArray *authCodesArray; //授权码数组
+@property (nonatomic, strong) NSMutableArray *no_authCodesArray;//废弃授权码数组
+@property (nonatomic, strong) NSDictionary   *authCodeDic;    //授权码串字典
 @property (nonatomic, strong) UIView *collectionQrcodeBaseView;//收款码基础视图
 @property (nonatomic, strong) UIView *payQrcodeBaseView;//付款码基础视图
+
+/**
+ 定时器
+ */
+@property (nonatomic, strong) NSTimer *timer;
 /**
  TN
  */
@@ -68,9 +73,13 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self creaetDefuleUI];
     [self createSelectBar];
     [self create_PayView];
+    
+    //默认展示付款码 - 请求付款码
+    [self getAuthCodes];
     
     //增加B扫C,反扫结果监听
     [self addNotifactionBSC];
@@ -86,13 +95,17 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
+    self.navCoverView.rightImgStr = @"general_icon_morehdpi";
     self.navCoverView.midTitleStr = @"收付款";
     
     __weak PayQrcodeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
-    
+    self.navCoverView.rightBlock = ^{
+        //刷新授权码
+        [weakSelf readNewAuthCode];
+    };
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
@@ -105,30 +118,9 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 //默认绘制收款码UI
 - (void)creaetDefuleUI{
     
-    //默认展示 收款码
-    self.collectionQrcodeBaseView = [[UIView alloc] init];
-    self.collectionQrcodeBaseView.backgroundColor = self.baseScrollView.backgroundColor;
-    [self.baseScrollView addSubview:self.collectionQrcodeBaseView];
-    
-    self.collectionQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
-    self.collectionQrcodeView.style = CollectionQrcordView;
-    self.collectionQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
-    self.collectionQrcodeView.twoQrCodeStr = @"这里是二维码信息字符串";
-    [self.collectionQrcodeBaseView addSubview:self.collectionQrcodeView];
-    
-    CGFloat collectionQrcodeBaseViewH = self.collectionQrcodeView.height;
-    
-    [self.collectionQrcodeBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_40);
-        make.centerX.equalTo(self.baseScrollView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, collectionQrcodeBaseViewH));
-    }];
-    
-    [self.collectionQrcodeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.collectionQrcodeBaseView);
-        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
-        make.size.mas_equalTo(self.collectionQrcodeView.size);
-    }];
+    //默认展示 付款码
+    [self creaetPayQrView];
+
 }
 
 //创建切换条UI
@@ -138,61 +130,106 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [self.baseScrollView addSubview:self.selectBarView];
     
     [self.selectBarView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.collectionQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
-        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
+        make.top.equalTo(self.payQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.payQrcodeBaseView.mas_centerX);
         make.size.mas_equalTo(self.selectBarView.size);
     }];
 }
-//创建收款码UI
-- (void)createCollectionQrView{
+//初始化支付工具(sps)
+- (void)create_PayView{
+    self.payView = [SDPayView getPayView];
+    self.payView.addCardType = SDPayView_ADDBANKCARD;
+    self.payView.delegate = self;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
     
-    self.collectionQrcodeBaseView = [[UIView alloc] init];
-    self.collectionQrcodeBaseView.backgroundColor = self.baseScrollView.backgroundColor;
-    [self.baseScrollView addSubview:self.collectionQrcodeBaseView];
-    
-    self.collectionQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
-    self.collectionQrcodeView.style = CollectionQrcordView;
-    self.collectionQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
-    self.collectionQrcodeView.twoQrCodeStr = @"这里是二维码信息字符串";
-    [self.collectionQrcodeBaseView addSubview:self.collectionQrcodeView];
-    
-    CGFloat collectionQrcodeBaseViewH = self.collectionQrcodeView.height;
-
-    [self.collectionQrcodeBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_40);
-        make.centerX.equalTo(self.baseScrollView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, collectionQrcodeBaseViewH));
-    }];
-    
-    [self.collectionQrcodeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.collectionQrcodeBaseView);
-        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
-        make.size.mas_equalTo(self.collectionQrcodeView.size);
-    }];
-    
-
-    //重置SelectBarView的约束
-    [self.selectBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.collectionQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
-        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
-        make.size.mas_equalTo(self.selectBarView.size);
-    }];
 }
+
+#pragma mark SDSelectBarViewDelegate
+- (void)selectBarClick:(NSInteger)index{
+    if (index == 1) {
+        //        if (self.payQrcodeBaseView) {
+        //            [UIView animateWithDuration:0.2 animations:^{
+        //                self.payQrcodeBaseView.alpha = 0;
+        //                self.selectBarView.alpha = 0;
+        //            } completion:^(BOOL finished) {
+        //                [self.payQrcodeBaseView removeFromSuperview];
+        //
+        //                //创建 收款码 视图
+        //                [self createCollectionQrView];
+        //                //创建 付款码 视图成功  选择按钮Bar恢复显示
+        //                self.selectBarView.alpha = 1;
+        //            }];
+        //        }
+
+        [UIView animateWithDuration:0.2f animations:^{
+            self.selectBarView.alpha = 0;
+        } completion:^(BOOL finished) {
+            if (self.authCodesArray.count == 0) {
+                //点击获取授权码
+                [self getAuthCodes];
+            }else{
+                //创建 付款码 视图
+                [self creaetPayQrView];
+                //创建 付款码 视图成功  选择按钮Bar恢复显示
+                self.selectBarView.alpha = 1;
+            }
+        }];
+        
+    }
+    if (index == 2) {
+        
+        //        if (self.collectionQrcodeBaseView) {
+        //            [UIView animateWithDuration:0.2 animations:^{
+        //                self.selectBarView.alpha = 0;
+        //                self.collectionQrcodeBaseView.alpha = 0;
+        //            } completion:^(BOOL finished) {
+        //                [self.collectionQrcodeBaseView removeFromSuperview];
+        //
+        //                if (self.authCodesArray.count == 0) {
+        //                    //点击获取授权码
+        //                    [self getAuthCodes];
+        //                }else{
+        //                    //创建 付款码 视图
+        //                    [self creaetPayQrView];
+        //                    //创建 付款码 视图成功  选择按钮Bar恢复显示
+        //                    self.selectBarView.alpha = 1;
+        //                }
+        //            }];
+        //        }
+        
+        [UIView animateWithDuration:0.2f animations:^{
+            self.selectBarView.alpha = 0;
+        } completion:^(BOOL finished) {
+            //创建 收款码 视图
+            [self createCollectionQrView];
+            //创建 收款码 视图成功  选择按钮Bar恢复显示
+            self.selectBarView.alpha = 1;
+        }];
+        
+
+    }
+}
+
 //创建付款码UI
+//创建好付款码视图,但授权码值不赋值 - 在定时器刷新时读取授权码
 - (void)creaetPayQrView{
     
-    NSDictionary *authCodeDic = [self.authCodesArray firstObject];
-    NSString *authCode = [authCodeDic objectForKey:@"code"];
+    //防止重复创建收款码/付款码UI
+    if (self.collectionQrcodeBaseView || self.payQrcodeBaseView) {
+        [self.payQrcodeBaseView removeFromSuperview];
+        [self.collectionQrcodeBaseView removeFromSuperview];
+    }
     
     self.payQrcodeBaseView = [[UIView alloc] init];
+    self.payQrcodeBaseView.backgroundColor = [UIColor redColor];
     self.payQrcodeBaseView.backgroundColor = self.baseScrollView.backgroundColor;
     [self.baseScrollView addSubview:self.payQrcodeBaseView];
     
     self.payQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
     self.payQrcodeView.style = PayQrcodeView;
     self.payQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
-    self.payQrcodeView.oneQrCodeStr = authCode;
-    self.payQrcodeView.twoQrCodeStr = authCode;
+    self.payQrcodeView.oneQrCodeStr = nil;
+    self.payQrcodeView.twoQrCodeStr = nil;
     self.payQrcodeView.payToolNameStr = @"杉德卡";
     [self.payQrcodeBaseView addSubview:self.payQrcodeView];
     
@@ -229,14 +266,50 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         make.size.mas_equalTo(self.selectBarView.size);
     }];
 }
-//初始化支付工具(sps)
-- (void)create_PayView{
-    self.payView = [SDPayView getPayView];
-    self.payView.addCardType = SDPayView_ADDBANKCARD;
-    self.payView.delegate = self;
-    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
+
+//创建收款码UI
+- (void)createCollectionQrView{
     
+    //防止重复创建收款码/付款码UI
+    if (self.collectionQrcodeBaseView || self.payQrcodeBaseView) {
+        [self.payQrcodeBaseView removeFromSuperview];
+        [self.collectionQrcodeBaseView removeFromSuperview];
+    }
+    
+    self.collectionQrcodeBaseView = [[UIView alloc] init];
+    self.collectionQrcodeBaseView.backgroundColor = [UIColor greenColor];
+    self.collectionQrcodeBaseView.backgroundColor = self.baseScrollView.backgroundColor;
+    [self.baseScrollView addSubview:self.collectionQrcodeBaseView];
+    
+    self.collectionQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
+    self.collectionQrcodeView.style = CollectionQrcordView;
+    self.collectionQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
+    self.collectionQrcodeView.twoQrCodeStr = @"这里是二维码信息字符串";
+    [self.collectionQrcodeBaseView addSubview:self.collectionQrcodeView];
+    
+    CGFloat collectionQrcodeBaseViewH = self.collectionQrcodeView.height;
+
+    [self.collectionQrcodeBaseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, collectionQrcodeBaseViewH));
+    }];
+    
+    [self.collectionQrcodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionQrcodeBaseView);
+        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
+        make.size.mas_equalTo(self.collectionQrcodeView.size);
+    }];
+    
+
+    //重置SelectBarView的约束
+    [self.selectBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.collectionQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
+        make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
+        make.size.mas_equalTo(self.selectBarView.size);
+    }];
 }
+
 //注册MQTT推送的反扫启动SPS通知
 #pragma mark 注册通知 - MQTT推送反扫TN
 - (void)addNotifactionBSC{
@@ -251,45 +324,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
 }
 
-#pragma mark SDSelectBarViewDelegate
-- (void)selectBarClick:(NSInteger)index{
-    if (index == 1) {
-        if (self.payQrcodeBaseView) {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.payQrcodeBaseView.alpha = 0;
-                self.selectBarView.alpha = 0;
-            } completion:^(BOOL finished) {
-                [self.payQrcodeBaseView removeFromSuperview];
-                
-                //创建 收款码 视图
-                [self createCollectionQrView];
-                //创建 付款码 视图成功  选择按钮Bar恢复显示
-                self.selectBarView.alpha = 1;
-            }];
-        }
-    }
-    if (index == 2) {
-        if (self.collectionQrcodeBaseView) {
-            [UIView animateWithDuration:0.2 animations:^{
-                self.selectBarView.alpha = 0;
-                self.collectionQrcodeBaseView.alpha = 0;
-            } completion:^(BOOL finished) {
-                [self.collectionQrcodeBaseView removeFromSuperview];
 
-                if (self.authCodesArray.count == 0) {
-                    //点击获取授权码
-                    [self getAuthCodes];
-                }else{
-                    //创建 付款码 视图
-                    [self creaetPayQrView];
-                    //创建 付款码 视图成功  选择按钮Bar恢复显示
-                    self.selectBarView.alpha = 1;
-                }
-            }];
-        }
-    }
-    
-}
 
 #pragma mark - SDPayViewDelegate
 - (void)payViewReturnDefulePayToolDic:(NSMutableDictionary *)defulePayToolDic{
@@ -393,6 +428,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 NSArray *tempArray = [[PayNucHelper sharedInstance] jsonStringToArray:authCodes];
                 //授权码获取
                 self.authCodesArray = [NSMutableArray arrayWithCapacity:0];
+                self.no_authCodesArray = [NSMutableArray arrayWithCapacity:0];
                 for (int i = 0; i < tempArray.count; i++) {
                     [self.authCodesArray addObject:tempArray[i]];
                 }
@@ -400,7 +436,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 [self creaetPayQrView];
                 //创建 付款码 视图成功 - 按钮选中Bar恢复显示
                 self.selectBarView.alpha = 1;
-                
+                //定时刷新 授权码
+                [self refreshAuthCode];
             }];
         }];
         
@@ -444,7 +481,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:payTools];
                 NSString *order = [NSString stringWithUTF8String:paynuc.get("order").c_str()];
                 orderDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:order];
-                amountStr = [orderDic objectForKey:@"amount"];
                 
                 //排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
@@ -453,7 +489,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 //支付控件设置列表
                 [self.payView setPayTools:payToolsArray];
                 //支付控件设置信息
-                [self.payView setPayInfo:@[@"付款给商户",[NSString stringWithFormat:@"%.2f",[amountStr floatValue]/100]]];
+                [self.payView setPayInfo:@[@"付款给商户",[NSString stringWithFormat:@"%.2f",[[orderDic objectForKey:@"amount"] floatValue]/100]]];
                 //支付控件弹出
                 [self.payView showPayTool];
             }];
@@ -554,6 +590,57 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 
 
 #pragma mark - 本类公共方法调用
+#pragma mark 定时刷新授权码
+- (void)refreshAuthCode{
+    
+    //由于定时器间隔x秒后执行readNewAuthCode  获取的第一个授权码需手动执行
+    [self readNewAuthCode];
+    
+    //定时一分钟刷新授权码
+    self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+    
+
+    
+}
+//每隔一分钟读取新授权码
+- (void)readNewAuthCode{
+    
+    if (self.no_authCodesArray.count>0 && self.authCodeDic) {
+        //存储旧授权码
+        [self.no_authCodesArray addObject:self.authCodeDic];
+    }
+    
+    if (self.no_authCodesArray.count == 0 && self.authCodeDic) {
+        //第一个授权码作废
+        [self.no_authCodesArray addObject:self.authCodeDic];
+    }
+    
+    //当有授权码余量
+    if (self.authCodesArray.count>0) {
+        //永远取余量授权码组第一个
+        self.authCodeDic = [self.authCodesArray firstObject];
+        //取一个授权码展示,从数组里删除该使用中的授权码
+        [self.authCodesArray removeObject:self.authCodeDic];
+        
+        //设置条形码/二维码
+        NSString *qrCodeStr = [self.authCodeDic objectForKey:@"code"];
+        if (qrCodeStr&&qrCodeStr.length>0) {
+            self.payQrcodeView.oneQrCodeStr = qrCodeStr;
+            self.payQrcodeView.twoQrCodeStr = qrCodeStr;
+        }
+    }else{
+        //timer停止
+        [self.timer invalidate];
+        //timer清空
+        self.timer = nil;
+        
+        //如果余量不足,则重新申请新授权码下发
+        [self getAuthCodes];
+    }
+    
+    
+}
 
 - (void)dealloc{
     //删除通知

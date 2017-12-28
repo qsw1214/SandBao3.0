@@ -153,7 +153,6 @@
 {
     TnOrderViewController *sandTNOrderVC  = [[TnOrderViewController alloc] init];
     sandTNOrderVC.TN = TN;
-    sandTNOrderVC.type = SandTnOrderTypeC2B; //正扫
     [self.navigationController pushViewController:sandTNOrderVC animated:YES];
 }
 

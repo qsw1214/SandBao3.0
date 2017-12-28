@@ -65,7 +65,7 @@
     [leftbtn setBackgroundImage:leftImg forState:UIControlStateNormal];
     [leftbtn setBackgroundImage:leftImgSelect forState:UIControlStateSelected];
     leftbtn.tag = 1;
-    leftbtn.selected = NO;
+    leftbtn.selected = YES;
     [leftbtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
     [blueView addSubview:leftbtn];
     
@@ -75,7 +75,7 @@
     [rightBtn setBackgroundImage:rightImg forState:UIControlStateNormal];
     [rightBtn setBackgroundImage:rightImgSelect forState:UIControlStateSelected];
     rightBtn.tag = 2;
-    rightBtn.selected = YES;
+    rightBtn.selected = NO;
     [rightBtn addTarget:self action:@selector(click:) forControlEvents:UIControlEventTouchUpInside];
     [blueView addSubview:rightBtn];
     
@@ -87,14 +87,14 @@
     rightBtn.frame = CGRectMake(rightBtnOX, leftBtnOY, rightImg.size.width, rightImg.size.height);
     
     
-    //默认创建左边按钮选中装填layer
+    //默认创建左边按钮选中状态layer
     [self createLeftGradientlayer];
 }
 
 - (void)click:(UIButton*)btn{
     
     //点击左边按钮
-    if (btn.tag == 1) {
+    if (btn.tag == 1 && !leftbtn.selected) {
         leftbtn.selected = YES;
         rightBtn.selected = NO;
         rightBtn.userInteractionEnabled = YES;
@@ -110,7 +110,7 @@
     }
     
     //点击右边按钮
-    if (btn.tag == 2) {
+    if (btn.tag == 2 && !rightBtn.selected) {
         leftbtn.selected = NO;
         rightBtn.selected = YES;
         rightBtn.userInteractionEnabled = NO;
@@ -135,8 +135,8 @@
                                   (__bridge id)[UIColor colorWithRed:108/255.f green:185/255.f blue:249/255.f alpha:1.f].CGColor,
                                   (__bridge id)[UIColor colorWithRed:69/255.f green:145/255.f blue:241/255.f alpha:1.f].CGColor
                                   ];
-    rightGradientLayer.startPoint = CGPointMake(1, 0.5f);
-    rightGradientLayer.endPoint = CGPointMake(0.f, 0.5f);
+    rightGradientLayer.startPoint = CGPointMake(0.f, 0.5f);
+    rightGradientLayer.endPoint = CGPointMake(1.f, 0.5f);
     [blueView.layer insertSublayer:rightGradientLayer atIndex:0];
 }
 
@@ -148,8 +148,8 @@
                                   (__bridge id)[UIColor colorWithRed:108/255.f green:185/255.f blue:249/255.f alpha:1.f].CGColor,
                                   (__bridge id)[UIColor colorWithRed:69/255.f green:145/255.f blue:241/255.f alpha:1.f].CGColor
                                   ];
-    leftGradientLayer.startPoint = CGPointMake(0.f, 0.5f);
-    leftGradientLayer.endPoint = CGPointMake(1.f, 0.5f);
+    leftGradientLayer.startPoint = CGPointMake(1.f, 0.5f);
+    leftGradientLayer.endPoint = CGPointMake(0.f, 0.5f);
     [blueView.layer insertSublayer:leftGradientLayer atIndex:0];
 }
 
