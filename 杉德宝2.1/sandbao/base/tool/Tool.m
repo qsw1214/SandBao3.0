@@ -29,7 +29,25 @@
 @implementation Tool
 
 
+#pragma mark - popVc指定返回到某一个具体视图控制器
+/**
+ popVc指定返回到某一个具体视图控制器
 
+ @param vc 当前视图控制器
+ @param vcName 要返回的视图控制器
+ */
++ (void)popToPenultimateViewController:(UIViewController*)vc vcName:(NSString*)vcName{
+    NSString *currentViewControllerName = [NSString stringWithUTF8String:object_getClassName(vc)];
+    
+    for (int i = 0; vc.navigationController.viewControllers.count; i++) {
+        NSString *name = [NSString stringWithUTF8String:object_getClassName(vc.navigationController.viewControllers[i])];
+        if ([name isEqualToString:vcName]) {
+            [vc.navigationController popToViewController:vc.navigationController.viewControllers[i] animated:YES];
+            break;
+        }
+    }
+    [vc.navigationController popToRootViewControllerAnimated:YES];
+}
 
 
 #pragma mark - 弹出默认对话框+无事件处理

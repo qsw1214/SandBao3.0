@@ -17,10 +17,33 @@ typedef NS_ENUM(NSInteger,SDQrcodeViewStyle)
     
 };
 
+
+@protocol SDQrcodeViewDelegate<NSObject>
+
+/**
+ 付款码首次展示代理
+
+ @param show 是否展示
+ @param close 是否关闭 - 点击了我知道了(YES)
+ */
+- (void)payQrcodeWaringTip:(BOOL)show close:(BOOL)close;
+
+@end
+
+
+
 @interface SDQrcodeView : UIView
 
 #pragma mark - 公共属性部分
 
+/**
+ 代理
+ */
+@property (nonatomic, weak)id<SDQrcodeViewDelegate>delegate;
+
+/**
+ 类型
+ */
 @property (nonatomic, assign) SDQrcodeViewStyle style;
 
 /**
@@ -52,20 +75,10 @@ typedef NS_ENUM(NSInteger,SDQrcodeViewStyle)
 @property (nonatomic, strong) NSString *payToolNameStr;
 
 
-///**
-// 公共 - 创建底部空白视图
-// */
-//- (void)createBottomEmptyView;
-//
-///**
-// 付款码 - 创建底部支付工具视图
-// */
-//- (void)createPayToolShowView;
-//
-///**
-// 收款码 - 创建设置金额视图
-// */
-//- (void)createSetMoneyBtnView;
+/**
+ 外部调用 - 隐藏放大的条码图片
+ */
+- (void)hiddenBigQrcodeView;
 
 
 @end

@@ -14,6 +14,13 @@
  */
 @property (nonatomic, assign) BOOL setPayPassFromeHomeNav;
 
+
+/**
+ 需要返回按钮
+ */
+@property (nonatomic, assign) BOOL needGoBackIcon;
+
+
 /**
  类型
  */

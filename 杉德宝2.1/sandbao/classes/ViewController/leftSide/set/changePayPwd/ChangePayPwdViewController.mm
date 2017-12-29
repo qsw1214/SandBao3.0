@@ -56,7 +56,7 @@
         if ([CommParameter sharedInstance].payPassFlag == NO) {
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }else{
-           [weakSelf.navCoverView popToPenultimateViewController:weakSelf];
+           [Tool popToPenultimateViewController:weakSelf vcName:@"VerifyTypeViewController"];
         }
         
         

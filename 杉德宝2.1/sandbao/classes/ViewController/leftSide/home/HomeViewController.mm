@@ -154,6 +154,10 @@
         ScannerViewController *mScannerViewController = [[ScannerViewController alloc] init];
         [self.navigationController pushViewController:mScannerViewController animated:YES];
     }
+    if (btn.tag == BTN_TAG_JUSTCLICK) {
+        //@头像点击
+        [self presentLeftMenuViewController:self.sideMenuViewController];
+    }
     
 }
 
@@ -196,6 +200,7 @@
     headIconImgView.layer.shadowOpacity = 1;
     headIconImgView.layer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:headIconImgView.frame].CGPath;
     headIconImgView.layer.shadowOffset = CGSizeZero;
+    headIconImgView.userInteractionEnabled = YES;
     [headWhiteView addSubview:headIconImgView];
     
     [headIconImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -203,6 +208,18 @@
         make.left.equalTo(headWhiteView.mas_left).offset(LEFTRIGHTSPACE_15);
         make.size.mas_equalTo(headimg.size);
     }];
+    
+    UIButton *headClickBtn = [Tool createButton:@"" attributeStr:nil font:nil textColor:[UIColor clearColor]];
+    headClickBtn.tag = BTN_TAG_JUSTCLICK;
+    [headClickBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headIconImgView addSubview:headClickBtn];
+    
+    [headClickBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headIconImgView.mas_top);
+        make.centerX.equalTo(headIconImgView.mas_centerX);
+        make.size.mas_equalTo(headIconImgView.size);
+    }];
+    
     
     headPhoneNoLab = [Tool createLable:@"1111*******1111" attributeStr:nil font:FONT_18_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headWhiteView addSubview:headPhoneNoLab];
@@ -625,9 +642,10 @@
 #pragma mark MQTT事件: 商户反扫支付通知(600001)
 - (void)noticeB2c:(NSDictionary*)dic{
     NSString *msgData = [[dic objectForKey:@"data"] objectForKey:@"msgData"];
-    NSDictionary *tnDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:msgData];
-    NSString *tn = [tnDic objectForKey:@"sandTN"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:tn];
+    NSString *msgTime = [[dic objectForKey:@"data"] objectForKey:@"msgTime"];
+    NSDictionary *msgDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:msgData];
+    NSString *msg = [msgDic objectForKey:@"msg"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:[NSString stringWithFormat:@"%@+%@",msgTime,msg]];
 }
 
 #pragma mark MQTT事件: 商户反扫支付通知(600002)

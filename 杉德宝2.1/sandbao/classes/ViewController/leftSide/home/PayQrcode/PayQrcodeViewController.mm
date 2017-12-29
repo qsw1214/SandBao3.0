@@ -15,7 +15,7 @@
 
 
 typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
-@interface PayQrcodeViewController ()<SDSelectBarDelegate,SDPayViewDelegate>
+@interface PayQrcodeViewController ()<SDSelectBarDelegate,SDPayViewDelegate,SDQrcodeViewDelegate>
 {
     NSArray *payToolsArray; //从tn获取的支付工具
     
@@ -72,7 +72,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     //定时器停止
-    [self closeTimer];
+    [self cleanTimer];
 }
 
 
@@ -155,7 +155,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     //点击 授权码按钮
     if (index == 1) {
         //定时器继续
-        [self openTimer];
+        [self startTimer];
         
         if (self.authCodesArray.count == 0) {
             //点击获取授权码
@@ -195,6 +195,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     self.payQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
     self.payQrcodeView.oneQrCodeStr = nil;
     self.payQrcodeView.twoQrCodeStr = nil;
+    self.payQrcodeView.delegate = self;
     self.payQrcodeView.payToolNameStr = @"杉德卡";
     [self.payQrcodeBaseView addSubview:self.payQrcodeView];
     
@@ -282,13 +283,15 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPayToolViewPwd:) name:MQTT_NOTICE_BSC_TN_PWD object:nil];
     //注册无密反扫通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showPayToolView:) name:MQTT_NOTICE_BSC_TN object:nil];
-    
 }
 //从通知获取MQTT推送的TN号,走支付流程
 - (void)showPayToolViewPwd:(NSNotification*)noti{
     
     //拿到通知后,立即暂停刷新
     [self stopTimer];
+    
+    //拿到通知后,关闭放大的图片
+    [self.payQrcodeView hiddenBigQrcodeView];
     
     //获取TN号
     self.TN = (NSString*)noti.object;
@@ -300,10 +303,31 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     //拿到通知后,立即暂停刷新
     [self stopTimer];
     
+    //拿到通知后,关闭放大的图片
+    [self.payQrcodeView hiddenBigQrcodeView];
+    
     NSString *str = (NSString*)noti.object;
-    [Tool showDialog:str];
+    NSArray *strArr = [str componentsSeparatedByString:@"+"];
+    NSString *msgTime = [strArr firstObject];
+    NSString *msg = [strArr lastObject];
+    [Tool showDialog:msg message:msgTime defulBlock:^{
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
-
+#pragma mark - SDQrcodeViewDelegate
+- (void)payQrcodeWaringTip:(BOOL)show close:(BOOL)close{
+    
+    //第一次展示
+    if (show && !close) {
+        //停止定时器刷新
+        [self stopTimer];
+    }
+    //点击了 '我知道了' 按钮
+    if (!show && close) {
+        //继续定时器刷新
+        [self startTimer];
+    }
+}
 
 #pragma mark - SDPayViewDelegate
 - (void)payViewReturnDefulePayToolDic:(NSMutableDictionary *)defulePayToolDic{
@@ -357,7 +381,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)payViewClickCloseBtn{
     //支付控件触发关闭
     //定时器开启
-    [self openTimer];
+    [self startTimer];
     
 }
 
@@ -383,7 +407,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [self.payView hidPayTool];
         
         //定时器继续
-        [self openTimer];
+        [self startTimer];
     }];
 }
 
@@ -399,16 +423,56 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         paynuc.set("tTokenType", "04000301");
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    } rightBlock:^{
+                        [self getAuthCodes];
+                    }];
+                }
+                if (type == respCodeErrorType) {
+                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    } rightBlock:^{
+                        [self getAuthCodes];
+                    }];
+                }
+            }];
         } successBlock:^{
-            
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            }];
         }];
         if (error) return ;
         
+        
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/getAuthCodes/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                if (type == frErrorType) {
+                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    } rightBlock:^{
+                        [self getAuthCodes];
+                    }];
+                }
+                if (type == respCodeErrorType) {
+                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                        [self.navigationController popViewControllerAnimated:YES];
+                    } rightBlock:^{
+                        [self getAuthCodes];
+                    }];
+                }
+            }];
         } successBlock:^{
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
@@ -426,10 +490,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 [self refreshAuthCode];
             }];
         }];
-        
         if (error) return ;
     }];
-    
 }
 
 #pragma mark 作废授权码
@@ -437,25 +499,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
     //作废授权码,不需要关心其结果,只做上送
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
-        
         paynuc.set("authCode", [authCode UTF8String]);
-        NSInteger fr =  paynuc.func("user/reportAuthCode/v1");
-        NSLog(@"-=-=-=-=-=-=-=-=-=-=%ld-=-=-=-=-=-=-=-=-=-=",(long)fr);
-        
-//        __block BOOL error = NO;
-//        paynuc.set("authCode", [authCode UTF8String]);
-//        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
-//        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/reportAuthCode/v1" errorBlock:^(SDRequestErrorType type) {
-//            error = YES;
-//            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-//               [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
-//            }];
-//
-//        } successBlock:^{
-//            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-//                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
-//            }];
-//        }];
+        paynuc.func("user/reportAuthCode/v1");
     }];
 }
 
@@ -472,6 +517,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         paynuc.set("tTokenType", "04000101");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+               //获取支付工具失败,恢复定时器刷新
+                [self startTimer];
+            }];
         } successBlock:^{
             
         }];
@@ -486,6 +535,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         paynuc.set("work", [work UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getPayToolsForPay/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                //获取支付工具失败,恢复定时器刷新
+                [self startTimer];
+            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
@@ -599,9 +652,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 
 
-
-
-
 #pragma mark - 本类公共方法调用
 #pragma mark 定时刷新授权码
 - (void)refreshAuthCode{
@@ -610,13 +660,13 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [self readNewAuthCode];
     
     //定时一分钟刷新授权码
-    self.timer = [NSTimer timerWithTimeInterval:5.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
+    self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
-    
     
 }
 //每隔一分钟读取新授权码
 - (void)readNewAuthCode{
+    //定时器只要重新启动 - 必然会执行 readNewAuthCode() 该方法一次 :需注意
     
     if (self.no_authCodesArray.count>0 && self.authCodeDic) {
         //存储旧授权码
@@ -630,7 +680,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [self.no_authCodesArray addObject:self.authCodeDic];
         //第一个授权码作废
         [self reportAuthCode:[self.authCodeDic objectForKey:@"code"]];
-        
     }
     
     //当有授权码余量
@@ -647,14 +696,14 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
             self.payQrcodeView.twoQrCodeStr = qrCodeStr;
         }
     }else{
-        //timer停止
-        [self closeTimer];
+        //timer清除
+        [self cleanTimer];
         //如果余量不足,则重新申请新授权码下发
         [self getAuthCodes];
     }
 }
 //继续定时器
-- (void)openTimer{
+- (void)startTimer{
     if (self.timer) {
         [self.timer setFireDate:[NSDate distantPast]];
     }
@@ -668,7 +717,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 
 //清除定时器
-- (void)closeTimer{
+- (void)cleanTimer{
     if (self.timer) {
         [self.timer invalidate];
         self.timer = nil;
@@ -680,7 +729,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MQTT_NOTICE_BSC_TN_PWD object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MQTT_NOTICE_BSC_TN object:nil];
     //预防性删除定时器
-    [self closeTimer];
+    [self cleanTimer];
 
 }
 

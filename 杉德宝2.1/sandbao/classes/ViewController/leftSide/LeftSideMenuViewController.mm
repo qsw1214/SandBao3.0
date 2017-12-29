@@ -509,7 +509,9 @@
                 }
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            }];
         }];
         if (error) return;
         
@@ -584,22 +586,22 @@
         [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"网络连接失败,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         [Tool exitApplication:self];
                     }];
                 }else{
                     [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         [Tool exitApplication:self];
                     }];
                 }
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            }];
         }];
         if (error) return;
         
@@ -609,14 +611,13 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"加载支付工具失败,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         [Tool exitApplication:self];
                     }];
                 }else{
                     [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         [Tool exitApplication:self];
                     }];
                 }

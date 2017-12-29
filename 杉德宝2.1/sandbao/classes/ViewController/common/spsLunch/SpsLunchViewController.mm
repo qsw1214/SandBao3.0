@@ -277,7 +277,9 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 }
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            }];
         }];
         if (error) return ;
         
@@ -306,8 +308,8 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 }
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 [self.spsLoadingView stopCircleAnimation];
                 [self headViewAnimation];
@@ -403,8 +405,8 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 }
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 NSString *work = [NSString stringWithUTF8String:paynuc.get("work").c_str()];
                 successWorkDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];

@@ -360,8 +360,8 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
-        } successBlock:^{
             
+        } successBlock:^{
         }];
         if (error) return ;
         
@@ -414,17 +414,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
-        
-        
-        //此处增加第二次 queryCardDetail
-        //此处增加第二次 queryCardDetail
-        //此处增加第二次 queryCardDetail
-        //此处增加第二次 queryCardDetail
-        //此处增加第二次 queryCardDetail
-        //此处增加第二次 queryCardDetail
-        //此处增加第二次 queryCardDetail
-        //此处增加第二次 queryCardDetail
-        
         
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;

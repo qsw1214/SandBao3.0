@@ -232,6 +232,7 @@
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 
                 [Tool showDialog:@"支付密码设置成功" defulBlock:^{

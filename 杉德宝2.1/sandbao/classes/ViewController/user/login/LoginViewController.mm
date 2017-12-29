@@ -201,23 +201,24 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getStoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
                     [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //退出处理
                         [Tool exitApplication:self];
                     }];
                 }
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //重新申请sToken
                         [self load];
                     }];
                 }
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+               [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            }];
         }];
         if (error) return;
         
@@ -227,22 +228,23 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@("token/getTtoken/v1") errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
                     [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         [Tool exitApplication:self];
                     }];
                 }
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //重新申请tTtoken
                         [self load];
                     }];
                 }
             }];
         } successBlock:^{
-            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+            }];
         }];
         if (error) return;
         
@@ -250,15 +252,14 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
                     [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         [Tool exitApplication:self];
                     }];
                 }
                 if (type == respCodeErrorType) {
                     [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
-                        [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                         //重新申请鉴权工具
                         [self load];
                     }];

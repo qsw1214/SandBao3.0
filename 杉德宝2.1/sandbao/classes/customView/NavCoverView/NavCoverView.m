@@ -330,17 +330,16 @@
     NSString *currentViewControllerName = [NSString stringWithUTF8String:object_getClassName(vc)];
     
     UIViewController *penultimateVC = vc.navigationController.viewControllers[1];
-    
+
     NSString *penultimateVCName = [NSString stringWithUTF8String:object_getClassName(penultimateVC)];
-    
+
     if ([currentViewControllerName isEqualToString:penultimateVCName]) {
         [vc.navigationController popToRootViewControllerAnimated:YES];
     }else{
         [vc.navigationController popToViewController:penultimateVC animated:YES];
     }
-    
-}
 
+}
 
 
 @end

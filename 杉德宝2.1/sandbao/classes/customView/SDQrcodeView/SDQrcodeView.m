@@ -71,12 +71,21 @@
     //弹出时 - 二维码图片
     UIImageView *twoBackGroundView;
     
+    //手势 - 点击隐藏
+    UITapGestureRecognizer *hiddenTap;
+    
 }
 
 
 @end
 
 @implementation SDQrcodeView
+
+#pragma mark - public
+- (void)hiddenBigQrcodeView{
+    
+    [self touchHiddenBigImg:hiddenTap];
+}
 
 #pragma mark - 初始化+私有方法集
 
@@ -384,6 +393,9 @@
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, headView.frame.size.width, selfViewH);
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:SDQrcodeView_Pay_First_Be_Use]) {
+        if ([_delegate respondsToSelector:@selector(payQrcodeWaringTip:close:)]) {
+            [_delegate payQrcodeWaringTip:YES close:NO];
+        }
         [self createWaringTip];
     }
     
@@ -515,7 +527,12 @@
         [payToolShowView removeFromSuperview];
     }
     
-    [self createPayToolShowView];
+    /*
+     //暂时隐藏设置默认支付工具功能
+     [self createPayToolShowView];
+     */
+    
+    [self createBottomEmptyView];
 }
 //左右小圆点颜色赋值
 - (void)setRoundRLColor:(UIColor *)roundRLColor{
@@ -646,7 +663,7 @@
     //在层级最高处创建白色遮罩视图
     whiteMaskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     whiteMaskView.backgroundColor = [UIColor whiteColor];
-    UITapGestureRecognizer *hiddenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchHiddenBigImg:)];
+    hiddenTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchHiddenBigImg:)];
     [whiteMaskView addGestureRecognizer:hiddenTap];
     whiteMaskView.alpha = 0;
     [[UIApplication sharedApplication].keyWindow addSubview:whiteMaskView];
@@ -732,8 +749,8 @@
         
         if (oneQrShow == YES) {
             //位置恢复
-//            CGAffineTransform transformRotate = CGAffineTransformMakeRotation(-M_PI_2);
-//            tap.view.transform = CGAffineTransformScale(transformRotate, 1.0f, 1.0f);
+            CGAffineTransform transformRotate = CGAffineTransformMakeRotation(-M_PI_2);
+            tap.view.transform = CGAffineTransformScale(transformRotate, 0.6f, 0.6f);
             oneQrShow = NO;
             twoQrShow = NO;
         }
@@ -754,6 +771,10 @@
 
 
 - (void)closeWaringTip:(UIButton*)btn{
+    
+    if ([_delegate respondsToSelector:@selector(payQrcodeWaringTip:close:)]) {
+        [_delegate payQrcodeWaringTip:NO close:YES];
+    }
     
     [[NSUserDefaults standardUserDefaults] setObject:@"-=-=-=-=" forKey:SDQrcodeView_Pay_First_Be_Use];
     //删除 tipMaskView

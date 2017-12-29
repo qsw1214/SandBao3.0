@@ -40,7 +40,7 @@
     __weak LogpwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         // 返回 RegistViewController
-        [weakSelf.navCoverView popToPenultimateViewController:weakSelf];
+        [Tool popToPenultimateViewController:weakSelf vcName:@"RegistViewController"];
     };
 }
 #pragma mark - 重写父类-点击方法集合

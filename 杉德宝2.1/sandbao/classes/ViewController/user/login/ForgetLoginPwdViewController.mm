@@ -178,6 +178,7 @@
                 VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
                 verifyTypeVC.verifyType = VERIFY_TYPE_FORGETLOGPWD;
                 verifyTypeVC.phoneNoStr = self.phoneNum;
+                verifyTypeVC.needGoBackIcon = YES;
                 [self.navigationController pushViewController:verifyTypeVC animated:YES];
             }];
         }];

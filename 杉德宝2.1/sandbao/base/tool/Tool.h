@@ -16,10 +16,18 @@ typedef void(^DefulBtnBlock)();
 @interface Tool : NSObject
 
 
+#pragma mark - popVc指定返回到某一个具体视图控制器
+/**
+ popVc指定返回到某一个具体视图控制器
+ 
+ @param vc 当前视图控制器
+ @param vcName 要返回的视图控制器
+ */
++ (void)popToPenultimateViewController:(UIViewController*)vc vcName:(NSString*)vcName;
+
+
+
 #pragma mark - APPDelegate中弹框提示
-
-
-
 #pragma mark - 弹出默认对话框+无事件处理
 
 /**

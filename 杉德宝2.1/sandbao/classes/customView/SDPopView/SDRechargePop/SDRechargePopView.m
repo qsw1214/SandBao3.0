@@ -195,7 +195,7 @@
     if (!_closeBtn) {
         _closeBtn = [[UIButton alloc] init];
         [_closeBtn addTarget:self action:@selector(hidden) forControlEvents:UIControlEventTouchUpInside];
-        UIImage *closeImg = [UIImage imageNamed:@"login_list_icon_closed"];
+        UIImage *closeImg = [UIImage imageNamed:@"login_list_icon_closedr"];
         [_closeBtn setImage:closeImg forState:UIControlStateNormal];
         CGFloat closeBtnW = closeBtnRightMargin*2 + closeImg.size.width;
         CGFloat closeBtnH = closeBtnRightMargin*2 + closeImg.size.height;

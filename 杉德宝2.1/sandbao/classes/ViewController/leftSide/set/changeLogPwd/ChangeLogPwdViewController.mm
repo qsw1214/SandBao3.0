@@ -44,7 +44,7 @@
     
     __weak ChangeLogPwdViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [weakSelf.navCoverView popToPenultimateViewController:weakSelf];
+        [Tool popToPenultimateViewController:weakSelf vcName:@"VerifyTypeViewController"];
     };
     
 }

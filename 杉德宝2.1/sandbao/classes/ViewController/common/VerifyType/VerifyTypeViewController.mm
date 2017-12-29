@@ -35,13 +35,15 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //请求鉴权工具集组
-     [self getAuthCroups];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //请求鉴权工具集组
+    [self getAuthCroups];
     
     [self createUI];
     
@@ -67,6 +69,13 @@
                 } rightBlock:^{
                     [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf forLogOut:YES];
                 }];
+            };
+        }
+        else if (self.needGoBackIcon) {
+            self.navCoverView.letfImgStr = @"login_icon_back";
+            __weak VerifyTypeViewController *weakSelf = self;
+            self.navCoverView.leftBlock = ^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             };
         }else{
             self.navCoverView.hidden = YES;
