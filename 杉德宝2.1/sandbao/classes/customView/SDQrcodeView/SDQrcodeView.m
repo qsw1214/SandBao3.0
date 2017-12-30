@@ -260,8 +260,6 @@
     if (![[NSUserDefaults standardUserDefaults] objectForKey:SDQrcodeView_Pay_First_Be_Use]) {
         [self createWaringTip];
     }
-    
-    
 }
 
 
@@ -672,7 +670,6 @@
     
     //条形码展示动画
     if (tap.view.tag == 1) {
-        
         //获取条码图片
         UIImage *oneImg = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake([UIScreen mainScreen].bounds.size.width, AdapterHfloat(100))];
         
@@ -749,12 +746,14 @@
 - (void)touchHiddenBigImg:(UIGestureRecognizer*)tap{
     
     [UIView animateWithDuration:0.4f animations:^{
+        //亮度恢复
+        [UIScreen mainScreen].brightness = currentLight;
+        
         if (oneQrShow == YES) {
             //位置恢复
-            CGAffineTransform transformRotate = CGAffineTransformMakeRotation(-M_PI_2);
-            whiteMaskView.transform = CGAffineTransformScale(transformRotate, 0.3f, 0.3f);
-            oneQrShow = NO;
-            twoQrShow = NO;
+            oneBackGroundView.transform = CGAffineTransformRotate(oneBackGroundView.transform,- M_PI_2);
+            oneBackGroundView.transform = CGAffineTransformMakeScale(1.f, 1.f);
+            tap.view.alpha = 0.6;
         }
         if (twoQrShow == YES) {
             //位置恢复
@@ -762,12 +761,25 @@
             twoBackGroundView.transform = CGAffineTransformMakeScale(0.8f, 0.8f);
             oneQrShow = NO;
             twoQrShow = NO;
+            tap.view.alpha = 0.f;
         }
-        //亮度恢复
-        [UIScreen mainScreen].brightness = currentLight;
-        tap.view.alpha = 0.f;
     } completion:^(BOOL finished) {
-        [tap.view removeFromSuperview];
+        if (oneQrShow == YES) {
+            [UIView animateWithDuration:0.2f animations:^{
+                oneBackGroundView.transform = CGAffineTransformTranslate(oneBackGroundView.transform, 0, -100);
+                oneBackGroundView.transform = CGAffineTransformScale(oneBackGroundView.transform, 0.8f, 0.8f);
+                oneQrShow = NO;
+                twoQrShow = NO;
+                tap.view.alpha = 0.f;
+            } completion:^(BOOL finished) {
+                [tap.view removeFromSuperview];
+            }];
+        }
+        if (twoQrShow == YES) {
+            [tap.view removeFromSuperview];
+        }
+        
+        
     }];
     
 }

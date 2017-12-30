@@ -308,8 +308,16 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     NSArray *strArr = [str componentsSeparatedByString:@"+"];
     NSString *msgTime = [strArr firstObject];
     NSString *msg = [strArr lastObject];
+    
     [Tool showDialog:msg message:msgTime defulBlock:^{
-        [self.navigationController popViewControllerAnimated:YES];
+        //无密 - 付款成功!
+        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+        rechargeFinishVC.transTypeName = @"支付成功";
+        rechargeFinishVC.amtMoneyStr = [NSString stringWithFormat:@"%.2f",[[successWorkDic objectForKey:@"transAmt"] floatValue]/100];
+        rechargeFinishVC.payOutName = [self.selectedPayDict objectForKey:@"title"];
+        rechargeFinishVC.payOutNo = [[self.selectedPayDict objectForKey:@"account"] objectForKey:@"accNo"];
+        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
+        
     }];
 }
 #pragma mark - SDPayViewDelegate
@@ -480,11 +488,12 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
     //作废授权码,不需要关心其结果,只做上送
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
-        paynuc.set("authCode", [authCode UTF8String]);
+        NSDictionary *authCodeDic = @{@"code":authCode};
+        NSString *authCodeStr = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)authCodeDic];
+        paynuc.set("authCode", [authCodeStr UTF8String]);
         paynuc.func("user/reportAuthCode/v1");
     }];
 }
-
 
 #pragma mark 获取支付工具
 - (void)TNOrder:(NSString*)TN

@@ -13,6 +13,9 @@
 
 #define bezlViewWH 30
 
+//转圈一直转啊转的 超时时间
+#define durationTimeOut  45.f
+
 @interface  SDMBProgressView(){
     
     MBProgressHUD *HUD;
@@ -148,12 +151,12 @@
         
         if (type == SDMBProgressViewOnlyLoading) {
             lableText = @"正在加载中...";
-            [self addMBProgressHUD:MBProgressHUDModeIndeterminate animationType:MBProgressHUDAnimationZoomOut customView:nil lableText:lableText detailsLabelText:nil hid:NO delayTime:0];
+            [self addMBProgressHUD:MBProgressHUDModeIndeterminate animationType:MBProgressHUDAnimationZoomOut customView:nil lableText:lableText detailsLabelText:nil hid:NO delayTime:durationTimeOut];
         }
         if (type == SDMBProgressViewOnlyLoadingIMG) {
             lableText = @"正在加载中...";
             SDActivityView *activityV = [[SDActivityView alloc]initWithImage:@"SDMBPRotaion" view:self rectWH:bezlViewWH];
-            [self addMBProgressHUD:MBProgressHUDModeCustomView animationType:MBProgressHUDAnimationZoomOut customView:(UIImageView*)activityV lableText:lableText detailsLabelText:nil hid:NO delayTime:0];
+            [self addMBProgressHUD:MBProgressHUDModeCustomView animationType:MBProgressHUDAnimationZoomOut customView:(UIImageView*)activityV lableText:lableText detailsLabelText:nil hid:NO delayTime:durationTimeOut];
         }
         if (type == SDMBProgressViewLoadError) {
             lableText = @"信息加载失败";

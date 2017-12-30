@@ -273,19 +273,19 @@
     }];
     
     [nickNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headView.mas_top).offset(UPDOWNSPACE_0);
+        make.centerY.equalTo(headView.mas_centerY).offset(- nickNameLab.height/2);
         make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
         make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width - headImgViewWH - LEFTRIGHTSPACE_20-LEFTRIGHTSPACE_15, nickNameLab.height));
     }];
     
     [realNameImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(headView);
+        make.centerY.equalTo(realNameLab.mas_centerY);
         make.left.equalTo(headImgView.mas_right).offset(LEFTRIGHTSPACE_15);
         make.size.mas_equalTo(realNameImgView.size);
     }];
     
     [realNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(headView);
+        make.centerY.equalTo(headView.mas_centerY).offset(realNameLab.height/2);
         make.left.equalTo(realNameImgView.mas_right).offset(LEFTRIGHTSPACE_04);
         make.size.mas_equalTo(realNameLab.size);
     }];

@@ -87,23 +87,15 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
     [super setNavCoverView];
-    if (self.realNameFromeHomeNav) {
-        self.navCoverView.letfImgStr = @"login_icon_back";
-        __weak RealNameViewController *weakSelf = self;
-        self.navCoverView.leftBlock = ^{
-            [Tool showDialog:@"您还未实名" message:@"是否放弃实名" leftBtnString:@"继续实名" rightBtnString:@"退出杉德宝" leftBlock:^{
-                //do no thing
-            } rightBlock:^{
-                [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf forLogOut:YES];
-            }];
-        };
-        
-    }else{
-        self.navCoverView.hidden = YES;
-    }
-    
-    
-    
+    self.navCoverView.letfImgStr = @"login_icon_back";
+    __weak RealNameViewController *weakSelf = self;
+    self.navCoverView.leftBlock = ^{
+        [Tool showDialog:@"您还未实名" message:@"是否放弃实名" leftBtnString:@"继续实名" rightBtnString:@"退出杉德宝" leftBlock:^{
+            //do no thing
+        } rightBlock:^{
+            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf forLogOut:YES];
+        }];
+    };
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{

@@ -54,7 +54,8 @@
     blueView.layer.cornerRadius = blueViewH/2.f;
     blueView.layer.shadowColor = [UIColor blackColor].CGColor;
     blueView.layer.shadowOffset = CGSizeMake(0, 3.f);
-    blueView.layer.shadowOpacity = 0.8f;
+    blueView.layer.shadowRadius = 7.f;
+    blueView.layer.shadowOpacity = 0.35f;
     blueView.center = self.center;
     [self addSubview:blueView];
     

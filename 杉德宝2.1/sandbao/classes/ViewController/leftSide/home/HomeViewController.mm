@@ -186,9 +186,9 @@
     headWhiteView.backgroundColor = [UIColor whiteColor];
     headWhiteView.layer.cornerRadius = 5.f;
     headWhiteView.layer.shadowColor = COLOR_343339.CGColor;
-    headWhiteView.layer.shadowOpacity = 0.85;
-    headWhiteView.layer.shadowOffset = CGSizeMake(0, 1.5f);
-    headWhiteView.layer.shadowRadius = 3.5f;
+    headWhiteView.layer.shadowOpacity = 0.35;
+    headWhiteView.layer.shadowOffset = CGSizeMake(0, 5.f);
+    headWhiteView.layer.shadowRadius = 7.f;
     [headView addSubview:headWhiteView];
     
     
@@ -198,6 +198,8 @@
     headIconImgView.layer.masksToBounds = YES;
     headIconImgView.layer.shadowColor = COLOR_343339.CGColor;
     headIconImgView.layer.shadowOpacity = 1;
+    headIconImgView.layer.borderWidth = 0.4f;
+    headIconImgView.layer.borderColor = COLOR_343339.CGColor;
     headIconImgView.layer.shadowPath = [UIBezierPath bezierPathWithOvalInRect:headIconImgView.frame].CGPath;
     headIconImgView.layer.shadowOffset = CGSizeZero;
     headIconImgView.userInteractionEnabled = YES;
@@ -382,6 +384,11 @@
     UILabel *sandServerLab = [Tool createLable:@"杉德服务" attributeStr:nil font:FONT_15_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [bodyViewOne addSubview:sandServerLab];
     
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = COLOR_A1A2A5_3;
+    [bodyViewOne addSubview:line];
+    
+    
     //majletView
     SDMajletView *sandServerView = [SDMajletView createMajletViewOY:0];
     sandServerView.cellSpace = LEFTRIGHTSPACE_25;
@@ -411,12 +418,19 @@
         make.size.mas_equalTo(sandServerLab.size);
     }];
     
+
+    
     [sandServerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(sandServerLab.mas_bottom).offset(labSpaceToView);
         make.centerX.equalTo(bodyViewOne.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, sandServerView.height));
     }];
     
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(sandServerView.mas_top);
+        make.left.equalTo(sandServerLab.mas_left);
+        make.size.mas_equalTo(CGSizeMake(sandServerView.width - 2*LEFTRIGHTSPACE_18, 0.8f));
+    }];
 }
 
 - (void)create_bodyViewTwo{
@@ -429,6 +443,11 @@
     //限时服务
     UILabel *limitServerLab = [Tool createLable:@"限时服务" attributeStr:nil font:FONT_15_Medium textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [bodyViewTwo addSubview:limitServerLab];
+    
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = COLOR_A1A2A5_3;
+    [bodyViewTwo addSubview:line];
+    
     
     //majletView
     SDMajletView *limitServerView = [SDMajletView createMajletViewOY:0];
@@ -461,6 +480,11 @@
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, limitServerView.height));
     }];
     
+    [line mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(limitServerView.mas_top);
+        make.left.equalTo(limitServerLab.mas_left);
+        make.size.mas_equalTo(CGSizeMake(limitServerView.width - 2*LEFTRIGHTSPACE_18, 0.8f));
+    }];
     
 }
 
@@ -669,7 +693,6 @@
         if (![CommParameter sharedInstance].realNameFlag) {
             [Tool showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"登出" leftBlock:^{
                 RealNameViewController *realName = [[RealNameViewController alloc] init];
-                realName.realNameFromeHomeNav = YES;
                 UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
                 [self.sideMenuViewController setContentViewController:realNameNav];
             } rightBlock:^{

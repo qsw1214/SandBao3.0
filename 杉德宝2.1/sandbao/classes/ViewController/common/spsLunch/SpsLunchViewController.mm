@@ -430,7 +430,6 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         if (![CommParameter sharedInstance].realNameFlag) {
             [Tool showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"退出支付" leftBlock:^{
                 RealNameViewController *realName = [[RealNameViewController alloc] init];
-                realName.realNameFromeHomeNav = YES;
                 UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
                 [self.sideMenuViewController setContentViewController:realNameNav];
                 
