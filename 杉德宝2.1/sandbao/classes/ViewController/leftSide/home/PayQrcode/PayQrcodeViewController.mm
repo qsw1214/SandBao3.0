@@ -15,7 +15,7 @@
 
 
 typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
-@interface PayQrcodeViewController ()<SDSelectBarDelegate,SDPayViewDelegate,SDQrcodeViewDelegate>
+@interface PayQrcodeViewController ()<SDSelectBarDelegate,SDPayViewDelegate>
 {
     NSArray *payToolsArray; //从tn获取的支付工具
     
@@ -161,7 +161,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
             //点击获取授权码
             [self getAuthCodes];
         }else{
-            //创建 付款码 视图
+            //创建 付款码 视图 - (这里不隐藏而是重新创建是为了后期有可能UI做变化)
             [self creaetPayQrView];
         }
     }
@@ -170,7 +170,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         //定时器暂停
         [self stopTimer];
 
-        //创建 收款码 视图
+        //创建 收款码 视图 - (这里不隐藏而是重新创建是为了后期有可能UI做变化)
         [self createCollectionQrView];
     }
 }
@@ -195,8 +195,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     self.payQrcodeView.roundRLColor = self.baseScrollView.backgroundColor;
     self.payQrcodeView.oneQrCodeStr = nil;
     self.payQrcodeView.twoQrCodeStr = nil;
-    self.payQrcodeView.delegate = self;
-    self.payQrcodeView.payToolNameStr = @"杉德卡";
     [self.payQrcodeBaseView addSubview:self.payQrcodeView];
     
     //bottomTip
@@ -314,21 +312,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [self.navigationController popViewControllerAnimated:YES];
     }];
 }
-#pragma mark - SDQrcodeViewDelegate
-- (void)payQrcodeWaringTip:(BOOL)show close:(BOOL)close{
-    
-    //第一次展示
-    if (show && !close) {
-        //停止定时器刷新
-        [self stopTimer];
-    }
-    //点击了 '我知道了' 按钮
-    if (!show && close) {
-        //继续定时器刷新
-        [self startTimer];
-    }
-}
-
 #pragma mark - SDPayViewDelegate
 - (void)payViewReturnDefulePayToolDic:(NSMutableDictionary *)defulePayToolDic{
     //设置默认支付工具(显示)
@@ -484,8 +467,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 for (int i = 0; i < tempArray.count; i++) {
                     [self.authCodesArray addObject:tempArray[i]];
                 }
-                //创建 付款码 视图
-                [self creaetPayQrView];
                 //定时刷新 授权码
                 [self refreshAuthCode];
             }];
@@ -666,6 +647,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 //每隔一分钟读取新授权码
 - (void)readNewAuthCode{
+    NSLog(@"************************* 我被调用 ***************************");
+    
     //定时器只要重新启动 - 必然会执行 readNewAuthCode() 该方法一次 :需注意
     
     if (self.no_authCodesArray.count>0 && self.authCodeDic) {

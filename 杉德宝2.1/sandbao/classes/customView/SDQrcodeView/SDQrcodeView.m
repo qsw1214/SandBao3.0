@@ -14,6 +14,10 @@
 #define AdapterHfloat(f) ((f/667.f)*[UIScreen mainScreen].bounds.size.height)
 #define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 
+#define TWO_QRCODE_WH 500
+#define ONE_QECODE_W  500
+#define ONE_QECODE_H  (500*(1-0.678))
+
 
 @interface SDQrcodeView (){
     
@@ -253,6 +257,11 @@
     [bodyView addSubview:roundViewRight];
     
     
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:SDQrcodeView_Pay_First_Be_Use]) {
+        [self createWaringTip];
+    }
+    
+    
 }
 
 
@@ -391,14 +400,6 @@
     
     selfViewH += payToolShowViewH;
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, headView.frame.size.width, selfViewH);
-    
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:SDQrcodeView_Pay_First_Be_Use]) {
-        if ([_delegate respondsToSelector:@selector(payQrcodeWaringTip:close:)]) {
-            [_delegate payQrcodeWaringTip:YES close:NO];
-        }
-        [self createWaringTip];
-    }
-    
 }
 
 
@@ -493,7 +494,7 @@
         
     }else{
         _oneQrCodeStr = oneQrCodeStr;
-        oneQrcodeImgView.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake(selfViewW, AdapterHfloat(55))];
+        oneQrcodeImgView.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake(ONE_QECODE_W, ONE_QECODE_H)];
         //放大时 - 放大时条形码+条形数字实时刷新
         if (oneLab&&oneimgv) {
             oneLab.text = _oneQrCodeStr;
@@ -509,7 +510,7 @@
         
     }else{
         _twoQrCodeStr = twoQrCodeStr;
-        twoQrCodeImgView.image = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
+        twoQrCodeImgView.image = [self twoDimensionCodeWithStr:_twoQrCodeStr size:TWO_QRCODE_WH];
         //放大时 - 放大二维码实时刷新
         if (twoBackGroundView) {
             twoBackGroundView.image = [self twoDimensionCodeWithStr:_twoQrCodeStr size:twoQrCodeImgViewWH];
@@ -587,30 +588,31 @@
 {
     // 1.将字符串转换成NSData
     NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
-    
+
     // 2.创建条形码滤镜
     CIFilter *filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
-    
+
     // 3.恢复滤镜的默认属性
     [filter setDefaults];
-    
+
     // 4.设置滤镜inputMessage数据
     [filter setValue:data forKey:@"inputMessage"];
-    
+
     // 5.获得滤镜输出的图像
     CIImage *urlImage = [filter outputImage];
-    
+
     // 6.消除模糊
     CGFloat scaleX = size.width / urlImage.extent.size.width;
     CGFloat scaleY = size.height / urlImage.extent.size.height;
-    
+
     CIImage *transformImg = [urlImage imageByApplyingTransform:CGAffineTransformScale(CGAffineTransformIdentity, scaleX, scaleY)];
-    
+
     // 6.将CIImage 转换为UIImage
     UIImage *image = [UIImage imageWithCIImage:transformImg];
-    
+
     return image;
 }
+
 
 #pragma mark - 生成二维码
 - (UIImage *)twoDimensionCodeWithStr:(NSString *)str size:(CGFloat)size
@@ -676,7 +678,7 @@
         
         //创建动画用- 条形码背景框
         oneBackGroundView = [[UIView alloc] init];
-        oneBackGroundView.backgroundColor = [UIColor whiteColor];
+        oneBackGroundView.backgroundColor = [UIColor clearColor];
         [whiteMaskView addSubview:oneBackGroundView];
         
         //条码框提示
@@ -685,12 +687,13 @@
         oneTipLab.textColor = [UIColor colorWithRed:255/255.0 green:93/255.0 blue:49/255.0 alpha:1/1.0];
         oneTipLab.textAlignment = NSTextAlignmentCenter;
         oneTipLab.font = [UIFont systemFontOfSize:11];
+        oneTipLab.backgroundColor = [UIColor clearColor];
         oneTipLab.frame = CGRectMake(0, 0, oneImg.size.width, AdapterHfloat(12));
         [oneBackGroundView addSubview:oneTipLab];
         
         //条形码图片
         oneimgv= [[UIImageView alloc] init];
-        oneimgv.backgroundColor = [UIColor whiteColor];
+        oneimgv.backgroundColor = [UIColor clearColor];
         
         oneimgv.image = oneImg;
         oneimgv.frame = CGRectMake(0, oneTipLab.frame.size.height, oneImg.size.width, oneImg.size.height);
@@ -737,7 +740,7 @@
             //设置亮度最大
             [UIScreen mainScreen].brightness = 1.f;
             whiteMaskView.alpha = 1;
-            twoBackGroundView.transform = CGAffineTransformMakeScale(1.5, 1.5);
+            twoBackGroundView.transform = CGAffineTransformMakeScale(1.5f, 1.5f);
         }];
     }
     
@@ -746,17 +749,17 @@
 - (void)touchHiddenBigImg:(UIGestureRecognizer*)tap{
     
     [UIView animateWithDuration:0.4f animations:^{
-        
         if (oneQrShow == YES) {
             //位置恢复
             CGAffineTransform transformRotate = CGAffineTransformMakeRotation(-M_PI_2);
-            tap.view.transform = CGAffineTransformScale(transformRotate, 0.6f, 0.6f);
+            whiteMaskView.transform = CGAffineTransformScale(transformRotate, 0.3f, 0.3f);
             oneQrShow = NO;
             twoQrShow = NO;
         }
         if (twoQrShow == YES) {
             //位置恢复
-            tap.view.transform = CGAffineTransformMakeScale(1.f, 1.f);
+            twoBackGroundView.alpha = 0.f;
+            twoBackGroundView.transform = CGAffineTransformMakeScale(0.8f, 0.8f);
             oneQrShow = NO;
             twoQrShow = NO;
         }
@@ -771,11 +774,7 @@
 
 
 - (void)closeWaringTip:(UIButton*)btn{
-    
-    if ([_delegate respondsToSelector:@selector(payQrcodeWaringTip:close:)]) {
-        [_delegate payQrcodeWaringTip:NO close:YES];
-    }
-    
+
     [[NSUserDefaults standardUserDefaults] setObject:@"-=-=-=-=" forKey:SDQrcodeView_Pay_First_Be_Use];
     //删除 tipMaskView
     [btn.superview removeFromSuperview];

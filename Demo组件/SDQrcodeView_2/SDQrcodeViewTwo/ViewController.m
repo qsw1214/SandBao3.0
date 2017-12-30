@@ -36,8 +36,8 @@
     sdQrcodeView = [[SDQrcodeView alloc] initWithFrame:CGRectZero];
     sdQrcodeView.style = PayQrcodeView;
     sdQrcodeView.roundRLColor = self.view.backgroundColor;
-    sdQrcodeView.oneQrCodeStr = @"asfdsafd";
-    sdQrcodeView.twoQrCodeStr = @"813129131212312";
+    sdQrcodeView.oneQrCodeStr = @"339374071035287071";
+    sdQrcodeView.twoQrCodeStr = @"339374071035287071";
     sdQrcodeView.payToolNameStr = @"杉德卡";
     sdQrcodeView.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - sdQrcodeView.frame.size.width)/2, 100, sdQrcodeView.frame.size.width, sdQrcodeView.frame.size.height);
     

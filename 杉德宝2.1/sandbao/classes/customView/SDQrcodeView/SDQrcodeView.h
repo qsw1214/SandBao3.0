@@ -18,28 +18,9 @@ typedef NS_ENUM(NSInteger,SDQrcodeViewStyle)
 };
 
 
-@protocol SDQrcodeViewDelegate<NSObject>
-
-/**
- 付款码首次展示代理
-
- @param show 是否展示
- @param close 是否关闭 - 点击了我知道了(YES)
- */
-- (void)payQrcodeWaringTip:(BOOL)show close:(BOOL)close;
-
-@end
-
-
-
 @interface SDQrcodeView : UIView
 
 #pragma mark - 公共属性部分
-
-/**
- 代理
- */
-@property (nonatomic, weak)id<SDQrcodeViewDelegate>delegate;
 
 /**
  类型

@@ -17,10 +17,14 @@ typedef NS_ENUM(NSInteger,SDQrcodeViewStyle)
     
 };
 
+
 @interface SDQrcodeView : UIView
 
 #pragma mark - 公共属性部分
 
+/**
+ 类型
+ */
 @property (nonatomic, assign) SDQrcodeViewStyle style;
 
 /**
@@ -52,20 +56,10 @@ typedef NS_ENUM(NSInteger,SDQrcodeViewStyle)
 @property (nonatomic, strong) NSString *payToolNameStr;
 
 
-///**
-// 公共 - 创建底部空白视图
-// */
-//- (void)createBottomEmptyView;
-//
-///**
-// 付款码 - 创建底部支付工具视图
-// */
-//- (void)createPayToolShowView;
-//
-///**
-// 收款码 - 创建设置金额视图
-// */
-//- (void)createSetMoneyBtnView;
+/**
+ 外部调用 - 隐藏放大的条码图片
+ */
+- (void)hiddenBigQrcodeView;
 
 
 @end
