@@ -8,7 +8,6 @@
 
 #import "Tool.h"
 #import <UIKit/UIKit.h>
-#import "CustomAlertView.h"
 #import "SDSqlite.h"
 #import "SqliteHelper.h"
 #import "Base64Util.h"

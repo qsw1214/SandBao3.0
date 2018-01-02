@@ -98,7 +98,6 @@
     //load失败
     if (loadingResult == 0) {
         [self loadingError:@"网络异常,请退出重试" type:1];
-        
     }
     //load成功
     else
@@ -185,6 +184,10 @@
 
 #pragma mark - Loading失败 - 进入失败页
 - (void)loadingError:(NSString*)errorStr type:(NSInteger)errorType{
+    
+    //errorType = 0 ; 无网络处理
+    //errorType = 1 ; 两步认证失败处理
+    
     ErrorLunchViewController *mErrorLunchViewController = [[ErrorLunchViewController alloc] init];
     mErrorLunchViewController.errorInfo = errorStr;
     mErrorLunchViewController.errorType = errorType;

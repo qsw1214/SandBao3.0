@@ -151,12 +151,12 @@
         
         if (type == SDMBProgressViewOnlyLoading) {
             lableText = @"正在加载中...";
-            [self addMBProgressHUD:MBProgressHUDModeIndeterminate animationType:MBProgressHUDAnimationZoomOut customView:nil lableText:lableText detailsLabelText:nil hid:NO delayTime:durationTimeOut];
+            [self addMBProgressHUD:MBProgressHUDModeIndeterminate animationType:MBProgressHUDAnimationZoomOut customView:nil lableText:lableText detailsLabelText:nil hid:YES delayTime:durationTimeOut];
         }
         if (type == SDMBProgressViewOnlyLoadingIMG) {
             lableText = @"正在加载中...";
             SDActivityView *activityV = [[SDActivityView alloc]initWithImage:@"SDMBPRotaion" view:self rectWH:bezlViewWH];
-            [self addMBProgressHUD:MBProgressHUDModeCustomView animationType:MBProgressHUDAnimationZoomOut customView:(UIImageView*)activityV lableText:lableText detailsLabelText:nil hid:NO delayTime:durationTimeOut];
+            [self addMBProgressHUD:MBProgressHUDModeCustomView animationType:MBProgressHUDAnimationZoomOut customView:(UIImageView*)activityV lableText:lableText detailsLabelText:nil hid:YES delayTime:durationTimeOut];
         }
         if (type == SDMBProgressViewLoadError) {
             lableText = @"信息加载失败";

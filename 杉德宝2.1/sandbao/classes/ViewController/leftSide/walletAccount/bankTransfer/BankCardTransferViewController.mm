@@ -447,17 +447,20 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
             
         });
     } rechagreErrorBlock:^(NSArray *paramArr){
-        //支付失败
+        //支付失败 - 动画停止
         [successView animationStopClean];
-        [self.payView originPayTool];
+        //支付失败 - 复位到支付订单
+        [self.payView payPwdResetToPayOrderView];
         if (paramArr.count>0) {
             [Tool showDialog:paramArr[0] defulBlock:^{
-                [self.payView hidPayTool];
+                //支付失败 - 复位支付工具且删除
+                [self.payView resetPayToolHidden];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }else{
             [Tool showDialog:@"网络连接异常" defulBlock:^{
-                [self.payView hidPayTool];
+                //支付失败 - 复位支付工具且删除
+                [self.payView resetPayToolHidden];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }

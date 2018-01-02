@@ -340,17 +340,16 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
             [self.navigationController pushViewController:transferFinishVC animated:YES];
         });
     } transferPayErrorBlock:^(NSArray *paramArr){
-        //支付失败
+        //支付失败 - 动画停止
         [successView animationStopClean];
-        [self.payView originPayTool];
+        //支付失败 - 隐藏支付工具
+        [self.payView hidPayToolInPayPwdView];
         if (paramArr.count>0) {
             [Tool showDialog:paramArr[0] defulBlock:^{
-                [self.payView hidPayTool];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }else{
             [Tool showDialog:@"网络连接异常" defulBlock:^{
-                [self.payView hidPayTool];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }

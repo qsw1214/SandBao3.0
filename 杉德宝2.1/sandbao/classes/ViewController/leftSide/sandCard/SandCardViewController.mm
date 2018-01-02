@@ -26,10 +26,6 @@
 @property (nonatomic, strong) UILabel *noCardLab;
 @property (nonatomic, strong) UIButton *bottomBtn;
 @property (nonatomic, strong) CardBaseTableView *sandTableView;
-/**
- 支付工具控件
- */
-@property (nonatomic, strong) SDPayView *payView;
 @end
 
 @implementation SandCardViewController
@@ -54,7 +50,6 @@
     // Do any additional setup after loading the view.
     
     [self createUI];
-    [self create_PayView];
 }
 
 
@@ -135,12 +130,7 @@
     }];
 
 }
-- (void)create_PayView{
-    self.payView = [SDPayView getPayView];
-    self.payView.style = SDPayViewOnlyPwd;
-    self.payView.delegate = self;
-    [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
-}
+
 
 
 #pragma mark - tableViewDelegate

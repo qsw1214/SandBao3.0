@@ -275,9 +275,11 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
             }];
         });
     } bankCardDelError:^(NSArray *paramArr){
-        //解绑失败
+        //支付失败 - 动画停止
         [successView animationStopClean];
-        [self.payView hidPayTool];
+        //支付失败 - 隐藏支付工具
+        [self.payView hidPayToolInPayPwdView];
+        
         [self.bankTableView reloadData];
         if (paramArr.count>0) {
             [Tool showDialog:paramArr[0]];

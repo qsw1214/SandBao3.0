@@ -358,8 +358,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     } oederErrorBlock:^(NSArray *paramArr){
         //支付失败 - 动画停止
         [successView animationStopClean];
-        //支付失败 - 支付控件归位
-        [self.payView originPayTool];
+        //支付失败 - 复位到支付订单
+        [self.payView payPwdResetToPayOrderView];
         
         if (paramArr.count>0) {
             [Tool showDialog:paramArr[0]];
@@ -395,7 +395,9 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 - (void)payViewPayToolsError:(NSString *)errorInfo{
     [Tool showDialog:errorInfo defulBlock:^{
-        [self.payView hidPayTool];
+        
+        //复位支付工具且删除
+        [self.payView resetPayToolHidden];
         
         //定时器继续
         [self startTimer];

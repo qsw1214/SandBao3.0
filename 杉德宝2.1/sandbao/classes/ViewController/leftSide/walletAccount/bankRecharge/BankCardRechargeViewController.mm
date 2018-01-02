@@ -461,17 +461,20 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
             [self.navigationController pushViewController:rechargeFinishVC animated:YES];
         });
     } rechagreErrorBlock:^(NSArray *paramArr){
-        //支付失败
+        //支付失败 - 动画停止
         [successView animationStopClean];
-        [self.payView originPayTool];
+        //支付失败 - 复位到支付订单
+        [self.payView payPwdResetToPayOrderView];
         if (paramArr.count>0) {
+            //支付失败 - 复位支付工具且删除
             [Tool showDialog:paramArr[0] defulBlock:^{
-                [self.payView hidPayTool];
+                [self.payView resetPayToolHidden];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }else{
             [Tool showDialog:@"网络连接异常" defulBlock:^{
-                [self.payView hidPayTool];
+                //支付失败 - 复位支付工具且删除
+                [self.payView resetPayToolHidden];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }
@@ -482,6 +485,12 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         
+        //@"修改支付密码"
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000601";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     
 }

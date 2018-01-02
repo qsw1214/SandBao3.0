@@ -209,8 +209,8 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     } oederErrorBlock:^(NSArray *paramArr){
         //支付失败- 动画停止
         [successView animationStopClean];
-        //支付失败 - 支付工具归位
-        [self.payView originPayTool];
+        //支付失败 - 复位到支付订单
+        [self.payView payPwdResetToPayOrderView];
         
         if (paramArr.count>0) {
             //spsLunch页特例:交易异常后,仅提示用户,且返回sps订单金额页,不进行退出操作,退出由用户触发

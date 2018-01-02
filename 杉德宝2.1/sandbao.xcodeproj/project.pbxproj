@@ -303,7 +303,6 @@
 		A7DF3C941DC718FD00243EF6 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DF3C931DC718FD00243EF6 /* WebKit.framework */; };
 		A7DF3C961DC7191400243EF6 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DF3C951DC7191400243EF6 /* libsqlite3.0.tbd */; };
 		A7DF3C981DC7192600243EF6 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A7DF3C971DC7192600243EF6 /* libz.1.2.5.tbd */; };
-		A7E9C7841E2CAFE500080B87 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E9C7831E2CAFE500080B87 /* CustomAlertView.m */; };
 		A7EFB1541EB9A8DD009AA369 /* MQTTCFSocketDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EFB12B1EB9A8DD009AA369 /* MQTTCFSocketDecoder.m */; };
 		A7EFB1551EB9A8DD009AA369 /* MQTTCFSocketEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EFB12D1EB9A8DD009AA369 /* MQTTCFSocketEncoder.m */; };
 		A7EFB1561EB9A8DD009AA369 /* MQTTCFSocketTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EFB12F1EB9A8DD009AA369 /* MQTTCFSocketTransport.m */; };
@@ -323,13 +322,6 @@
 		A7EFB1641EB9A8DD009AA369 /* MQTTTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = A7EFB14F1EB9A8DD009AA369 /* MQTTTransport.m */; };
 		A7F2F2641E1E2AE000F6CDA3 /* HttpComm.mm in Sources */ = {isa = PBXBuildFile; fileRef = A7F2F2611E1E2AE000F6CDA3 /* HttpComm.mm */; };
 		A7FF2FC91E1602D80068A2F7 /* CommParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FC81E1602D80068A2F7 /* CommParameter.m */; };
-		A7FF2FE31E160A800068A2F7 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FD61E160A800068A2F7 /* DataModel.m */; };
-		A7FF2FE41E160A800068A2F7 /* DragCellCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FD81E160A800068A2F7 /* DragCellCollectionView.m */; };
-		A7FF2FE51E160A800068A2F7 /* ExternStringDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FDA1E160A800068A2F7 /* ExternStringDefine.m */; };
-		A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FDC1E160A800068A2F7 /* FooterCollectionReusableView.m */; };
-		A7FF2FE71E160A800068A2F7 /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FDE1E160A800068A2F7 /* HeaderCollectionReusableView.m */; };
-		A7FF2FE81E160A800068A2F7 /* ItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FE01E160A800068A2F7 /* ItemCollectionViewCell.m */; };
-		A7FF2FE91E160A800068A2F7 /* MinletsData.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FF2FE21E160A800068A2F7 /* MinletsData.m */; };
 		A7FF2FEB1E160B910068A2F7 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A7FF2FEA1E160B910068A2F7 /* libc++.tbd */; };
 /* End PBXBuildFile section */
 
@@ -808,8 +800,6 @@
 		A7DF3C931DC718FD00243EF6 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		A7DF3C951DC7191400243EF6 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		A7DF3C971DC7192600243EF6 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
-		A7E9C7821E2CAFE500080B87 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
-		A7E9C7831E2CAFE500080B87 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
 		A7EFB12A1EB9A8DD009AA369 /* MQTTCFSocketDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTCFSocketDecoder.h; sourceTree = "<group>"; };
 		A7EFB12B1EB9A8DD009AA369 /* MQTTCFSocketDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQTTCFSocketDecoder.m; sourceTree = "<group>"; };
 		A7EFB12C1EB9A8DD009AA369 /* MQTTCFSocketEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQTTCFSocketEncoder.h; sourceTree = "<group>"; };
@@ -856,20 +846,6 @@
 		A7FF2F921E16000C0068A2F7 /* SDSqlite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSqlite.h; sourceTree = "<group>"; };
 		A7FF2FC71E1602D80068A2F7 /* CommParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommParameter.h; sourceTree = "<group>"; };
 		A7FF2FC81E1602D80068A2F7 /* CommParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommParameter.m; sourceTree = "<group>"; };
-		A7FF2FD51E160A800068A2F7 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
-		A7FF2FD61E160A800068A2F7 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
-		A7FF2FD71E160A800068A2F7 /* DragCellCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragCellCollectionView.h; sourceTree = "<group>"; };
-		A7FF2FD81E160A800068A2F7 /* DragCellCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragCellCollectionView.m; sourceTree = "<group>"; };
-		A7FF2FD91E160A800068A2F7 /* ExternStringDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExternStringDefine.h; sourceTree = "<group>"; };
-		A7FF2FDA1E160A800068A2F7 /* ExternStringDefine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternStringDefine.m; sourceTree = "<group>"; };
-		A7FF2FDB1E160A800068A2F7 /* FooterCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FooterCollectionReusableView.h; sourceTree = "<group>"; };
-		A7FF2FDC1E160A800068A2F7 /* FooterCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FooterCollectionReusableView.m; sourceTree = "<group>"; };
-		A7FF2FDD1E160A800068A2F7 /* HeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCollectionReusableView.h; sourceTree = "<group>"; };
-		A7FF2FDE1E160A800068A2F7 /* HeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCollectionReusableView.m; sourceTree = "<group>"; };
-		A7FF2FDF1E160A800068A2F7 /* ItemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCollectionViewCell.h; sourceTree = "<group>"; };
-		A7FF2FE01E160A800068A2F7 /* ItemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCollectionViewCell.m; sourceTree = "<group>"; };
-		A7FF2FE11E160A800068A2F7 /* MinletsData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinletsData.h; sourceTree = "<group>"; };
-		A7FF2FE21E160A800068A2F7 /* MinletsData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinletsData.m; sourceTree = "<group>"; };
 		A7FF2FEA1E160B910068A2F7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -966,13 +942,13 @@
 			path = loadhelper;
 			sourceTree = "<group>";
 		};
-		281D105E1E6FDADA0031806C /* NavCoverView */ = {
+		281D105E1E6FDADA0031806C /* SDNavCoverView */ = {
 			isa = PBXGroup;
 			children = (
 				281D105F1E6FDAEF0031806C /* NavCoverView.h */,
 				281D10601E6FDAEF0031806C /* NavCoverView.m */,
 			);
-			path = NavCoverView;
+			path = SDNavCoverView;
 			sourceTree = "<group>";
 		};
 		281F64301E792A970005AE86 /* SDCycleScrollView */ = {
@@ -2167,15 +2143,6 @@
 			path = classes;
 			sourceTree = "<group>";
 		};
-		A7E9C7811E2CAFE500080B87 /* customAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				A7E9C7821E2CAFE500080B87 /* CustomAlertView.h */,
-				A7E9C7831E2CAFE500080B87 /* CustomAlertView.m */,
-			);
-			path = customAlertView;
-			sourceTree = "<group>";
-		};
 		A7EFB1281EB9A8DD009AA369 /* MQTTClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -2284,9 +2251,7 @@
 				A7D24CD81E973D9E00688506 /* webViewProgress */,
 				281F644A1E7934590005AE86 /* BannerView */,
 				2821B7841E77B25A00F093D7 /* HeadImageBtnView */,
-				281D105E1E6FDADA0031806C /* NavCoverView */,
-				A7E9C7811E2CAFE500080B87 /* customAlertView */,
-				A7FF2FD41E160A800068A2F7 /* collectionview */,
+				281D105E1E6FDADA0031806C /* SDNavCoverView */,
 			);
 			path = customView;
 			sourceTree = "<group>";
@@ -2298,27 +2263,6 @@
 				A7FF2FC81E1602D80068A2F7 /* CommParameter.m */,
 			);
 			path = comm;
-			sourceTree = "<group>";
-		};
-		A7FF2FD41E160A800068A2F7 /* collectionview */ = {
-			isa = PBXGroup;
-			children = (
-				A7FF2FD51E160A800068A2F7 /* DataModel.h */,
-				A7FF2FD61E160A800068A2F7 /* DataModel.m */,
-				A7FF2FD71E160A800068A2F7 /* DragCellCollectionView.h */,
-				A7FF2FD81E160A800068A2F7 /* DragCellCollectionView.m */,
-				A7FF2FD91E160A800068A2F7 /* ExternStringDefine.h */,
-				A7FF2FDA1E160A800068A2F7 /* ExternStringDefine.m */,
-				A7FF2FDB1E160A800068A2F7 /* FooterCollectionReusableView.h */,
-				A7FF2FDC1E160A800068A2F7 /* FooterCollectionReusableView.m */,
-				A7FF2FDD1E160A800068A2F7 /* HeaderCollectionReusableView.h */,
-				A7FF2FDE1E160A800068A2F7 /* HeaderCollectionReusableView.m */,
-				A7FF2FDF1E160A800068A2F7 /* ItemCollectionViewCell.h */,
-				A7FF2FE01E160A800068A2F7 /* ItemCollectionViewCell.m */,
-				A7FF2FE11E160A800068A2F7 /* MinletsData.h */,
-				A7FF2FE21E160A800068A2F7 /* MinletsData.m */,
-			);
-			path = collectionview;
 			sourceTree = "<group>";
 		};
 		BE31DB1D75EE22969E918619 /* Pods */ = {
@@ -2631,7 +2575,6 @@
 				28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */,
 				28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */,
 				28F3770D1FB31C4500813512 /* ValidAuthToolView.m in Sources */,
-				A7FF2FE61E160A800068A2F7 /* FooterCollectionReusableView.m in Sources */,
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
 				28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */,
 				289C0D551F203FBC00360147 /* YXEasing.m in Sources */,
@@ -2644,7 +2587,6 @@
 				A7EFB15F1EB9A8DD009AA369 /* MQTTSessionSynchron.m in Sources */,
 				288421911F8E091200082E7C /* NSDate+time.m in Sources */,
 				28D7E59D1FA9BF3800518042 /* UserHongbaoViewController.mm in Sources */,
-				A7FF2FE41E160A800068A2F7 /* DragCellCollectionView.m in Sources */,
 				28981B8B1FA01FA8004CFC95 /* BankPickerView.m in Sources */,
 				281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */,
 				A7EFB1601EB9A8DD009AA369 /* MQTTSSLSecurityPolicy.m in Sources */,
@@ -2666,7 +2608,6 @@
 				A7EFB1571EB9A8DD009AA369 /* MQTTCoreDataPersistence.m in Sources */,
 				28D28F1D1FCEAF8C00B3F00B /* ErrorLunchViewController.mm in Sources */,
 				28BCE8C31FB18FD500D62F94 /* VerifyViewController.mm in Sources */,
-				A7FF2FE51E160A800068A2F7 /* ExternStringDefine.m in Sources */,
 				28B649851FAC654A0074A390 /* SDPayToolOrderView.m in Sources */,
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
 				288421971F8E091200082E7C /* NSString+Money.m in Sources */,
@@ -2703,13 +2644,11 @@
 				288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */,
 				A7FF2FC91E1602D80068A2F7 /* CommParameter.m in Sources */,
 				28B649221FAC459B0074A390 /* LunchViewController.mm in Sources */,
-				A7FF2FE71E160A800068A2F7 /* HeaderCollectionReusableView.m in Sources */,
 				28466F471FA8160500FA64FF /* AboutUSViewController.m in Sources */,
 				28B649841FAC654A0074A390 /* SDPayToolListView.m in Sources */,
 				2820D1AF1E7BE8120012C067 /* SDCircleView.m in Sources */,
 				28981B881FA01FA8004CFC95 /* PhoneAuthToolView.m in Sources */,
 				28D7E5851FA9A50C00518042 /* BankCardRechargeViewController.mm in Sources */,
-				A7FF2FE81E160A800068A2F7 /* ItemCollectionViewCell.m in Sources */,
 				28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */,
 				A7EFB15E1EB9A8DD009AA369 /* MQTTSessionManager.m in Sources */,
 				28B649861FAC654A0074A390 /* SDPayToolPwdView.m in Sources */,
@@ -2722,7 +2661,6 @@
 				28C362471FD912CB007F067C /* ScannerViewController.m in Sources */,
 				2824BB0B1FDA2B4A00C267AB /* TnOrderCellView.m in Sources */,
 				28A8AEAF1FAB25E500FA1EC1 /* SDBottomPop.m in Sources */,
-				A7FF2FE91E160A800068A2F7 /* MinletsData.m in Sources */,
 				282D90361EF769B000CF8C28 /* SDMBProgressView.m in Sources */,
 				288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */,
 				281F64471E792A970005AE86 /* SDCollectionViewCell.m in Sources */,
@@ -2743,7 +2681,6 @@
 				289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */,
 				281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */,
 				28B6491A1FAC451D0074A390 /* SDMajletCell.m in Sources */,
-				A7FF2FE31E160A800068A2F7 /* DataModel.m in Sources */,
 				28D7E5971FA9A53F00518042 /* UserTransferBeginViewController.mm in Sources */,
 				2834E4361FBEB813007F1F61 /* NickNameViewController.mm in Sources */,
 				28D289B01FA2CA8000C3787E /* SandCardViewController.mm in Sources */,
@@ -2780,7 +2717,6 @@
 				282D90321EF769B000CF8C28 /* SDActivityView.m in Sources */,
 				28D28F301FD15C0000B3F00B /* UIImage+HDExtension.m in Sources */,
 				288421B51F8E095E00082E7C /* SqliteHelper.m in Sources */,
-				A7E9C7841E2CAFE500080B87 /* CustomAlertView.m in Sources */,
 				A7EFB15C1EB9A8DD009AA369 /* MQTTSession.m in Sources */,
 				A7DF3C5C1DC7152A00243EF6 /* main.m in Sources */,
 				281F64491E792A970005AE86 /* UIView+SDExtension.m in Sources */,

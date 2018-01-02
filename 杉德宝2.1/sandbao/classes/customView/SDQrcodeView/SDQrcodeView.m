@@ -746,9 +746,12 @@
 - (void)touchHiddenBigImg:(UIGestureRecognizer*)tap{
     
     [UIView animateWithDuration:0.4f animations:^{
-        //亮度恢复
-        [UIScreen mainScreen].brightness = currentLight;
         
+        if (currentLight) {
+            //亮度恢复
+            [UIScreen mainScreen].brightness = currentLight;
+        }
+
         if (oneQrShow == YES) {
             //位置恢复
             oneBackGroundView.transform = CGAffineTransformRotate(oneBackGroundView.transform,- M_PI_2);
