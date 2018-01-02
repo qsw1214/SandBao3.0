@@ -420,17 +420,13 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
-                    } rightBlock:^{
-                        [self getAuthCodes];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
-                    } rightBlock:^{
-                        [self getAuthCodes];
                     }];
                 }
             }];
@@ -448,17 +444,13 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
-                    } rightBlock:^{
-                        [self getAuthCodes];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取授权码失败" message:@"请刷新后获取" leftBtnString:@"取消" rightBtnString:@"重新获取" leftBlock:^{
+                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
-                    } rightBlock:^{
-                        [self getAuthCodes];
                     }];
                 }
             }];
@@ -526,7 +518,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getPayToolsForPay/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                //获取支付工具失败,恢复定时器刷新
                 [self startTimer];
             }];
         } successBlock:^{
@@ -540,7 +531,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
                 
                 //排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
-                
                 
                 //支付控件设置列表
                 [self.payView setPayTools:payToolsArray];

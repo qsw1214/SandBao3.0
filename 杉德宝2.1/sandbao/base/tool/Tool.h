@@ -60,6 +60,17 @@ typedef void(^DefulBtnBlock)();
  */
 + (void)showDialog:(NSString*)title message:(NSString*)message defulBlock:(DefulBtnBlock)defulblock;
 
+#pragma mark - 弹出带标题对话框+事件处理+自定义处理标题
+/**
+ 弹出带标题对话框+事件处理+自定义处理标题
+ 
+ @param title 标题
+ @param message 消息内容
+ @param sureTitle 确认消息标题
+ @param defaultBlock 自定义的事件处理
+ */
++ (void)showDialog:(NSString*)title message:(NSString*)message sureTitle:(NSString*)sureTitle defualtBlcok:(DefulBtnBlock)defaultBlock;
+
 #pragma mark - 弹出带标题对话框+事件处理
 
 /**

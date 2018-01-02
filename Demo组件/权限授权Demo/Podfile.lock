@@ -1,0 +1,12 @@
+PODS:
+  - JLAuthorizationManager (1.0.0)
+
+DEPENDENCIES:
+  - JLAuthorizationManager (~> 1.0.0)
+
+SPEC CHECKSUMS:
+  JLAuthorizationManager: 3ec50da8848c34444645fde83a9724e9d61c8d9d
+
+PODFILE CHECKSUM: 22f6d8e33b5f1b6f024df999aee311e54167b430
+
+COCOAPODS: 1.4.0.beta.2

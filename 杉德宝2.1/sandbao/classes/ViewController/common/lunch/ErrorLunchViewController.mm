@@ -86,7 +86,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         // 网络权限受限
         if (self.errorType == 0) {
-            [Tool showDialog:@"网络权限受限" message:@"允许杉德宝使用WiFi或蜂窝无线网络" defulBlock:^{
+            [Tool showDialog:@"网络权限受限,您可以" message:@"检查网络连接情况或允许杉德宝使用网络" sureTitle:@"去解决" defualtBlcok:^{
                 [Tool openUrl:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
                 [Tool exitApplication:self];
             }];

@@ -58,15 +58,6 @@
  */
 + (void)showDialog:(NSString *)message{
     
-//    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:@"提示" message:message buttonTitles:@"确认",nil, nil];
-//    alertView.alertViewStyle = CustomAlertViewStyleDefault;
-//    
-//    [alertView showWithCompletion:^(NSInteger selectIndex) {
-//        if (selectIndex == 0) {
-//            // do  nothing
-//        }
-//    }];
-    
     HDAlertView *alertView = [HDAlertView alertViewWithTitle:@"提示" andMessage:message];
     alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
     alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
@@ -91,14 +82,6 @@
  @param defulblock 默认事件回调
  */
 + (void)showDialog:(NSString *)message defulBlock:(DefulBtnBlock)defulblock{
-//    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:@"提示" message:message buttonTitles:@"我知道了",nil, nil];
-//    alertView.alertViewStyle = CustomAlertViewStyleDefault;
-//    
-//    [alertView showWithCompletion:^(NSInteger selectIndex) {
-//        if (selectIndex == 0) {
-//            defulblock();
-//        }
-//    }];
     
     HDAlertView *alertView = [HDAlertView alertViewWithTitle:@"提示" andMessage:message];
     alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
@@ -114,7 +97,7 @@
 }
 
 
-#pragma mark - 弹出带标题对话框+默认事件处理
+#pragma mark - 弹出带标题对话框+默认事件处理 + 消息标题
 /**
  弹出带标题对话框+默认事件处理
 
@@ -136,6 +119,28 @@
     [alertView show];
 }
 
+#pragma mark - 弹出带标题对话框+事件处理+自定义处理标题
+/**
+ 弹出带标题对话框+事件处理+自定义处理标题
+ 
+ @param title 标题
+ @param message 消息内容
+ @param sureTitle 确认消息标题
+ @param defaultBlock 自定义的事件处理
+ */
++ (void)showDialog:(NSString*)title message:(NSString*)message sureTitle:(NSString*)sureTitle defualtBlcok:(DefulBtnBlock)defaultBlock{
+    
+    HDAlertView *alertView = [HDAlertView alertViewWithTitle:title andMessage:message];
+    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
+    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
+    alertView.isSupportRotating = YES;
+    
+    [alertView addButtonWithTitle:sureTitle type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
+        defaultBlock();
+    }];
+    [alertView show];
+}
+
 
 #pragma mark - 弹出带标题对话框+事件处理
 /**
@@ -149,18 +154,6 @@
  @param rightbtnblock 右按钮回调
  */
 + (void)showDialog:(NSString*)title message:(NSString*)message leftBtnString:(NSString*)leftString rightBtnString:(NSString*)rightString leftBlock:(LeftBtnBlock)leftbtnblock rightBlock:(RightBtnBlock)rightbtnblock{
-    
-//    CustomAlertView* alertView = [[CustomAlertView alloc] initWithTitle:title message:message buttonTitles:leftString,rightString, nil];
-//    alertView.alertViewStyle = CustomAlertViewStyleDefault;
-//    
-//    [alertView showWithCompletion:^(NSInteger selectIndex) {
-//        if (selectIndex == 0) {
-//            leftbtnblock();
-//        }
-//        else if(selectIndex == 1){
-//            rightbtnblock();
-//        }
-//    }];
     
     HDAlertView *alertView = [HDAlertView alertViewWithTitle:title andMessage:message];
     alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
@@ -178,6 +171,7 @@
     [alertView show];
     
 }
+
 
 #pragma mark - url跳转
 /**
