@@ -30,9 +30,9 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     NSDictionary *successWorkDic; //支付成功后返回的work
     
     CGFloat limitFloat;
-    
     NSDictionary *orderDic; //订单信息
-    
+    // 跳转忘记密码的标识
+    BOOL forgetPwdPush;
 }
 /**
  支付工具控件
@@ -61,13 +61,22 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     //检测是否实名/设置支付密码
     [self checkRealNameOrSetPayPwd];
     
+
+    
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    //只要消失,删除sps
-    [self.payView removeFromSuperview];
+    //除 跳转忘记密码页面外, 其他情况均删除支付工具
+    if (forgetPwdPush) {
+        forgetPwdPush = NO;
+    }else{
+        //只要消失,删除sps
+        [self.payView removeFromSuperview];
+        forgetPwdPush = NO;
+    }
+    
     
 }
 
@@ -227,8 +236,16 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         
+        forgetPwdPush = YES;
+        
+        //@"修改支付密码"
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000601";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
+        
     }
-    
 }
 
 - (void)payViewAddPayToolCard:(NSString *)type{

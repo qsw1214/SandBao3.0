@@ -484,7 +484,6 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewForgetPwd:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        
         //@"修改支付密码"
         VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
         verifyTypeVC.tokenType = @"01000601";
