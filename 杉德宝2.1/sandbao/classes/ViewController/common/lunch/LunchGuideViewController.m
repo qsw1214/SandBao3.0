@@ -7,6 +7,8 @@
 //
 
 #import "LunchGuideViewController.h"
+#import "LFFAuthorizationManager.h"
+#import "SDAuthorazithonPopView.h"
 
 //首次安装 - 引导页 
 
@@ -28,13 +30,13 @@
     // Do any additional setup after loading the view.
     
     [self setBaseInfo];
+    
 }
 
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
     [self.baseScrollView removeFromSuperview];
-
 }
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
@@ -62,6 +64,7 @@
     imgScrollerView.showsHorizontalScrollIndicator = NO;
     imgScrollerView.pagingEnabled = YES;
     imgScrollerView.scrollEnabled = YES;
+    imgScrollerView.delegate = self;
     imgScrollerView.bounces = NO;  //取消弹簧效果!
     [self.view addSubview:imgScrollerView];
     
@@ -83,10 +86,40 @@
             nextBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 100);
             [nextBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             [imgCell addSubview:nextBtn];
+            //弹出权限授予框
+            [self setAuthorization];
         }
     }
     
 
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentSize.width == SCREEN_WIDTH*imgeNameArr.count) {
+        
+    }
+    
+}
+
+
+#pragma mark - 设置访问权限
+- (void)setAuthorization{
+    
+    SDAuthorazithonPopView *authorizationPop = [SDAuthorazithonPopView showRechargePopView:@"体验更多功能" rechargeChooseBlock:^(NSString *cellName) {
+        if ([cellName isEqualToString:@"允许访问麦克风"]) {
+            [[LFFAuthorizationManager defaultManager] requestAudioAccess];
+        }
+        if ([cellName isEqualToString:@"允许访问相机"]) {
+            [[LFFAuthorizationManager defaultManager] requestCameraAccess];
+        }
+        if ([cellName isEqualToString:@"允许访问相册"]) {
+            [[LFFAuthorizationManager defaultManager] requestPhotoLibraryAccess];
+        }
+        if ([cellName isEqualToString:@"允许访问通讯录"]) {
+            [[LFFAuthorizationManager defaultManager] requestAddressBookAccess];
+        }
+    }];
+    authorizationPop.chooseBtnTitleArr = @[@"允许访问麦克风",@"允许访问相机",@"允许访问相册",@"允许访问通讯录"];
 }
 
 - (void)didReceiveMemoryWarning {

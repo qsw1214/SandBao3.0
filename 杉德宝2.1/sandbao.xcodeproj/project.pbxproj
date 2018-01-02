@@ -15,7 +15,6 @@
 		280B5BBF1FC2D7E100319F82 /* recharge_not_chooseBtn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 280B5BBD1FC2D7E100319F82 /* recharge_not_chooseBtn@3x.png */; };
 		280B5BC21FC3FB3700319F82 /* SandCardDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 280B5BC11FC3FB3700319F82 /* SandCardDetailViewController.mm */; };
 		280B5BC41FC4011A00319F82 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 280B5BC31FC4011A00319F82 /* SF-UI-Display-Regular.otf */; };
-		280B5C0C1FC563D300319F82 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 280B5C0B1FC563D300319F82 /* TestViewController.m */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
 		281431341FB54DB0000F4063 /* UserTransferFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281431331FB54DB0000F4063 /* UserTransferFinishViewController.m */; };
 		2814313C1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2814313B1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm */; };
@@ -85,6 +84,8 @@
 		28466F5C1FA846CE00FA64FF /* sandServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28466F5B1FA846CE00FA64FF /* sandServer.plist */; };
 		28491BD21F38719F00E2B30C /* DismissAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */; };
 		28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = 28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */; };
+		284E49671FFB550700C343D9 /* LFFAuthorizationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 284E49661FFB550700C343D9 /* LFFAuthorizationManager.m */; };
+		284E496D1FFB5DDA00C343D9 /* SDAuthorazithonPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 284E496C1FFB5DDA00C343D9 /* SDAuthorazithonPopView.m */; };
 		2853C5781EE134C100DFF407 /* h5test.html in Resources */ = {isa = PBXBuildFile; fileRef = 2853C5771EE134C100DFF407 /* h5test.html */; };
 		2857416E1FBD763400AA25A1 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857416D1FBD763400AA25A1 /* MessageViewController.m */; };
 		285741721FBD903900AA25A1 /* IdentityDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 285741711FBD903900AA25A1 /* IdentityDetailViewController.mm */; };
@@ -353,8 +354,6 @@
 		280B5BC11FC3FB3700319F82 /* SandCardDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandCardDetailViewController.mm; sourceTree = "<group>"; };
 		280B5BC31FC4011A00319F82 /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
 		280B5BC51FC4042B00319F82 /* SFText-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFText-Medium.otf"; sourceTree = "<group>"; };
-		280B5C0A1FC563D300319F82 /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
-		280B5C0B1FC563D300319F82 /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+easyFrame.h"; sourceTree = "<group>"; };
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
 		281431321FB54DB0000F4063 /* UserTransferFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTransferFinishViewController.h; sourceTree = "<group>"; };
@@ -471,6 +470,10 @@
 		28491BCF1F38719F00E2B30C /* DismissAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissAnimatedTransitioning.m; sourceTree = "<group>"; };
 		28491BD01F38719F00E2B30C /* PresentAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentAnimatedTransitioning.h; sourceTree = "<group>"; };
 		28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentAnimatedTransitioning.m; sourceTree = "<group>"; };
+		284E49651FFB550700C343D9 /* LFFAuthorizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFFAuthorizationManager.h; sourceTree = "<group>"; };
+		284E49661FFB550700C343D9 /* LFFAuthorizationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFFAuthorizationManager.m; sourceTree = "<group>"; };
+		284E496B1FFB5DDA00C343D9 /* SDAuthorazithonPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAuthorazithonPopView.h; sourceTree = "<group>"; };
+		284E496C1FFB5DDA00C343D9 /* SDAuthorazithonPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAuthorazithonPopView.m; sourceTree = "<group>"; };
 		2853C5771EE134C100DFF407 /* h5test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = h5test.html; sourceTree = "<group>"; };
 		2857416C1FBD763400AA25A1 /* MessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewController.h; sourceTree = "<group>"; };
 		2857416D1FBD763400AA25A1 /* MessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewController.m; sourceTree = "<group>"; };
@@ -1247,8 +1250,6 @@
 			children = (
 				28466F451FA8160500FA64FF /* AboutUSViewController.h */,
 				28466F461FA8160500FA64FF /* AboutUSViewController.m */,
-				280B5C0A1FC563D300319F82 /* TestViewController.h */,
-				280B5C0B1FC563D300319F82 /* TestViewController.m */,
 			);
 			path = aboutUs;
 			sourceTree = "<group>";
@@ -1287,6 +1288,15 @@
 				28491BD11F38719F00E2B30C /* PresentAnimatedTransitioning.m */,
 			);
 			path = SDViewControllerAnimatedTransitioning;
+			sourceTree = "<group>";
+		};
+		284E49641FFB550700C343D9 /* LFFAuthorizationManager */ = {
+			isa = PBXGroup;
+			children = (
+				284E49651FFB550700C343D9 /* LFFAuthorizationManager.h */,
+				284E49661FFB550700C343D9 /* LFFAuthorizationManager.m */,
+			);
+			path = LFFAuthorizationManager;
 			sourceTree = "<group>";
 		};
 		2857416B1FBD762800AA25A1 /* message */ = {
@@ -1398,6 +1408,7 @@
 		2884219D1F8E095E00082E7C /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				284E49641FFB550700C343D9 /* LFFAuthorizationManager */,
 				281AEA891F90BC4D0000D1F5 /* loadhelper */,
 				2884219E1F8E095E00082E7C /* majlet_funcHelper */,
 				288421A11F8E095E00082E7C /* mqttclientHelper */,
@@ -1662,6 +1673,8 @@
 				28A8AEA11FAB25E500FA1EC1 /* image */,
 				28A8AEAA1FAB25E500FA1EC1 /* SDRechargePopView.h */,
 				28A8AEAB1FAB25E500FA1EC1 /* SDRechargePopView.m */,
+				284E496B1FFB5DDA00C343D9 /* SDAuthorazithonPopView.h */,
+				284E496C1FFB5DDA00C343D9 /* SDAuthorazithonPopView.m */,
 			);
 			path = SDRechargePop;
 			sourceTree = "<group>";
@@ -2613,6 +2626,7 @@
 			files = (
 				2841F6201F53C52E00BD23C8 /* SDWaveViwe.m in Sources */,
 				288421B41F8E095E00082E7C /* SDRequestHelp.mm in Sources */,
+				284E49671FFB550700C343D9 /* LFFAuthorizationManager.m in Sources */,
 				28BCE8B01FB07BFB00D62F94 /* ChangePayPwdViewController.mm in Sources */,
 				28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */,
 				28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */,
@@ -2639,7 +2653,6 @@
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
 				28D289AD1FA2CA7000C3787E /* BankCardViewController.mm in Sources */,
 				28B649801FAC654A0074A390 /* SDPayAnimtion.m in Sources */,
-				280B5C0C1FC563D300319F82 /* TestViewController.m in Sources */,
 				2837EADF1FD7E13300C10A57 /* SDQrcodeView.m in Sources */,
 				28981B7D1FA01FA8004CFC95 /* CardNoAuthToolView.m in Sources */,
 				28D28F2F1FD15C0000B3F00B /* NSString+HDExtension.m in Sources */,
@@ -2745,6 +2758,7 @@
 				28D28F221FCFE79F00B3F00B /* LogpwdViewController.mm in Sources */,
 				28B649821FAC654A0074A390 /* SDPaySuccessAnimationView.m in Sources */,
 				288421961F8E091200082E7C /* NSString+file.m in Sources */,
+				284E496D1FFB5DDA00C343D9 /* SDAuthorazithonPopView.m in Sources */,
 				28981B7E1FA01FA8004CFC95 /* IdentityAuthToolView.m in Sources */,
 				288421B11F8E095E00082E7C /* MqttClientManager.m in Sources */,
 				A7EFB15A1EB9A8DD009AA369 /* MQTTMessage.m in Sources */,

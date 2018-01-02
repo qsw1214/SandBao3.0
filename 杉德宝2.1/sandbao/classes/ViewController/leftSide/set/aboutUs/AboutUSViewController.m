@@ -8,7 +8,6 @@
 
 #import "AboutUSViewController.h"
 #import "SetCellView.h"
-#import "TestViewController.h"
 @interface AboutUSViewController ()
 {
     
@@ -59,8 +58,6 @@
     }
     if (btn.tag == BTN_TAG_ABOUTSAND) {
         NSLog(@"杉德宝隐私政策");
-        TestViewController *testVC = [[TestViewController alloc] init];
-        [self.navigationController pushViewController:testVC animated:YES];
     }
     
 }
@@ -77,7 +74,9 @@
     
     
     //titleLab
-    UILabel *titleLab = [Tool createLable:@"杉德宝V1.1.0" attributeStr:nil font:FONT_18_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    NSString *strVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] ;
+    NSString *strVersionInfo = [NSString stringWithFormat:@"@杉德宝Build版本号: %@",strVersion];
+    UILabel *titleLab = [Tool createLable:strVersionInfo attributeStr:nil font:FONT_18_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
     
     //erCodeImgView
