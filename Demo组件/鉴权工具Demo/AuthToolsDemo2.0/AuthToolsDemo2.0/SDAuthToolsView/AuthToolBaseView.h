@@ -48,7 +48,6 @@
 /**
  根据OY点创建authToolView
  -- 该方法用于子类重写使用 --
- __ 本类不实现该方法 --
  @param OY y点值
  @return 实例
  */

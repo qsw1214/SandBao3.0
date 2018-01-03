@@ -169,6 +169,10 @@
     
 }
 
+- (void)buttonClick:(UIButton *)btn{
+    //父类提供的方法 - 无具体实现
+    //具体实现交由子类分别处理
+}
 
 
 @end

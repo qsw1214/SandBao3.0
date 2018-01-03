@@ -14,7 +14,6 @@
 @implementation PaymentPwdCell
 
 +(instancetype)createPaymentCellViewOY:(CGFloat)OY{
-    
     PaymentPwdCell *cell = [[PaymentPwdCell alloc] initWithFrame:CGRectMake(0, OY, 0, 0)];
     return cell;
 }

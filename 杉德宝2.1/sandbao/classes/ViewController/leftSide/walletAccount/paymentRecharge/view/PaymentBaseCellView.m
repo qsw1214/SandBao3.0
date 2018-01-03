@@ -14,7 +14,14 @@
  */
 @implementation PaymentBaseCellView
 
-
+/**
+ 类方法实例化
+ */
++(instancetype)createPaymentCellViewOY:(CGFloat)OY{
+    
+    PaymentBaseCellView *cell = [[PaymentBaseCellView alloc] initWithFrame:CGRectZero];
+    return cell;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     

@@ -15,7 +15,7 @@
 #import "SandCardDetailViewController.h"
 #import "CardBaseTableView.h"
 
-@interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource,SDPayViewDelegate>
+@interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     //杉德卡数组
     NSMutableArray *sandArray;

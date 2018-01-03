@@ -25,6 +25,11 @@
 @synthesize space;
 
 
++ (instancetype)createAuthToolViewOY:(CGFloat)OY{
+    AuthToolBaseView *baseView = [[AuthToolBaseView alloc] initWithFrame:CGRectZero];
+    return baseView;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame{
     if ([super initWithFrame:frame]) {
         frameRect = frame;
