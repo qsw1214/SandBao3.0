@@ -27,6 +27,8 @@ static CommParameter *commParameterSharedInstance = nil;
 - (void)showCommParameter{
     
     NSLog(@"******************************");
+    NSLog(@" _mqttFlag :%d",_mqttFlag);
+    NSLog(@" _sToken :%@",_sToken);
     NSLog(@" _urlSchemes :%@",_urlSchemes);
     NSLog(@" _userName :%@",_userName);
     NSLog(@" _userRealName :%@",_userRealName);
@@ -50,10 +52,11 @@ static CommParameter *commParameterSharedInstance = nil;
  */
 -(void)cleanCommParameter{
     
+    _mqttFlag = nil; //MQTT存在标识
+    
     _sToken = nil;   //用户活动状态标识
     
     _urlSchemes = nil; //第三方启动的URL Schemes
-    
     _userInfo = nil; //用户信息
     _userName = nil; //用户名
     _userRealName = nil; //用户实名

@@ -67,6 +67,14 @@
     
     //检测是否实名/设置支付密码
     [self checkRealNameOrSetPayPwd];
+    
+    if (![CommParameter sharedInstance].mqttFlag) {
+        
+        // 注册MQTT -- MQTT内部自动过滤重复创建
+        [self rigistMqtt];
+    }
+    
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -93,8 +101,7 @@
     [self create_bodyViewOne];
     [self create_bodyViewTwo];
     
-    // 5. MQTT
-    [self addMqtt];
+    
     
 }
 #pragma mark - 重写父类-baseScrollView设置
@@ -490,7 +497,7 @@
 
 #pragma mark - 业务逻辑
 #pragma mark 注册MQTT
-- (void)addMqtt{
+- (void)rigistMqtt{
     
     //1先注册代理
     [[MqttClientManager shareInstance] registerDelegate:self];
@@ -500,6 +507,9 @@
     [[MqttClientManager shareInstance] loginWithIp:kIP port:kPort userName:kMqttuserNmae password:kMqttpasswd topic:kMqttTopicUSERID([CommParameter sharedInstance].userId)];
     
     //[[MqttClientManager shareInstance] loginWithIp:kIP port:kPort userName:kMqttuserNmae password:kMqttpasswd topic:kMqttTopicBROADCAST];
+    
+    //标识MQTT已登录
+    [CommParameter sharedInstance].mqttFlag = YES;
 }
 #pragma mark MQTT代理方法
 - (void)messageTopic:(NSString *)topic data:(NSDictionary *)dic

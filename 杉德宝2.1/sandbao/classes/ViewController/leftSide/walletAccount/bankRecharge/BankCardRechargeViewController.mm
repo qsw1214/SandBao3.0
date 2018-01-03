@@ -23,6 +23,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     UIView *tipView;
     UIView *bodyView;
     
+    NSString *moneyStr;
+    
     UILabel *tipLab;
     UIImageView *bankIconImgView;
     UILabel *bankNameLab;
@@ -103,8 +105,10 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     if (btn.tag == BTN_TAG_RECHARGE) {
         if ([moneyTextfield.text floatValue]>0) {
             if ([moneyTextfield.text floatValue]<=limitFloat) {
+                //金额赋值(分)
+                moneyStr = moneyTextfield.text;
                 //支付控件设置信息
-                [self.payView setPayInfo:@[@"钱包账户充值",[NSString stringWithFormat:@"¥%@",moneyTextfield.text]]];
+                [self.payView setPayInfo:@[@"钱包账户充值",[NSString stringWithFormat:@"¥%@",moneyStr]]];
                 [self fee];
             }else{
                 [Tool showDialog:@"金额超限!"];
@@ -581,7 +585,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
-        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
+        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyStr floatValue] * 100];
         
         NSDictionary *workDic = [[NSDictionary alloc] init];
         workDic = @{
@@ -631,7 +635,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [SDRequestHelp shareSDRequest].controller = self;
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
-        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyTextfield.text floatValue] * 100];
+        NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyStr floatValue] * 100];
         
         NSDictionary *workDic = [[NSDictionary alloc] init];
         workDic = @{

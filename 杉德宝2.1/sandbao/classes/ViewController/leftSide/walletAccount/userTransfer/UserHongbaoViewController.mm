@@ -15,7 +15,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 {
     UIView *headView;
     UIView *bodyView;
-    
+    NSString *moneyStr;
     UITextField *moneyTextfield;
     
     CGFloat limitFloat;
@@ -74,6 +74,8 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     if (btn.tag == BTN_TAG_TRANSFER) {
         
         if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue] <= limitFloat) {
+            //金额赋值(分)
+            moneyStr = moneyTextfield.text;
             [self fee];
         }else{
             [Tool showDialog:@"请输入转账金额"];
@@ -386,7 +388,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         //work
         NSMutableDictionary *workDic = [[NSMutableDictionary alloc] initWithCapacity:0];
         [workDic setObject:@"transfer" forKey:@"type"];
-        NSInteger cashFen = [moneyTextfield.text floatValue]*100;
+        NSInteger cashFen = [moneyStr floatValue]*100;
         [workDic setObject:[NSString stringWithFormat:@"%ld",(long)cashFen] forKey:@"transAmt"];  //转一元
         NSString *workStr = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
         paynuc.set("work", [workStr UTF8String]);
@@ -433,7 +435,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         NSString *feerate =  [self.wordDic objectForKey:@"feeRate"];
         NSInteger feerateValue = [feerate integerValue];
         CGFloat   feerateFloat =  feerateValue/100;
-        NSInteger cashFen = [moneyTextfield.text floatValue]*100;
+        NSInteger cashFen = [moneyStr floatValue]*100;
         NSInteger feeFloat =  cashFen * feerateFloat;
         NSString *feeLocalStr = [NSString stringWithFormat:@"%ld",feeFloat];
         NSMutableDictionary *workDicGet = [NSMutableDictionary dictionaryWithDictionary:self.wordDic];

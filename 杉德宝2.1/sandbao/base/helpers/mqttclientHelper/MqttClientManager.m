@@ -111,6 +111,8 @@
 }
 /*实际登陆处理*/
 -(void)loginMQTT{
+
+    
     /*设置ip和端口号*/
     self.transport.host = _ip;
     self.transport.port = _port;
@@ -146,7 +148,6 @@
     applogout = Applogout;
     
     [_mqttSession close];
-    
     
     _delegate=nil;//代理
     _mqttSession=nil;
