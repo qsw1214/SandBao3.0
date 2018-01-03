@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/classes/ViewController/leftSide/walletAccount/paymentRecharge/view/PaymentBaseCellView.m"
-            timestampString = "536647175.591321"
+            filePath = "sandbao/classes/ViewController/leftSide/home/PayQrcode/PayQrcodeViewController.mm"
+            timestampString = "536659692.329615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
-            landmarkName = "+createPaymentCellViewOY:"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "-showPayToolViewPwd:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

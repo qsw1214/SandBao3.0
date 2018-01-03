@@ -12,6 +12,7 @@
 #import "SDSelectBarView.h"
 #import "SDQrcodeView.h"
 #import "RechargeFinishViewController.h"
+#import "VerifyTypeViewController.h"
 
 
 typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
@@ -67,12 +68,16 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    //回到页面
+    
+    if (self.payQrcodeView) {
+        //- 开启定时器
+        [self startTimer];
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    //定时器停止
-    [self cleanTimer];
+    
 }
 
 
@@ -106,6 +111,9 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
     __weak PayQrcodeViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
+        
+        //预防性删除定时器
+        [weakSelf cleanTimer];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     self.navCoverView.rightBlock = ^{
@@ -377,9 +385,14 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 
 - (void)payViewForgetPwd:(NSString *)type{
-    
+    //定时器已在支付控件弹出时 - 暂停
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        
+        //@"修改支付密码"
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000601";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     
 }
@@ -642,7 +655,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [self readNewAuthCode];
     
     //定时一分钟刷新授权码
-    self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
+    self.timer = [NSTimer timerWithTimeInterval:5.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
 }
@@ -714,7 +727,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MQTT_NOTICE_BSC_TN object:nil];
     //预防性删除定时器
     [self cleanTimer];
-
 }
 
 

@@ -249,6 +249,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         //修改支付密码
+        
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         //修改杉德卡密码

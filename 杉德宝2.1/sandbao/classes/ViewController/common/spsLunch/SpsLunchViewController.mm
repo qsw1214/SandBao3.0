@@ -236,6 +236,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         
+        //点击忘记密码push离开Spslunch页面后,不删除payView
         forgetPwdPush = YES;
         
         //@"修改支付密码"

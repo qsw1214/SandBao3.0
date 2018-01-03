@@ -15,6 +15,8 @@
 
 #import "AddBankCardViewController.h"
 #import "CardBaseTableView.h"
+#import "VerifyTypeViewController.h"
+
 typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 
 @interface BankCardViewController ()<UITableViewDelegate,UITableViewDataSource,SDPayViewDelegate>
@@ -293,11 +295,12 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         //修改支付密码
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000601";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
-    if ([type isEqualToString:PAYTOOL_ACCPASS]) {
-        //修改杉德卡密码
-    }
-    
 }
 
 

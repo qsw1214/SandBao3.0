@@ -384,8 +384,6 @@
         
         return payToolsOK;
     }
-    
-    
     return nil;
 }
 

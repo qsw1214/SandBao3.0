@@ -9,7 +9,7 @@
 #import "UserTransferViewController.h"
 #import "PayNucHelper.h"
 #import "UserTransferFinishViewController.h"
-
+#import "VerifyTypeViewController.h"
 typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 
 @interface UserTransferViewController ()<UITextFieldDelegate,SDPayViewDelegate>
@@ -414,9 +414,11 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         //修改支付密码
-    }
-    if ([type isEqualToString:PAYTOOL_ACCPASS]) {
-        //修改杉德卡密码
+        VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
+        verifyTypeVC.tokenType = @"01000601";
+        verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
+        [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
     
 }
