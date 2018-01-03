@@ -589,9 +589,6 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
                 NSString *work = [NSString stringWithUTF8String:paynuc.get("work").c_str()];
                 self.wordDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];
                 
-                NSString *fee = [self.wordDic objectForKey:@"fee"];
-                NSString *feeAmt = [NSString stringWithFormat:@"%.2f", [transAmt floatValue] * [fee floatValue]];
-                
                 //支付控件弹出
                 [self.payView showPayTool];
             }];

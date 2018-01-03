@@ -21,7 +21,7 @@
 #import "SDDrowNoticeView.h"
 
 
-@interface HomeViewController ()<MqttClientManagerDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface HomeViewController ()<MqttClientManagerDelegate,UICollectionViewDelegate>
 {
     //headView
     UIImageView *headBGimgView; //背景图视图

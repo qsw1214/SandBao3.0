@@ -613,7 +613,6 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
                 self.wordDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:work];
                 
                 NSString *fee = [self.wordDic objectForKey:@"fee"];
-                NSString *feeAmt = [NSString stringWithFormat:@"%.2f", [transAmt floatValue] * [fee floatValue]];
                 
                 //支付工具弹出
                 [self.payView showPayTool];

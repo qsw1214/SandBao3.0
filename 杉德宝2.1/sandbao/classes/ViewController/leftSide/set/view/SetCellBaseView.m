@@ -10,7 +10,10 @@
 #define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
 @implementation SetCellBaseView
 
-
++ (instancetype)createSetCellViewOY:(CGFloat)OY{
+    SetCellBaseView *cell = [[SetCellBaseView alloc] initWithFrame:CGRectZero];
+    return cell;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame{
     

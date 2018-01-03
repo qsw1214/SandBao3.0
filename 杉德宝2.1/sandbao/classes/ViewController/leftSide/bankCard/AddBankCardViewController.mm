@@ -241,7 +241,6 @@
                 NSString *userInfo = [NSString stringWithUTF8String:paynuc.get("userInfo").c_str()];
                 userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:userInfo];
                 
-                NSMutableArray *payTool_authToolsArr = [payToolDic objectForKey:@"authTools"];
                 //追加UI
                 [self appendUI];
             }];

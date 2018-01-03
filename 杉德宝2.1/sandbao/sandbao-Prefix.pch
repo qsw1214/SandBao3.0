@@ -35,7 +35,6 @@
 #import "SDLog.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SDRequestHelp.h"
-#import "SDAlertControllerUtil.h"
 #import "LocationUtil.h"
 #import "HDAlertView.h"
 
@@ -97,10 +96,10 @@
 
 
 //mqtt端口/地址
-#define kIP @"172.28.250.63"   //开发
-#define kPort 61613
-//#define kIP @"172.28.247.111"  //测试
+//#define kIP @"172.28.250.63"   //开发
 //#define kPort 61613
+#define kIP @"172.28.247.111"
+#define kPort 61613
 //#define kIP @"????"  //生产
 //#define kPort ????
 #define kMqttuserNmae @"testuser"

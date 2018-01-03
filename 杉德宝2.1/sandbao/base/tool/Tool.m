@@ -36,7 +36,6 @@
  @param vcName 要返回的视图控制器
  */
 + (void)popToPenultimateViewController:(UIViewController*)vc vcName:(NSString*)vcName{
-    NSString *currentViewControllerName = [NSString stringWithUTF8String:object_getClassName(vc)];
     
     for (int i = 0; vc.navigationController.viewControllers.count; i++) {
         NSString *name = [NSString stringWithUTF8String:object_getClassName(vc.navigationController.viewControllers[i])];
@@ -948,17 +947,6 @@
     }];
     
 }
-
-#pragma mark - pop返回指定返回某个VC
-- (void)popViewControlleWithNavgationController:(UINavigationController*)nav byViewControllerName:(NSString*)vcName{
-    
-    NSArray *navSubViewcontrollers = nav.viewControllers;
-    
-    
-    
-    
-}
-
 
 #pragma mark - ImageView工厂方法
 + (UIImageView*)createImagView:(UIImage*)image{
