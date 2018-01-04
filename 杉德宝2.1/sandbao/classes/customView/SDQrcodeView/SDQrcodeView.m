@@ -499,8 +499,6 @@
             oneimgv.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake([UIScreen mainScreen].bounds.size.width, AdapterHfloat(100))];
         }
     }
-    
-    
 }
 //二维码赋值
 - (void)setTwoQrCodeStr:(NSString *)twoQrCodeStr{

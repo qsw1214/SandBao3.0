@@ -66,7 +66,7 @@ static SDMQTTManager *mqttManager = nil;
 }
 
 //连接MQTT
-- (void)linkMQTT{
+- (void)linkMQTT:(NSString*)clientID{
     
     if (!self.manager) {
         self.manager = [[MQTTSessionManager alloc] init];
@@ -84,7 +84,7 @@ static SDMQTTManager *mqttManager = nil;
                            will:[@"offline" dataUsingEncoding:NSUTF8StringEncoding]
                         willQos:MQTTQosLevelExactlyOnce
                  willRetainFlag:true
-                   withClientId:[CommParameter sharedInstance].sToken];
+                   withClientId:clientID];
         
         /*
          * MQTTCLient: observe the MQTTSessionManager's state to display the connection status
@@ -104,9 +104,7 @@ static SDMQTTManager *mqttManager = nil;
  @param clientID id
  */
 - (void)setClientID:(NSString *)clientID{
-    
-    [self linkMQTT];
-    
+    [self linkMQTT:clientID];
 }
 
 /**

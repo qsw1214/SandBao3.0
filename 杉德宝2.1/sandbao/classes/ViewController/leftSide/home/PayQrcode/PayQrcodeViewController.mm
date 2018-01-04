@@ -24,6 +24,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
     NSDictionary *successWorkDic; //支付成功后返回的work
     
+    //本类实例是否存在,界定推送结果后是否展示
+    //(用于防止在其他页面弹出反扫的支付控件)
+    BOOL isSelfSave;
+    
 }
 @property (nonatomic, strong) NSMutableArray *authCodesArray; //授权码数组
 @property (nonatomic, strong) NSMutableArray *no_authCodesArray;//废弃授权码数组
@@ -69,7 +73,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //回到页面
-    
+    isSelfSave = YES;
     if (self.payQrcodeView) {
         //- 开启定时器
         [self startTimer];
@@ -77,13 +81,14 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
-    
+    isSelfSave = NO;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     
     [self creaetDefuleUI];
     [self createSelectBar];
@@ -123,6 +128,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
+    
     
     
 }
@@ -292,41 +298,46 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 }
 //从通知获取MQTT推送的TN号,走支付流程
 - (void)showPayToolViewPwd:(NSNotification*)noti{
+    if (isSelfSave) {
+        //拿到通知后,立即暂停刷新
+        [self stopTimer];
+        
+        //拿到通知后,关闭放大的图片
+        [self.payQrcodeView hiddenBigQrcodeView];
+        
+        //获取TN号
+        self.TN = (NSString*)noti.object;
+        //同正扫流程
+        [self TNOrder:self.TN];
+    }
     
-    //拿到通知后,立即暂停刷新
-    [self stopTimer];
-    
-    //拿到通知后,关闭放大的图片
-    [self.payQrcodeView hiddenBigQrcodeView];
-    
-    //获取TN号
-    self.TN = (NSString*)noti.object;
-    //同正扫流程
-    [self TNOrder:self.TN];
 }
 //从通知获取MQTT推送的TN号,走无密通知
 - (void)showPayToolView:(NSNotification*)noti{
-    //拿到通知后,立即暂停刷新
-    [self stopTimer];
     
-    //拿到通知后,关闭放大的图片
-    [self.payQrcodeView hiddenBigQrcodeView];
-    
-    NSString *str = (NSString*)noti.object;
-    NSArray *strArr = [str componentsSeparatedByString:@"+"];
-    NSString *msgTime = [strArr firstObject];
-    NSString *msg = [strArr lastObject];
-    
-    [Tool showDialog:msg message:msgTime defulBlock:^{
-        //无密 - 付款成功!
-//        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
-//        rechargeFinishVC.transTypeName = @"支付成功";
-//        rechargeFinishVC.amtMoneyStr = [NSString stringWithFormat:@"%.2f",[[successWorkDic objectForKey:@"transAmt"] floatValue]/100];
-//        rechargeFinishVC.payOutName = [self.selectedPayDict objectForKey:@"title"];
-//        rechargeFinishVC.payOutNo = [[self.selectedPayDict objectForKey:@"account"] objectForKey:@"accNo"];
-//        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
+    if (isSelfSave) {
+        //拿到通知后,立即暂停刷新
+        [self stopTimer];
         
-    }];
+        //拿到通知后,关闭放大的图片
+        [self.payQrcodeView hiddenBigQrcodeView];
+        
+        NSString *str = (NSString*)noti.object;
+        NSArray *strArr = [str componentsSeparatedByString:@"+"];
+        NSString *msgTime = [strArr firstObject];
+        NSString *msg = [strArr lastObject];
+        
+        [Tool showDialog:msg message:msgTime defulBlock:^{
+            //无密 - 付款成功!
+            //        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+            //        rechargeFinishVC.transTypeName = @"支付成功";
+            //        rechargeFinishVC.amtMoneyStr = [NSString stringWithFormat:@"%.2f",[[successWorkDic objectForKey:@"transAmt"] floatValue]/100];
+            //        rechargeFinishVC.payOutName = [self.selectedPayDict objectForKey:@"title"];
+            //        rechargeFinishVC.payOutNo = [[self.selectedPayDict objectForKey:@"account"] objectForKey:@"accNo"];
+            //        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
+            
+        }];
+    }
 }
 #pragma mark - SDPayViewDelegate
 - (void)payViewReturnDefulePayToolDic:(NSMutableDictionary *)defulePayToolDic{
