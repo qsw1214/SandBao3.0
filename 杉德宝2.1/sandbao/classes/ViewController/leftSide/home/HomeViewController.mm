@@ -14,14 +14,14 @@
 #import "MessageViewController.h"
 #import "PayQrcodeViewController.h"
 #import "ScannerViewController.h"
-
+#import "SDMQTTManager.h"
 
 #import "GradualView.h"
 #import "SDMajletView.h"
 #import "SDDrowNoticeView.h"
 
 
-@interface HomeViewController ()<MqttClientManagerDelegate,UICollectionViewDelegate>
+@interface HomeViewController ()<SDMQTTManagerDelegate,UICollectionViewDelegate>
 {
     //headView
     UIImageView *headBGimgView; //背景图视图
@@ -69,7 +69,6 @@
     [self checkRealNameOrSetPayPwd];
     
     if (![CommParameter sharedInstance].mqttFlag) {
-        
         // 注册MQTT -- MQTT内部自动过滤重复创建
         [self rigistMqtt];
     }
@@ -499,21 +498,17 @@
 #pragma mark 注册MQTT
 - (void)rigistMqtt{
     
-    //1先注册代理
-    [[MqttClientManager shareInstance] registerDelegate:self];
-    
-    //2再订阅消息
-    //订阅主题不能放到子线程,不然消息Block不会回调
-    [[MqttClientManager shareInstance] loginWithIp:kIP port:kPort userName:kMqttuserNmae password:kMqttpasswd topic:kMqttTopicUSERID([CommParameter sharedInstance].userId)];
-    
-    //[[MqttClientManager shareInstance] loginWithIp:kIP port:kPort userName:kMqttuserNmae password:kMqttpasswd topic:kMqttTopicBROADCAST];
-    
-    //标识MQTT已登录
+    //1.注册代理
+    [SDMQTTManager shareMQttManager].delegate = self;
+    //2.设置clientID
+    [SDMQTTManager shareMQttManager].clientID = [CommParameter sharedInstance].sToken;
+    //3.订阅消息
+    [[SDMQTTManager shareMQttManager] subscaribeTopic:kMqttTopicUSERID([CommParameter sharedInstance].userId) atLevel:MQTTQosLevelExactlyOnce];
+    //4.标识MQTT已登录
     [CommParameter sharedInstance].mqttFlag = YES;
 }
 #pragma mark MQTT代理方法
-- (void)messageTopic:(NSString *)topic data:(NSDictionary *)dic
-{
+- (void)messageTopic:(NSString *)toPic dataDic:(NSDictionary *)dic{
     
     //mqtt消息落库
 //    [self setMqttlist:dic];

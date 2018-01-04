@@ -319,12 +319,12 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
     [Tool showDialog:msg message:msgTime defulBlock:^{
         //无密 - 付款成功!
-        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
-        rechargeFinishVC.transTypeName = @"支付成功";
-        rechargeFinishVC.amtMoneyStr = [NSString stringWithFormat:@"%.2f",[[successWorkDic objectForKey:@"transAmt"] floatValue]/100];
-        rechargeFinishVC.payOutName = [self.selectedPayDict objectForKey:@"title"];
-        rechargeFinishVC.payOutNo = [[self.selectedPayDict objectForKey:@"account"] objectForKey:@"accNo"];
-        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
+//        RechargeFinishViewController *rechargeFinishVC = [[RechargeFinishViewController alloc] init];
+//        rechargeFinishVC.transTypeName = @"支付成功";
+//        rechargeFinishVC.amtMoneyStr = [NSString stringWithFormat:@"%.2f",[[successWorkDic objectForKey:@"transAmt"] floatValue]/100];
+//        rechargeFinishVC.payOutName = [self.selectedPayDict objectForKey:@"title"];
+//        rechargeFinishVC.payOutNo = [[self.selectedPayDict objectForKey:@"account"] objectForKey:@"accNo"];
+//        [self.navigationController pushViewController:rechargeFinishVC animated:YES];
         
     }];
 }
@@ -655,7 +655,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [self readNewAuthCode];
     
     //定时一分钟刷新授权码
-    self.timer = [NSTimer timerWithTimeInterval:5.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
+    self.timer = [NSTimer timerWithTimeInterval:60.f target:self selector:@selector(readNewAuthCode) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
 }

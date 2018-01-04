@@ -1,6 +1,14 @@
 PODS:
   - IQKeyboardManager (5.0.6)
   - Masonry (1.1.0)
+  - MQTTClient (0.9.9):
+    - MQTTClient/Core (= 0.9.9)
+  - MQTTClient/Core (0.9.9):
+    - MQTTClient/Manager
+    - MQTTClient/Min
+  - MQTTClient/Manager (0.9.9):
+    - MQTTClient/Min
+  - MQTTClient/Min (0.9.9)
   - Pgyer (2.8.9)
   - PgyUpdate (1.5)
   - pop (1.0.10)
@@ -13,6 +21,7 @@ PODS:
 DEPENDENCIES:
   - IQKeyboardManager (~> 5.0.6)
   - Masonry
+  - MQTTClient
   - Pgyer
   - PgyUpdate
   - pop
@@ -23,6 +32,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   IQKeyboardManager: 077b7f691dfa9d69db9cff66f2bed68ebfc02d9b
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MQTTClient: 5a59e0ebcad95f86ad8fc04dd4b819a944e58e0c
   Pgyer: 830654e51e23f754cce5d8b3ea9ba72be68452eb
   PgyUpdate: bad71685b91bba4aa520b7fe29356a476700fdf2
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
@@ -30,6 +40,6 @@ SPEC CHECKSUMS:
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
 
-PODFILE CHECKSUM: 11ea123d312a5efff7713fa97e847c617309edeb
+PODFILE CHECKSUM: 698e0ae4550bf59450fdad3f34b8a4838cb4319a
 
 COCOAPODS: 1.4.0.beta.2

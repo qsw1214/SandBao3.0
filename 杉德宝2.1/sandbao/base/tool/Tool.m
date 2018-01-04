@@ -15,7 +15,7 @@
 #import "LoginViewController.h"
 #import "SpsLunchViewController.h"
 #import "HDAlertView.h"
-
+#import "SDMQTTManager.h"
 #define Tool_Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
 @interface Tool(){
     
@@ -205,7 +205,7 @@
             [[CommParameter sharedInstance] cleanCommParameter];
             
             //2. 登出->mqtt结束
-            [[MqttClientManager shareInstance] close:YES];
+            [[SDMQTTManager shareMQttManager] closeMQTT];
             
             //3.跳转登陆页面
             LoginViewController *mLoginViewController = [[LoginViewController alloc] init];

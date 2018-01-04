@@ -27,8 +27,6 @@
 #import "NavCoverView.h"
 #import "CommParameter.h"
 #import "SDMBProgressView.h"
-#import "MqttClientManagerDelegate.h"
-#import "MqttClientManager.h"
 #import "WeiboSDK.h"
 #import "Tool.h"
 #import <POP/POP.h>
@@ -94,16 +92,7 @@
 #define UM_Wallet @"wallet"  //钱包账户
 
 
-
-//mqtt端口/地址
-//#define kIP @"172.28.250.63"   //开发
-//#define kPort 61613
-#define kIP @"172.28.247.111"
-#define kPort 61613
-//#define kIP @"????"  //生产
-//#define kPort ????
-#define kMqttuserNmae @"testuser"
-#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+//MQTT订阅广播的Topic
 #define kMqttTopicUSERID(USERID) [NSString stringWithFormat:@"SANDBAO/0003/USER/%@",USERID]
 #define kMqttTopicBROADCAST @"SANDBAO/0003/BROADCAST"
 

@@ -46,6 +46,8 @@
     [[PgyUpdateManager sharedPgyManager] startManagerWithAppId:@"33bb2bbf63b37e4e8e82c5a53cd14ca8"];
     //执行版本更新检测-(上传AppStore前 请务必删除蒲公英SDK)
     [[PgyUpdateManager sharedPgyManager] checkUpdate];
+    //关闭摇一摇截图
+    [[PgyManager sharedPgyManager] setEnableFeedback:NO];
 #pragma mark - ***上传AppStore前 请务必删除蒲公英SDK***
     
     //-2. 启动定位 - 实例化
