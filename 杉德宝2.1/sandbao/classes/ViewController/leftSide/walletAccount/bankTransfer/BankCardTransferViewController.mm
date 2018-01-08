@@ -443,14 +443,11 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         [successView animationSuccess];
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-            
             //提现成功
             BankCardTransferFinishViewController *bankCardTransferFinishVC = [[BankCardTransferFinishViewController alloc] init];
             bankCardTransferFinishVC.bankTitle = bankNameLab.text;
             bankCardTransferFinishVC.bankNo = bankNumLab.text;
             [self.navigationController pushViewController:bankCardTransferFinishVC animated:YES];
-            
-            
         });
     } rechagreErrorBlock:^(NSArray *paramArr){
         //支付失败 - 动画停止

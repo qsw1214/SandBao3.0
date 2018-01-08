@@ -261,7 +261,6 @@
         }];
         if (error) return ;
         
-        
         paynuc.set("payToolKinds", "[]");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;

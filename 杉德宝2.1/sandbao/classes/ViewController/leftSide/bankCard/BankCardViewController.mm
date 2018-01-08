@@ -274,6 +274,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
             [Tool showDialog:@"解绑成功" defulBlock:^{
+                //解绑成功 - 更新支付工具
                 [self ownPayTools];
             }];
         });

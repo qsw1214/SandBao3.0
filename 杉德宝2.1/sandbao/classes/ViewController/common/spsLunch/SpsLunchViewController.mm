@@ -208,13 +208,9 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         [successView animationSuccess];
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-            
-            //成功回调
-            [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
-                [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
-            }];
+            //支付成功 - 刷新支付工具(无论刷新成功失败-给第三方App均返回支付成功)
+            [self ownPayTools];
         });
-        
     } oederErrorBlock:^(NSArray *paramArr){
         //支付失败- 动画停止
         [successView animationStopClean];
@@ -517,9 +513,67 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     }
     //延迟执行效果
     [self performSelector:@selector(outSps) withObject:nil afterDelay:0.4f];
-    
-
 }
+
+#pragma mark 查询我方支付工具鉴权工具
+/**
+ *@brief 查询我方支付工具
+ */
+- (void)ownPayTools
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "01001501");
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                //成功回调
+                [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
+                    [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
+                }];
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+        }];
+        if (error) return ;
+        
+        paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                //成功回调
+                [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
+                    [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
+                }];
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
+                [self.HUD hidden];
+                
+                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
+                //支付工具排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //成功回调
+                [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
+                    [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
+                }];
+            }];
+        }];
+        if (error) return ;
+    }];
+}
+
 - (void)outSps{
     //sps启动支付成功/失败 urlScheme清空
     [CommParameter sharedInstance].urlSchemes = nil;
