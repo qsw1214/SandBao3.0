@@ -11,14 +11,19 @@
 //mqtt端口/地址
 //#define kIP @"172.28.250.63"   //开发
 //#define kPort 61613
-#define kIP @"172.28.247.111"
+//#define kMqttuserNmae @"testuser"
+//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+
+//#define kIP @"172.28.247.111"    //测试
+//#define kPort 61613
+//#define kMqttuserNmae @"testuser"
+//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+
+#define kIP @"180.169.86.123"  //生产
 #define kPort 61613
-//#define kIP @"????"  //生产
-//#define kPort ????
-#define kMqttuserNmae @"testuser"
-#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
-#define kMqttTopicUSERID(USERID) [NSString stringWithFormat:@"SANDBAO/0003/USER/%@",USERID]
-#define kMqttTopicBROADCAST @"SANDBAO/0003/BROADCAST"
+#define kMqttuserNmae @"sand-magw-mqtt-user"
+#define kMqttpasswd   @"magw@sand#20150805%!_"
+
 
 @interface SDMQTTManager()<MQTTSessionDelegate,MQTTSessionManagerDelegate>{
     
@@ -75,7 +80,7 @@ static SDMQTTManager *mqttManager = nil;
         [self.manager connectTo:kIP
                            port:kPort
                             tls:false
-                      keepalive:60
+                      keepalive:10
                           clean:false   //session是否清除，这个需要注意，如果是false，代表保持登录，如果客户端离线了再次登录就可以接收到离线消息。注意：QoS为1和QoS为2，并需订阅和发送一致 
                            auth:true
                            user:kMqttuserNmae
