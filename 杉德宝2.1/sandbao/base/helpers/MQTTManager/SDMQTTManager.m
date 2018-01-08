@@ -8,23 +8,6 @@
 
 #import "SDMQTTManager.h"
 
-//mqtt端口/地址
-//#define kIP @"172.28.250.63"   //开发
-//#define kPort 61613
-//#define kMqttuserNmae @"testuser"
-//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
-
-//#define kIP @"172.28.247.111"    //测试
-//#define kPort 61613
-//#define kMqttuserNmae @"testuser"
-//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
-
-#define kIP @"180.169.86.123"  //生产
-#define kPort 61613
-#define kMqttuserNmae @"sand-magw-mqtt-user"
-#define kMqttpasswd   @"magw@sand#20150805%!_"
-
-
 @interface SDMQTTManager()<MQTTSessionDelegate,MQTTSessionManagerDelegate>{
     
 }
@@ -76,31 +59,31 @@ static SDMQTTManager *mqttManager = nil;
     if (!self.manager) {
         self.manager = [[MQTTSessionManager alloc] init];
         self.manager.delegate = self;
-        
         [self.manager connectTo:kIP
                            port:kPort
                             tls:false
-                      keepalive:10
-                          clean:false   //session是否清除，这个需要注意，如果是false，代表保持登录，如果客户端离线了再次登录就可以接收到离线消息。注意：QoS为1和QoS为2，并需订阅和发送一致 
+                      keepalive:30
+                          clean:true   //session是否清除，这个需要注意，如果是false，代表保持登录，如果客户端离线了再次登录就可以接收到离线消息。注意：QoS为1和QoS为2，并需订阅和发送一致
                            auth:true
                            user:kMqttuserNmae
                            pass:kMqttpasswd
                       willTopic:@""
                            will:[@"offline" dataUsingEncoding:NSUTF8StringEncoding]
                         willQos:MQTTQosLevelExactlyOnce
-                 willRetainFlag:true
+                 willRetainFlag:false
                    withClientId:clientID];
-        
-        /*
-         * MQTTCLient: observe the MQTTSessionManager's state to display the connection status
-         */
-        [self.manager addObserver:self
-                       forKeyPath:@"state"
-                          options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
-                          context:nil];
+        [self.manager.session connectAndWaitTimeout:20];
     } else {
         [self.manager connectToLast];
     }
+    
+    /*
+     * MQTTCLient: observe the MQTTSessionManager's state to display the connection status
+     */
+    [self.manager addObserver:self
+                   forKeyPath:@"state"
+                      options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                      context:nil];
 }
 
 /**
@@ -109,7 +92,10 @@ static SDMQTTManager *mqttManager = nil;
  @param clientID id
  */
 - (void)setClientID:(NSString *)clientID{
-    [self linkMQTT:clientID];
+    if (clientID.length>0) {
+        [self linkMQTT:clientID];
+    }
+    
 }
 
 /**
@@ -120,8 +106,14 @@ static SDMQTTManager *mqttManager = nil;
     [self.manager removeObserver:self forKeyPath:@"state"];
     //关闭连接
     [self.manager disconnect];
+    
     //管理对象置空
     self.manager = nil;
+    
+    //数据清空
+    self.delegate = nil;
+    
+    self.clientID = nil;
 }
 
 /**

@@ -16,8 +16,8 @@
 
 
 #pragma mark - *********用户退出后置空*********
-#pragma mark - MQTTFlag (MQTT存在的标识)
-@property (nonatomic, assign) BOOL mqttFlag;      //MQTT标识
+#pragma mark - mqttFlag
+@property (nonatomic, assign) BOOL mqttFlag;      //mqtt存在标识
 
 #pragma mark - sToken
 @property (nonatomic, strong) NSString *sToken;   //用户活动状态标识

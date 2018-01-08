@@ -68,12 +68,10 @@
     //检测是否实名/设置支付密码
     [self checkRealNameOrSetPayPwd];
     
-    if (![CommParameter sharedInstance].mqttFlag) {
-        // 注册MQTT -- MQTT内部自动过滤重复创建
+    if ([CommParameter sharedInstance].mqttFlag == NO) {
+        // 注册MQTT
         [self rigistMqtt];
     }
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -95,14 +93,17 @@
     NSURL *limitServerURL = [[NSBundle mainBundle] URLForResource:@"limitServer" withExtension:@"plist"];
     self.limitServerArr = [NSMutableArray arrayWithContentsOfURL:limitServerURL];
     
-    
     [self create_HeadView];
     [self create_bodyViewOne];
     [self create_bodyViewTwo];
     
+    // 注册MQTT
+    [self rigistMqtt];
     
     
 }
+
+
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
@@ -498,14 +499,16 @@
 #pragma mark 注册MQTT
 - (void)rigistMqtt{
     
+    //0.MQTT标识已存在
+    [CommParameter sharedInstance].mqttFlag = YES;
+    
     //1.注册代理
     [SDMQTTManager shareMQttManager].delegate = self;
     //2.设置clientID
     [SDMQTTManager shareMQttManager].clientID = [CommParameter sharedInstance].sToken;
     //3.订阅消息
     [[SDMQTTManager shareMQttManager] subscaribeTopic:kMqttTopicUSERID([CommParameter sharedInstance].userId) atLevel:MQTTQosLevelExactlyOnce];
-    //4.标识MQTT已登录
-    [CommParameter sharedInstance].mqttFlag = YES;
+    
 }
 #pragma mark MQTT代理方法
 - (void)messageTopic:(NSString *)toPic dataDic:(NSDictionary *)dic{

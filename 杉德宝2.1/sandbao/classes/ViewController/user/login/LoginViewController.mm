@@ -12,6 +12,8 @@
 #import "ForgetLoginPwdViewController.h"
 #import "RegistViewController.h"
 #import "SmsCheckViewController.h"
+#import "SDMQTTManager.h"
+
 
 
 @interface LoginViewController ()
@@ -30,6 +32,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [self load];
 }
 

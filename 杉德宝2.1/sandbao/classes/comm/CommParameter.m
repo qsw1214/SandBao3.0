@@ -27,7 +27,7 @@ static CommParameter *commParameterSharedInstance = nil;
 - (void)showCommParameter{
     
     NSLog(@"******************************");
-    NSLog(@" _mqttFlag :%d",_mqttFlag);
+    NSLog(@" _mqttFlag :%@",_mqttFlag);
     NSLog(@" _sToken :%@",_sToken);
     NSLog(@" _urlSchemes :%@",_urlSchemes);
     NSLog(@" _userName :%@",_userName);
@@ -52,7 +52,7 @@ static CommParameter *commParameterSharedInstance = nil;
  */
 -(void)cleanCommParameter{
     
-    _mqttFlag = nil; //MQTT存在标识
+    _mqttFlag = nil; //mqtt状态标识
     
     _sToken = nil;   //用户活动状态标识
     
