@@ -199,13 +199,14 @@ static SDRequestHelp *_instance = nil;
         return successType;
     }
     else{
-        /*1.特殊处理集合:
+        /*1.特殊处理集合(默认不弹框提示,除非程序员自己外部修改):
          *030005 -> 登陆加强鉴权->HUD消失
          *030012 -> 微博第三方登陆为注册->HUD消失
          *050005 -> 绑卡成功,开通快捷失败(后端默认绑卡成功)->HUD消失
          *050004 -> 实名成功,开通快捷失败(后端默认实名成功)->HUD消失
+         *040071 -> 检测没有发送短信(第一次setRealName上送信息给后端,后端返回该特殊错误码,用于UI跳转短信页)->HUD消失
          */
-        NSArray *array = @[@"030005",@"030012",@"050005",@"050004"];
+        NSArray *array = @[@"030005",@"030012",@"050005",@"050004",@"040071"];
         if ([weakSelf respCodeArray:array respCode:weakSelf.respCode]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (weakSelf.HUD) {

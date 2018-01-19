@@ -418,17 +418,9 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                     for (int i = 0; i<tempAuthToolsArray.count; i++) {
                         NSDictionary *authToolDic = tempAuthToolsArray[i];
                         if ([[authToolDic objectForKey:@"type"] isEqualToString:@"sms"]) {
-                            SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
-                            smsVC.payToolDic = payToolDic;
-                            smsVC.userInfoDic = userInfoDic;
-                            smsVC.phoneNoStr = self.bankPhoneNoStr;
-                            smsVC.identityNoStr = self.identityNoStr;
-                            smsVC.realNameStr = self.realNameStr;
-                            smsVC.bankCardNoStr = self.bankCardNoStr;
-                            smsVC.cvnStr = self.cvnStr;
-                            smsVC.expiryStr = self.validStr;
-                            smsVC.smsCheckType = SMS_CHECKTYPE_REALNAME;
-                            [self.navigationController pushViewController:smsVC animated:YES];
+                            //获取鉴权工具成功,但此时该鉴权工具默认下发为短信.
+                            //第一次setRealName,(仅用于)上送四要素信息给后端,后端用于向通道获取短信码
+                            [self setRealNameForUpdataInfo];
                         }else{
                             [Tool showDialog:@"下发鉴权工具有误"];
                         }
@@ -436,11 +428,93 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                 }else{
                     [Tool showDialog:@"下发鉴权工具为空"];
                 }
-                
             }];
         }];
         if (error) return ;
         
+    }];
+    
+}
+
+#pragma mark - (上送实名认证四要素给后端)
+- (void)setRealNameForUpdataInfo{
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        //由于通道问题,必须先setRealName()一次,便于后端获取四要素信息,然后才可进行真正的setRealName()
+        //authTools
+        NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
+        NSMutableDictionary *authToolDic1 = [[NSMutableDictionary alloc] init];
+        [authToolDic1 setValue:@"sms" forKey:@"type"];
+        NSMutableDictionary *smsDic = [[NSMutableDictionary alloc] init];
+        [smsDic setValue:self.bankPhoneNoStr forKey:@"phoneNo"];
+        [smsDic setValue:@"" forKey:@"code"];
+        [authToolDic1 setObject:smsDic forKey:@"sms"];
+        [authToolsArray1 addObject:authToolDic1];
+        NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
+        
+        
+        //payTool
+        NSMutableDictionary *payToolDic = [NSMutableDictionary dictionaryWithDictionary:payToolDic];
+        NSMutableDictionary *payToolDic_authToolDic = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *payToolDic_authToolDic_creditCardDic = [[NSMutableDictionary alloc] init];
+        
+        [payToolDic_authToolDic setValue:@"creditCard" forKey:@"type"];
+        [payToolDic_authToolDic_creditCardDic setValue:self.cvnStr forKey:@"cvn"];
+        [payToolDic_authToolDic_creditCardDic setValue:self.validStr forKey:@"expiry"];
+        [payToolDic_authToolDic setObject:payToolDic_authToolDic_creditCardDic forKey:@"creditCard"];
+        
+        [payToolDic setObject:@[payToolDic_authToolDic] forKey:@"authTools"];
+        NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:payToolDic];
+        
+        
+        //userinfo
+        NSMutableDictionary *userinfoDic = [NSMutableDictionary dictionaryWithDictionary:userInfoDic];
+        NSMutableDictionary *userinfoDic_userinfoDic = [[NSMutableDictionary alloc] init];
+        
+        [userinfoDic_userinfoDic setValue:self.identityNoStr forKey:@"identityNo"];
+        [userinfoDic_userinfoDic setValue:@"01" forKey:@"type"]; //01 身份证 02 军官证 03护照
+        
+        [userinfoDic setValue:userinfoDic_userinfoDic forKey:@"identity"];
+        [userinfoDic setValue:self.realNameStr forKey:@"userRealName"];
+        [userinfoDic setValue:self.bankPhoneNoStr forKey:@"phoneNo"];
+        NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userinfoDic];
+        
+        paynuc.set("authTools", [authTools UTF8String]);
+        paynuc.set("payTool", [payTool UTF8String]);
+        paynuc.set("userInfo", [userInfo UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"user/setRealName/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                if (type == respCodeErrorType) {
+                    NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
+                    if ([@"040071" isEqualToString:respCode]) {
+                        
+                        //respCode:"040071" respMsg:'检测没有发送短信'
+                        SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
+                        smsVC.payToolDic = payToolDic;
+                        smsVC.userInfoDic = userInfoDic;
+                        smsVC.phoneNoStr = self.bankPhoneNoStr;
+                        smsVC.identityNoStr = self.identityNoStr;
+                        smsVC.realNameStr = self.realNameStr;
+                        smsVC.bankCardNoStr = self.bankCardNoStr;
+                        smsVC.cvnStr = self.cvnStr;
+                        smsVC.expiryStr = self.validStr;
+                        smsVC.smsCheckType = SMS_CHECKTYPE_REALNAME;
+                        [self.navigationController pushViewController:smsVC animated:YES];
+                    }
+                }
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+            }];
+        }];
+        if (error) return ;
     }];
     
 }

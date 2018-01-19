@@ -234,14 +234,10 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                     for (int i = 0; i<tempAuthToolsArray.count; i++) {
                         NSDictionary *authToolDic = tempAuthToolsArray[i];
                         if ([[authToolDic objectForKey:@"type"] isEqualToString:@"sms"]) {
-                            SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
-                            smsVC.payToolDic = self.payToolDic;
-                            smsVC.userInfoDic = self.userInfoDic;
-                            smsVC.phoneNoStr = self.bankPhoneNoStr;
-                            smsVC.cvnStr = self.cvnStr;
-                            smsVC.expiryStr = self.validStr;
-                            smsVC.smsCheckType = SMS_CHECKTYPE_ADDBANKCARD;
-                            [self.navigationController pushViewController:smsVC animated:YES];
+                            
+                            //获取鉴权工具成功,但此时该鉴权工具默认下发为短信.
+                            //第二次queryCardDetail,(仅用于)上送四要素信息给后端,后端用于向通道获取短信码
+                            [self queryCardDetailForUpdataInfo];
                         }else{
                             [Tool showDialog:@"下发鉴权工具有误"];
                         }
@@ -257,6 +253,49 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     }];
     
 }
+#pragma mark - 上送四要素信息给后端
+- (void)queryCardDetailForUpdataInfo{
+    
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        //第二次queryCardDetail,account域中携带卡信息,上送给后端
+        NSMutableDictionary *accountDic = [NSMutableDictionary dictionaryWithDictionary:self.accountDic];
+        [accountDic setValue:self.bankCardNo forKey:@"accNo"];
+        if (self.validStr.length==0 || self.cvnStr.length==0) {
+            [accountDic setValue:@"" forKey:@"expiry"];
+            [accountDic setValue:@"" forKey:@"cvn"];
+        }else{
+            [accountDic setValue:self.validStr forKey:@"expiry"];
+            [accountDic setValue:self.cvnStr forKey:@"cvn"];
+        }
+        NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountDic];
+        
+        paynuc.set("account", [account UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/queryCardDetail/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
+                smsVC.payToolDic = self.payToolDic;
+                smsVC.userInfoDic = self.userInfoDic;
+                smsVC.phoneNoStr = self.bankPhoneNoStr;
+                smsVC.cvnStr = self.cvnStr;
+                smsVC.expiryStr = self.validStr;
+                smsVC.smsCheckType = SMS_CHECKTYPE_ADDBANKCARD;
+                [self.navigationController pushViewController:smsVC animated:YES];
+            }];
+        }];
+        if (error) return ;
+    }];
+    
+   
+}
+
 
 -(void)checkCardType{
     

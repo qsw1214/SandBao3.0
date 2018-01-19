@@ -308,6 +308,14 @@
         CGFloat rightBtnOX = baseView.frame.size.width*3/4;
         rightBtn.frame = CGRectMake(rightBtnOX, 0, self.frame.size.width/4, baseView.frame.size.height);
     }
+    
+    if (_style == NavCoverStyleWhite) {
+        labRight.textColor = [UIColor blackColor];
+    }
+    if (_style == NavCoverStyleGradient) {
+        labRight.textColor = [UIColor whiteColor];
+    }
+    
 }
 
 

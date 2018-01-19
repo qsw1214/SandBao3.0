@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self creaetUI];
 }
 
 
@@ -51,7 +52,21 @@
     
 }
 
-
+#pragma mark  - UI绘制
+- (void)creaetUI{
+    
+    UIImage *backGroundImg = [UIImage imageNamed:@"billpage_empty"];
+    UIImageView *backGroundImgView = [Tool createImagView:backGroundImg];
+    [self.baseScrollView addSubview:backGroundImgView];
+    
+    [backGroundImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.size.mas_equalTo(self.baseScrollView.size);
+    }];
+    
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

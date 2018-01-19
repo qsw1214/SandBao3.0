@@ -46,7 +46,6 @@
 		2824F0151FEFE1C60041D857 /* shoufukuan_icon_pay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F00B1FEFE1C60041D857 /* shoufukuan_icon_pay@3x.png */; };
 		2824F0161FEFE1C60041D857 /* showPayQrcode@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F00C1FEFE1C60041D857 /* showPayQrcode@2x.png */; };
 		2824F0171FEFE1C60041D857 /* showPayQrcode@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F00D1FEFE1C60041D857 /* showPayQrcode@3x.png */; };
-		2824F0AB1FF23ACC0041D857 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2824F0AA1FF23ACC0041D857 /* WebViewController.m */; };
 		2824F1261FF33DBC0041D857 /* fukuanma@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F11E1FF33DBC0041D857 /* fukuanma@2x.png */; };
 		2824F1271FF33DBC0041D857 /* fukuanma@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F11F1FF33DBC0041D857 /* fukuanma@3x.png */; };
 		2824F1281FF33DBC0041D857 /* fukuanma_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F1201FF33DBC0041D857 /* fukuanma_selected@2x.png */; };
@@ -141,6 +140,7 @@
 		289C0D551F203FBC00360147 /* YXEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 289C0D531F203FBC00360147 /* YXEasing.m */; };
 		289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289C0D581F203FE100360147 /* SDSuccessAnimationView.m */; };
 		289D15D81EE505BD00B34EAC /* sandbaolibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289D15D71EE505BD00B34EAC /* sandbaolibrary.a */; };
+		28A2CC112011F79400419ACA /* WebViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28A2CC102011F79400419ACA /* WebViewController.mm */; };
 		28A8AEAF1FAB25E500FA1EC1 /* SDBottomPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AE9F1FAB25E500FA1EC1 /* SDBottomPop.m */; };
 		28A8AEB01FAB25E500FA1EC1 /* login_list_icon_closedr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA21FAB25E500FA1EC1 /* login_list_icon_closedr@2x.png */; };
 		28A8AEB11FAB25E500FA1EC1 /* login_list_icon_closedr@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA31FAB25E500FA1EC1 /* login_list_icon_closedr@3x.png */; };
@@ -250,7 +250,7 @@
 		28D289AD1FA2CA7000C3787E /* BankCardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289AC1FA2CA7000C3787E /* BankCardViewController.mm */; };
 		28D289B01FA2CA8000C3787E /* SandCardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289AF1FA2CA8000C3787E /* SandCardViewController.mm */; };
 		28D289B31FA2CA8C00C3787E /* SetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B21FA2CA8C00C3787E /* SetViewController.m */; };
-		28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B51FA2D2D600C3787E /* MyBillViewController.m */; };
+		28D289B71FA2D2D600C3787E /* MyBillViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289B51FA2D2D600C3787E /* MyBillViewController.mm */; };
 		28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */; };
 		28D289FB1FA330D400C3787E /* opensans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289FA1FA330D400C3787E /* opensans.ttf */; };
 		28D28F1A1FCD511100B3F00B /* LocationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D28F191FCD511100B3F00B /* LocationUtil.m */; };
@@ -378,8 +378,6 @@
 		2824F00B1FEFE1C60041D857 /* shoufukuan_icon_pay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoufukuan_icon_pay@3x.png"; sourceTree = "<group>"; };
 		2824F00C1FEFE1C60041D857 /* showPayQrcode@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "showPayQrcode@2x.png"; sourceTree = "<group>"; };
 		2824F00D1FEFE1C60041D857 /* showPayQrcode@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "showPayQrcode@3x.png"; sourceTree = "<group>"; };
-		2824F0A91FF23ACC0041D857 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		2824F0AA1FF23ACC0041D857 /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		2824F11E1FF33DBC0041D857 /* fukuanma@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fukuanma@2x.png"; sourceTree = "<group>"; };
 		2824F11F1FF33DBC0041D857 /* fukuanma@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fukuanma@3x.png"; sourceTree = "<group>"; };
 		2824F1201FF33DBC0041D857 /* fukuanma_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fukuanma_selected@2x.png"; sourceTree = "<group>"; };
@@ -542,6 +540,8 @@
 		289C0D571F203FE100360147 /* SDSuccessAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSuccessAnimationView.h; sourceTree = "<group>"; };
 		289C0D581F203FE100360147 /* SDSuccessAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSuccessAnimationView.m; sourceTree = "<group>"; };
 		289D15D71EE505BD00B34EAC /* sandbaolibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = sandbaolibrary.a; sourceTree = "<group>"; };
+		28A2CC0F2011F79400419ACA /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		28A2CC102011F79400419ACA /* WebViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebViewController.mm; sourceTree = "<group>"; };
 		28A8AE9E1FAB25E500FA1EC1 /* SDBottomPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBottomPop.h; sourceTree = "<group>"; };
 		28A8AE9F1FAB25E500FA1EC1 /* SDBottomPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBottomPop.m; sourceTree = "<group>"; };
 		28A8AEA21FAB25E500FA1EC1 /* login_list_icon_closedr@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_list_icon_closedr@2x.png"; sourceTree = "<group>"; };
@@ -685,7 +685,7 @@
 		28D289AF1FA2CA8000C3787E /* SandCardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandCardViewController.mm; sourceTree = "<group>"; };
 		28D289B11FA2CA8C00C3787E /* SetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetViewController.h; sourceTree = "<group>"; };
 		28D289B21FA2CA8C00C3787E /* SetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetViewController.m; sourceTree = "<group>"; };
-		28D289B51FA2D2D600C3787E /* MyBillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBillViewController.m; sourceTree = "<group>"; };
+		28D289B51FA2D2D600C3787E /* MyBillViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MyBillViewController.mm; sourceTree = "<group>"; };
 		28D289B61FA2D2D600C3787E /* MyBillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBillViewController.h; sourceTree = "<group>"; };
 		28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Text-Regular.otf"; sourceTree = "<group>"; };
 		28D289FA1FA330D400C3787E /* opensans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = opensans.ttf; sourceTree = "<group>"; };
@@ -969,15 +969,6 @@
 				2824F00D1FEFE1C60041D857 /* showPayQrcode@3x.png */,
 			);
 			path = img;
-			sourceTree = "<group>";
-		};
-		2824F0A81FF23AA20041D857 /* web */ = {
-			isa = PBXGroup;
-			children = (
-				2824F0A91FF23ACC0041D857 /* WebViewController.h */,
-				2824F0AA1FF23ACC0041D857 /* WebViewController.m */,
-			);
-			path = web;
 			sourceTree = "<group>";
 		};
 		2824F11D1FF33DBC0041D857 /* img */ = {
@@ -1398,6 +1389,7 @@
 				28D7E5811FA9A47F00518042 /* paymentRecharge */,
 				28D7E5801FA9A47F00518042 /* bankTransfer */,
 				28D7E57F1FA9A47F00518042 /* userTransfer */,
+				28A2CC0E2011F79400419ACA /* web */,
 			);
 			path = walletAccount;
 			sourceTree = "<group>";
@@ -1544,6 +1536,15 @@
 				289C0D581F203FE100360147 /* SDSuccessAnimationView.m */,
 			);
 			path = SDSuccessAnimationViews;
+			sourceTree = "<group>";
+		};
+		28A2CC0E2011F79400419ACA /* web */ = {
+			isa = PBXGroup;
+			children = (
+				28A2CC0F2011F79400419ACA /* WebViewController.h */,
+				28A2CC102011F79400419ACA /* WebViewController.mm */,
+			);
+			path = web;
 			sourceTree = "<group>";
 		};
 		28A8AE9C1FAB25E500FA1EC1 /* SDPopView */ = {
@@ -1781,7 +1782,6 @@
 		28BCE8BA1FB18F9F00D62F94 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				2824F0A81FF23AA20041D857 /* web */,
 				28B6491C1FAC459B0074A390 /* lunch */,
 				2836AD641FE12A2500BAB209 /* sms */,
 				2836AD661FE12A4200BAB209 /* VerifyType */,
@@ -1794,7 +1794,7 @@
 			isa = PBXGroup;
 			children = (
 				28D289B61FA2D2D600C3787E /* MyBillViewController.h */,
-				28D289B51FA2D2D600C3787E /* MyBillViewController.m */,
+				28D289B51FA2D2D600C3787E /* MyBillViewController.mm */,
 			);
 			path = myBill;
 			sourceTree = "<group>";
@@ -2449,14 +2449,13 @@
 				284E49671FFB550700C343D9 /* LFFAuthorizationManager.m in Sources */,
 				28BCE8B01FB07BFB00D62F94 /* ChangePayPwdViewController.mm in Sources */,
 				28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */,
-				28D289B71FA2D2D600C3787E /* MyBillViewController.m in Sources */,
+				28D289B71FA2D2D600C3787E /* MyBillViewController.mm in Sources */,
 				28F3770D1FB31C4500813512 /* ValidAuthToolView.m in Sources */,
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
 				28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */,
 				289C0D551F203FBC00360147 /* YXEasing.m in Sources */,
 				281431341FB54DB0000F4063 /* UserTransferFinishViewController.m in Sources */,
 				281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */,
-				2824F0AB1FF23ACC0041D857 /* WebViewController.m in Sources */,
 				288421BB1F8E0A2100082E7C /* Base64Util.m in Sources */,
 				28D28F231FCFE79F00B3F00B /* RegistViewController.mm in Sources */,
 				288421911F8E091200082E7C /* NSDate+time.m in Sources */,
@@ -2474,6 +2473,7 @@
 				28981BD71FA05EC1004CFC95 /* PayPwdViewController.mm in Sources */,
 				287586011FD66AFF00DACC8E /* SDSelectBarView.m in Sources */,
 				289729761FBEE8ED0041373E /* AddSandCardViewController.mm in Sources */,
+				28A2CC112011F79400419ACA /* WebViewController.mm in Sources */,
 				28D7E58A1FA9A51600518042 /* PaymentActiveViewController.mm in Sources */,
 				28B649141FAC45040074A390 /* BaseViewController.mm in Sources */,
 				28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */,

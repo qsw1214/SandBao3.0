@@ -71,12 +71,10 @@
 #define MQTT_NOTICE_BSC_TN_PWD @"MQTT_NOTICE_BSC_TN_PWD"
 
 
-
 //数据库表名配置
 #define MINLETS_ARR  (NSMutableArray*)@[@"id",@"orders",@"title",@"logo",@"url",@"type",@"isTest"]
 #define USERSCONFIG_ARR (NSMutableArray*)@[@"active",@"credit_fp",@"lets",@"sToken",@"uid",@"userName"]
 #define MQTTLIST_ARR (NSMutableArray*)@[@"uid",@"msg",@"isRead",@"indexCount"]
-
 
 
 //友盟自定义事件统计 - 事件计数 - 事件id
@@ -100,56 +98,16 @@
 #define WB_App_Oauth2url @"https://api.weibo.com/oauth2/default.html"
 
 
-
-#pragma mark - 配置切换(生产/测试环境)
-#pragma mark - 1.生产环境地址
-//#define AddressHTTP @"https://sdb.sandpay.com.cn/"                          //生产
-
-#pragma mark - 2.测试环境地址
-//#define AddressHTTP @"http://172.28.250.242:17892/"                         //测试
-
-//#define AddressHTTP @"http://192.168.22.157:9081/"                          //测试2
-
-#define AddressHTTP @"http://172.28.247.111:17892/"                         //测试3
-
-//#define AddressHTTP @"http://192.168.22.58:8080/smp-uc-client/"             //肖云
-
-//#define AddressHTTP @"http://192.168.22.168:8080/"                          //大广
-
-//#define AddressHTTP @"http://192.168.22.122:8080/"                          //存叶
-
-//#define AddressHTTP @"http://192.168.22.156:8080/"                          //伟丽
-
-//#define AddressHTTP @"http://192.168.22.204:8090/smp-uc-client/"            //大龙
-
-
-
-//mqtt端口/地址
-//#define kIP @"172.28.250.63"   //开发
-//#define kPort 61613
-//#define kMqttuserNmae @"testuser"
-//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
-
-#define kIP @"172.28.247.111"    //测试
-#define kPort 61613
-#define kMqttuserNmae @"testuser"
-#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
-
-//#define kIP @"180.169.86.123"  //生产
-//#define kPort 61613
-//#define kMqttuserNmae @"sand-magw-mqtt-user"
-//#define kMqttpasswd   @"magw@sand#20150805%!_"
-
 //MQTT订阅广播的Topic
 #define kMqttTopicUSERID(USERID) [NSString stringWithFormat:@"SANDBAO/0003/USER/%@",USERID]
 #define kMqttTopicBROADCAST @"SANDBAO/0003/BROADCAST"
 
 
+//账单详情地址
 #define jnl_order_list_mobile @"ot/jnl-order-list-mobile.html?" //账户变动  03000201
 #define jnl_trans_flow_mobile @"ot/jnl-trans-flow-mobile.html?" //订单流水  03000101
 #define ot_help_normal_FAQ    @"ot/help-normal-FAQ.html"        //帮助中心
 #define ot_index              @"ot/index.html"                  //服务协议
-
 
 
 //AccType
@@ -159,6 +117,9 @@
 #define COMMON_CODE  @"06" //久彰宝通用
 #define MARKET_CODE @"07" //久彰宝商超
 
+
+
+
 //用哪个开哪个
 //显示给开发人员 (显示输入数据)
 //#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
@@ -166,6 +127,63 @@
 #define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
 
 
+
+
+
+
+
+
+
+
+/*************↓↓↓↓↓***************测试**********↓↓↓↓↓***************/
+#pragma mark - 2.测试环境地址
+#define AddressHTTP @"http://172.28.247.111:17892/"                         //测试3
+//环境开关
+#define Environment YES
+
+//mqtt端口/地址
+#define kIP @"172.28.247.111"    //测试
+#define kPort 61613
+#define kMqttuserNmae @"testuser"
+#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+//#define kIP @"172.28.250.63"   //开发
+//#define kPort 61613
+//#define kMqttuserNmae @"testuser"
+//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+
+//蒲公英key
+#define pgyKey @"33bb2bbf63b37e4e8e82c5a53cd14ca8"
+/***************↑↑↑↑↑↑*************测试************↑↑↑↑↑**************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************↓↓↓↓↓***************生产**********↓↓↓↓↓***************/
+//#pragma mark - 1.生产环境地址
+//#define AddressHTTP @"https://sdb.sandpay.com.cn/"                          //生产
+////环境开关
+//#define Environment NO
+//
+////mqtt端口/地址
+//#define kIP @"172.28.250.63"   //开发
+//#define kPort 61613
+//#define kMqttuserNmae @"testuser"
+//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+//
+////蒲公英key
+//#define pgyKey @"7e2e46b54026ae02b7b963ae1e3d54b3"
+/***************↑↑↑↑↑↑*************生产************↑↑↑↑↑**************/
 
 
 

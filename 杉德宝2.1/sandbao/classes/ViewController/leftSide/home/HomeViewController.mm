@@ -68,10 +68,6 @@
     //检测是否实名/设置支付密码
     [self checkRealNameOrSetPayPwd];
     
-    if ([CommParameter sharedInstance].mqttFlag == NO) {
-        // 注册MQTT
-        [self rigistMqtt];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -79,6 +75,11 @@
     
     //通知LeftSideMenuViewController 刷新用户信息UI
     [self postNotifactionToLeftSideMenuWithUserInfoRefrush];
+    
+    if ([CommParameter sharedInstance].mqttFlag == NO) {
+        // 注册MQTT
+        [self rigistMqtt];
+    }
     
 }
 

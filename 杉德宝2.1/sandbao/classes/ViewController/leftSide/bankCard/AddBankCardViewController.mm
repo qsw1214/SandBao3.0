@@ -19,6 +19,8 @@
     
     NSDictionary *userInfoDic;  //用户信息字典
     
+    NSDictionary *accountDic;   //支付工具域下账户域字典
+    
     NSArray *appendUIArr;        //保存追加UI的子view
 }
 @property (nonatomic, strong) NSString *bankCardNoStr;  //银行卡号
@@ -75,6 +77,8 @@
         AddBankCardSecViewController *addSecVC = [[AddBankCardSecViewController alloc] init];
         addSecVC.payToolDic = payToolDic;
         addSecVC.userInfoDic = userInfoDic;
+        addSecVC.accountDic = accountDic;
+        addSecVC.bankCardNo = self.bankCardNoStr;
         [self.navigationController pushViewController:addSecVC animated:YES];
     }
 
@@ -222,10 +226,10 @@
         }];
         if (error) return ;
         
-        NSMutableDictionary *accountDic = [[NSMutableDictionary alloc] init];
-        [accountDic setValue:@"03" forKey:@"kind"];
-        [accountDic setValue:[NSString stringWithFormat:@"%@", self.bankCardNoStr] forKey:@"accNo"];
-        NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountDic];
+        NSMutableDictionary *accountdic = [[NSMutableDictionary alloc] init];
+        [accountdic setValue:@"03" forKey:@"kind"];
+        [accountdic setValue:[NSString stringWithFormat:@"%@", self.bankCardNoStr] forKey:@"accNo"];
+        NSString *account = [[PayNucHelper sharedInstance] dictionaryToJson:accountdic];
 
         paynuc.set("account", [account UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/queryCardDetail/v1" errorBlock:^(SDRequestErrorType type) {
@@ -237,6 +241,8 @@
                 
                 NSString *payTool = [NSString stringWithUTF8String:paynuc.get("payTool").c_str()];
                 payToolDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:payTool];
+                
+                accountDic = [payToolDic objectForKey:@"account"];
                 
                 NSString *userInfo = [NSString stringWithUTF8String:paynuc.get("userInfo").c_str()];
                 userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:userInfo];

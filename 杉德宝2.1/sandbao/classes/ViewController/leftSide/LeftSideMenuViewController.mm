@@ -219,7 +219,7 @@
     [self.baseScrollView addSubview:headView];
     
     //headImgView
-    CGFloat headImgViewWH = LEFTRIGHTSPACE_55;
+    CGFloat headImgViewWH = LEFTRIGHTSPACE_80;
     UIImage *headImg = [UIImage imageNamed:@"center_profile_avatar"];
     headImgView = [Tool createImagView:headImg];
     headImgView.layer.cornerRadius = headImgViewWH/2;
@@ -452,7 +452,7 @@
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_BankCard];
     }
-    if ([titleName isEqualToString:@"杉德卡"]) {
+    if ([titleName isEqualToString:@"卡券包"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.sandCardNav];
         //友盟自定义时间统计 - 计数事件

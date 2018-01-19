@@ -18,6 +18,8 @@
 #import "BankCardTransferViewController.h"
 #import "UserTransferBeginViewController.h"
 
+#import "WebViewController.h"
+
 @interface WalletAccountViewController ()
 {
     //headView
@@ -27,12 +29,15 @@
     NSMutableDictionary *rechargeInPayToolDic;
     //钱包账户_被转账_支付工具
     NSMutableDictionary *transferOutPayToolDic;
-
     
     UILabel *balanceLab;
     
     BOOL payForAnthoerFlag; //代付凭证标识
+    
+    
+    
 }
+@property (nonatomic, strong) NSString *walletPayToolID; //钱包账户ID
 @end
 
 @implementation WalletAccountViewController
@@ -78,11 +83,18 @@
     self.navCoverView.style = NavCoverStyleGradient;
     self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"";
+    self.navCoverView.rightTitleStr = @"明细";
     
     __weak WalletAccountViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         //归位Home或SpsLunch
         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
+    };
+    
+    self.navCoverView.rightBlock = ^{
+        WebViewController *webViewVC = [[WebViewController alloc] init];
+        webViewVC.payToolID = weakSelf.walletPayToolID;
+        [weakSelf.navigationController pushViewController:webViewVC animated:YES];
     };
 }
 #pragma mark - 重写父类-点击方法集合
@@ -355,6 +367,8 @@
         
         NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];
         balacneStr = [NSString stringWithFormat:@"%.2f",[balacneStr floatValue]/100];
+        
+        _walletPayToolID = [rechargeInPayToolDic objectForKey:@"id"];
         
 //        NSString *moneyYuanFormatterStr = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
 //
