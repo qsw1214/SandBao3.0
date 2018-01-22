@@ -14,6 +14,8 @@
 #import "AddSandCardViewController.h"
 #import "SandCardDetailViewController.h"
 #import "CardBaseTableView.h"
+#import "SDSelectBarTwoView.h"
+
 
 @interface SandCardViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -21,6 +23,8 @@
     NSMutableArray *sandArray;
     
     CGFloat cellHeight;
+    
+    SDSelectBarTwoView *selectBarView;
     
 }
 @property (nonatomic, strong) UILabel *noCardLab;
@@ -50,6 +54,7 @@
     // Do any additional setup after loading the view.
     
     [self createUI];
+    [self createSandCardList];
 }
 
 
@@ -66,22 +71,24 @@
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"杉德卡";
+    self.navCoverView.rightTitleStr = @"添加";
+    
     
     __weak SandCardViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         //归位Home或SpsLunch
         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
     };
-    
+    self.navCoverView.rightBlock = ^{
+        //绑定杉德卡
+        AddSandCardViewController *addSandCardVC = [[AddSandCardViewController alloc] init];
+        [weakSelf.navigationController pushViewController:addSandCardVC animated:YES];
+    };
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
-    //绑定杉德卡
-    if (btn.tag == BTN_TAG_BINDSANDCARD) {
-        AddSandCardViewController *addSandCardVC = [[AddSandCardViewController alloc] init];
-        [self.navigationController pushViewController:addSandCardVC animated:YES];
-    }
+   
 }
 
 #pragma mark  - UI绘制
@@ -91,13 +98,37 @@
     self.noCardLab = [Tool createLable:@"暂无绑定的杉德卡" attributeStr:nil font:FONT_18_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:self.noCardLab];
     
-    //bottomBtn
-    self.bottomBtn = [Tool createButton:@"添加杉德卡" attributeStr:nil font:FONT_14_Regular textColor:COLOR_FFFFFF];
-    self.bottomBtn.backgroundColor = COLOR_58A5F6;
-    [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
-    [self.view addSubview:self.bottomBtn];
-    self.bottomBtn.height = UPDOWNSPACE_64;
+    
+    selectBarView = [SDSelectBarTwoView showSelectBarView:@[@"卡包",@"券包"] selectBarBlock:^(NSInteger index) {
+        //卡包
+        if (index == 0) {
+             self.sandTableView.hidden = NO;
+        }
+        //券包
+        if (index == 1) {
+            self.sandTableView.hidden = YES;
+        }
+    }];
+    [self.baseScrollView addSubview:selectBarView];
+    
+   
+    [self.noCardLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_160);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(self.noCardLab.size);
+    }];
+    
+    [selectBarView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_11);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(selectBarView.size);
+    }];
+    
+
+
+}
+
+- (void)createSandCardList{
     
     //tableview
     cellHeight = UPDOWNSPACE_122;
@@ -109,28 +140,13 @@
     self.sandTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.baseScrollView addSubview:self.sandTableView];
     
-    
-    
-    [self.noCardLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_160);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(self.noCardLab.size);
-    }];
-    
-    [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.baseScrollView);
-        make.bottom.equalTo(self.view.mas_bottom);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.bottomBtn.height));
-    }];
-    
     [self.sandTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView);
+        make.top.equalTo(selectBarView.mas_bottom).offset(UPDOWNSPACE_20);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0));
     }];
-
+    
 }
-
 
 
 #pragma mark - tableViewDelegate
@@ -263,14 +279,12 @@
         [self.sandTableView reloadData];
         [self.sandTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         [self.sandTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.baseScrollView);
+            make.top.equalTo(selectBarView.mas_bottom).offset(UPDOWNSPACE_20);
             make.centerX.equalTo(self.baseScrollView);
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.baseScrollView.height - self.bottomBtn.height));
         }];
     }else{
         self.noCardLab.hidden = NO;
-        [self.bottomBtn setTitle:@"添加杉德卡" forState:UIControlStateNormal];
-        self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
     }
     
   

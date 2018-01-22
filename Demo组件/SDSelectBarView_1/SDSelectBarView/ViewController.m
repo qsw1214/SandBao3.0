@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SDSelectBarView.h"
+#import "SDSelectBarTwoView.h"
 @interface ViewController ()
 
 @end
@@ -20,7 +20,7 @@
     
     self.view.backgroundColor = [UIColor blueColor];
     
-    SDSelectBarView *s  = [SDSelectBarView showSelectBarView:@[@"话费",@"吃饭",@"加油卡",@"生活缴费"] selectBarBlock:^(NSInteger index) {
+    SDSelectBarTwoView *s  = [SDSelectBarTwoView showSelectBarView:@[@"话费",@"吃饭",@"加油卡",@"生活缴费"] selectBarBlock:^(NSInteger index) {
         
         NSLog(@"点击了:%ld",(long)index);
         

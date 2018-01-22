@@ -164,7 +164,9 @@
 //黑色(0.5透明度)
 #define COLOR_343339_5 HexRGBA(0x343339,0.5f)
 //按钮灰
-#define COLOR_D9D9D9 HexRGBA(0xD9D9D9,0.5f)
+#define COLOR_D9D9D9 HexRGBA(0xD9D9D9,1.f)
+//线框灰
+#define COLOR_D8D8D8 HexRGBA(0xD8D8D8,1.f)
 //线灰
 #define COLOR_A1A2A5_3 HexRGBA(0xA1A2A5,0.3f)
 //灰色

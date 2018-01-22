@@ -94,7 +94,7 @@
                 tToken = [NSString stringWithUTF8String:paynuc.get("tToken").c_str()];
                 [self createUI];
                 
-                NSString *requestStr = [NSString stringWithFormat:@"%@%@sandtoken=%@&accountType=%@&id=%@",AddressHTTP,jnl_trans_flow_mobile,tToken,CASH_CODE,self.payToolID];
+                NSString *requestStr = [NSString stringWithFormat:@"%@%@sandtoken=%@&accountType=%@&id=%@",AddressHTTP,jnl_trans_flow_mobile,tToken,self.code,self.payToolID];
                 [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestStr]]];
             }];
         }];

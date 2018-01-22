@@ -10,10 +10,16 @@
 #import "PayNucHelper.h"
 
 #import "GradualView.h"
+#import "WebViewController.h"
+
 typedef void(^SandCardStateBlock)(NSArray *paramArr);
 @interface SandCardDetailViewController ()<SDPayViewDelegate>
 {
     GradualView *headView;
+    
+    UILabel *moneyLab; //余额
+    
+    UILabel *cardNoLab; //卡号
     
     NSString *accPassword; //accPass字符串
 }
@@ -21,6 +27,8 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
  支付工具控件
  */
 @property (nonatomic, strong) SDPayView *payView;
+
+@property (nonatomic, strong) NSString *sandCardPayToolID; //记名卡账户ID
 @end
 
 @implementation SandCardDetailViewController
@@ -31,6 +39,9 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     [self create_HeadView];
     [self create_BodyView];
     [self create_PayView];
+    
+    
+    [self getBalances];
     
 }
 
@@ -46,11 +57,19 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
     self.navCoverView.midTitleStr = @"杉德卡详情";
+    self.navCoverView.rightTitleStr = @"明细";
     
     __weak SandCardDetailViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
+    self.navCoverView.rightBlock = ^{
+        WebViewController *webViewVC = [[WebViewController alloc] init];
+        webViewVC.payToolID = weakSelf.sandCardPayToolID;
+        webViewVC.code = CONSUME_CODE;
+        [weakSelf.navigationController pushViewController:webViewVC animated:YES];
+    };
+    
     
 }
 #pragma mark - 重写父类-点击方法集合
@@ -86,7 +105,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     [headView addSubview:balanceLab];
     
     //moneyLab
-    UILabel *moneyLab = [Tool createLable:@"¥256.90" attributeStr:nil font:FONT_50_SFUDisplay_Regular textColor:COLOR_FFFFFF alignment:NSTextAlignmentCenter];
+    moneyLab = [Tool createLable:@"¥0.00" attributeStr:nil font:FONT_50_SFUDisplay_Regular textColor:COLOR_FFFFFF alignment:NSTextAlignmentCenter];
     [headView addSubview:moneyLab];
     
     //dataLab
@@ -115,42 +134,34 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
 
 - (void)create_BodyView{
     
-    
     //cardDetailLab
     UILabel *cardDetailLab = [Tool createLable:@"卡片详情" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [headView addSubview:cardDetailLab];
-    
+
     //detailView
     UIView *detailView = [[UIView alloc] init];
     detailView.backgroundColor = COLOR_FFFFFF;
-    detailView.layer.borderColor = COLOR_343339_5.CGColor;
+    detailView.layer.borderColor = COLOR_D8D8D8.CGColor;
     detailView.layer.borderWidth = 0.5f;
     [self.baseScrollView addSubview:detailView];
     
-    //cardInstructionLab
-    UILabel *cardInstructionLab = [Tool createLable:@"卡片使用说明" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
-    [self.baseScrollView addSubview:cardInstructionLab];
+    //杉德logo
+    UILabel *sandName = [Tool createLable:@"杉德" attributeStr:nil font:FONT_36_SFUIT_Rrgular textColor:COLOR_666666 alignment:NSTextAlignmentCenter];
+    sandName.layer.borderColor = COLOR_D8D8D8.CGColor;
+    sandName.layer.borderWidth = 0.5f;
+    [detailView addSubview:sandName];
     
-    //cardWebBtn
-    UIButton *cardWebBtn = [Tool createButton:@"http://www.sandlife.com.cn" attributeStr:nil font:FONT_12_Regular textColor:COLOR_FF5D31];
-    cardWebBtn.tag = BTN_TAG_ENTERWEBVC;
-    [cardWebBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.baseScrollView addSubview:cardWebBtn];
+    //cardNo
+    UIView *cardNoView = [[UIView alloc] init];
+    cardNoView.backgroundColor = [UIColor whiteColor];
+    [detailView addSubview:cardNoView];
     
-    //line
-    UIView *line = [[UIView alloc] init];
-    line.backgroundColor = COLOR_A1A2A5_3;
-    line.size = CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_45, 1);
-    [self.baseScrollView addSubview:line];
+    UILabel *cardNoDesLab = [Tool createLable:@"卡片号:" attributeStr:nil font:FONT_10_PingFangSC_Light textColor:COLOR_343339_5 alignment:NSTextAlignmentCenter];
+    [cardNoView addSubview:cardNoDesLab];
     
-    
-    //carQrCodeLab
-    UILabel *carQrCodeLab = [Tool createLable:@"卡片二维码" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
-    [self.baseScrollView addSubview:carQrCodeLab];
-    
-    UIImage *qrImg = [UIImage imageNamed:@"set_erCode"];
-    UIImageView *qrCodeImgView = [Tool createImagView:qrImg];
-    [self.baseScrollView addSubview:qrCodeImgView];
+    cardNoLab = [Tool createLable:@"**** **** **** ****  " attributeStr:nil font:FONT_20_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
+    cardNoLab.textAlignment = NSTextAlignmentRight;
+    [cardNoView addSubview:cardNoLab];
     
     //unBingdingBtn
     UIButton *unBingdingBtn = [Tool createBarButton:@"解绑" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
@@ -158,53 +169,48 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     [unBingdingBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:unBingdingBtn];
     
-    
+    CGFloat detailViewW = LEFTRIGHTSPACE_286;
+    CGFloat detailViewH = UPDOWNSPACE_100;
+    CGFloat cardNoViewSpace = (detailViewW - (cardNoDesLab.width + LEFTRIGHTSPACE_04 + cardNoLab.width))/2;
     
     [cardDetailLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headView.mas_bottom).offset(UPDOWNSPACE_30);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(cardDetailLab.size);
     }];
-    
+
     [detailView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardDetailLab.mas_bottom).offset(UPDOWNSPACE_14);
         make.left.equalTo(self.baseScrollView.mas_left).offset(LEFTRIGHTSPACE_45);
-        make.size.mas_equalTo(CGSizeMake(LEFTRIGHTSPACE_286, UPDOWNSPACE_100));
+        make.size.mas_equalTo(CGSizeMake(detailViewW, detailViewH));
     }];
     
-    [cardInstructionLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(detailView.mas_bottom).offset(UPDOWNSPACE_16);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(cardInstructionLab.size);
-    }];
-   
-    [cardWebBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardInstructionLab.mas_bottom).offset(UPDOWNSPACE_25);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(cardWebBtn.size);
+    [sandName mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(detailView.mas_top);
+        make.centerX.mas_equalTo(detailView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(detailViewW, detailViewH/2));
     }];
     
-    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardWebBtn.mas_bottom).offset(UPDOWNSPACE_0);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(line.size);
+    [cardNoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(sandName.mas_bottom);
+        make.centerX.equalTo(sandName);
+        make.size.mas_equalTo(CGSizeMake(detailViewW, detailViewH/2));
     }];
     
-    
-    [carQrCodeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(cardWebBtn.mas_bottom).offset(UPDOWNSPACE_20);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(carQrCodeLab.size);
+    [cardNoDesLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(cardNoView);
+        make.left.equalTo(cardNoView.mas_left).offset(cardNoViewSpace);
+        make.size.mas_equalTo(CGSizeMake(LEFTRIGHTSPACE_35, cardNoDesLab.height));
     }];
     
-    [qrCodeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(carQrCodeLab.mas_bottom).offset(UPDOWNSPACE_20);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(qrCodeImgView.size);
+    [cardNoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(cardNoView);
+        make.right.equalTo(cardNoView.mas_right).offset(-cardNoViewSpace);
+        make.size.mas_equalTo(cardNoLab.size);
     }];
     
     [unBingdingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(qrCodeImgView.mas_bottom).offset(UPDOWNSPACE_30);
+        make.top.equalTo(detailView.mas_bottom).offset(UPDOWNSPACE_69);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(unBingdingBtn.size);
     }];
@@ -258,6 +264,55 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
 }
 
 #pragma mark - 业务逻辑
+
+#pragma mark - 卡账户余额查询
+-(void)getBalances{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        paynuc.set("tTokenType", "03000401");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        NSString *payTools;
+        NSMutableArray *payToolsArray = [NSMutableArray arrayWithCapacity:0];
+        [payToolsArray addObject:self.payToolDic];
+        payTools = [[PayNucHelper sharedInstance] arrayToJSON:payToolsArray];
+        paynuc.set("payTools", [payTools UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getBalances/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                //更新数据 主账户 钱包账户余额
+                NSString *payTools = [NSString stringWithUTF8String:paynuc.get("payTools").c_str()];
+                NSArray *payToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:payTools];
+                
+                //排序
+                payToolsArr = [Tool orderForPayTools:payToolsArr];
+                if (payToolsArr.count>0) {
+                    NSDictionary *payToolDic = payToolsArr[0];
+                    moneyLab.text = [NSString stringWithFormat:@"¥%.2f",[[[payToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue]/100];
+                    self.sandCardPayToolID = [payToolDic objectForKey:@"id"];
+                    cardNoLab.text = [NSString stringWithFormat:@"**** **** **** %@",[[payToolDic objectForKey:@"account"] objectForKey:@"accNo"]];
+                }
+            }];
+        }];
+        if (error) return ;
+    }];
+    
+}
+
+
+
+
 #pragma mark 解绑_查询鉴权工具
 - (void)unbingding_getAuthTools
 {

@@ -94,6 +94,7 @@
     self.navCoverView.rightBlock = ^{
         WebViewController *webViewVC = [[WebViewController alloc] init];
         webViewVC.payToolID = weakSelf.walletPayToolID;
+        webViewVC.code = CASH_CODE;
         [weakSelf.navigationController pushViewController:webViewVC animated:YES];
     };
 }

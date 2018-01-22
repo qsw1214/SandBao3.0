@@ -131,12 +131,12 @@
     
     
     //bottomBtn
-    self.bottomBtn = [Tool createButton:@"绑定" attributeStr:nil font:FONT_14_Regular textColor:COLOR_FFFFFF];
-    self.bottomBtn.backgroundColor = COLOR_58A5F6;
+    self.bottomBtn = [Tool createBarButton:@"绑定" font:FONT_14_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
     self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
     [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.bottomBtn];
-    self.bottomBtn.height = UPDOWNSPACE_64;
+    [self.baseScrollView addSubview:self.bottomBtn];
+    
+    
     
     
     
@@ -160,8 +160,8 @@
     
     [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.baseScrollView);
-        make.bottom.equalTo(self.view.mas_bottom).offset(UPDOWNSPACE_0);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.bottomBtn.height));
+        make.top.equalTo(sandCardCodeCheckView.mas_bottom).offset(UPDOWNSPACE_64);
+        make.size.mas_equalTo(self.bottomBtn.size);
     }];
     
     

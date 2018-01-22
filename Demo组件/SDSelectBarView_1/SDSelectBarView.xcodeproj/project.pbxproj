@@ -15,7 +15,7 @@
 		287585D21FD5638700DACC8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 287585D01FD5638700DACC8E /* LaunchScreen.storyboard */; };
 		287585DD1FD5638800DACC8E /* SDSelectBarViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 287585DC1FD5638800DACC8E /* SDSelectBarViewTests.m */; };
 		287585E81FD5638800DACC8E /* SDSelectBarViewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 287585E71FD5638800DACC8E /* SDSelectBarViewUITests.m */; };
-		287585F71FD563AD00DACC8E /* SDSelectBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287585F61FD563AD00DACC8E /* SDSelectBarView.m */; };
+		287585F71FD563AD00DACC8E /* SDSelectBarTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 287585F61FD563AD00DACC8E /* SDSelectBarTwoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +52,8 @@
 		287585E31FD5638800DACC8E /* SDSelectBarViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDSelectBarViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		287585E71FD5638800DACC8E /* SDSelectBarViewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDSelectBarViewUITests.m; sourceTree = "<group>"; };
 		287585E91FD5638800DACC8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		287585F51FD563AD00DACC8E /* SDSelectBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSelectBarView.h; sourceTree = "<group>"; };
-		287585F61FD563AD00DACC8E /* SDSelectBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSelectBarView.m; sourceTree = "<group>"; };
+		287585F51FD563AD00DACC8E /* SDSelectBarTwoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSelectBarTwoView.h; sourceTree = "<group>"; };
+		287585F61FD563AD00DACC8E /* SDSelectBarTwoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSelectBarTwoView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,8 +109,8 @@
 				287585C81FD5638700DACC8E /* ViewController.h */,
 				287585C91FD5638700DACC8E /* ViewController.m */,
 				287585CB1FD5638700DACC8E /* Main.storyboard */,
-				287585F51FD563AD00DACC8E /* SDSelectBarView.h */,
-				287585F61FD563AD00DACC8E /* SDSelectBarView.m */,
+				287585F51FD563AD00DACC8E /* SDSelectBarTwoView.h */,
+				287585F61FD563AD00DACC8E /* SDSelectBarTwoView.m */,
 				287585CE1FD5638700DACC8E /* Assets.xcassets */,
 				287585D01FD5638700DACC8E /* LaunchScreen.storyboard */,
 				287585D31FD5638700DACC8E /* Info.plist */,
@@ -284,7 +284,7 @@
 				287585CA1FD5638700DACC8E /* ViewController.m in Sources */,
 				287585C71FD5638700DACC8E /* AppDelegate.m in Sources */,
 				287585C41FD5638700DACC8E /* main.m in Sources */,
-				287585F71FD563AD00DACC8E /* SDSelectBarView.m in Sources */,
+				287585F71FD563AD00DACC8E /* SDSelectBarTwoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +528,7 @@
 				287585EE1FD5638800DACC8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		287585EF1FD5638800DACC8E /* Build configuration list for PBXNativeTarget "SDSelectBarViewTests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +537,7 @@
 				287585F11FD5638800DACC8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		287585F21FD5638800DACC8E /* Build configuration list for PBXNativeTarget "SDSelectBarViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -544,6 +546,7 @@
 				287585F41FD5638800DACC8E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

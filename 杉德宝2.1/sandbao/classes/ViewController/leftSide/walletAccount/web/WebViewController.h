@@ -11,6 +11,8 @@
 @interface WebViewController : BaseViewController
 
 @property (nonatomic, strong) NSString *payToolID;
+@property (nonatomic, strong) NSString *code;
+
 
 
 @end

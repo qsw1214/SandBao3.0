@@ -279,6 +279,7 @@
 		28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.mm */; };
 		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
+		28F3036A2015CDB000C2C0D1 /* SDSelectBarTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F303682015CDAF00C2C0D1 /* SDSelectBarTwoView.m */; };
 		28F3770C1FB31C4500813512 /* CvnAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F377091FB31C4500813512 /* CvnAuthToolView.m */; };
 		28F3770D1FB31C4500813512 /* ValidAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F3770B1FB31C4500813512 /* ValidAuthToolView.m */; };
 		4DD1A90DEFCB099DED2ED74F /* libPods-sandbao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AEAE75BF7CC1B1A93F66984 /* libPods-sandbao.a */; };
@@ -741,6 +742,8 @@
 		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeftSideMenuViewController.mm; sourceTree = "<group>"; };
 		28EBA18C1F2F1B0B003EEA61 /* SDDrowNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDrowNoticeView.h; sourceTree = "<group>"; };
 		28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDrowNoticeView.m; sourceTree = "<group>"; };
+		28F303682015CDAF00C2C0D1 /* SDSelectBarTwoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSelectBarTwoView.m; sourceTree = "<group>"; };
+		28F303692015CDB000C2C0D1 /* SDSelectBarTwoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSelectBarTwoView.h; sourceTree = "<group>"; };
 		28F377081FB31C4500813512 /* CvnAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CvnAuthToolView.h; sourceTree = "<group>"; };
 		28F377091FB31C4500813512 /* CvnAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CvnAuthToolView.m; sourceTree = "<group>"; };
 		28F3770A1FB31C4500813512 /* ValidAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidAuthToolView.h; sourceTree = "<group>"; };
@@ -1251,6 +1254,8 @@
 				2824F11D1FF33DBC0041D857 /* img */,
 				287585FF1FD66AFF00DACC8E /* SDSelectBarView.h */,
 				287586001FD66AFF00DACC8E /* SDSelectBarView.m */,
+				28F303692015CDB000C2C0D1 /* SDSelectBarTwoView.h */,
+				28F303682015CDAF00C2C0D1 /* SDSelectBarTwoView.m */,
 			);
 			path = SDSelectBarView;
 			sourceTree = "<group>";
@@ -2511,6 +2516,7 @@
 				28491BD31F38719F00E2B30C /* PresentAnimatedTransitioning.m in Sources */,
 				288421921F8E091200082E7C /* NSObject+NSLocalNotification.m in Sources */,
 				A7FF2FC91E1602D80068A2F7 /* CommParameter.m in Sources */,
+				28F3036A2015CDB000C2C0D1 /* SDSelectBarTwoView.m in Sources */,
 				28B649221FAC459B0074A390 /* LunchViewController.mm in Sources */,
 				28466F471FA8160500FA64FF /* AboutUSViewController.m in Sources */,
 				28B649841FAC654A0074A390 /* SDPayToolListView.m in Sources */,
