@@ -16,7 +16,7 @@
 		280B5BC21FC3FB3700319F82 /* SandCardDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 280B5BC11FC3FB3700319F82 /* SandCardDetailViewController.mm */; };
 		280B5BC41FC4011A00319F82 /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 280B5BC31FC4011A00319F82 /* SF-UI-Display-Regular.otf */; };
 		2811CA0B1F94B3EB003C4468 /* UIView+easyFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */; };
-		281431341FB54DB0000F4063 /* UserTransferFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 281431331FB54DB0000F4063 /* UserTransferFinishViewController.m */; };
+		281431341FB54DB0000F4063 /* UserTransferFinishViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281431331FB54DB0000F4063 /* UserTransferFinishViewController.mm */; };
 		2814313C1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2814313B1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm */; };
 		281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2817475B1F96E25B007D4D3A /* LoginViewController.mm */; };
 		281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747B51F9847DB007D4D3A /* RealNameViewController.mm */; };
@@ -265,7 +265,7 @@
 		28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */; };
 		28D7E5851FA9A50C00518042 /* BankCardRechargeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5841FA9A50C00518042 /* BankCardRechargeViewController.mm */; };
 		28D7E58A1FA9A51600518042 /* PaymentActiveViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5871FA9A51600518042 /* PaymentActiveViewController.mm */; };
-		28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.m */; };
+		28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.mm */; };
 		28D7E5911FA9A52C00518042 /* BankCardTransferViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.mm */; };
 		28D7E5961FA9A53F00518042 /* UserTransferPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5931FA9A53F00518042 /* UserTransferPageViewController.m */; };
 		28D7E5971FA9A53F00518042 /* UserTransferBeginViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5951FA9A53F00518042 /* UserTransferBeginViewController.mm */; };
@@ -329,7 +329,7 @@
 		2811CA091F94B3EB003C4468 /* UIView+easyFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+easyFrame.h"; sourceTree = "<group>"; };
 		2811CA0A1F94B3EB003C4468 /* UIView+easyFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+easyFrame.m"; sourceTree = "<group>"; };
 		281431321FB54DB0000F4063 /* UserTransferFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTransferFinishViewController.h; sourceTree = "<group>"; };
-		281431331FB54DB0000F4063 /* UserTransferFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTransferFinishViewController.m; sourceTree = "<group>"; };
+		281431331FB54DB0000F4063 /* UserTransferFinishViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = UserTransferFinishViewController.mm; sourceTree = "<group>"; };
 		2814313A1FB59B3B000F4063 /* ForgetLoginPwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetLoginPwdViewController.h; sourceTree = "<group>"; };
 		2814313B1FB59B3B000F4063 /* ForgetLoginPwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ForgetLoginPwdViewController.mm; sourceTree = "<group>"; };
 		2817475A1F96E25B007D4D3A /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -714,7 +714,7 @@
 		28D7E5861FA9A51600518042 /* PaymentActiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentActiveViewController.h; sourceTree = "<group>"; };
 		28D7E5871FA9A51600518042 /* PaymentActiveViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PaymentActiveViewController.mm; sourceTree = "<group>"; };
 		28D7E58C1FA9A52C00518042 /* BankCardTransferFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardTransferFinishViewController.h; sourceTree = "<group>"; };
-		28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankCardTransferFinishViewController.m; sourceTree = "<group>"; };
+		28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BankCardTransferFinishViewController.mm; sourceTree = "<group>"; };
 		28D7E58E1FA9A52C00518042 /* BankCardTransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardTransferViewController.h; sourceTree = "<group>"; };
 		28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BankCardTransferViewController.mm; sourceTree = "<group>"; };
 		28D7E5921FA9A53F00518042 /* UserTransferPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserTransferPageViewController.h; sourceTree = "<group>"; };
@@ -1851,7 +1851,7 @@
 				28D7E59B1FA9BF3800518042 /* UserHongbaoViewController.h */,
 				28D7E59C1FA9BF3800518042 /* UserHongbaoViewController.mm */,
 				281431321FB54DB0000F4063 /* UserTransferFinishViewController.h */,
-				281431331FB54DB0000F4063 /* UserTransferFinishViewController.m */,
+				281431331FB54DB0000F4063 /* UserTransferFinishViewController.mm */,
 			);
 			path = userTransfer;
 			sourceTree = "<group>";
@@ -1862,7 +1862,7 @@
 				28D7E58E1FA9A52C00518042 /* BankCardTransferViewController.h */,
 				28D7E58F1FA9A52C00518042 /* BankCardTransferViewController.mm */,
 				28D7E58C1FA9A52C00518042 /* BankCardTransferFinishViewController.h */,
-				28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.m */,
+				28D7E58D1FA9A52C00518042 /* BankCardTransferFinishViewController.mm */,
 			);
 			path = bankTransfer;
 			sourceTree = "<group>";
@@ -2454,7 +2454,7 @@
 				281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */,
 				28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */,
 				289C0D551F203FBC00360147 /* YXEasing.m in Sources */,
-				281431341FB54DB0000F4063 /* UserTransferFinishViewController.m in Sources */,
+				281431341FB54DB0000F4063 /* UserTransferFinishViewController.mm in Sources */,
 				281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */,
 				288421BB1F8E0A2100082E7C /* Base64Util.m in Sources */,
 				28D28F231FCFE79F00B3F00B /* RegistViewController.mm in Sources */,
@@ -2476,7 +2476,7 @@
 				28A2CC112011F79400419ACA /* WebViewController.mm in Sources */,
 				28D7E58A1FA9A51600518042 /* PaymentActiveViewController.mm in Sources */,
 				28B649141FAC45040074A390 /* BaseViewController.mm in Sources */,
-				28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.m in Sources */,
+				28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.mm in Sources */,
 				28D28F1D1FCEAF8C00B3F00B /* ErrorLunchViewController.mm in Sources */,
 				28BCE8C31FB18FD500D62F94 /* VerifyViewController.mm in Sources */,
 				28B649851FAC654A0074A390 /* SDPayToolOrderView.m in Sources */,

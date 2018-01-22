@@ -33,7 +33,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
     NSArray *rechargePayToolsArray; //获取下发支付工具组
     
-    CGFloat limitFloat;
+    NSDecimalNumber *limitDec;
     
 }
 /**
@@ -104,7 +104,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
     if (btn.tag == BTN_TAG_RECHARGE) {
         if ([moneyTextfield.text floatValue]>0) {
-            if ([moneyTextfield.text floatValue]<=limitFloat) {
+            NSComparisonResult res =  [[NSDecimalNumber decimalNumberWithString:moneyTextfield.text] compare:limitDec];
+            if ([moneyTextfield.text length]>0 && res<=0) {
                 //金额赋值(分)
                 moneyStr = moneyTextfield.text;
                 //支付控件设置信息
@@ -119,7 +120,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     }
     
     if (btn.tag == BTN_TAG_SHOWALLMONEY) {
-        moneyTextfield.text = [NSString stringWithFormat:@"%.2f",limitFloat];
+        moneyTextfield.text = [NSString stringWithFormat:@"%@",limitDec];
     }
     
     
@@ -201,9 +202,9 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [self.baseScrollView addSubview:tipView];
     
     //获取limit信息 - (充值limit-限制转入账户可转入金额)
-    limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.rechargeInPayToolDic objectForKey:@"limit"]]/100;
+    limitDec = [[PayNucHelper sharedInstance] limitInfo:[self.rechargeInPayToolDic objectForKey:@"limit"]];
     //tipLab
-    tipLab = [Tool createLable:[NSString stringWithFormat:@"您的账户,单笔最多可充值(%.2f)元",limitFloat] attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    tipLab = [Tool createLable:[NSString stringWithFormat:@"您的账户,单笔最多可充值(%@)元",limitDec] attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [tipView addSubview:tipLab];
     
     tipView.height = tipLab.height + UPDOWNSPACE_15*2;

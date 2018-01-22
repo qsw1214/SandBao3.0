@@ -313,7 +313,7 @@
     NSURL *setPlistDataPath = [[NSBundle mainBundle] URLForResource:@"leftMenu" withExtension:@"plist"];
     NSArray *arrar = [NSArray arrayWithContentsOfURL:setPlistDataPath];
     dataArray = arrar;
-    CGFloat tableViewH = UPDOWNSPACE_64 * dataArray.count;
+    CGFloat tableViewH = UPDOWNSPACE_52 * dataArray.count;
     
     UIView *line = [[UIView alloc] init];
     line.backgroundColor = COLOR_A1A2A5_3;
@@ -351,18 +351,18 @@
     [logOutbtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.baseScrollView.mas_left);
         make.size.mas_equalTo(CGSizeMake(self.baseScrollView.width, logOutImg.size.height*2));
-        make.bottom.equalTo(tableview.mas_bottom).offset(UPDOWNSPACE_69);
+        make.bottom.equalTo(tableview.mas_bottom).offset(UPDOWNSPACE_100);
     }];
     
     [logOutImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(logOutbtn.mas_centerY);
-        make.left.equalTo(logOutbtn.mas_left).offset(LEFTRIGHTSPACE_20);
+        make.left.equalTo(logOutbtn.mas_left).offset(LEFTRIGHTSPACE_25);
         make.size.mas_equalTo(logOutImg.size);
     }];
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(logOutbtn.mas_centerY);
-        make.left.equalTo(logOutImgView.mas_right).offset(LEFTRIGHTSPACE_15);
+        make.left.equalTo(logOutImgView.mas_right).offset(LEFTRIGHTSPACE_12);
         make.size.mas_equalTo(titleLab.size);
     }];
     
@@ -397,7 +397,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return UPDOWNSPACE_64;
+    return UPDOWNSPACE_52;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 

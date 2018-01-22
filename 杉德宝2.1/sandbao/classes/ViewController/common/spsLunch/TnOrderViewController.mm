@@ -34,7 +34,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
     NSDictionary *successWorkDic; //支付成功后返回的work
     
-    CGFloat limitFloat;
+    NSDecimalNumber *limitDec;
 }
 /**
  支付工具控件
@@ -83,17 +83,6 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_PAY) {
-        
-        //获取limit信息 - (支付limit-限制订单下发的支付工具单笔额度)
-//        limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.selectedPayDict objectForKey:@"limit"]]/100;
-//        CGFloat amountFloat = [[orderDic objectForKey:@"amount"] floatValue]/100;
-//        if (limitFloat > 0 && (amountFloat >= limitFloat)) {
-//            [Tool showDialog:@"订单金额超过限额,请更换其他方式支付!" defulBlock:^{
-//                [self.payView hidPayTool];
-//            }];
-//        }else{
-//
-//        }
         
         //@"立即付款"
         [self.payView showPayTool];

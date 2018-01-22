@@ -449,7 +449,7 @@ static PayNucHelper *payNucHelperSharedInstance = nil;
  @param limit limit域
  @return 返回最大限额
  */
--(CGFloat)limitInfo:(NSDictionary*)limitDic{
+-(NSDecimalNumber*)limitInfo:(NSDictionary*)limitDic{
     
     //单月最高
     NSString *month = [limitDic objectForKey:@"month"];
@@ -470,7 +470,14 @@ static PayNucHelper *payNucHelperSharedInstance = nil;
     
     monthRemainFloat = monthRemainFloat<dayRemainFloat?monthRemainFloat:dayRemainFloat;
     monthRemainFloat = monthRemainFloat<singleFloat?monthRemainFloat:singleFloat;
-    return monthRemainFloat;
+    
+    
+    NSDecimalNumber *limitDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",monthRemainFloat]];
+    //分转换为元
+    NSDecimalNumber *hundredDec = [NSDecimalNumber decimalNumberWithString:@"100"];
+    limitDec = [limitDec decimalNumberByDividingBy:hundredDec];
+    
+    return limitDec;
 }
 
 

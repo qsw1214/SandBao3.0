@@ -19,6 +19,9 @@
 #import "GradualView.h"
 #import "SDMajletView.h"
 #import "SDDrowNoticeView.h"
+#import "SDRechargePopView.h"
+#import "BankCardTransferViewController.h"
+#import "UserTransferBeginViewController.h"
 
 
 @interface HomeViewController ()<SDMQTTManagerDelegate,UICollectionViewDelegate>
@@ -49,6 +52,11 @@
     //bodyViewTwo
     UIView      *bodyViewTwo;
     
+    
+    //钱包账户_被转账_支付工具
+    NSMutableDictionary *transferOutPayToolDic;
+    
+    
 }
 @property (nonatomic, strong) NSMutableArray *sandServerArr; //杉德服务子件数组
 @property (nonatomic, strong) NSMutableArray *limitServerArr; //限时服务子件数组
@@ -62,7 +70,7 @@
     //允许RESideMenu的返回手势
     self.sideMenuViewController.panGestureEnabled = YES;
     
-    //用户刷新数据信息
+    //用户刷新数据信息+支付工具刷新
     [self refreshUI];
     
     //检测是否实名/设置支付密码
@@ -404,6 +412,53 @@
     sandServerView.majletArr = self.sandServerArr;
     sandServerView.titleNameBlock = ^(NSString *titleName) {
         NSLog(@"titleName == %@",titleName);
+        
+        
+        //转账功能
+        if ([titleName isEqualToString:@"转账"]) {
+            if ([[transferOutPayToolDic objectForKey:@"available"] boolValue] == NO){
+                //            [Tool showDialog:@"账户暂时无法转账 available == NO"];
+                //            return ;
+            }
+            SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
+                if ([cellName isEqualToString:@"个人银行卡"]) {
+                    if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                        [Tool showDialog:@"账户余额不足,无法转账到银行卡"];
+                        return ;
+                    }
+                    BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];
+                    bankCardTransferVC.transferOutPayToolDic = transferOutPayToolDic;
+                    bankCardTransferVC.tTokenType = @"02000201";
+                    [self.navigationController pushViewController:bankCardTransferVC animated:YES];
+                }
+                if ([cellName isEqualToString:@"杉德宝用户"]) {
+                    if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                        [Tool showDialog:@"账户余额不足,无法转账到杉德宝用户"];
+                        return ;
+                    }
+                    UserTransferBeginViewController *sandUserTransferVC = [[UserTransferBeginViewController alloc] init];
+                    [self.navigationController pushViewController:sandUserTransferVC animated:YES];
+                }
+            }];
+            popview.chooseBtnTitleArr = @[@"个人银行卡",@"杉德宝用户"];
+        }
+        
+        //理财功能
+        if ([titleName isEqualToString:@"理财"]) {
+            
+        }
+        //积分商城
+        if ([titleName isEqualToString:@"积分商城"]) {
+            
+        }
+        //手机充值
+        if ([titleName isEqualToString:@"手机充值"]) {
+            
+        }
+        //生活缴费
+        if ([titleName isEqualToString:@"生活缴费"]) {
+            
+        }
     };
     [bodyViewOne addSubview:sandServerView];
     
@@ -464,6 +519,7 @@
     limitServerView.majletArr = self.limitServerArr;
     limitServerView.titleNameBlock = ^(NSString *titleName) {
         NSLog(@"titleName == %@",titleName);
+        
     };
     [bodyViewTwo addSubview:limitServerView];
     
@@ -739,6 +795,19 @@
     //获取且拼装金额数据
     NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     NSDictionary *sandWalletDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
+    
+    if (sandWalletDic.count == 0) {
+        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" defulBlock:^{
+            //呼叫
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
+                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
+            }
+        }];
+    }
+    
+    //初始化被转账支付工具 (即钱包账户)
+    transferOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:sandWalletDic];
+    
     NSString *moneyStr = [[sandWalletDic objectForKey:@"account"] objectForKey:@"balance"];
     moneyStr = [NSString stringWithFormat:@"%.2f",[moneyStr floatValue]/100];
     NSString *moneyMidStr = [moneyStr substringToIndex:(moneyStr.length - 3)];
@@ -786,6 +855,40 @@
         make.size.mas_equalTo(moneyBtnRightLabSize);
     }];
 }
+
+
+#pragma mark - 设置(刷新)支付工具
+- (void)settingData
+{
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    
+    //钱包账户_被转账_支付工具
+    transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
+    
+    //钱包账户未成功开通
+    if (transferOutPayToolDic.count == 0) {
+        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
+            //归位Home或SpsLunch
+            [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+        } rightBlock:^{
+            //呼叫
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
+                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
+            }
+        }];
+        
+    }else{
+        
+        //钱包账户_被转账_支付工具
+        transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
+        transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
+    }
+    
+}
+
+
+
 #pragma mark 通知左侧边栏刷新用户信息UI
 - (void)postNotifactionToLeftSideMenuWithUserInfoRefrush{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"User_Info_Changed" object:nil];

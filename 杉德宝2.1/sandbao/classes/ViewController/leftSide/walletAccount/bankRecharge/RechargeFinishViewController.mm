@@ -33,6 +33,7 @@
     
     [self create_HeadView];
     [self create_BodyView];
+    [self ownPayTools];
     
 }
 
@@ -54,8 +55,7 @@
     
     __weak RechargeFinishViewController *weakSelf = self;
     self.navCoverView.rightBlock = ^{
-        //1.刷新支付工具
-        [weakSelf ownPayTools];
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
     };
     
 }
@@ -272,8 +272,6 @@
                 //支付工具排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                
             }];
         }];
         if (error) return ;

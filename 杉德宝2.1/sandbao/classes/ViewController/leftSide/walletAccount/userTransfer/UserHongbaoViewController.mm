@@ -18,7 +18,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     NSString *moneyStr;
     UITextField *moneyTextfield;
     
-    CGFloat limitFloat;
+    NSDecimalNumber *limitDec;
 }
 /**
  work域
@@ -72,8 +72,8 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     
     //转账!
     if (btn.tag == BTN_TAG_TRANSFER) {
-        
-        if ([moneyTextfield.text floatValue]>0 && [moneyTextfield.text floatValue] <= limitFloat) {
+          NSComparisonResult res =  [[NSDecimalNumber decimalNumberWithString:moneyTextfield.text] compare:limitDec];
+        if ([moneyTextfield.text floatValue]>0 && res<=0) {
             //金额赋值(分)
             moneyStr = moneyTextfield.text;
             [self fee];
@@ -147,7 +147,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 - (void)create_BodyView{
     
     //获取limit信息 - (转账limit-限制转出账户可转出金额)
-    limitFloat = [[PayNucHelper sharedInstance] limitInfo:[self.outPayToolDic objectForKey:@"limit"]]/100;
+    limitDec = [[PayNucHelper sharedInstance] limitInfo:[self.outPayToolDic objectForKey:@"limit"]];
     
     //bodyView
     bodyView = [[UIView alloc] init];
@@ -181,7 +181,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     [bodyView addSubview:transferBtn];
 
     //limitTipLab
-    NSString *limitStr = [NSString stringWithFormat:@"最高可发:%.2f元红包",limitFloat];
+    NSString *limitStr = [NSString stringWithFormat:@"最高可发:%@元红包",limitDec];
     UILabel *limitTipLab = [Tool createLable:limitStr attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:limitTipLab];
     

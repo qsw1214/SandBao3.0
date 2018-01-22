@@ -147,7 +147,7 @@ extern PayNuc paynuc;
  @param limit limit域
  @return 返回最大限额
  */
--(CGFloat)limitInfo:(NSDictionary*)limit;
+-(NSDecimalNumber*)limitInfo:(NSDictionary*)limit;
 
 
 

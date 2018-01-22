@@ -29,7 +29,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     NSArray *payToolsArray; //从tn获取的支付工具
     NSDictionary *successWorkDic; //支付成功后返回的work
     
-    CGFloat limitFloat;
+    NSDecimalNumber *limitDec;
     NSDictionary *orderDic; //订单信息
     // 跳转忘记密码的标识
     BOOL forgetPwdPush;
@@ -533,7 +533,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
-                //成功回调
+                //查询支付工具失败也回调成功
                 [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
                     [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
                 }];
@@ -549,7 +549,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
-                //成功回调
+                //查询支付工具失败也回调成功
                 [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
                     [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
                 }];
