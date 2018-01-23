@@ -63,8 +63,26 @@
         make.size.mas_equalTo(self.baseScrollView.size);
     }];
 
-    UIButton *inviteBtn = [Tool createButton:@"" attributeStr:nil font:nil textColor:nil];
+    UIView *qrCodeView = [[UIView alloc] init];
+//    qrCodeView.backgroundColor = [UIColor redColor];
+    [inviteBGView addSubview:qrCodeView];
     
+    [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(inviteBGView.mas_left).offset(LEFTRIGHTSPACE_55);
+        make.centerY.equalTo(inviteBGView);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_55, SCREEN_WIDTH - 2*LEFTRIGHTSPACE_55));
+    }];
+    
+    UIButton *inviteBtn = [Tool createButton:@"" attributeStr:nil font:nil textColor:nil];
+    inviteBtn.backgroundColor = [UIColor clearColor];
+    inviteBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, UPDOWNSPACE_112);
+    [inviteBGView addSubview:inviteBtn];
+    
+    [inviteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(inviteBGView.mas_bottom).offset(-UPDOWNSPACE_112);
+        make.centerX.equalTo(inviteBGView);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, UPDOWNSPACE_112));
+    }];
     
     
 }

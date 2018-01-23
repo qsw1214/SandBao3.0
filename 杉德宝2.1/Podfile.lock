@@ -17,6 +17,7 @@ PODS:
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
   - UMengAnalytics-NO-IDFA (4.2.5)
+  - WechatOpenSDK (1.8.1)
 
 DEPENDENCIES:
   - IQKeyboardManager (~> 5.0.6)
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - RESideMenu (~> 4.0.7)
   - SDWebImage (~> 4.0)
   - UMengAnalytics-NO-IDFA
+  - WechatOpenSDK
 
 SPEC CHECKSUMS:
   IQKeyboardManager: 077b7f691dfa9d69db9cff66f2bed68ebfc02d9b
@@ -39,7 +41,8 @@ SPEC CHECKSUMS:
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
+  WechatOpenSDK: 491d965d79335070328571d3e79f714549e79a5e
 
-PODFILE CHECKSUM: 698e0ae4550bf59450fdad3f34b8a4838cb4319a
+PODFILE CHECKSUM: a2b8f5356d1bd01cafecad681a0de8cd3010e27c
 
 COCOAPODS: 1.4.0.beta.2

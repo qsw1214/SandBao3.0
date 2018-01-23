@@ -2,7 +2,8 @@ platform :ios, ‘8.0’
 #use_frameworks!个别需要用到它，比如reactiveCocoa
 
 target 'sandbao' do
-pod 'SDWebImage', '~> 4.0'
+pod 'SDWebImage', '~> 4.0’
+pod 'WechatOpenSDK'
 pod "pop"
 pod 'Masonry'
 pod 'IQKeyboardManager', '~> 5.0.6'
