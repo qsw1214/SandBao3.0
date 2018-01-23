@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		28DBA54C20161A3400E8B852 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA54B20161A3400E8B852 /* AppDelegate.m */; };
+		28DBA54F20161A3400E8B852 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA54E20161A3400E8B852 /* ViewController.m */; };
+		28DBA55220161A3400E8B852 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28DBA55020161A3400E8B852 /* Main.storyboard */; };
+		28DBA55420161A3400E8B852 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DBA55320161A3400E8B852 /* Assets.xcassets */; };
+		28DBA55720161A3400E8B852 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28DBA55520161A3400E8B852 /* LaunchScreen.storyboard */; };
+		28DBA55A20161A3400E8B852 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA55920161A3400E8B852 /* main.m */; };
+		28DBA56420161A3400E8B852 /* SDBarButtonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA56320161A3400E8B852 /* SDBarButtonTests.m */; };
+		28DBA56F20161A3400E8B852 /* SDBarButtonUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA56E20161A3400E8B852 /* SDBarButtonUITests.m */; };
+		28DBA58120161AED00E8B852 /* SDBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA58020161AED00E8B852 /* SDBarButton.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		28DBA56020161A3400E8B852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28DBA53F20161A3300E8B852 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28DBA54620161A3400E8B852;
+			remoteInfo = SDBarButton;
+		};
+		28DBA56B20161A3400E8B852 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28DBA53F20161A3300E8B852 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28DBA54620161A3400E8B852;
+			remoteInfo = SDBarButton;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		28DBA54720161A3400E8B852 /* SDBarButton.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDBarButton.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DBA54A20161A3400E8B852 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		28DBA54B20161A3400E8B852 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		28DBA54D20161A3400E8B852 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		28DBA54E20161A3400E8B852 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		28DBA55120161A3400E8B852 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		28DBA55320161A3400E8B852 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28DBA55620161A3400E8B852 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		28DBA55820161A3400E8B852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28DBA55920161A3400E8B852 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		28DBA55F20161A3400E8B852 /* SDBarButtonTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDBarButtonTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DBA56320161A3400E8B852 /* SDBarButtonTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDBarButtonTests.m; sourceTree = "<group>"; };
+		28DBA56520161A3400E8B852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28DBA56A20161A3400E8B852 /* SDBarButtonUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDBarButtonUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28DBA56E20161A3400E8B852 /* SDBarButtonUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDBarButtonUITests.m; sourceTree = "<group>"; };
+		28DBA57020161A3400E8B852 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28DBA57F20161AED00E8B852 /* SDBarButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDBarButton.h; sourceTree = "<group>"; };
+		28DBA58020161AED00E8B852 /* SDBarButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDBarButton.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		28DBA54420161A3400E8B852 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DBA55C20161A3400E8B852 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DBA56720161A3400E8B852 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28DBA53E20161A3300E8B852 = {
+			isa = PBXGroup;
+			children = (
+				28DBA54920161A3400E8B852 /* SDBarButton */,
+				28DBA56220161A3400E8B852 /* SDBarButtonTests */,
+				28DBA56D20161A3400E8B852 /* SDBarButtonUITests */,
+				28DBA54820161A3400E8B852 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		28DBA54820161A3400E8B852 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28DBA54720161A3400E8B852 /* SDBarButton.app */,
+				28DBA55F20161A3400E8B852 /* SDBarButtonTests.xctest */,
+				28DBA56A20161A3400E8B852 /* SDBarButtonUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28DBA54920161A3400E8B852 /* SDBarButton */ = {
+			isa = PBXGroup;
+			children = (
+				28DBA54A20161A3400E8B852 /* AppDelegate.h */,
+				28DBA54B20161A3400E8B852 /* AppDelegate.m */,
+				28DBA54D20161A3400E8B852 /* ViewController.h */,
+				28DBA54E20161A3400E8B852 /* ViewController.m */,
+				28DBA57F20161AED00E8B852 /* SDBarButton.h */,
+				28DBA58020161AED00E8B852 /* SDBarButton.m */,
+				28DBA55020161A3400E8B852 /* Main.storyboard */,
+				28DBA55320161A3400E8B852 /* Assets.xcassets */,
+				28DBA55520161A3400E8B852 /* LaunchScreen.storyboard */,
+				28DBA55820161A3400E8B852 /* Info.plist */,
+				28DBA55920161A3400E8B852 /* main.m */,
+			);
+			path = SDBarButton;
+			sourceTree = "<group>";
+		};
+		28DBA56220161A3400E8B852 /* SDBarButtonTests */ = {
+			isa = PBXGroup;
+			children = (
+				28DBA56320161A3400E8B852 /* SDBarButtonTests.m */,
+				28DBA56520161A3400E8B852 /* Info.plist */,
+			);
+			path = SDBarButtonTests;
+			sourceTree = "<group>";
+		};
+		28DBA56D20161A3400E8B852 /* SDBarButtonUITests */ = {
+			isa = PBXGroup;
+			children = (
+				28DBA56E20161A3400E8B852 /* SDBarButtonUITests.m */,
+				28DBA57020161A3400E8B852 /* Info.plist */,
+			);
+			path = SDBarButtonUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		28DBA54620161A3400E8B852 /* SDBarButton */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28DBA57320161A3400E8B852 /* Build configuration list for PBXNativeTarget "SDBarButton" */;
+			buildPhases = (
+				28DBA54320161A3400E8B852 /* Sources */,
+				28DBA54420161A3400E8B852 /* Frameworks */,
+				28DBA54520161A3400E8B852 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SDBarButton;
+			productName = SDBarButton;
+			productReference = 28DBA54720161A3400E8B852 /* SDBarButton.app */;
+			productType = "com.apple.product-type.application";
+		};
+		28DBA55E20161A3400E8B852 /* SDBarButtonTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28DBA57620161A3400E8B852 /* Build configuration list for PBXNativeTarget "SDBarButtonTests" */;
+			buildPhases = (
+				28DBA55B20161A3400E8B852 /* Sources */,
+				28DBA55C20161A3400E8B852 /* Frameworks */,
+				28DBA55D20161A3400E8B852 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28DBA56120161A3400E8B852 /* PBXTargetDependency */,
+			);
+			name = SDBarButtonTests;
+			productName = SDBarButtonTests;
+			productReference = 28DBA55F20161A3400E8B852 /* SDBarButtonTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		28DBA56920161A3400E8B852 /* SDBarButtonUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28DBA57920161A3400E8B852 /* Build configuration list for PBXNativeTarget "SDBarButtonUITests" */;
+			buildPhases = (
+				28DBA56620161A3400E8B852 /* Sources */,
+				28DBA56720161A3400E8B852 /* Frameworks */,
+				28DBA56820161A3400E8B852 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28DBA56C20161A3400E8B852 /* PBXTargetDependency */,
+			);
+			name = SDBarButtonUITests;
+			productName = SDBarButtonUITests;
+			productReference = 28DBA56A20161A3400E8B852 /* SDBarButtonUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		28DBA53F20161A3300E8B852 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = tianNanYiHao;
+				TargetAttributes = {
+					28DBA54620161A3400E8B852 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Manual;
+					};
+					28DBA55E20161A3400E8B852 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 28DBA54620161A3400E8B852;
+					};
+					28DBA56920161A3400E8B852 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 28DBA54620161A3400E8B852;
+					};
+				};
+			};
+			buildConfigurationList = 28DBA54220161A3300E8B852 /* Build configuration list for PBXProject "SDBarButton" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 28DBA53E20161A3300E8B852;
+			productRefGroup = 28DBA54820161A3400E8B852 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				28DBA54620161A3400E8B852 /* SDBarButton */,
+				28DBA55E20161A3400E8B852 /* SDBarButtonTests */,
+				28DBA56920161A3400E8B852 /* SDBarButtonUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28DBA54520161A3400E8B852 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DBA55720161A3400E8B852 /* LaunchScreen.storyboard in Resources */,
+				28DBA55420161A3400E8B852 /* Assets.xcassets in Resources */,
+				28DBA55220161A3400E8B852 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DBA55D20161A3400E8B852 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DBA56820161A3400E8B852 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28DBA54320161A3400E8B852 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DBA58120161AED00E8B852 /* SDBarButton.m in Sources */,
+				28DBA54F20161A3400E8B852 /* ViewController.m in Sources */,
+				28DBA55A20161A3400E8B852 /* main.m in Sources */,
+				28DBA54C20161A3400E8B852 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DBA55B20161A3400E8B852 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DBA56420161A3400E8B852 /* SDBarButtonTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28DBA56620161A3400E8B852 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28DBA56F20161A3400E8B852 /* SDBarButtonUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		28DBA56120161A3400E8B852 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28DBA54620161A3400E8B852 /* SDBarButton */;
+			targetProxy = 28DBA56020161A3400E8B852 /* PBXContainerItemProxy */;
+		};
+		28DBA56C20161A3400E8B852 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28DBA54620161A3400E8B852 /* SDBarButton */;
+			targetProxy = 28DBA56B20161A3400E8B852 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		28DBA55020161A3400E8B852 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28DBA55120161A3400E8B852 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		28DBA55520161A3400E8B852 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28DBA55620161A3400E8B852 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		28DBA57120161A3400E8B852 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		28DBA57220161A3400E8B852 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		28DBA57420161A3400E8B852 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDBarButton/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDBarButton;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ba030a12-99c3-466f-8e38-038dfbd73c8c";
+				PROVISIONING_PROFILE_SPECIFIER = sandComm_Dev_Profile;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		28DBA57520161A3400E8B852 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDBarButton/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDBarButton;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ba030a12-99c3-466f-8e38-038dfbd73c8c";
+				PROVISIONING_PROFILE_SPECIFIER = sandComm_Dev_Profile;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		28DBA57720161A3400E8B852 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDBarButtonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDBarButtonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDBarButton.app/SDBarButton";
+			};
+			name = Debug;
+		};
+		28DBA57820161A3400E8B852 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDBarButtonTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDBarButtonTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDBarButton.app/SDBarButton";
+			};
+			name = Release;
+		};
+		28DBA57A20161A3400E8B852 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDBarButtonUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDBarButtonUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SDBarButton;
+			};
+			name = Debug;
+		};
+		28DBA57B20161A3400E8B852 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDBarButtonUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDBarButtonUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SDBarButton;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28DBA54220161A3300E8B852 /* Build configuration list for PBXProject "SDBarButton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DBA57120161A3400E8B852 /* Debug */,
+				28DBA57220161A3400E8B852 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28DBA57320161A3400E8B852 /* Build configuration list for PBXNativeTarget "SDBarButton" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DBA57420161A3400E8B852 /* Debug */,
+				28DBA57520161A3400E8B852 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28DBA57620161A3400E8B852 /* Build configuration list for PBXNativeTarget "SDBarButtonTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DBA57720161A3400E8B852 /* Debug */,
+				28DBA57820161A3400E8B852 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28DBA57920161A3400E8B852 /* Build configuration list for PBXNativeTarget "SDBarButtonUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28DBA57A20161A3400E8B852 /* Debug */,
+				28DBA57B20161A3400E8B852 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28DBA53F20161A3300E8B852 /* Project object */;
+}
