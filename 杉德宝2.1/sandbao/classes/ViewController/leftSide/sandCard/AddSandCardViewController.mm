@@ -12,13 +12,13 @@
 
 @interface AddSandCardViewController ()
 {
- 
+    SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString *sandCardNoStr;
 @property (nonatomic, strong) NSString *sandCardCodeStr;  //校验码
 @property (nonatomic, strong) NSString *sandCardCodeCheckStr; //再次输入校验码
 
-@property (nonatomic, strong) UIButton *bottomBtn;
+@property (nonatomic, strong) UIView *bottomBtn;
 
 @end
 
@@ -73,6 +73,8 @@
             if ([self.sandCardCodeStr isEqualToString:self.sandCardCodeCheckStr]) {
                 //绑定杉德卡
                 [self bindingSandCard];
+            }else{
+                [Tool showDialog:@"两次校验码输入不一致"];
             }
             
         }else{
@@ -131,9 +133,10 @@
     
     
     //bottomBtn
-    self.bottomBtn = [Tool createBarButton:@"绑定" font:FONT_14_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    self.bottomBtn.tag = BTN_TAG_BINDSANDCARD;
-    [self.bottomBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    self.bottomBtn = [barButton createBarButton:@"绑定" font:FONT_14_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_BINDSANDCARD;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:self.bottomBtn];
     
     
@@ -164,9 +167,32 @@
         make.size.mas_equalTo(self.bottomBtn.size);
     }];
     
-    
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[sandCardNoView.textfiled,sandCardCodeView.textfiled,sandCardCodeCheckView.textfiled]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
 }
 
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
+}
 
 #pragma mark - 业务逻辑
 #pragma mark 绑卡_查询鉴权工具
@@ -250,11 +276,10 @@
     
 }
 
-
-
-
-
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (void)didReceiveMemoryWarning {

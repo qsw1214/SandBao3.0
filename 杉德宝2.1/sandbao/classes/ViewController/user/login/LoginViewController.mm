@@ -18,7 +18,7 @@
 
 @interface LoginViewController ()
 {
-    
+    SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString * phoneNum;
 @property (nonatomic, strong) NSString * loginPwd;
@@ -100,6 +100,7 @@
     phoneAuthToolView.successBlock = ^(NSString *textfieldText) {
         weakself.phoneNum = textfieldText;
     };
+    
     [self.baseScrollView addSubview:phoneAuthToolView];
     
     //PwdAuthToolView
@@ -119,9 +120,10 @@
     [self.baseScrollView addSubview:forgetBtn];
     
     //logintBtn
-    UIButton *loginBarbtn = [Tool createBarButton:@"登录" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    loginBarbtn.tag = BTN_TAG_LOGIN;
-    [loginBarbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *loginBarbtn = [barButton createBarButton:@"登录" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_LOGIN;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:loginBarbtn];
     
     //registBtn
@@ -179,7 +181,37 @@
         make.size.mas_equalTo(registbtn.size);
     }];
     
+    
+    
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[phoneAuthToolView.textfiled,pwdAuthToolView.textfiled]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
 }
+
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
+}
+
+
+
 
 #pragma mark - 业务逻辑
 #pragma mark 获取登陆鉴权工具

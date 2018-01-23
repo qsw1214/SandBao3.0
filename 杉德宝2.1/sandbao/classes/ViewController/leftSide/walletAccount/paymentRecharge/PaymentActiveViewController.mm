@@ -23,7 +23,7 @@
 @interface PaymentActiveViewController ()
 {
     
-    
+    SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString *paymentNo;
 @property (nonatomic, strong) NSString *paymenCode;
@@ -103,9 +103,10 @@
 //    [self.baseScrollView addSubview:paymentPwdCell];
     
     //rechargeBarBtn
-    UIButton *rechargeBarBtn = [Tool createBarButton:@"激活" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    rechargeBarBtn.tag = BTN_TAG_PAYMENTACTIVE;
-    [rechargeBarBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *rechargeBarBtn = [barButton createBarButton:@"激活" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_PAYMENTACTIVE;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBarBtn];
     
     [paymentNoCell mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -126,6 +127,31 @@
         make.size.mas_equalTo(rechargeBarBtn.size);
     }];
     
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[paymentNoCell.textfield,paymenCodeCell.textfield]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
+}
+
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
 }
 
 
@@ -185,6 +211,11 @@
     
 }
 
+
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (void)didReceiveMemoryWarning {

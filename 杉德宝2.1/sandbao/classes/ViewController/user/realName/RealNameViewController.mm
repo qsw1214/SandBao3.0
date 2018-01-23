@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     ValidAuthToolView *validAuthToolView;
     CvnAuthToolView *cvnAuthToolView;
     
-    UIButton *nextBarbtn;
+    UIView *nextBarbtn;
     
     NSDictionary *payToolDic;   //支付工具字典
     
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     NSArray *appendUIArr;        //保存追加UI的子view
     
-    
+    SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString *realNameStr;  //真实姓名
 @property (nonatomic, strong) NSString *bankCardNoStr;  //银行卡号
@@ -166,9 +166,10 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     
     //nextBtn
-    nextBarbtn = [Tool createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    nextBarbtn.tag = BTN_TAG_NEXT;
-    [nextBarbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    nextBarbtn = [barButton createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_NEXT;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:nextBarbtn];
     
     
@@ -210,11 +211,37 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         make.size.mas_equalTo(nextBarbtn.size);
     }];
 
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[nameAuthToolView.textfiled,identityAuthToolView.textfiled,cardNoAuthToolView.textfiled]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
 }
 
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
+}
 //查询银行卡后,追加UI
 - (void)appendUI:(BankCardType)cardType{
     __weak typeof(self) weakself = self;
+    
+    [barButton changeState:NO];
     
     //bankAuthToolView
     bankAuthToolView = [BankAuthToolView createAuthToolViewOY:0];
@@ -232,6 +259,9 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     };
     [self.baseScrollView addSubview:bankPhoneNoAuthToolView];
     
+    [self.textfiledArr addObject:bankPhoneNoAuthToolView.textfiled];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:bankPhoneNoAuthToolView.textfiled];
+    
     //如果是信用卡 - 创建信用卡相关视图
     if (cardType == creditCard) {
         validAuthToolView = [ValidAuthToolView createAuthToolViewOY:0];
@@ -240,6 +270,8 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             weakself.validStr = textfieldText;
         };
         [self.baseScrollView addSubview:validAuthToolView];
+        [self.textfiledArr addObject:validAuthToolView.textfiled];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:validAuthToolView.textfiled];
         
         cvnAuthToolView = [CvnAuthToolView createAuthToolViewOY:0];
         cvnAuthToolView.tip.text = @"请输入正确CVN";
@@ -247,6 +279,8 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             weakself.cvnStr = textfieldText;
         };
         [self.baseScrollView addSubview:cvnAuthToolView];
+        [self.textfiledArr addObject:cvnAuthToolView.textfiled];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:cvnAuthToolView.textfiled];
     }
 
     
@@ -292,7 +326,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         make.size.mas_equalTo(moreBankListBtnSize);
     }];
     
-    nextBarbtn.tag = BTN_TAG_REALNAME;
+    barButton.btn.tag = BTN_TAG_REALNAME;
     [nextBarbtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(moreBankListBtn.mas_bottom).offset(UPDOWNSPACE_25);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
@@ -328,7 +362,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         self.baseScrollView.contentSize = CGSizeMake(self.baseScrollView.contentSize.width, originalViewHeight);
         
         //重置约束
-        nextBarbtn.tag = BTN_TAG_NEXT;
+        barButton.btn.tag = BTN_TAG_NEXT;
         [nextBarbtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cardNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_15);
             make.centerX.equalTo(self.baseScrollView.mas_centerX);
@@ -522,7 +556,10 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 
 
 
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 

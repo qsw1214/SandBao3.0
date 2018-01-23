@@ -13,7 +13,7 @@
 
 @interface ForgetLoginPwdViewController ()
 {
-    
+    SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString * phoneNum;
 @end
@@ -84,9 +84,10 @@
     [self.baseScrollView addSubview:phoneAuthToolView];
     
     //nextBtn
-    UIButton *nextBarbtn = [Tool createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    nextBarbtn.tag = BTN_TAG_NEXT;
-    [nextBarbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *nextBarbtn = [barButton createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_NEXT;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:nextBarbtn];
     
     //frame
@@ -107,6 +108,33 @@
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];
+    
+    
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[phoneAuthToolView.textfiled]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
+}
+
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
 }
 
 #pragma mark - 业务逻辑
@@ -187,7 +215,10 @@
 }
 
 
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

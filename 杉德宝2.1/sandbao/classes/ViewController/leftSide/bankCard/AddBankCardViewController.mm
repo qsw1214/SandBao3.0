@@ -13,7 +13,7 @@
 {
     CardNoAuthToolView *cardNoAuthToolView;
     
-    UIButton *nextBarbtn;
+    UIView *nextBarbtn;
     
     NSDictionary *payToolDic;   //支付工具字典
     
@@ -22,6 +22,8 @@
     NSDictionary *accountDic;   //支付工具域下账户域字典
     
     NSArray *appendUIArr;        //保存追加UI的子view
+    
+    SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString *bankCardNoStr;  //银行卡号
 @end
@@ -109,9 +111,10 @@
     
     
     //nextBtn
-    nextBarbtn = [Tool createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    nextBarbtn.tag = BTN_TAG_NEXT;
-    [nextBarbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    nextBarbtn = [barButton createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_NEXT;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:nextBarbtn];
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -138,6 +141,31 @@
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[cardNoAuthToolView.textfiled]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
+}
+
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
 }
 
 //查询银行卡后,追加UI
@@ -170,7 +198,7 @@
         make.size.mas_equalTo(moreBankListBtnSize);
     }];
     
-    nextBarbtn.tag = BTN_TAG_BINDBANKCARD;
+    barButton.btn.tag = BTN_TAG_BINDBANKCARD;
     [nextBarbtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(moreBankListBtn.mas_bottom).offset(UPDOWNSPACE_25);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
@@ -197,7 +225,7 @@
         appendUIArr = nil;
         
         //重置约束
-        nextBarbtn.tag = BTN_TAG_NEXT;
+        barButton.btn.tag = BTN_TAG_NEXT;
         [nextBarbtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(cardNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_15);
             make.centerX.equalTo(self.baseScrollView.mas_centerX);
@@ -256,10 +284,10 @@
     
 }
 
-
-
-
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 

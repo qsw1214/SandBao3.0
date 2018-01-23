@@ -28,7 +28,6 @@
     
 }
 @property (nonatomic, strong) UILabel *noCardLab;
-@property (nonatomic, strong) UIButton *bottomBtn;
 @property (nonatomic, strong) CardBaseTableView *sandTableView;
 @end
 
@@ -281,13 +280,11 @@
         [self.sandTableView mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(selectBarView.mas_bottom).offset(UPDOWNSPACE_20);
             make.centerX.equalTo(self.baseScrollView);
-            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.baseScrollView.height - self.bottomBtn.height));
+            make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.baseScrollView.height - self.sandTableView.y));
         }];
     }else{
         self.noCardLab.hidden = NO;
     }
-    
-  
 }
 
 

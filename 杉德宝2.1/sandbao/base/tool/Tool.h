@@ -285,18 +285,4 @@ typedef void(^DefulBtnBlock)();
  */
 + (UIButton*)createButton:(NSString*)str attributeStr:(NSMutableAttributedString*)attributeStr font:(UIFont*)font textColor:(UIColor*)textColor;
 
-
-#pragma mark -  BarBtn工厂方法
-/**
- BarBtn工厂方法
-
- @param str 文字
- @param font 字体
- @param titleColor 字体颜色
- @param groundColor 背景颜色
- @param space 间距
- @return 实例
- */
-+ (UIButton*)createBarButton:(NSString*)str font:(UIFont*)font titleColor:(UIColor*)titleColor backGroundColor:(UIColor*)groundColor leftSpace:(CGFloat)space;
-
 @end

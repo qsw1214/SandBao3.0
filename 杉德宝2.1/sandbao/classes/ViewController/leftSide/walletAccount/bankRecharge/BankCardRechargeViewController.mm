@@ -35,6 +35,8 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
     NSDecimalNumber *limitDec;
     
+    SDBarButton *barButton;
+    
 }
 /**
  充值支付工具
@@ -312,16 +314,38 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         make.size.mas_equalTo(bottomBtn.size);
     }];
     
-
-
-    
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[moneyTextfield]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
 }
 
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
+}
 - (void)create_NextBarBtn{
     //rechargeBtn
-    UIButton *rechargeBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
-    rechargeBtn.tag = BTN_TAG_RECHARGE;
-    [rechargeBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *rechargeBtn = [barButton createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_RECHARGE;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBtn];
     
     [rechargeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -329,8 +353,9 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(rechargeBtn.size);
     }];
-    
 }
+
+
 - (void)create_PayView{
     self.payView = [SDPayView getPayView];
     self.payView.addCardType = SDPayView_ADDBANKCARD;
@@ -699,6 +724,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
 }
 
+
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

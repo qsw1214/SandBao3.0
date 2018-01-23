@@ -11,7 +11,7 @@
 
 @interface NickNameViewController ()
 {
-    
+    SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString *nickNameStr;
 @end
@@ -78,9 +78,10 @@
     [self.baseScrollView addSubview:nickNameAuthToolView];
     
     //nextBtn
-    UIButton *nextBarbtn = [Tool createBarButton:@"提交" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    nextBarbtn.tag = BTN_TAG_NEXT;
-    [nextBarbtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *nextBarbtn = [barButton createBarButton:@"提交" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_NEXT;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:nextBarbtn];
     
     [nickNameAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -95,11 +96,32 @@
         make.size.mas_equalTo(nextBarbtn.size);
     }];
     
-    
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[nickNameAuthToolView.textfiled]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
 }
 
-
-
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
+}
 
 
 #pragma mark - 业务逻辑
@@ -155,7 +177,10 @@
 
 
 
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (void)didReceiveMemoryWarning {

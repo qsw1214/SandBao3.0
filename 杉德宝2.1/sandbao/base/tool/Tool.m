@@ -1007,36 +1007,4 @@
     
 }
 
-#pragma mark -  BarBtn工厂方法
-+ (UIButton*)createBarButton:(NSString*)str font:(UIFont*)font titleColor:(UIColor*)titleColor backGroundColor:(UIColor*)groundColor leftSpace:(CGFloat)space{
-    
-    UIButton *btn = [[UIButton alloc] init];
-    [btn setBackgroundImage:[UIImage imageWithColor:groundColor] forState:UIControlStateNormal];
-    [btn setBackgroundImage:[UIImage imageWithColor: [UIColor colorWithRed:53/255.0 green:139/255.0 blue:239/255.0 alpha:1/1.0]] forState:UIControlStateHighlighted];
-    btn.layer.cornerRadius = 5.f;
-    btn.layer.masksToBounds = YES;
-    UILabel *midLab = [[UILabel alloc] init];
-    midLab.textAlignment = NSTextAlignmentCenter;
-    midLab.textColor = titleColor;
-    midLab.font = font;
-    midLab.text = str;
-    //防止lab遮挡按钮的点击事件,因此添加其layer - (待验证)
-    [btn.layer addSublayer:midLab.layer];
-    
-    //frame
-    CGFloat upSpace = ((20/667.f) * ([[UIScreen mainScreen] bounds].size.height));
-    CGSize midLabSize = [midLab sizeThatFits:CGSizeZero];
-    
-    CGFloat selfWidth = [UIScreen mainScreen].bounds.size.width - 2*space;
-    CGFloat selfHeight = upSpace*2 + midLabSize.height;
-    btn.frame = CGRectMake(0, 0, selfWidth, selfHeight);
-    
-    midLab.frame = CGRectMake(0, 0, midLabSize.width, midLabSize.height);
-    midLab.center = btn.center;
-    
-    return btn;
-}
-
-
-
 @end

@@ -22,6 +22,8 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     UILabel *cardNoLab; //卡号
     
     NSString *accPassword; //accPass字符串
+    
+    SDBarButton *barButton;
 }
 /**
  支付工具控件
@@ -164,10 +166,12 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     [cardNoView addSubview:cardNoLab];
     
     //unBingdingBtn
-    UIButton *unBingdingBtn = [Tool createBarButton:@"解绑" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    unBingdingBtn.tag = BTN_TAG_UNBINDCARD;
-    [unBingdingBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *unBingdingBtn = [barButton createBarButton:@"解绑" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_UNBINDCARD;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:unBingdingBtn];
+    [barButton changeState:YES];
     
     CGFloat detailViewW = LEFTRIGHTSPACE_286;
     CGFloat detailViewH = UPDOWNSPACE_100;
@@ -407,10 +411,10 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
 
 
 
-
-
-
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (void)didReceiveMemoryWarning {

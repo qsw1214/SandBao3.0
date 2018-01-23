@@ -33,7 +33,7 @@
 #import "ValidAuthToolView.h"
 #import "CvnAuthToolView.h"
 #import "SDPayConfig.h"
-
+#import "SDBarButton.h"
 
 
 
@@ -272,6 +272,11 @@
  */
 @property (nonatomic, strong) SDMBProgressView *HUD;
 
+
+/**
+ 子类中存储的textfiled数组
+ */
+@property (nonatomic, strong) NSMutableArray *textfiledArr;
 
 
 #pragma mark - overried - 供子类重写的公共方法

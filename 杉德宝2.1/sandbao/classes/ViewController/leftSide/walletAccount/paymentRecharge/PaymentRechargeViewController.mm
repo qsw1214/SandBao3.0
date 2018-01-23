@@ -15,7 +15,7 @@
 
 @interface PaymentRechargeViewController ()
 {
-    
+    SDBarButton *barButton;
     
 }
 @property (nonatomic, strong) NSString *paymentPwd;
@@ -111,18 +111,44 @@
     
     
     //rechargeBtn
-    UIButton *rechargeBtn = [Tool createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
-    rechargeBtn.tag = BTN_TAG_RECHARGE;
-    [rechargeBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *rechargeBtn = [barButton createBarButton:@"充值" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_RECHARGE;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBtn];
+    [barButton changeState:YES];
     
     [rechargeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(paymentPwdCell.mas_bottom).offset(UPDOWNSPACE_69);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(rechargeBtn.size);
     }];
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[paymentPwdCell.textfield]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
 }
 
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
+}
 #pragma mark - 业务逻辑
 #pragma mark 查询支付工具
 - (void)getPayTools{
@@ -344,7 +370,10 @@
 }
 
 
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 

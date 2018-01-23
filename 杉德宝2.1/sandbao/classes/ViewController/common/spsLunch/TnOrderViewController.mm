@@ -35,6 +35,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     NSDictionary *successWorkDic; //支付成功后返回的work
     
     NSDecimalNumber *limitDec;
+    
+    SDBarButton *barButton;
 }
 /**
  支付工具控件
@@ -167,10 +169,12 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [bodyView addSubview:orderPayWayCell];
 
     //payBarBtn
-    UIButton *payBarBtn = [Tool createBarButton:@"立即付款" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
-    payBarBtn.tag = BTN_TAG_PAY;
-    [payBarBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *payBarBtn = [barButton createBarButton:@"立即付款" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_PAY;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [bodyView addSubview:payBarBtn];
+    [barButton changeState:YES];
     
     bodyView.height = orderTimeCell.height *4 + UPDOWNSPACE_69 + payBarBtn.height + UPDOWNSPACE_122;
     
@@ -460,6 +464,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     
 }
 
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

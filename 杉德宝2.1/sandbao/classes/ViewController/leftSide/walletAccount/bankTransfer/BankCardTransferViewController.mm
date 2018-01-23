@@ -31,6 +31,8 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     NSArray *rechargePayToolsArray; //获取下发支付工具组
     
     NSDecimalNumber *limitDec;
+    
+    SDBarButton *barButton;
 }
 /**
  转入支付工具(提现)
@@ -306,15 +308,38 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     }];
     
     
-    
-    
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[moneyTextfield]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
 }
 
+- (void)textFieldChange:(NSNotification*)noti{
+    
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
+}
 - (void)create_NextBarBtn{
     //rechargeBtn
-    UIButton *rechargeBtn = [Tool createBarButton:@"两个工作日到账,确认转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
-    rechargeBtn.tag = BTN_TAG_TRANSFER;
-    [rechargeBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *rechargeBtn = [barButton createBarButton:@"两个工作日到账,确认转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_TRANSFER;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBtn];
     
     [rechargeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -675,6 +700,11 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         }];
         if (error) return ;
     }];
+}
+
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

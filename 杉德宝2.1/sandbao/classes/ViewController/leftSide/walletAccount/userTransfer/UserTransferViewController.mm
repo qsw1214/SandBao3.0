@@ -21,6 +21,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     UITextField *moneyTextfield;
     
     NSDecimalNumber *limitDec;
+    SDBarButton *barButton;
 }
 /**
  work域
@@ -194,9 +195,10 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
     
     
     //transferBtn
-    UIButton *transferBtn = [Tool createBarButton:@"确认并转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    transferBtn.tag = BTN_TAG_TRANSFER;
-    [transferBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    barButton = [[SDBarButton alloc] init];
+    UIView *transferBtn = [barButton createBarButton:@"确认并转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    barButton.btn.tag = BTN_TAG_TRANSFER;
+    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:transferBtn];
     
     
@@ -234,7 +236,31 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         make.size.mas_equalTo(transferBtn.size);
     }];
    
+    //装载所有的textfiled
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[moneyTextfield]];
+    for (int i = 0 ; i<self.textfiledArr.count; i++) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
+    }
+}
+
+- (void)textFieldChange:(NSNotification*)noti{
     
+    //按钮置灰不可点击
+    UITextField *currentTextField = (UITextField*)noti.object;
+    if (currentTextField.text.length == 0) {
+        [barButton changeState:NO];
+    }
+    
+    //按钮高亮可点击
+    NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
+    for (UITextField *t in self.textfiledArr) {
+        if ([t.text length]>0) {
+            [tempArr addObject:t];
+        }
+        if (tempArr.count == self.textfiledArr.count) {
+            [barButton changeState:YES];
+        }
+    }
 }
 
 - (void)create_bottomView{
@@ -563,23 +589,10 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- (void)dealloc{
+    //清除通知
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -277,6 +277,7 @@
 		28D7E5AA1FA9D15A00518042 /* PaymentPwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5A61FA9D15A00518042 /* PaymentPwdCell.m */; };
 		28D7E5AD1FA9D25000518042 /* PaymentRechargeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AC1FA9D25000518042 /* PaymentRechargeViewController.mm */; };
 		28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.mm */; };
+		28DBA5852017081D00E8B852 /* SDBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA5832017081D00E8B852 /* SDBarButton.m */; };
 		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
 		28F3036A2015CDB000C2C0D1 /* SDSelectBarTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F303682015CDAF00C2C0D1 /* SDSelectBarTwoView.m */; };
@@ -738,6 +739,8 @@
 		28D7E5AC1FA9D25000518042 /* PaymentRechargeViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PaymentRechargeViewController.mm; sourceTree = "<group>"; };
 		28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RechargeFinishViewController.mm; sourceTree = "<group>"; };
 		28D7E5AF1FA9D5E400518042 /* RechargeFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFinishViewController.h; sourceTree = "<group>"; };
+		28DBA5832017081D00E8B852 /* SDBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBarButton.m; sourceTree = "<group>"; };
+		28DBA5842017081D00E8B852 /* SDBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBarButton.h; sourceTree = "<group>"; };
 		28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideMenuViewController.h; sourceTree = "<group>"; };
 		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeftSideMenuViewController.mm; sourceTree = "<group>"; };
 		28EBA18C1F2F1B0B003EEA61 /* SDDrowNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDrowNoticeView.h; sourceTree = "<group>"; };
@@ -1910,6 +1913,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		28DBA5822017081200E8B852 /* SDBarButton */ = {
+			isa = PBXGroup;
+			children = (
+				28DBA5842017081D00E8B852 /* SDBarButton.h */,
+				28DBA5832017081D00E8B852 /* SDBarButton.m */,
+			);
+			path = SDBarButton;
+			sourceTree = "<group>";
+		};
 		28EB6CEC1FA182FB003949AF /* leftSide */ = {
 			isa = PBXGroup;
 			children = (
@@ -2117,6 +2129,7 @@
 		A7FF2F941E1601CB0068A2F7 /* customView */ = {
 			isa = PBXGroup;
 			children = (
+				28DBA5822017081200E8B852 /* SDBarButton */,
 				281D105E1E6FDADA0031806C /* SDNavCoverView */,
 				2837EACF1FD7E13300C10A57 /* SDQrcodeView */,
 				287585FE1FD66AF800DACC8E /* SDSelectBarView */,
@@ -2505,6 +2518,7 @@
 				2857416E1FBD763400AA25A1 /* MessageViewController.m in Sources */,
 				283B0FD41FAAFBA00010ADAA /* SandItemTableViewCell.m in Sources */,
 				2836ADF01FE3705A00BAB209 /* LunchGuideViewController.m in Sources */,
+				28DBA5852017081D00E8B852 /* SDBarButton.m in Sources */,
 				28B649811FAC654A0074A390 /* SDPayKeyBoardView.m in Sources */,
 				280B5BC21FC3FB3700319F82 /* SandCardDetailViewController.mm in Sources */,
 				28A8AEB81FAB25E500FA1EC1 /* SDRechargePopView.m in Sources */,

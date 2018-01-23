@@ -147,7 +147,6 @@
 }
 
 
-
 #pragma mark - scrollerViewDelegate
 //禁止本类及其子类baseScrollview向下滚动
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -166,7 +165,6 @@
     
     NSString *viewControllerName = [NSString stringWithUTF8String:object_getClassName(self)];
     NSLog(@"\n->\n(%@ -- 回收)\n->",viewControllerName);
-    
 }
 
 - (void)buttonClick:(UIButton *)btn{
