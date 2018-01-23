@@ -337,7 +337,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)create_NextBarBtn{
     //rechargeBtn
     barButton = [[SDBarButton alloc] init];
-    UIView *rechargeBtn = [barButton createBarButton:@"两个工作日到账,确认转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_358BEF leftSpace:LEFTRIGHTSPACE_40];
+    UIView *rechargeBtn = [barButton createBarButton:@"两个工作日到账,确认转账" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
     barButton.btn.tag = BTN_TAG_TRANSFER;
     [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:rechargeBtn];

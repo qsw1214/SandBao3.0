@@ -140,6 +140,7 @@
 		289C0D551F203FBC00360147 /* YXEasing.m in Sources */ = {isa = PBXBuildFile; fileRef = 289C0D531F203FBC00360147 /* YXEasing.m */; };
 		289C0D591F203FE100360147 /* SDSuccessAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 289C0D581F203FE100360147 /* SDSuccessAnimationView.m */; };
 		289D15D81EE505BD00B34EAC /* sandbaolibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 289D15D71EE505BD00B34EAC /* sandbaolibrary.a */; };
+		289FED5120172E260087A70E /* InviteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 289FED5020172E260087A70E /* InviteViewController.m */; };
 		28A2CC112011F79400419ACA /* WebViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28A2CC102011F79400419ACA /* WebViewController.mm */; };
 		28A8AEAF1FAB25E500FA1EC1 /* SDBottomPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A8AE9F1FAB25E500FA1EC1 /* SDBottomPop.m */; };
 		28A8AEB01FAB25E500FA1EC1 /* login_list_icon_closedr@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28A8AEA21FAB25E500FA1EC1 /* login_list_icon_closedr@2x.png */; };
@@ -542,6 +543,8 @@
 		289C0D571F203FE100360147 /* SDSuccessAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSuccessAnimationView.h; sourceTree = "<group>"; };
 		289C0D581F203FE100360147 /* SDSuccessAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSuccessAnimationView.m; sourceTree = "<group>"; };
 		289D15D71EE505BD00B34EAC /* sandbaolibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = sandbaolibrary.a; sourceTree = "<group>"; };
+		289FED4F20172E260087A70E /* InviteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteViewController.h; sourceTree = "<group>"; };
+		289FED5020172E260087A70E /* InviteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteViewController.m; sourceTree = "<group>"; };
 		28A2CC0F2011F79400419ACA /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		28A2CC102011F79400419ACA /* WebViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WebViewController.mm; sourceTree = "<group>"; };
 		28A8AE9E1FAB25E500FA1EC1 /* SDBottomPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBottomPop.h; sourceTree = "<group>"; };
@@ -1546,6 +1549,15 @@
 			path = SDSuccessAnimationViews;
 			sourceTree = "<group>";
 		};
+		289FED4E20172DD90087A70E /* invite */ = {
+			isa = PBXGroup;
+			children = (
+				289FED4F20172E260087A70E /* InviteViewController.h */,
+				289FED5020172E260087A70E /* InviteViewController.m */,
+			);
+			path = invite;
+			sourceTree = "<group>";
+		};
 		28A2CC0E2011F79400419ACA /* web */ = {
 			isa = PBXGroup;
 			children = (
@@ -1637,6 +1649,7 @@
 				28B6490B1FAC17A30074A390 /* HomeViewController.mm */,
 				287585FA1FD66ABC00DACC8E /* PayQrcode */,
 				2857416B1FBD762800AA25A1 /* message */,
+				289FED4E20172DD90087A70E /* invite */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -2513,6 +2526,7 @@
 				2824BB071FD97BC600C267AB /* TnOrderViewController.mm in Sources */,
 				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
 				28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */,
+				289FED5120172E260087A70E /* InviteViewController.m in Sources */,
 				28B6491B1FAC451D0074A390 /* SDMajletView.m in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,
 				2857416E1FBD763400AA25A1 /* MessageViewController.m in Sources */,

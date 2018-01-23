@@ -15,8 +15,7 @@
     SDBarButton *barButton;
 }
 @property (nonatomic, strong) NSString *sandCardNoStr;
-@property (nonatomic, strong) NSString *sandCardCodeStr;  //校验码
-@property (nonatomic, strong) NSString *sandCardCodeCheckStr; //再次输入校验码
+@property (nonatomic, strong) NSString *sandCardCodeStr;  //杉德卡密码
 
 @property (nonatomic, strong) UIView *bottomBtn;
 
@@ -44,7 +43,6 @@
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
-    
 }
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
@@ -67,15 +65,9 @@
 - (void)buttonClick:(UIButton *)btn{
     
     if (btn.tag == BTN_TAG_BINDSANDCARD) {
-        if (self.sandCardNoStr.length>0 && self.sandCardCodeStr.length>0 && self.sandCardCodeCheckStr.length>0) {
-            
-            //两次输入一致
-            if ([self.sandCardCodeStr isEqualToString:self.sandCardCodeCheckStr]) {
-                //绑定杉德卡
-                [self bindingSandCard];
-            }else{
-                [Tool showDialog:@"两次校验码输入不一致"];
-            }
+        if (self.sandCardNoStr.length>0 && self.sandCardCodeStr.length>0) {
+            //绑定杉德卡
+            [self bindingSandCard];
             
         }else{
             [Tool showDialog:@"请完成卡信息填写"];
@@ -106,9 +98,9 @@
     PwdAuthToolView *sandCardCodeView = [PwdAuthToolView createAuthToolViewOY:0];
     sandCardCodeView.type = PwdAuthToolSandPayPwdType;
     sandCardCodeView.backgroundColor = [UIColor whiteColor];
-    sandCardCodeView.titleLab.text = @"卡片校验码";
-    sandCardCodeView.textfiled.placeholder  = @"请输入卡片校验码";
-    sandCardCodeView.tip.text = @"请输入正确的卡片校验码";
+    sandCardCodeView.titleLab.text = @"杉德卡支付密码";
+    sandCardCodeView.textfiled.placeholder  = @"请输入杉德卡支付密码";
+    sandCardCodeView.tip.text = @"请输入正确的杉德卡支付密码";
     sandCardCodeView.textfiled.text = SHOWTOTEST(@"728060");
     self.sandCardCodeStr = SHOWTOTEST(@"728060");
     sandCardCodeView.successBlock = ^(NSString *textfieldText) {
@@ -116,35 +108,52 @@
     };
     [self.baseScrollView addSubview:sandCardCodeView];
     
-    
-    //sandCardCodeCheckView
-    PwdAuthToolView *sandCardCodeCheckView = [PwdAuthToolView createAuthToolViewOY:0];
-    sandCardCodeCheckView.type = PwdAuthToolSandPayPwdType;
-    sandCardCodeCheckView.backgroundColor = [UIColor whiteColor];
-    sandCardCodeCheckView.titleLab.text = @"确认校验码";
-    sandCardCodeCheckView.textfiled.placeholder = @"请输入卡片校验码";
-    sandCardCodeCheckView.tip.text = @"请输入正确的卡片校验码";
-    sandCardCodeCheckView.textfiled.text = SHOWTOTEST(@"728060");
-    self.sandCardCodeCheckStr = SHOWTOTEST(@"728060");
-    sandCardCodeCheckView.successBlock = ^(NSString *textfieldText) {
-        weakself.sandCardCodeCheckStr = textfieldText;
-    };
-    [self.baseScrollView addSubview:sandCardCodeCheckView];
-    
-    
     //bottomBtn
     barButton = [[SDBarButton alloc] init];
-    self.bottomBtn = [barButton createBarButton:@"绑定" font:FONT_14_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    self.bottomBtn = [barButton createBarButton:@"绑定并开通快捷" font:FONT_14_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
     barButton.btn.tag = BTN_TAG_BINDSANDCARD;
     [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:self.bottomBtn];
     
     
+    //温馨提示
+    UILabel *tipTitleLab = [Tool createLable:@"温馨提示" attributeStr:nil font:FONT_15_Medium textColor:COLOR_000000 alignment:NSTextAlignmentLeft];
+    [self.baseScrollView addSubview:tipTitleLab];
+    
+    //tipDetail
+    //设置文字排版
+    NSMutableParagraphStyle *MParaStyle = [[NSMutableParagraphStyle alloc] init];
+    MParaStyle.alignment =  NSTextAlignmentNatural;  // 文字站位
+    MParaStyle.maximumLineHeight = 20;  // 最大高度
+    MParaStyle.lineHeightMultiple = 10 ;  //  平均高度
+    MParaStyle.minimumLineHeight = 0;  // 最小高度
+    MParaStyle.firstLineHeadIndent = 0; // 首行缩进
+    MParaStyle.lineSpacing = 0; // 行间距
+    MParaStyle.headIndent = 0;  // 左侧整体缩进
+    MParaStyle.tailIndent = SCREEN_WIDTH - 20;  //  右侧整体缩进
+    MParaStyle.lineBreakMode = NSLineBreakByCharWrapping; // 内容省略方式
+    MParaStyle.baseWritingDirection = NSWritingDirectionLeftToRight;  // 书写方式
+    MParaStyle.paragraphSpacingBefore = 5;  // 段落之间间距
+    MParaStyle.paragraphSpacing = 0; // 段落间距离
+    
+    NSMutableDictionary *attributes = [NSMutableDictionary new];
+    // 添加paragraphStyle
+    [attributes setObject:MParaStyle forKey:NSParagraphStyleAttributeName];
+    // 添加font
+    [attributes setObject:FONT_12_Regular forKey:NSFontAttributeName];
+    
+    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"1.首次使用杉德卡支付，请先输入校验码；\n2.开通快捷服务后，当您在杉德宝内使用杉德卡进行支付时，仅需输入杉德宝的支付密码即可完成付款完成操作；\n3.若使用该杉德卡进行线下消费或主账户圈存，仍需输入杉德卡支付密码进行校验。" attributes:attributes];
+    
+    UITextView *tipDetailTextview = [[UITextView alloc] init];
+    [tipDetailTextview setAttributedText:text];
+    tipDetailTextview.textColor = COLOR_343339_5;
+    [self.baseScrollView addSubview:tipDetailTextview];
     
     
     
+
     [sandCardNoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_10);
+        make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_20);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(sandCardNoView.size);
     }];
@@ -155,20 +164,26 @@
         make.size.mas_equalTo(sandCardCodeView.size);
     }];
     
-    [sandCardCodeCheckView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(sandCardCodeView.mas_bottom);
-        make.centerX.equalTo(self.baseScrollView);
-        make.size.mas_equalTo(sandCardCodeCheckView.size);
-    }];
-    
     [self.bottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.baseScrollView);
-        make.top.equalTo(sandCardCodeCheckView.mas_bottom).offset(UPDOWNSPACE_64);
+        make.top.equalTo(sandCardCodeView.mas_bottom).offset(UPDOWNSPACE_64);
         make.size.mas_equalTo(self.bottomBtn.size);
     }];
     
+    [tipTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bottomBtn.mas_left);
+        make.top.equalTo(self.bottomBtn.mas_bottom).offset(UPDOWNSPACE_112);
+        make.size.mas_equalTo(tipTitleLab.size);
+    }];
+    
+    [tipDetailTextview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bottomBtn.mas_left);
+        make.top.equalTo(tipTitleLab.mas_bottom).offset(UPDOWNSPACE_10);
+        make.size.mas_equalTo(CGSizeMake(self.bottomBtn.width, UPDOWNSPACE_160));
+    }];
+    
     //装载所有的textfiled
-    self.textfiledArr = [NSMutableArray arrayWithArray:@[sandCardNoView.textfiled,sandCardCodeView.textfiled,sandCardCodeCheckView.textfiled]];
+    self.textfiledArr = [NSMutableArray arrayWithArray:@[sandCardNoView.textfiled,sandCardCodeView.textfiled]];
     for (int i = 0 ; i<self.textfiledArr.count; i++) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:self.textfiledArr[i]];
     }
@@ -239,12 +254,10 @@
         __block BOOL error = NO;
         NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
         NSMutableDictionary *authToolDic = [[NSMutableDictionary alloc] init];
-        [authToolDic setValue:@"cardCheckCode" forKey:@"type"];
-        [authToolDic setValue:self.sandCardCodeStr forKey:@"cardCheckCode"];
+        [authToolDic setValue:@"accpass" forKey:@"type"];
+        [authToolDic setValue:[[PayNucHelper sharedInstance] pinenc:self.sandCardCodeStr type:@"accpass"] forKey:@"password"];
         [authToolsArray1 addObject:authToolDic];
         NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
-        
-        paynuc.set("authTools", [authTools UTF8String]);
         
         
         //账户
@@ -267,7 +280,6 @@
                 [self.HUD hidden];
                 [Tool showDialog:@"绑卡成功" defulBlock:^{
                     [self.navigationController popViewControllerAnimated:YES];
-                    
                 }];
             }];
         }];

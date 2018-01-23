@@ -22,6 +22,7 @@
 #import "SDRechargePopView.h"
 #import "BankCardTransferViewController.h"
 #import "UserTransferBeginViewController.h"
+#import "InviteViewController.h"
 
 
 @interface HomeViewController ()<SDMQTTManagerDelegate,UICollectionViewDelegate>
@@ -519,6 +520,27 @@
     limitServerView.majletArr = self.limitServerArr;
     limitServerView.titleNameBlock = ^(NSString *titleName) {
         NSLog(@"titleName == %@",titleName);
+        //超值年化
+        if ([titleName isEqualToString:@"超值年化"]) {
+            
+        }
+        //新卡推荐
+        if ([titleName isEqualToString:@"新卡推荐"]) {
+            
+        }
+        //超值兑换
+        if ([titleName isEqualToString:@"超值兑换"]) {
+            
+        }
+        //商户推荐
+        if ([titleName isEqualToString:@"商户推荐"]) {
+            
+        }
+        //邀请好友
+        if ([titleName isEqualToString:@"邀请好友"]) {
+            InviteViewController *invitedVC = [[InviteViewController alloc] init];
+            [self.navigationController pushViewController:invitedVC animated:YES];
+        }
         
     };
     [bodyViewTwo addSubview:limitServerView];
