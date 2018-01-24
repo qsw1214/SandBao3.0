@@ -780,6 +780,9 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     //删除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MQTT_NOTICE_BSC_TN_PWD object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MQTT_NOTICE_BSC_TN object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     //预防性删除定时器
     [self cleanTimer];
 }

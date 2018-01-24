@@ -27,7 +27,7 @@ static CommParameter *commParameterSharedInstance = nil;
 - (void)showCommParameter{
     
     NSLog(@"******************************");
-    NSLog(@" _mqttFlag :%@",_mqttFlag);
+    NSLog(@" _mqttFlag :%d",_mqttFlag);
     NSLog(@" _sToken :%@",_sToken);
     NSLog(@" _urlSchemes :%@",_urlSchemes);
     NSLog(@" _userName :%@",_userName);

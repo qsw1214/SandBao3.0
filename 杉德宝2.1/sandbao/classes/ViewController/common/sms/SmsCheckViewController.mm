@@ -426,6 +426,7 @@
                 LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
                 setLogpwdVC.phoneNoStr = self.phoneNoStr;
                 setLogpwdVC.smsCodeString = self.smsCodeString;
+                setLogpwdVC.inviteCodeString = self.inviteCodeString;
                 [self.navigationController pushViewController:setLogpwdVC animated:YES];
                 
             }];

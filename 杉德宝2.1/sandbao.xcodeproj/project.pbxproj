@@ -279,6 +279,7 @@
 		28D7E5AD1FA9D25000518042 /* PaymentRechargeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AC1FA9D25000518042 /* PaymentRechargeViewController.mm */; };
 		28D7E5B01FA9D5E400518042 /* RechargeFinishViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5AE1FA9D5E400518042 /* RechargeFinishViewController.mm */; };
 		28DBA5852017081D00E8B852 /* SDBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 28DBA5832017081D00E8B852 /* SDBarButton.m */; };
+		28E17F422018815300D9BACF /* InviteAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17F412018815300D9BACF /* InviteAuthToolView.m */; };
 		28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */; };
 		28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28EBA18D1F2F1B0B003EEA61 /* SDDrowNoticeView.m */; };
 		28F3036A2015CDB000C2C0D1 /* SDSelectBarTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F303682015CDAF00C2C0D1 /* SDSelectBarTwoView.m */; };
@@ -744,6 +745,8 @@
 		28D7E5AF1FA9D5E400518042 /* RechargeFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechargeFinishViewController.h; sourceTree = "<group>"; };
 		28DBA5832017081D00E8B852 /* SDBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBarButton.m; sourceTree = "<group>"; };
 		28DBA5842017081D00E8B852 /* SDBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBarButton.h; sourceTree = "<group>"; };
+		28E17F402018815300D9BACF /* InviteAuthToolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InviteAuthToolView.h; sourceTree = "<group>"; };
+		28E17F412018815300D9BACF /* InviteAuthToolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InviteAuthToolView.m; sourceTree = "<group>"; };
 		28EB6CED1FA18321003949AF /* LeftSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideMenuViewController.h; sourceTree = "<group>"; };
 		28EB6CEE1FA18321003949AF /* LeftSideMenuViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LeftSideMenuViewController.mm; sourceTree = "<group>"; };
 		28EBA18C1F2F1B0B003EEA61 /* SDDrowNoticeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDrowNoticeView.h; sourceTree = "<group>"; };
@@ -1489,6 +1492,8 @@
 				28F377091FB31C4500813512 /* CvnAuthToolView.m */,
 				28F3770A1FB31C4500813512 /* ValidAuthToolView.h */,
 				28F3770B1FB31C4500813512 /* ValidAuthToolView.m */,
+				28E17F402018815300D9BACF /* InviteAuthToolView.h */,
+				28E17F412018815300D9BACF /* InviteAuthToolView.m */,
 				28981B761FA01FA8004CFC95 /* View */,
 			);
 			path = SDAuthToolsView;
@@ -2622,6 +2627,7 @@
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,
 				28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */,
+				28E17F422018815300D9BACF /* InviteAuthToolView.m in Sources */,
 				28F3770C1FB31C4500813512 /* CvnAuthToolView.m in Sources */,
 				28D7E5961FA9A53F00518042 /* UserTransferPageViewController.m in Sources */,
 			);

@@ -7,8 +7,10 @@
 //
 
 #import "InviteViewController.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
 
-@interface InviteViewController ()
+@interface InviteViewController ()<WXApiDelegate>
 
 @end
 
@@ -45,16 +47,24 @@
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
-    
+    if (btn.tag == BTN_TAG_JUSTCLICK) {
+        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+        req.text = @"www.baidu.com";
+        req.bText = YES;
+        req.scene = WXSceneSession;
+        
+        [WXApi sendReq:req];
+    }
 }
 
 
 #pragma mark  - UI绘制
 - (void)creaetUI{
     
+    //背景
     UIImage *inviteBGimg = [UIImage imageNamed:@"invite_bg"];
     UIImageView *inviteBGView = [Tool createImagView:inviteBGimg];
-    
+    inviteBGView.userInteractionEnabled = YES;
     [self.baseScrollView addSubview:inviteBGView];
     
     [inviteBGView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,25 +73,34 @@
         make.size.mas_equalTo(self.baseScrollView.size);
     }];
 
+    //二维码
     UIView *qrCodeView = [[UIView alloc] init];
-//    qrCodeView.backgroundColor = [UIColor redColor];
+    qrCodeView.backgroundColor = [UIColor redColor];
+    qrCodeView.alpha = 0.5f;
     [inviteBGView addSubview:qrCodeView];
+    CGFloat qrCodeViewWH = SCREEN_WIDTH - LEFTRIGHTSPACE_85*2;
+    CGFloat qrCodeViewOY = UPDOWNSPACE_174;
     
     [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(inviteBGView.mas_left).offset(LEFTRIGHTSPACE_55);
-        make.centerY.equalTo(inviteBGView);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_55, SCREEN_WIDTH - 2*LEFTRIGHTSPACE_55));
+        make.top.equalTo(self.baseScrollView.mas_top).offset(qrCodeViewOY);
+        make.left.equalTo(inviteBGView.mas_left).offset(LEFTRIGHTSPACE_85);
+        make.size.mas_equalTo(CGSizeMake(qrCodeViewWH, qrCodeViewWH));
     }];
     
+    
+    //透明按钮 - 分享
     UIButton *inviteBtn = [Tool createButton:@"" attributeStr:nil font:nil textColor:nil];
-    inviteBtn.backgroundColor = [UIColor clearColor];
+    inviteBtn.backgroundColor = [UIColor greenColor];
+    inviteBtn.alpha = 0.4f;
     inviteBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, UPDOWNSPACE_112);
+    inviteBtn.tag = BTN_TAG_JUSTCLICK;
+    [inviteBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [inviteBGView addSubview:inviteBtn];
     
     [inviteBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(inviteBGView.mas_bottom).offset(-UPDOWNSPACE_112);
+        make.bottom.equalTo(inviteBGView.mas_bottom).offset(-UPDOWNSPACE_58);
         make.centerX.equalTo(inviteBGView);
-        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, UPDOWNSPACE_112));
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, UPDOWNSPACE_160));
     }];
     
     

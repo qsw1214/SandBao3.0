@@ -13,8 +13,10 @@
 @interface RegistViewController ()
 {
     SDBarButton *barButton;
+    
 }
 @property (nonatomic, strong) NSString *phoneNoStr; //手机号
+@property (nonatomic, strong) NSString *inviteCodeStr; //邀请码
 @property (nonatomic, strong) NSArray *authToolsArray;  //鉴权工具组
 @property (nonatomic, strong) NSArray *regAuthToolsArray; //待更新鉴权工具组
 @end
@@ -68,6 +70,7 @@
                         SmsCheckViewController *smsVC = [[SmsCheckViewController alloc] init];
                         smsVC.phoneNoStr = self.phoneNoStr;
                         smsVC.smsCheckType = SMS_CHECKTYPE_REGIST;
+                        smsVC.inviteCodeString = self.inviteCodeStr;
                         [self.navigationController pushViewController:smsVC animated:YES];
                     }else{
                         [Tool showDialog:@"下发鉴权工具有误"];
@@ -107,6 +110,17 @@
     [self.baseScrollView addSubview:phoneAuthToolView];
     
     
+    InviteAuthToolView *inviteAuthToolView = [InviteAuthToolView createAuthToolViewOY:0];
+    inviteAuthToolView.tip.text = @"请输入正确邀请码";
+    inviteAuthToolView.successBlock = ^(NSString *textfieldText) {
+        weakself.inviteCodeStr = textfieldText;
+    };
+    [self.baseScrollView addSubview:inviteAuthToolView];
+    
+    
+    
+    
+    
     //nextBtn
     barButton = [[SDBarButton alloc] init];
     UIView *nextBarbtn = [barButton createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
@@ -140,9 +154,14 @@
         make.size.mas_equalTo(phoneAuthToolView.size);
     }];
     
+    [inviteAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(phoneAuthToolView.mas_bottom);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.size.mas_equalTo(inviteAuthToolView.size);
+    }];
     
     [nextBarbtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(phoneAuthToolView.mas_bottom).offset(UPDOWNSPACE_40);
+        make.top.equalTo(inviteAuthToolView.mas_bottom).offset(UPDOWNSPACE_40);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];

@@ -153,6 +153,7 @@
         NSMutableDictionary *userInfoDic1 = [[NSMutableDictionary alloc] init];
         [userInfoDic1 setValue:self.phoneNoStr forKey:@"userName"];
         [userInfoDic1 setValue:self.phoneNoStr forKey:@"phoneNo"];
+        [userInfoDic1 setValue:self.inviteCodeString forKey:@"inviteCode"];
         NSString *userInfo1 = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic1];
         
         //注册 - regAuthTools

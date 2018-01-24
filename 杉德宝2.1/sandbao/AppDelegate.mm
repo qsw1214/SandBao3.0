@@ -22,10 +22,12 @@
 #import "LeftSideMenuViewController.h"
 
 #import "UMMobClick/MobClick.h"
+#import "WXApi.h"
+
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
 
-@interface AppDelegate ()<WeiboSDKDelegate>
+@interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate>
 {
     //通过URL_Schemes方式启动情况下 : APP是否未启动的标识
     BOOL APP_DIDFINISHLUNCH_WITH_URLSCHEMES;
@@ -50,8 +52,11 @@
     [[PgyManager sharedPgyManager] setEnableFeedback:NO];
 #pragma mark - ***上传AppStore前 请务必删除蒲公英SDK***
     
-    //-2. 启动定位 - 实例化
+    //-3. 启动定位 - 实例化
     [LocationUtil shareLocationManager];
+    
+    //-2. 微信SDK
+    [self WXSDK];
     
     //-1. 友盟相关设置
     [self UMSetAbout];
@@ -126,6 +131,13 @@
         // 3.显示窗口
         [self.window makeKeyAndVisible];
     }
+}
+
+#pragma mark 微信相关设置
+- (void)WXSDK{
+    
+    [WXApi registerApp:@"wxb63368e4a82f8ab9"];
+    
 }
 
 #pragma mark 友盟相关设置
@@ -264,6 +276,10 @@
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
+    //微信启动杉德宝 - 使用scheme方式唤起均会回调
+    if ([WXApi handleOpenURL:url delegate:self]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
     //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
@@ -305,6 +321,10 @@
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
     }
+    //微信启动杉德宝 - 使用scheme方式唤起均会回调
+    if ([WXApi handleOpenURL:url delegate:self]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
     //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
@@ -344,6 +364,10 @@
     //微博启动杉德宝 - 使用scheme方式唤起均会回调
     if ([WeiboSDK handleOpenURL:url delegate:self]) {
         return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    //微信启动杉德宝 - 使用scheme方式唤起均会回调
+    if ([WXApi handleOpenURL:url delegate:self]) {
+        return [WXApi handleOpenURL:url delegate:self];
     }
     //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {

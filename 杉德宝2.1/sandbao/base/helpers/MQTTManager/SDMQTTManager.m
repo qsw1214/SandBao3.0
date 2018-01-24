@@ -72,7 +72,6 @@ static SDMQTTManager *mqttManager = nil;
                         willQos:MQTTQosLevelExactlyOnce
                  willRetainFlag:false
                    withClientId:clientID];
-        [self.manager.session connectAndWaitTimeout:20];
     } else {
         [self.manager connectToLast];
     }
@@ -104,6 +103,7 @@ static SDMQTTManager *mqttManager = nil;
 - (void)closeMQTT{
     //清除kvo监听
     [self.manager removeObserver:self forKeyPath:@"state"];
+    
     //关闭连接
     [self.manager disconnect];
     

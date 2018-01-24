@@ -28,6 +28,12 @@
 @property (nonatomic, strong) NSString *smsCodeString;
 
 
+#pragma mark - 注册模式下属性
+/**
+ 注册 - 邀请码
+ */
+@property (nonatomic, strong) NSString *inviteCodeString;
+
 
 #pragma mark - 登陆模式下属性
 

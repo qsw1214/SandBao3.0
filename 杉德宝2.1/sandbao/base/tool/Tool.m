@@ -599,7 +599,7 @@
 
 #pragma mark - 银行icon数据获取
 + (NSArray*)getBankIconInfo:(NSString*)bankName{
-    
+
     NSArray *arrayInfo = [NSArray new];
     //背景和图标
     UIImage *iconImage;
@@ -721,9 +721,13 @@
             }
         }
     }
-    arrayInfo = @[iconImage,iconWatermarkImage,backgroundColor,backgroundColor2];
-    return arrayInfo;
-
+    if (iconImage && iconWatermarkImage && backgroundColor && backgroundColor2) {
+        arrayInfo = @[iconImage,iconWatermarkImage,backgroundColor,backgroundColor2];
+        return arrayInfo;
+    }else{
+        return @[[UIImage imageNamed:@"qvip_pay_imageholder"],[UIImage imageNamed:@"watermask_sand"],Tool_Rgba(0, 191, 255, 1.0),Tool_Rgba(7, 78, 218, 1.0)];
+    }
+    return @[[UIImage imageNamed:@"qvip_pay_imageholder"],[UIImage imageNamed:@"watermask_sand"],Tool_Rgba(0, 191, 255, 1.0),Tool_Rgba(7, 78, 218, 1.0)];
 }
 
 #pragma mark - 获取payList列表不同支付工具描述

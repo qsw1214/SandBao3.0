@@ -36,6 +36,10 @@
     
     //基础配置 - 网络请求强引用当前视图控制器实例,在当前页面退出后,需清除该强引用
     [SDRequestHelp shareSDRequest].controller = nil;
+    
+    //基础配置 - 子类视图每次加载均存储最新RESideMenu地址到全局变量 (currentResideMenu)
+    [CommParameter sharedInstance].currentResideMenu = self.sideMenuViewController;
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

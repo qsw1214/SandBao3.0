@@ -21,9 +21,11 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     
     UILabel *cardNoLab; //卡号
     
-    NSString *accPassword; //accPass字符串
+    NSString *payPassword; //Pass字符串
     
     SDBarButton *barButton;
+    
+    NSDictionary *authToolDic;
 }
 /**
  支付工具控件
@@ -235,12 +237,16 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     
     //动画开始
     [successView animationStart];
-    accPassword = pwdStr;
+    payPassword = pwdStr;
     [self unbandCardSuccessBlock:^(NSArray *paramArr){
         //解绑成功
         [successView animationSuccess];
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+            
+            [Tool showDialog:@"解绑成功" defulBlock:^{
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
             
         });
     } errorBlock:^(NSArray *paramArr){
@@ -345,6 +351,8 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
                 NSString *tempAuthTools = [NSString stringWithUTF8String:paynuc.get("authTools").c_str()];
                 NSArray *tempAuthToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:tempAuthTools];
                 
+                authToolDic = tempAuthToolsArray[0];
+                
                 //支付控件设置列表
                 [self.payView setPayTools:tempAuthToolsArray];
                 //支付控件弹出
@@ -368,13 +376,15 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         __block BOOL error = NO;
         
         NSMutableArray *tempAuthToolsArray = [[NSMutableArray alloc] init];
-        NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:authToolDic];
+        [authToolsDic removeObjectForKey:@"pass"];
         NSMutableDictionary *passDic = [[NSMutableDictionary alloc] init];
-        [passDic setValue:[[PayNucHelper sharedInstance] pinenc:accPassword type:@"accpass"] forKey:@"password"];
+        [passDic setValue:[[PayNucHelper sharedInstance] pinenc:payPassword type:@"paypass"] forKey:@"password"];
+        [passDic setValue:@"" forKey:@"description"];
+        [passDic setValue:@"" forKey:@"encryptType"];
+        [passDic setValue:@"" forKey:@"regular"];
         [authToolsDic setObject:passDic forKey:@"pass"];
-        [authToolsDic setObject:@"accpass" forKey:@"type"];
         [tempAuthToolsArray addObject:authToolsDic];
-        
         NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:tempAuthToolsArray];
         
         NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)self.payToolDic];

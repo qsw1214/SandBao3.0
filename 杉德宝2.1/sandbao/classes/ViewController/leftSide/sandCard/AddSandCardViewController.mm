@@ -255,7 +255,9 @@
         NSMutableArray *authToolsArray1 = [[NSMutableArray alloc] init];
         NSMutableDictionary *authToolDic = [[NSMutableDictionary alloc] init];
         [authToolDic setValue:@"accpass" forKey:@"type"];
-        [authToolDic setValue:[[PayNucHelper sharedInstance] pinenc:self.sandCardCodeStr type:@"accpass"] forKey:@"password"];
+        [authToolDic setObject:@{@"encryptType":@"sand",
+                                 @"password":[[PayNucHelper sharedInstance] pinenc:self.sandCardCodeStr type:@"accpass"]
+                                 } forKey:@"pass"];
         [authToolsArray1 addObject:authToolDic];
         NSString *authTools = [[PayNucHelper sharedInstance] arrayToJSON:authToolsArray1];
         
