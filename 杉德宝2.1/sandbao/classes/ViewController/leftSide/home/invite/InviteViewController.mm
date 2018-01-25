@@ -65,7 +65,7 @@
                 WXMediaMessage *message = [WXMediaMessage message];
                 message.title = @"邀请好友注册,立马赚积分";
                 message.description = @"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!";
-                [message setThumbImage:[UIImage imageNamed:@"Icon-iPhone-60.png"]];
+                [message setThumbImage:[UIImage imageNamed:@"icon"]];
                 WXWebpageObject *ext = [WXWebpageObject object];
                 ext.webpageUrl = @"http://www.sandlife.com.cn";
                 message.mediaObject = ext;
@@ -84,7 +84,7 @@
                 WXMediaMessage *message = [WXMediaMessage message];
                 message.title = @"邀请好友注册,立马赚积分";
                 message.description = @"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!";
-                [message setThumbImage:[UIImage imageNamed:@"Icon-iPhone-60.png"]];
+                [message setThumbImage:[UIImage imageNamed:@"icon"]];
                 
                 WXWebpageObject *ext = [WXWebpageObject object];
                 ext.webpageUrl = @"http://www.sandlife.com.cn";
@@ -105,9 +105,6 @@
             }
             
         }];
-        
-        
-     
     }
 }
 
