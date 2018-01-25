@@ -10,6 +10,8 @@
 #import "WXApi.h"
 #import "WXApiObject.h"
 
+#import "SDInvitePop.h"
+
 @interface InviteViewController ()<WXApiDelegate>
 
 @end
@@ -48,6 +50,13 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     if (btn.tag == BTN_TAG_JUSTCLICK) {
+        
+        NSDictionary *inviteInfo = @{@"title":@[@"",@"",@""],
+                                     @"icon":@[@"",@"",@""]
+                                     }
+        [SDInvitePop showInvitePopView:<#(NSDictionary *)#> cellClickBlock:<#^(NSString *titleName)block#>]
+        
+        
         SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
         req.text = @"www.baidu.com";
         req.bText = YES;
