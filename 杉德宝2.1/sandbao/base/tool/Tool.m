@@ -343,13 +343,13 @@
         NSMutableArray *payToolsNew = [NSMutableArray arrayWithCapacity:0];
         for (int j = 0; j<resultArrayOrder.count; j++) {
             
-            NSString *countNum = [NSString stringWithFormat:@"%@",resultArrayOrder[j]];
+            NSInteger countNum = [[NSString stringWithFormat:@"%@",resultArrayOrder[j]] integerValue];
             
             for (int a = 0; a<payTools.count; a++) {
 
-                NSString *orderOld = [payTools[a] objectForKey:@"order"];
+                NSInteger orderOld = [[payTools[a] objectForKey:@"order"] integerValue];
                 
-                if ([countNum isEqualToString:orderOld]) {
+                if (countNum == orderOld) {
                     [payToolsNew addObject:payTools[a]];
                 }
             }
@@ -364,7 +364,6 @@
             if (![payToolsNewNorepet containsObject:ID]) {
                 [payToolsNewNorepet addObject:ID];
             }
-            
         }
         
         //再次重组: 根据 payToolsNewNorepet 对应的下标和ID

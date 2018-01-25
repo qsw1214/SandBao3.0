@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		28E17EFF20182E8C00D9BACF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17EFE20182E8C00D9BACF /* AppDelegate.m */; };
+		28E17F0220182E8C00D9BACF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17F0120182E8C00D9BACF /* ViewController.m */; };
+		28E17F0520182E8C00D9BACF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F0320182E8C00D9BACF /* Main.storyboard */; };
+		28E17F0720182E8C00D9BACF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F0620182E8C00D9BACF /* Assets.xcassets */; };
+		28E17F0A20182E8C00D9BACF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F0820182E8C00D9BACF /* LaunchScreen.storyboard */; };
+		28E17F0D20182E8C00D9BACF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17F0C20182E8C00D9BACF /* main.m */; };
+		28E17F1720182E8C00D9BACF /* SDInvitePopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17F1620182E8C00D9BACF /* SDInvitePopTests.m */; };
+		28E17F2220182E8C00D9BACF /* SDInvitePopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17F2120182E8C00D9BACF /* SDInvitePopUITests.m */; };
+		28E17F3220182EC100D9BACF /* SDInvitePop.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17F3120182EC100D9BACF /* SDInvitePop.m */; };
+		28E17F3A2018532600D9BACF /* icon_moments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F342018532600D9BACF /* icon_moments@2x.png */; };
+		28E17F3B2018532600D9BACF /* icon_wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F352018532600D9BACF /* icon_wechat@2x.png */; };
+		28E17F3C2018532600D9BACF /* icon_moments@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F362018532600D9BACF /* icon_moments@3x.png */; };
+		28E17F3D2018532600D9BACF /* icon_weibo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F372018532600D9BACF /* icon_weibo@3x.png */; };
+		28E17F3E2018532600D9BACF /* icon_weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F382018532600D9BACF /* icon_weibo@2x.png */; };
+		28E17F3F2018532600D9BACF /* icon_wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28E17F392018532600D9BACF /* icon_wechat@3x.png */; };
+		28E17F482018B42F00D9BACF /* SDIvitePopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E17F472018B42F00D9BACF /* SDIvitePopCell.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		28E17F1320182E8C00D9BACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28E17EF220182E8C00D9BACF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28E17EF920182E8C00D9BACF;
+			remoteInfo = SDInvitePop;
+		};
+		28E17F1E20182E8C00D9BACF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 28E17EF220182E8C00D9BACF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 28E17EF920182E8C00D9BACF;
+			remoteInfo = SDInvitePop;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		28E17EFA20182E8C00D9BACF /* SDInvitePop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDInvitePop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		28E17EFD20182E8C00D9BACF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		28E17EFE20182E8C00D9BACF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		28E17F0020182E8C00D9BACF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		28E17F0120182E8C00D9BACF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		28E17F0420182E8C00D9BACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		28E17F0620182E8C00D9BACF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28E17F0920182E8C00D9BACF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		28E17F0B20182E8C00D9BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28E17F0C20182E8C00D9BACF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		28E17F1220182E8C00D9BACF /* SDInvitePopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDInvitePopTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28E17F1620182E8C00D9BACF /* SDInvitePopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDInvitePopTests.m; sourceTree = "<group>"; };
+		28E17F1820182E8C00D9BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28E17F1D20182E8C00D9BACF /* SDInvitePopUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SDInvitePopUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		28E17F2120182E8C00D9BACF /* SDInvitePopUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDInvitePopUITests.m; sourceTree = "<group>"; };
+		28E17F2320182E8C00D9BACF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		28E17F3020182EC100D9BACF /* SDInvitePop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDInvitePop.h; sourceTree = "<group>"; };
+		28E17F3120182EC100D9BACF /* SDInvitePop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDInvitePop.m; sourceTree = "<group>"; };
+		28E17F342018532600D9BACF /* icon_moments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_moments@2x.png"; sourceTree = "<group>"; };
+		28E17F352018532600D9BACF /* icon_wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_wechat@2x.png"; sourceTree = "<group>"; };
+		28E17F362018532600D9BACF /* icon_moments@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_moments@3x.png"; sourceTree = "<group>"; };
+		28E17F372018532600D9BACF /* icon_weibo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_weibo@3x.png"; sourceTree = "<group>"; };
+		28E17F382018532600D9BACF /* icon_weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_weibo@2x.png"; sourceTree = "<group>"; };
+		28E17F392018532600D9BACF /* icon_wechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_wechat@3x.png"; sourceTree = "<group>"; };
+		28E17F462018B42F00D9BACF /* SDIvitePopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDIvitePopCell.h; sourceTree = "<group>"; };
+		28E17F472018B42F00D9BACF /* SDIvitePopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDIvitePopCell.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		28E17EF720182E8C00D9BACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E17F0F20182E8C00D9BACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E17F1A20182E8C00D9BACF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28E17EF120182E8C00D9BACF = {
+			isa = PBXGroup;
+			children = (
+				28E17EFC20182E8C00D9BACF /* SDInvitePop */,
+				28E17F1520182E8C00D9BACF /* SDInvitePopTests */,
+				28E17F2020182E8C00D9BACF /* SDInvitePopUITests */,
+				28E17EFB20182E8C00D9BACF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		28E17EFB20182E8C00D9BACF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				28E17EFA20182E8C00D9BACF /* SDInvitePop.app */,
+				28E17F1220182E8C00D9BACF /* SDInvitePopTests.xctest */,
+				28E17F1D20182E8C00D9BACF /* SDInvitePopUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		28E17EFC20182E8C00D9BACF /* SDInvitePop */ = {
+			isa = PBXGroup;
+			children = (
+				28E17EFD20182E8C00D9BACF /* AppDelegate.h */,
+				28E17EFE20182E8C00D9BACF /* AppDelegate.m */,
+				28E17F0020182E8C00D9BACF /* ViewController.h */,
+				28E17F0120182E8C00D9BACF /* ViewController.m */,
+				28E17F2F20182EA100D9BACF /* SDInvitePop */,
+				28E17F0320182E8C00D9BACF /* Main.storyboard */,
+				28E17F0620182E8C00D9BACF /* Assets.xcassets */,
+				28E17F0820182E8C00D9BACF /* LaunchScreen.storyboard */,
+				28E17F0B20182E8C00D9BACF /* Info.plist */,
+				28E17F0C20182E8C00D9BACF /* main.m */,
+			);
+			path = SDInvitePop;
+			sourceTree = "<group>";
+		};
+		28E17F1520182E8C00D9BACF /* SDInvitePopTests */ = {
+			isa = PBXGroup;
+			children = (
+				28E17F1620182E8C00D9BACF /* SDInvitePopTests.m */,
+				28E17F1820182E8C00D9BACF /* Info.plist */,
+			);
+			path = SDInvitePopTests;
+			sourceTree = "<group>";
+		};
+		28E17F2020182E8C00D9BACF /* SDInvitePopUITests */ = {
+			isa = PBXGroup;
+			children = (
+				28E17F2120182E8C00D9BACF /* SDInvitePopUITests.m */,
+				28E17F2320182E8C00D9BACF /* Info.plist */,
+			);
+			path = SDInvitePopUITests;
+			sourceTree = "<group>";
+		};
+		28E17F2F20182EA100D9BACF /* SDInvitePop */ = {
+			isa = PBXGroup;
+			children = (
+				28E17F332018530100D9BACF /* source */,
+				28E17F3020182EC100D9BACF /* SDInvitePop.h */,
+				28E17F3120182EC100D9BACF /* SDInvitePop.m */,
+				28E17F462018B42F00D9BACF /* SDIvitePopCell.h */,
+				28E17F472018B42F00D9BACF /* SDIvitePopCell.m */,
+			);
+			path = SDInvitePop;
+			sourceTree = "<group>";
+		};
+		28E17F332018530100D9BACF /* source */ = {
+			isa = PBXGroup;
+			children = (
+				28E17F342018532600D9BACF /* icon_moments@2x.png */,
+				28E17F362018532600D9BACF /* icon_moments@3x.png */,
+				28E17F352018532600D9BACF /* icon_wechat@2x.png */,
+				28E17F392018532600D9BACF /* icon_wechat@3x.png */,
+				28E17F382018532600D9BACF /* icon_weibo@2x.png */,
+				28E17F372018532600D9BACF /* icon_weibo@3x.png */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		28E17EF920182E8C00D9BACF /* SDInvitePop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28E17F2620182E8C00D9BACF /* Build configuration list for PBXNativeTarget "SDInvitePop" */;
+			buildPhases = (
+				28E17EF620182E8C00D9BACF /* Sources */,
+				28E17EF720182E8C00D9BACF /* Frameworks */,
+				28E17EF820182E8C00D9BACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SDInvitePop;
+			productName = SDInvitePop;
+			productReference = 28E17EFA20182E8C00D9BACF /* SDInvitePop.app */;
+			productType = "com.apple.product-type.application";
+		};
+		28E17F1120182E8C00D9BACF /* SDInvitePopTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28E17F2920182E8C00D9BACF /* Build configuration list for PBXNativeTarget "SDInvitePopTests" */;
+			buildPhases = (
+				28E17F0E20182E8C00D9BACF /* Sources */,
+				28E17F0F20182E8C00D9BACF /* Frameworks */,
+				28E17F1020182E8C00D9BACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28E17F1420182E8C00D9BACF /* PBXTargetDependency */,
+			);
+			name = SDInvitePopTests;
+			productName = SDInvitePopTests;
+			productReference = 28E17F1220182E8C00D9BACF /* SDInvitePopTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		28E17F1C20182E8C00D9BACF /* SDInvitePopUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 28E17F2C20182E8C00D9BACF /* Build configuration list for PBXNativeTarget "SDInvitePopUITests" */;
+			buildPhases = (
+				28E17F1920182E8C00D9BACF /* Sources */,
+				28E17F1A20182E8C00D9BACF /* Frameworks */,
+				28E17F1B20182E8C00D9BACF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				28E17F1F20182E8C00D9BACF /* PBXTargetDependency */,
+			);
+			name = SDInvitePopUITests;
+			productName = SDInvitePopUITests;
+			productReference = 28E17F1D20182E8C00D9BACF /* SDInvitePopUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		28E17EF220182E8C00D9BACF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = tianNanYiHao;
+				TargetAttributes = {
+					28E17EF920182E8C00D9BACF = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Manual;
+					};
+					28E17F1120182E8C00D9BACF = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 28E17EF920182E8C00D9BACF;
+					};
+					28E17F1C20182E8C00D9BACF = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 28E17EF920182E8C00D9BACF;
+					};
+				};
+			};
+			buildConfigurationList = 28E17EF520182E8C00D9BACF /* Build configuration list for PBXProject "SDInvitePop" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 28E17EF120182E8C00D9BACF;
+			productRefGroup = 28E17EFB20182E8C00D9BACF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				28E17EF920182E8C00D9BACF /* SDInvitePop */,
+				28E17F1120182E8C00D9BACF /* SDInvitePopTests */,
+				28E17F1C20182E8C00D9BACF /* SDInvitePopUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		28E17EF820182E8C00D9BACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28E17F0A20182E8C00D9BACF /* LaunchScreen.storyboard in Resources */,
+				28E17F3D2018532600D9BACF /* icon_weibo@3x.png in Resources */,
+				28E17F0720182E8C00D9BACF /* Assets.xcassets in Resources */,
+				28E17F3C2018532600D9BACF /* icon_moments@3x.png in Resources */,
+				28E17F3E2018532600D9BACF /* icon_weibo@2x.png in Resources */,
+				28E17F0520182E8C00D9BACF /* Main.storyboard in Resources */,
+				28E17F3B2018532600D9BACF /* icon_wechat@2x.png in Resources */,
+				28E17F3F2018532600D9BACF /* icon_wechat@3x.png in Resources */,
+				28E17F3A2018532600D9BACF /* icon_moments@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E17F1020182E8C00D9BACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E17F1B20182E8C00D9BACF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		28E17EF620182E8C00D9BACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28E17F0220182E8C00D9BACF /* ViewController.m in Sources */,
+				28E17F482018B42F00D9BACF /* SDIvitePopCell.m in Sources */,
+				28E17F3220182EC100D9BACF /* SDInvitePop.m in Sources */,
+				28E17F0D20182E8C00D9BACF /* main.m in Sources */,
+				28E17EFF20182E8C00D9BACF /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E17F0E20182E8C00D9BACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28E17F1720182E8C00D9BACF /* SDInvitePopTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		28E17F1920182E8C00D9BACF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28E17F2220182E8C00D9BACF /* SDInvitePopUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		28E17F1420182E8C00D9BACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28E17EF920182E8C00D9BACF /* SDInvitePop */;
+			targetProxy = 28E17F1320182E8C00D9BACF /* PBXContainerItemProxy */;
+		};
+		28E17F1F20182E8C00D9BACF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 28E17EF920182E8C00D9BACF /* SDInvitePop */;
+			targetProxy = 28E17F1E20182E8C00D9BACF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		28E17F0320182E8C00D9BACF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28E17F0420182E8C00D9BACF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		28E17F0820182E8C00D9BACF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				28E17F0920182E8C00D9BACF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		28E17F2420182E8C00D9BACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		28E17F2520182E8C00D9BACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		28E17F2720182E8C00D9BACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDInvitePop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDInvitePop;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ba030a12-99c3-466f-8e38-038dfbd73c8c";
+				PROVISIONING_PROFILE_SPECIFIER = sandComm_Dev_Profile;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		28E17F2820182E8C00D9BACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDInvitePop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDInvitePop;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "ba030a12-99c3-466f-8e38-038dfbd73c8c";
+				PROVISIONING_PROFILE_SPECIFIER = sandComm_Dev_Profile;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		28E17F2A20182E8C00D9BACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDInvitePopTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDInvitePopTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDInvitePop.app/SDInvitePop";
+			};
+			name = Debug;
+		};
+		28E17F2B20182E8C00D9BACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDInvitePopTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDInvitePopTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SDInvitePop.app/SDInvitePop";
+			};
+			name = Release;
+		};
+		28E17F2D20182E8C00D9BACF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDInvitePopUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDInvitePopUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SDInvitePop;
+			};
+			name = Debug;
+		};
+		28E17F2E20182E8C00D9BACF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CYP2Q7U7L3;
+				INFOPLIST_FILE = SDInvitePopUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sand.SDInvitePopUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SDInvitePop;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		28E17EF520182E8C00D9BACF /* Build configuration list for PBXProject "SDInvitePop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E17F2420182E8C00D9BACF /* Debug */,
+				28E17F2520182E8C00D9BACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28E17F2620182E8C00D9BACF /* Build configuration list for PBXNativeTarget "SDInvitePop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E17F2720182E8C00D9BACF /* Debug */,
+				28E17F2820182E8C00D9BACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28E17F2920182E8C00D9BACF /* Build configuration list for PBXNativeTarget "SDInvitePopTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E17F2A20182E8C00D9BACF /* Debug */,
+				28E17F2B20182E8C00D9BACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		28E17F2C20182E8C00D9BACF /* Build configuration list for PBXNativeTarget "SDInvitePopUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				28E17F2D20182E8C00D9BACF /* Debug */,
+				28E17F2E20182E8C00D9BACF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 28E17EF220182E8C00D9BACF /* Project object */;
+}
