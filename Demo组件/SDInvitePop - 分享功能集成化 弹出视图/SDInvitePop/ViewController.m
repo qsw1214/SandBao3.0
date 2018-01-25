@@ -26,6 +26,9 @@
     
     [SDInvitePop showInvitePopView:@{@"icon":@[@"icon_wechat",@"icon_moments",@"icon_weibo",@"icon_wechat",@"icon_wechat"],
                                      @"title":@[@"微信",@"朋友圈",@"微博",@"icon_wechat信",@"icon_wechat信"]
+                                     } cellClickBlock:^(NSString *titleName) {
+                                         
+                                         NSLog(@"%@",titleName);
                                      }];
     
     

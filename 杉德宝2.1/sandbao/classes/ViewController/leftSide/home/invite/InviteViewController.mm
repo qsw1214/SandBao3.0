@@ -9,7 +9,7 @@
 #import "InviteViewController.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
-
+#import "PayNucHelper.h"
 #import "SDInvitePop.h"
 
 @interface InviteViewController ()<WXApiDelegate>
@@ -51,18 +51,63 @@
 - (void)buttonClick:(UIButton *)btn{
     if (btn.tag == BTN_TAG_JUSTCLICK) {
         
-        NSDictionary *inviteInfo = @{@"title":@[@"",@"",@""],
-                                     @"icon":@[@"",@"",@""]
-                                     }
-        [SDInvitePop showInvitePopView:<#(NSDictionary *)#> cellClickBlock:<#^(NSString *titleName)block#>]
+        
+        NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
+        NSString *inviteCode = [userInfoDic objectForKey:@"inviteCode"];
+        
+        NSDictionary *inviteInfo = @{@"icon":@[@"icon_wechat",@"icon_moments",@"icon_weibo"],
+                                     @"title":@[@"微信",@"朋友圈",@"微博"]
+                                     };
+        [SDInvitePop showInvitePopView:inviteInfo cellClickBlock:^(NSString *titleName) {
+            
+            if ([titleName isEqualToString:@"微信"]) {
+                
+                WXMediaMessage *message = [WXMediaMessage message];
+                message.title = @"邀请好友注册,立马赚积分";
+                message.description = @"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!";
+                [message setThumbImage:[UIImage imageNamed:@"Icon-iPhone-60.png"]];
+                WXWebpageObject *ext = [WXWebpageObject object];
+                ext.webpageUrl = @"http://www.sandlife.com.cn";
+                message.mediaObject = ext;
+                
+                SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+                req.text = inviteCode;
+                req.bText = NO;
+                req.message = message;
+                req.scene = WXSceneSession;
+                BOOL sendSuccess =  [WXApi sendReq:req];
+                if (!sendSuccess) {
+                    [Tool showDialog:@"请安装微信"];
+                }
+            }
+            if ([titleName isEqualToString:@"朋友圈"]) {
+                WXMediaMessage *message = [WXMediaMessage message];
+                message.title = @"邀请好友注册,立马赚积分";
+                message.description = @"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!";
+                [message setThumbImage:[UIImage imageNamed:@"Icon-iPhone-60.png"]];
+                
+                WXWebpageObject *ext = [WXWebpageObject object];
+                ext.webpageUrl = @"http://www.sandlife.com.cn";
+                message.mediaObject = ext;
+                
+                SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+                req.text = inviteCode;
+                req.bText = NO;
+                req.message = message;
+                req.scene = WXSceneTimeline;
+                BOOL sendSuccess =  [WXApi sendReq:req];
+                if (!sendSuccess) {
+                    [Tool showDialog:@"请安装微信"];
+                }
+            }
+            if ([titleName isEqualToString:@"微博"]) {
+                
+            }
+            
+        }];
         
         
-        SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
-        req.text = @"www.baidu.com";
-        req.bText = YES;
-        req.scene = WXSceneSession;
-        
-        [WXApi sendReq:req];
+     
     }
 }
 
@@ -99,7 +144,7 @@
     
     //透明按钮 - 分享
     UIButton *inviteBtn = [Tool createButton:@"" attributeStr:nil font:nil textColor:nil];
-    inviteBtn.backgroundColor = [UIColor greenColor];
+    inviteBtn.backgroundColor = [UIColor clearColor];
     inviteBtn.alpha = 0.4f;
     inviteBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, UPDOWNSPACE_112);
     inviteBtn.tag = BTN_TAG_JUSTCLICK;

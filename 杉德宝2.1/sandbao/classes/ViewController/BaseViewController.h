@@ -35,6 +35,8 @@
 #import "InviteAuthToolView.h"
 #import "SDPayConfig.h"
 #import "SDBarButton.h"
+#import "SDMQTTManager.h"
+
 
 
 

@@ -320,6 +320,7 @@
     
     
     if (result == YES) {
+        [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [self ownPayTools_login];
     } else {
         //数据写入失败->返回直接登陆

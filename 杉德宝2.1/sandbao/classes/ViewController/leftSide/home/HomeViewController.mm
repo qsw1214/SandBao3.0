@@ -85,10 +85,8 @@
     //通知LeftSideMenuViewController 刷新用户信息UI
     [self postNotifactionToLeftSideMenuWithUserInfoRefrush];
     
-    if ([CommParameter sharedInstance].mqttFlag == NO) {
-        // 注册MQTT
-        [self rigistMqtt];
-    }
+    // 注册MQTT + 订阅消息
+    [self rigistMqtt];
     
 }
 
@@ -106,10 +104,6 @@
     [self create_HeadView];
     [self create_bodyViewOne];
     [self create_bodyViewTwo];
-    
-    // 注册MQTT
-    [self rigistMqtt];
-    
     
 }
 
@@ -583,8 +577,6 @@
     
     //1.注册代理
     [SDMQTTManager shareMQttManager].delegate = self;
-    //2.设置clientID
-    [SDMQTTManager shareMQttManager].clientID = [CommParameter sharedInstance].sToken;
     //3.订阅消息
     [[SDMQTTManager shareMQttManager] subscaribeTopic:kMqttTopicUSERID([CommParameter sharedInstance].userId) atLevel:MQTTQosLevelExactlyOnce];
     
@@ -878,39 +870,6 @@
         make.size.mas_equalTo(moneyBtnRightLabSize);
     }];
 }
-
-
-#pragma mark - 设置(刷新)支付工具
-- (void)settingData
-{
-    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
-    
-    //钱包账户_被转账_支付工具
-    transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
-    transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
-    
-    //钱包账户未成功开通
-    if (transferOutPayToolDic.count == 0) {
-        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
-            //归位Home或SpsLunch
-            [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
-        } rightBlock:^{
-            //呼叫
-            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
-                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
-            }
-        }];
-        
-    }else{
-        
-        //钱包账户_被转账_支付工具
-        transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
-        transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
-    }
-    
-}
-
-
 
 #pragma mark 通知左侧边栏刷新用户信息UI
 - (void)postNotifactionToLeftSideMenuWithUserInfoRefrush{

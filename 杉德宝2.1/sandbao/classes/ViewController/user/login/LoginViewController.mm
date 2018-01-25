@@ -33,6 +33,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    //进入登录页面 - 强制关闭MQTT
+    [[SDMQTTManager shareMQttManager] closeMQTT];
+    
     [self load];
 }
 
@@ -463,6 +466,7 @@
     
     
     if (result == YES) {
+        [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [self ownPayTools_login];
     } else {
         //数据写入失败->返回直接登陆

@@ -220,6 +220,8 @@
 #pragma mark SDIvitePopCellDelegate
 - (void)cellClick:(NSString *)titleName{
     
+    [self hidden];
+    
     self.cellClickBlock(titleName);
 }
 

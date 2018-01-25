@@ -25,46 +25,30 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/classes/ViewController/user/realName/RealNameViewController.mm"
-            timestampString = "538554324.78613"
+            filePath = "sandbao/base/helpers/MQTTManager/SDMQTTManager.m"
+            timestampString = "538567749.084681"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "521"
-            endingLineNumber = "521"
-            landmarkName = "-setRealNameForUpdataInfo"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-handleMessage:onTopic:retained:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__50-[RealNameViewController setRealNameForUpdataInfo]_block_invoke"
-                  moduleName = "sandbao"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tiannanyihao/Desktop/SandBao3.0/%E6%9D%89%E5%BE%B7%E5%AE%9D2.1/sandbao/classes/ViewController/user/realName/RealNameViewController.mm"
-                  timestampString = "538554324.915992"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "521"
-                  endingLineNumber = "521"
-                  offsetFromSymbolStart = "2768">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__50-[RealNameViewController setRealNameForUpdataInfo]_block_invoke_2"
-                  moduleName = "sandbao"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tiannanyihao/Desktop/SandBao3.0/%E6%9D%89%E5%BE%B7%E5%AE%9D2.1/sandbao/classes/ViewController/user/realName/RealNameViewController.mm"
-                  timestampString = "538554324.9176461"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "521"
-                  endingLineNumber = "521"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "sandbao/base/helpers/MQTTManager/SDMQTTManager.m"
+            timestampString = "538567749.084784"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-closeMQTT"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -74,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "sandbao/classes/ViewController/leftSide/home/HomeViewController.mm"
-            timestampString = "538554404.867112"
+            timestampString = "538567749.08486"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "749"
-            endingLineNumber = "749"
-            landmarkName = "-loginOtherDevice:"
+            startingLineNumber = "576"
+            endingLineNumber = "576"
+            landmarkName = "-rigistMqtt"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

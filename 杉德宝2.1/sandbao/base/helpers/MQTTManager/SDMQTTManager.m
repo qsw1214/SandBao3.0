@@ -85,17 +85,20 @@ static SDMQTTManager *mqttManager = nil;
                       context:nil];
 }
 
-/**
- 设置用户clientID
 
- @param clientID id
+
+/**
+ 登录MQTT
+
+ @param clientID sToken
  */
-- (void)setClientID:(NSString *)clientID{
+- (void)loginMQTT:(NSString *)clientID{
     if (clientID.length>0) {
         [self linkMQTT:clientID];
     }
-    
 }
+
+
 
 /**
  关闭MQTT
@@ -113,7 +116,6 @@ static SDMQTTManager *mqttManager = nil;
     //数据清空
     self.delegate = nil;
     
-    self.clientID = nil;
 }
 
 /**

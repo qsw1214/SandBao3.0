@@ -30,10 +30,6 @@
 
 @interface SDMQTTManager : NSObject
 
-/**
- 用户clientID:切换用户需重新设置
- */
-@property (nonatomic, strong) NSString *clientID;
 
 @property (nonatomic, weak) id<SDMQTTManagerDelegate>delegate;
 
@@ -44,6 +40,13 @@
  */
 + (instancetype)shareMQttManager;
 
+
+/**
+ 登录MQTT
+
+ @param clientID sToken
+ */
+- (void)loginMQTT:(NSString *)clientID;
 
 /**
  订阅单条广播

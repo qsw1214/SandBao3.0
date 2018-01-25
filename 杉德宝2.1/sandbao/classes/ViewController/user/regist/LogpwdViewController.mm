@@ -199,14 +199,14 @@
 - (void)updateUserData
 {
     NSString *creditFp = [NSString stringWithUTF8String:paynuc.get("creditFp").c_str()];
-    NSString *sToken = [NSString stringWithUTF8String:paynuc.get("sToken").c_str()];
+    [CommParameter sharedInstance].sToken = [NSString stringWithUTF8String:paynuc.get("sToken").c_str()];
     
     long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where uid = '%@'", [CommParameter sharedInstance].userId]];
     
     BOOL result;
     if (count > 0) {  //新注册用户 - > count永远不会大于0
         //激活用户状态
-        result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@', credit_fp = '%@'  where uid = '%@'", @"0", sToken, creditFp, [CommParameter sharedInstance].userId]];
+        result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@', credit_fp = '%@'  where uid = '%@'", @"0", [CommParameter sharedInstance].sToken, creditFp, [CommParameter sharedInstance].userId]];
     } else {
         NSMutableArray *minletsArray = [SDSqlite selectData:[SqliteHelper shareSqliteHelper].sandBaoDB tableName:@"minlets" columnArray:MINLETS_ARR ];
         
@@ -234,11 +234,12 @@
         NSString *letsJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         letsJson = [[letsJson stringByReplacingOccurrencesOfString:@"\n" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
         
-        result = [SDSqlite insertData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"insert into usersconfig (uid, userName, active, sToken, credit_fp, lets) values ('%@', '%@', '%@', '%@', '%@', '%@')", [CommParameter sharedInstance].userId, self.phoneNoStr, @"0", sToken, creditFp, letsJson]];
+        result = [SDSqlite insertData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"insert into usersconfig (uid, userName, active, sToken, credit_fp, lets) values ('%@', '%@', '%@', '%@', '%@', '%@')", [CommParameter sharedInstance].userId, self.phoneNoStr, @"0", [CommParameter sharedInstance].sToken, creditFp, letsJson]];
     }
     
     //注册成成功 -> 归位到实名认证页 
     if (result == YES) {
+        [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [Tool showDialog:@"恭喜您,注册成功!" message:@"立即实名认证,体验更多功能!" defulBlock:^{
             //去实名
             RealNameViewController *realName = [[RealNameViewController alloc] init];
