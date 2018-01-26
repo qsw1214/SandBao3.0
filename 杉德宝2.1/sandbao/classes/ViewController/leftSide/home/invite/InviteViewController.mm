@@ -8,11 +8,14 @@
 
 #import "InviteViewController.h"
 #import "WXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+
 #import "WXApiObject.h"
 #import "PayNucHelper.h"
 #import "SDInvitePop.h"
 
-@interface InviteViewController ()<WXApiDelegate>
+@interface InviteViewController ()<WXApiDelegate,TencentSessionDelegate>
 
 @end
 
@@ -55,8 +58,8 @@
         NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
         NSString *inviteCode = [userInfoDic objectForKey:@"inviteCode"];
         
-        NSDictionary *inviteInfo = @{@"icon":@[@"icon_wechat",@"icon_moments",@"icon_weibo"],
-                                     @"title":@[@"微信",@"朋友圈",@"微博"]
+        NSDictionary *inviteInfo = @{@"icon":@[@"icon_wechat",@"icon_moments",@"icon_qq",@"icon_weibo"],
+                                     @"title":@[@"微信",@"朋友圈",@"腾讯QQ",@"微博"]
                                      };
         [SDInvitePop showInvitePopView:inviteInfo cellClickBlock:^(NSString *titleName) {
             
@@ -100,8 +103,19 @@
                     [Tool showDialog:@"请安装微信"];
                 }
             }
-            if ([titleName isEqualToString:@"微博"]) {
+            if ([titleName isEqualToString:@"腾讯QQ"]) {
+
+                TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:Tencent_APPID andDelegate:self];
                 
+                QQApiURLObject *urlObject = [[QQApiURLObject alloc] initWithURL:[NSURL URLWithString:@"http://www.sandlife.com.cn"] title:@"邀请好友注册,立马赚积分" description:@"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!" previewImageData:UIImageJPEGRepresentation([UIImage imageNamed:@"icon"], 0.5f) targetContentType:QQApiURLTargetTypeNews];
+                
+                SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:urlObject];
+                // 分享给好友
+                [QQApiInterface sendReq:req];
+            }
+            
+            if ([titleName isEqualToString:@"微博"]) {
+                [Tool showDialog:@"暂不支持微博分享"];
             }
             
         }];

@@ -23,11 +23,14 @@
 
 #import "UMMobClick/MobClick.h"
 #import "WXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+
+
 
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
 
-@interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate>
+@interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate,TencentSessionDelegate>
 {
     //通过URL_Schemes方式启动情况下 : APP是否未启动的标识
     BOOL APP_DIDFINISHLUNCH_WITH_URLSCHEMES;
@@ -52,11 +55,14 @@
     [[PgyManager sharedPgyManager] setEnableFeedback:NO];
 #pragma mark - ***上传AppStore前 请务必删除蒲公英SDK***
     
-    //-3. 启动定位 - 实例化
+    //-4. 启动定位 - 实例化
     [LocationUtil shareLocationManager];
     
-    //-2. 微信SDK
+    //-3. 微信SDK
     [self WXSDK];
+    
+    //-2. TencentSDK
+    [self TencentSDK];
     
     //-1. 友盟相关设置
     [self UMSetAbout];
@@ -133,11 +139,19 @@
     }
 }
 
+
+
 #pragma mark 微信相关设置
 - (void)WXSDK{
     
     [WXApi registerApp:@"wxb63368e4a82f8ab9"];
     
+}
+
+#pragma mark 腾讯相关设置
+- (void)TencentSDK{
+    
+   TencentOAuth *ttt = [[TencentOAuth alloc] initWithAppId:Tencent_APPID andDelegate:nil]; //注册
 }
 
 #pragma mark 友盟相关设置
@@ -280,6 +294,10 @@
     if ([WXApi handleOpenURL:url delegate:self]) {
         return [WXApi handleOpenURL:url delegate:self];
     }
+    //QQ启动杉德宝 - 使用scheme方式唤起均会回调
+    if ([TencentOAuth CanHandleOpenURL:url]){
+        return [TencentOAuth HandleOpenURL:url];
+    }
     //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
@@ -325,6 +343,10 @@
     if ([WXApi handleOpenURL:url delegate:self]) {
         return [WXApi handleOpenURL:url delegate:self];
     }
+    //QQ启动杉德宝 - 使用scheme方式唤起均会回调
+    if ([TencentOAuth CanHandleOpenURL:url]){
+        return [TencentOAuth HandleOpenURL:url];
+    }
     //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {
         NSString *urlStr = [NSString stringWithFormat:@"%@",url];
@@ -368,6 +390,10 @@
     //微信启动杉德宝 - 使用scheme方式唤起均会回调
     if ([WXApi handleOpenURL:url delegate:self]) {
         return [WXApi handleOpenURL:url delegate:self];
+    }
+    //QQ启动杉德宝 - 使用scheme方式唤起均会回调
+    if ([TencentOAuth CanHandleOpenURL:url]){
+        return [TencentOAuth HandleOpenURL:url];
     }
     //第三方App启动杉德宝(sps) - 使用scheme方式唤起均会回调
     if ([url.absoluteString containsString:@"sandbao"]) {

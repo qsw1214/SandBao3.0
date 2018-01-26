@@ -73,6 +73,7 @@ static SDMQTTManager *mqttManager = nil;
                  willRetainFlag:false
                    withClientId:clientID];
     } else {
+        self.manager.session.clientId = clientID;
         [self.manager connectToLast];
     }
     
@@ -83,6 +84,7 @@ static SDMQTTManager *mqttManager = nil;
                    forKeyPath:@"state"
                       options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                       context:nil];
+    
 }
 
 
@@ -98,35 +100,23 @@ static SDMQTTManager *mqttManager = nil;
     }
 }
 
-
-
 /**
  关闭MQTT
  */
 - (void)closeMQTT{
-    //清除kvo监听
-    [self.manager removeObserver:self forKeyPath:@"state"];
     
-    //关闭连接
+    //避免删除kvo异常
+    @try{
+        //清除kvo监听
+        [self.manager removeObserver:self forKeyPath:@"state"];
+    }
+    @catch(NSException *exception){
+        
+    }
+    
+    //关闭连接 - 触发监听(有可能关成功,测试出有关失败的可能)
     [self.manager disconnect];
     
-    //管理对象置空
-    self.manager = nil;
-    
-    //数据清空
-    self.delegate = nil;
-    
-}
-
-/**
- 订阅一条消息
-
- @param topic 订阅URL
- @param qosLevel 消息接收级别
- */
-- (void)subscaribeTopic:(NSString *)topic atLevel:(MQTTQosLevel)qosLevel{
-    
-    self.manager.subscriptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:qosLevel] forKey:topic];
 }
 
 /**
@@ -161,8 +151,27 @@ static SDMQTTManager *mqttManager = nil;
     }
 }
 
-/*
- * MQTTSessionManagerDelegate
+
+
+/**
+ 订阅一条消息
+ 
+ @param topic 订阅URL
+ @param qosLevel 消息接收级别
+ */
+- (void)subscaribeTopic:(NSString *)topic atLevel:(MQTTQosLevel)qosLevel{
+    
+    self.manager.subscriptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:qosLevel] forKey:topic];
+}
+
+
+#pragma mark - MQTTSessionManagerDelegate
+/**
+ 订阅消息回调
+
+ @param data data
+ @param topic 主题
+ @param retained 服务器是否保留数据
  */
 - (void)handleMessage:(NSData *)data onTopic:(NSString *)topic retained:(BOOL)retained{
     /*

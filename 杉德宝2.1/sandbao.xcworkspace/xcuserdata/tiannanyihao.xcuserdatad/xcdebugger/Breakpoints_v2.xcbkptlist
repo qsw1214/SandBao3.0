@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/classes/ViewController/common/spsLunch/TnOrderViewController.mm"
-            timestampString = "538536095.328445"
+            filePath = "sandbao/classes/ViewController/leftSide/LeftSideMenuViewController.mm"
+            timestampString = "538652142.675912"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
-            landmarkName = "-TNOrder:"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "-noPwdLogin"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/base/helpers/MQTTManager/SDMQTTManager.m"
-            timestampString = "538567940.168883"
+            filePath = "sandbao/classes/ViewController/leftSide/LeftSideMenuViewController.mm"
+            timestampString = "538652142.676034"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "-handleMessage:onTopic:retained:"
+            startingLineNumber = "508"
+            endingLineNumber = "508"
+            landmarkName = "-noPwdLogin"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,29 +41,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/base/helpers/MQTTManager/SDMQTTManager.m"
-            timestampString = "538567940.16898"
+            filePath = "sandbao/classes/ViewController/leftSide/LeftSideMenuViewController.mm"
+            timestampString = "538652142.67611"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-closeMQTT"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
+            landmarkName = "-noPwdLogin"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "sandbao/classes/ViewController/leftSide/home/HomeViewController.mm"
-            timestampString = "538567940.169064"
+            filePath = "Pods/MQTTClient/MQTTClient/MQTTClient/MQTTSession.m"
+            timestampString = "538647879.712242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "576"
-            endingLineNumber = "576"
-            landmarkName = "-rigistMqtt"
+            startingLineNumber = "628"
+            endingLineNumber = "628"
+            landmarkName = "-checkDup:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

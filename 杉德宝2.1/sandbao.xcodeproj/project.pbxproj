@@ -54,7 +54,6 @@
 		2824F12B1FF33DBC0041D857 /* shoukuanma@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F1231FF33DBC0041D857 /* shoukuanma@3x.png */; };
 		2824F12C1FF33DBC0041D857 /* shoukuanma_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F1241FF33DBC0041D857 /* shoukuanma_selected@2x.png */; };
 		2824F12D1FF33DBC0041D857 /* shoukuanma_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2824F1251FF33DBC0041D857 /* shoukuanma_selected@3x.png */; };
-		282A48CE1F27337D00821A15 /* libSDWebImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A48CD1F27337D00821A15 /* libSDWebImage.a */; };
 		282D90321EF769B000CF8C28 /* SDActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282D902B1EF769B000CF8C28 /* SDActivityView.m */; };
 		282D90331EF769B000CF8C28 /* SDMBPerror.png in Resources */ = {isa = PBXBuildFile; fileRef = 282D902D1EF769B000CF8C28 /* SDMBPerror.png */; };
 		282D90341EF769B000CF8C28 /* SDMBPLoad.png in Resources */ = {isa = PBXBuildFile; fileRef = 282D902E1EF769B000CF8C28 /* SDMBPLoad.png */; };
@@ -270,6 +269,9 @@
 		28D47107201982A100055EC4 /* icon_wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D470FF201982A100055EC4 /* icon_wechat@3x.png */; };
 		28D47108201982A100055EC4 /* icon_weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D47100201982A100055EC4 /* icon_weibo@2x.png */; };
 		28D47109201982A100055EC4 /* icon_weibo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D47101201982A100055EC4 /* icon_weibo@3x.png */; };
+		28D47115201AC65400055EC4 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D47114201AC65400055EC4 /* TencentOpenAPI.framework */; };
+		28D47118201AC6D100055EC4 /* icon_qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D47116201AC6D100055EC4 /* icon_qq@3x.png */; };
+		28D47119201AC6D100055EC4 /* icon_qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28D47117201AC6D100055EC4 /* icon_qq@2x.png */; };
 		28D7E5701FA879AC00518042 /* limitServer.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28D7E56F1FA879AC00518042 /* limitServer.plist */; };
 		28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */; };
 		28D7E5851FA9A50C00518042 /* BankCardRechargeViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7E5841FA9A50C00518042 /* BankCardRechargeViewController.mm */; };
@@ -398,7 +400,6 @@
 		2824F1231FF33DBC0041D857 /* shoukuanma@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuanma@3x.png"; sourceTree = "<group>"; };
 		2824F1241FF33DBC0041D857 /* shoukuanma_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuanma_selected@2x.png"; sourceTree = "<group>"; };
 		2824F1251FF33DBC0041D857 /* shoukuanma_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoukuanma_selected@3x.png"; sourceTree = "<group>"; };
-		282A48CD1F27337D00821A15 /* libSDWebImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSDWebImage.a; path = "../../../../Library/Developer/Xcode/DerivedData/sandbao-ayiadrxmozfpmiadtzajtbozkvgl/Build/Products/Debug-iphoneos/SDWebImage/libSDWebImage.a"; sourceTree = "<group>"; };
 		282D902A1EF769B000CF8C28 /* SDActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDActivityView.h; sourceTree = "<group>"; };
 		282D902B1EF769B000CF8C28 /* SDActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDActivityView.m; sourceTree = "<group>"; };
 		282D902D1EF769B000CF8C28 /* SDMBPerror.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SDMBPerror.png; sourceTree = "<group>"; };
@@ -730,6 +731,9 @@
 		28D470FF201982A100055EC4 /* icon_wechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_wechat@3x.png"; sourceTree = "<group>"; };
 		28D47100201982A100055EC4 /* icon_weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_weibo@2x.png"; sourceTree = "<group>"; };
 		28D47101201982A100055EC4 /* icon_weibo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_weibo@3x.png"; sourceTree = "<group>"; };
+		28D47114201AC65400055EC4 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		28D47116201AC6D100055EC4 /* icon_qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_qq@3x.png"; sourceTree = "<group>"; };
+		28D47117201AC6D100055EC4 /* icon_qq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_qq@2x.png"; sourceTree = "<group>"; };
 		28D7E56F1FA879AC00518042 /* limitServer.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = limitServer.plist; sourceTree = "<group>"; };
 		28D7E5751FA885CE00518042 /* BankItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankItemTableViewCell.h; sourceTree = "<group>"; };
 		28D7E5761FA885CE00518042 /* BankItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankItemTableViewCell.m; sourceTree = "<group>"; };
@@ -820,10 +824,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7DF3C8E1DC718D800243EF6 /* SystemConfiguration.framework in Frameworks */,
 				2836ADED1FE3660200BAB209 /* AssetsLibrary.framework in Frameworks */,
 				A7DF3C8C1DC718CA00243EF6 /* CoreTelephony.framework in Frameworks */,
-				282A48CE1F27337D00821A15 /* libSDWebImage.a in Frameworks */,
-				A7DF3C8E1DC718D800243EF6 /* SystemConfiguration.framework in Frameworks */,
 				280621E91EF8F05100346D1A /* AVFoundation.framework in Frameworks */,
 				280621E71EF8F04100346D1A /* AudioToolbox.framework in Frameworks */,
 				280621E51EF8F03800346D1A /* CoreMotion.framework in Frameworks */,
@@ -831,6 +834,7 @@
 				A7DF3C821DC7188100243EF6 /* JavaScriptCore.framework in Frameworks */,
 				283DBD111ECA965A00B84E3E /* CoreText.framework in Frameworks */,
 				A7DF3C8A1DC718BD00243EF6 /* Security.framework in Frameworks */,
+				28D47115201AC65400055EC4 /* TencentOpenAPI.framework in Frameworks */,
 				A7DF3C841DC7188B00243EF6 /* ImageIO.framework in Frameworks */,
 				283DBD0F1ECA960D00B84E3E /* QuartzCore.framework in Frameworks */,
 				A7FF2FEB1E160B910068A2F7 /* libc++.tbd in Frameworks */,
@@ -1886,6 +1890,8 @@
 		28D470FB201982A100055EC4 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				28D47117201AC6D100055EC4 /* icon_qq@2x.png */,
+				28D47116201AC6D100055EC4 /* icon_qq@3x.png */,
 				28D470FC201982A100055EC4 /* icon_moments@2x.png */,
 				28D470FD201982A100055EC4 /* icon_moments@3x.png */,
 				28D470FE201982A100055EC4 /* icon_wechat@2x.png */,
@@ -1894,6 +1900,14 @@
 				28D47101201982A100055EC4 /* icon_weibo@3x.png */,
 			);
 			path = source;
+			sourceTree = "<group>";
+		};
+		28D47113201AC64E00055EC4 /* TencentSDK */ = {
+			isa = PBXGroup;
+			children = (
+				28D47114201AC65400055EC4 /* TencentOpenAPI.framework */,
+			);
+			path = TencentSDK;
 			sourceTree = "<group>";
 		};
 		28D7E5741FA885BC00518042 /* view */ = {
@@ -2100,7 +2114,6 @@
 			isa = PBXGroup;
 			children = (
 				2836ADEC1FE3660200BAB209 /* AssetsLibrary.framework */,
-				282A48CD1F27337D00821A15 /* libSDWebImage.a */,
 				280621E81EF8F05100346D1A /* AVFoundation.framework */,
 				280621E61EF8F04100346D1A /* AudioToolbox.framework */,
 				280621E41EF8F03800346D1A /* CoreMotion.framework */,
@@ -2184,6 +2197,7 @@
 				289C0D4F1F203FBC00360147 /* YXEasings */,
 				283DBD251ECAA1A400B84E3E /* weiboSdk */,
 				281F64301E792A970005AE86 /* SDCycleScrollView */,
+				28D47113201AC64E00055EC4 /* TencentSDK */,
 			);
 			path = thirdLibrary;
 			sourceTree = "<group>";
@@ -2377,6 +2391,7 @@
 				28B649971FAC654A0074A390 /* banklist_gs@3x.png in Resources */,
 				28B649CF1FAC654B0074A390 /* qvip_pay_imageholder@3x.png in Resources */,
 				2824F00E1FEFE1C60041D857 /* list_icon_goMore@2x.png in Resources */,
+				28D47119201AC6D100055EC4 /* icon_qq@2x.png in Resources */,
 				2824F0171FEFE1C60041D857 /* showPayQrcode@3x.png in Resources */,
 				28B649A61FAC654A0074A390 /* banklist_nj@2x.png in Resources */,
 				28B649A51FAC654A0074A390 /* banklist_nh@3x.png in Resources */,
@@ -2402,6 +2417,7 @@
 				28B649941FAC654A0074A390 /* banklist_gh@2x.png in Resources */,
 				2824F1261FF33DBC0041D857 /* fukuanma@2x.png in Resources */,
 				2824F1281FF33DBC0041D857 /* fukuanma_selected@2x.png in Resources */,
+				28D47118201AC6D100055EC4 /* icon_qq@3x.png in Resources */,
 				28B649C01FAC654B0074A390 /* list_xiaofei@2x.png in Resources */,
 				28B649A31FAC654A0074A390 /* banklist_nb@3x.png in Resources */,
 				28B649961FAC654A0074A390 /* banklist_gs@2x.png in Resources */,
@@ -2800,6 +2816,8 @@
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/PgySDK/sdk",
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/analytics",
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/common",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/TencentSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sandbao/sandbao-Prefix.pch";
@@ -2841,6 +2859,8 @@
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/PgySDK/sdk",
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/analytics",
 					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/UMLibrary/common",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/sandbao/library/thirdLibrary/TencentSDK",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sandbao/sandbao-Prefix.pch";

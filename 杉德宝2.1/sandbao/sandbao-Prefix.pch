@@ -97,6 +97,12 @@
 #define WB_App_Secret @"736b0c538d2c68ca277b3b7557fe9a1c"
 #define WB_App_Oauth2url @"https://api.weibo.com/oauth2/default.html"
 
+//2.Tencent
+#define Tencent_APPID @"1106608603"
+#define Tencent_APPKey @"3ieXMpmgLy7sIElb"
+
+
+
 
 //MQTT订阅广播的Topic
 #define kMqttTopicUSERID(USERID) [NSString stringWithFormat:@"SANDBAO/0003/USER/%@",USERID]

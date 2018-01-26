@@ -239,6 +239,7 @@
     
     //注册成成功 -> 归位到实名认证页 
     if (result == YES) {
+        //登录MQTT前,确保MQTT关闭
         [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [Tool showDialog:@"恭喜您,注册成功!" message:@"立即实名认证,体验更多功能!" defulBlock:^{
             //去实名

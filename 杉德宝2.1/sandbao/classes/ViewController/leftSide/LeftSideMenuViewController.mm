@@ -569,6 +569,7 @@
     NSString *letsStrNew = [[PayNucHelper sharedInstance] arrayToJSON:lensArrM];
     [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB  tableName:@"usersconfig" columnArray:(NSMutableArray*)@[@"lets"] paramArray:(NSMutableArray *)@[letsStrNew] whereColumnString:@"uid" whereParamString:[CommParameter sharedInstance].userId];
     
+    //登录MQTT前,确保MQTT关闭
     [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
     
     //查询用户信息

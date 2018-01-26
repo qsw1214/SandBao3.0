@@ -33,9 +33,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //进入登录页面 - 强制关闭MQTT
-    [[SDMQTTManager shareMQttManager] closeMQTT];
-    
     [self load];
 }
 
@@ -128,6 +125,7 @@
     barButton.btn.tag = BTN_TAG_LOGIN;
     [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:loginBarbtn];
+    
     
     //registBtn
     NSMutableAttributedString *registAttributeStr = [[NSMutableAttributedString alloc] initWithString:@"新用户? 注册"];
@@ -466,6 +464,7 @@
     
     
     if (result == YES) {
+        //登录MQTT前,确保MQTT关闭
         [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [self ownPayTools_login];
     } else {

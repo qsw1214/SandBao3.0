@@ -320,6 +320,7 @@
     
     
     if (result == YES) {
+        //登录MQTT前,确保MQTT关闭MQTT
         [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [self ownPayTools_login];
     } else {
