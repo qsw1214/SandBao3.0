@@ -139,9 +139,18 @@
     }];
 
     //二维码
-    UIView *qrCodeView = [[UIView alloc] init];
-    qrCodeView.backgroundColor = [UIColor redColor];
+    
+    NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
+    UIImage *qrimg = [UIImage imageNamed:@"bg_kuang"];
+    
+    UIImage *qrImg = [Tool twoDimensionCodeWithStr:[userInfoDic objectForKey:@"inviteCode"] size:qrimg.size.width-1];
+    
+    
+    
+    UIImageView *qrCodeView = [[UIImageView alloc] init];
+    qrCodeView.backgroundColor = [UIColor whiteColor];
     qrCodeView.alpha = 0.5f;
+    qrCodeView.image = qrimg;
     [inviteBGView addSubview:qrCodeView];
     CGFloat qrCodeViewWH = SCREEN_WIDTH - LEFTRIGHTSPACE_85*2;
     CGFloat qrCodeViewOY = UPDOWNSPACE_174;
@@ -149,7 +158,7 @@
     [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(qrCodeViewOY);
         make.left.equalTo(inviteBGView.mas_left).offset(LEFTRIGHTSPACE_85);
-        make.size.mas_equalTo(CGSizeMake(qrCodeViewWH, qrCodeViewWH));
+        make.size.mas_equalTo(CGSizeMake(qrimg.size.width, qrimg.size.height));
     }];
     
     

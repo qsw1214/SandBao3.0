@@ -440,19 +440,19 @@
         
         //理财功能
         if ([titleName isEqualToString:@"理财"]) {
-            
+             [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
         //积分商城
         if ([titleName isEqualToString:@"积分商城"]) {
-            
+            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
         //手机充值
         if ([titleName isEqualToString:@"手机充值"]) {
-            
+            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
         //生活缴费
         if ([titleName isEqualToString:@"生活缴费"]) {
-            
+            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
     };
     [bodyViewOne addSubview:sandServerView];
@@ -516,19 +516,19 @@
         NSLog(@"titleName == %@",titleName);
         //超值年化
         if ([titleName isEqualToString:@"超值年化"]) {
-            
+            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
         //新卡推荐
         if ([titleName isEqualToString:@"新卡推荐"]) {
-            
+            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
         //超值兑换
         if ([titleName isEqualToString:@"超值兑换"]) {
-            
+            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
         //商户推荐
         if ([titleName isEqualToString:@"商户推荐"]) {
-            
+            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
         }
         //邀请好友
         if ([titleName isEqualToString:@"邀请好友"]) {

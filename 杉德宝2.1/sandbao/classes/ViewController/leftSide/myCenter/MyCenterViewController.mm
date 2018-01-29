@@ -139,9 +139,11 @@
     }
     if (btn.tag == BTN_TAG_MYERCODE) {
         NSLog(@"我的二维码");
+        [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
     }
     if (btn.tag == BTN_TAG_MYHEADNAME) {
         NSLog(@"我的发票抬头");
+        [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
     }
     
 }
