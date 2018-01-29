@@ -281,14 +281,10 @@
         __block BOOL error = NO;
         
         
-        NSDictionary *workDic = [[NSDictionary alloc] init];
-        workDic = @{
-                    @"type":@"recharge",
-                    @"transAmt":@"0",
-                    @"feeType":[paramDic objectForKey:@"feeType"],
-                    @"feeRate":[paramDic objectForKey:@"feeRate"]
-                    };
-        
+        NSMutableDictionary *workDic = [NSMutableDictionary dictionaryWithDictionary:paramDic];
+        [workDic setValue:@"0" forKey:@"transAmt"];
+        [workDic setValue:[paramDic objectForKey:@"feeType"] forKey:@"feeType"];
+        [workDic setValue:[paramDic objectForKey:@"feeRate"] forKey:@"feeRate"];
         NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)workDic];
         
         NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.rechargeInPayToolDic];

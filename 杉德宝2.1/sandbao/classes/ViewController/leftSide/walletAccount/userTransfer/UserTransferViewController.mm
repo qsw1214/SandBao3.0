@@ -517,19 +517,12 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         //2.支付
         //work
         //本地计算fee
-        NSString *feerate =  [self.wordDic objectForKey:@"feeRate"];
-        NSInteger feerateValue = [feerate integerValue];
-        CGFloat   feerateFloat =  feerateValue/100;
         NSInteger cashFen = [moneyStr floatValue]*100;
-        NSInteger feeFloat =  cashFen * feerateFloat;
-        NSString *feeLocalStr = [NSString stringWithFormat:@"%ld",feeFloat];
-        NSMutableDictionary *workDicGet = [NSMutableDictionary dictionaryWithDictionary:self.wordDic];
-        [workDicGet removeObjectForKey:@"fee"];
-        [workDicGet setObject:feeLocalStr forKey:@"fee"];
-        [workDicGet setObject:@"transfer" forKey:@"type"];
-        
-        [workDicGet setObject:[NSString stringWithFormat:@"%ld",(long)cashFen] forKey:@"transAmt"];  //转一元
-        NSString *workStrGet = [[PayNucHelper sharedInstance] dictionaryToJson:workDicGet];
+        NSMutableDictionary *workDic = [NSMutableDictionary dictionaryWithDictionary:self.wordDic];
+        [workDic setValue:[NSString stringWithFormat:@"%ld",(long)cashFen] forKey:@"transAmt"];
+        [workDic setValue:[self.wordDic objectForKey:@"feeType"] forKey:@"feeType"];
+        [workDic setValue:[self.wordDic objectForKey:@"feeRate"] forKey:@"feeRate"];
+        NSString *workStrGet = [[PayNucHelper sharedInstance] dictionaryToJson:workDic];
         paynuc.set("work", [workStrGet UTF8String]);
         
         //inPayTool

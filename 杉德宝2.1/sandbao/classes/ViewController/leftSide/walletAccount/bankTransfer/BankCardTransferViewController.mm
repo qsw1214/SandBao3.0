@@ -640,15 +640,12 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         __block BOOL error = NO;
         NSString *transAmt = [NSString stringWithFormat:@"%.0f", [moneyStr floatValue] * 100];
         
-        NSDictionary *workDic = [[NSDictionary alloc] init];
-        workDic = @{
-                    @"type":@"withdraw",
-                    @"transAmt":transAmt,
-                    @"feeType":[paramDic objectForKey:@"feeType"],
-                    @"feeRate":[paramDic objectForKey:@"feeRate"]
-                    };
-        
+        NSMutableDictionary *workDic = [NSMutableDictionary dictionaryWithDictionary:paramDic];
+        [workDic setValue:transAmt forKey:@"transAmt"];
+        [workDic setValue:[paramDic objectForKey:@"feeType"] forKey:@"feeType"];
+        [workDic setValue:[paramDic objectForKey:@"feeRate"] forKey:@"feeRate"];
         NSString *work = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)workDic];
+        
         NSString *inPayTool = [[PayNucHelper sharedInstance] dictionaryToJson:self.transferInPayToolDic];
         
         NSMutableDictionary *outPayToolDic = [NSMutableDictionary dictionaryWithDictionary:self.transferOutPayToolDic];
