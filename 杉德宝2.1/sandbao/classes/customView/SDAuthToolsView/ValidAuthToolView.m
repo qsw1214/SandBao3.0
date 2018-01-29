@@ -7,6 +7,7 @@
 //
 
 #import "ValidAuthToolView.h"
+#import "SDExpiryPop.h"
 
 @implementation ValidAuthToolView
 
@@ -31,10 +32,26 @@
         self.textfiled.placeholder = @"输入卡片有效期";
         self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
         
+        self.textfiled.userInteractionEnabled = NO;
+        
+        //由于改成pickerView弹出选择cvn模式,因此隐藏本鉴权工具的textfiled,改成Btn覆盖
+        UIButton *coverBtn = [[UIButton alloc] init];
+        coverBtn.frame = self.textfiled.frame;
+        coverBtn.backgroundColor = [UIColor clearColor];
+        [coverBtn addTarget:self action:@selector(showExpiry) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:coverBtn];
+        
     }return self;
     
 }
-
+- (void)showExpiry{
+    
+    __weak typeof(self)weakself = self;
+    [SDExpiryPop showExpiryPopView:^(NSString *mY) {
+        weakself.textfiled.text = mY;
+        _successBlock(mY);
+    }];
+}
 #pragma - mark textfiledDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     

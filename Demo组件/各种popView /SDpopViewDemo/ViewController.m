@@ -12,7 +12,7 @@
 #import "SDRechargePopView.h"
 #import "SDBottomPop.h"
 
-
+#import "SDExpiryPop.h"
 
 @interface ViewController ()
 
@@ -31,28 +31,22 @@
 
 - (IBAction)searchPopClick:(id)sender {
     
-    [SDSearchPop showSearchPopViewPlaceholder:@"这里输入文字" textBlock:^(NSString *text) {
+  
+    [SDExpiryPop showExpiryPopView:^(NSString *mY) {
+       
+        NSLog(@"%@",mY);
         
     }];
+    
     
 }
 - (IBAction)rechargePopClick:(id)sender {
     
-    SDRechargePopView *pop = [SDRechargePopView showRechargePopView:@"" rechargeChooseBlock:^(NSString *cellName) {
-        
-    }];
-    
-    pop.chooseBtnTitleArr = @[@"按钮一",@"按钮二"];
-    
+
 }
 - (IBAction)bottomPopClick:(id)sender {
     
-    [SDBottomPop showBottomPopView:@"这里是我们的温馨提示" cellNameList:@[@"添加杉德卡",@"删除"] suerBlock:^(NSString *cellName) {
-        NSLog(@"%@",cellName);
-    } cancleBlock:^{
-        NSLog(@"-=-=--= 取消 -=-=-=-=");
-    }];
-    
+ 
 }
 
 - (void)didReceiveMemoryWarning {

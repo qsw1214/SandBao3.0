@@ -58,7 +58,7 @@
 //    [self testFour];
 //
 //    //密码框的测试
-    [self testFiv];
+//    [self testFiv];
 //
 //    //姓名框的测试
 //     [self testSix];
@@ -72,7 +72,8 @@
 //    //CVN测试
 //    [self testnine];
     //有效期测试
-//    [self testten];
+    [self testten];
+    
     
 }
 
@@ -92,6 +93,7 @@
     cvn.tip.text = @"请输入正确有效CVN号";
     cvn.successBlock = ^(NSString *textfieldText) {
         NSLog(@"%@",textfieldText);
+        
     };
     
     [self.scrollview addSubview:cvn];

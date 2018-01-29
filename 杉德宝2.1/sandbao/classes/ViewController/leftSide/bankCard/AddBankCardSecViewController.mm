@@ -30,12 +30,13 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     BankCardType cardType;
     
-    SDBarButton *barButton;
+    
     
 }
 @property (nonatomic, strong) NSString *bankPhoneNoStr;
 @property (nonatomic, strong) NSString *validStr;       //卡有效期
 @property (nonatomic, strong) NSString *cvnStr;       //cvn
+@property (nonatomic, strong) SDBarButton *barButton;
 @end
 
 @implementation AddBankCardSecViewController
@@ -78,11 +79,21 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     if (btn.tag == BTN_TAG_NEXT) {
         
-        if (self.bankPhoneNoStr.length>0) {
-            [self getAuthTools];
+        if (self.validStr.length>0) {
+            if (self.bankPhoneNoStr.length>0 && self.validStr.length>0 && self.cvnStr.length>0) {
+                [self getAuthTools];
+            }else{
+                [Tool showDialog:@"请输入银行预留手机号"];
+            }
         }else{
-            [Tool showDialog:@"请输入银行预留手机号"];
+            if (self.bankPhoneNoStr.length>0) {
+                [self getAuthTools];
+            }else{
+                [Tool showDialog:@"请输入银行预留手机号"];
+            }
         }
+        
+        
     }
         
 }
@@ -133,6 +144,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         validAuthToolView.tip.text = @"请输入正确有效期";
         validAuthToolView.successBlock = ^(NSString *textfieldText) {
             weakSelf.validStr = textfieldText;
+            [weakSelf.barButton changeState:YES];
         };
         [self.baseScrollView addSubview:validAuthToolView];
         self.textfiledArr = [NSMutableArray arrayWithArray:@[bankPhoneNoAuthToolView.textfiled]];
@@ -159,10 +171,10 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     }
     
     //nextBtn
-    barButton = [[SDBarButton alloc] init];
-    UIView *nextBarbtn = [barButton createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
-    barButton.btn.tag = BTN_TAG_NEXT;
-    [barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    self.barButton = [[SDBarButton alloc] init];
+    UIView *nextBarbtn = [self.barButton createBarButton:@"继续" font:FONT_15_Regular titleColor:COLOR_FFFFFF backGroundColor:COLOR_58A5F6 leftSpace:LEFTRIGHTSPACE_40];
+    self.barButton.btn.tag = BTN_TAG_NEXT;
+    [self.barButton.btn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.baseScrollView addSubview:nextBarbtn];
     
     [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -231,7 +243,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     //按钮置灰不可点击
     UITextField *currentTextField = (UITextField*)noti.object;
     if (currentTextField.text.length == 0) {
-        [barButton changeState:NO];
+        [self.barButton changeState:NO];
     }
     
     //按钮高亮可点击
@@ -241,7 +253,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             [tempArr addObject:t];
         }
         if (tempArr.count == self.textfiledArr.count) {
-            [barButton changeState:YES];
+            [self.barButton changeState:YES];
         }
     }
 }

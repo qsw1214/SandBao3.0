@@ -30,12 +30,9 @@
         self.titleLab.text = @"CVN";
         self.textfiled.placeholder = @"输入卡片背面签名处后三位校验码";
         self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
-        
     }return self;
     
 }
-
-
 #pragma - mark textfiledDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     

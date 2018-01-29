@@ -25,6 +25,7 @@
 		282144521FA474C600E6D489 /* SixCodeAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2821443D1FA474C600E6D489 /* SixCodeAuthToolView.m */; };
 		282144531FA474C600E6D489 /* BankPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282144401FA474C600E6D489 /* BankPickerView.m */; };
 		282144541FA474C600E6D489 /* NoCopyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 282144421FA474C600E6D489 /* NoCopyTextField.m */; };
+		283B992A201F10760008EBA3 /* SDExpiryPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 283B9929201F10760008EBA3 /* SDExpiryPop.m */; };
 		2857CE341F9889E600874A7C /* NextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857CE331F9889E600874A7C /* NextViewController.m */; };
 		28E1C0981F8F51FD00527048 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C0971F8F51FD00527048 /* main.m */; };
 		28E1C09B1F8F51FD00527048 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 28E1C09A1F8F51FD00527048 /* AppDelegate.m */; };
@@ -86,6 +87,8 @@
 		282144401FA474C600E6D489 /* BankPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BankPickerView.m; sourceTree = "<group>"; };
 		282144411FA474C600E6D489 /* NoCopyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoCopyTextField.h; sourceTree = "<group>"; };
 		282144421FA474C600E6D489 /* NoCopyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoCopyTextField.m; sourceTree = "<group>"; };
+		283B9928201F10760008EBA3 /* SDExpiryPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDExpiryPop.h; sourceTree = "<group>"; };
+		283B9929201F10760008EBA3 /* SDExpiryPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDExpiryPop.m; sourceTree = "<group>"; };
 		2857CE321F9889E600874A7C /* NextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NextViewController.h; sourceTree = "<group>"; };
 		2857CE331F9889E600874A7C /* NextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NextViewController.m; sourceTree = "<group>"; };
 		28E1C0931F8F51FD00527048 /* AuthToolsDemo2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AuthToolsDemo2.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -185,12 +188,22 @@
 		2821443E1FA474C600E6D489 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				283B9927201F10760008EBA3 /* SDExpiryPop */,
 				2821443F1FA474C600E6D489 /* BankPickerView.h */,
 				282144401FA474C600E6D489 /* BankPickerView.m */,
 				282144411FA474C600E6D489 /* NoCopyTextField.h */,
 				282144421FA474C600E6D489 /* NoCopyTextField.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		283B9927201F10760008EBA3 /* SDExpiryPop */ = {
+			isa = PBXGroup;
+			children = (
+				283B9928201F10760008EBA3 /* SDExpiryPop.h */,
+				283B9929201F10760008EBA3 /* SDExpiryPop.m */,
+			);
+			path = SDExpiryPop;
 			sourceTree = "<group>";
 		};
 		28E1C08A1F8F51FD00527048 = {
@@ -488,6 +501,7 @@
 				282144461FA474C600E6D489 /* IdentityAuthToolView.m in Sources */,
 				282144521FA474C600E6D489 /* SixCodeAuthToolView.m in Sources */,
 				2857CE341F9889E600874A7C /* NextViewController.m in Sources */,
+				283B992A201F10760008EBA3 /* SDExpiryPop.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
