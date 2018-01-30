@@ -60,7 +60,8 @@
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
-    
+    self.baseScrollView.scrollEnabled = NO;
+    self.baseScrollView.delegate = self;
     self.baseScrollView.backgroundColor = COLOR_F5F5F5;
     
 }
@@ -133,11 +134,29 @@
     cellHeight = UPDOWNSPACE_122;
     self.sandTableView = [[CardBaseTableView alloc] init];
     self.sandTableView.cellHeight = cellHeight;
+    self.sandTableView.backgroundColor = COLOR_F5F5F5;
     self.sandTableView.delegate = self;
     self.sandTableView.dataSource = self;
     self.sandTableView.scrollEnabled = YES;
     self.sandTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.baseScrollView addSubview:self.sandTableView];
+    
+    
+    __weak typeof(self) weakself = self;
+    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+        [weakself ownPayTools];
+    }];
+    [header setImages:@[[UIImage imageNamed:@"refresh"]] forState:MJRefreshStateIdle];
+    [header setImages:@[[UIImage imageNamed:@"refresh_nomal"]] forState:MJRefreshStatePulling];
+    NSMutableArray *imgArr = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 1; i<=8; i++) {
+        NSString *imgName = [NSString stringWithFormat:@"refresh_Refreshing%d",i];
+        UIImage *img = [UIImage imageNamed:imgName];
+        [imgArr addObject:img];
+    }
+    [header setImages:imgArr forState:MJRefreshStateRefreshing];
+    self.sandTableView.mj_header = header;
+    
     
     [self.sandTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(selectBarView.mas_bottom).offset(UPDOWNSPACE_20);
@@ -249,6 +268,8 @@
                 
                 //设置支付工具
                 [self settingData];
+                //下拉刷新结束
+                [self.sandTableView.mj_header endRefreshing];
                 
             }];
         }];
@@ -288,7 +309,10 @@
 }
 
 
-
+//scrollorView代理 - 屏蔽父类方法即可, 不需具体实现
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

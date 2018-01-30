@@ -8,6 +8,7 @@
 
 #import "BankCardViewController.h"
 
+
 #import "PayNucHelper.h"
 #import "SDPayView.h"
 #import "BankItemTableViewCell.h"
@@ -59,7 +60,6 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [self createUI];
     
     [self createUI_PayToolView];
@@ -72,7 +72,8 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
-    
+    self.baseScrollView.scrollEnabled = NO;
+    self.baseScrollView.delegate = self;
     self.baseScrollView.backgroundColor = COLOR_F5F5F5;
     
 }
@@ -143,6 +144,20 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     self.bankTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.baseScrollView addSubview:self.bankTableView];
 
+    __weak typeof(self) weakself = self;
+    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingBlock:^{
+        [weakself ownPayTools];
+    }];
+    [header setImages:@[[UIImage imageNamed:@"refresh"]] forState:MJRefreshStateIdle];
+    [header setImages:@[[UIImage imageNamed:@"refresh_nomal"]] forState:MJRefreshStatePulling];
+    NSMutableArray *imgArr = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 1; i<=8; i++) {
+        NSString *imgName = [NSString stringWithFormat:@"refresh_Refreshing%d",i];
+        UIImage *img = [UIImage imageNamed:imgName];
+        [imgArr addObject:img];
+    }
+    [header setImages:imgArr forState:MJRefreshStateRefreshing];
+    self.bankTableView.mj_header = header;
     
     [self.noCardLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(UPDOWNSPACE_160);
@@ -352,6 +367,8 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
                 
                 //设置支付工具
                 [self settingData];
+                //下拉刷新结束
+                [self.bankTableView.mj_header endRefreshing];
                 
             }];
         }];
@@ -505,6 +522,10 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
 }
 
+//scrollorView代理 - 屏蔽父类方法即可, 不需具体实现
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

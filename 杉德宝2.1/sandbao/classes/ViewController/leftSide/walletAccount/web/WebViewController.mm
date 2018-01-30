@@ -30,6 +30,8 @@
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
+    self.baseScrollView.scrollEnabled = NO;
+    self.baseScrollView.delegate = self;
 }
 #pragma mark - 重写父类-导航设置方法
 - (void)setNavCoverView{
@@ -56,6 +58,11 @@
     webView.UIDelegate = self;
     webView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.baseScrollView.height);
     [self.baseScrollView addSubview:webView];
+    
+    __weak typeof(self) weakself = self;
+    webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakself getToken];
+    }];
 }
 
 #pragma mark - WKNavigationDelegate
@@ -108,6 +115,10 @@
 
 
 
+//scrollorView代理 - 屏蔽父类方法即可, 不需具体实现
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

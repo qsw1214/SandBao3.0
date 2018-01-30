@@ -10,6 +10,8 @@ pod 'IQKeyboardManager', '~> 5.0.6'
 pod 'RESideMenu', '~> 4.0.7'
 pod 'UMengAnalytics-NO-IDFA'
 pod 'MQTTClient'
+pod 'MJRefresh'
+
 
 pod 'Pgyer'
 pod 'PgyUpdate'
