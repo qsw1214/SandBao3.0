@@ -23,7 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self getToken];
+    [self createUI];
     
 }
 
@@ -63,6 +63,7 @@
     webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakself getToken];
     }];
+    [webView.scrollView.mj_header beginRefreshing];
 }
 
 #pragma mark - WKNavigationDelegate
@@ -99,7 +100,6 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 tToken = [NSString stringWithUTF8String:paynuc.get("tToken").c_str()];
-                [self createUI];
                 
                 NSString *requestStr = [NSString stringWithFormat:@"%@%@sandtoken=%@&accountType=%@&id=%@",AddressHTTP,jnl_trans_flow_mobile,tToken,self.code,self.payToolID];
                 [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestStr]]];
@@ -107,13 +107,7 @@
         }];
         if (error) return ;
     }];
-    
 }
-
-
-
-
-
 
 //scrollorView代理 - 屏蔽父类方法即可, 不需具体实现
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

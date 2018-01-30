@@ -85,7 +85,16 @@
     [titleView addSubview:sureBtn];
     
     NSMutableArray *yearArr = [NSMutableArray arrayWithCapacity:0];
-    for (NSInteger i = 1990; i<2100; i++) {
+    
+    //计算当前年份
+    //获取当前时间
+    NSDate *now = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSCalendarUnitYear;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    NSInteger year = [dateComponent year];
+    
+    for (NSInteger i = year; i<2100; i++) {
         NSString *yearStr = [NSString stringWithFormat:@"%ld",(long)i];
         [yearArr addObject:yearStr];
     }
