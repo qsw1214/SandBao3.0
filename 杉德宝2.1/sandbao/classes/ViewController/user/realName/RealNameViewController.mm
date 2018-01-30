@@ -237,7 +237,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     //按钮高亮可点击
     NSMutableArray *tempArr = [NSMutableArray arrayWithCapacity:0];
-    
     for (UITextField *t in self.textfiledArr) {
         if ([t.text length]>0) {
             [tempArr addObject:t];

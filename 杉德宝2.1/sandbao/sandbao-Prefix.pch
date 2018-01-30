@@ -117,8 +117,8 @@
 
 
 //AccType
-#define CONSUME_CODE @"03" //消费账户
-#define CASH_CODE @"04" //现金账户
+#define CONSUME_CODE @"03" //电子记名卡账户
+#define CASH_CODE @"04" //钱包账户
 #define SD_CRAD_CODE @"05" //杉德记名卡
 #define COMMON_CODE  @"06" //久彰宝通用
 #define MARKET_CODE @"07" //久彰宝商超

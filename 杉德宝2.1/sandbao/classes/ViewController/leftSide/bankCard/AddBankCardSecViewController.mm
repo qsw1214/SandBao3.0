@@ -83,13 +83,13 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             if (self.bankPhoneNoStr.length>0 && self.validStr.length>0 && self.cvnStr.length>0) {
                 [self getAuthTools];
             }else{
-                [Tool showDialog:@"请输入银行预留手机号"];
+                [Tool showDialog:@"请输入完整验证信息"];
             }
         }else{
             if (self.bankPhoneNoStr.length>0) {
                 [self getAuthTools];
             }else{
-                [Tool showDialog:@"请输入银行预留手机号"];
+                [Tool showDialog:@"请输入完整验证信息"];
             }
         }
         

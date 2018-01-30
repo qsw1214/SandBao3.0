@@ -139,26 +139,34 @@
     }];
 
     //二维码
-    
+    CGFloat qrSpace = 20;
     NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
-    UIImage *qrimg = [UIImage imageNamed:@"bg_kuang"];
+    UIImage *qrimg_BG = [UIImage imageNamed:@"bg_kuang"];
     
-    UIImage *qrImg = [Tool twoDimensionCodeWithStr:[userInfoDic objectForKey:@"inviteCode"] size:qrimg.size.width-1];
+    CGSize qrImg_BGSize = CGSizeMake(qrimg_BG.size.width*0.9, qrimg_BG.size.height*0.9);
     
+    UIImage *qrImg = [Tool twoDimensionCodeWithStr:[userInfoDic objectForKey:@"inviteCode"] size:qrImg_BGSize.width-qrSpace];
     
+    UIImageView *qrCodeView_BG = [[UIImageView alloc] init];
+    qrCodeView_BG.image = qrimg_BG;
+    [inviteBGView addSubview:qrCodeView_BG];
     
-    UIImageView *qrCodeView = [[UIImageView alloc] init];
-    qrCodeView.backgroundColor = [UIColor whiteColor];
-    qrCodeView.alpha = 0.5f;
-    qrCodeView.image = qrimg;
-    [inviteBGView addSubview:qrCodeView];
-    CGFloat qrCodeViewWH = SCREEN_WIDTH - LEFTRIGHTSPACE_85*2;
+    UIImageView *qrCodeImg = [[UIImageView alloc] init];
+    qrCodeImg.image = qrImg;
+    [inviteBGView addSubview:qrCodeImg];
+
     CGFloat qrCodeViewOY = UPDOWNSPACE_174;
     
-    [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [qrCodeView_BG mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top).offset(qrCodeViewOY);
-        make.left.equalTo(inviteBGView.mas_left).offset(LEFTRIGHTSPACE_85);
-        make.size.mas_equalTo(CGSizeMake(qrimg.size.width, qrimg.size.height));
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(CGSizeMake(qrImg_BGSize.width, qrImg_BGSize.height));
+    }];
+    
+    [qrCodeImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(qrCodeViewOY+qrSpace/2);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(CGSizeMake(qrImg.size.width, qrImg.size.height));
     }];
     
     
