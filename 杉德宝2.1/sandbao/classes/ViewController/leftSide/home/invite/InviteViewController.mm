@@ -70,7 +70,7 @@
                 message.description = @"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!";
                 [message setThumbImage:[UIImage imageNamed:@"icon"]];
                 WXWebpageObject *ext = [WXWebpageObject object];
-                ext.webpageUrl = @"http://www.sandlife.com.cn";
+                ext.webpageUrl = [NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode];
                 message.mediaObject = ext;
                 
                 SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
@@ -90,7 +90,7 @@
                 [message setThumbImage:[UIImage imageNamed:@"icon"]];
                 
                 WXWebpageObject *ext = [WXWebpageObject object];
-                ext.webpageUrl = @"http://www.sandlife.com.cn";
+                ext.webpageUrl = [NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode];
                 message.mediaObject = ext;
                 
                 SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
@@ -107,7 +107,7 @@
 
                 TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:Tencent_APPID andDelegate:self];
                 
-                QQApiURLObject *urlObject = [[QQApiURLObject alloc] initWithURL:[NSURL URLWithString:@"http://www.sandlife.com.cn"] title:@"邀请好友注册,立马赚积分" description:@"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!" previewImageData:UIImageJPEGRepresentation([UIImage imageNamed:@"icon"], 0.5f) targetContentType:QQApiURLTargetTypeNews];
+                QQApiURLObject *urlObject = [[QQApiURLObject alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode]] title:@"邀请好友注册,立马赚积分" description:@"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!" previewImageData:UIImageJPEGRepresentation([UIImage imageNamed:@"icon"], 0.5f) targetContentType:QQApiURLTargetTypeNews];
                 
                 SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:urlObject];
                 // 分享给好友

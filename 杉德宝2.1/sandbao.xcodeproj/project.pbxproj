@@ -246,6 +246,7 @@
 		28B649CD1FAC654B0074A390 /* payListSelectedState@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B6497D1FAC654A0074A390 /* payListSelectedState@3x.png */; };
 		28B649CE1FAC654B0074A390 /* qvip_pay_imageholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B6497E1FAC654A0074A390 /* qvip_pay_imageholder@2x.png */; };
 		28B649CF1FAC654B0074A390 /* qvip_pay_imageholder@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 28B6497F1FAC654A0074A390 /* qvip_pay_imageholder@3x.png */; };
+		28B86ECC20219E780068BFDF /* SDWkWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B86ECB20219E780068BFDF /* SDWkWebView.m */; };
 		28BCE8A71FB03E5900D62F94 /* AddBankCardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8A61FB03E5900D62F94 /* AddBankCardViewController.mm */; };
 		28BCE8AA1FB046CB00D62F94 /* AddBankCardSecViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8A91FB046CB00D62F94 /* AddBankCardSecViewController.mm */; };
 		28BCE8AD1FB04E8100D62F94 /* AddBankCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8AC1FB04E8100D62F94 /* AddBankCardCell.m */; };
@@ -685,6 +686,8 @@
 		28B6497D1FAC654A0074A390 /* payListSelectedState@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "payListSelectedState@3x.png"; sourceTree = "<group>"; };
 		28B6497E1FAC654A0074A390 /* qvip_pay_imageholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qvip_pay_imageholder@2x.png"; sourceTree = "<group>"; };
 		28B6497F1FAC654A0074A390 /* qvip_pay_imageholder@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qvip_pay_imageholder@3x.png"; sourceTree = "<group>"; };
+		28B86ECA20219E780068BFDF /* SDWkWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWkWebView.h; sourceTree = "<group>"; };
+		28B86ECB20219E780068BFDF /* SDWkWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWkWebView.m; sourceTree = "<group>"; };
 		28BCE8A51FB03E5900D62F94 /* AddBankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBankCardViewController.h; sourceTree = "<group>"; };
 		28BCE8A61FB03E5900D62F94 /* AddBankCardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddBankCardViewController.mm; sourceTree = "<group>"; };
 		28BCE8A81FB046CB00D62F94 /* AddBankCardSecViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBankCardSecViewController.h; sourceTree = "<group>"; };
@@ -1868,6 +1871,15 @@
 			path = commImg;
 			sourceTree = "<group>";
 		};
+		28B86EC920219E780068BFDF /* SDWkWebView */ = {
+			isa = PBXGroup;
+			children = (
+				28B86ECA20219E780068BFDF /* SDWkWebView.h */,
+				28B86ECB20219E780068BFDF /* SDWkWebView.m */,
+			);
+			path = SDWkWebView;
+			sourceTree = "<group>";
+		};
 		28BCE8BA1FB18F9F00D62F94 /* common */ = {
 			isa = PBXGroup;
 			children = (
@@ -2218,6 +2230,7 @@
 		A7FF2F941E1601CB0068A2F7 /* customView */ = {
 			isa = PBXGroup;
 			children = (
+				28B86EC920219E780068BFDF /* SDWkWebView */,
 				28DBA5822017081200E8B852 /* SDBarButton */,
 				281D105E1E6FDADA0031806C /* SDNavCoverView */,
 				2837EACF1FD7E13300C10A57 /* SDQrcodeView */,
@@ -2642,6 +2655,7 @@
 				A7F2F2641E1E2AE000F6CDA3 /* HttpComm.mm in Sources */,
 				288421B01F8E095E00082E7C /* Majlet_Func.mm in Sources */,
 				281F644D1E7934B40005AE86 /* SDBannerView.m in Sources */,
+				28B86ECC20219E780068BFDF /* SDWkWebView.m in Sources */,
 				28D28F1A1FCD511100B3F00B /* LocationUtil.m in Sources */,
 				28981B891FA01FA8004CFC95 /* PwdAuthToolView.m in Sources */,
 				28D7E5771FA885CE00518042 /* BankItemTableViewCell.m in Sources */,

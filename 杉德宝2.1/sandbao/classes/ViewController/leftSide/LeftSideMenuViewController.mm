@@ -568,10 +568,7 @@
     //更新该用户lets信息
     NSString *letsStrNew = [[PayNucHelper sharedInstance] arrayToJSON:lensArrM];
     [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB  tableName:@"usersconfig" columnArray:(NSMutableArray*)@[@"lets"] paramArray:(NSMutableArray *)@[letsStrNew] whereColumnString:@"uid" whereParamString:[CommParameter sharedInstance].userId];
-    
-    //登录MQTT前,确保MQTT关闭
-    [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
-    
+
     //查询用户信息
     [self ownPayTools];
 }
@@ -634,6 +631,9 @@
                 //根据order 字段排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //MQTT登录
+                [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
                 
                 //暗登陆成功
                 //刷新UI数据

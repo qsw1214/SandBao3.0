@@ -242,9 +242,11 @@
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
+                    [Tool showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
                         //重新申请sToken
                         [self load];
+                    } rightBlock:^{
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
@@ -268,9 +270,11 @@
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
-                        //重新申请tTtoken
+                    [Tool showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
+                        //重新申请sToken
                         [self load];
+                    } rightBlock:^{
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
@@ -292,9 +296,11 @@
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"网络连接失败,点击重连" defulBlock:^{
-                        //重新申请鉴权工具
+                    [Tool showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
+                        //重新申请sToken
                         [self load];
+                    } rightBlock:^{
+                        [Tool exitApplication:self];
                     }];
                 }
             }];
@@ -461,8 +467,6 @@
     
     
     if (result == YES) {
-        //登录MQTT前,确保MQTT关闭
-        [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [self ownPayTools_login];
     } else {
         //数据写入失败->返回直接登陆
@@ -506,8 +510,13 @@
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
+                //MQTT登录
+                [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
+                
                 //归位Home或SpsLunch
                 [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+                
+                
                 //友盟埋点 - 账号统计 - 开始
                 [MobClick profileSignInWithPUID:[CommParameter sharedInstance].userId provider:@"sand"];
                 //友盟埋点 - 账号统计 - 结束

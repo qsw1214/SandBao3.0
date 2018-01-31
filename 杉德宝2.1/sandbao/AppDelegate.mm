@@ -144,7 +144,7 @@
 #pragma mark 微信相关设置
 - (void)WXSDK{
     
-    [WXApi registerApp:@"wxb63368e4a82f8ab9"];
+    [WXApi registerApp:@"wx40014525016fd620"];
     
 }
 

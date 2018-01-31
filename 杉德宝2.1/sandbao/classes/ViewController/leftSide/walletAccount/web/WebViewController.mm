@@ -7,13 +7,14 @@
 //
 
 #import "WebViewController.h"
-#import <WebKit/WebKit.h>
 #import "PayNucHelper.h"
+#import "SDWkWebView.h"
 
-@interface WebViewController ()<WKUIDelegate,WKNavigationDelegate>
+@interface WebViewController ()<SDWkWebNavgationDelegate>
 {
-    WKWebView *webView;
     NSString *tToken;
+    SDWkWebView *sdWebView;
+    NSString *requestStr;
 }
 @end
 
@@ -24,6 +25,8 @@
     // Do any additional setup after loading the view.
     
     [self createUI];
+    
+    [self getToken];
     
 }
 
@@ -53,36 +56,18 @@
 
 #pragma mark  - UI绘制
 - (void)createUI{
-    webView = [[WKWebView alloc] init];
-    webView.navigationDelegate = self;
-    webView.UIDelegate = self;
-    webView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.baseScrollView.height);
-    [self.baseScrollView addSubview:webView];
+    
+    sdWebView = [[SDWkWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.baseScrollView.height)];
+    sdWebView.navgationDelegate = self;
+    [self.baseScrollView addSubview:sdWebView];
     
     __weak typeof(self) weakself = self;
-    webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself getToken];
+    sdWebView.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakself loadURL];
     }];
-    [webView.scrollView.mj_header beginRefreshing];
+    [sdWebView.webView.scrollView.mj_header beginRefreshing];
 }
 
-#pragma mark - WKNavigationDelegate
-// 页面开始加载时调用
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
-    
-}
-// 当内容开始返回时调用
-- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
-    
-}
-// 页面加载完成之后调用
-- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
-    
-}
-// 页面加载失败时调用
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
-    
-}
 
 #pragma mark - 业务逻辑
 - (void)getToken{
@@ -101,13 +86,45 @@
                 [self.HUD hidden];
                 tToken = [NSString stringWithUTF8String:paynuc.get("tToken").c_str()];
                 
-                NSString *requestStr = [NSString stringWithFormat:@"%@%@sandtoken=%@&accountType=%@&id=%@",AddressHTTP,jnl_trans_flow_mobile,tToken,self.code,self.payToolID];
-                [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestStr]]];
+                requestStr = [NSString stringWithFormat:@"%@%@sandtoken=%@&accountType=%@&id=%@",AddressHTTP,jnl_trans_flow_mobile,tToken,self.code,self.payToolID];
+                
+                [self loadURL];
             }];
         }];
         if (error) return ;
     }];
 }
+
+
+/**加载url*/
+- (void)loadURL{
+    if (requestStr.length>0) {
+        [sdWebView load:[NSURL URLWithString:requestStr]];
+    }else{
+        [sdWebView.webView.scrollView.mj_header endRefreshing];
+    }
+}
+
+
+#pragma mark - SDWkwebViewNavigationDelegate
+// 页面开始加载时调用
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    
+}
+// 当内容开始返回时调用
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+    
+}
+// 页面加载完成之后调用
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    [sdWebView.webView.scrollView.mj_header endRefreshing];
+}
+// 页面加载失败时调用
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+    [sdWebView.webView.scrollView.mj_header endRefreshing];
+}
+
+
 
 //scrollorView代理 - 屏蔽父类方法即可, 不需具体实现
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

@@ -241,9 +241,6 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 
-                //短息验证成功 - 停止计时器
-                [smsCodeAuthToolView stopTimer];
-                
                 //更新用户数据信息
                 [Tool refreshUserInfo:[NSString stringWithUTF8String:paynuc.get("userInfo").c_str()]];
                 //更新用户数据库
@@ -320,8 +317,6 @@
     
     
     if (result == YES) {
-        //登录MQTT前,确保MQTT关闭MQTT
-        [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
         [self ownPayTools_login];
     } else {
         //数据写入失败->返回直接登陆
@@ -363,6 +358,9 @@
                 //根据order 字段排序
                 payToolsArray = [Tool orderForPayTools:payToolsArray];
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //MQTT登录
+                [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
                 
                 //归位Home或SpsLunch
                 [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
@@ -580,8 +578,6 @@
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 if (type == respCodeErrorType) {
-                    //短息验证成功 - 停止计时器
-                    [smsCodeAuthToolView stopTimer];
                     NSString *respCode = [NSString stringWithUTF8String:paynuc.get("respCode").c_str()];
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                     //绑卡成功,开通快捷失败(后端默认绑卡成功)
@@ -595,8 +591,6 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                //短息验证成功 - 停止计时器
-                [smsCodeAuthToolView stopTimer];
                 [Tool showDialog:@"绑卡成功" defulBlock:^{
                     [self ownPayTools_addBakcCard];
                 }];

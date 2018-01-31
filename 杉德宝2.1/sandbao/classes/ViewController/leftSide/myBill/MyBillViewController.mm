@@ -8,14 +8,17 @@
 
 #import "MyBillViewController.h"
 #import "PayNucHelper.h"
-#import <WebKit/WebKit.h>
+#import "SDWkWebView.h"
 
 
-@interface MyBillViewController ()
+
+
+@interface MyBillViewController ()<SDWkWebNavgationDelegate>
 {
     NSString *tToken;
-    WKWebView *webView;
     
+    SDWkWebView *sdWebView;
+    NSString *requestStr;
 }
 @end
 
@@ -30,6 +33,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self createUI];
+    
     [self getToken];
 }
 
@@ -64,14 +70,15 @@
 #pragma mark - UI绘制
 - (void)createUI{
     
-    webView = [[WKWebView alloc] init];
-    webView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.baseScrollView.height);
-    [self.baseScrollView addSubview:webView];
+    sdWebView = [[SDWkWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.baseScrollView.height)];
     
+    sdWebView.navgationDelegate = self;
     __weak typeof(self) weakself = self;
-    webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself getToken];
+    sdWebView.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakself loadURL];
     }];
+    [self.baseScrollView addSubview:sdWebView];
+    
 }
 
 #pragma mark - 业务逻辑
@@ -83,7 +90,6 @@
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
-        
         paynuc.set("tTokenType", "03000201");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
@@ -91,14 +97,40 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
                 tToken = [NSString stringWithUTF8String:paynuc.get("tToken").c_str()];
-                [self createUI];
-                NSString *requestStr = [NSString stringWithFormat:@"%@%@sandtoken=%@",AddressHTTP,jnl_order_list_mobile,tToken];
-                [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:requestStr]]];
+                requestStr = [NSString stringWithFormat:@"%@%@sandtoken=%@",AddressHTTP,jnl_order_list_mobile,tToken];
+                [self loadURL];
             }];
         }];
         if (error) return ;
     }];
 
+}
+
+/**加载url*/
+- (void)loadURL{
+    if (requestStr.length>0) {
+        [sdWebView load:[NSURL URLWithString:requestStr]];
+    }else{
+        [sdWebView.webView.scrollView.mj_header endRefreshing];
+    }
+}
+
+#pragma mark - SDWkWebViewNavgationDelegate
+//开始加载
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    
+}
+//加载开始返回
+- (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
+    
+}
+//加载成功
+- (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation{
+    [sdWebView.webView.scrollView.mj_header endRefreshing];
+}
+//加载失败
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
+    [sdWebView.webView.scrollView.mj_header endRefreshing];
 }
 
 
