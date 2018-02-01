@@ -447,25 +447,43 @@
     CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
-    return [UIImage imageWithCGImage:scaledImage];
+    
+    //9.获取原始二维码图片
+    UIImage *qrCodeImg = [UIImage imageWithCGImage:scaledImage];
+    
+    
+    //10.添加logo
+    UIImage *logoImage = [UIImage imageNamed:@"iconApp"];
+    CGSize logoImgSize = CGSizeMake(qrCodeImg.size.width*0.2, qrCodeImg.size.height*0.2);
+    
+    UIGraphicsBeginImageContextWithOptions(qrCodeImg.size, NO, [[UIScreen mainScreen] scale]);
+    [qrCodeImg drawInRect:CGRectMake(0, 0, qrCodeImg.size.width, qrCodeImg.size.height)];
+    
+    CGRect rect = CGRectMake(qrCodeImg.size.width/2 - logoImgSize.width/2, qrCodeImg.size.height/2-logoImgSize.height/2, logoImgSize.width, logoImgSize.height);
+    
+    [logoImage drawInRect:rect];
+    UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resultingImage;
 }
 
-
-#pragma mark - 金额格式化
-+ (NSString *)numberStyleWith:(NSNumber*)number{
+#pragma mark - 分转换为元
++ (NSString*)fenToYuanDict:(NSDictionary*)payToolDic{
     
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    NSString *fenStr = [[payToolDic objectForKey:@"account"] objectForKey:@"useableBalance"];
     
-    numberFormatter.numberStyle = kCFNumberFormatterDecimalStyle;
+    NSInteger fenInteger = [fenStr integerValue];
     
-    NSString * decimalNumberStr = [numberFormatter stringFromNumber:number];
-    
-    if ( [number floatValue] == 0) {
-        decimalNumberStr = @"0.00";
+    if (fenInteger == 0) {
+        return @"0.00";
     }
-    
-    return decimalNumberStr;
-    
+    else{
+        NSDecimalNumber *yuanDecimalNumber = [[NSDecimalNumber alloc] initWithMantissa:fenInteger exponent:-2 isNegative:NO];
+        NSString *yuanStr = [NSString stringWithFormat:@"%@",yuanDecimalNumber];
+        return yuanStr;
+        
+    }
+    return @"0.00";
 }
 
 #pragma mark - 用户信息获取/刷新
@@ -500,6 +518,9 @@
     NSDictionary *sandWalletDic = [[NSDictionary alloc] init];
     //代付凭证 初始化
     NSDictionary *payForAnotherDic = [[NSDictionary alloc] init];
+    //积分账户 初始化
+    NSDictionary *sandPointDic = [[NSDictionary alloc] init];
+    
     
     for (int i = 0; i < ownPayToolsArr.count; i++) {
         NSDictionary *dic = ownPayToolsArr[i];
@@ -556,13 +577,22 @@
         else if ([@"1014" isEqualToString:type]) {
             payForAnotherDic = dic;
         }
+        //积分账户
+        else if ([@"1015" isEqualToString:type]) {
+            sandPointDic = dic;
+        }
     }
     
-    
+    //银行卡
     [infoDic setObject:bankArray forKey:@"bankArray"];
+    //杉德卡
     [infoDic setObject:sandArray forKey:@"sandArray"];
+    //钱包账户
     [infoDic setObject:sandWalletDic forKey:@"sandWalletDic"];
+    //代付凭证
     [infoDic setObject:payForAnotherDic forKey:@"payForAnotherDic"];
+    //杉德积分
+    [infoDic setObject:sandPointDic forKey:@"sandPointDic"];
     
     return infoDic;
     

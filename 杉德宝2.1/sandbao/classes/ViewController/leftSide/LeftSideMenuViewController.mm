@@ -202,13 +202,16 @@
     self.sandCardNav = [[UINavigationController alloc] initWithRootViewController:self.sandCardVC];
     self.setNav = [[UINavigationController alloc] initWithRootViewController:self.setVC];
     
-    
     //全局变量存储所需要的 带导航视图控制器
+    [CommParameter sharedInstance].myCenterNav = self.myCenterNav;
     [CommParameter sharedInstance].homeNav = self.homeNav;
+    [CommParameter sharedInstance].myBillNav = self.myBillNav;
     [CommParameter sharedInstance].walletAccNav = self.walletAccNav;
-
-    
-    
+    [CommParameter sharedInstance].sandPointNav = self.sandPointNav;
+    [CommParameter sharedInstance].financicleNav = self.financicleNav;
+    [CommParameter sharedInstance].bankCardNav = self.bankCardNav;
+    [CommParameter sharedInstance].sandCardNav = self.sandCardNav;
+    [CommParameter sharedInstance].setNav = self.setNav;
 }
 
 #pragma mark  - UI绘制

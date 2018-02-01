@@ -229,7 +229,7 @@
 #define BTN_TAG_LOGOUT  100007  //登出
 #define BTN_TAG_INOUTPAY  100008 //收付款
 #define BTN_TAG_BLANCE  100009 //余额展示
-#define BTN_TAG_CARDBAG  100010 //卡券包
+#define BTN_TAG_SCANE  100010 //扫一扫
 #define BTN_TAG_RECHARGE  100011 //充值
 #define BTN_TAG_TRANSFER  100012 //转账
 #define BTN_TAG_SHOWALLMONEY  100013 //show全部金额
@@ -254,6 +254,8 @@
 #define BTN_TAG_CARDNUMFULL 100032 //银行卡超限
 #define BTN_TAG_ENTERWEBVC 100033 //点击进入网页VC
 #define BTN_TAG_PAY 100034 //立即支付
+
+
 /**
  项目工程:所有VC控制器均继承BaseViewController
  BaseViewController内置全屏Scrollview备用

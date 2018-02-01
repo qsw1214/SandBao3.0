@@ -499,8 +499,6 @@
             oneimgv.image = [self barCodeImageWithStr:_oneQrCodeStr size:CGSizeMake([UIScreen mainScreen].bounds.size.width, AdapterHfloat(100))];
         }
     }
-    
-    
 }
 //二维码赋值
 - (void)setTwoQrCodeStr:(NSString *)twoQrCodeStr{
@@ -649,7 +647,24 @@
     CGImageRef scaledImage = CGBitmapContextCreateImage(bitmapRef);
     CGContextRelease(bitmapRef);
     CGImageRelease(bitmapImage);
-    return [UIImage imageWithCGImage:scaledImage];
+    
+    //9.获取原始二维码图片
+    UIImage *qrCodeImg = [UIImage imageWithCGImage:scaledImage];
+    
+    
+    //10.添加logo
+    UIImage *logoImage = [UIImage imageNamed:@"iconApp"];
+    CGSize logoImgSize = CGSizeMake(qrCodeImg.size.width*0.2, qrCodeImg.size.height*0.2);
+    
+    UIGraphicsBeginImageContextWithOptions(qrCodeImg.size, NO, [[UIScreen mainScreen] scale]);
+    [qrCodeImg drawInRect:CGRectMake(0, 0, qrCodeImg.size.width, qrCodeImg.size.height)];
+    
+    CGRect rect = CGRectMake(qrCodeImg.size.width/2 - logoImgSize.width/2, qrCodeImg.size.height/2-logoImgSize.height/2, logoImgSize.width, logoImgSize.height);
+    
+    [logoImage drawInRect:rect];
+    UIImage *resultingImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resultingImage;
 }
 
 - (void)addTapShowBigImg:(UIView*)view{

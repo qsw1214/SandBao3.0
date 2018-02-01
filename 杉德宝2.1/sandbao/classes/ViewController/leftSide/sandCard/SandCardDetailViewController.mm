@@ -309,7 +309,8 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
                 payToolsArr = [Tool orderForPayTools:payToolsArr];
                 if (payToolsArr.count>0) {
                     NSDictionary *payToolDic = payToolsArr[0];
-                    moneyLab.text = [NSString stringWithFormat:@"¥%.2f",[[[payToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue]/100];
+                    
+                    moneyLab.text = [Tool fenToYuanDict:payToolDic];
                     self.sandCardPayToolID = [payToolDic objectForKey:@"id"];
                     cardNoLab.text = [NSString stringWithFormat:@"**** **** **** %@",[[payToolDic objectForKey:@"account"] objectForKey:@"accNo"]];
                 }

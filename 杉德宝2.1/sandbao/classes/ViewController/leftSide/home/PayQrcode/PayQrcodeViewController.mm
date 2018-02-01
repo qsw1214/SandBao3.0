@@ -324,10 +324,10 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         
         NSString *str = (NSString*)noti.object;
         NSArray *strArr = [str componentsSeparatedByString:@"+"];
-        NSString *msgTime = [strArr firstObject];
+        NSString *respMsg = [strArr firstObject];
         NSString *msg = [strArr lastObject];
         
-        [Tool showDialog:msg message:msgTime defulBlock:^{
+        [Tool showDialog:msg message:respMsg defulBlock:^{
             
             //更新金额
             [self ownPayTools];

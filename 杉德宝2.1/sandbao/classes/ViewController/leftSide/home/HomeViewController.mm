@@ -15,6 +15,7 @@
 #import "PayQrcodeViewController.h"
 #import "ScannerViewController.h"
 #import "SDMQTTManager.h"
+#import "SDBannerView.h"
 
 #import "GradualView.h"
 #import "SDMajletView.h"
@@ -25,7 +26,7 @@
 #import "InviteViewController.h"
 
 
-@interface HomeViewController ()<SDMQTTManagerDelegate,UICollectionViewDelegate>
+@interface HomeViewController ()<SDMQTTManagerDelegate,UICollectionViewDelegate,SDBannerViewDelegate>
 {
     //headView
     UIImageView *headBGimgView; //背景图视图
@@ -47,6 +48,9 @@
     
     UILabel *moneyBtnBottomLab;
     
+    
+    //bannerView
+    SDBannerView *bannerView;
     
     //bodyViewOne
     UIView      *bodyViewOne;
@@ -102,6 +106,7 @@
     self.limitServerArr = [NSMutableArray arrayWithContentsOfURL:limitServerURL];
     
     [self create_HeadView];
+    [self create_BannerView];
     [self create_bodyViewOne];
     [self create_bodyViewTwo];
     
@@ -160,7 +165,7 @@
         //@"钱包账户"
         [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].walletAccNav];
     }
-    if (btn.tag == BTN_TAG_CARDBAG) {
+    if (btn.tag == BTN_TAG_SCANE) {
         //@"扫一扫"
         ScannerViewController *mScannerViewController = [[ScannerViewController alloc] init];
         [self.navigationController pushViewController:mScannerViewController animated:YES];
@@ -180,6 +185,7 @@
     headBGimgView = [Tool createImagView:headBGimg];
     headBGimgView.userInteractionEnabled = YES;
     [self.baseScrollView addSubview:headBGimgView];
+    
     [headBGimgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.baseScrollView.mas_top);
         make.left.equalTo(self.baseScrollView.mas_left);
@@ -246,14 +252,14 @@
     //payBtn
     payBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
     [payBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    payBtn.tag = BTN_TAG_INOUTPAY;
+    payBtn.tag = BTN_TAG_SCANE;
     [headWhiteView addSubview:payBtn];
     
-    UIImage *paybtnImg = [UIImage imageNamed:@"index_function_01"];
+    UIImage *paybtnImg = [UIImage imageNamed:@"saoyisao"];
     UIImageView *payBtnImgeView = [Tool createImagView:paybtnImg];
     [payBtn addSubview:payBtnImgeView];
     
-    UILabel *payBtnBottomlab = [Tool createLable:@"收付款" attributeStr:nil font:FONT_15_Medium textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
+    UILabel *payBtnBottomlab = [Tool createLable:@"扫一扫" attributeStr:nil font:FONT_13_Regular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [payBtn addSubview:payBtnBottomlab];
     
     payBtn.width = payBtnBottomlab.width;
@@ -284,65 +290,103 @@
     moneyBtn.tag = BTN_TAG_BLANCE;
     [headWhiteView addSubview:moneyBtn];
     
+    UIImage *moneyBtnImg = [UIImage imageNamed:@"yue"];
+    UIImageView *moneyBtnImgView = [Tool createImagView:moneyBtnImg];
+    [moneyBtn addSubview:moneyBtnImgView];
+    
+    UILabel *moneyBtnBottomlab = [Tool createLable:@"余 额" attributeStr:nil font:FONT_13_Regular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
+    [moneyBtn addSubview:moneyBtnBottomlab];
+    
+    moneyBtn.width = moneyBtnBottomlab.width;
+    moneyBtn.height = moneyBtnBottomlab.height + moneyBtnImg.size.height + UPDOWNSPACE_10;
+    
+    [moneyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headIconImgView.mas_bottom).offset(UPDOWNSPACE_05);
+        make.centerX.equalTo(headWhiteView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(moneyBtn.width, moneyBtn.height));
+    }];
+    
+    [moneyBtnImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(moneyBtn.mas_top);
+        make.centerX.equalTo(moneyBtn.mas_centerX);
+        make.size.mas_equalTo(moneyBtnImgView.size);
+    }];
+    
+    [moneyBtnBottomlab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(moneyBtnImgView.mas_bottom).offset(UPDOWNSPACE_10);
+        make.centerX.equalTo(moneyBtn.mas_centerX);
+        make.size.mas_equalTo(moneyBtnBottomlab.size);
+    }];
+    
+    /**
+     * 余额显示版本 - 防止以后要用,暂不删除
+     
+    //moneyBtn
+    moneyBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
+    [moneyBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    moneyBtn.tag = BTN_TAG_BLANCE;
+    [headWhiteView addSubview:moneyBtn];
+
     moneyBtnLeftLab = [Tool createLable:@"¥" attributeStr:nil font:FONT_10_DINAlter textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [moneyBtn addSubview:moneyBtnLeftLab];
 
     moneyBtnMidLab = [Tool createLable:@"- -" attributeStr:nil font:FONT_36_DINAlter textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [moneyBtn addSubview:moneyBtnMidLab];
-    
+
     moneyBtnRightLab = [Tool createLable:@".00" attributeStr:nil font:FONT_10_DINAlter textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [moneyBtn addSubview:moneyBtnRightLab];
-    
+
     moneyBtnBottomLab = [Tool createLable:@"余额(元)" attributeStr:nil font:FONT_15_Medium textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [moneyBtn addSubview:moneyBtnBottomLab];
-    
+
     CGFloat upLabWidth = (moneyBtnLeftLab.width + moneyBtnMidLab.width + moneyBtnRightLab.width);
     CGFloat bottomLabWidth = moneyBtnBottomLab.width;
     moneyBtn.width = upLabWidth>bottomLabWidth?upLabWidth:bottomLabWidth;
-    
+
     [moneyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(headIconImgView.mas_bottom).offset(UPDOWNSPACE_05);
         make.centerX.equalTo(headWhiteView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(moneyBtn.width, payBtn.height));
     }];
-    
+
     [moneyBtnLeftLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(moneyBtn.mas_top).offset(UPDOWNSPACE_05);
         make.left.equalTo(moneyBtn.mas_left);
         make.size.mas_equalTo(moneyBtnLeftLab.size);
     }];
-    
+
     [moneyBtnMidLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(moneyBtn.mas_top);
         make.left.equalTo(moneyBtnLeftLab.mas_right);
         make.size.mas_equalTo(moneyBtnMidLab.size);
     }];
-    
+
     [moneyBtnRightLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(moneyBtn.mas_top).offset(UPDOWNSPACE_05);
         make.left.equalTo(moneyBtnMidLab.mas_right);
         make.size.mas_equalTo(moneyBtnRightLab.size);
     }];
-    
+
     [moneyBtnBottomLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(moneyBtn.mas_bottom).offset(UPDOWNSPACE_0);
         make.centerX.equalTo(moneyBtn.mas_centerX);
         make.size.mas_equalTo(moneyBtnBottomLab.size);
     }];
-    
+     
+     */
     
     //saoyisao
     UIButton *cardBagBtn = [Tool createButton:nil attributeStr:nil font:nil textColor:nil];
     [cardBagBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    cardBagBtn.tag = BTN_TAG_CARDBAG;
+    cardBagBtn.tag = BTN_TAG_INOUTPAY;
     [headWhiteView addSubview:cardBagBtn];
     
-    UIImage *cardBagImg = [UIImage imageNamed:@"index_function_03"];
+    UIImage *cardBagImg = [UIImage imageNamed:@"fukuan"];
     UIImageView *cardBagImgeView = [Tool createImagView:cardBagImg];
     cardBagImgeView.image = cardBagImg;
     [cardBagBtn addSubview:cardBagImgeView];
     
-    UILabel *cardBagBottomlab = [Tool createLable:@"扫一扫" attributeStr:nil font:FONT_15_Medium textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
+    UILabel *cardBagBottomlab = [Tool createLable:@"付 款" attributeStr:nil font:FONT_13_Regular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [cardBagBtn addSubview:cardBagBottomlab];
     
     cardBagBtn.width = cardBagBottomlab.width;
@@ -370,7 +414,7 @@
     //根据图片+按钮+间隙 计算整个背景高度
     CGFloat headViewH = headimg.size.height + payBtn.height + 2*UPDOWNSPACE_15 + UPDOWNSPACE_05;
     [headView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headBGimgView.mas_top).offset(UPDOWNSPACE_05);
+        make.top.equalTo(headBGimgView.mas_top);
         make.left.equalTo(headBGimgView.mas_left);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, headViewH));
     }];
@@ -380,6 +424,29 @@
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH - 2*LEFTRIGHTSPACE_15, headViewH - 2*UPDOWNSPACE_15));
     }];
     
+    //重置背景图片高度 - 辣鸡UI给的图
+    [headBGimgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top);
+        make.left.equalTo(self.baseScrollView.mas_left);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, headViewH));
+    }];
+
+    
+}
+
+- (void)create_BannerView{
+    
+    UIImage *bannerImg = [UIImage imageNamed:@"banner"];
+    bannerView = [[SDBannerView alloc] initStyle:SDBannerViewOnlyImage imageArray:@[bannerImg,bannerImg] UrlArray:nil titleArray:nil];
+    bannerView.delegate = self;
+    bannerView.rect = CGRectMake(0, 0, SCREEN_WIDTH, bannerImg.size.height);
+    [self.baseScrollView addSubview:bannerView];
+    
+    [bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(headBGimgView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, bannerImg.size.height));
+    }];
     
 }
 
@@ -403,13 +470,10 @@
     //majletView
     SDMajletView *sandServerView = [SDMajletView createMajletViewOY:0];
     sandServerView.cellSpace = LEFTRIGHTSPACE_25;
-    sandServerView.columnNumber = 5;
+    sandServerView.columnNumber = 4;
     sandServerView.majletArr = self.sandServerArr;
     sandServerView.titleNameBlock = ^(NSString *titleName) {
-        NSLog(@"titleName == %@",titleName);
         
-        
-        //转账功能
         if ([titleName isEqualToString:@"转账"]) {
             if ([[transferOutPayToolDic objectForKey:@"available"] boolValue] == NO){
                 //            [Tool showDialog:@"账户暂时无法转账 available == NO"];
@@ -417,7 +481,7 @@
             }
             SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
                 if ([cellName isEqualToString:@"个人银行卡"]) {
-                    if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                    if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
                         [Tool showDialog:@"账户余额不足,无法转账到银行卡"];
                         return ;
                     }
@@ -427,7 +491,7 @@
                     [self.navigationController pushViewController:bankCardTransferVC animated:YES];
                 }
                 if ([cellName isEqualToString:@"杉德宝用户"]) {
-                    if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                    if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
                         [Tool showDialog:@"账户余额不足,无法转账到杉德宝用户"];
                         return ;
                     }
@@ -438,22 +502,25 @@
             popview.chooseBtnTitleArr = @[@"个人银行卡",@"杉德宝用户"];
         }
         
-        //理财功能
-        if ([titleName isEqualToString:@"理财"]) {
-             [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+        if ([titleName isEqualToString:@"钱包"]) {
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].walletAccNav];
         }
-        //积分商城
         if ([titleName isEqualToString:@"积分商城"]) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].financicleNav];
         }
-        //手机充值
-        if ([titleName isEqualToString:@"手机充值"]) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+        if ([titleName isEqualToString:@"卡券"]) {
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].sandCardNav];
         }
-        //生活缴费
-        if ([titleName isEqualToString:@"生活缴费"]) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+        if ([titleName isEqualToString:@"账单"]) {
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].myBillNav];
         }
+        if ([titleName isEqualToString:@"积分"]) {
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].sandPointNav];
+        }
+        if ([titleName isEqualToString:@"银行卡"]) {
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+        }
+       
     };
     [bodyViewOne addSubview:sandServerView];
     
@@ -461,11 +528,7 @@
     bodyViewOne.height = labSpaceToView + sandServerLab.height + labSpaceToView + sandServerView.height;
     
     [bodyViewOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        if (SCREEN_HEIGHT == SCREEN_HEIGHT_736){
-            make.top.equalTo(headBGimgView.mas_bottom).offset(UPDOWNSPACE_25);
-        }else{
-            make.top.equalTo(headBGimgView.mas_bottom).offset(UPDOWNSPACE_0);
-        }
+        make.top.equalTo(bannerView.mas_bottom).offset(UPDOWNSPACE_10);
         make.centerX.equalTo(headBGimgView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, bodyViewOne.height));
     }];
@@ -748,10 +811,10 @@
 #pragma mark MQTT事件: 商户反扫支付通知(600001)
 - (void)noticeB2c:(NSDictionary*)dic{
     NSString *msgData = [[dic objectForKey:@"data"] objectForKey:@"msgData"];
-    NSString *msgTime = [[dic objectForKey:@"data"] objectForKey:@"msgTime"];
     NSDictionary *msgDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:msgData];
     NSString *msg = [msgDic objectForKey:@"msg"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:[NSString stringWithFormat:@"%@+%@",msgTime,msg]];
+    NSString *respMsg = [msgDic objectForKey:@"respMsg"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN object:[NSString stringWithFormat:@"%@+%@",respMsg,msg]];
 }
 
 #pragma mark MQTT事件: 商户反扫支付通知(600002)
@@ -761,6 +824,11 @@
     NSString *tn = [tnDic objectForKey:@"sandTN"];
     [[NSNotificationCenter defaultCenter] postNotificationName:MQTT_NOTICE_BSC_TN_PWD object:tn];
     
+}
+
+#pragma mark SDBannerDelegate
+-(void)sanBannerViewDelegateClick:(NSInteger)index{
+    NSLog(@"点击了第 %ld 张图片",index);
 }
 
 
@@ -805,72 +873,9 @@
     
     //1.刷新头像
     headIconImgView.image = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
-    // 刷新手机号
+    //2.刷新手机号
     headPhoneNoLab.text = [CommParameter sharedInstance].userName;
     
-    //2.刷新 moneyBtn 金额信息
-    //获取且拼装金额数据
-    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
-    NSDictionary *sandWalletDic = [ownPayToolDic objectForKey:@"sandWalletDic"];
-    
-    if (sandWalletDic.count == 0) {
-        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" defulBlock:^{
-            //呼叫
-            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
-                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
-            }
-        }];
-    }
-    
-    //初始化被转账支付工具 (即钱包账户)
-    transferOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:sandWalletDic];
-    
-    NSString *moneyStr = [[sandWalletDic objectForKey:@"account"] objectForKey:@"balance"];
-    moneyStr = [NSString stringWithFormat:@"%.2f",[moneyStr floatValue]/100];
-    NSString *moneyMidStr = [moneyStr substringToIndex:(moneyStr.length - 3)];
-    NSString *moneyRightStr = [moneyStr substringFromIndex:(moneyStr.length - 3)];
-    if ([moneyStr floatValue] == 0) {
-        moneyMidStr = @"0";
-        moneyRightStr = @".00";
-    }
-    moneyBtnMidLab.text = moneyMidStr;
-    moneyBtnRightLab.text = moneyRightStr;
-    
-    //中间金额模块约束重置
-    CGSize moneyBtnMidLabSize = [moneyBtnMidLab sizeThatFits:CGSizeZero];
-    CGSize moneyBtnRightLabSize = [moneyBtnRightLab sizeThatFits:CGSizeZero];
-    
-    CGFloat upLabWidth = (moneyBtnLeftLab.width + moneyBtnMidLabSize.width + moneyBtnRightLabSize.width);
-    CGFloat bottomLabWidth = moneyBtnBottomLab.width;
-    moneyBtn.width = upLabWidth>bottomLabWidth?upLabWidth:bottomLabWidth;
-    
-    [moneyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(headIconImgView.mas_bottom).offset(UPDOWNSPACE_05);
-        make.centerX.equalTo(headView.mas_centerX);
-        make.size.mas_equalTo(CGSizeMake(moneyBtn.width, payBtn.height));
-    }];
-    
-    [moneyBtnLeftLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moneyBtn.mas_top).offset(UPDOWNSPACE_05);
-        if (upLabWidth>bottomLabWidth) {
-            make.left.equalTo(moneyBtn.mas_left);
-        }else{
-            make.left.equalTo(moneyBtn.mas_left).offset((bottomLabWidth-upLabWidth)/2);
-        }
-        make.size.mas_equalTo(moneyBtnLeftLab.size);
-    }];
-    
-    [moneyBtnMidLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moneyBtn.mas_top);
-        make.left.equalTo(moneyBtnLeftLab.mas_right);
-        make.size.mas_equalTo(moneyBtnMidLabSize);
-    }];
-    
-    [moneyBtnRightLab mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moneyBtn.mas_top).offset(UPDOWNSPACE_05);
-        make.left.equalTo(moneyBtnMidLab.mas_right);
-        make.size.mas_equalTo(moneyBtnRightLabSize);
-    }];
 }
 
 #pragma mark 通知左侧边栏刷新用户信息UI

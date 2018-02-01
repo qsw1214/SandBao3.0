@@ -958,13 +958,13 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
-		281F644A1E7934590005AE86 /* BannerView */ = {
+		281F644A1E7934590005AE86 /* SDBannerView */ = {
 			isa = PBXGroup;
 			children = (
 				281F644B1E7934B40005AE86 /* SDBannerView.h */,
 				281F644C1E7934B40005AE86 /* SDBannerView.m */,
 			);
-			path = BannerView;
+			path = SDBannerView;
 			sourceTree = "<group>";
 		};
 		2820D1AC1E7BE8120012C067 /* SDCircleView */ = {
@@ -2246,7 +2246,7 @@
 				2820D1AC1E7BE8120012C067 /* SDCircleView */,
 				286BFCA91EE92A3100FD9731 /* SDScanView */,
 				A7D24CD81E973D9E00688506 /* webViewProgress */,
-				281F644A1E7934590005AE86 /* BannerView */,
+				281F644A1E7934590005AE86 /* SDBannerView */,
 				2821B7841E77B25A00F093D7 /* HeadImageBtnView */,
 			);
 			path = customView;

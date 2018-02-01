@@ -15,8 +15,15 @@
 
 #pragma mark - *********用户退出后不进行置空*********
 #pragma mark - HomeNav
-@property (nonatomic, strong) UINavigationController *homeNav;  //全局的首页实例
-@property (nonatomic, strong) UINavigationController *walletAccNav; //全局的钱包账户实例
+@property (nonatomic, strong) UINavigationController *myCenterNav;    //全局的 个人中心
+@property (nonatomic, strong) UINavigationController *homeNav;        //全局的 首页
+@property (nonatomic, strong) UINavigationController *myBillNav;      //全局的 我的账单
+@property (nonatomic, strong) UINavigationController *walletAccNav;   //全局的 钱包
+@property (nonatomic, strong) UINavigationController *sandPointNav;   //全局的 杉德积分
+@property (nonatomic, strong) UINavigationController *financicleNav;  //全局的 理财中心
+@property (nonatomic, strong) UINavigationController *bankCardNav;    //全局的 银行卡
+@property (nonatomic, strong) UINavigationController *sandCardNav;    //全局的 卡券包
+@property (nonatomic, strong) UINavigationController *setNav;         //全局的 设置
 
 #pragma mark - RESideMenu(current)
 @property (nonatomic, strong) RESideMenu *currentResideMenu;  //全局存储的当前主内容控制器

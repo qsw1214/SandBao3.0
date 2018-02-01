@@ -16,7 +16,9 @@
 #import "SDInvitePop.h"
 
 @interface InviteViewController ()<WXApiDelegate,TencentSessionDelegate>
-
+{
+    NSString *inviteCode;
+}
 @end
 
 @implementation InviteViewController
@@ -53,11 +55,6 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     if (btn.tag == BTN_TAG_JUSTCLICK) {
-        
-        
-        NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
-        NSString *inviteCode = [userInfoDic objectForKey:@"inviteCode"];
-        
         NSDictionary *inviteInfo = @{@"icon":@[@"icon_wechat",@"icon_moments",@"icon_qq",@"icon_weibo"],
                                      @"title":@[@"微信",@"朋友圈",@"腾讯QQ",@"微博"]
                                      };
@@ -68,7 +65,7 @@
                 WXMediaMessage *message = [WXMediaMessage message];
                 message.title = @"邀请好友注册,立马赚积分";
                 message.description = @"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!";
-                [message setThumbImage:[UIImage imageNamed:@"icon"]];
+                [message setThumbImage:[UIImage imageNamed:@"iconShare"]];
                 WXWebpageObject *ext = [WXWebpageObject object];
                 ext.webpageUrl = [NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode];
                 message.mediaObject = ext;
@@ -87,7 +84,7 @@
                 WXMediaMessage *message = [WXMediaMessage message];
                 message.title = @"邀请好友注册,立马赚积分";
                 message.description = @"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!";
-                [message setThumbImage:[UIImage imageNamed:@"icon"]];
+                [message setThumbImage:[UIImage imageNamed:@"iconShare"]];
                 
                 WXWebpageObject *ext = [WXWebpageObject object];
                 ext.webpageUrl = [NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode];
@@ -107,7 +104,7 @@
 
                 TencentOAuth *oauth = [[TencentOAuth alloc] initWithAppId:Tencent_APPID andDelegate:self];
                 
-                QQApiURLObject *urlObject = [[QQApiURLObject alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode]] title:@"邀请好友注册,立马赚积分" description:@"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!" previewImageData:UIImageJPEGRepresentation([UIImage imageNamed:@"icon"], 0.5f) targetContentType:QQApiURLTargetTypeNews];
+                QQApiURLObject *urlObject = [[QQApiURLObject alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode]] title:@"邀请好友注册,立马赚积分" description:@"恭喜您获取杉德邀请码!点击打开网页获取邀请码,下载杉德宝App并注册,您将获得高达50积分奖励!" previewImageData:UIImageJPEGRepresentation([UIImage imageNamed:@"iconShare"], 0.5f) targetContentType:QQApiURLTargetTypeNews];
                 
                 SendMessageToQQReq *req = [SendMessageToQQReq reqWithContent:urlObject];
                 // 分享给好友
@@ -126,6 +123,9 @@
 #pragma mark  - UI绘制
 - (void)creaetUI{
     
+    NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
+    inviteCode = [userInfoDic objectForKey:@"inviteCode"];
+    
     //背景
     UIImage *inviteBGimg = [UIImage imageNamed:@"invite_bg"];
     UIImageView *inviteBGView = [Tool createImagView:inviteBGimg];
@@ -139,13 +139,12 @@
     }];
 
     //二维码
-    CGFloat qrSpace = 20;
-    NSDictionary *userInfoDic = [[PayNucHelper sharedInstance] jsonStringToDictionary:[CommParameter sharedInstance].userInfo];
+    CGFloat qrSpace = 10;
     UIImage *qrimg_BG = [UIImage imageNamed:@"bg_kuang"];
     
-    CGSize qrImg_BGSize = CGSizeMake(qrimg_BG.size.width*0.9, qrimg_BG.size.height*0.9);
+    CGSize qrImg_BGSize = CGSizeMake(qrimg_BG.size.width*0.95, qrimg_BG.size.height*0.95);
     
-    UIImage *qrImg = [Tool twoDimensionCodeWithStr:[userInfoDic objectForKey:@"inviteCode"] size:qrImg_BGSize.width-qrSpace];
+    UIImage *qrImg = [Tool twoDimensionCodeWithStr:[NSString stringWithFormat:@"%@inviteCode=%@",SHARE_ADDRESS,inviteCode] size:qrImg_BGSize.width-qrSpace];
     
     UIImageView *qrCodeView_BG = [[UIImageView alloc] init];
     qrCodeView_BG.image = qrimg_BG;
@@ -164,8 +163,8 @@
     }];
     
     [qrCodeImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.baseScrollView.mas_top).offset(qrCodeViewOY+qrSpace/2);
-        make.centerX.equalTo(self.baseScrollView);
+        make.centerY.equalTo(qrCodeView_BG);
+        make.centerX.equalTo(qrCodeView_BG);
         make.size.mas_equalTo(CGSizeMake(qrImg.size.width, qrImg.size.height));
     }];
     

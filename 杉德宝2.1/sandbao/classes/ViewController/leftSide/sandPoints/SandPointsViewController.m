@@ -7,9 +7,11 @@
 //
 
 #import "SandPointsViewController.h"
+#import "WebViewController.h"
 
 @interface SandPointsViewController ()
 
+@property (nonatomic, strong) NSString *sandPointPayToolID; //积分账户ID
 @end
 
 @implementation SandPointsViewController
@@ -21,10 +23,19 @@
     self.sideMenuViewController.panGestureEnabled = YES;
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    //设置数据
+    [self settingData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self creaetUI];
+    
+    
 }
 
 
@@ -40,11 +51,19 @@
     self.navCoverView.style = NavCoverStyleGradient;
     self.navCoverView.letfImgStr = @"login_icon_back_white";
     self.navCoverView.midTitleStr = @"杉德积分";
+    self.navCoverView.rightTitleStr = @"明细";
  
     __weak SandPointsViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         //归位Home或SpsLunch
         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
+    };
+    
+    self.navCoverView.rightBlock = ^{
+        WebViewController *webViewVC = [[WebViewController alloc] init];
+        webViewVC.payToolID = weakSelf.sandPointPayToolID;
+        webViewVC.code = SAND_Point;
+        [weakSelf.navigationController pushViewController:webViewVC animated:YES];
     };
     
 }
@@ -70,6 +89,30 @@
     
 }
 
+- (void)settingData
+{
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    
+    //钱包账户_被充值_支付工具 - 初始化
+    NSDictionary *sandPointDic = [NSMutableDictionary dictionaryWithCapacity:0];
+    sandPointDic = [ownPayToolDic objectForKey:@"sandPointDic"];
+    
+    //钱包账户未成功开通
+    if (sandPointDic.count == 0) {
+        [Tool showDialog:@"请联系杉德客服" message:@"积分账户开通失败" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
+            //归位Home或SpsLunch
+            [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+        } rightBlock:^{
+            //呼叫
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
+                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
+            }
+        }];
+        
+    }else{
+        self.sandPointPayToolID = [sandPointDic objectForKey:@"id"];
+    }
+}
 
 
 

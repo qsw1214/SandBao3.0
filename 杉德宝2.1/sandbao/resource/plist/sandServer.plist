@@ -4,33 +4,45 @@
 <array>
 	<dict>
 		<key>iconKey</key>
-		<string>index_zhuanzhang</string>
+		<string>index_zz</string>
 		<key>titleKey</key>
 		<string>转账</string>
 	</dict>
-    <dict>
-        <key>iconKey</key>
-        <string>index_licai</string>
-        <key>titleKey</key>
-        <string>理财</string>
-    </dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_qianbao</string>
+		<key>titleKey</key>
+		<string>钱包</string>
+	</dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_store</string>
+		<key>titleKey</key>
+		<string>积分商城</string>
+	</dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_kq</string>
+		<key>titleKey</key>
+		<string>卡券</string>
+	</dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_zd</string>
+		<key>titleKey</key>
+		<string>账单</string>
+	</dict>
     <dict>
         <key>iconKey</key>
         <string>index_jifen</string>
         <key>titleKey</key>
-        <string>积分商城</string>
+        <string>积分</string>
     </dict>
     <dict>
         <key>iconKey</key>
-        <string>index_chongzhi</string>
+        <string>index_bank</string>
         <key>titleKey</key>
-        <string>手机充值</string>
-    </dict>
-    <dict>
-        <key>iconKey</key>
-        <string>index_jiaofei</string>
-        <key>titleKey</key>
-        <string>生活缴费</string>
+        <string>银行卡</string>
     </dict>
 </array>
 </plist>

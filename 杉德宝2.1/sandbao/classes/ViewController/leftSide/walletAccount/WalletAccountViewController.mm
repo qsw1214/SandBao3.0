@@ -149,7 +149,7 @@
         }
         SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"个人银行卡"]) {
-                if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
                     [Tool showDialog:@"账户余额不足,无法转账到银行卡"];
                     return ;
                 }
@@ -159,7 +159,7 @@
                 [self.navigationController pushViewController:bankCardTransferVC animated:YES];
             }
             if ([cellName isEqualToString:@"杉德宝用户"]) {
-                if ([[[transferOutPayToolDic objectForKey:@"account"] objectForKey:@"useableBalance"] floatValue] == 0) {
+                if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
                     [Tool showDialog:@"账户余额不足,无法转账到杉德宝用户"];
                     return ;
                 }
@@ -365,23 +365,11 @@
         }];
         
     }else{
-        
-        NSString *balacneStr = [[rechargeInPayToolDic objectForKey:@"account"] objectForKey:@"balance"];
-        balacneStr = [NSString stringWithFormat:@"%.2f",[balacneStr floatValue]/100];
+        NSString  *balacneStr = [Tool fenToYuanDict:rechargeInPayToolDic];
+        balanceLab.text = balacneStr;
         
         _walletPayToolID = [rechargeInPayToolDic objectForKey:@"id"];
         
-//        NSString *moneyYuanFormatterStr = [Tool numberStyleWith:[NSNumber numberWithFloat:[balacneStr floatValue]]];
-//
-//        NSString *moneyYuanStr = [balacneStr substringToIndex:(balacneStr.length -3)];
-//        NSString *moneyFenStr  = [balacneStr substringFromIndex:(balacneStr.length - 3)];
-
-        if ([balacneStr floatValue] != 0) {
-//            balanceLab.text = [NSString stringWithFormat:@"%@%@",moneyYuanStr,moneyFenStr];
-            balanceLab.text = balacneStr;
-        }else{
-            balanceLab.text = @"0.00";
-        }
         //钱包账户_被转账_支付工具
         transferOutPayToolDic = [NSMutableDictionary dictionaryWithCapacity:0];
         transferOutPayToolDic = [ownPayToolDic objectForKey:@"sandWalletDic"];

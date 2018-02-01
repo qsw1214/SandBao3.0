@@ -144,16 +144,14 @@ typedef void(^DefulBtnBlock)();
 + (UIImage *)twoDimensionCodeWithStr:(NSString *)str size:(CGFloat)size;
 
 
-#pragma mark - 金额格式化
-
+#pragma mark - 分转换为元
 /**
- 数字:金额格式化
-
- @param number 数字
- @return 数组化字符串
+ 分转换为元
+ 
+ @param payToolDic 支付工具字典
+ @return 元 字符串
  */
-+ (NSString *)numberStyleWith:(NSNumber*)number;
-
++ (NSString*)fenToYuanDict:(NSDictionary*)payToolDic;
 
 #pragma mark - 用户信息获取/刷新
 /**
