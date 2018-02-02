@@ -10,7 +10,7 @@
 #import "PayNucHelper.h"
 
 #import "GradualView.h"
-#import "WebViewController.h"
+#import "DetailsWebViewController.h"
 
 typedef void(^SandCardStateBlock)(NSArray *paramArr);
 @interface SandCardDetailViewController ()<SDPayViewDelegate>
@@ -68,7 +68,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
     self.navCoverView.rightBlock = ^{
-        WebViewController *webViewVC = [[WebViewController alloc] init];
+        DetailsWebViewController *webViewVC = [[DetailsWebViewController alloc] init];
         webViewVC.payToolID = weakSelf.sandCardPayToolID;
         webViewVC.code = CONSUME_CODE;
         [weakSelf.navigationController pushViewController:webViewVC animated:YES];

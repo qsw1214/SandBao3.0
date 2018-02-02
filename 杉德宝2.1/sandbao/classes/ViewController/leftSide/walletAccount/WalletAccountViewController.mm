@@ -18,7 +18,7 @@
 #import "BankCardTransferViewController.h"
 #import "UserTransferBeginViewController.h"
 
-#import "WebViewController.h"
+#import "DetailsWebViewController.h"
 
 @interface WalletAccountViewController ()
 {
@@ -92,7 +92,7 @@
     };
     
     self.navCoverView.rightBlock = ^{
-        WebViewController *webViewVC = [[WebViewController alloc] init];
+        DetailsWebViewController *webViewVC = [[DetailsWebViewController alloc] init];
         webViewVC.payToolID = weakSelf.walletPayToolID;
         webViewVC.code = CASH_CODE;
         [weakSelf.navigationController pushViewController:webViewVC animated:YES];

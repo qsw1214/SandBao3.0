@@ -9,7 +9,7 @@
 #import "SandPointsViewController.h"
 #import "PayNucHelper.h"
 
-#import "WebViewController.h"
+#import "DetailsWebViewController.h"
 #import "GradualView.h"
 #import "SDWaveViwe.h"
 
@@ -88,7 +88,7 @@
     
     self.navCoverView.rightBlock = ^{
         
-        WebViewController *webViewVC = [[WebViewController alloc] init];
+        DetailsWebViewController *webViewVC = [[DetailsWebViewController alloc] init];
         webViewVC.payToolID = weakSelf.sandPointPayToolID;
         webViewVC.code = SAND_Point;
         [weakSelf.navigationController pushViewController:webViewVC animated:YES];

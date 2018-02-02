@@ -9,7 +9,7 @@
 #import "PaymentRechargeViewController.h"
 #import "PayNucHelper.h"
 #import "RechargeFinishViewController.h"
-
+#import "DefaultWebViewController.h"
 #import "PaymentPwdCell.h"
 #import<CommonCrypto/CommonDigest.h>
 
@@ -82,8 +82,11 @@
         }else{
             [Tool showDialog:@"请输入正确信息"];
         }
-
-        
+    }
+    if (btn.tag == BTN_TAG_ENTERWEBVC) {
+        DefaultWebViewController *defaultWebVC = [[DefaultWebViewController alloc] init];
+        defaultWebVC.requestStr = Payment_ADDRESS;
+        [self.navigationController pushViewController:defaultWebVC animated:YES];
     }
     
 }
@@ -123,6 +126,21 @@
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(rechargeBtn.size);
     }];
+    
+    //代付凭证余额查询
+    UIButton *paymenMoneyRequestBtn = [Tool createButton:@"余额查询" attributeStr:nil font:FONT_13_OpenSan textColor:COLOR_358BEF];
+    paymenMoneyRequestBtn.tag = BTN_TAG_ENTERWEBVC;
+    [paymenMoneyRequestBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.baseScrollView addSubview:paymenMoneyRequestBtn];
+    
+    [paymenMoneyRequestBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(rechargeBtn.mas_bottom).offset(UPDOWNSPACE_50);
+        make.centerX.equalTo(self.baseScrollView);
+        make.size.mas_equalTo(CGSizeMake(paymenMoneyRequestBtn.width*2, paymenMoneyRequestBtn.height*2));
+    }];
+    
+    
+    
     //装载所有的textfiled
     self.textfiledArr = [NSMutableArray arrayWithArray:@[paymentPwdCell.textfield]];
     for (int i = 0 ; i<self.textfiledArr.count; i++) {

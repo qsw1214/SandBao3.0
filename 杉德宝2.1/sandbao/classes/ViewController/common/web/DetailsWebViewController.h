@@ -1,5 +1,5 @@
 //
-//  WebViewController.h
+//  DetailsWebViewController.h
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/12/26.
@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface WebViewController : BaseViewController
+@interface DetailsWebViewController : BaseViewController
 
 @property (nonatomic, strong) NSString *payToolID;
 @property (nonatomic, strong) NSString *code;

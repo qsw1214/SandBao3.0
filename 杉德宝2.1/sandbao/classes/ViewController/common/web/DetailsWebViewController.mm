@@ -1,16 +1,16 @@
 //
-//  WebViewController.m
+//  DetailsWebViewController.m
 //  sandbao
 //
 //  Created by tianNanYiHao on 2017/12/26.
 //  Copyright © 2017年 sand. All rights reserved.
 //
 
-#import "WebViewController.h"
+#import "DetailsWebViewController.h"
 #import "PayNucHelper.h"
 #import "SDWkWebView.h"
 
-@interface WebViewController ()<SDWkWebNavgationDelegate>
+@interface DetailsWebViewController ()<SDWkWebNavgationDelegate,UIScrollViewDelegate>
 {
     NSString *tToken;
     SDWkWebView *sdWebView;
@@ -18,7 +18,7 @@
 }
 @end
 
-@implementation WebViewController
+@implementation DetailsWebViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,6 +33,7 @@
 #pragma mark - 重写父类-baseScrollView设置
 - (void)setBaseScrollview{
     [super setBaseScrollview];
+    
     self.baseScrollView.scrollEnabled = NO;
     self.baseScrollView.delegate = self;
 }
@@ -41,10 +42,10 @@
     [super setNavCoverView];
     self.navCoverView.style = NavCoverStyleWhite;
     self.navCoverView.letfImgStr = @"login_icon_back";
-    self.navCoverView.midTitleStr = @"交易明细";
+    self.navCoverView.midTitleStr = @"明细";
     
     
-    __weak WebViewController *weakSelf = self;
+    __weak DetailsWebViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
         [weakSelf.navigationController popViewControllerAnimated:YES];
     };
@@ -65,7 +66,6 @@
     sdWebView.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakself loadURL];
     }];
-    [sdWebView.webView.scrollView.mj_header beginRefreshing];
 }
 
 
@@ -81,6 +81,9 @@
         paynuc.set("tTokenType", "03000101");
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+               [sdWebView.webView.scrollView.mj_header endRefreshing];
+            }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];

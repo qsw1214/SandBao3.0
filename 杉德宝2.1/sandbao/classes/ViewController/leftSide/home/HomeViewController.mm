@@ -262,7 +262,7 @@
     UILabel *payBtnBottomlab = [Tool createLable:@"扫一扫" attributeStr:nil font:FONT_13_Regular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [payBtn addSubview:payBtnBottomlab];
     
-    payBtn.width = payBtnBottomlab.width;
+    payBtn.width = LEFTRIGHTSPACE_40;
     payBtn.height = payBtnBottomlab.height + paybtnImg.size.height + UPDOWNSPACE_10;
     
     [payBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -297,7 +297,7 @@
     UILabel *moneyBtnBottomlab = [Tool createLable:@"余 额" attributeStr:nil font:FONT_13_Regular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [moneyBtn addSubview:moneyBtnBottomlab];
     
-    moneyBtn.width = moneyBtnBottomlab.width;
+    moneyBtn.width = LEFTRIGHTSPACE_40;
     moneyBtn.height = moneyBtnBottomlab.height + moneyBtnImg.size.height + UPDOWNSPACE_10;
     
     [moneyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -389,7 +389,7 @@
     UILabel *cardBagBottomlab = [Tool createLable:@"付 款" attributeStr:nil font:FONT_13_Regular textColor:COLOR_000000 alignment:NSTextAlignmentCenter];
     [cardBagBtn addSubview:cardBagBottomlab];
     
-    cardBagBtn.width = cardBagBottomlab.width;
+    cardBagBtn.width = LEFTRIGHTSPACE_40;
     cardBagBtn.height = cardBagBottomlab.height + cardBagImg.size.height + UPDOWNSPACE_10;
     
     [cardBagBtn mas_makeConstraints:^(MASConstraintMaker *make) {

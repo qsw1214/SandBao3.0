@@ -8,7 +8,7 @@
 
 #import "SDWkWebView.h"
 
-@interface SDWkWebView()
+@interface SDWkWebView()<WKUIDelegate,WKNavigationDelegate>
 {
     
 }
@@ -49,9 +49,6 @@
 - (void)load:(NSURL*)url{
     //请求
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
-    //添加请求监听
-    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
-
 }
 
 
@@ -75,6 +72,10 @@
 
 /**进度条显示*/
 - (void)progressShow{
+    
+    //添加请求监听
+    [self.webView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+    
     //开始加载网页时展示出progressView
     self.progressView.hidden = NO;
     //开始加载网页的时候将progressView的Height恢复为1.5倍
