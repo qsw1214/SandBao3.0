@@ -48,6 +48,9 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
+    //余额置空
+    sandPointCountLab.text = @" -- ";
+    
     //删除水波动画
     [self removeWaveView];
     
@@ -119,7 +122,7 @@
     UILabel *sandPointCountDecLab = [Tool createLable:@"积分余额" attributeStr:nil font:FONT_16_Regular textColor:COLOR_FFFFFF alignment:NSTextAlignmentCenter];
     [sandPointBGView addSubview:sandPointCountDecLab];
     
-    sandPointCountLab = [Tool createLable:@"2345" attributeStr:nil font:FONT_48_Regular textColor:COLOR_FFFFFF alignment:NSTextAlignmentCenter];
+    sandPointCountLab = [Tool createLable:@" -- " attributeStr:nil font:FONT_48_Regular textColor:COLOR_FFFFFF alignment:NSTextAlignmentCenter];
     [sandPointBGView addSubview:sandPointCountLab];
     
     [sandPointCountDecLab mas_makeConstraints:^(MASConstraintMaker *make) {
