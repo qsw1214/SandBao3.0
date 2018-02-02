@@ -9,6 +9,7 @@
 #import "SDBarButton.h"
 @interface SDBarButton(){
     UIView *shadowView;
+    UILabel *midLab;
 }
 
 @end
@@ -34,9 +35,10 @@
     self.btn.layer.cornerRadius = 5.f;
     self.btn.layer.masksToBounds = YES;
     
-    UILabel *midLab = [[UILabel alloc] init];
+    midLab = [[UILabel alloc] init];
     midLab.textAlignment = NSTextAlignmentCenter;
     midLab.textColor = titleColor;
+    midLab.alpha = 0.5f;
     midLab.font = font;
     midLab.text = str;
     //防止lab遮挡按钮的点击事件,因此添加其layer - (待验证)
@@ -84,10 +86,12 @@
     if (canClick) {
         self.btn.userInteractionEnabled = YES;
         shadowView.layer.shadowOpacity = 1;
+        midLab.alpha = 1.f;
     }
     else{
         self.btn.userInteractionEnabled = NO;
         shadowView.layer.shadowOpacity = 0;
+        midLab.alpha = 0.5f;
     }
     
     
