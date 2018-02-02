@@ -99,9 +99,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
 }
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
-    if (btn.tag == BTN_TAG_SHOWBANKLIST) {
-        NSLog(@"点击了 支持银行 按钮");
-    }
     if (btn.tag == BTN_TAG_NEXT) {
         //下一步 - 实名验证手机号
         if (self.realNameStr.length>0 && self.identityNoStr.length>0 && self.bankCardNoStr.length>0) {
@@ -168,6 +165,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     cardNoAuthToolView.successBlock = ^(NSString *textfieldText) {
         weakself.bankCardNoStr = textfieldText;
         //删除追加的UI
+        [weakself removeAppendUI];
     };
     [self.baseScrollView addSubview:cardNoAuthToolView];
     
@@ -292,15 +290,6 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         [self.textfiledArr addObject:cvnAuthToolView.textfiled];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChange:) name:UITextFieldTextDidEndEditingNotification object:cvnAuthToolView.textfiled];
     }
-
-    
-    //moreBankListBtn
-    UIButton *moreBankListBtn = [Tool createButton:@"支持银行" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7];
-    moreBankListBtn.tag = BTN_TAG_SHOWBANKLIST;
-    [moreBankListBtn setImage:[UIImage imageNamed:@"general_icon_detail"] forState:UIControlStateNormal];
-    CGSize moreBankListBtnSize = [moreBankListBtn sizeThatFits:CGSizeZero];
-    [self.baseScrollView addSubview:moreBankListBtn];
-    
     [bankAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
         make.centerX.equalTo(self.baseScrollView);
@@ -325,20 +314,14 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             make.size.mas_equalTo(cvnAuthToolView.size);
         }];
     }
-
-    [moreBankListBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    self.barButton.btn.tag = BTN_TAG_REALNAME;
+    [nextBarbtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         if (cardType == creditCard) {
             make.top.equalTo(cvnAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
         }else{
             make.top.equalTo(bankPhoneNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
         }
-        make.right.equalTo(bankPhoneNoAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
-        make.size.mas_equalTo(moreBankListBtnSize);
-    }];
-    
-    self.barButton.btn.tag = BTN_TAG_REALNAME;
-    [nextBarbtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moreBankListBtn.mas_bottom).offset(UPDOWNSPACE_25);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];
@@ -347,14 +330,14 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     
     if (cardType == creditCard) {
         //重置contentSize
-        appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + moreBankListBtn.height + validAuthToolView.height + cvnAuthToolView.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
+        appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + validAuthToolView.height + cvnAuthToolView.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
         //保存追加的UI子View
-        appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,validAuthToolView,cvnAuthToolView,moreBankListBtn];
+        appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,validAuthToolView,cvnAuthToolView];
     }else{
         //重置contentSize
-        appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + moreBankListBtn.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
+        appendViewHeight = bankAuthToolView.height + bankPhoneNoAuthToolView.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
         //保存追加的UI子View
-        appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView,moreBankListBtn];
+        appendUIArr = @[bankAuthToolView,bankPhoneNoAuthToolView];
     }
     self.baseScrollView.contentSize = CGSizeMake(self.baseScrollView.contentSize.width, self.baseScrollView.contentSize.height + appendViewHeight);
 }

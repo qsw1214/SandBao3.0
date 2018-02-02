@@ -134,7 +134,7 @@
     [self.baseScrollView addSubview:paymenMoneyRequestBtn];
     
     [paymenMoneyRequestBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(rechargeBtn.mas_bottom).offset(UPDOWNSPACE_50);
+        make.top.equalTo(rechargeBtn.mas_bottom).offset(UPDOWNSPACE_36);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(CGSizeMake(paymenMoneyRequestBtn.width*2, paymenMoneyRequestBtn.height*2));
     }];

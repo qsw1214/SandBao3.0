@@ -179,39 +179,27 @@
     bankAuthToolView.userInteractionEnabled = NO;
     [self.baseScrollView addSubview:bankAuthToolView];
     
-    //moreBankListBtn
-    UIButton *moreBankListBtn = [Tool createButton:@"支持银行" attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7];
-    moreBankListBtn.tag = BTN_TAG_SHOWBANKLIST;
-    [moreBankListBtn setImage:[UIImage imageNamed:@"general_icon_detail"] forState:UIControlStateNormal];
-    CGSize moreBankListBtnSize = [moreBankListBtn sizeThatFits:CGSizeZero];
-    [self.baseScrollView addSubview:moreBankListBtn];
-    
     [bankAuthToolView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(cardNoAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(bankAuthToolView.size);
     }];
     
-    [moreBankListBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(bankAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
-        make.right.equalTo(bankAuthToolView.mas_right).offset(-LEFTRIGHTSPACE_40);
-        make.size.mas_equalTo(moreBankListBtnSize);
-    }];
     
     barButton.btn.tag = BTN_TAG_BINDBANKCARD;
     [nextBarbtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(moreBankListBtn.mas_bottom).offset(UPDOWNSPACE_25);
+        make.top.equalTo(bankAuthToolView.mas_bottom).offset(UPDOWNSPACE_25);
         make.centerX.equalTo(self.baseScrollView.mas_centerX);
         make.size.mas_equalTo(nextBarbtn.size);
     }];
     
     
     //重置contentSize
-    CGFloat appendViewHeight = bankAuthToolView.height + moreBankListBtn.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
+    CGFloat appendViewHeight = bankAuthToolView.height + UPDOWNSPACE_25 + UPDOWNSPACE_25;
     self.baseScrollView.contentSize = CGSizeMake(self.baseScrollView.contentSize.width, self.baseScrollView.contentSize.height + appendViewHeight);
     
     //保存追加的UI子View
-    appendUIArr = @[bankAuthToolView,moreBankListBtn];
+    appendUIArr = @[bankAuthToolView];
 }
 
 
