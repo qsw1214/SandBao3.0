@@ -59,7 +59,7 @@
     
     
     //钱包账户_被转账_支付工具
-    NSMutableDictionary *transferOutPayToolDic;
+    NSMutableDictionary *sandWalletDic;
     
     
 }
@@ -475,23 +475,23 @@
     sandServerView.titleNameBlock = ^(NSString *titleName) {
         
         if ([titleName isEqualToString:@"转账"]) {
-            if ([[transferOutPayToolDic objectForKey:@"available"] boolValue] == NO){
+            if ([[sandWalletDic objectForKey:@"available"] boolValue] == NO){
                 //            [Tool showDialog:@"账户暂时无法转账 available == NO"];
                 //            return ;
             }
             SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
                 if ([cellName isEqualToString:@"个人银行卡"]) {
-                    if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
+                    if ([[Tool fenToYuanDict:sandWalletDic] isEqualToString:@"0.00"]) {
                         [Tool showDialog:@"账户余额不足,无法转账到银行卡"];
                         return ;
                     }
                     BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];
-                    bankCardTransferVC.transferOutPayToolDic = transferOutPayToolDic;
+                    bankCardTransferVC.transferOutPayToolDic = sandWalletDic;
                     bankCardTransferVC.tTokenType = @"02000201";
                     [self.navigationController pushViewController:bankCardTransferVC animated:YES];
                 }
                 if ([cellName isEqualToString:@"杉德宝用户"]) {
-                    if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
+                    if ([[Tool fenToYuanDict:sandWalletDic] isEqualToString:@"0.00"]) {
                         [Tool showDialog:@"账户余额不足,无法转账到杉德宝用户"];
                         return ;
                     }
@@ -829,6 +829,9 @@
 #pragma mark SDBannerDelegate
 -(void)sanBannerViewDelegateClick:(NSInteger)index{
     NSLog(@"点击了第 %ld 张图片",index);
+    
+    InviteViewController *invitedVC = [[InviteViewController alloc] init];
+    [self.navigationController pushViewController:invitedVC animated:YES];
 }
 
 
@@ -873,9 +876,22 @@
     
     //1.刷新头像
     headIconImgView.image = [Tool avatarImageWith:[CommParameter sharedInstance].avatar];
+    
     //2.刷新手机号
     headPhoneNoLab.text = [CommParameter sharedInstance].userName;
     
+    //3.刷新钱包账户工具
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    sandWalletDic = [NSMutableDictionary dictionaryWithDictionary:[ownPayToolDic objectForKey:@"sandWalletDic"]];
+    //钱包账户未成功开通
+    if (sandWalletDic.count == 0) {
+        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" defulBlock:^{
+            //呼叫
+            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
+                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
+            }
+        }];
+    }
 }
 
 #pragma mark 通知左侧边栏刷新用户信息UI

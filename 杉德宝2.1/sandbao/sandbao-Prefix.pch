@@ -190,7 +190,7 @@
 //#define kMqttpasswd   @"magw@sand#20150805%!_"
 //
 ////分享地址
-//#define SHARE_ADDRESS @"http://172.28.247.111:17892/ot/share.html?"
+//#define SHARE_ADDRESS @"https://sdb.sandpay.com.cn/ot/share.html?"
 //
 ////蒲公英key
 //#define pgyKey @"7e2e46b54026ae02b7b963ae1e3d54b3"

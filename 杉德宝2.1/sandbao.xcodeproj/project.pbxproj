@@ -257,7 +257,7 @@
 		28BCE8C61FB190B300D62F94 /* ChangeLogPwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28BCE8C51FB190B300D62F94 /* ChangeLogPwdViewController.mm */; };
 		28C362471FD912CB007F067C /* ScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C362461FD912CB007F067C /* ScannerViewController.m */; };
 		28D289A41FA2CA3700C3787E /* WalletAccountViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */; };
-		28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A61FA2CA4900C3787E /* SandPointsViewController.m */; };
+		28D289A71FA2CA4900C3787E /* SandPointsViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A61FA2CA4900C3787E /* SandPointsViewController.mm */; };
 		28D289AA1FA2CA6300C3787E /* FinancicleCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */; };
 		28D289AD1FA2CA7000C3787E /* BankCardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289AC1FA2CA7000C3787E /* BankCardViewController.mm */; };
 		28D289B01FA2CA8000C3787E /* SandCardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D289AF1FA2CA8000C3787E /* SandCardViewController.mm */; };
@@ -709,7 +709,7 @@
 		28D289A21FA2CA3700C3787E /* WalletAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountViewController.h; sourceTree = "<group>"; };
 		28D289A31FA2CA3700C3787E /* WalletAccountViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WalletAccountViewController.mm; sourceTree = "<group>"; };
 		28D289A51FA2CA4900C3787E /* SandPointsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandPointsViewController.h; sourceTree = "<group>"; };
-		28D289A61FA2CA4900C3787E /* SandPointsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandPointsViewController.m; sourceTree = "<group>"; };
+		28D289A61FA2CA4900C3787E /* SandPointsViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandPointsViewController.mm; sourceTree = "<group>"; };
 		28D289A81FA2CA6300C3787E /* FinancicleCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinancicleCenterViewController.h; sourceTree = "<group>"; };
 		28D289A91FA2CA6300C3787E /* FinancicleCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinancicleCenterViewController.m; sourceTree = "<group>"; };
 		28D289AB1FA2CA7000C3787E /* BankCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankCardViewController.h; sourceTree = "<group>"; };
@@ -1476,7 +1476,7 @@
 			isa = PBXGroup;
 			children = (
 				28D289A51FA2CA4900C3787E /* SandPointsViewController.h */,
-				28D289A61FA2CA4900C3787E /* SandPointsViewController.m */,
+				28D289A61FA2CA4900C3787E /* SandPointsViewController.mm */,
 			);
 			path = sandPoints;
 			sourceTree = "<group>";
@@ -2624,7 +2624,7 @@
 				28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */,
 				2824BB071FD97BC600C267AB /* TnOrderViewController.mm in Sources */,
 				281747671F96E25B007D4D3A /* LoginViewController.mm in Sources */,
-				28D289A71FA2CA4900C3787E /* SandPointsViewController.m in Sources */,
+				28D289A71FA2CA4900C3787E /* SandPointsViewController.mm in Sources */,
 				289FED5120172E260087A70E /* InviteViewController.mm in Sources */,
 				28B6491B1FAC451D0074A390 /* SDMajletView.m in Sources */,
 				2884219A1F8E091200082E7C /* UIImage+image.m in Sources */,

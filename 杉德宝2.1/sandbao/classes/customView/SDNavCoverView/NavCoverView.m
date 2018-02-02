@@ -147,6 +147,12 @@
         //修改状态栏白色
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     }
+    if (_style == NavCoverStyleGradient_RED) {
+        layerRGB.colors = @[(__bridge id)[UIColor colorWithRed:253/255.0 green:133/255.0 blue:132/255.0 alpha:1].CGColor,(__bridge id)[UIColor colorWithRed:253/255.0 green:157/255.0 blue:140/255.0 alpha:1].CGColor];
+        //修改状态栏白色
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    }
+    
     if (_style == NavCoverStyleClean) {
         self.backgroundColor = [UIColor clearColor];
         //修改状态栏白色
@@ -175,6 +181,9 @@
             labTitle.textColor = [UIColor colorWithRed:52/255.0 green:51/255.0 blue:57/255.0 alpha:1/1.0];
         }
         if (_style == NavCoverStyleGradient) {
+            labTitle.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1/1.0];
+        }
+        if (_style == NavCoverStyleGradient_RED) {
             labTitle.textColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1/1.0];
         }
         if (_style == NavCoverStyleClean) {
@@ -313,6 +322,9 @@
         labRight.textColor = [UIColor blackColor];
     }
     if (_style == NavCoverStyleGradient) {
+        labRight.textColor = [UIColor whiteColor];
+    }
+    if (_style == NavCoverStyleGradient_RED) {
         labRight.textColor = [UIColor whiteColor];
     }
     

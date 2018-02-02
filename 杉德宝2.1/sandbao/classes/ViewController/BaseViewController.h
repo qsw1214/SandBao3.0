@@ -150,6 +150,7 @@
 #define FONT_14_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(14)]
 #define FONT_14_SFUIT_Rrgular [UIFont fontWithName:@"SFUIText-Regular" size:fontSizeFit(14)]
 #define FONT_13_OpenSan  [UIFont fontWithName:@"OpenSans" size:fontSizeFit(13)]
+#define FONT_48_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(48)]
 #define FONT_13_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(13)]
 #define FONT_12_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(12)]
 #define FONT_11_Regular  [UIFont fontWithName:@"PingFang-SC-Regular" size:fontSizeFit(11)]

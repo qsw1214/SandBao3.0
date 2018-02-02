@@ -57,8 +57,6 @@
         //归位Home或SpsLunch
         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:weakSelf.sideMenuViewController];
     };
-    
- 
 }
 
 #pragma mark - 重写父类-点击方法集合
@@ -75,7 +73,7 @@
     sdWebView.navgationDelegate = self;
     __weak typeof(self) weakself = self;
     sdWebView.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakself loadURL];
+        [weakself getToken];
     }];
     [self.baseScrollView addSubview:sdWebView];
     

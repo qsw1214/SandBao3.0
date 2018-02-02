@@ -58,8 +58,8 @@
     };
     
     self.navCoverView.rightBlock = ^{
-        NSLog(@"搜索");
-
+        //@"搜索"
+        [SDMBProgressView showSDMBProgressNormalINView:weakSelf.baseScrollView lableText:@"努力开发中..."];
     };
     
     

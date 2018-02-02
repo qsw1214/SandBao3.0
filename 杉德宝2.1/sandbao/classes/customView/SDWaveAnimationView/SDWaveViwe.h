@@ -10,24 +10,29 @@
 
 @interface SDWaveViwe : UIView
 
+#pragma mark - 控制水波上涨动画的属性
 
 /**
- 刻度
+ 水波上涨动画 - 最终刻度
  */
-@property (nonatomic , assign) float scaleRang;
-
-
-/**
- 水波涨速
- */
-@property (nonatomic , assign) float waveSpeed;
-
+@property (nonatomic , assign) float waveUpRang;
 
 
 /**
- 振幅
+ 水波上涨动画 - 上涨速度
  */
-@property (nonatomic , assign) float waveA;
+@property (nonatomic , assign) float waveUpSpeed;
+
+
+
+#pragma mark - 控制水波波动动画的属性
+
+@property (nonatomic, assign) float wavaChangeSpeed;
+
+/**
+ 水波波动动画 - 波动振幅
+ */
+@property (nonatomic , assign) float waveChangA;
 
 
 @end
