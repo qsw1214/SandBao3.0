@@ -21,7 +21,7 @@
     UILabel *sandPointCountLab;
     
     //杉德积分账户 - 支付工具字典
-    NSDictionary *sandPointDic;
+    NSMutableDictionary *sandPointDic;
 }
 @property (nonatomic, strong) NSString *sandPointPayToolID; //积分账户ID
 @end
@@ -167,8 +167,7 @@
     NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     
     //钱包账户_被充值_支付工具 - 初始化
-    sandPointDic = [NSMutableDictionary dictionaryWithCapacity:0];
-    sandPointDic = [ownPayToolDic objectForKey:@"sandPointDic"];
+    sandPointDic = [NSMutableDictionary dictionaryWithDictionary:[ownPayToolDic objectForKey:@"sandPointDic"]];
     
     //钱包账户未成功开通
     if (sandPointDic.count == 0) {
@@ -206,7 +205,8 @@
         }];
         if (error) return ;
         
-        NSString *payTools = [[PayNucHelper sharedInstance] arrayToJSON:@[sandPointDic]];
+        NSMutableArray *payToolsArr = [NSMutableArray arrayWithArray:@[sandPointDic]];
+        NSString *payTools = [[PayNucHelper sharedInstance] arrayToJSON:payToolsArr];
         paynuc.set("payTools", [payTools UTF8String]);
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getBalances/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
