@@ -8,6 +8,7 @@
 
 #import "AboutUSViewController.h"
 #import "SetCellView.h"
+#import "DefaultWebViewController.h"
 @interface AboutUSViewController ()
 {
     
@@ -52,12 +53,17 @@
     
     if (btn.tag == BTN_TAG_VERSION) {
         NSLog(@"版本说明");
+        DefaultWebViewController *webVC = [[DefaultWebViewController alloc] init];
+        webVC.requestStr = [NSString stringWithFormat:@"%@%@",AddressHTTP,ot_help_normal_FAQ];
+        [self.navigationController pushViewController:webVC animated:YES];
     }
     if (btn.tag == BTN_TAG_TOSTAR) {
         NSLog(@"去评分");
     }
     if (btn.tag == BTN_TAG_ABOUTSAND) {
         NSLog(@"杉德宝隐私政策");
+        
+        
     }
     
 }
@@ -85,7 +91,7 @@
     [self.baseScrollView addSubview:erCodeImgView];
     
     //titlDesLab
-    UILabel *titlDesLab = [Tool createLable:@"扫描二维码,您的朋友也可以下载杉德宝" attributeStr:nil font:FONT_10_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+    UILabel *titlDesLab = [Tool createLable:@"扫描二维码,您的朋友也可以下载杉德宝" attributeStr:nil font:FONT_12_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titlDesLab];
     
     headView.height = UPDOWNSPACE_30 * 2 + UPDOWNSPACE_20 * 2 + titleLab.height + erCodeImg.size.height + titlDesLab.height;
