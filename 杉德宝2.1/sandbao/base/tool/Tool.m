@@ -198,7 +198,7 @@
     if (forLogOut) {
         //0.退出前 当前活跃状态的账户更新数据
         BOOL result = [SDSqlite updateData:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"update usersconfig set active = '%@', sToken = '%@' where active = '%@'", @"1", @"", @"0"]];
-        if (result) {
+        if (YES) {
             
             //1.清空Commparamater
             [[CommParameter sharedInstance] cleanCommParameter];

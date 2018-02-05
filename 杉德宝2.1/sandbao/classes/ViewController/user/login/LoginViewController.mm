@@ -229,7 +229,7 @@
         __block BOOL error = NO;
         
         //获取未登录钱sToken(虚拟)
-        paynuc.set("creditFp", "684599B093B8F673A9BE6A7F2AC4E45E");
+//        paynuc.set("creditFp", "684599B093B8F673A9BE6A7F2AC4E45E");
         [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getStoken/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;

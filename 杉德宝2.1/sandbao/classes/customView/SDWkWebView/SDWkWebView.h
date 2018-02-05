@@ -10,7 +10,12 @@
 #import <WebKit/WebKit.h>
 
 @protocol SDWkWebNavgationDelegate<NSObject>
-
+//在发送请求前,是否允许这个导航
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
+// 在收到响应后，决定是否跳转
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler;
+// 接收到服务器跳转请求之后调用
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation;
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation;
 // 当内容开始返回时调用
@@ -19,12 +24,13 @@
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation;
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation;
-// 接收到服务器跳转请求之后调用
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation;
-// 在收到响应后，决定是否跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler;
-// 在发送请求之前，决定是否跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
+//页面加载失败原因
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error;
+//网页加载内容进程终止
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView;
+
+
+
 @end
 
 @protocol SDWkWebUIDelegate<NSObject>

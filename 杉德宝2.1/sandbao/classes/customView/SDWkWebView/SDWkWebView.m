@@ -108,13 +108,46 @@
 
 
 #pragma mark - WKNavigationDelegate
+//在发送请求前,是否允许这个导航
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
+    //默认:允许此导航
+    decisionHandler(WKNavigationActionPolicyAllow);
+    //不允许此导航
+    //decisionHandler(WKNavigationActionPolicyCancel);
+    
+    //实现以下代理,让SDWkwebView的代理拿到 navigationAction
+    if ([_navgationDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:decisionHandler:)]) {
+        [_navgationDelegate webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
+    }
+}
+
+// 在收到响应后，是否允许加载
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
+    //默认:允许跳转
+    decisionHandler(WKNavigationResponsePolicyAllow);
+    //不允许跳转
+    //decisionHandler(WKNavigationResponsePolicyCancel);
+    
+    //实现以下代理,让SDWkwebView的代理拿到 navigationAction
+    if ([_navgationDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationResponse:decisionHandler:)]) {
+        [_navgationDelegate webView:webView decidePolicyForNavigationResponse:navigationResponse decisionHandler:decisionHandler];
+    }
+}
+// 接收到服务器跳转请求之后调用
+- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
+    if ([_navgationDelegate respondsToSelector:@selector(webView:didReceiveServerRedirectForProvisionalNavigation:)]) {
+        [_navgationDelegate webView:webView didReceiveServerRedirectForProvisionalNavigation:navigation];
+    }
+}
 // 页面开始加载时调用
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation{
+    //页面开始加载时,显示进度条(进度为0)
+    [self progressShow];
+    
     if ([_navgationDelegate respondsToSelector:@selector(webView:didStartProvisionalNavigation:)]) {
         [_navgationDelegate webView:webView didStartProvisionalNavigation:navigation];
     }
-    //页面开始加载时,显示进度条(进度为0)
-    [self progressShow];
+    
 }
 // 当内容开始返回时调用
 - (void)webView:(WKWebView *)webView didCommitNavigation:(WKNavigation *)navigation{
@@ -142,34 +175,21 @@
     }
     
 }
-// 接收到服务器跳转请求之后调用
-- (void)webView:(WKWebView *)webView didReceiveServerRedirectForProvisionalNavigation:(WKNavigation *)navigation{
-    if ([_navgationDelegate respondsToSelector:@selector(webView:didReceiveServerRedirectForProvisionalNavigation:)]) {
-        [_navgationDelegate webView:webView didReceiveServerRedirectForProvisionalNavigation:navigation];
+//页面加载失败原因
+- (void)webView:(WKWebView *)webView didFailNavigation:(null_unspecified WKNavigation *)navigation withError:(NSError *)error {
+    if ([_navgationDelegate respondsToSelector:@selector(webView:didFailNavigation:withError:)]) {
+        [_navgationDelegate webView:webView didFailNavigation:navigation withError:error];
     }
-}
-// 在收到响应后，决定是否跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationResponse:(WKNavigationResponse *)navigationResponse decisionHandler:(void (^)(WKNavigationResponsePolicy))decisionHandler{
     
-    if ([_navgationDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationResponse:decisionHandler:)]) {
-        [_navgationDelegate webView:webView decidePolicyForNavigationResponse:navigationResponse decisionHandler:decisionHandler];
-    }
-    //允许跳转
-    decisionHandler(WKNavigationResponsePolicyAllow);
-    //不允许跳转
-    //decisionHandler(WKNavigationResponsePolicyCancel);
 }
-// 在发送请求之前，决定是否跳转
-- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler{
-    
-    if ([_navgationDelegate respondsToSelector:@selector(webView:decidePolicyForNavigationAction:decisionHandler:)]) {
-        [_navgationDelegate webView:webView decidePolicyForNavigationAction:navigationAction decisionHandler:decisionHandler];
+//网页加载内容进程终止
+- (void)webViewWebContentProcessDidTerminate:(WKWebView *)webView {
+    if ([_navgationDelegate respondsToSelector:@selector(webViewWebContentProcessDidTerminate:)]) {
+        [_navgationDelegate webViewWebContentProcessDidTerminate:webView];
     }
-    //允许跳转
-    decisionHandler(WKNavigationActionPolicyAllow);
-    //不允许跳转
-    //decisionHandler(WKNavigationActionPolicyCancel);
 }
+
+
 
 
 
@@ -177,38 +197,40 @@
 // 创建一个新的WebView
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures{
     
+    //在默认当前页打开新网页进行load请求
+    NSLog(@"创建一个新的webView");
+    if (!navigationAction.targetFrame.isMainFrame) {
+        [webView loadRequest:navigationAction.request];
+    }
+    
+    //提供回调代理
     if ([_uidelegate respondsToSelector:@selector(webView:createWebViewWithConfiguration:forNavigationAction:windowFeatures:)]) {
         return  [_uidelegate webView:webView createWebViewWithConfiguration:configuration forNavigationAction:navigationAction windowFeatures:windowFeatures];
     }
-    return [[WKWebView alloc]init];
+    return nil;
+    
+
 }
 // 输入框
 - (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
-    
+    //提供回调代理
     if ([_uidelegate respondsToSelector:@selector(webView:runJavaScriptTextInputPanelWithPrompt:defaultText:initiatedByFrame:completionHandler:)]) {
         [_uidelegate webView:webView runJavaScriptTextInputPanelWithPrompt:prompt defaultText:defaultText initiatedByFrame:frame completionHandler:completionHandler];
     }
-    
-    //    completionHandler(@"http");
-    
 }
 // 确认框
 - (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler{
-    
+    NSLog(@"%@",message);
     if ([_uidelegate respondsToSelector:@selector(webView:runJavaScriptConfirmPanelWithMessage:initiatedByFrame:completionHandler:)]) {
         [_uidelegate webView:webView runJavaScriptConfirmPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
     }
-//    completionHandler(YES);
 }
 // 警告框
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
     NSLog(@"%@",message);
-    
     if ([_uidelegate respondsToSelector:@selector(webView:runJavaScriptAlertPanelWithMessage:initiatedByFrame:completionHandler:)]) {
         [_uidelegate webView:webView runJavaScriptAlertPanelWithMessage:message initiatedByFrame:frame completionHandler:completionHandler];
     }
-    
-//    completionHandler();
 }
 
 @end

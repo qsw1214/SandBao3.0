@@ -9,6 +9,7 @@
 #import "RegistViewController.h"
 #import "PayNucHelper.h"
 
+#import "DefaultWebViewController.h"
 #import "SmsCheckViewController.h"
 @interface RegistViewController ()
 {
@@ -87,6 +88,12 @@
         //返回- 登录页
         [self.navigationController popViewControllerAnimated:YES];
     }
+    if (btn.tag == BTN_TAG_ENTERWEBVC) {
+        //进入协议网页
+        DefaultWebViewController *webVC = [[DefaultWebViewController alloc] init];
+        webVC.requestStr = [NSString stringWithFormat:@"%@%@",AddressHTTP,ot_index];
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
     
 }
 
@@ -118,8 +125,22 @@
     [self.baseScrollView addSubview:inviteAuthToolView];
     
     
+    //服务协议
+    NSMutableAttributedString *serverAttributeStr = [[NSMutableAttributedString alloc] initWithString:@"《杉德宝服务协议》"];
+    [serverAttributeStr addAttributes:@{
+                                     NSFontAttributeName:FONT_13_Regular,
+                                     NSForegroundColorAttributeName:COLOR_358BEF
+                                     } range:NSMakeRange(0, 9)];
+    UIButton *serverBtn = [Tool createButton:@"" attributeStr:serverAttributeStr font:FONT_13_Regular textColor:COLOR_358BEF];
+    serverBtn.tag = BTN_TAG_ENTERWEBVC;
+    [serverBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.baseScrollView addSubview:serverBtn];
     
-    
+    [serverBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(inviteAuthToolView.mas_bottom).offset(UPDOWNSPACE_0);
+        make.right.equalTo(self.view.mas_right).offset(-LEFTRIGHTSPACE_40);
+        make.size.mas_equalTo(serverBtn.size);
+    }];
     
     //nextBtn
     barButton = [[SDBarButton alloc] init];

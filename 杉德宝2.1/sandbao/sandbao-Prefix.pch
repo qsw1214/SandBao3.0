@@ -162,7 +162,6 @@
 //代付凭证余额查询地址
 #define Payment_ADDRESS @"https://dfb.sandpay.com.cn:8990/transfer.html?type=query"
 
-
 //蒲公英key
 #define pgyKey @"33bb2bbf63b37e4e8e82c5a53cd14ca8"
 /***************↑↑↑↑↑↑*************测试************↑↑↑↑↑**************/

@@ -13,7 +13,7 @@
 
 
 
-@interface MyBillViewController ()<SDWkWebNavgationDelegate>
+@interface MyBillViewController ()<SDWkWebNavgationDelegate,SDWkWebUIDelegate>
 {
     NSString *tToken;
     
@@ -71,6 +71,7 @@
     sdWebView = [[SDWkWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.baseScrollView.height)];
     
     sdWebView.navgationDelegate = self;
+    sdWebView.uidelegate = self;
     __weak typeof(self) weakself = self;
     sdWebView.webView.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakself getToken];
@@ -131,6 +132,33 @@
     [sdWebView.webView.scrollView.mj_header endRefreshing];
 }
 
+#pragma mark - SDWkWebUIDelegate
+// 输入框
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
+    
+}
+// 确认框
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(NO);
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+}
+// 警告框
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 //scrollorView代理 - 屏蔽父类方法即可, 不需具体实现
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

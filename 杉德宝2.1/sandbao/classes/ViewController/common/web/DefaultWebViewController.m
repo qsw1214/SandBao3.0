@@ -8,7 +8,7 @@
 
 #import "DefaultWebViewController.h"
 #import "SDWkWebView.h"
-@interface DefaultWebViewController ()<SDWkWebNavgationDelegate,UIScrollViewDelegate>
+@interface DefaultWebViewController ()<SDWkWebNavgationDelegate,SDWkWebUIDelegate,UIScrollViewDelegate>
 {
     SDWkWebView *sdWebView;
 }
@@ -53,6 +53,7 @@
     
     sdWebView = [[SDWkWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.baseScrollView.height)];
     sdWebView.navgationDelegate = self;
+    sdWebView.uidelegate = self;
     [self.baseScrollView addSubview:sdWebView];
     
     __weak typeof(self) weakself = self;
@@ -91,6 +92,34 @@
 // 页面加载失败时调用
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation{
     [sdWebView.webView.scrollView.mj_header endRefreshing];
+}
+
+#pragma mark - SDWkWebUIDelegate
+// 输入框
+- (void)webView:(WKWebView *)webView runJavaScriptTextInputPanelWithPrompt:(NSString *)prompt defaultText:(nullable NSString *)defaultText initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(NSString * __nullable result))completionHandler{
+    
+}
+// 确认框
+- (void)webView:(WKWebView *)webView runJavaScriptConfirmPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL result))completionHandler{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(NO);
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler(YES);
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+}
+// 警告框
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        completionHandler();
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
