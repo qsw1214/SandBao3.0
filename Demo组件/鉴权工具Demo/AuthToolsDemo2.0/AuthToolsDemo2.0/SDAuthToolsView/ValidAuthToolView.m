@@ -29,7 +29,7 @@
     
     if ([super initWithFrame:frame]) {
         self.titleLab.text = @"有效期";
-        self.textfiled.placeholder = @"输入卡片有效期";
+        self.textfiled.placeholder = @"月份/年份(MM/YY)";
         self.textfiled.keyboardType = UIKeyboardTypeNumberPad;
         
         self.textfiled.userInteractionEnabled = NO;

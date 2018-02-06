@@ -248,7 +248,8 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        
+        [self.payView hidPayToolInPayListView];
+        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         

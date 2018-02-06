@@ -151,7 +151,7 @@
     //sexCell
     IdentityDetailCellView *sexCell = [IdentityDetailCellView createSetCellViewOY:0];
     sexCell.titleStr = @"性别";
-    sexCell.rightStr = @"-";
+    sexCell.rightStr = @"暂不支持显示";
     sexCell.clickBlock = ^{
         
     };
@@ -180,7 +180,7 @@
     IdentityDetailCellView *addressCell = [IdentityDetailCellView createSetCellViewOY:0];
     addressCell.rightImgStr = @"center_profile_arror_right";
     addressCell.titleStr = @"详细地址";
-    addressCell.rightStr = @"火星福尔吉斯区32号";
+    addressCell.rightStr = @"暂不支持显示";
     addressCell.line.hidden = YES;
     addressCell.clickBlock = ^{
         

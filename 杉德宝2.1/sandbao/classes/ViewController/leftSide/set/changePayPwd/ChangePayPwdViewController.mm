@@ -71,15 +71,16 @@
         if (self.SIX_CODE_STATE == SIX_CODE_STATE_CHECK_OK) {
             //验证支付密码不重复,查询带注册鉴权
             [self setRegAuthTools];
-            
         }
-        if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN || self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
+        if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN) {
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self createUI];
         }
-        
-        
-        
+        if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"两次密码不正确,请重新输入!"];
+            [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self createUI];
+        }
     }
     
 }

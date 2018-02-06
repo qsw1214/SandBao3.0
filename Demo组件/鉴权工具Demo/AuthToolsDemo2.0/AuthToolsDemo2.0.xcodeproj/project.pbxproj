@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2801CCF12029983B00F266A9 /* SandCardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801CCF02029983A00F266A9 /* SandCardNoAuthToolView.m */; };
 		282144431FA474C600E6D489 /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282144261FA474C600E6D489 /* AuthToolBaseView.m */; };
 		282144441FA474C600E6D489 /* BankAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 282144281FA474C600E6D489 /* BankAuthToolView.m */; };
 		282144451FA474C600E6D489 /* CardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2821442A1FA474C600E6D489 /* CardNoAuthToolView.m */; };
@@ -59,6 +60,8 @@
 
 /* Begin PBXFileReference section */
 		192CFADC6A6BAE2496FDEBF0 /* Pods-AuthToolsDemo2.0.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AuthToolsDemo2.0.release.xcconfig"; path = "Pods/Target Support Files/Pods-AuthToolsDemo2.0/Pods-AuthToolsDemo2.0.release.xcconfig"; sourceTree = "<group>"; };
+		2801CCEF2029983A00F266A9 /* SandCardNoAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandCardNoAuthToolView.h; sourceTree = "<group>"; };
+		2801CCF02029983A00F266A9 /* SandCardNoAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandCardNoAuthToolView.m; sourceTree = "<group>"; };
 		282144251FA474C600E6D489 /* AuthToolBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthToolBaseView.h; sourceTree = "<group>"; };
 		282144261FA474C600E6D489 /* AuthToolBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthToolBaseView.m; sourceTree = "<group>"; };
 		282144271FA474C600E6D489 /* BankAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BankAuthToolView.h; sourceTree = "<group>"; };
@@ -150,6 +153,8 @@
 				282144281FA474C600E6D489 /* BankAuthToolView.m */,
 				282144291FA474C600E6D489 /* CardNoAuthToolView.h */,
 				2821442A1FA474C600E6D489 /* CardNoAuthToolView.m */,
+				2801CCEF2029983A00F266A9 /* SandCardNoAuthToolView.h */,
+				2801CCF02029983A00F266A9 /* SandCardNoAuthToolView.m */,
 				2821442B1FA474C600E6D489 /* IdentityAuthToolView.h */,
 				2821442C1FA474C600E6D489 /* IdentityAuthToolView.m */,
 				2821442D1FA474C600E6D489 /* image */,
@@ -494,6 +499,7 @@
 				28E1C0981F8F51FD00527048 /* main.m in Sources */,
 				282144501FA474C600E6D489 /* PhoneAuthToolView.m in Sources */,
 				2821444F1FA474C600E6D489 /* NameAuthToolView.m in Sources */,
+				2801CCF12029983B00F266A9 /* SandCardNoAuthToolView.m in Sources */,
 				28F377071FB319EC00813512 /* ValidAuthToolView.m in Sources */,
 				282144531FA474C600E6D489 /* BankPickerView.m in Sources */,
 				282144431FA474C600E6D489 /* AuthToolBaseView.m in Sources */,

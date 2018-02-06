@@ -130,9 +130,12 @@
     
     //最右边按钮事件
     self.navCoverView.rightBlock = ^{
+        [SDMBProgressView showSDMBProgressNormalINView:weakSelf.view lableText:@"努力开发中..."];
+        /**
         //@"消息"
         MessageViewController *messageVC = [[MessageViewController alloc] init];
         [weakSelf.navigationController pushViewController:messageVC animated:YES];
+         */
         
     };
     //右边第二个按钮事件(由右向左数)
@@ -506,7 +509,10 @@
             [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].walletAccNav];
         }
         if ([titleName isEqualToString:@"积分商城"]) {
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
+            /*
             [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].financicleNav];
+             */
         }
         if ([titleName isEqualToString:@"卡券"]) {
             [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].sandCardNav];
@@ -579,19 +585,19 @@
         NSLog(@"titleName == %@",titleName);
         //超值年化
         if ([titleName isEqualToString:@"超值年化"]) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
         }
         //新卡推荐
         if ([titleName isEqualToString:@"新卡推荐"]) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
         }
         //超值兑换
         if ([titleName isEqualToString:@"超值兑换"]) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
         }
         //商户推荐
         if ([titleName isEqualToString:@"商户推荐"]) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.baseScrollView lableText:@"努力开发中..."];
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
         }
         //邀请好友
         if ([titleName isEqualToString:@"邀请好友"]) {
@@ -883,15 +889,7 @@
     //3.刷新钱包账户工具
     NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
     sandWalletDic = [NSMutableDictionary dictionaryWithDictionary:[ownPayToolDic objectForKey:@"sandWalletDic"]];
-    //钱包账户未成功开通
-    if (sandWalletDic.count == 0) {
-        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" defulBlock:^{
-            //呼叫
-            if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tel:021-962567"]]) {
-                [Tool openUrl:[NSURL URLWithString:@"tel:021-962567"]];
-            }
-        }];
-    }
+    //4.若钱包账户未开通成功,由于UI上不需要展示钱包账户,因此钱包账户未开通情况下,可暂不判断或提示
 }
 
 #pragma mark 通知左侧边栏刷新用户信息UI

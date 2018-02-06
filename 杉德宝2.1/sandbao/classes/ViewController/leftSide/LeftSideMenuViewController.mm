@@ -445,7 +445,10 @@
     }
     if ([titleName isEqualToString:@"理财中心"]) {
         //重置RESdieMeun的主控制器
+        [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
+        /** 点击进入理财 - 暂时屏蔽
         [self.sideMenuViewController setContentViewController:self.financicleNav];
+         */
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_Financial];
     }

@@ -69,6 +69,7 @@
     }
     
     if (btn.tag == BTN_TAG_HONGBAO) {
+        
         //红包选中
         hongbaoBtn.selected = YES;
         hongbaoBtn.backgroundColor = COLOR_358BEF;
@@ -81,7 +82,12 @@
         userHongbaoVC.userInfoDic = self.userInfoDic;
         userHongbaoVC.inPayToolDic = self.inPayToolDic;
         userHongbaoVC.outPayToolDic = self.outPayToolDic;
+        
+        [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
+        
+        /*
         [self.navigationController pushViewController:userHongbaoVC animated:YES];
+        */
         
     }
     

@@ -137,6 +137,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     cellHeight = UPDOWNSPACE_160;
     self.bankTableView = [[CardBaseTableView alloc] init];
     self.bankTableView.cellHeight = cellHeight;
+    self.bankTableView.backgroundColor = [UIColor redColor];
     self.bankTableView.delegate = self;
     self.bankTableView.dataSource = self;
     self.bankTableView.scrollEnabled = YES;
@@ -395,6 +396,8 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     if (bankArray.count>0) {
         self.noCardLab.hidden = YES;
+        self.bankTableView.hidden = NO;
+        
         if (bankArray.count>=3) {
             self.bottomBtn.backgroundColor = COLOR_D9D9D9;
             self.bottomBtn.tag = BTN_TAG_CARDNUMFULL;
@@ -410,8 +413,9 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
             make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, self.baseScrollView.height - self.bottomBtn.height));
         }];
     }else{
-        self.bottomBtn.userInteractionEnabled = YES;
         self.noCardLab.hidden = NO;
+        self.bankTableView.hidden = YES;
+        self.bottomBtn.userInteractionEnabled = YES;
         [self.bottomBtn setTitle:@"添加银行卡" forState:UIControlStateNormal];
         self.bottomBtn.tag = BTN_TAG_BINDBANKCARD;
     }

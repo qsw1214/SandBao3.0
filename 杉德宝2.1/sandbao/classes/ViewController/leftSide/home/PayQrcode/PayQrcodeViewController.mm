@@ -186,6 +186,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 
         //创建 收款码 视图 - (这里不隐藏而是重新创建是为了后期有可能UI做变化)
         [self createCollectionQrView];
+        
+        [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
     }
 }
 
@@ -253,7 +255,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [self.payQrcodeBaseView removeFromSuperview];
         [self.collectionQrcodeBaseView removeFromSuperview];
     }
-    
+    /*
     self.collectionQrcodeBaseView = [[UIView alloc] init];
     self.collectionQrcodeBaseView.backgroundColor = [UIColor greenColor];
     self.collectionQrcodeBaseView.backgroundColor = self.baseScrollView.backgroundColor;
@@ -284,6 +286,14 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     [self.selectBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.collectionQrcodeBaseView.mas_bottom).offset(UPDOWNSPACE_40);
         make.centerX.equalTo(self.collectionQrcodeBaseView.mas_centerX);
+        make.size.mas_equalTo(self.selectBarView.size);
+    }];
+    */
+    
+    //重置SelectBarView的约束 - 固定高于底部bottom50 (上面注释部分解开后, 此约束删除即可)
+    [self.selectBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.baseScrollView.mas_top).offset(self.baseScrollView.height - self.selectBarView.height - UPDOWNSPACE_40);
+        make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(self.selectBarView.size);
     }];
 }
@@ -414,7 +424,8 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        
+        [self.payView hidPayToolInPayListView];
+        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         

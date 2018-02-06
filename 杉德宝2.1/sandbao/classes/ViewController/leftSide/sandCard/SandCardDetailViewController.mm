@@ -95,6 +95,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     
     //headView
     headView = [[GradualView alloc] init];
+    headView.colorStyle = GradualColorBlue;
     [headView setRect:CGRectMake(LEFTRIGHTSPACE_00, UPDOWNSPACE_0, SCREEN_WIDTH, UPDOWNSPACE_197)];
     [self.baseScrollView addSubview:headView];
     

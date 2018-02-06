@@ -163,6 +163,13 @@
             [self deleteErrorTextAnimation:textField];
             [self showTip];
         }else if([self validatePasswordNumAndLetter:textField.text] && textField.text>0){
+            
+            //解决切换明密文后, textfiled文字后缀有空格问题
+            NSString* text = self.textfiled.text;
+            self.textfiled.text = @" ";
+            self.textfiled.text = text;
+            
+            //回调
             _successBlock(textField.text);
         }
     }
@@ -172,6 +179,13 @@
             [self deleteErrorTextAnimation:textField];
             [self showTip];
         }else if(textField.text>0){
+            
+            //解决切换明密文后, textfiled文字后缀有空格问题
+            NSString* text = self.textfiled.text;
+            self.textfiled.text = @" ";
+            self.textfiled.text = text;
+            
+            //回调
             _successBlock(textField.text);
         }
     }

@@ -21,10 +21,7 @@
  */
 @property (nonatomic, strong) NSString *smsCodeString;
 
-/**
- 邀请码
- */
-@property (nonatomic, strong) NSString *inviteCodeString;
+
 
 @end
 

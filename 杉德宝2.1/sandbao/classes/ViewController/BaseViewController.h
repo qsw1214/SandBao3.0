@@ -32,6 +32,7 @@
 #import "SixCodeAuthToolView.h"
 #import "BankAuthToolView.h"
 #import "ValidAuthToolView.h"
+#import "SandCardNoAuthToolView.h"
 #import "CvnAuthToolView.h"
 #import "InviteAuthToolView.h"
 #import "SDPayConfig.h"

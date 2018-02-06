@@ -410,6 +410,7 @@
         //checkUser
         NSMutableDictionary *userInfoDic = [[NSMutableDictionary alloc] init];
         [userInfoDic setValue:self.phoneNoStr forKey:@"userName"];
+        [userInfoDic setValue:self.inviteCodeString forKey:@"inviteCode"];
         NSString *userInfo = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic];
         
         paynuc.set("userInfo", [userInfo UTF8String]);
@@ -426,7 +427,6 @@
                 LogpwdViewController *setLogpwdVC = [[LogpwdViewController alloc] init];
                 setLogpwdVC.phoneNoStr = self.phoneNoStr;
                 setLogpwdVC.smsCodeString = self.smsCodeString;
-                setLogpwdVC.inviteCodeString = self.inviteCodeString;
                 [self.navigationController pushViewController:setLogpwdVC animated:YES];
                 
             }];

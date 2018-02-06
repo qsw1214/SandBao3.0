@@ -107,6 +107,7 @@
         //券包
         if (index == 1) {
             self.sandTableView.hidden = YES;
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
         }
     }];
     [self.baseScrollView addSubview:selectBarView];

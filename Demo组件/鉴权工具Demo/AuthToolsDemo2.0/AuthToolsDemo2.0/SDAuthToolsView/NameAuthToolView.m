@@ -80,7 +80,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     
-    if (!(textField.text.length>1 && textField.text.length<=6) && (textField.text.length>0)) {
+    if (!(textField.text.length>1 && textField.text.length<=10) && (textField.text.length>0)) {
         [self deleteErrorTextAnimation:textField];
         [self showTip];
     }else if(textField.text.length>0){

@@ -228,7 +228,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     
     
     //rechargeMoneyLab
-    UILabel *rechargeMoneyLab = [Tool createLable:@"转账金额(手续费率0.1%)" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    UILabel *rechargeMoneyLab = [Tool createLable:@"转账金额" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:rechargeMoneyLab];
     
     //rmbLab
@@ -514,16 +514,29 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        
+        [self.payView hidPayToolInPayListView];
+        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         
     }
 }
 - (void)payViewPayToolsError:(NSString *)errorInfo{
-    [Tool showDialog:errorInfo defulBlock:^{
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
+    
+    if ([errorInfo isEqualToString:@"无可用支付工具"]) {
+        [Tool showDialog:@"已绑定银行不可用" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        } rightBlock:^{
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+        }];
+    }
+    if ([errorInfo isEqualToString:@"无支付工具下发"]) {
+        [Tool showDialog:@"未绑定银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        } rightBlock:^{
+            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+        }];
+    }
 }
 #pragma mark - 业务逻辑
 #pragma mark 查询支付工具

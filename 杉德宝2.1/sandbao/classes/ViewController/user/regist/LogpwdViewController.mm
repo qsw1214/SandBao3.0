@@ -153,7 +153,6 @@
         NSMutableDictionary *userInfoDic1 = [[NSMutableDictionary alloc] init];
         [userInfoDic1 setValue:self.phoneNoStr forKey:@"userName"];
         [userInfoDic1 setValue:self.phoneNoStr forKey:@"phoneNo"];
-        [userInfoDic1 setValue:self.inviteCodeString forKey:@"inviteCode"];
         NSString *userInfo1 = [[PayNucHelper sharedInstance] dictionaryToJson:userInfoDic1];
         
         //注册 - regAuthTools
@@ -239,15 +238,58 @@
     
     //注册成成功 -> 归位到实名认证页 
     if (result == YES) {
-        //MQTT登录
-        [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
-        [Tool showDialog:@"恭喜您,注册成功!" message:@"立即实名认证,体验更多功能!" defulBlock:^{
-            //去实名
-            RealNameViewController *realName = [[RealNameViewController alloc] init];
-            UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
-            [self.sideMenuViewController setContentViewController:realNameNav];
-        }];
+        [self ownPayTools_login];
     }
+    else{
+        
+    }
+}
+/**
+ 更新我方支付工具_注册模式
+ */
+- (void)ownPayTools_login
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].self.HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        paynuc.set("tTokenType", "01001501");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
+                //根据order 字段排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //MQTT登录
+                [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
+                [Tool showDialog:@"恭喜您,注册成功!" message:@"立即实名认证,体验更多功能!" defulBlock:^{
+                    //去实名
+                    RealNameViewController *realName = [[RealNameViewController alloc] init];
+                    UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
+                    [self.sideMenuViewController setContentViewController:realNameNav];
+                }];
+            }];
+        }];
+        if (error) return ;
+        
+    }];
 }
 
 - (void)dealloc{

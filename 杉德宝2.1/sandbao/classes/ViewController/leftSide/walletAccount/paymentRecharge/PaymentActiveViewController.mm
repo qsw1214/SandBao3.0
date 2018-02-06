@@ -202,6 +202,7 @@
                 [Tool showDialog:@"代付凭证激活成功" defulBlock:^{
                     //代付凭证标识置为YES
                     [CommParameter sharedInstance].payForAnotherFlag = YES;
+                    [self.navigationController popViewControllerAnimated:YES];
                 }];
                 
             }];

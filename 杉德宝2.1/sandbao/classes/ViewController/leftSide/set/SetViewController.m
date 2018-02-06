@@ -75,6 +75,7 @@
     }
     if (btn.tag == BTN_TAG_FEEDBACK) {
         NSLog(@"意见反馈");
+        [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
     }
     if (btn.tag == BTN_TAG_ABOUTUS) {
         NSLog(@"关于");

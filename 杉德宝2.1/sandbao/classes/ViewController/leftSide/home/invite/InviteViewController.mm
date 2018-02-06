@@ -55,8 +55,8 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     if (btn.tag == BTN_TAG_JUSTCLICK) {
-        NSDictionary *inviteInfo = @{@"icon":@[@"icon_wechat",@"icon_moments",@"icon_qq",@"icon_weibo"],
-                                     @"title":@[@"微信",@"朋友圈",@"腾讯QQ",@"微博"]
+        NSDictionary *inviteInfo = @{@"icon":@[@"icon_wechat",@"icon_moments",@"icon_qq"],
+                                     @"title":@[@"微信",@"朋友圈",@"腾讯QQ"]
                                      };
         [SDInvitePop showInvitePopView:inviteInfo cellClickBlock:^(NSString *titleName) {
             
@@ -110,11 +110,6 @@
                 // 分享给好友
                 [QQApiInterface sendReq:req];
             }
-            
-            if ([titleName isEqualToString:@"微博"]) {
-                [Tool showDialog:@"暂不支持微博分享"];
-            }
-            
         }];
     }
 }

@@ -82,7 +82,7 @@
     __weak typeof(self) weakself = self;
     
     //sandCardNoView
-    CardNoAuthToolView *sandCardNoView = [CardNoAuthToolView createAuthToolViewOY:0];
+    SandCardNoAuthToolView *sandCardNoView = [SandCardNoAuthToolView createAuthToolViewOY:0];
     sandCardNoView.backgroundColor = [UIColor whiteColor];
     sandCardNoView.titleLab.text = @"杉德卡卡号";
     sandCardNoView.tip.text = @"请输入正确杉德卡卡号";
@@ -142,7 +142,7 @@
     // 添加font
     [attributes setObject:FONT_12_Regular forKey:NSFontAttributeName];
     
-    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"1.首次使用杉德卡支付，请先输入校验码；\n2.开通快捷服务后，当您在杉德宝内使用杉德卡进行支付时，仅需输入杉德宝的支付密码即可完成付款完成操作；\n3.若使用该杉德卡进行线下消费或主账户圈存，仍需输入杉德卡支付密码进行校验。" attributes:attributes];
+    NSAttributedString *text = [[NSAttributedString alloc] initWithString:@"1.开通快捷服务后，当您在杉德宝内使用杉德卡进行支付时，仅需输入杉德宝的支付密码即可完成付款完成操作；\n2.若使用该杉德卡进行线下消费或主账户圈存，仍需输入杉德卡支付密码进行校验。" attributes:attributes];
     
     UITextView *tipDetailTextview = [[UITextView alloc] init];
     [tipDetailTextview setAttributedText:text];
@@ -172,7 +172,7 @@
     
     [tipTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bottomBtn.mas_left);
-        make.top.equalTo(self.bottomBtn.mas_bottom).offset(UPDOWNSPACE_112);
+        make.top.equalTo(self.bottomBtn.mas_bottom).offset(UPDOWNSPACE_50);
         make.size.mas_equalTo(tipTitleLab.size);
     }];
     

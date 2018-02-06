@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2801CCEE2029971500F266A9 /* SandCardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801CCED2029971300F266A9 /* SandCardNoAuthToolView.m */; };
 		280621E31EF8F02F00346D1A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E21EF8F02F00346D1A /* OpenGLES.framework */; };
 		280621E51EF8F03800346D1A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E41EF8F03800346D1A /* CoreMotion.framework */; };
 		280621E71EF8F04100346D1A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E61EF8F04100346D1A /* AudioToolbox.framework */; };
@@ -333,6 +334,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2801CCEC2029971300F266A9 /* SandCardNoAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandCardNoAuthToolView.h; sourceTree = "<group>"; };
+		2801CCED2029971300F266A9 /* SandCardNoAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandCardNoAuthToolView.m; sourceTree = "<group>"; };
 		280621E21EF8F02F00346D1A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		280621E41EF8F03800346D1A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		280621E61EF8F04100346D1A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1543,6 +1546,8 @@
 				28981B601FA01FA8004CFC95 /* BankAuthToolView.m */,
 				28981B611FA01FA8004CFC95 /* CardNoAuthToolView.h */,
 				28981B621FA01FA8004CFC95 /* CardNoAuthToolView.m */,
+				2801CCEC2029971300F266A9 /* SandCardNoAuthToolView.h */,
+				2801CCED2029971300F266A9 /* SandCardNoAuthToolView.m */,
 				28981B631FA01FA8004CFC95 /* IdentityAuthToolView.h */,
 				28981B641FA01FA8004CFC95 /* IdentityAuthToolView.m */,
 				28981B651FA01FA8004CFC95 /* image */,
@@ -2725,6 +2730,7 @@
 				285741721FBD903900AA25A1 /* IdentityDetailViewController.mm in Sources */,
 				28BCE8A71FB03E5900D62F94 /* AddBankCardViewController.mm in Sources */,
 				2884219C1F8E091200082E7C /* UITextField+CheckLenght.m in Sources */,
+				2801CCEE2029971500F266A9 /* SandCardNoAuthToolView.m in Sources */,
 				2836AD601FE1122C00BAB209 /* SpsLunchViewController.mm in Sources */,
 				28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */,
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,

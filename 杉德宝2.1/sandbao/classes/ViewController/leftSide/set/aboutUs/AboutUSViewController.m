@@ -59,9 +59,11 @@
     }
     if (btn.tag == BTN_TAG_TOSTAR) {
         NSLog(@"去评分");
+        [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
     }
     if (btn.tag == BTN_TAG_ABOUTSAND) {
         NSLog(@"杉德宝隐私政策");
+        [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
         
         
     }
@@ -80,14 +82,15 @@
     
     
     //titleLab
-    NSString *strVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"] ;
-    NSString *strVersionInfo = [NSString stringWithFormat:@"@杉德宝Build版本号: %@",strVersion];
+    NSString *strVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] ;
+    NSString *strVersionInfo = [NSString stringWithFormat:@"@杉德宝AppStore版本号: %@",strVersion];
     UILabel *titleLab = [Tool createLable:strVersionInfo attributeStr:nil font:FONT_18_Regular textColor:COLOR_343339 alignment:NSTextAlignmentCenter];
     [self.baseScrollView addSubview:titleLab];
     
     //erCodeImgView
     UIImage *erCodeImg = [UIImage imageNamed:@"set_erCode"];
-    UIImageView *erCodeImgView = [Tool createImagView:erCodeImg];
+    
+    UIImageView *erCodeImgView = [Tool createImagView:[Tool twoDimensionCodeWithStr:@"https://sdb.sandpay.com.cn" size:erCodeImg.size.height]];
     [self.baseScrollView addSubview:erCodeImgView];
     
     //titlDesLab
@@ -119,10 +122,6 @@
         make.centerX.equalTo(headView.mas_centerX);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, titlDesLab.height));
     }];
-    
-    
-    
-    
 }
 
 
