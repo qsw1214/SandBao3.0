@@ -26,9 +26,11 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 
 
-
+/**
+ * 屏蔽蒲公英SDK
 #import <PgySDK/PgyManager.h>
 #import <PgyUpdate/PgyUpdateManager.h>
+ */
 
 @interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate,TencentSessionDelegate>
 {
@@ -43,6 +45,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
 #pragma mark - ***上传AppStore前 请务必删除蒲公英SDK***
+    /**
     //启动基本SDK
     // 7e2e46b54026ae02b7b963ae1e3d54b3 (上传生产版本key) com.sand.sandbao2
     // 33bb2bbf63b37e4e8e82c5a53cd14ca8 (上传测试版本Key) com.sand.sandbao
@@ -53,6 +56,7 @@
     [[PgyUpdateManager sharedPgyManager] checkUpdate];
     //关闭摇一摇截图
     [[PgyManager sharedPgyManager] setEnableFeedback:NO];
+     */
 #pragma mark - ***上传AppStore前 请务必删除蒲公英SDK***
     
     //-4. 启动定位 - 实例化
@@ -157,8 +161,7 @@
 #pragma mark 友盟相关设置
 - (void)UMSetAbout{
 
-//    UMConfigInstance.appKey = @"59edaad7a40fa37273000561";//接入统计
-    UMConfigInstance.appKey = @"";//不接入统计
+    UMConfigInstance.appKey = @"59edaad7a40fa37273000561";//接入统计
     UMConfigInstance.channelId = nil;
     UMConfigInstance.eSType = E_UM_NORMAL;
     UMConfigInstance.ePolicy = SEND_INTERVAL;

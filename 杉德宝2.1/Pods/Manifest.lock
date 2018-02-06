@@ -10,8 +10,6 @@ PODS:
   - MQTTClient/Manager (0.9.9):
     - MQTTClient/Min
   - MQTTClient/Min (0.9.9)
-  - Pgyer (2.8.9)
-  - PgyUpdate (1.5)
   - pop (1.0.10)
   - RESideMenu (4.0.7)
   - SDWebImage (4.2.2):
@@ -25,8 +23,6 @@ DEPENDENCIES:
   - Masonry
   - MJRefresh
   - MQTTClient
-  - Pgyer
-  - PgyUpdate
   - pop
   - RESideMenu (~> 4.0.7)
   - SDWebImage (~> 4.0)
@@ -38,14 +34,12 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
   MQTTClient: 5a59e0ebcad95f86ad8fc04dd4b819a944e58e0c
-  Pgyer: 830654e51e23f754cce5d8b3ea9ba72be68452eb
-  PgyUpdate: bad71685b91bba4aa520b7fe29356a476700fdf2
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   WechatOpenSDK: 491d965d79335070328571d3e79f714549e79a5e
 
-PODFILE CHECKSUM: 0df0952f0f0356e03eac4ea279b3ec10fc2b2cfa
+PODFILE CHECKSUM: 56a9ac4a750dfda0e6b92cbd9298336cefc97bf7
 
 COCOAPODS: 1.4.0.beta.2
