@@ -842,6 +842,15 @@
 
 
 #pragma mark - 本类公共方法调用
+#pragma mark 获取用户绑定的银行卡数量
+/**获取用户绑定的银行卡数量*/
+- (NSArray*)getBankCardPayToolArr
+{
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    NSArray *bankCardPayTooArr = [NSMutableArray arrayWithCapacity:0];
+    bankCardPayTooArr = [ownPayToolDic objectForKey:@"bankArray"];
+    return bankCardPayTooArr;
+}
 #pragma mark 检测是否实名或设置支付密码
 - (void)checkRealNameOrSetPayPwd{
     

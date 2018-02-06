@@ -344,9 +344,9 @@
     [self hiddenPayToolViewFromePayPwdView];
 }
 
-#pragma mark 外部调用 - 隐藏支付密码页_添加银行/杉德卡调用
+#pragma mark 内部调用 - 隐藏支付密码页_添加银行/杉德卡调用
 /**
- 外部调用隐藏方法
+ 内部调用隐藏方法
  (方法调用背景:点击绑新卡按钮,整体下移消失 - 跳转绑卡页面)
  (调用此方法,让PayToolList页面/PayToolOrder页面均下移隐藏且删除)
  */
@@ -415,7 +415,7 @@
         //1. 订单页删除
         [SDPayAnimtion payToolOrderViewAnimation:self.payToolOrderView frame:SDPayToolOrderViewRightDidDisapper showState:NO];
         //2. 列表页删除
-        [SDPayAnimtion payToolListViewAnimation:self.payToolListView frame:SDPayToolListViewDidDisapper_down showState:NO];
+        [SDPayAnimtion payToolListViewAnimation:self.payToolListView frame:SDPayToolListViewDidDisapper showState:NO];
         //3. 密码页删除
         [SDPayAnimtion payToolPwdViewAnimation:self.payToolPwdView frame:SDPayToolPwdViewDidDisapper showState:NO];
         //4. 透明背景删除
@@ -472,6 +472,8 @@
     if ([_delegate respondsToSelector:@selector(payViewAddPayToolCard:)]) {
         [_delegate payViewAddPayToolCard:payType];
     }
+    //隐藏支付工具列表页面
+    [self hidPayToolInPayListView];
 }
 
 

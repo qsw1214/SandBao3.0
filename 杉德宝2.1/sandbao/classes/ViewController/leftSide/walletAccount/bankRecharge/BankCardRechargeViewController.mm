@@ -10,6 +10,7 @@
 #import "PayNucHelper.h"
 #import "RechargeFinishViewController.h"
 #import "VerifyTypeViewController.h"
+#import "AddBankCardViewController.h"
 
 typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 
@@ -122,6 +123,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     }
     
     if (btn.tag == BTN_TAG_SHOWALLMONEY) {
+        [barButton changeState:YES];
         moneyTextfield.text = [NSString stringWithFormat:@"%@",limitDec];
     }
     
@@ -527,8 +529,13 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        [self.payView hidPayToolInPayListView];
-        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+        NSArray *bankCardArr = [self getBankCardPayToolArr];
+        if (bankCardArr.count>=3) {
+            [Tool showDialog:@"已绑定3张银行卡,不可继续绑卡"];
+        }else{
+            AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
+            [self.navigationController pushViewController:addBankCardVC animated:YES];
+        }
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         
@@ -537,17 +544,19 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewPayToolsError:(NSString *)errorInfo{
     
     if ([errorInfo isEqualToString:@"无可用支付工具"]) {
-        [Tool showDialog:@"已绑定银行不可用" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+        [Tool showDialog:@"已绑定银行卡不可用" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
              [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
-            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+            AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
+            [self.navigationController pushViewController:addBankCardVC animated:YES];
         }];
     }
     if ([errorInfo isEqualToString:@"无支付工具下发"]) {
         [Tool showDialog:@"未绑定银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
-            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+            AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
+            [self.navigationController pushViewController:addBankCardVC animated:YES];
         }];
     }
 }
@@ -733,6 +742,16 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
 }
 
+#pragma mark - 公共方法
+#pragma mark 获取用户绑定的银行卡数量
+/**获取用户绑定的银行卡数量*/
+- (NSArray*)getBankCardPayToolArr
+{
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    NSArray *bankCardPayTooArr = [NSMutableArray arrayWithCapacity:0];
+    bankCardPayTooArr = [ownPayToolDic objectForKey:@"bankArray"];
+    return bankCardPayTooArr;
+}
 
 - (void)dealloc{
     //清除通知

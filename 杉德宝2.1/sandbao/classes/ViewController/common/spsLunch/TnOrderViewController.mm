@@ -12,7 +12,7 @@
 #import "TnOrderCellView.h"
 #import "RechargeFinishViewController.h"
 #import "VerifyTypeViewController.h"
-
+#import "AddBankCardViewController.h"
 
 typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 @interface TnOrderViewController ()<SDPayViewDelegate>
@@ -287,8 +287,13 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        [self.payView hidPayToolInPayListView];
-        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+        NSArray *bankCardArr = [self getBankCardPayToolArr];
+        if (bankCardArr.count>=3) {
+            [Tool showDialog:@"已绑定3张银行卡,不可继续绑卡"];
+        }else{
+            AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
+            [self.navigationController pushViewController:addBankCardVC animated:YES];
+        }
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         
@@ -463,6 +468,17 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         }];
     }];
     
+}
+
+#pragma mark - 本类公共方法调用
+#pragma mark 获取用户绑定的银行卡数量
+/**获取用户绑定的银行卡数量*/
+- (NSArray*)getBankCardPayToolArr
+{
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    NSArray *bankCardPayTooArr = [NSMutableArray arrayWithCapacity:0];
+    bankCardPayTooArr = [ownPayToolDic objectForKey:@"bankArray"];
+    return bankCardPayTooArr;
 }
 
 - (void)dealloc{

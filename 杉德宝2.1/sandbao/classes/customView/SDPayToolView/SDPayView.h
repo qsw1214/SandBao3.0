@@ -154,11 +154,5 @@ typedef NS_ENUM(NSInteger,SDPayViewAddCardType) {
  */
 - (void)hidPayToolInPayPwdView;
 
-#pragma mark 外部调用 - 隐藏支付密码页_添加银行/杉德卡调用
-/**
- 外部调用隐藏方法
- (方法调用背景:点击绑新卡按钮,整体下移消失 - 跳转绑卡页面)
- (调用此方法,让PayToolList页面/PayToolOrder页面均下移隐藏且删除)
- */
-- (void)hidPayToolInPayListView;
+
 @end

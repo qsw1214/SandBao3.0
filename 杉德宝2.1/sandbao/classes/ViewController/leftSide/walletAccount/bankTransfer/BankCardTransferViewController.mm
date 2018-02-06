@@ -10,6 +10,7 @@
 #import "PayNucHelper.h"
 #import "BankCardTransferFinishViewController.h"
 #import "VerifyTypeViewController.h"
+#import "AddBankCardViewController.h"
 
 
 typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
@@ -118,13 +119,13 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         }
     }
     if (btn.tag == BTN_TAG_SHOWALLMONEY) {
-        moneyTextfield.text = [NSString stringWithFormat:@"%@",limitDec];
+        [barButton changeState:YES];
+        moneyTextfield.text = [self limitCompareWallet];
     }
 }
 
 
 #pragma mark  - UI绘制
-
 - (void)create_HeadView{
     //headView
     headView = [[UIView alloc] init];
@@ -196,9 +197,8 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     tipView.backgroundColor = COLOR_F5F5F5;
     [self.baseScrollView addSubview:tipView];
     
-    //获取limit信息 - (提现limit-限制转出账户可转出金额)
-    limitDec = [[PayNucHelper sharedInstance] limitInfo:[self.transferOutPayToolDic objectForKey:@"limit"]];
     //tipLab
+    [self limitCompareWallet];
     UILabel *tipLab = [Tool createLable:[NSString stringWithFormat:@"最多可对该卡转账:%@元",limitDec] attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [tipView addSubview:tipLab];
     
@@ -252,7 +252,9 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     [bodyView addSubview:line];
     
     //bottomTipLab
-    UILabel *bottomTipLab = [Tool createLable:@"该卡最低转账金额100.00元" attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    NSString *allWalletMoney = [self limitCompareWallet];
+    allWalletMoney = [NSString stringWithFormat:@"可全部转入银行卡的金额为:¥%@",allWalletMoney];
+    UILabel *bottomTipLab = [Tool createLable:allWalletMoney attributeStr:nil font:FONT_11_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [bodyView addSubview:bottomTipLab];
     
     //bottomBtn
@@ -514,8 +516,13 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)payViewAddPayToolCard:(NSString *)type{
     
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
-        [self.payView hidPayToolInPayListView];
-        [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+        NSArray *bankCardArr = [self getBankCardPayToolArr];
+        if (bankCardArr.count>=3) {
+            [Tool showDialog:@"已绑定3张银行卡,不可继续绑卡"];
+        }else{
+            AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
+            [self.navigationController pushViewController:addBankCardVC animated:YES];
+        }
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         
@@ -524,17 +531,19 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)payViewPayToolsError:(NSString *)errorInfo{
     
     if ([errorInfo isEqualToString:@"无可用支付工具"]) {
-        [Tool showDialog:@"已绑定银行不可用" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+        [Tool showDialog:@"已绑定银行卡不可用" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
-            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+            AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
+            [self.navigationController pushViewController:addBankCardVC animated:YES];
         }];
     }
     if ([errorInfo isEqualToString:@"无支付工具下发"]) {
         [Tool showDialog:@"未绑定银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
-            [self.sideMenuViewController setContentViewController:[CommParameter sharedInstance].bankCardNav];
+            AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
+            [self.navigationController pushViewController:addBankCardVC animated:YES];
         }];
     }
 }
@@ -710,6 +719,33 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         }];
         if (error) return ;
     }];
+}
+
+#pragma mark - 公共方法
+#pragma mark 获取用户绑定的银行卡数量
+/**获取用户绑定的银行卡数量*/
+- (NSArray*)getBankCardPayToolArr
+{
+    NSDictionary *ownPayToolDic = [Tool getPayToolsInfo:[CommParameter sharedInstance].ownPayToolsArray];
+    NSArray *bankCardPayTooArr = [NSMutableArray arrayWithCapacity:0];
+    bankCardPayTooArr = [ownPayToolDic objectForKey:@"bankArray"];
+    return bankCardPayTooArr;
+}
+
+//*比较limit与钱包余额*/
+- (NSString*)limitCompareWallet{
+    //获取limit信息 - (提现limit-限制转出账户可转出金额)
+    limitDec = [[PayNucHelper sharedInstance] limitInfo:[self.transferOutPayToolDic objectForKey:@"limit"]];
+    
+    NSString *showMoney = @"";
+    float wallectMoney = [[Tool fenToYuanDict:self.transferOutPayToolDic] floatValue];
+    float limitMoney = [[NSString stringWithFormat:@"%@",limitDec] floatValue];
+    if (wallectMoney>limitMoney) {
+        showMoney = [NSString stringWithFormat:@"%@",limitDec];
+    }else{
+        showMoney = [Tool fenToYuanDict:self.transferOutPayToolDic];
+    }
+    return showMoney;
 }
 
 - (void)dealloc{
