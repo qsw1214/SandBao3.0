@@ -174,7 +174,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     }
     
     self.payView = [SDPayView getPayView];
-    self.payView.addCardType = SDPayView_ADDSANDCARD;
+    self.payView.addCardType = SDPayView_ADDBANKCARD;
     self.payView.delegate = self;
     [[UIApplication sharedApplication].keyWindow addSubview:self.payView];
 }

@@ -249,12 +249,12 @@
         if ([_delegate respondsToSelector:@selector(payToolListViewAddPayToolCardWithpayType:)]) {
             for (int i = 0; i<paylistArr.count; i++) {
                 NSDictionary *dic = paylistArr[i];
-                NSString *title = [dic objectForKey:@"type"];
-                if ([title isEqualToString:PAYTOOL_PAYPASS]) {
-                    [_delegate payToolListViewAddPayToolCardWithpayType:title];
+                NSString *type = [dic objectForKey:@"type"];
+                if ([type isEqualToString:PAYTOOL_PAYPASS]) {
+                    [_delegate payToolListViewAddPayToolCardWithpayType:type];
                 }
-                else if ([title isEqualToString:PAYTOOL_ACCPASS]){
-                     [_delegate payToolListViewAddPayToolCardWithpayType:title];
+                else if ([type isEqualToString:PAYTOOL_ACCPASS]){
+                     [_delegate payToolListViewAddPayToolCardWithpayType:type];
                 }
             }
             //1.1 UI回退由 payToolListViewAddPayToolCardWithpayType 代理方法处理
