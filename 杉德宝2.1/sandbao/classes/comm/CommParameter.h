@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <RESideMenu.h>
-
 @interface CommParameter : NSObject
 
 
@@ -25,8 +23,8 @@
 @property (nonatomic, strong) UINavigationController *sandCardNav;    //全局的 卡券包
 @property (nonatomic, strong) UINavigationController *setNav;         //全局的 设置
 
-#pragma mark - RESideMenu(current)
-@property (nonatomic, strong) RESideMenu *currentResideMenu;  //全局存储的当前主内容控制器
+#pragma mark - ViewController(current)
+@property (nonatomic, strong) UIViewController *currentVC;  //全局存储的当前窗口上的VC
 
 
 

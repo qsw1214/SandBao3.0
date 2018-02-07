@@ -133,7 +133,13 @@
         //2.2 nameLab文字
         NSString *accNo  = [[dic objectForKey:@"account"] objectForKey:@"accNo"];
         NSString *lastfournumber = accNo.length>=4?[accNo substringFromIndex:accNo.length-4]: @"暂无显示";
-        bankNameLabel.text = [NSString stringWithFormat:@"%@(%@)",title,lastfournumber];
+        //2.2.1 - (钱包账户.电子记名卡)不显示尾号
+        if ([[dic objectForKey:@"type"] isEqualToString:@"1005"]) {
+            bankNameLabel.text = [NSString stringWithFormat:@"%@",title];
+        }else{
+            bankNameLabel.text = [NSString stringWithFormat:@"%@(%@)",title,lastfournumber];
+        }
+        
         
         //3.2 limitLab文字
          bankLimitLabel.text = [SDPayToolListView getbankLimitLabelText:type userblance:userBalanceStr];

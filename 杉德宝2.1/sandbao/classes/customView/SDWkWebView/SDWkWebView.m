@@ -97,8 +97,16 @@
     } completion:^(BOOL finished) {
         //隐藏progress
         weakSelf.progressView.hidden = YES;
+        
+        //避免删除kvo异常
         //加载成功 - 删除监听
-        [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+        @try{
+            [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
+        }
+        @catch (NSException *exception){
+            
+        }
+        
     }];
 }
 
@@ -167,11 +175,13 @@
         [_navgationDelegate webView:webView didFailProvisionalNavigation:navigation];
     }
     
+    //避免删除kvo异常
     //加载失败 - 删除监听
     @try{
         [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
     }
     @catch(NSException *exception){
+        
     }
     
 }

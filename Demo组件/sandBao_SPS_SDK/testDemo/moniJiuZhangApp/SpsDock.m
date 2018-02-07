@@ -13,8 +13,11 @@
 #define OTHER_SCHEMES   @"sandbaoPay"
 
 //杉德宝AppStore:APPID
-#define STOREAPPID @"0000000"
+#define STOREAPPID @"1345742057"
 #define APPSTORE_FOR_SANDBAO [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/id%@?ls=1&mt=8", STOREAPPID]]
+
+@interface SpsDock()<UIAlertViewDelegate>
+@end
 
 @implementation SpsDock
 
@@ -71,10 +74,6 @@ static SpsDock *spsDockSharedInstace = nil;
                     } else {
                         //唤起杉德宝失败
                         [[SpsDock sharedInstance]  showAlertError];
-                        /*
-                         唤起杉德宝失败,引导进入AppStore安装杉德宝
-                         [application openURL:APPSTORE_FOR_SANDBAO options:@{} completionHandler:nil];
-                         */
                     }
                 }];
             }
@@ -89,10 +88,6 @@ static SpsDock *spsDockSharedInstace = nil;
     else{
         //唤起杉德宝失败
         [[SpsDock sharedInstance] showAlertError];
-        /*
-         唤起杉德宝失败,引导进入AppStore安装杉德宝
-         [application openURL:APPSTORE_FOR_SANDBAO options:@{} completionHandler:nil];
-         */
     }
 }
 
@@ -167,9 +162,18 @@ static SpsDock *spsDockSharedInstace = nil;
  */
 - (void)showAlertError{
     
-    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"未能启动杉德宝支付" message: @"请前往AppStore下载" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"您尚未安装杉德宝" message: @"点击前往AppStore下载" delegate:self cancelButtonTitle:@"下载" otherButtonTitles:nil, nil];
+    view.delegate = self;
     [view show];
-    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+ 
+    if (buttonIndex == 0) {
+        UIApplication *application = [UIApplication sharedApplication];
+        //唤起杉德宝失败,引导进入AppStore安装杉德宝
+        [application openURL:APPSTORE_FOR_SANDBAO options:@{} completionHandler:nil];
+    }
 }
 
 

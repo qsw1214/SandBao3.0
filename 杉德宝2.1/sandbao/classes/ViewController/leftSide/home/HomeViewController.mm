@@ -808,8 +808,8 @@
         //1.退出用户登录页
         [Tool showDialog:msgTitle message:message defulBlock:^{
             
-            //从全局变量 [CommParameter sharedInstance].currentResideMenu 获取当前窗口下的主内容视图,用于登出UI操作
-            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:[CommParameter sharedInstance].currentResideMenu forLogOut:YES];
+            //从全局变量 [CommParameter sharedInstance].currentVC 获取当前窗口下的主内容视图,用于登出UI操作
+            [Tool setContentViewControllerWithLoginFromSideMentuVIewController:[CommParameter sharedInstance].currentVC forLogOut:YES];
         }];
     }
     
