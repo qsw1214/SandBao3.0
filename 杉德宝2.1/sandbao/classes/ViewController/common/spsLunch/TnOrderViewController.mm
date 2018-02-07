@@ -278,6 +278,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
         verifyTypeVC.tokenType = @"01000601";
         verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.popToRoot = YES;
         verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
         [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }

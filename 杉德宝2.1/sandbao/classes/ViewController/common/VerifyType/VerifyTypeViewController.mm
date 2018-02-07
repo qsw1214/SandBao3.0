@@ -59,7 +59,9 @@
 - (void)setNavCoverView{
     [super setNavCoverView];
     
+    //未设置过支付密码
     if ([CommParameter sharedInstance].payPassFlag == NO) {
+        //从首页跳转进入的修改支付密码
         if (self.setPayPassFromeHomeNav) {
             self.navCoverView.letfImgStr = @"login_icon_back";
             __weak VerifyTypeViewController *weakSelf = self;
@@ -71,6 +73,7 @@
                 }];
             };
         }
+        //非首页跳转进入的修改支付密码
         else if (self.needGoBackIcon) {
             self.navCoverView.letfImgStr = @"login_icon_back";
             __weak VerifyTypeViewController *weakSelf = self;
@@ -81,12 +84,21 @@
             self.navCoverView.hidden = YES;
         }
         
-    }else{
+    }
+    //已设置过支付密码
+    else{
         self.navCoverView.letfImgStr = @"login_icon_back";
         __weak VerifyTypeViewController *weakSelf = self;
-        self.navCoverView.leftBlock = ^{
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        };
+        if (self.popToRoot) {
+            self.navCoverView.leftBlock = ^{
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            };
+        }else{
+            self.navCoverView.leftBlock = ^{
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+            };
+        }
+        
     }
     
 }

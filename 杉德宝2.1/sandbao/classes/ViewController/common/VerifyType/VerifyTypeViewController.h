@@ -38,4 +38,10 @@
 @property (nonatomic, strong) NSString *phoneNoStr;
 
 
+/**
+ 是否支持跳转回Root导航
+ */
+@property (nonatomic, assign) BOOL popToRoot;
+
+
 @end

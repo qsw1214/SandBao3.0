@@ -16,9 +16,6 @@
 #define STOREAPPID @"1345742057"
 #define APPSTORE_FOR_SANDBAO [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/us/app/id%@?ls=1&mt=8", STOREAPPID]]
 
-@interface SpsDock()<UIAlertViewDelegate>
-@end
-
 @implementation SpsDock
 
 
@@ -162,18 +159,34 @@ static SpsDock *spsDockSharedInstace = nil;
  */
 - (void)showAlertError{
     
-    UIAlertView *view = [[UIAlertView alloc] initWithTitle:@"您尚未安装杉德宝" message: @"点击前往AppStore下载" delegate:self cancelButtonTitle:@"下载" otherButtonTitles:nil, nil];
-    view.delegate = self;
-    [view show];
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
- 
-    if (buttonIndex == 0) {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您尚未安装杉德宝" message:@"点击前往AppStore下载" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         UIApplication *application = [UIApplication sharedApplication];
         //唤起杉德宝失败,引导进入AppStore安装杉德宝
         [application openURL:APPSTORE_FOR_SANDBAO options:@{} completionHandler:nil];
+    }]];
+    [[self currentViewController] presentViewController:alert animated:YES completion:nil];
+}
+
+/**获取当前窗口下的视图控制器*/
+- (UIViewController *)currentViewController
+{
+    UIWindow *keyWindow  = [UIApplication sharedApplication].keyWindow;
+    UIViewController *vc = keyWindow.rootViewController;
+    while (vc.presentedViewController)
+    {
+        vc = vc.presentedViewController;
+        
+        if ([vc isKindOfClass:[UINavigationController class]])
+        {
+            vc = [(UINavigationController *)vc visibleViewController];
+        }
+        else if ([vc isKindOfClass:[UITabBarController class]])
+        {
+            vc = [(UITabBarController *)vc selectedViewController];
+        }
     }
+    return vc;
 }
 
 

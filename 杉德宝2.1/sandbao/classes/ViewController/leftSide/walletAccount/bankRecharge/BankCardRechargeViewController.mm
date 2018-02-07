@@ -150,11 +150,11 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     [bankIconBackGroundView addSubview:bankIconImgView];
     
     //bankName
-    bankNameLab = [Tool createLable:@"unknown" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
+    bankNameLab = [Tool createLable:@"银行卡号" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNameLab];
     
     //bankNum
-    bankNumLab = [Tool createLable:@"尾号unknown" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
+    bankNumLab = [Tool createLable:@"尾号(银行卡后四位尾号)" attributeStr:nil font:FONT_13_Regular textColor:COLOR_343339_5 alignment:NSTextAlignmentLeft];
     [headView addSubview:bankNumLab];
     
     bankIconBackGroundView.size = CGSizeMake(bankIconImag.size.width + LEFTRIGHTSPACE_09*2, bankIconImag.size.height + LEFTRIGHTSPACE_09*2);
@@ -520,6 +520,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
         VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
         verifyTypeVC.tokenType = @"01000601";
         verifyTypeVC.verifyType = VERIFY_TYPE_CHANGEPATPWD;
+        verifyTypeVC.popToRoot = YES;
         verifyTypeVC.phoneNoStr = [CommParameter sharedInstance].phoneNo;
         [self.navigationController pushViewController:verifyTypeVC animated:YES];
     }
@@ -544,7 +545,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewPayToolsError:(NSString *)errorInfo{
     
     if ([errorInfo isEqualToString:@"无可用支付工具"]) {
-        [Tool showDialog:@"已绑定银行卡不可用" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+        [Tool showDialog:@"未绑定银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
              [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];

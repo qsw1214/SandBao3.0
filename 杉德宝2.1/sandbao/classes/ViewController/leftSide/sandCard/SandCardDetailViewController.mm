@@ -270,6 +270,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         //修改杉德卡密码
+        [Tool showDialog:@"暂不支持修改"];
     }
     
 }

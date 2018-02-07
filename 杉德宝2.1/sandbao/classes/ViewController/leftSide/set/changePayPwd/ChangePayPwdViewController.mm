@@ -77,7 +77,7 @@
             [self createUI];
         }
         if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
-            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"两次密码不正确,请重新输入!"];
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"两次密码不一致,请重新输入!"];
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self createUI];
         }
