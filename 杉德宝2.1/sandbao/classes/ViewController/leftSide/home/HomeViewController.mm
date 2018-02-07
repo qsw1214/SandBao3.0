@@ -440,7 +440,7 @@
 - (void)create_BannerView{
     
     UIImage *bannerImg = [UIImage imageNamed:@"banner"];
-    bannerView = [[SDBannerView alloc] initStyle:SDBannerViewOnlyImage imageArray:@[bannerImg,bannerImg] UrlArray:nil titleArray:nil];
+    bannerView = [[SDBannerView alloc] initStyle:SDBannerViewOnlyImage imageArray:@[bannerImg] UrlArray:nil titleArray:nil];
     bannerView.delegate = self;
     bannerView.rect = CGRectMake(0, 0, SCREEN_WIDTH, bannerImg.size.height);
     [self.baseScrollView addSubview:bannerView];
