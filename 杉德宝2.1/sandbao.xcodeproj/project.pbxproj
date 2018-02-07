@@ -2881,7 +2881,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sand.sandbao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "510e6b97-81b0-4d9e-85f2-1b75cb8e2277";
+				PROVISIONING_PROFILE = "d8902cd3-e0d9-4974-8022-02fbcde326b9";
 				PROVISIONING_PROFILE_SPECIFIER = sandComm_Dev_Profile;
 			};
 			name = Debug;
@@ -2892,7 +2892,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = CYP2Q7U7L3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2924,8 +2924,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sand.sandbao;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "32ba215d-640b-4eb3-a9d3-4d9d85e23158";
-				PROVISIONING_PROFILE_SPECIFIER = sandComm_Dev_Profile;
+				PROVISIONING_PROFILE = "cc45f7f7-4659-46e9-9a48-cdfe0c7206da";
+				PROVISIONING_PROFILE_SPECIFIER = sandbao_Dis_Profile;
 			};
 			name = Release;
 		};

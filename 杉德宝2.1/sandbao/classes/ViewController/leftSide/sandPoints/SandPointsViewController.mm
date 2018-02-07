@@ -15,7 +15,7 @@
 
 @interface SandPointsViewController ()
 {
-    UIView *headView;
+
     GradualView *sandPointBGView;
     SDWaveViwe *waveView;
     UILabel *sandPointCountLab;
@@ -59,8 +59,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self creaetUI];
     
+    [self create_HeadView];
+    [self create_BodyView];
     
 }
 
@@ -98,11 +99,10 @@
 #pragma mark - 重写父类-点击方法集合
 - (void)buttonClick:(UIButton *)btn{
     
-    
 }
 
 #pragma mark  - UI绘制
-- (void)creaetUI{
+- (void)create_HeadView{
     
     CGFloat sandPointBGViewH = UPDOWNSPACE_133;
     
@@ -154,6 +154,21 @@
     
     [sandPointBGView addSubview:waveView];
 }
+
+- (void)create_BodyView{
+    
+    UILabel *tipLab = [Tool createLable:@"敬请期待..." attributeStr:nil font:FONT_14_Regular textColor:COLOR_343339_7 alignment:NSTextAlignmentCenter];
+    [self.baseScrollView addSubview:tipLab];
+    
+    [tipLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.baseScrollView.mas_centerX);
+        make.centerY.equalTo(self.baseScrollView.mas_centerY);
+        make.size.mas_equalTo(tipLab.size);
+    }];
+    
+    
+}
+
 
 /**删除水波动画*/
 - (void)removeWaveView{
