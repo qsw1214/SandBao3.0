@@ -100,6 +100,7 @@
 		2857416E1FBD763400AA25A1 /* MessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2857416D1FBD763400AA25A1 /* MessageViewController.m */; };
 		285741721FBD903900AA25A1 /* IdentityDetailViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 285741711FBD903900AA25A1 /* IdentityDetailViewController.mm */; };
 		28574C5B1F4E72BF0003090D /* libpaynuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 28574C5A1F4E72BF0003090D /* libpaynuc.a */; };
+		285F4F77202C39900076336C /* loading-812h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 285F4F76202C39900076336C /* loading-812h@3x.png */; };
 		286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 286BFCAB1EE92A3100FD9731 /* SDScanView.m */; };
 		286BFCAE1EE92A3100FD9731 /* SGQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */; };
 		287585B41FD53A8C00DACC8E /* notPay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 287585B21FD53A8C00DACC8E /* notPay@2x.png */; };
@@ -483,6 +484,7 @@
 		285741701FBD903900AA25A1 /* IdentityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityDetailViewController.h; sourceTree = "<group>"; };
 		285741711FBD903900AA25A1 /* IdentityDetailViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IdentityDetailViewController.mm; sourceTree = "<group>"; };
 		28574C5A1F4E72BF0003090D /* libpaynuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libpaynuc.a; sourceTree = "<group>"; };
+		285F4F76202C39900076336C /* loading-812h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loading-812h@3x.png"; sourceTree = "<group>"; };
 		286BFCAA1EE92A3100FD9731 /* SDScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScanView.h; sourceTree = "<group>"; };
 		286BFCAB1EE92A3100FD9731 /* SDScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScanView.m; sourceTree = "<group>"; };
 		286BFCAC1EE92A3100FD9731 /* SGQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SGQRCode.bundle; sourceTree = "<group>"; };
@@ -1062,6 +1064,7 @@
 				283043ED1FE3AED500DD4317 /* loading-568h@2x.png */,
 				283043EE1FE3AED500DD4317 /* loading-667h@2x.png */,
 				283043EF1FE3AED500DD4317 /* loading-736h@3x.png */,
+				285F4F76202C39900076336C /* loading-812h@3x.png */,
 				283043F01FE3AED500DD4317 /* loading.png */,
 				283043F11FE3AED500DD4317 /* loading@2x.png */,
 			);
@@ -2414,6 +2417,7 @@
 				283B9915201EEE130008EBA3 /* icon_moments@3x.png in Resources */,
 				283B9914201EEE130008EBA3 /* icon_moments@2x.png in Resources */,
 				2853C5781EE134C100DFF407 /* h5test.html in Resources */,
+				285F4F77202C39900076336C /* loading-812h@3x.png in Resources */,
 				283B9919201EEE130008EBA3 /* icon_wechat@3x.png in Resources */,
 				2824F12B1FF33DBC0041D857 /* shoukuanma@3x.png in Resources */,
 				28A8AEB31FAB25E500FA1EC1 /* recharge_chooseBtn@3x.png in Resources */,

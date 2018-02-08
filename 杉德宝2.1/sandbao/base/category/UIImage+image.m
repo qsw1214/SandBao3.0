@@ -26,7 +26,8 @@
 #define iPhone6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 // 判断是否为iPhone6 plus
 #define iPhone6plus (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
-
+// 判断是否为iPhone X
+#define iPhoneX (IS_IPHONE && SCREEN_MAX_LENGTH == 812.f)
 
 
 @implementation UIImage (image)
@@ -65,7 +66,10 @@
         name = [name filenameAppend:@"-667h@2x"];
     } else if (iPhone6plus) {
         name = [name filenameAppend:@"-736h@3x"];
-    }else {
+    } else if (iPhoneX){
+        name = [name filenameAppend:@"-812h@3x"];
+    }
+    else {
         name = [name filenameAppend:@""];
     }
     
@@ -88,7 +92,10 @@
         name = [name filenameAppend:@"-667h@2x"];
     } else if (iPhone6plus) {
         name = [name filenameAppend:@"-736h@3x"];
-    }else {
+    } else if (iPhoneX){
+        name = [name filenameAppend:@"-812h@3x"];
+    }
+    else {
         name = [name filenameAppend:@""];
     }
     return [UIImage imageNamed:name];
