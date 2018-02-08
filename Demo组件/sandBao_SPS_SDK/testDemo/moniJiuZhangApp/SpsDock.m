@@ -9,7 +9,7 @@
 #import "SpsDock.h"
 #import <UIKit/UIKit.h>
 
-#define SAND_SCHEMES @"sandbao"
+#define SAND_SCHEMES @"sandbaoApp"
 #define OTHER_SCHEMES   @"sandbaoPay"
 
 //杉德宝AppStore:APPID
