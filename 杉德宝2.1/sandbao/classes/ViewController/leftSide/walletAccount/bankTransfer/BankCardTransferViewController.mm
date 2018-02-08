@@ -61,7 +61,13 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     [self getPayTools];
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //清除payView
+    if (self.payView) {
+        [self.payView hidePayTool];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

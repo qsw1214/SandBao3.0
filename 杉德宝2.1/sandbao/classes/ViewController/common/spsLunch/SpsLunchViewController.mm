@@ -73,7 +73,10 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         forgetPwdPush = NO;
     }else{
         //只要消失,删除sps
-        [self.payView removeFromSuperview];
+        //清除payView
+        if (self.payView) {
+            [self.payView hidePayTool];
+        }
         forgetPwdPush = NO;
     }
     

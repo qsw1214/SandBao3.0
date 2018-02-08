@@ -51,6 +51,7 @@
         noCopyTextfield.placeholder = @"";
         noCopyTextfield.clearButtonMode = UITextFieldViewModeNever;
         noCopyTextfield.delegate = self;
+        [noCopyTextfield becomeFirstResponder];
         noCopyTextfield.backgroundColor = [UIColor clearColor];
         noCopyTextfield.textColor = [UIColor clearColor];
         noCopyTextfield.tintColor = [UIColor clearColor];

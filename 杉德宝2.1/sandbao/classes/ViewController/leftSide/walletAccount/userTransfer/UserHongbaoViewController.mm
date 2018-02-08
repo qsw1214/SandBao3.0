@@ -33,6 +33,15 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
 
 @implementation UserHongbaoViewController
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //清除payView
+    if (self.payView) {
+        [self.payView hidePayTool];
+    }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.

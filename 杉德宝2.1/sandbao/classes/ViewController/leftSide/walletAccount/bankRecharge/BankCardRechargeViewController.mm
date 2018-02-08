@@ -67,6 +67,15 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //清除payView
+    if (self.payView) {
+        [self.payView hidePayTool];
+    }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -545,7 +554,7 @@ typedef void(^WalletRechargeStateBlock)(NSArray *paramArr);
 - (void)payViewPayToolsError:(NSString *)errorInfo{
     
     if ([errorInfo isEqualToString:@"无可用支付工具"]) {
-        [Tool showDialog:@"未绑定银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+        [Tool showDialog:@"无可用银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
              [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];

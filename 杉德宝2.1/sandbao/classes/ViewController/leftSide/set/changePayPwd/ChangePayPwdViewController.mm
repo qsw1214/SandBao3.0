@@ -72,6 +72,7 @@
             //验证支付密码不重复,查询带注册鉴权
             [self setRegAuthTools];
         }
+        
         if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN) {
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self createUI];

@@ -53,9 +53,12 @@
     
     if (btn.tag == BTN_TAG_VERSION) {
         NSLog(@"版本说明");
+        [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
+        /*
         DefaultWebViewController *webVC = [[DefaultWebViewController alloc] init];
         webVC.requestStr = [NSString stringWithFormat:@"%@%@",AddressHTTP,ot_help_normal_FAQ];
         [self.navigationController pushViewController:webVC animated:YES];
+         */
     }
     if (btn.tag == BTN_TAG_TOSTAR) {
         NSLog(@"去评分");

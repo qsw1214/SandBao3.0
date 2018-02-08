@@ -82,6 +82,15 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     isSelfSave = NO;
+    
+    //清除payView
+    if (self.payView) {
+        [self.payView hidePayTool];
+    }
+    //隐藏payQrcodeView的条码/二维码放大视图
+    if (self.payQrcodeView) {
+        [self.payQrcodeView hiddenBigQrcodeView];
+    }
 }
 
 

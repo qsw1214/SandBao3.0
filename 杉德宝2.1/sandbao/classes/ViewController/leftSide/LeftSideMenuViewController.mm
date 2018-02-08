@@ -428,18 +428,24 @@
     if ([titleName isEqualToString:@"我的账单"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.myBillNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_Bill];
     }
     if ([titleName isEqualToString:@"钱包账户"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.walletAccNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_Wallet];
     }
     if ([titleName isEqualToString:@"杉德积分"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.sandPointNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_Sandpoint];
     }
@@ -448,6 +454,8 @@
         [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"努力开发中..."];
         /** 点击进入理财 - 暂时屏蔽
         [self.sideMenuViewController setContentViewController:self.financicleNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
          */
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_Financial];
@@ -455,25 +463,27 @@
     if ([titleName isEqualToString:@"银行卡"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.bankCardNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_BankCard];
     }
     if ([titleName isEqualToString:@"卡券包"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.sandCardNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_SandCard];
     }
     if ([titleName isEqualToString:@"设置"]) {
         //重置RESdieMeun的主控制器
         [self.sideMenuViewController setContentViewController:self.setNav];
+        //隐藏Menu控制器
+        [self.sideMenuViewController hideMenuViewController];
         //友盟自定义时间统计 - 计数事件
         [MobClick event:UM_Setting];
     }
-    
-    //隐藏Menu控制器
-    [self.sideMenuViewController hideMenuViewController];
-    
 }
 
 

@@ -62,7 +62,13 @@
             //设置支付密码 - 上送鉴权
             [self setRegAuthTools];
         }
-        if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN || self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
+        
+        if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_AGAIN) {
+            [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self createUI];
+        }
+        if (self.SIX_CODE_STATE == SIX_CODE_STATE_INPUT_FIRST) {
+            [SDMBProgressView showSDMBProgressNormalINView:self.view lableText:@"两次密码不一致,请重新输入!"];
             [self.baseScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self createUI];
         }
@@ -266,8 +272,8 @@
                 [Tool showDialog:@"支付密码设置成功" defulBlock:^{
                     [CommParameter sharedInstance].payPassFlag = YES;
                     
-                    //归位Home或SpsLunch
-                    [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+                    //拉取ownPayTools
+                    [self ownPayTools_rigest];
                 }];
                 
             }];
@@ -275,6 +281,57 @@
         if (error) return ;
     }];
 }
+
+/**
+ 更新我方支付工具_注册模式
+ */
+- (void)ownPayTools_rigest
+{
+    self.HUD = [SDMBProgressView showSDMBProgressOnlyLoadingINViewImg:self.view];
+    [SDRequestHelp shareSDRequest].self.HUD = self.HUD;
+    [SDRequestHelp shareSDRequest].controller = self;
+    [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+        __block BOOL error = NO;
+        
+        paynuc.set("tTokenType", "01001501");
+        paynuc.set("cfg_termFp", [[Tool setCfgTempFpStaticDataFlag:NO DynamicDataFlag:YES] UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"token/getTtoken/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                //归位Home或SpsLunch
+                [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+            }];
+        } successBlock:^{
+            
+        }];
+        if (error) return ;
+        
+        
+        paynuc.set("payToolKinds", "[]");
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"payTool/getOwnPayTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                //归位Home或SpsLunch
+                [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+            }];
+        } successBlock:^{
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                [self.HUD hidden];
+                
+                NSArray *payToolsArray = [[PayNucHelper sharedInstance] jsonStringToArray:[NSString stringWithUTF8String:paynuc.get("payTools").c_str()]];
+                //根据order 字段排序
+                payToolsArray = [Tool orderForPayTools:payToolsArray];
+                [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
+                
+                //归位Home或SpsLunch
+                [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
+            }];
+        }];
+        if (error) return ;
+        
+    }];
+}
+
 
 - (void)dealloc{
     //清除通知
