@@ -1,0 +1,208 @@
+//
+//  sandbao-Prefix.pch
+//  sandbao
+//
+//  Created by tianNanYiHao on 2016/10/31.
+//  Copyright © 2016年 sand. All rights reserved.
+//
+
+#ifndef sandbao_Prefix_pch
+#define sandbao_Prefix_pch
+
+#ifdef __OBJC__
+#import <Availability.h>
+#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+#import "UIImage+image.h"
+#import "NSString+file.h"
+#import "NSDate+time.h"
+#import "NSString+string.h"
+#import "NSString+Money.h"
+#import "NSString+EncodingUTF8Additions.h"
+#import "NSRegularExpression+Verification.h"
+#import "NSString+Encryption.h"
+#import "UITextField+CheckLenght.h"
+#import "UIDevice+DeviceoInfo.h"
+#import "NavCoverView.h"
+#import "CommParameter.h"
+#import "SDMBProgressView.h"
+#import "WeiboSDK.h"
+#import "Tool.h"
+#import <POP/POP.h>
+
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "SDRequestHelp.h"
+#import "LocationUtil.h"
+#import "HDAlertView.h"
+
+//添加混淆作用的头文件（这个文件名是脚本confuse.sh中定义的）
+//#import "codeObfuscation.h"
+#endif
+
+//判断系统版本
+#define IOS_VERSION_8 (([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=9.0)? (YES):(NO))
+#define IOS_VERSION_9 (([[[UIDevice currentDevice] systemVersion] floatValue] >=9.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=10.0)? (YES):(NO))
+#define IOS_VERSION_10 (([[[UIDevice currentDevice] systemVersion] floatValue] >=10.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=11.0)? (YES):(NO))
+#define IOS_VERSION_11 (([[[UIDevice currentDevice] systemVersion] floatValue] >=11.0)? (YES):(NO))
+
+// 打印的宏
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#define debugMethod() NSLog(@"%s", __func__)
+#else
+#define NSLog(...)
+#define debugMethod()
+#endif
+
+
+//通知
+//退出后切回首页通知
+#define LOGOUTNOTICEBARITEM @"logoutNoticeBarItem"
+//退出后 重置MQTT的clientID
+#define LOGOUTNOTICEMQTT @"logoutNoticeMQTT"
+//杉德宝已启动 : 用户已登录 + OPENSPSPAYNOTICELOGOUT
+#define OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN @"openSPSPaynoticeLogin"
+//NSUserDefaults存储方式 对应key
+#define FIRST_INSTALL_APP @"FIRST_INSTALL_APP" //首次安装App的key
+//接受MQTT消息推送的通知 - 商户反扫支付通知(无密)
+#define MQTT_NOTICE_BSC_TN @"MQTT_NOTICE_BSC_TN"
+//接受MQTT消息推送的通知 - 商户反扫支付通知(有密)
+#define MQTT_NOTICE_BSC_TN_PWD @"MQTT_NOTICE_BSC_TN_PWD"
+
+
+//数据库表名配置
+#define MINLETS_ARR  (NSMutableArray*)@[@"id",@"orders",@"title",@"logo",@"url",@"type",@"isTest"]
+#define USERSCONFIG_ARR (NSMutableArray*)@[@"active",@"credit_fp",@"lets",@"sToken",@"uid",@"userName"]
+#define MQTTLIST_ARR (NSMutableArray*)@[@"uid",@"msg",@"isRead",@"indexCount"]
+
+
+//友盟自定义事件统计 - 事件计数 - 事件id
+#define UM_BankCard @"bankcard"  //银行卡
+#define UM_Bill @"bill" //我的账单
+#define UM_Financial @"financial"  //理财
+#define UM_Home @"home"  //首页
+#define UM_Login @"login"  //登录
+#define UM_Logout @"logout" //登出
+#define UM_SandCard @"sandcard" //杉德卡
+#define UM_Sandpoint @"sandpoint"  //杉德积分
+#define UM_Setting @"setting"  //设置
+#define UM_Wallet @"wallet"  //钱包账户
+
+
+
+//调用微博微信登陆key
+//1.微博
+#define WB_App_Key @"1542798135"
+#define WB_App_Secret @"736b0c538d2c68ca277b3b7557fe9a1c"
+#define WB_App_Oauth2url @"https://api.weibo.com/oauth2/default.html"
+
+//2.Tencent
+#define Tencent_APPID @"1106608603"
+#define Tencent_APPKey @"3ieXMpmgLy7sIElb"
+
+
+
+
+//MQTT订阅广播的Topic
+#define kMqttTopicUSERID(USERID) [NSString stringWithFormat:@"SANDBAO/0003/USER/%@",USERID]
+#define kMqttTopicBROADCAST @"SANDBAO/0003/BROADCAST"
+
+
+//账单详情地址
+#define jnl_order_list_mobile @"ot/jnl-order-list-mobile.html?" //账户变动  03000201
+#define jnl_trans_flow_mobile @"ot/jnl-trans-flow-mobile.html?" //订单流水  03000101
+#define ot_help_normal_FAQ    @"ot/help-normal-FAQ.html"        //帮助中心
+#define ot_index              @"ot/index.html"                  //服务协议
+
+
+//AccType
+#define CONSUME_CODE @"03"  //电子记名卡账户
+#define CASH_CODE    @"04"  //钱包账户
+#define SAND_Point   @"09"  //杉德积分
+
+
+
+
+//用哪个开哪个
+//显示给开发人员 (显示输入数据)
+//#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",FORMAT]
+//显示给测试人员 (隐藏输入数据)
+#define SHOWTOTEST(FORMAT) [NSString stringWithFormat:@"%@",@""]
+
+
+
+
+
+
+
+
+
+
+/*************↓↓↓↓↓***************测试**********↓↓↓↓↓***************/
+#pragma mark - 2.测试环境地址
+#define AddressHTTP @"http://172.28.247.111:17892/"                         //测试3
+//#define AddressHTTP @"http://172.28.250.242:17892/"                         //测试
+//环境开关
+#define Environment YES
+
+//mqtt端口/地址
+#define kIP @"172.28.247.111"    //测试
+#define kPort 61613
+#define kMqttuserNmae @"testuser"
+#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+//#define kIP @"172.28.250.63"   //开发
+//#define kPort 61613
+//#define kMqttuserNmae @"testuser"
+//#define kMqttpasswd   @"0d6be69b264717f2dd33652e212b173104b4a647b7c11ae72e9885f11cd312fb"
+
+//分享地址
+#define SHARE_ADDRESS @"http://172.28.247.111:17892/ot/share.html?"
+
+//代付凭证余额查询地址
+#define Payment_ADDRESS @"https://dfb.sandpay.com.cn:8990/transfer.html?type=query"
+
+//蒲公英key
+#define pgyKey @"33bb2bbf63b37e4e8e82c5a53cd14ca8"
+/***************↑↑↑↑↑↑*************测试************↑↑↑↑↑**************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************↓↓↓↓↓***************生产**********↓↓↓↓↓***************/
+//#pragma mark - 1.生产环境地址
+//#define AddressHTTP @"https://sdb.sandpay.com.cn/"                          //生产
+////环境开关
+//#define Environment NO
+//
+////mqtt端口/地址
+//#define kIP @"180.169.86.123"  //生产
+//#define kPort 61613
+//#define kMqttuserNmae @"sand-magw-mqtt-user"
+//#define kMqttpasswd   @"magw@sand#20150805%!_"
+//
+////分享地址
+//#define SHARE_ADDRESS @"https://sdb.sandpay.com.cn/ot/share.html?"
+//
+////代付凭证余额查询地址
+//#define Payment_ADDRESS @"https://dfb.sandpay.com.cn:8990/transfer.html?type=query"
+//
+////蒲公英key
+//#define pgyKey @"7e2e46b54026ae02b7b963ae1e3d54b3"
+/***************↑↑↑↑↑↑*************生产************↑↑↑↑↑**************/
+
+
+
+#endif
+/* sandbao_Prefix_pch */

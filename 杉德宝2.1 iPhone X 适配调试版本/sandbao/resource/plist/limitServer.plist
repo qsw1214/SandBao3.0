@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>iconKey</key>
+		<string>index_nianhua</string>
+		<key>titleKey</key>
+		<string>超值年化</string>
+	</dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_tuijian</string>
+		<key>titleKey</key>
+		<string>新卡推荐</string>
+	</dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_duihuan</string>
+		<key>titleKey</key>
+		<string>超值兑换</string>
+	</dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_shanghu</string>
+		<key>titleKey</key>
+		<string>商户推荐</string>
+	</dict>
+	<dict>
+		<key>iconKey</key>
+		<string>index_icon_invite</string>
+		<key>titleKey</key>
+		<string>邀请好友</string>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,45 @@
+PODS:
+  - IQKeyboardManager (5.0.6)
+  - Masonry (1.1.0)
+  - MJRefresh (3.1.15.1)
+  - MQTTClient (0.9.9):
+    - MQTTClient/Core (= 0.9.9)
+  - MQTTClient/Core (0.9.9):
+    - MQTTClient/Manager
+    - MQTTClient/Min
+  - MQTTClient/Manager (0.9.9):
+    - MQTTClient/Min
+  - MQTTClient/Min (0.9.9)
+  - pop (1.0.10)
+  - RESideMenu (4.0.7)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
+  - UMengAnalytics-NO-IDFA (4.2.5)
+  - WechatOpenSDK (1.8.1)
+
+DEPENDENCIES:
+  - IQKeyboardManager (~> 5.0.6)
+  - Masonry
+  - MJRefresh
+  - MQTTClient
+  - pop
+  - RESideMenu (~> 4.0.7)
+  - SDWebImage (~> 4.0)
+  - UMengAnalytics-NO-IDFA
+  - WechatOpenSDK
+
+SPEC CHECKSUMS:
+  IQKeyboardManager: 077b7f691dfa9d69db9cff66f2bed68ebfc02d9b
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  MQTTClient: 5a59e0ebcad95f86ad8fc04dd4b819a944e58e0c
+  pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
+  RESideMenu: f24c508404b49c667344c54aba7e590883533958
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
+  WechatOpenSDK: 491d965d79335070328571d3e79f714549e79a5e
+
+PODFILE CHECKSUM: 56a9ac4a750dfda0e6b92cbd9298336cefc97bf7
+
+COCOAPODS: 1.4.0.beta.2

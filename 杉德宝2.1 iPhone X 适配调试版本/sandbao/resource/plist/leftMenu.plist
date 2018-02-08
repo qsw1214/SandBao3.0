@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>imgName</key>
+		<string>center_menu_01</string>
+		<key>title</key>
+		<string>我的账单</string>
+	</dict>
+	<dict>
+		<key>imgName</key>
+		<string>center_menu_02</string>
+		<key>title</key>
+		<string>钱包账户</string>
+	</dict>
+	<dict>
+		<key>imgName</key>
+		<string>center_menu_03</string>
+		<key>title</key>
+		<string>杉德积分</string>
+	</dict>
+	<dict>
+		<key>imgName</key>
+		<string>center_menu_04</string>
+		<key>title</key>
+		<string>理财中心</string>
+	</dict>
+	<dict>
+		<key>imgName</key>
+		<string>center_menu_05</string>
+		<key>title</key>
+		<string>银行卡</string>
+	</dict>
+	<dict>
+		<key>imgName</key>
+		<string>center_menu_06</string>
+		<key>title</key>
+		<string>卡券包</string>
+	</dict>
+	<dict>
+		<key>imgName</key>
+		<string>center_menu_07</string>
+		<key>title</key>
+		<string>设置</string>
+	</dict>
+</array>
+</plist>
