@@ -9,7 +9,7 @@
 #import "SpsDock.h"
 #import <UIKit/UIKit.h>
 
-#define SAND_SCHEMES @"sandbao"
+#define SAND_SCHEMES @"sandbaoApp"
 #define OTHER_SCHEMES   @"sandbaoPay"
 
 //杉德宝AppStore:APPID
@@ -62,7 +62,6 @@ static SpsDock *spsDockSharedInstace = nil;
     
     //能唤起URL
     if ([application canOpenURL:url]){
-        
         if (@available(iOS 11.0,*)){
             if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
                 [application openURL:url options:@{} completionHandler:^(BOOL success) {
@@ -167,6 +166,7 @@ static SpsDock *spsDockSharedInstace = nil;
     }]];
     [[self currentViewController] presentViewController:alert animated:YES completion:nil];
 }
+
 
 /**获取当前窗口下的视图控制器*/
 - (UIViewController *)currentViewController
