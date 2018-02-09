@@ -59,22 +59,46 @@ static SDMQTTManager *mqttManager = nil;
     if (!self.manager) {
         self.manager = [[MQTTSessionManager alloc] init];
         self.manager.delegate = self;
-        [self.manager connectTo:kIP
-                           port:kPort
-                            tls:false
-                      keepalive:30
-                          clean:true   //session是否清除，这个需要注意，如果是false，代表保持登录，如果客户端离线了再次登录就可以接收到离线消息。注意：QoS为1和QoS为2，并需订阅和发送一致
-                           auth:true
-                           user:kMqttuserNmae
-                           pass:kMqttpasswd
-                      willTopic:@""
-                           will:[@"offline" dataUsingEncoding:NSUTF8StringEncoding]
-                        willQos:MQTTQosLevelExactlyOnce
-                 willRetainFlag:false
-                   withClientId:clientID];
+        [self.manager
+         connectTo:kIP
+         port:kPort
+         tls:false
+         keepalive:30
+         clean:true
+         auth:true
+         user:kMqttuserNmae
+         pass:kMqttpasswd
+         will:false
+         willTopic:@""
+         willMsg:nil
+         willQos:MQTTQosLevelExactlyOnce
+         willRetainFlag:false
+         withClientId:clientID
+         securityPolicy:nil
+         certificates:nil
+         protocolLevel:MQTTProtocolVersion0
+         connectHandler:^(NSError *error) {
+             
+         }];
+        
+//        [self.manager connectTo:kIP
+//                           port:kPort
+//                            tls:false
+//                      keepalive:30
+//                          clean:true   //session是否清除，这个需要注意，如果是false，代表保持登录，如果客户端离线了再次登录就可以接收到离线消息。注意：QoS为1和QoS为2，并需订阅和发送一致
+//                           auth:true
+//                           user:kMqttuserNmae
+//                           pass:kMqttpasswd
+//                      willTopic:@""
+//                           will:[@"offline" dataUsingEncoding:NSUTF8StringEncoding]
+//                        willQos:MQTTQosLevelExactlyOnce
+//                 willRetainFlag:false
+//                   withClientId:clientID];
     } else {
         self.manager.session.clientId = clientID;
-        [self.manager connectToLast];
+        [self.manager connectToLast:^(NSError *error) {
+            
+        }];
     }
     
     /*

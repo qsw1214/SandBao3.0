@@ -186,8 +186,11 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         make.centerX.equalTo(self.baseScrollView);
         make.size.mas_equalTo(CGSizeMake(SCREEN_WIDTH, 0));
     }];
-    
+}
 
+- (void)viewSafeAreaInsetsDidChange{
+    [super viewSafeAreaInsetsDidChange];
+    NSLog(@"%@",NSStringFromUIEdgeInsets(self.view.safeAreaInsets));
 }
 
 - (void)createUI_PayToolView{
