@@ -56,8 +56,11 @@
 
 #pragma mark  - UI绘制
 - (void)setBaseInfo{
-    imgeNameArr = @[@"guiedeOne",@"guiedeTwo",@"guiedeThree",@"guiedeFour"];
-    
+    if (iPhoneX) {
+        imgeNameArr = @[@"guiedeOne_X",@"guiedeTwo_X",@"guiedeThree_X",@"guiedeFour_X"];
+    }else{
+        imgeNameArr = @[@"guiedeOne",@"guiedeTwo",@"guiedeThree",@"guiedeFour"];
+    }
     imgScrollerView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     imgScrollerView.contentSize = CGSizeMake(SCREEN_WIDTH*imgeNameArr.count, SCREEN_HEIGHT);
     imgScrollerView.showsVerticalScrollIndicator = NO;
