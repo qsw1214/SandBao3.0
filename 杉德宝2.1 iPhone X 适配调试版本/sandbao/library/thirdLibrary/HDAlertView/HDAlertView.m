@@ -493,7 +493,7 @@ NSString *const HDAlertViewDidDismissNotification   = @"HDAlertViewDidDismissNot
         }
         
         //        CGFloat titleLabelH = titleLabelSize.height;
-        CGFloat titleLabelH = 64.0;
+        CGFloat titleLabelH = SafeAreaNavgationTop;
         CGFloat titleLabelX = margin;
         CGFloat titleLabelY = 0;
         self.titleLabel.frame = CGRectMake(titleLabelX, titleLabelY, titleLabelW, titleLabelH);

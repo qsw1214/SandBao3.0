@@ -46,6 +46,31 @@
 #define IOS_VERSION_10 (([[[UIDevice currentDevice] systemVersion] floatValue] >=10.0 && [[[UIDevice currentDevice] systemVersion] floatValue] <=11.0)? (YES):(NO))
 #define IOS_VERSION_11 (([[[UIDevice currentDevice] systemVersion] floatValue] >=11.0)? (YES):(NO))
 
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+
+
+// 判断是否为iPhone4
+#define iPhone4 (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+// 判断是否为iPhone5
+#define iPhone5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
+// 判断是否为iPhone6
+#define iPhone6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
+// 判断是否为iPhone6 plus
+#define iPhone6plus (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+// 判断是否为iPhone X
+#define iPhoneX (IS_IPHONE && SCREEN_MAX_LENGTH == 812.f)
+
+//导航栏64/88判断
+#define SafeAreaNavgationTop (SCREEN_HEIGHT == 812 ? 88 : 64)
+
 // 打印的宏
 #ifdef DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)

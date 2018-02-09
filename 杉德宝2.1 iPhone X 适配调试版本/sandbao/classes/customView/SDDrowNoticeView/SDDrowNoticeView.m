@@ -11,7 +11,7 @@
 
 
 #define selfWith [UIScreen mainScreen].bounds.size.width
-#define selfHeight 64.f
+#define selfHeight ([UIScreen mainScreen].bounds.size.height == 812.f ? 88 : 64)
 #define spaceToParentView 10
 @interface SDDrowNoticeView()<UIGestureRecognizerDelegate,UIActionSheetDelegate>{
     

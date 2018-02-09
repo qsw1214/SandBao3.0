@@ -88,12 +88,41 @@
     //如果未登录情况,进行明暗登录操作
     if ([CommParameter sharedInstance].userInfo.length == 0) {
         
+        [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+            //查询活跃状态用户数量(1且只能为1)
+            long count = 0;
+            //1.明登录
+            if (count <= 0 && [self.loginTypeStr isEqualToString:@"PWD_LOGIN"])
+            {
+                //第一次安装 - 明登陆
+                if (![[NSUserDefaults standardUserDefaults] objectForKey:FIRST_INSTALL_APP]) {
+                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                        LunchGuideViewController *lunchGuideVC = [[LunchGuideViewController alloc] init];
+                        [self.sideMenuViewController setContentViewController:lunchGuideVC];
+                    }];
+                }else{
+                    //常规 - 明登陆
+                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+//                        [self pwdLogin];
+                        [self noPwdLogin];
+                    }];
+                }
+            }
+            //2.暗登陆
+            else
+            {
+                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                    //暗登陆成 - 切换到首页
+                    [self noPwdLogin];
+                }];
+            }
+        }];
     }
+    
     //重置baseScrollview的Contentsize
     [self setBaseScrollViewContentSize];
-    
-    [self noPwdLogin];
 }
+
 
 
 - (void)viewDidLoad {
@@ -361,8 +390,8 @@
     
     allHeight = lasetObjectViewOY + UPDOWNSPACE_20;
     
-    if (allHeight < SCREEN_HEIGHT - UPDOWNSPACE_64) {
-        self.baseScrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT - UPDOWNSPACE_64);
+    if (allHeight < SCREEN_HEIGHT - SafeAreaNavgationTop) {
+        self.baseScrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT - SafeAreaNavgationTop);
     }else{
         self.baseScrollView.contentSize = CGSizeMake(0, allHeight);
     }
