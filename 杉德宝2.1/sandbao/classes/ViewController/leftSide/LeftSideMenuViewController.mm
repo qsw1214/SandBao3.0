@@ -385,8 +385,8 @@
     
     allHeight = lasetObjectViewOY + UPDOWNSPACE_20;
     
-    if (allHeight < SCREEN_HEIGHT - UPDOWNSPACE_64) {
-        self.baseScrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT - UPDOWNSPACE_64);
+    if (allHeight < SCREEN_HEIGHT - SafeAreaNavgationTop) {
+        self.baseScrollView.contentSize = CGSizeMake(0, SCREEN_HEIGHT - SafeAreaNavgationTop);
     }else{
         self.baseScrollView.contentSize = CGSizeMake(0, allHeight);
     }

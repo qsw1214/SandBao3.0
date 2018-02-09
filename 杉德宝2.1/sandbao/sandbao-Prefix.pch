@@ -67,7 +67,8 @@
 // 判断是否为iPhone X
 #define iPhoneX (IS_IPHONE && SCREEN_MAX_LENGTH == 812.f)
 
-
+//导航栏64/88判断
+#define SafeAreaNavgationTop (SCREEN_HEIGHT == 812 ? 88 : 64)
 
 // 打印的宏
 #ifdef DEBUG

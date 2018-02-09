@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2801CCEE2029971500F266A9 /* SandCardNoAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2801CCED2029971300F266A9 /* SandCardNoAuthToolView.m */; };
+		2804C631202D57B800130B51 /* NavCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2804C630202D57B700130B51 /* NavCoverView.m */; };
 		280621E31EF8F02F00346D1A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E21EF8F02F00346D1A /* OpenGLES.framework */; };
 		280621E51EF8F03800346D1A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E41EF8F03800346D1A /* CoreMotion.framework */; };
 		280621E71EF8F04100346D1A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 280621E61EF8F04100346D1A /* AudioToolbox.framework */; };
@@ -23,7 +24,6 @@
 		281747B61F9847DB007D4D3A /* RealNameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281747B51F9847DB007D4D3A /* RealNameViewController.mm */; };
 		281A38DF1FDE647200714D0C /* CardBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281A38DE1FDE647200714D0C /* CardBaseTableView.m */; };
 		281AEA8C1F90BC6A0000D1F5 /* Loading.mm in Sources */ = {isa = PBXBuildFile; fileRef = 281AEA8B1F90BC6A0000D1F5 /* Loading.mm */; };
-		281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281D10601E6FDAEF0031806C /* NavCoverView.m */; };
 		281F64421E792A970005AE86 /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F64321E792A970005AE86 /* NSData+SDDataCache.m */; };
 		281F64431E792A970005AE86 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F64351E792A970005AE86 /* TAAbstractDotView.m */; };
 		281F64441E792A970005AE86 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 281F64371E792A970005AE86 /* TAAnimatedDotView.m */; };
@@ -337,6 +337,8 @@
 /* Begin PBXFileReference section */
 		2801CCEC2029971300F266A9 /* SandCardNoAuthToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandCardNoAuthToolView.h; sourceTree = "<group>"; };
 		2801CCED2029971300F266A9 /* SandCardNoAuthToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SandCardNoAuthToolView.m; sourceTree = "<group>"; };
+		2804C62F202D57B700130B51 /* NavCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavCoverView.h; sourceTree = "<group>"; };
+		2804C630202D57B700130B51 /* NavCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavCoverView.m; sourceTree = "<group>"; };
 		280621E21EF8F02F00346D1A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		280621E41EF8F03800346D1A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		280621E61EF8F04100346D1A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -361,8 +363,6 @@
 		281A38DE1FDE647200714D0C /* CardBaseTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CardBaseTableView.m; sourceTree = "<group>"; };
 		281AEA8A1F90BC6A0000D1F5 /* Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Loading.h; sourceTree = "<group>"; };
 		281AEA8B1F90BC6A0000D1F5 /* Loading.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Loading.mm; sourceTree = "<group>"; };
-		281D105F1E6FDAEF0031806C /* NavCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavCoverView.h; sourceTree = "<group>"; };
-		281D10601E6FDAEF0031806C /* NavCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavCoverView.m; sourceTree = "<group>"; };
 		281F64311E792A970005AE86 /* NSData+SDDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SDDataCache.h"; sourceTree = "<group>"; };
 		281F64321E792A970005AE86 /* NSData+SDDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SDDataCache.m"; sourceTree = "<group>"; };
 		281F64341E792A970005AE86 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
@@ -876,6 +876,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2804C62E202D57B700130B51 /* SDNavCoverView */ = {
+			isa = PBXGroup;
+			children = (
+				2804C62F202D57B700130B51 /* NavCoverView.h */,
+				2804C630202D57B700130B51 /* NavCoverView.m */,
+			);
+			path = SDNavCoverView;
+			sourceTree = "<group>";
+		};
 		281747561F96E23F007D4D3A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -924,15 +933,6 @@
 				281AEA8B1F90BC6A0000D1F5 /* Loading.mm */,
 			);
 			path = loadhelper;
-			sourceTree = "<group>";
-		};
-		281D105E1E6FDADA0031806C /* SDNavCoverView */ = {
-			isa = PBXGroup;
-			children = (
-				281D105F1E6FDAEF0031806C /* NavCoverView.h */,
-				281D10601E6FDAEF0031806C /* NavCoverView.m */,
-			);
-			path = SDNavCoverView;
 			sourceTree = "<group>";
 		};
 		281F64301E792A970005AE86 /* SDCycleScrollView */ = {
@@ -2245,10 +2245,10 @@
 			children = (
 				28B86EC920219E780068BFDF /* SDWkWebView */,
 				28DBA5822017081200E8B852 /* SDBarButton */,
-				281D105E1E6FDADA0031806C /* SDNavCoverView */,
 				2837EACF1FD7E13300C10A57 /* SDQrcodeView */,
 				287585FE1FD66AF800DACC8E /* SDSelectBarView */,
 				28B649231FAC654A0074A390 /* SDPayToolView */,
+				2804C62E202D57B700130B51 /* SDNavCoverView */,
 				28A8AE9C1FAB25E500FA1EC1 /* SDPopView */,
 				28981B5C1FA01FA8004CFC95 /* SDAuthToolsView */,
 				2841F61D1F53C52100BD23C8 /* SDWaveAnimationView */,
@@ -2604,7 +2604,6 @@
 				288421911F8E091200082E7C /* NSDate+time.m in Sources */,
 				28D7E59D1FA9BF3800518042 /* UserHongbaoViewController.mm in Sources */,
 				28981B8B1FA01FA8004CFC95 /* BankPickerView.m in Sources */,
-				281D10611E6FDAEF0031806C /* NavCoverView.m in Sources */,
 				28A8AEC11FAB635900FA1EC1 /* MyCenterCellView.m in Sources */,
 				289C0D541F203FBC00360147 /* Easing.c in Sources */,
 				2821B7D01E77E22700F093D7 /* GradualView.m in Sources */,
@@ -2740,6 +2739,7 @@
 				286BFCAD1EE92A3100FD9731 /* SDScanView.m in Sources */,
 				281F64461E792A970005AE86 /* TAPageControl.m in Sources */,
 				28EBA18E1F2F1B0B003EEA61 /* SDDrowNoticeView.m in Sources */,
+				2804C631202D57B800130B51 /* NavCoverView.m in Sources */,
 				28E17F422018815300D9BACF /* InviteAuthToolView.m in Sources */,
 				28F3770C1FB31C4500813512 /* CvnAuthToolView.m in Sources */,
 				28D7E5961FA9A53F00518042 /* UserTransferPageViewController.m in Sources */,

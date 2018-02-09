@@ -79,7 +79,7 @@
     self.baseScrollView.delegate = self;
     
     //配置所有baseScrollview子类 frame
-    self.baseScrollView.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - 64);
+    self.baseScrollView.frame = CGRectMake(0, SafeAreaNavgationTop, SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaNavgationTop);
     [self.view addSubview:self.baseScrollView];
 }
 
@@ -132,8 +132,8 @@
     
     allHeight = lasetObjectViewOY + UPDOWNSPACE_20;
     
-    if (allHeight < SCREEN_HEIGHT - UPDOWNSPACE_64) {
-        self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - UPDOWNSPACE_64);
+    if (allHeight < SCREEN_HEIGHT - SafeAreaNavgationTop) {
+        self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT - SafeAreaNavgationTop);
     }else{
         self.baseScrollView.contentSize = CGSizeMake(SCREEN_WIDTH, allHeight);
     }

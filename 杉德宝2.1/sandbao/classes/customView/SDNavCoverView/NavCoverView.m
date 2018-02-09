@@ -8,6 +8,12 @@
 
 #import "NavCoverView.h"
 #define AdapterFfloat(f) (([[UIScreen mainScreen] bounds].size.height==736.f)?(f):(f*0.8571))
+
+#define screenHeight [UIScreen mainScreen].bounds.size.height
+#define navGationHeight (screenHeight == 812.f ? 88 : 64)
+#define stateBarHight   (screenHeight == 812.f ? 44 : 20)
+
+
 @interface NavCoverView (){
     
     UIView *baseView;
@@ -39,7 +45,7 @@
 - (instancetype)init{
     
     if ([super init]) {
-        self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
+        self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, navGationHeight);
         self.backgroundColor = [UIColor whiteColor];
         [self createUI];
         //默认状态栏白色
@@ -61,13 +67,13 @@
     //创建并添加baseView
     leftSpace = 15;
     baseView = [[UIView alloc] init];
-    baseView.frame = CGRectMake(0, 20, self.frame.size.width, 44);
+    baseView.frame = CGRectMake(0, stateBarHight, self.frame.size.width, 44);
     [self addSubview:baseView];
     
     
     // mid标题
     labTitle = [[UILabel alloc] init];
-    labTitle.frame = CGRectMake(15, 20, self.frame.size.width-2*15, 64-20);
+    labTitle.frame = CGRectMake(15, stateBarHight, self.frame.size.width-2*15, navGationHeight-stateBarHight);
     labTitle.font = [UIFont fontWithName:@"PingFangSC-Medium" size:AdapterFfloat(17)];
     labTitle.textAlignment = NSTextAlignmentCenter;
     [baseView addSubview:labTitle];
