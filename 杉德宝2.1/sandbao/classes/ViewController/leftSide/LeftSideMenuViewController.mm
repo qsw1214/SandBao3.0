@@ -135,9 +135,13 @@
     
     //退出
     if (btn.tag == BTN_TAG_LOGOUT) {
-        [self loginOut];
-        //友盟自定义时间统计 - 计数事件
-        [MobClick event:UM_Logout];
+        [[SDAlertView shareAlert] showDialog:nil message:@"退出杉德宝" leftBtnString:@"取消" rightBtnString:@"确定" leftBlock:^{
+            //do no thing
+        } rightBlock:^{
+            [self loginOut];
+            //友盟自定义时间统计 - 计数事件
+            [MobClick event:UM_Logout];
+        }];
     }
     //个人信息
     if (btn.tag == BTN_TAG_JUSTCLICK) {

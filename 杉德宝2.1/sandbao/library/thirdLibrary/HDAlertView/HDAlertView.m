@@ -172,13 +172,13 @@ NSString *const HDAlertViewDidDismissNotification   = @"HDAlertViewDidDismissNot
     appearance.viewBackgroundColor = [UIColor clearColor];
     appearance.titleColor = [UIColor blackColor];
     appearance.messageColor = [UIColor darkGrayColor];
-    appearance.titleFont = [UIFont boldSystemFontOfSize:17.0];
-    appearance.messageFont = [UIFont systemFontOfSize:13.0];
-    appearance.buttonFont = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
+    appearance.titleFont = [UIFont boldSystemFontOfSize:14.0];
+    appearance.messageFont = [UIFont systemFontOfSize:16.0];
+    appearance.buttonFont = [UIFont boldSystemFontOfSize:17.f];
     appearance.defaultButtonTitleColor = HDColorFromHex(0x358BEF);
     appearance.cancelButtonTitleColor = HDColorFromHex(0x343339);
-    appearance.destructiveButtonTitleColor = HDColorFromHex(0xFF5D31);
-    appearance.cornerRadius = 10.0;
+    appearance.destructiveButtonTitleColor = HDColorFromHex(0x343339);
+    appearance.cornerRadius = 5.0;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {

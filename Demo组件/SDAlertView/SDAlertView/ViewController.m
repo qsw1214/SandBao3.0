@@ -17,9 +17,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-     [[SDAlertView shareAlert] showDialog:@"12321312"];
+    [[SDAlertView shareAlert] showDialog:@"提示" message:@"这里是消息消息\n这里是消息内容" leftBtnString:@"确定" rightBtnString:@"取消" leftBlock:^{
+        
+    } rightBlock:^{
+        
+    }];
     
-    [self performSelector:@selector(ddd) withObject:nil afterDelay:10.f];
+//    [self performSelector:@selector(ddd) withObject:nil afterDelay:10.f];
     
 }
 

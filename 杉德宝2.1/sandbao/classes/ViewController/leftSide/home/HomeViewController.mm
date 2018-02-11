@@ -805,6 +805,8 @@
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         AudioServicesPlaySystemSound(1312);
         
+        //防止提示冲突 - 故在MQTT-多点登陆提示框之前,预先清除一次弹框
+        [[SDAlertView shareAlert] hideDialogAnimation:YES];
         //1.退出用户登录页
         [[SDAlertView shareAlert] showDialog:msgTitle message:message defulBlock:^{
             
