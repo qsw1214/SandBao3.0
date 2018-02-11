@@ -77,7 +77,7 @@
                 req.scene = WXSceneSession;
                 BOOL sendSuccess =  [WXApi sendReq:req];
                 if (!sendSuccess) {
-                    [Tool showDialog:@"请安装微信"];
+                    [[SDAlertView shareAlert] showDialog:@"请安装微信"];
                 }
             }
             if ([titleName isEqualToString:@"朋友圈"]) {
@@ -97,7 +97,7 @@
                 req.scene = WXSceneTimeline;
                 BOOL sendSuccess =  [WXApi sendReq:req];
                 if (!sendSuccess) {
-                    [Tool showDialog:@"请安装微信"];
+                    [[SDAlertView shareAlert] showDialog:@"请安装微信"];
                 }
             }
             if ([titleName isEqualToString:@"腾讯QQ"]) {

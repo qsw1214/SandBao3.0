@@ -70,7 +70,7 @@
             [self bindingSandCard];
             
         }else{
-            [Tool showDialog:@"请完成卡信息填写"];
+            [[SDAlertView shareAlert] showDialog:@"请完成卡信息填写"];
         }
     }
     
@@ -280,7 +280,7 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                [Tool showDialog:@"绑卡成功" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"绑卡成功" defulBlock:^{
                     [self.navigationController popViewControllerAnimated:YES];
                 }];
             }];

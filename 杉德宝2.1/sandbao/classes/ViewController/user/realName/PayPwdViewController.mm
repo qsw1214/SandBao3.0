@@ -188,13 +188,13 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络连接失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络连接失败" message:@"进入杉德宝完成设置" defulBlock:^{
                         //归位Home或SpsLunch
                         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"获取鉴权失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"获取鉴权失败" message:@"进入杉德宝完成设置" defulBlock:^{
                         //归位Home或SpsLunch
                         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
@@ -251,14 +251,14 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                     [Tool showDialog:@"网络连接失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                     [[SDAlertView shareAlert] showDialog:@"网络连接失败" message:@"进入杉德宝完成设置" defulBlock:^{
                         //归位Home或SpsLunch
                         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                         
                     }];
                 }
                 if (type == respCodeErrorType) {
-                     [Tool showDialog:@"密码提交失败" message:@"进入杉德宝完成设置" defulBlock:^{
+                     [[SDAlertView shareAlert] showDialog:@"密码提交失败" message:@"进入杉德宝完成设置" defulBlock:^{
                         //归位Home或SpsLunch
                         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
@@ -269,7 +269,7 @@
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 [self.HUD hidden];
                 
-                [Tool showDialog:@"支付密码设置成功" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"支付密码设置成功" defulBlock:^{
                     [CommParameter sharedInstance].payPassFlag = YES;
                     
                     //拉取ownPayTools

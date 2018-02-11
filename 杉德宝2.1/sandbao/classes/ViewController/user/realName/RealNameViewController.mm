@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
     self.navCoverView.letfImgStr = @"login_icon_back";
     __weak RealNameViewController *weakSelf = self;
     self.navCoverView.leftBlock = ^{
-        [Tool showDialog:@"您还未实名" message:@"是否放弃实名" leftBtnString:@"继续实名" rightBtnString:@"退出杉德宝" leftBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"您还未实名" message:@"是否放弃实名" leftBtnString:@"继续实名" rightBtnString:@"退出杉德宝" leftBlock:^{
             //do no thing
         } rightBlock:^{
             [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf forLogOut:YES];
@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger,BankCardType) {
         if (self.realNameStr.length>0 && self.identityNoStr.length>0 && self.bankCardNoStr.length>0) {
             [self queryCardDetail];
         }else{
-            [Tool showDialog:@"请输入完整验证信息"];
+            [[SDAlertView shareAlert] showDialog:@"请输入完整验证信息"];
         }
     }
     if (btn.tag == BTN_TAG_REALNAME) {
@@ -112,14 +112,14 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             if (self.realNameStr.length>0 && self.identityNoStr.length>0 && self.bankCardNoStr.length>0 && self.bankPhoneNoStr.length>0 && self.validStr.length>0 && self.cvnStr.length>0) {
                 [self getAuthTools];
             }else{
-               [Tool showDialog:@"请输入完整验证信息"];
+               [[SDAlertView shareAlert] showDialog:@"请输入完整验证信息"];
             }
         }else{
             if (self.realNameStr.length>0 && self.identityNoStr.length>0 && self.bankCardNoStr.length>0 && self.bankPhoneNoStr.length>0) {
                 [self getAuthTools];
             }
             else{
-                [Tool showDialog:@"请输入完整验证信息"];
+                [[SDAlertView shareAlert] showDialog:@"请输入完整验证信息"];
             }
         }
     }
@@ -449,11 +449,11 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                             //第一次setRealName,(仅用于)上送四要素信息给后端,后端用于向通道获取短信码
                             [self setRealNameForUpdataInfo];
                         }else{
-                            [Tool showDialog:@"下发鉴权工具有误"];
+                            [[SDAlertView shareAlert] showDialog:@"下发鉴权工具有误"];
                         }
                     }
                 }else{
-                    [Tool showDialog:@"下发鉴权工具为空"];
+                    [[SDAlertView shareAlert] showDialog:@"下发鉴权工具为空"];
                 }
             }];
         }];

@@ -104,7 +104,7 @@
     if (btn.tag == BTN_TAG_RECHARGE) {
         //@"充值"
         if ([[rechargeInPayToolDic objectForKey:@"available"] boolValue] == NO){
-//            [Tool showDialog:@"账户暂时无法充值 available == NO"];
+//            [[SDAlertView shareAlert] showDialog:@"账户暂时无法充值 available == NO"];
 //            return ;
         }
         //1.代付凭证已激活
@@ -144,13 +144,13 @@
     }
     if (btn.tag == BTN_TAG_TRANSFER) {
         if ([[transferOutPayToolDic objectForKey:@"available"] boolValue] == NO){
-//            [Tool showDialog:@"账户暂时无法转账 available == NO"];
+//            [[SDAlertView shareAlert] showDialog:@"账户暂时无法转账 available == NO"];
 //            return ;
         }
         SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
             if ([cellName isEqualToString:@"个人银行卡"]) {
                 if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
-                    [Tool showDialog:@"账户余额不足,无法转账到银行卡"];
+                    [[SDAlertView shareAlert] showDialog:@"账户余额不足,无法转账到银行卡"];
                     return ;
                 }
                 BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];
@@ -160,7 +160,7 @@
             }
             if ([cellName isEqualToString:@"杉德宝用户"]) {
                 if ([[Tool fenToYuanDict:transferOutPayToolDic] isEqualToString:@"0.00"]) {
-                    [Tool showDialog:@"账户余额不足,无法转账到杉德宝用户"];
+                    [[SDAlertView shareAlert] showDialog:@"账户余额不足,无法转账到杉德宝用户"];
                     return ;
                 }
                 UserTransferBeginViewController *sandUserTransferVC = [[UserTransferBeginViewController alloc] init];
@@ -355,7 +355,7 @@
     
     //钱包账户未成功开通
     if (rechargeInPayToolDic.count == 0) {
-        [Tool showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"请联系杉德客服" message:@"钱包账户开通失败!" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
             //归位Home或SpsLunch
             [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
         } rightBlock:^{

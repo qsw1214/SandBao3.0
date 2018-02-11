@@ -87,7 +87,7 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
             moneyStr = moneyTextfield.text;
             [self fee];
         }else{
-            [Tool showDialog:@"请输入转账金额"];
+            [[SDAlertView shareAlert] showDialog:@"请输入转账金额"];
         }
         
     }
@@ -356,11 +356,11 @@ typedef void(^TransferPayStateBlock)(NSArray *paramArr);
         //支付失败 - 隐藏支付工具
         [self.payView hidPayToolInPayPwdView];
         if (paramArr.count>0) {
-            [Tool showDialog:paramArr[0] defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:paramArr[0] defulBlock:^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }else{
-            [Tool showDialog:@"网络连接异常" defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"网络连接异常" defulBlock:^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }

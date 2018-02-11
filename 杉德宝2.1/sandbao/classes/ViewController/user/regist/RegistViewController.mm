@@ -74,14 +74,14 @@
                         smsVC.inviteCodeString = self.inviteCodeStr;
                         [self.navigationController pushViewController:smsVC animated:YES];
                     }else{
-                        [Tool showDialog:@"下发鉴权工具有误"];
+                        [[SDAlertView shareAlert] showDialog:@"下发鉴权工具有误"];
                     }
                 }
             }else{
-                [Tool showDialog:@"下发鉴权工具为空"];
+                [[SDAlertView shareAlert] showDialog:@"下发鉴权工具为空"];
             }
         }else{
-            [Tool showDialog:@"请输入正确的登陆账号及密码"];
+            [[SDAlertView shareAlert] showDialog:@"请输入正确的登陆账号及密码"];
         }
     }
     if (btn.tag == BTN_TAG_LOGIN) {

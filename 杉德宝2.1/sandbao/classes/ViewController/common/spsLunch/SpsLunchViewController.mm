@@ -222,9 +222,9 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         
         if (paramArr.count>0) {
             //spsLunch页特例:交易异常后,仅提示用户,且返回sps订单金额页,不进行退出操作,退出由用户触发
-            [Tool showDialog:paramArr[0]];
+            [[SDAlertView shareAlert] showDialog:paramArr[0]];
         }else{
-            [Tool showDialog:@"网络连接异常" message:@"返回商户" defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"网络连接异常" message:@"返回商户" defulBlock:^{
                 [self payGoBackByisSuccess:SPS_PAY_ERROR];
             }];
         }
@@ -254,7 +254,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         NSArray *bankCardArr = [self getBankCardPayToolArr];
         if (bankCardArr.count>=3) {
-            [Tool showDialog:@"已绑定3张银行卡,不可继续绑卡"];
+            [[SDAlertView shareAlert] showDialog:@"已绑定3张银行卡,不可继续绑卡"];
         }else{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
             [self.navigationController pushViewController:addBankCardVC animated:YES];
@@ -265,7 +265,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     }
 }
 - (void)payViewPayToolsError:(NSString *)errorInfo{
-    [Tool showDialog:errorInfo message:@"返回商户" defulBlock:^{
+    [[SDAlertView shareAlert] showDialog:errorInfo message:@"返回商户" defulBlock:^{
         [self payGoBackByisSuccess:SPS_PAY_ERROR];
     }];
 }
@@ -289,13 +289,13 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络出现异常" message:@"返回商户" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络出现异常" message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg message:@"返回商户" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:respMsg message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
@@ -320,13 +320,13 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络出现异常" message:@"返回商户" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络出现异常" message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
                 if (type == respCodeErrorType) {
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                    [Tool showDialog:respMsg message:@"返回商户" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:respMsg message:@"返回商户" defulBlock:^{
                         [self payGoBackByisSuccess:SPS_PAY_ERROR];
                     }];
                 }
@@ -452,7 +452,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
     {
         //若检测未实名,进行实名
         if (![CommParameter sharedInstance].realNameFlag) {
-            [Tool showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"退出支付" leftBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"退出支付" leftBlock:^{
                 RealNameViewController *realName = [[RealNameViewController alloc] init];
                 UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
                 [self.sideMenuViewController setContentViewController:realNameNav];
@@ -466,7 +466,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
         }
         //若检测未设置支付密码,则修改支付密码
         if (![CommParameter sharedInstance].payPassFlag) {
-            [Tool showDialog:@"请进行设置" message:@"检测到您还未设置支付密码" leftBtnString:@"去设置" rightBtnString:@"退出支付" leftBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"请进行设置" message:@"检测到您还未设置支付密码" leftBtnString:@"去设置" rightBtnString:@"退出支付" leftBlock:^{
                 //由于设置支付密码挂在实名流程之下(不能单独设置),因此单独设置支付密码必须走 修改支付密码流程
                 VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
                 verifyTypeVC.tokenType = @"01000601";
@@ -544,7 +544,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 //查询支付工具失败也回调成功
-                [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
                     [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
                 }];
             }];
@@ -560,7 +560,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 //查询支付工具失败也回调成功
-                [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
                     [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
                 }];
             }];
@@ -575,7 +575,7 @@ typedef void(^SpsLunchPayBlock)(NSArray *paramArr);
                 [CommParameter sharedInstance].ownPayToolsArray = payToolsArray;
                 
                 //成功回调
-                [Tool showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"支付成功" message:@"点击返回商户" defulBlock:^{
                     [self payGoBackByisSuccess:SPS_PAY_SUCCESS];
                 }];
             }];

@@ -272,9 +272,9 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         //支付失败 - 复位到支付订单
         [self.payView payPwdResetToPayOrderView];
         if (paramArr.count>0) {
-            [Tool showDialog:paramArr[0]];
+            [[SDAlertView shareAlert] showDialog:paramArr[0]];
         }else{
-            [Tool showDialog:@"网络连接异常"];
+            [[SDAlertView shareAlert] showDialog:@"网络连接异常"];
         }
     }];
 }
@@ -298,7 +298,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         NSArray *bankCardArr = [self getBankCardPayToolArr];
         if (bankCardArr.count>=3) {
-            [Tool showDialog:@"已绑定3张银行卡,不可继续绑卡"];
+            [[SDAlertView shareAlert] showDialog:@"已绑定3张银行卡,不可继续绑卡"];
         }else{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
             [self.navigationController pushViewController:addBankCardVC animated:YES];
@@ -309,7 +309,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     }
 }
 - (void)payViewPayToolsError:(NSString *)errorInfo{
-    [Tool showDialog:errorInfo defulBlock:^{
+    [[SDAlertView shareAlert] showDialog:errorInfo defulBlock:^{
         UIViewController *secVC = self.navigationController.viewControllers[1];
         [self.navigationController popToViewController:secVC animated:YES];
     }];

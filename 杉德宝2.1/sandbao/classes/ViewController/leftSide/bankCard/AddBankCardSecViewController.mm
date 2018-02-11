@@ -83,13 +83,13 @@ typedef NS_ENUM(NSInteger,BankCardType) {
             if (self.bankPhoneNoStr.length>0 && self.validStr.length>0 && self.cvnStr.length>0) {
                 [self getAuthTools];
             }else{
-                [Tool showDialog:@"请输入完整验证信息"];
+                [[SDAlertView shareAlert] showDialog:@"请输入完整验证信息"];
             }
         }else{
             if (self.bankPhoneNoStr.length>0) {
                 [self getAuthTools];
             }else{
-                [Tool showDialog:@"请输入完整验证信息"];
+                [[SDAlertView shareAlert] showDialog:@"请输入完整验证信息"];
             }
         }
         
@@ -287,11 +287,11 @@ typedef NS_ENUM(NSInteger,BankCardType) {
                             //第二次queryCardDetail,(仅用于)上送四要素信息给后端,后端用于向通道获取短信码
                             [self queryCardDetailForUpdataInfo];
                         }else{
-                            [Tool showDialog:@"下发鉴权工具有误"];
+                            [[SDAlertView shareAlert] showDialog:@"下发鉴权工具有误"];
                         }
                     }
                 }else{
-                    [Tool showDialog:@"下发鉴权工具为空"];
+                    [[SDAlertView shareAlert] showDialog:@"下发鉴权工具为空"];
                 }
                 
             }];

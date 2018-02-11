@@ -68,7 +68,7 @@
             //激活代付凭证权限
             [self getBalances];
         }else{
-            [Tool showDialog:@"请输入正确信息"];
+            [[SDAlertView shareAlert] showDialog:@"请输入正确信息"];
         }
     }
     
@@ -199,7 +199,7 @@
                 [self.HUD hidden];
                 
                 //激活成功
-                [Tool showDialog:@"代付凭证激活成功" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"代付凭证激活成功" defulBlock:^{
                     //代付凭证标识置为YES
                     [CommParameter sharedInstance].payForAnotherFlag = YES;
                     [self.navigationController popViewControllerAnimated:YES];

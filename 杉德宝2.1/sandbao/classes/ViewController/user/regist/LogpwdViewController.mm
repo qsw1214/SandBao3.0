@@ -51,7 +51,7 @@
         if (self.loginPwdStr.length > 0 ) {
             [self registerUser];
         }else{
-            [Tool showDialog:@"请输入正确登陆密码"];
+            [[SDAlertView shareAlert] showDialog:@"请输入正确登陆密码"];
         }
     }
     
@@ -240,7 +240,7 @@
     if (result == YES) {
         //MQTT登录
         [[SDMQTTManager shareMQttManager] loginMQTT:[CommParameter sharedInstance].sToken];
-        [Tool showDialog:@"恭喜您,注册成功!" message:@"立即实名认证,体验更多功能!" defulBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"恭喜您,注册成功!" message:@"立即实名认证,体验更多功能!" defulBlock:^{
             //去实名
             RealNameViewController *realName = [[RealNameViewController alloc] init];
             UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];

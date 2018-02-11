@@ -369,8 +369,8 @@ static PayNucHelper *payNucHelperSharedInstance = nil;
  */
 - (BOOL)load
 {
-    int result = paynuc.func("CreateTube");
-    if (result == 0) {
+    int fr = paynuc.func("CreateTube");
+    if (fr == 0) {
         return YES;
     } else {
         return NO;

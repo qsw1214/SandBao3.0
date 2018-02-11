@@ -118,10 +118,10 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
                 
                 [self fee];
             }else{
-                [Tool showDialog:@"金额超限!"];
+                [[SDAlertView shareAlert] showDialog:@"金额超限!"];
             }
         }else{
-            [Tool showDialog:@"请输入正确金额"];
+            [[SDAlertView shareAlert] showDialog:@"请输入正确金额"];
         }
     }
     if (btn.tag == BTN_TAG_SHOWALLMONEY) {
@@ -490,13 +490,13 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         //支付失败 - 复位到支付订单
         [self.payView payPwdResetToPayOrderView];
         if (paramArr.count>0) {
-            [Tool showDialog:paramArr[0] defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:paramArr[0] defulBlock:^{
                 //支付失败 - 复位支付工具且删除
                 [self.payView resetPayToolHidden];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }];
         }else{
-            [Tool showDialog:@"网络连接异常" defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"网络连接异常" defulBlock:^{
                 //支付失败 - 复位支付工具且删除
                 [self.payView resetPayToolHidden];
                 [self.navigationController popToRootViewControllerAnimated:YES];
@@ -525,7 +525,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         NSArray *bankCardArr = [self getBankCardPayToolArr];
         if (bankCardArr.count>=3) {
-            [Tool showDialog:@"已绑定3张银行卡,不可继续绑卡"];
+            [[SDAlertView shareAlert] showDialog:@"已绑定3张银行卡,不可继续绑卡"];
         }else{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
             [self.navigationController pushViewController:addBankCardVC animated:YES];
@@ -538,7 +538,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
 - (void)payViewPayToolsError:(NSString *)errorInfo{
     
     if ([errorInfo isEqualToString:@"无可用支付工具"]) {
-        [Tool showDialog:@"无可用银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"无可用银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
@@ -546,7 +546,7 @@ typedef void(^WalletTransferStateBlock)(NSArray *paramArr);
         }];
     }
     if ([errorInfo isEqualToString:@"无支付工具下发"]) {
-        [Tool showDialog:@"未绑定银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"未绑定银行卡" message:@"请绑定新银行卡" leftBtnString:@"取消" rightBtnString:@"去绑卡" leftBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];

@@ -33,7 +33,7 @@
     [super viewDidAppear:animated];
 
     if (!isCanScanner) {
-        [Tool showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"暂不设置" rightBtnString:@"去设置" leftBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"暂不设置" rightBtnString:@"去设置" leftBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         } rightBlock:^{
             //去设置
@@ -139,7 +139,7 @@
 //        //pop一下
 //        [self.navigationController popViewControllerAnimated:NO];
     }else{
-        [Tool showDialog:@"您的二维码有误,请确认后再扫" defulBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"您的二维码有误,请确认后再扫" defulBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }

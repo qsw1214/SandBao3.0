@@ -141,7 +141,7 @@
     //右边第二个按钮事件(由右向左数)
     self.navCoverView.rightSecBlock = ^{
         //@"客服"
-        [Tool showDialog:@"为您拨打客服热线" message:@"021-962567" leftBtnString:@"取消" rightBtnString:@"呼叫" leftBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"为您拨打客服热线" message:@"021-962567" leftBtnString:@"取消" rightBtnString:@"呼叫" leftBlock:^{
             
         } rightBlock:^{
             //呼叫
@@ -479,13 +479,13 @@
         
         if ([titleName isEqualToString:@"转账"]) {
             if ([[sandWalletDic objectForKey:@"available"] boolValue] == NO){
-                //            [Tool showDialog:@"账户暂时无法转账 available == NO"];
+                //            [[SDAlertView shareAlert] showDialog:@"账户暂时无法转账 available == NO"];
                 //            return ;
             }
             SDRechargePopView *popview = [SDRechargePopView showRechargePopView:@"转账到" rechargeChooseBlock:^(NSString *cellName) {
                 if ([cellName isEqualToString:@"个人银行卡"]) {
                     if ([[Tool fenToYuanDict:sandWalletDic] isEqualToString:@"0.00"]) {
-                        [Tool showDialog:@"账户余额不足,无法转账到银行卡"];
+                        [[SDAlertView shareAlert] showDialog:@"账户余额不足,无法转账到银行卡"];
                         return ;
                     }
                     BankCardTransferViewController * bankCardTransferVC = [[BankCardTransferViewController alloc] init];
@@ -495,7 +495,7 @@
                 }
                 if ([cellName isEqualToString:@"杉德宝用户"]) {
                     if ([[Tool fenToYuanDict:sandWalletDic] isEqualToString:@"0.00"]) {
-                        [Tool showDialog:@"账户余额不足,无法转账到杉德宝用户"];
+                        [[SDAlertView shareAlert] showDialog:@"账户余额不足,无法转账到杉德宝用户"];
                         return ;
                     }
                     UserTransferBeginViewController *sandUserTransferVC = [[UserTransferBeginViewController alloc] init];
@@ -806,7 +806,7 @@
         AudioServicesPlaySystemSound(1312);
         
         //1.退出用户登录页
-        [Tool showDialog:msgTitle message:message defulBlock:^{
+        [[SDAlertView shareAlert] showDialog:msgTitle message:message defulBlock:^{
             
             //从全局变量 [CommParameter sharedInstance].currentVC 获取当前窗口下的主内容视图,用于登出UI操作
             [Tool setContentViewControllerWithLoginFromSideMentuVIewController:[CommParameter sharedInstance].currentVC forLogOut:YES];
@@ -859,7 +859,7 @@
     {
         //若检测未实名,进行实名
         if (![CommParameter sharedInstance].realNameFlag) {
-            [Tool showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"登出" leftBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"请进行认证" message:@"检测到您还未实名认证" leftBtnString:@"去实名" rightBtnString:@"登出" leftBlock:^{
                 RealNameViewController *realName = [[RealNameViewController alloc] init];
                 UINavigationController *realNameNav = [[UINavigationController alloc] initWithRootViewController:realName];
                 [self.sideMenuViewController setContentViewController:realNameNav];
@@ -870,7 +870,7 @@
         }
         //若检测未设置支付密码,则修改支付密码
         if (![CommParameter sharedInstance].payPassFlag) {
-            [Tool showDialog:@"请进行设置" message:@"检测到您还未设置支付密码" leftBtnString:@"去设置" rightBtnString:@"登出" leftBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"请进行设置" message:@"检测到您还未设置支付密码" leftBtnString:@"去设置" rightBtnString:@"登出" leftBlock:^{
                 //由于设置支付密码挂在实名流程之下(不能单独设置),因此单独设置支付密码必须走 修改支付密码流程
                 VerifyTypeViewController *verifyTypeVC = [[VerifyTypeViewController alloc] init];
                 verifyTypeVC.tokenType = @"01000601";

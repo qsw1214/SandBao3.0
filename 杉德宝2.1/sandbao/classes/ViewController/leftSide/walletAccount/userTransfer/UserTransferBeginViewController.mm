@@ -71,10 +71,10 @@
         
         [SDSearchPop showSearchPopViewPlaceholder:@"杉德宝账户" textBlock:^(NSString *text) {
             if (![NSRegularExpression validateMobile:text]) {
-                return [Tool showDialog:@"输入的手机号码格式不正确，请重新输入。"];
+                return [[SDAlertView shareAlert] showDialog:@"输入的手机号码格式不正确，请重新输入。"];
             }
             if ([text isEqualToString:[CommParameter sharedInstance].userName]) {
-                 [Tool showDialog:@"转账对象不能为自己哦!"];
+                 [[SDAlertView shareAlert] showDialog:@"转账对象不能为自己哦!"];
                 return;
             }
             self.otherPhoneNoStr = text;
@@ -248,11 +248,11 @@
     NSDictionary *otherSandWalletDic = [otherPayToolDic objectForKey:@"sandWalletDic"];
     
     if (ownSandWalletDic.count == 0 || ![[ownSandWalletDic objectForKey:@"available"] boolValue]) {
-//        [Tool showDialog:@"我方无可用支付工具"];
+//        [[SDAlertView shareAlert] showDialog:@"我方无可用支付工具"];
 //        return NO;
     }
     if (otherSandWalletDic.count == 0 || ![[otherSandWalletDic objectForKey:@"available"] boolValue] ) {
-        [Tool showDialog:@"对方无可用支付工具"];
+        [[SDAlertView shareAlert] showDialog:@"对方无可用支付工具"];
         return NO;
     }
     return YES;

@@ -346,7 +346,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         NSString *respMsg = [strArr firstObject];
         NSString *msg = [strArr lastObject];
         
-        [Tool showDialog:msg message:respMsg defulBlock:^{
+        [[SDAlertView shareAlert] showDialog:msg message:respMsg defulBlock:^{
             
             //更新金额
             [self ownPayTools];
@@ -403,9 +403,9 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
         [self.payView payPwdResetToPayOrderView];
         
         if (paramArr.count>0) {
-            [Tool showDialog:paramArr[0]];
+            [[SDAlertView shareAlert] showDialog:paramArr[0]];
         }else{
-            [Tool showDialog:@"网络连接异常"];
+            [[SDAlertView shareAlert] showDialog:@"网络连接异常"];
         }
     }];
 }
@@ -436,7 +436,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     if ([type isEqualToString:PAYTOOL_PAYPASS]) {
         NSArray *bankCardArr = [self getBankCardPayToolArr];
         if (bankCardArr.count>=3) {
-            [Tool showDialog:@"已绑定3张银行卡,不可继续绑卡"];
+            [[SDAlertView shareAlert] showDialog:@"已绑定3张银行卡,不可继续绑卡"];
         }else{
             AddBankCardViewController *addBankCardVC = [[AddBankCardViewController alloc] init];
             [self.navigationController pushViewController:addBankCardVC animated:YES];
@@ -447,7 +447,7 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
     }
 }
 - (void)payViewPayToolsError:(NSString *)errorInfo{
-    [Tool showDialog:errorInfo defulBlock:^{
+    [[SDAlertView shareAlert] showDialog:errorInfo defulBlock:^{
         
         //复位支付工具且删除
         [self.payView resetPayToolHidden];
@@ -475,12 +475,12 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
+                    [[SDAlertView shareAlert] showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
+                    [[SDAlertView shareAlert] showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
                     }];
                 }
@@ -499,12 +499,12 @@ typedef void(^OrderInfoPayStateBlock)(NSArray *paramArr);
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
+                    [[SDAlertView shareAlert] showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
+                    [[SDAlertView shareAlert] showDialog:@"啊哦" message:@"获取授权码失败" sureTitle:@"我知道了" defualtBlcok:^{
                         [self.navigationController popViewControllerAnimated:YES];
                     }];
                 }

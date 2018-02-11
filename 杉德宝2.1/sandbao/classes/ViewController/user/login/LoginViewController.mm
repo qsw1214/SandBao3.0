@@ -69,7 +69,7 @@
             //友盟自定义时间统计 - 计数事件
             [MobClick event:UM_Login];
         }else{
-            [Tool showDialog:@"请输入正确的登陆账号及密码"];
+            [[SDAlertView shareAlert] showDialog:@"请输入正确的登陆账号及密码"];
         }
     }
     if (btn.tag == BTN_TAG_REGIST) {
@@ -236,13 +236,13 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络连接超时,请退出重试" defulBlock:^{
                         //退出处理
                         [Tool exitApplication:self];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
                         //重新申请sToken
                         [self load];
                     } rightBlock:^{
@@ -265,12 +265,12 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络连接超时,请退出重试" defulBlock:^{
                         [Tool exitApplication:self];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
                         //重新申请sToken
                         [self load];
                     } rightBlock:^{
@@ -291,12 +291,12 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == frErrorType) {
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络连接超时,请退出重试" defulBlock:^{
                         [Tool exitApplication:self];
                     }];
                 }
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络异常" message:@"点击重新连接" leftBtnString:@"重连" rightBtnString:@"退出杉德宝" leftBlock:^{
                         //重新申请sToken
                         [self load];
                     } rightBlock:^{
@@ -316,7 +316,7 @@
                         [self.authToolsArray addObject:authToolsArr[i]];
                     }
                 }else{
-                    [Tool showDialog:@"无鉴权工具下发" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"无鉴权工具下发" defulBlock:^{
                         [Tool exitApplication:self];
                     }];
                 }
@@ -377,11 +377,11 @@
                                     smsCheckVC.loginAuthToolArray = authToolSArr;
                                     [self.navigationController pushViewController:smsCheckVC animated:YES];
                                 }else{
-                                    [Tool showDialog:@"下发鉴权工具有误"];
+                                    [[SDAlertView shareAlert] showDialog:@"下发鉴权工具有误"];
                                 }
                             }
                         }else{
-                            [Tool showDialog:@"下发鉴权工具为空"];
+                            [[SDAlertView shareAlert] showDialog:@"下发鉴权工具为空"];
                         }
                     }else{
                         [self load];
@@ -470,7 +470,7 @@
         [self ownPayTools_login];
     } else {
         //数据写入失败->返回直接登陆
-        [Tool showDialog:@"用户数据存储失败,请返回重新登陆" defulBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"用户数据存储失败,请返回重新登陆" defulBlock:^{
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];
     }

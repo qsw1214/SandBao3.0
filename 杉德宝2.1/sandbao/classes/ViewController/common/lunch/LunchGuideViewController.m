@@ -89,12 +89,13 @@
             nextBtn.frame = CGRectMake(0, 0, SCREEN_WIDTH, 100);
             [nextBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             [imgCell addSubview:nextBtn];
+            
+            /** 暂时屏蔽 等设计提出优化方案
             //弹出权限授予框
             [self setAuthorization];
+             */
         }
     }
-    
-
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

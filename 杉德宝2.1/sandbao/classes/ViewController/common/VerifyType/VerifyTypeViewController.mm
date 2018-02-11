@@ -66,7 +66,7 @@
             self.navCoverView.letfImgStr = @"login_icon_back";
             __weak VerifyTypeViewController *weakSelf = self;
             self.navCoverView.leftBlock = ^{
-                [Tool showDialog:@"您还未设置支付密码" message:@"是否放弃设置" leftBtnString:@"继续设置" rightBtnString:@"退出杉德宝" leftBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"您还未设置支付密码" message:@"是否放弃设置" leftBtnString:@"继续设置" rightBtnString:@"退出杉德宝" leftBlock:^{
                     //do no thing
                 } rightBlock:^{
                     [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf forLogOut:YES];
@@ -187,7 +187,7 @@
     
     //过滤仅短信验证方式!
     if ([[self.authGroupTypeDic objectForKey:@"title"] isEqualToString:@"短信验证"]) {
-        [Tool showDialog:@"推荐短信+N校验方式,确保账户安全!"];
+        [[SDAlertView shareAlert] showDialog:@"推荐短信+N校验方式,确保账户安全!"];
     }else{
         //根据所选鉴权方式_获取鉴权工具
         [self getAuthToolsfForAuthGroup];
@@ -300,7 +300,7 @@
                         }
                     }
                 }else{
-                    [Tool showDialog:@"下发鉴权工具为空"];
+                    [[SDAlertView shareAlert] showDialog:@"下发鉴权工具为空"];
                 }
             }];
         }];

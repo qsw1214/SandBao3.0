@@ -127,6 +127,7 @@
 		288421BB1F8E0A2100082E7C /* Base64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421B81F8E0A2100082E7C /* Base64Util.m */; };
 		288421BC1F8E0A2100082E7C /* GzipUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421BA1F8E0A2100082E7C /* GzipUtility.m */; };
 		288421C01F8E0A7800082E7C /* Tool.m in Sources */ = {isa = PBXBuildFile; fileRef = 288421BF1F8E0A7800082E7C /* Tool.m */; };
+		28897BDB20301F16009C7276 /* SDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28897BD920301F16009C7276 /* SDAlertView.m */; };
 		289729761FBEE8ED0041373E /* AddSandCardViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 289729751FBEE8ED0041373E /* AddSandCardViewController.mm */; };
 		28981B7B1FA01FA8004CFC95 /* AuthToolBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B5E1FA01FA8004CFC95 /* AuthToolBaseView.m */; };
 		28981B7C1FA01FA8004CFC95 /* BankAuthToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28981B601FA01FA8004CFC95 /* BankAuthToolView.m */; };
@@ -269,7 +270,6 @@
 		28D289F91FA32E2D00C3787E /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289F81FA32E2D00C3787E /* SF-UI-Text-Regular.otf */; };
 		28D289FB1FA330D400C3787E /* opensans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28D289FA1FA330D400C3787E /* opensans.ttf */; };
 		28D28F1A1FCD511100B3F00B /* LocationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D28F191FCD511100B3F00B /* LocationUtil.m */; };
-		28D28F1D1FCEAF8C00B3F00B /* ErrorLunchViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D28F1C1FCEAF8C00B3F00B /* ErrorLunchViewController.mm */; };
 		28D28F221FCFE79F00B3F00B /* LogpwdViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D28F1F1FCFE79F00B3F00B /* LogpwdViewController.mm */; };
 		28D28F231FCFE79F00B3F00B /* RegistViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D28F211FCFE79F00B3F00B /* RegistViewController.mm */; };
 		28D28F2E1FD15C0000B3F00B /* HDAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D28F261FD15C0000B3F00B /* HDAlertView.m */; };
@@ -534,6 +534,8 @@
 		288421BA1F8E0A2100082E7C /* GzipUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzipUtility.m; sourceTree = "<group>"; };
 		288421BE1F8E0A7800082E7C /* Tool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tool.h; sourceTree = "<group>"; };
 		288421BF1F8E0A7800082E7C /* Tool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tool.m; sourceTree = "<group>"; };
+		28897BD920301F16009C7276 /* SDAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAlertView.m; sourceTree = "<group>"; };
+		28897BDA20301F16009C7276 /* SDAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAlertView.h; sourceTree = "<group>"; };
 		289729741FBEE8ED0041373E /* AddSandCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddSandCardViewController.h; sourceTree = "<group>"; };
 		289729751FBEE8ED0041373E /* AddSandCardViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddSandCardViewController.mm; sourceTree = "<group>"; };
 		28981B5D1FA01FA8004CFC95 /* AuthToolBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthToolBaseView.h; sourceTree = "<group>"; };
@@ -732,8 +734,6 @@
 		28D289FA1FA330D400C3787E /* opensans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = opensans.ttf; sourceTree = "<group>"; };
 		28D28F181FCD511100B3F00B /* LocationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationUtil.h; sourceTree = "<group>"; };
 		28D28F191FCD511100B3F00B /* LocationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationUtil.m; sourceTree = "<group>"; };
-		28D28F1B1FCEAF8C00B3F00B /* ErrorLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorLunchViewController.h; sourceTree = "<group>"; };
-		28D28F1C1FCEAF8C00B3F00B /* ErrorLunchViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ErrorLunchViewController.mm; sourceTree = "<group>"; };
 		28D28F1E1FCFE79F00B3F00B /* LogpwdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogpwdViewController.h; sourceTree = "<group>"; };
 		28D28F1F1FCFE79F00B3F00B /* LogpwdViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LogpwdViewController.mm; sourceTree = "<group>"; };
 		28D28F201FCFE79F00B3F00B /* RegistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
@@ -1753,8 +1753,6 @@
 			children = (
 				28B6491F1FAC459B0074A390 /* LunchViewController.h */,
 				28B649201FAC459B0074A390 /* LunchViewController.mm */,
-				28D28F1B1FCEAF8C00B3F00B /* ErrorLunchViewController.h */,
-				28D28F1C1FCEAF8C00B3F00B /* ErrorLunchViewController.mm */,
 				2836ADEE1FE3705A00BAB209 /* LunchGuideViewController.h */,
 				2836ADEF1FE3705A00BAB209 /* LunchGuideViewController.m */,
 			);
@@ -1927,6 +1925,8 @@
 		28D28F241FD15C0000B3F00B /* HDAlertView */ = {
 			isa = PBXGroup;
 			children = (
+				28897BDA20301F16009C7276 /* SDAlertView.h */,
+				28897BD920301F16009C7276 /* SDAlertView.m */,
 				28D28F251FD15C0000B3F00B /* HDAlertView.h */,
 				28D28F261FD15C0000B3F00B /* HDAlertView.m */,
 				28D28F271FD15C0000B3F00B /* HDMacro.h */,
@@ -2621,7 +2621,6 @@
 				28B649141FAC45040074A390 /* BaseViewController.mm in Sources */,
 				28D7E5901FA9A52C00518042 /* BankCardTransferFinishViewController.mm in Sources */,
 				283B992E201F11A90008EBA3 /* SDExpiryPop.m in Sources */,
-				28D28F1D1FCEAF8C00B3F00B /* ErrorLunchViewController.mm in Sources */,
 				28BCE8C31FB18FD500D62F94 /* VerifyViewController.mm in Sources */,
 				28B649851FAC654A0074A390 /* SDPayToolOrderView.m in Sources */,
 				288421981F8E091200082E7C /* NSString+string.m in Sources */,
@@ -2682,6 +2681,7 @@
 				281F64471E792A970005AE86 /* SDCollectionViewCell.m in Sources */,
 				28EB6CEF1FA18321003949AF /* LeftSideMenuViewController.mm in Sources */,
 				281F64451E792A970005AE86 /* TADotView.m in Sources */,
+				28897BDB20301F16009C7276 /* SDAlertView.m in Sources */,
 				28981B871FA01FA8004CFC95 /* NameAuthToolView.m in Sources */,
 				28D28F2E1FD15C0000B3F00B /* HDAlertView.m in Sources */,
 				28D7E5AA1FA9D15A00518042 /* PaymentPwdCell.m in Sources */,

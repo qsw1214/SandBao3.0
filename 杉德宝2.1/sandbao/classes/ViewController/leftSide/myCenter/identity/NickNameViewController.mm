@@ -58,7 +58,7 @@
             //修改用户基础信息(昵称)
             [self resetUserBaseInfo];
         }else{
-            [Tool showDialog:@"请输入您的昵称信息"];
+            [[SDAlertView shareAlert] showDialog:@"请输入您的昵称信息"];
         }
     }
 }
@@ -159,7 +159,7 @@
                 [CommParameter sharedInstance].nick = self.nickNameStr;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Nick_Name_Changed" object:nil];
                 
-                [Tool showDialog:@"昵称修改成功" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"昵称修改成功" defulBlock:^{
                     [self.navigationController popViewControllerAnimated:YES];
                 }];
             }];

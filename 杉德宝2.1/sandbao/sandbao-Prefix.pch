@@ -34,7 +34,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "SDRequestHelp.h"
 #import "LocationUtil.h"
-#import "HDAlertView.h"
+#import "SDAlertView.h"
 
 //添加混淆作用的头文件（这个文件名是脚本confuse.sh中定义的）
 //#import "codeObfuscation.h"
@@ -81,6 +81,8 @@
 
 
 //通知
+//大Loading结果通知
+#define LOGINWAYNOTICE @"logintWayNotice"
 //退出后切回首页通知
 #define LOGOUTNOTICEBARITEM @"logoutNoticeBarItem"
 //退出后 重置MQTT的clientID

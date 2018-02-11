@@ -14,7 +14,6 @@
 #import "GzipUtility.h"
 #import "LoginViewController.h"
 #import "SpsLunchViewController.h"
-#import "HDAlertView.h"
 #import "SDMQTTManager.h"
 #define Tool_Rgba(r,g,b,a) [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:a]
 @interface Tool(){
@@ -47,127 +46,6 @@
 }
 
 
-#pragma mark - 弹出默认对话框+无事件处理
-/**
- 弹出(CustomAlertViewStyleDefault)对话框+无事件处理 (一般用于反馈后端resMsg)
- 
- @param message 消息
- */
-+ (void)showDialog:(NSString *)message{
-    
-    HDAlertView *alertView = [HDAlertView alertViewWithTitle:@"提示" andMessage:message];
-    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
-    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
-    alertView.isSupportRotating = YES;
-    
-    [alertView addButtonWithTitle:@"确定" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
-        // do nothing
-    }];
-    
-    [alertView show];
-
-}
-
-
-
-
-#pragma mark - 弹出默认对话框+默认事件处理
-/**
- 弹出(CustomAlertViewStyleDefault)对话框+默认事件处理 (一般用于反馈后端resMsg,并需要处理一定事件如sToken失效提示后退出重登陆)
- 
- @param message 消息
- @param defulblock 默认事件回调
- */
-+ (void)showDialog:(NSString *)message defulBlock:(DefulBtnBlock)defulblock{
-    
-    HDAlertView *alertView = [HDAlertView alertViewWithTitle:@"提示" andMessage:message];
-    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
-    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
-    alertView.isSupportRotating = YES;
-    
-    [alertView addButtonWithTitle:@"确定" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
-        defulblock();
-    }];
-    
-    [alertView show];
-    
-}
-
-
-#pragma mark - 弹出带标题对话框+默认事件处理 + 消息标题
-/**
- 弹出带标题对话框+默认事件处理
-
- @param title 标题
- @param message 信息
- @param defulblock 默认事件处理
- */
-+ (void)showDialog:(NSString*)title message:(NSString*)message defulBlock:(DefulBtnBlock)defulblock{
-    
-    HDAlertView *alertView = [HDAlertView alertViewWithTitle:title andMessage:message];
-    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
-    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
-    alertView.isSupportRotating = YES;
-    
-    [alertView addButtonWithTitle:@"确定" type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
-        defulblock();
-    }];
-    
-    [alertView show];
-}
-
-#pragma mark - 弹出带标题对话框+事件处理+自定义处理标题
-/**
- 弹出带标题对话框+事件处理+自定义处理标题
- 
- @param title 标题
- @param message 消息内容
- @param sureTitle 确认消息标题
- @param defaultBlock 自定义的事件处理
- */
-+ (void)showDialog:(NSString*)title message:(NSString*)message sureTitle:(NSString*)sureTitle defualtBlcok:(DefulBtnBlock)defaultBlock{
-    
-    HDAlertView *alertView = [HDAlertView alertViewWithTitle:title andMessage:message];
-    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
-    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
-    alertView.isSupportRotating = YES;
-    
-    [alertView addButtonWithTitle:sureTitle type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
-        defaultBlock();
-    }];
-    [alertView show];
-}
-
-
-#pragma mark - 弹出带标题对话框+事件处理
-/**
-  弹出(CustomAlertViewStyleDefault)带标题对话框+事件处理
-
- @param title 标题
- @param message 消息
- @param leftString 左边文字
- @param rightString 右边文字
- @param leftbtnblock 左按钮回调
- @param rightbtnblock 右按钮回调
- */
-+ (void)showDialog:(NSString*)title message:(NSString*)message leftBtnString:(NSString*)leftString rightBtnString:(NSString*)rightString leftBlock:(LeftBtnBlock)leftbtnblock rightBlock:(RightBtnBlock)rightbtnblock{
-    
-    HDAlertView *alertView = [HDAlertView alertViewWithTitle:title andMessage:message];
-    alertView.transitionStyle = HDAlertViewTransitionStyleDropDown;
-    alertView.backgroundStyle = HDAlertViewBackgroundStyleSolid;
-    alertView.isSupportRotating = YES;
-    
-    [alertView addButtonWithTitle:leftString type:HDAlertViewButtonTypeDefault handler:^(HDAlertView *alertView) {
-        leftbtnblock();
-    }];
-    
-    [alertView addButtonWithTitle:rightString type:HDAlertViewButtonTypeDestructive handler:^(HDAlertView *alertView) {
-        rightbtnblock();
-    }];
-    
-    [alertView show];
-    
-}
 
 
 #pragma mark - url跳转

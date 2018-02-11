@@ -80,7 +80,7 @@
         if (self.paymentPwd.length>0) {
             [self fee];
         }else{
-            [Tool showDialog:@"请输入正确信息"];
+            [[SDAlertView shareAlert] showDialog:@"请输入正确信息"];
         }
     }
     if (btn.tag == BTN_TAG_ENTERWEBVC) {
@@ -229,7 +229,7 @@
         NSDictionary *payForAnotherDic = [payToolDic objectForKey:@"payForAnotherDic"];
         
         if (![payForAnotherDic objectForKey:@"available"]) {
-            [Tool showDialog:@"无可用支付工具" defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"无可用支付工具" defulBlock:^{
                  [self.navigationController popViewControllerAnimated:YES];
             }];
         }else{
@@ -237,7 +237,7 @@
             self.rechargeOutPayToolDic = [NSMutableDictionary dictionaryWithDictionary:payForAnotherDic];
         }
     }else{
-        [Tool showDialog:@"无可用工具下发" defulBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"无可用工具下发" defulBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }

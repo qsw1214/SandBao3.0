@@ -81,7 +81,7 @@
                 NSString *mediaType = AVMediaTypeVideo;//读取媒体类型
                 AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:mediaType];//读取设备授权状态
                 if(authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied){
-                    [Tool showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"暂不启用" rightBtnString:@"去启用" leftBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"相机权限受限" message:@"请在设置中启用" leftBtnString:@"暂不启用" rightBtnString:@"去启用" leftBlock:^{
                         //do no thing
                     } rightBlock:^{
                         //去设置
@@ -102,7 +102,7 @@
                 // 检测相册权限是否支持
                 ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
                 if (status == ALAuthorizationStatusRestricted || status == ALAuthorizationStatusDenied) {
-                    [Tool showDialog:@"相册权限受限" message:@"请在设置中启用" leftBtnString:@"暂不启用" rightBtnString:@"去启用" leftBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"相册权限受限" message:@"请在设置中启用" leftBtnString:@"暂不启用" rightBtnString:@"去启用" leftBlock:^{
                         // do no thing
                     } rightBlock:^{
                         //去设置
@@ -263,7 +263,7 @@
     
     NSData *dataW = [base64Str dataUsingEncoding:NSUTF8StringEncoding];
     if (dataW.length >4000) {
-        [Tool showDialog:@"图片过大,请重新选择"];
+        [[SDAlertView shareAlert] showDialog:@"图片过大,请重新选择"];
         return;
     }
     
@@ -312,7 +312,7 @@
                 [CommParameter sharedInstance].avatar = base64Str;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Avatar_Changed" object:nil];
                 
-                [Tool showDialog:@"头像修改成功"];
+                [[SDAlertView shareAlert] showDialog:@"头像修改成功"];
                 
                 //销毁照片控制器
                 [picker dismissViewControllerAnimated:YES completion:^{

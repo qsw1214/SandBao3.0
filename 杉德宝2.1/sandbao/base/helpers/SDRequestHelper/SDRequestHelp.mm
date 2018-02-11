@@ -224,7 +224,7 @@ static SDRequestHelp *_instance = nil;
                     [weakSelf.HUD hidden];
                 }
                 if (weakSelf.respCodeErrorAutomatic) {
-                    [Tool showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:[NSString stringWithUTF8String:paynuc.get("respMsg").c_str()] defulBlock:^{
                         [Tool setContentViewControllerWithLoginFromSideMentuVIewController:weakSelf.controller forLogOut:YES];
                     }];
                 }
@@ -249,14 +249,14 @@ static SDRequestHelp *_instance = nil;
                         //checkResultMsg错误码提示
                         NSString *checkResultMsg = [[arrTools firstObject] objectForKey:@"checkResultMsg"];
                         if (checkResultMsg.length>0) {
-                            [Tool showDialog:checkResultMsg];
+                            [[SDAlertView shareAlert] showDialog:checkResultMsg];
                         }else{
                             //respMsg错误码提示
-                            [Tool showDialog:weakSelf.respMsg];
+                            [[SDAlertView shareAlert] showDialog:weakSelf.respMsg];
                         }
                     }else{
                         //respMsg错误码提示
-                        [Tool showDialog:weakSelf.respMsg];
+                        [[SDAlertView shareAlert] showDialog:weakSelf.respMsg];
                     }
                 }
             });

@@ -320,7 +320,7 @@
         [self ownPayTools_login];
     } else {
         //数据写入失败->返回直接登陆
-        [Tool showDialog:@"用户数据存储失败,请返回重新登陆" defulBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"用户数据存储失败,请返回重新登陆" defulBlock:^{
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];
     }
@@ -502,7 +502,7 @@
                         [smsCodeAuthToolView stopTimer];
                         [CommParameter sharedInstance].realNameFlag = YES;
                         NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
-                        [Tool showDialog:respMsg defulBlock:^{
+                        [[SDAlertView shareAlert] showDialog:respMsg defulBlock:^{
                             PayPwdViewController *payPwdVC = [[PayPwdViewController alloc] init];
                             [self.navigationController pushViewController:payPwdVC animated:YES];
                         }];
@@ -582,7 +582,7 @@
                     NSString *respMsg = [NSString stringWithUTF8String:paynuc.get("respMsg").c_str()];
                     //绑卡成功,开通快捷失败(后端默认绑卡成功)
                     if ([@"050005" isEqualToString:respCode]) {
-                        [Tool showDialog:respMsg defulBlock:^{
+                        [[SDAlertView shareAlert] showDialog:respMsg defulBlock:^{
                             [self ownPayTools_addBakcCard];
                         }];
                     }
@@ -591,7 +591,7 @@
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                [Tool showDialog:@"绑卡成功" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"绑卡成功" defulBlock:^{
                     [self ownPayTools_addBakcCard];
                 }];
             }];

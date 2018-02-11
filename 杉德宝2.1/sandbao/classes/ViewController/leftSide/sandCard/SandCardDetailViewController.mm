@@ -255,7 +255,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
             
-            [Tool showDialog:@"解绑成功" defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"解绑成功" defulBlock:^{
                 [self.navigationController popViewControllerAnimated:YES];
             }];
             
@@ -267,7 +267,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         [self.payView hidPayToolInPayPwdView];
         
         if (paramArr.count>0) {
-            [Tool showDialog:paramArr[0]];
+            [[SDAlertView shareAlert] showDialog:paramArr[0]];
         }
     }];
 }
@@ -280,7 +280,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     }
     if ([type isEqualToString:PAYTOOL_ACCPASS]) {
         //修改杉德卡密码
-        [Tool showDialog:@"暂不支持修改"];
+        [[SDAlertView shareAlert] showDialog:@"暂不支持修改"];
     }
     
 }
@@ -388,6 +388,7 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
     [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
         __block BOOL error = NO;
         
+        
         NSMutableArray *tempAuthToolsArray = [[NSMutableArray alloc] init];
         NSMutableDictionary *authToolsDic = [NSMutableDictionary dictionaryWithDictionary:authToolDic];
         [authToolsDic removeObjectForKey:@"pass"];
@@ -402,8 +403,18 @@ typedef void(^SandCardStateBlock)(NSArray *paramArr);
         
         NSString *payTool = [[PayNucHelper sharedInstance] dictionaryToJson:(NSMutableDictionary*)self.payToolDic];
         
-        paynuc.set("payTool", [payTool UTF8String]);
+        
         paynuc.set("authTools", [authTools UTF8String]);
+        [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
+            error = YES;
+            [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                errorBlock(nil);
+            }];
+        } successBlock:^{
+        }];
+        if (error) return ;
+        
+        paynuc.set("payTool", [payTool UTF8String]);
         [[SDRequestHelp shareSDRequest] closedRespCpdeErrorAutomatic];
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"card/unbandCard/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;

@@ -164,7 +164,7 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/getRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"登陆密码修改失败" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"登陆密码修改失败" defulBlock:^{
                     [self.navigationController popViewControllerAnimated:YES];
                 }];
             }];
@@ -175,7 +175,7 @@
                 NSString *regAuthTools = [NSString stringWithUTF8String:paynuc.get("regAuthTools").c_str()];
                 regAuthToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
                 if (![[[regAuthToolsArr firstObject] objectForKey:@"type"] isEqualToString:@"loginpass"]) {
-                    [Tool showDialog:@"下发鉴权工具有误"];
+                    [[SDAlertView shareAlert] showDialog:@"下发鉴权工具有误"];
                 }
                 
                 
@@ -213,14 +213,14 @@
         [[SDRequestHelp shareSDRequest] requestWihtFuncName:@"authTool/setRegAuthTools/v1" errorBlock:^(SDRequestErrorType type) {
             error = YES;
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                [Tool showDialog:@"登陆密码修改失败" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"登陆密码修改失败" defulBlock:^{
                     [self.navigationController popViewControllerAnimated:YES];
                 }];
             }];
         } successBlock:^{
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [self.HUD hidden];
-                [Tool showDialog:@"登录密码修改成功,请重新登录" defulBlock:^{
+                [[SDAlertView shareAlert] showDialog:@"登录密码修改成功,请重新登录" defulBlock:^{
                     
                     //修改登录密码 - 成功返回
                     if (self.verifyType == VERIFY_TYPE_CHANGELOGPWD) {

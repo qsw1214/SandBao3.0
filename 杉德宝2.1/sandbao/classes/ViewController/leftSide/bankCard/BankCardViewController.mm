@@ -104,7 +104,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
     
     //卡数量超限
     if (btn.tag == BTN_TAG_CARDNUMFULL) {
-        [Tool showDialog:@"您最多只能绑三张银行卡,如需绑定新卡,请先解绑"];
+        [[SDAlertView shareAlert] showDialog:@"您最多只能绑三张银行卡,如需绑定新卡,请先解绑"];
     }
     //绑卡
     if (btn.tag == BTN_TAG_BINDBANKCARD) {
@@ -298,7 +298,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         [successView animationSuccess];
         dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5f * NSEC_PER_SEC));
         dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-            [Tool showDialog:@"解绑成功" defulBlock:^{
+            [[SDAlertView shareAlert] showDialog:@"解绑成功" defulBlock:^{
                 //解绑成功 - 更新支付工具
                 [self ownPayTools];
             }];
@@ -311,7 +311,7 @@ typedef void(^BankCardUnBindBlock)(NSArray *paramArr);
         
         [self.bankTableView reloadData];
         if (paramArr.count>0) {
-            [Tool showDialog:paramArr[0]];
+            [[SDAlertView shareAlert] showDialog:paramArr[0]];
         }
     }];
     

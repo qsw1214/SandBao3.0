@@ -207,7 +207,7 @@
                 NSString *regAuthTools = [NSString stringWithUTF8String:paynuc.get("regAuthTools").c_str()];
                 regAuthToolsArr = [[PayNucHelper sharedInstance] jsonStringToArray:regAuthTools];
                 if (![[[regAuthToolsArr firstObject] objectForKey:@"type"] isEqualToString:@"paypass"]) {
-                    [Tool showDialog:@"下发鉴权工具有误"];
+                    [[SDAlertView shareAlert] showDialog:@"下发鉴权工具有误"];
                 }
                 
                 
@@ -253,13 +253,13 @@
                 [self.HUD hidden];
                 
                 if ([CommParameter sharedInstance].payPassFlag == NO) {
-                    [Tool showDialog:@"支付密码设置成功" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"支付密码设置成功" defulBlock:^{
                         [CommParameter sharedInstance].payPassFlag = YES;
                         //归位Home或SpsLunch
                         [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
                     }];
                 }else{
-                    [Tool showDialog:@"支付密码修改成功" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"支付密码修改成功" defulBlock:^{
                         [CommParameter sharedInstance].payPassFlag = YES;
                         //pop返回set页
                         [self.navigationController popToRootViewControllerAnimated:YES];

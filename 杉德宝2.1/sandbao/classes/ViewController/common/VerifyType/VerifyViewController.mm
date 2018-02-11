@@ -56,7 +56,7 @@
             [self setAuthTools];
             
         }else{
-            [Tool showDialog:@"请输入正确信息"];
+            [[SDAlertView shareAlert] showDialog:@"请输入正确信息"];
         }
     }
     

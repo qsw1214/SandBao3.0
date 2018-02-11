@@ -10,14 +10,14 @@
 #import <IQKeyboardManager.h>
 #import <UIKit/UIKit.h>
 #import "LunchViewController.h"
-#import "ErrorLunchViewController.h"
+
 #import "PayNucHelper.h"
 #import "UIDevice+DeviceoInfo.h"
 #import "Majlet_Func.h"
 #import "SDNetwork.h"
 #import "SDSqlite.h"
 #import "SqliteHelper.h"
-#import "Loading.h"
+
 #import "RESideMenu.h"
 #import "LeftSideMenuViewController.h"
 
@@ -81,25 +81,16 @@
     // 2.window设置
     [self setWindows];
     
-    // 3.loading
-    [self loading:launchOptions];
+    // 3.启动方式
+    [self finishLunch:launchOptions];
+    
+    // 4.设置RESideMenu
+    [self setRESideMenu];
     
     return YES;
 }
 
-
-- (void)loading:(NSDictionary *)launchOptions{
-    
-    //网络状态预判断
-    SDNetwork *netWork = [[SDNetwork alloc] init];
-    NSInteger netWorkType = [netWork integerWithNetworkType];
-    if (netWorkType == 0 || netWorkType == 5) {
-        //进入异常引导页 - 引导用户去系统设置
-        [self loadingError:nil type:0];
-        return;
-    }
-    
-    NSInteger loadingResult = [Loading startLoading];
+- (void)finishLunch:(NSDictionary *)launchOptions{
     //判断久彰App调用启动方式
     NSURL *url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
     if (url) {
@@ -110,37 +101,25 @@
         //用户自启动杉德宝App - 设置全局变量urlScheme为nil
         [CommParameter sharedInstance].urlSchemes = nil;
     }
+}
+
+
+- (void)setRESideMenu{
     
-    NSString *loginTypeStr;
-    //load失败
-    if (loadingResult == 0) {
-        [self loadingError:@"网络异常,请退出重试" type:1];
-    }
-    //load成功
-    else
-    {
-        //明登陆引导
-        if (loadingResult == 1) {
-            loginTypeStr = @"PWD_LOGIN";
-        }
-        //暗登陆引导
-        if (loadingResult == 2) {
-            loginTypeStr = @"NO_PWD_LOGIN";
-        }
-        //lunchVC
-        LunchViewController *lunchVC = [[LunchViewController alloc] init];
-        UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
-        
-        //leftVC
-        LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
-        leftVC.loginTypeStr = loginTypeStr;
-        //RESidenMenu控制器
-        RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
-        
-        self.window.rootViewController = sideMenuVC;
-        // 3.显示窗口
-        [self.window makeKeyAndVisible];
-    }
+    //lunchVC
+    LunchViewController *lunchVC = [[LunchViewController alloc] init];
+    UINavigationController *lunchNav = [[UINavigationController alloc] initWithRootViewController:lunchVC];
+    
+    //leftVC
+    LeftSideMenuViewController *leftVC = [[LeftSideMenuViewController alloc] init];
+    //RESidenMenu控制器
+    RESideMenu *sideMenuVC = [[RESideMenu alloc] initWithContentViewController:lunchNav leftMenuViewController:leftVC rightMenuViewController:nil];
+    
+    self.window.rootViewController = sideMenuVC;
+    
+    // 3.显示窗口
+    [self.window makeKeyAndVisible];
+    
 }
 
 
@@ -213,18 +192,7 @@
 }
 
 
-#pragma mark - Loading失败 - 进入失败页
-- (void)loadingError:(NSString*)errorStr type:(NSInteger)errorType{
-    
-    //errorType = 0 ; 无网络处理
-    //errorType = 1 ; 两步认证失败处理
-    
-    ErrorLunchViewController *mErrorLunchViewController = [[ErrorLunchViewController alloc] init];
-    mErrorLunchViewController.errorInfo = errorStr;
-    mErrorLunchViewController.errorType = errorType;
-    self.window.rootViewController = mErrorLunchViewController;
-    [self.window makeKeyAndVisible];
-}
+
 
 
 

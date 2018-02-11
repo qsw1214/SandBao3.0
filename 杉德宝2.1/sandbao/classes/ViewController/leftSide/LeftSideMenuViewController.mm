@@ -85,39 +85,6 @@
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    //如果未登录情况,进行明暗登录操作
-    if ([CommParameter sharedInstance].userInfo.length == 0) {
-        
-        [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
-            //查询活跃状态用户数量(1且只能为1)
-            long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
-            //1.明登录
-            if (count <= 0 && [self.loginTypeStr isEqualToString:@"PWD_LOGIN"])
-            {
-                //第一次安装 - 明登陆
-                if (![[NSUserDefaults standardUserDefaults] objectForKey:FIRST_INSTALL_APP]) {
-                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                        LunchGuideViewController *lunchGuideVC = [[LunchGuideViewController alloc] init];
-                        [self.sideMenuViewController setContentViewController:lunchGuideVC];
-                    }];
-                }else{
-                    //常规 - 明登陆
-                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                        [self pwdLogin];
-                    }];
-                }
-            }
-            //2.暗登陆
-            else
-            {
-                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
-                    //暗登陆成 - 切换到首页
-                    [self noPwdLogin];
-                }];
-            }
-        }];
-    }
-
     //重置baseScrollview的Contentsize
     [self setBaseScrollViewContentSize];
 }
@@ -132,6 +99,8 @@
     [self addSubViewController];
     
     //增加监听
+    //监听决定明暗登录的通知
+    [self addNotifaction_Login];
     //监听用户信息变化
     [self addNotifaction_UserInfo];
     //监听昵称变化
@@ -605,11 +574,11 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"网络连接失败,请退出重试" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络连接失败,请退出重试" defulBlock:^{
                         [Tool exitApplication:self];
                     }];
                 }else{
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络连接超时,请退出重试" defulBlock:^{
                         [Tool exitApplication:self];
                     }];
                 }
@@ -629,11 +598,11 @@
             [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
                 [[SDRequestHelp shareSDRequest] openRespCpdeErrorAutomatic];
                 if (type == respCodeErrorType) {
-                    [Tool showDialog:@"加载支付工具失败,请退出重试" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"加载支付工具失败,请退出重试" defulBlock:^{
                         [Tool exitApplication:self];
                     }];
                 }else{
-                    [Tool showDialog:@"网络连接超时,请退出重试" defulBlock:^{
+                    [[SDAlertView shareAlert] showDialog:@"网络连接超时,请退出重试" defulBlock:^{
                         [Tool exitApplication:self];
                     }];
                 }
@@ -708,6 +677,10 @@
 
 
 #pragma mark - 本类公共方法调用
+#pragma mark 决定明暗登录的通知
+- (void)addNotifaction_Login{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(Applogin:) name:LOGINWAYNOTICE object:nil];
+}
 #pragma mark 用户信息变化监听
 - (void)addNotifaction_UserInfo{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUI) name:@"User_Info_Changed" object:nil];
@@ -724,6 +697,45 @@
 #pragma mark 监听OtherAppOpen启动
 - (void)addNotifaction_otherAppOpen{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(openSpsLunch:) name:OPEN_SPSPAY_NOTIFACTION_STATE_LOGIN object:nil];
+}
+
+#pragma mark 明暗登录
+- (void)Applogin:(NSNotification*)noti{
+    //明暗登录类型
+    NSString *type = noti.object;
+    
+    //如果未登录情况,进行明暗登录操作
+    if ([CommParameter sharedInstance].userInfo.length == 0) {
+        
+        [[SDRequestHelp shareSDRequest] dispatchGlobalQuque:^{
+            //查询活跃状态用户数量(1且只能为1)
+            long count = [SDSqlite getCount:[SqliteHelper shareSqliteHelper].sandBaoDB sql:[NSString stringWithFormat:@"select count(*) from usersconfig where active = '%@'", @"0"]];
+            //1.明登录
+            if (count <= 0 && [type isEqualToString:@"PWD_LOGIN"])
+            {
+                //第一次安装 - 明登陆
+                if (![[NSUserDefaults standardUserDefaults] objectForKey:FIRST_INSTALL_APP]) {
+                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                        LunchGuideViewController *lunchGuideVC = [[LunchGuideViewController alloc] init];
+                        [self.sideMenuViewController setContentViewController:lunchGuideVC];
+                    }];
+                }else{
+                    //常规 - 明登陆
+                    [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                        [self pwdLogin];
+                    }];
+                }
+            }
+            //2.暗登陆
+            else
+            {
+                [[SDRequestHelp shareSDRequest] dispatchToMainQueue:^{
+                    //暗登陆成 - 切换到首页
+                    [self noPwdLogin];
+                }];
+            }
+        }];
+    }
 }
 
 #pragma mark 刷新用户信息

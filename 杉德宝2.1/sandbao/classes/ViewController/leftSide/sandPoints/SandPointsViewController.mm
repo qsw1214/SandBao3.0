@@ -186,7 +186,7 @@
     
     //钱包账户未成功开通
     if (sandPointDic.count == 0) {
-        [Tool showDialog:@"请联系杉德客服" message:@"积分账户开通失败" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
+        [[SDAlertView shareAlert] showDialog:@"请联系杉德客服" message:@"积分账户开通失败" leftBtnString:@"返回首页" rightBtnString:@"联系客服" leftBlock:^{
             //归位Home或SpsLunch
             [Tool setContentViewControllerWithHomeOrSpsLunchFromSideMenuViewController:self.sideMenuViewController];
         } rightBlock:^{
